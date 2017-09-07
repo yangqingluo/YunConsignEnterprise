@@ -110,11 +110,12 @@
         [[QKNetworkSingleton sharedManager] loginWithID:self.usernameTextField.text Password:self.passwordTextField.text completion:^(id responseBody, NSError *error){
             [weakself hideHud];
             if (!error) {
-                if (isHttpSuccess([responseBody[@"Status"] intValue])) {
+                AppResponse *appResponse = [AppResponse mj_objectWithKeyValues:responseBody];
+                if (isHttpSuccess(appResponse.global.flag)) {
                     
                 }
                 else {
-                    [weakself showHint:responseBody[@"Msg"]];
+                    [weakself showHint:appResponse.global.message];
                 }
             }
             else{

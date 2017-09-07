@@ -25,7 +25,7 @@
     if (self) {
         self.automaticallyAdjustsScrollViewInsets = NO;
         self.viewControllers = @[[DailyOperationVC new], [FinancialManagementVC new], [SystemConfigVC new]];
-        self.tabBar.backgroundImage = [[UIImage imageWithColor:[UIColor whiteColor]] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
+        self.tabBar.backgroundImage = [[UIImage imageWithColor:[UIColor whiteColor]] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
         self.tabBar.tintColor = navigationBarColor;
         for (UIViewController *vc in self.viewControllers) {
             NSDictionary *dic = self.tabItemArray[[self.viewControllers indexOfObject:vc]];

@@ -12,6 +12,36 @@
 
 @end
 
+@implementation Global
+
+
+
+@end
+
+
+@implementation ResponseItem
+
+
+
+@end
+
+@implementation AppResponse
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [[self class] mj_setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"responses" : [ResponseItem class],
+                     };
+        }];
+    }
+    
+    
+    return self;
+}
+
+@end
 
 @implementation AppUserInfo
 

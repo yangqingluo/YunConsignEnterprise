@@ -12,6 +12,49 @@
 
 @end
 
+@interface Global : NSObject
+
+@property (assign, nonatomic) int flag;
+@property (strong, nonatomic) NSString *message;
+
+@end
+
+@interface ResponseItem : Global
+
+@property (assign, nonatomic) int length;
+@property (assign, nonatomic) int total;
+@property (strong, nonatomic) NSArray *items;
+
+@end
+
+@interface AppResponse : NSObject
+
+@property (strong, nonatomic) Global *global;
+@property (strong, nonatomic) NSArray *responses;
+
+@end
+
 @interface AppUserInfo : NSObject
+
+@property (strong, nonatomic) NSArray *access_list;
+@property (strong, nonatomic) NSString *gender;
+@property (strong, nonatomic) NSString *gender_text;
+@property (strong, nonatomic) NSString *head_img;
+@property (strong, nonatomic) NSString *join_id;
+@property (strong, nonatomic) NSString *join_name;
+@property (strong, nonatomic) NSString *login_token;
+@property (strong, nonatomic) NSString *login_type;
+@property (strong, nonatomic) NSString *login_type_text;
+@property (strong, nonatomic) NSString *open_city_id;
+@property (strong, nonatomic) NSString *open_city_name;
+@property (strong, nonatomic) NSString *role_id;
+@property (strong, nonatomic) NSString *role_name;
+@property (strong, nonatomic) NSString *service_id;
+@property (strong, nonatomic) NSString *service_name;
+@property (strong, nonatomic) NSString *telphone;
+@property (strong, nonatomic) NSString *user_id;
+@property (strong, nonatomic) NSString *user_name;
+@property (strong, nonatomic) NSString *user_state;
+@property (strong, nonatomic) NSString *user_state_text;
 
 @end

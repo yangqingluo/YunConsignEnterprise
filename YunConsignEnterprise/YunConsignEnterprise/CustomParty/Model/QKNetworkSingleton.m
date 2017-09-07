@@ -255,8 +255,14 @@ NSString *httpRespString(NSError *error, NSObject *object){
     [self Get:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
         completion(responseBody, error);
         
-        if (!error && isHttpSuccess([responseBody[@"global"][@"flag"] intValue])) {
-            [[AppPublic getInstance] loginDoneWithUserData:responseBody username:username password:password];
+        if (!error) {
+            AppResponse *appResponse = [AppResponse mj_objectWithKeyValues:responseBody];
+            if (isHttpSuccess(appResponse.global.flag) && appResponse.responses.count) {
+                ResponseItem *item = appResponse.responses[0];
+                if (item.items.count) {
+                    [[AppPublic getInstance] loginDoneWithUserData:item.items[0] username:username password:password];
+                }
+            }
         }
     }];
 }

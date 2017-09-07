@@ -293,7 +293,7 @@ NSString *stringFromDate(NSDate *date, NSString *format) {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:username forKey:kUserName];
     
-    [[UserPublic getInstance] saveUserData:[AppUserInfo mj_objectWithKeyValues:data[@"Data"]]];
+    [[UserPublic getInstance] saveUserData:[AppUserInfo mj_objectWithKeyValues:data]];
     [self goToMainVC];
 }
 

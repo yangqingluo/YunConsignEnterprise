@@ -47,4 +47,16 @@ __strong static UserPublic *_singleManger = nil;
     _singleManger = nil;
 }
 
+#pragma getter
+- (AppUserInfo *)userData{
+    if (!_userData) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        NSDictionary *data = [ud objectForKey:kUserData];
+        if (data) {
+            _userData = [AppUserInfo mj_objectWithKeyValues:data];
+        }
+    }
+    return _userData;
+}
+
 @end
