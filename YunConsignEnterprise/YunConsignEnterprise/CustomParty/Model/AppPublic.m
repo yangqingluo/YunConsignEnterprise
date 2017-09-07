@@ -1,6 +1,5 @@
 //
 //  AppPublic.m
-//  SafetyOfMAS
 //
 //  Created by yangqingluo on 16/9/9.
 //  Copyright © 2016年 yangqingluo. All rights reserved.
@@ -10,6 +9,9 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "UIImage+Color.h"
 
+#import "LoginViewController.h"
+#import "MainTabBarController.h"
+
 @interface AppPublic()
 
 @end
@@ -18,7 +20,7 @@
 
 __strong static AppPublic  *_singleManger = nil;
 
-+ (AppPublic *)getInstance{
++ (AppPublic *)getInstance {
     static dispatch_once_t pred = 0;
     
     dispatch_once(&pred, ^{
@@ -29,7 +31,7 @@ __strong static AppPublic  *_singleManger = nil;
     return _singleManger;
 }
 
-- (instancetype)init{
+- (instancetype)init {
     if (_singleManger) {
         return _singleManger;
     }
@@ -43,7 +45,7 @@ __strong static AppPublic  *_singleManger = nil;
 }
 
 #pragma getter
-- (NSString *)appName{
+- (NSString *)appName {
     if (!_appName) {
         _appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
     }
@@ -53,7 +55,7 @@ __strong static AppPublic  *_singleManger = nil;
 
 #pragma public
 //检查该版本是否第一次使用
-BOOL isFirstUsing(){
+BOOL isFirstUsing() {
     //#if DEBUG
     //    NSString *key = @"CFBundleVersion";
     //#else
@@ -73,7 +75,7 @@ BOOL isFirstUsing(){
     return ![version isEqualToString:saveVersion];
 }
 
-BOOL isMobilePhone(NSString *string){
+BOOL isMobilePhone(NSString *string) {
     if (!string || string.length == 0) {
         return NO;
     }
@@ -88,7 +90,7 @@ BOOL isMobilePhone(NSString *string){
     return matches.count > 0;
 }
 
-BOOL isEmailAdress(NSString *string){
+BOOL isEmailAdress(NSString *string) {
     if (!string || string.length == 0) {
         return NO;
     }
@@ -104,7 +106,7 @@ BOOL isEmailAdress(NSString *string){
     return matches.count > 0;
 }
 
-NSString *sha1(NSString *string){
+NSString *sha1(NSString *string) {
     const char *cstr = [string cStringUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:cstr length:string.length];
     uint8_t digest[CC_SHA1_DIGEST_LENGTH];
@@ -120,12 +122,12 @@ NSString *sha1(NSString *string){
 /*!
  @brief 替换空字符串
  */
-NSString *notNilString(NSString *string){
+NSString *notNilString(NSString *string) {
     return string.length ? string : @"";
 }
 
 //图像压缩
-NSData *dataOfImageCompression(UIImage *image, BOOL isHead){
+NSData *dataOfImageCompression(UIImage *image, BOOL isHead) {
     //头像图片
     if (isHead) {
         //调整分辨率
@@ -166,7 +168,7 @@ NSData *dataOfImageCompression(UIImage *image, BOOL isHead){
     return imageData;
 }
 
-UIButton *NewBackButton(UIColor *color){
+UIButton *NewBackButton(UIColor *color) {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *i = [UIImage imageNamed:@"nav_back"];
     if (color) {
@@ -178,38 +180,35 @@ UIButton *NewBackButton(UIColor *color){
     return btn;
 }
 
-UIButton *NewTextButton(NSString *title, UIColor *textColor){
+UIButton *NewTextButton(NSString *title, UIColor *textColor) {
     UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 64, 0, 64, 44)];
     [saveButton setTitle:title forState:UIControlStateNormal];
     [saveButton setTitleColor:textColor forState:UIControlStateNormal];
     saveButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
     //    saveButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    
     return saveButton;
 }
 
 //日期-文本转换
-NSDate *dateFromString(NSString *dateString, NSString *format){
+NSDate *dateFromString(NSString *dateString, NSString *format) {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:format];
     NSDate *destDate= [dateFormatter dateFromString:dateString];
-    
     return destDate;
 }
 
-NSString *stringFromDate(NSDate *date, NSString *format){
+NSString *stringFromDate(NSDate *date, NSString *format) {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:format];
     NSString *destDateString = [dateFormatter stringFromDate:date];
-    
     return destDateString;
 }
 
-+ (NSString *)standardTimeStringWithTString:(NSString *)string{    
++ (NSString *)standardTimeStringWithTString:(NSString *)string {
     return [AppPublic standardTimeStringWithTString:string originalDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS" destinationalDateFormat:@"yyyy-MM-dd HH:mm"];
 }
 
-+ (NSString *)standardTimeStringWithTString:(NSString *)string originalDateFormat:(NSString *)oFormat destinationalDateFormat:(NSString *)dFormat{
++ (NSString *)standardTimeStringWithTString:(NSString *)string originalDateFormat:(NSString *)oFormat destinationalDateFormat:(NSString *)dFormat {
     if (string) {
         NSArray *array = [string componentsSeparatedByString:@"T"];
         if (array.count >= 2) {
@@ -221,7 +220,7 @@ NSString *stringFromDate(NSDate *date, NSString *format){
     return @"--";
 }
 
-+ (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width{
++ (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width {
     NSMutableParagraphStyle *paragraphStyle= [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = 0;
@@ -232,7 +231,7 @@ NSString *stringFromDate(NSDate *date, NSString *format){
     return [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:drawOptions attributes:attibutes context:nil].size;
 }
 
-+ (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantHeight:(CGFloat)height{
++ (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantHeight:(CGFloat)height {
     NSMutableParagraphStyle *paragraphStyle= [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = 0;
@@ -244,31 +243,31 @@ NSString *stringFromDate(NSDate *date, NSString *format){
     return [text boundingRectWithSize:CGSizeMake(MAXFLOAT, height) options:drawOptions attributes:attibutes context:nil].size;
 }
 
-+ (void)adjustWidthWithLabel:(UILabel *)label{
++ (void)adjustLabelWidth:(UILabel *)label {
     label.width = [AppPublic textSizeWithString:label.text font:label.font constantHeight:label.height].width;
 }
 
-+ (void)adjustHeightWithLabel:(UILabel *)label{
++ (void)adjustLabelHeight:(UILabel *)label {
     label.height = [AppPublic textSizeWithString:label.text font:label.font constantWidth:label.width].height;
 }
 
 //切圆角
-+ (void)roundCornerRadius:(UIView *)view{
++ (void)roundCornerRadius:(UIView *)view {
     [AppPublic roundCornerRadius:view cornerRadius:0.5 * MAX(view.width, view.height)];
 }
 
-+ (void)roundCornerRadius:(UIView *)view cornerRadius:(CGFloat)radius{
++ (void)roundCornerRadius:(UIView *)view cornerRadius:(CGFloat)radius {
     view.layer.cornerRadius = radius;
     view.layer.masksToBounds = YES;
 }
 
 //顶部状态栏颜色
-+ (void)changeStatusBarLightContent:(BOOL)isWhite{
++ (void)changeStatusBarLightContent:(BOOL)isWhite {
     [[UIApplication sharedApplication] setStatusBarStyle:isWhite ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault];
 }
 
 //判断类是否有某属性
-+ (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name{
++ (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name {
     unsigned int outCount, i;
     Ivar *ivars = class_copyIvarList(myClass, &outCount);
     for (i = 0; i < outCount; i++) {
@@ -282,22 +281,32 @@ NSString *stringFromDate(NSDate *date, NSString *format){
     return NO;
 }
 
-- (void)logOut{
+- (void)logout {
     
 }
 
-- (void)loginDoneWithUserData:(NSDictionary *)data username:(NSString *)username password:(NSString *)password{
-
-}
-
-
-
-- (void)goToMainVC{
-}
-
-- (void)goToLoginCompletion:(void (^)(void))completion{
-
+- (void)loginDoneWithUserData:(NSDictionary *)data username:(NSString *)username password:(NSString *)password {
+    if (!data || !username) {
+        return;
+    }
     
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:username forKey:kUserName];
+    
+    [[UserPublic getInstance] saveUserData:[AppUserInfo mj_objectWithKeyValues:data[@"Data"]]];
+    [self goToMainVC];
+}
+
+- (void)goToMainVC {
+    [UserPublic getInstance].mainTabNav = [[MainTabNavController alloc] initWithRootViewController:[MainTabBarController new]];
+    [[UIApplication sharedApplication].delegate window].rootViewController = [UserPublic getInstance].mainTabNav;
+}
+
+- (void)goToLoginCompletion:(void (^)(void))completion {
+    [[UIApplication sharedApplication].delegate window].rootViewController = [LoginViewController new];
+    if (completion) {
+        completion();
+    }
 }
 
 @end

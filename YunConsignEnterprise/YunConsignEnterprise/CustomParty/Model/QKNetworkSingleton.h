@@ -50,6 +50,6 @@ NSURL *imageURLWithPath(NSString *path);
 - (void)pushImages:(NSArray *)imageDataArray Parameters:(NSDictionary *)parameters URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion withUpLoadProgress:(Progress)progress;
 
 //login
-- (void)loginWithID:(NSString *)username Password:(NSString *)password LoginType:(int)loginType completion:(QKNetworkBlock)completion;
+- (void)loginWithID:(NSString *)username Password:(NSString *)password  completion:(QKNetworkBlock)completion;
 
 @end

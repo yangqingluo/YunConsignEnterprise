@@ -1,6 +1,5 @@
 //
 //  AppPublic.h
-//  SafetyOfMAS
 //
 //  Created by yangqingluo on 16/9/9.
 //  Copyright © 2016年 yangqingluo. All rights reserved.
@@ -21,15 +20,15 @@
 
 #define RGBA(R, G, B, A) [UIColor colorWithRed:R / 255.f green:G / 255.f blue:B / 255.f alpha:A]
 
-#define navigationBarColor           RGBA(0x21, 0x27, 0x31, 1.0)
-#define separaterColor               RGBA(0xe5, 0xe5, 0xe5, 1)
+#define navigationBarColor           RGBA(0x00, 0xbc, 0xd4, 1.0)
+#define separaterColor               RGBA(0xe5, 0xe5, 0xe5, 1.0)
 #define separaterAlphaColor          RGBA(0xe5, 0xe5, 0xe5, 0.6)
 
-#define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1)
-#define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1)
-#define lightWhiteColor              RGBA(0xf5, 0xf5, 0xf5, 1)
-#define silverColor                  RGBA(0xc0, 0xc0, 0xc0, 1)
-#define baseTextColor                RGBA(0x33, 0x33, 0x33, 1)
+#define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1.0)
+#define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1.0)
+#define lightWhiteColor              RGBA(0xf8, 0xf8, 0xf8, 1.0)
+#define silverColor                  RGBA(0xc0, 0xc0, 0xc0, 1.0)
+#define baseTextColor                RGBA(0x33, 0x33, 0x33, 1.0)
 
 #define STATUS_HEIGHT                20.0
 #define STATUS_BAR_HEIGHT            64.0
@@ -137,8 +136,8 @@ NSString *stringFromDate(NSDate *date, NSString *format);
 //文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width;
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantHeight:(CGFloat)height;
-+ (void)adjustWidthWithLabel:(UILabel *)label;
-+ (void)adjustHeightWithLabel:(UILabel *)label;
++ (void)adjustLabelWidth:(UILabel *)label;
++ (void)adjustLabelHeight:(UILabel *)label;
 
 //切圆角
 + (void)roundCornerRadius:(UIView *)view;
@@ -150,7 +149,7 @@ NSString *stringFromDate(NSDate *date, NSString *format);
 //判断类是否有某属性
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name;
 
-- (void)logOut;
+- (void)logout;
 - (void)loginDoneWithUserData:(NSDictionary *)data username:(NSString *)username password:(NSString *)password;
 
 - (void)goToMainVC;

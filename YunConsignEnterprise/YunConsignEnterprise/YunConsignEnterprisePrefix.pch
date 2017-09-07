@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 
 #import "AppPublic.h"
+#import "UserPublic.h"
 #import "AppBasicViewController.h"
 
 #endif /* YunConsignEnterprisePrefix_pch */

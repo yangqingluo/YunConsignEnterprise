@@ -14,9 +14,19 @@
 
 @implementation AppDelegate
 
-
+static void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    if ([UserPublic getInstance].userData) {
+        [[AppPublic getInstance] goToMainVC];
+    }
+    else {
+        [[AppPublic getInstance] goToLoginCompletion:nil];
+    }
+    
     return YES;
 }
 
