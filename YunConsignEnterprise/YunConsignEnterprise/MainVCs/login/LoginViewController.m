@@ -63,7 +63,7 @@
     
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     loginButton.frame = CGRectMake(kEdgeBig, inputView.bottom + 30, screen_width - 2 * kEdgeBig, 40);
-    loginButton.backgroundColor = baseRedColor;
+    loginButton.backgroundColor = navigationBarColor;
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];

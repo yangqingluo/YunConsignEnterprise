@@ -43,8 +43,26 @@
 
 @end
 
+@implementation AppAccessInfo
+
+
+
+@end
+
 @implementation AppUserInfo
 
-
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [[self class] mj_setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"access_list" : [AppAccessInfo class],
+                     };
+        }];
+    }
+    
+    
+    return self;
+}
 
 @end

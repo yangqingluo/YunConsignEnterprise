@@ -16,22 +16,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setupNav];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupNav{
+    [self createNavWithTitle:@"系统设置" createMenuItem:^UIView *(int nIndex){
+        if (nIndex == 0){
+            UIButton *btn = NewTextButton(@"登出", [UIColor whiteColor]);
+            [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+            return btn;
+        }
+        
+        return nil;
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)logout {
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] Get:@{@"login_token" : [UserPublic getInstance].userData.login_token} HeadParm:nil URLFooter:@"/login/logout.do" completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            [[AppPublic getInstance] logout];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
 }
-*/
 
 @end

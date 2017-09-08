@@ -27,14 +27,27 @@
 
 @end
 
-@interface AppResponse : NSObject
+@interface AppResponse : AppType
 
 @property (strong, nonatomic) Global *global;
 @property (strong, nonatomic) NSArray *responses;
 
 @end
 
-@interface AppUserInfo : NSObject
+@interface AppAccessInfo : AppType
+
+@property (assign, nonatomic) int is_display;
+@property (assign, nonatomic) int is_leaf;
+@property (assign, nonatomic) int sort;
+@property (strong, nonatomic) NSString *menu_code;
+@property (strong, nonatomic) NSString *menu_icon;
+@property (strong, nonatomic) NSString *menu_id;
+@property (strong, nonatomic) NSString *menu_name;
+@property (strong, nonatomic) NSString *parent_id;
+
+@end
+
+@interface AppUserInfo : AppType
 
 @property (strong, nonatomic) NSArray *access_list;
 @property (strong, nonatomic) NSString *gender;

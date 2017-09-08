@@ -282,7 +282,9 @@ NSString *stringFromDate(NSDate *date, NSString *format) {
 }
 
 - (void)logout {
-    
+    [self goToLoginCompletion:^{
+        [[UserPublic getInstance] clear];
+    }];
 }
 
 - (void)loginDoneWithUserData:(NSDictionary *)data username:(NSString *)username password:(NSString *)password {

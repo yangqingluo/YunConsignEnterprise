@@ -272,17 +272,16 @@ NSString *httpRespString(NSError *error, NSObject *object){
         responseObject = [NSJSONSerialization JSONObjectWithData:responseBody options:NSJSONReadingAllowFragments error:&serializationError];
         if (!serializationError && [responseObject isKindOfClass:[NSDictionary class]]) {
             AppResponse *appResponse = [AppResponse mj_objectWithKeyValues:responseBody];
-            if (appResponse.global.flag == 1) {
+            code = appResponse.global.flag;
+            message = appResponse.global.message.length ? appResponse.global.message : [NSString stringWithFormat:@"未知错误码:%d", (int)code];
+            if (code == 1) {
+                completionObject = @{};
                 if (appResponse.responses.count > 0) {
                     ResponseItem *item = appResponse.responses[0];
                     if (item.items.count > 0) {
                         completionObject = item.items[0];
                     }
                 }
-            }
-            else {
-                code = appResponse.global.flag;
-                message = appResponse.global.message.length ? appResponse.global.message : [NSString stringWithFormat:@"未知错误码:%d", (int)code];
             }
         }
     }

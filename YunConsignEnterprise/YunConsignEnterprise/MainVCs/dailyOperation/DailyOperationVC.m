@@ -16,12 +16,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupNav];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupNav{
+    [self createNavWithTitle:@"日常操作" createMenuItem:^UIView *(int nIndex){
+//        if (nIndex == 0){
+//            UIButton *btn = NewTextButton(@"登出", [UIColor whiteColor]);
+//            [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+//            return btn;
+//        }
+        
+        return nil;
+    }];
 }
 
 @end
