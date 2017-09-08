@@ -30,7 +30,7 @@
     self.interactivePopGestureRecognizer.delegate = self;
 }
 
-#pragma UIGestureRecognizerDelegate
+#pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     return self.childViewControllers.count > 1;
 }

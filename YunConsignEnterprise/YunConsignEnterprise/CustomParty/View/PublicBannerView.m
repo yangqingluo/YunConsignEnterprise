@@ -33,7 +33,7 @@
     return self;
 }
 
-#pragma setter
+#pragma mark - setter
 - (UIView *)baseView {
     if (!_baseView) {
         _baseView = [[UIScrollView alloc]initWithFrame:CGRectMake(kEdge, 0, self.width - kEdge * 2, self.height - 32)];

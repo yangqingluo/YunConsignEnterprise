@@ -251,7 +251,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
     }];
 }
 
-#pragma private
+#pragma mark - private
 - (BOOL)occuredRemoteLogin:(id)object {
     
     

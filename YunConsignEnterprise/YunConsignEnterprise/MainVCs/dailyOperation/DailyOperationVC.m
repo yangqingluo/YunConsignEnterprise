@@ -54,7 +54,7 @@
     
 }
 
-#pragma getter
+#pragma mark - getter
 
 
 @end

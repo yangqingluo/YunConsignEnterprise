@@ -44,7 +44,7 @@ __strong static AppPublic  *_singleManger = nil;
     return self;
 }
 
-#pragma getter
+#pragma mark - getter
 - (NSString *)appName {
     if (!_appName) {
         _appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
@@ -53,7 +53,7 @@ __strong static AppPublic  *_singleManger = nil;
     return _appName;
 }
 
-#pragma public
+#pragma mark - public
 //检查该版本是否第一次使用
 BOOL isFirstUsing() {
     //#if DEBUG
@@ -181,12 +181,11 @@ UIButton *NewBackButton(UIColor *color) {
 }
 
 UIButton *NewTextButton(NSString *title, UIColor *textColor) {
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 64, 0, 64, 44)];
-    [saveButton setTitle:title forState:UIControlStateNormal];
-    [saveButton setTitleColor:textColor forState:UIControlStateNormal];
-    saveButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
-    //    saveButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    return saveButton;
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 64, 0, 64, 44)];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:textColor forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    return btn;
 }
 
 //日期-文本转换
