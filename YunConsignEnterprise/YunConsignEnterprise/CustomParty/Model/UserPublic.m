@@ -32,6 +32,7 @@ __strong static UserPublic *_singleManger = nil;
 - (void)saveUserData:(AppUserInfo *)data{
     if (data) {
         _userData = data;
+        [self generateRootAccesses];
     }
     
     if (_userData) {
@@ -47,6 +48,38 @@ __strong static UserPublic *_singleManger = nil;
     _singleManger = nil;
 }
 
+- (void)generateRootAccesses {
+    NSMutableDictionary *rootAccess = [NSMutableDictionary new];
+    for (AppAccessInfo *accessItem in _userData.access_list) {
+        if (!accessItem.parent_id) {
+            continue;
+        }
+        if ([accessItem.parent_id isEqualToString:@"0"]) {
+            [rootAccess setObject:accessItem forKey:accessItem.parent_id];
+        }
+    }
+    
+    for (AppAccessInfo *accessItem in _userData.access_list) {
+        if (!accessItem.parent_id) {
+            continue;
+        }
+        if (![accessItem.parent_id isEqualToString:@"0"]) {
+            AppAccessInfo *parentAccess = rootAccess[accessItem.parent_id];
+            if (parentAccess) {
+                if ([parentAccess.menu_name isEqualToString:@"日常操作"]) {
+                    [self.dailyOperationAccesses addObject:accessItem];
+                }
+                else if ([parentAccess.menu_name isEqualToString:@"财务管理"]) {
+                    [self.financialManagementAccesses addObject:accessItem];
+                }
+                else if ([parentAccess.menu_name isEqualToString:@"系统设置"]) {
+                    [self.systemConfigAccesses addObject:accessItem];
+                }
+            }
+        }
+    }
+}
+
 #pragma getter
 - (AppUserInfo *)userData{
     if (!_userData) {
@@ -54,9 +87,31 @@ __strong static UserPublic *_singleManger = nil;
         NSDictionary *data = [ud objectForKey:kUserData];
         if (data) {
             _userData = [AppUserInfo mj_objectWithKeyValues:data];
+            [self generateRootAccesses];
         }
     }
     return _userData;
+}
+
+- (NSMutableArray *)dailyOperationAccesses {
+    if (!_dailyOperationAccesses) {
+        _dailyOperationAccesses = [NSMutableArray new];
+    }
+    return _dailyOperationAccesses;
+}
+
+- (NSMutableArray *)financialManagementAccesses {
+    if (!_financialManagementAccesses) {
+        _financialManagementAccesses = [NSMutableArray new];
+    }
+    return _financialManagementAccesses;
+}
+
+- (NSMutableArray *)systemConfigAccesses {
+    if (!_systemConfigAccesses) {
+        _systemConfigAccesses = [NSMutableArray new];
+    }
+    return _systemConfigAccesses;
 }
 
 @end

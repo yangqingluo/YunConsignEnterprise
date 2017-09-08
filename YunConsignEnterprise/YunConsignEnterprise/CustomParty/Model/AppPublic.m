@@ -251,6 +251,11 @@ NSString *stringFromDate(NSDate *date, NSString *format) {
     label.height = [AppPublic textSizeWithString:label.text font:label.font constantWidth:label.width].height;
 }
 
++ (CGFloat )systemFontOfSize:(CGFloat)pxSize {
+    CGFloat pt = (pxSize / 96) * 72;
+    return pt;
+}
+
 //切圆角
 + (void)roundCornerRadius:(UIView *)view {
     [AppPublic roundCornerRadius:view cornerRadius:0.5 * MAX(view.width, view.height)];

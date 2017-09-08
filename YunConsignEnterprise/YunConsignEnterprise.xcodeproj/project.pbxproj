@@ -163,6 +163,7 @@
 		E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0DA1F5EA8CE002EBE41 /* UIImage+SubImage.m */; };
 		E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E01F5EA903002EBE41 /* AppType.m */; };
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
+		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -434,6 +435,8 @@
 		E4AEA0E01F5EA903002EBE41 /* AppType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppType.m; sourceTree = "<group>"; };
 		E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KGViewExtend.h"; sourceTree = "<group>"; };
 		E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KGViewExtend.m"; sourceTree = "<group>"; };
+		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
+		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -653,6 +656,8 @@
 			children = (
 				E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */,
 				E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */,
+				E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */,
+				E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1244,6 +1249,7 @@
 				E4AEA08C1F5EA6D0002EBE41 /* UIWebView+AFNetworking.m in Sources */,
 				E4AEA07D1F5EA6D0002EBE41 /* AFNetworkReachabilityManager.m in Sources */,
 				E4AEA0801F5EA6D0002EBE41 /* AFURLResponseSerialization.m in Sources */,
+				E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */,
 				E4AEA0981F5EA6D0002EBE41 /* IQPreviousNextView.m in Sources */,
 				E44765051F6129040084F4EB /* UserPublic.m in Sources */,
 			);

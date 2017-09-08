@@ -19,6 +19,13 @@
 //用户登陆数据
 @property (strong, nonatomic) AppUserInfo *userData;
 
+//日常操作权限
+@property (strong, nonatomic) NSMutableArray *dailyOperationAccesses;
+//财务管理权限
+@property (strong, nonatomic) NSMutableArray *financialManagementAccesses;
+//系统设置权限
+@property (strong, nonatomic) NSMutableArray *systemConfigAccesses;
+
 //保存用户数据
 - (void)saveUserData:(AppUserInfo *)data;
 //清除

@@ -21,8 +21,8 @@
 #define RGBA(R, G, B, A) [UIColor colorWithRed:R / 255.f green:G / 255.f blue:B / 255.f alpha:A]
 
 #define navigationBarColor           RGBA(0x00, 0xbc, 0xd4, 1.0)
-#define separaterColor               RGBA(0xe5, 0xe5, 0xe5, 1.0)
-#define separaterAlphaColor          RGBA(0xe5, 0xe5, 0xe5, 0.6)
+#define separaterColor               RGBA(0xdb, 0xdb, 0xdb, 1.0)
+#define separaterAlphaColor          RGBA(0xdb, 0xdb, 0xdb, 0.6)
 
 #define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1.0)
 #define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1.0)
@@ -52,11 +52,12 @@
 #define appSeparaterLineSize         1.0//分割线尺寸
 #define appPageSize                  20//获取分页数据时分页size
 
-#define kEdgeSmall                   5.0
-#define kEdge                        10.0
-#define kEdgeMiddle                  15.0
-#define kEdgeBig                     20.0
-#define kEdgeHuge                    35.0
+#define kEdgeSmall                   4.0
+#define kEdge                        8.0
+#define kEdgeMiddle                  12.0
+#define kEdgeBig                     16.0
+#define kEdgeHuge                    28.0
+
 
 #define cellDetailLeft               (kEdgeMiddle + 80 + kEdge)
 #define cellDetailRightWhenIndicator (screen_width - kEdgeHuge)
