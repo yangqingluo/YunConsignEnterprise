@@ -22,6 +22,7 @@
 - (AFHTTPSessionManager *)baseHttpRequestWithParm:(NSDictionary *)parm andSuffix:(NSString *)suffix{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setTimeoutInterval:20];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     for (NSString *key in parm.allKeys) {
         if (parm[key]) {
             [manager.requestSerializer setValue:parm[key] forHTTPHeaderField:key];
@@ -89,13 +90,13 @@ NSString *httpRespString(NSError *error, NSObject *object){
 - (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion{
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];
     NSString *urlStr = [urlStringWithService(urlString) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    QKWEAKSELF;
     [manager GET:urlStr parameters:userInfo progress:^(NSProgress * _Nonnull Progress){
         
     } success:^(NSURLSessionDataTask *task, id responseObject){
-        completion(responseObject, nil);
-        
+        [weakself doResponseCompletion:responseObject block:completion];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        completion(nil, error);
+        [weakself doResponseCompletion:nil block:completion];
     }];
 }
 //Post
@@ -109,12 +110,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
         completion(responseObject, nil);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        if ([self occuredRemoteLogin:task]) {
-            completion(task, error);
-        }
-        else{
-            completion(nil, error);
-        }
+        completion(nil, error);
     }];
 }
 
@@ -240,38 +236,63 @@ NSString *httpRespString(NSError *error, NSObject *object){
         completion(responseObject, nil);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        if ([self occuredRemoteLogin:task]) {
-            completion(task, error);
-        }
-        else{
-            completion(nil, error);
-        }
+        completion(nil, error);
     }];
 }
 
 //login
-- (void)loginWithID:(NSString *)username Password:(NSString *)password completion:(QKNetworkBlock)completion{
+- (void)loginWithID:(NSString *)username Password:(NSString *)password completion:(QKNetworkBlock)completion {
     NSDictionary *m_dic = @{@"login_code" : username, @"login_pass" : password, @"login_type" : @3};//登录方式：1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
     [self Get:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
-        completion(responseBody, error);
-        
         if (!error) {
-            AppResponse *appResponse = [AppResponse mj_objectWithKeyValues:responseBody];
-            if (isHttpSuccess(appResponse.global.flag) && appResponse.responses.count) {
-                ResponseItem *item = appResponse.responses[0];
-                if (item.items.count) {
-                    [[AppPublic getInstance] loginDoneWithUserData:item.items[0] username:username password:password];
-                }
-            }
+            [[AppPublic getInstance] loginDoneWithUserData:responseBody username:username password:password];
         }
+        completion(responseBody, error);
     }];
 }
 
 #pragma private
-- (BOOL)occuredRemoteLogin:(id)object{
+- (BOOL)occuredRemoteLogin:(id)object {
     
     
     return NO;
+}
+
+- (void)doResponseCompletion:(id)responseBody block:(QKNetworkBlock)completion {
+    NSString *message = @"出错";
+    NSInteger code = 0;
+    id completionObject = nil;
+    if (!responseBody) {
+        message = @"网络出错";
+    }
+    else if ([responseBody isKindOfClass:[NSData class]]) {
+        message = @"数据出错";
+        id responseObject = nil;
+        NSError *serializationError = nil;
+        responseObject = [NSJSONSerialization JSONObjectWithData:responseBody options:NSJSONReadingAllowFragments error:&serializationError];
+        if (!serializationError && [responseObject isKindOfClass:[NSDictionary class]]) {
+            AppResponse *appResponse = [AppResponse mj_objectWithKeyValues:responseBody];
+            if (appResponse.global.flag == 1) {
+                if (appResponse.responses.count > 0) {
+                    ResponseItem *item = appResponse.responses[0];
+                    if (item.items.count > 0) {
+                        completionObject = item.items[0];
+                    }
+                }
+            }
+            else {
+                code = appResponse.global.flag;
+                message = appResponse.global.message.length ? appResponse.global.message : [NSString stringWithFormat:@"未知错误码:%d", (int)code];
+            }
+        }
+    }
+    
+    if (completionObject) {
+        completion(completionObject, nil);
+    }
+    else {
+        completion(nil, [NSError errorWithDomain:@"tms.yunlaila.com.cn" code:code userInfo:@{@"message" : message}]);
+    }
 }
 
 @end

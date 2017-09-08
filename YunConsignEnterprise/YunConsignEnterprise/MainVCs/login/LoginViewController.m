@@ -109,17 +109,8 @@
         QKWEAKSELF;
         [[QKNetworkSingleton sharedManager] loginWithID:self.usernameTextField.text Password:self.passwordTextField.text completion:^(id responseBody, NSError *error){
             [weakself hideHud];
-            if (!error) {
-                AppResponse *appResponse = [AppResponse mj_objectWithKeyValues:responseBody];
-                if (isHttpSuccess(appResponse.global.flag)) {
-                    
-                }
-                else {
-                    [weakself showHint:appResponse.global.message];
-                }
-            }
-            else{
-                [weakself showHint:@"网络出错"];
+            if (error) {
+                [weakself showHint:error.userInfo[@"message"]];
             }
         }];
     }
