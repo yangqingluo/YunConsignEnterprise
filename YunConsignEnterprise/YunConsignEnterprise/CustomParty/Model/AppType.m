@@ -10,6 +10,10 @@
 
 @implementation AppType
 
+- (instancetype)copyWithZone:(NSZone *)zone{
+    return [[self class] mj_objectWithKeyValues:[self mj_keyValues]];
+}
+
 @end
 
 @implementation Global

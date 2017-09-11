@@ -25,6 +25,9 @@
     [self setupNav];
     
     CGFloat height_banner = screen_width + 32;
+    if (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner <  148) {
+        height_banner += (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner -  148);
+    }
     _bannerView = [[PublicBannerView alloc] initWithFrame:CGRectMake(0, self.view.height - height_banner, screen_width, height_banner)];
     _bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:_bannerView];
@@ -35,6 +38,7 @@
     [self.view insertSubview:_headerView belowSubview:self.bannerView];
     
     self.bannerView.dataSource = [UserPublic getInstance].dailyOperationAccesses;
+    self.headerView.userData = [UserPublic getInstance].userData;
 }
 
 - (void)setupNav{
