@@ -55,10 +55,13 @@ __strong static UserPublic *_singleManger = nil;
             continue;
         }
         if ([accessItem.parent_id isEqualToString:@"0"]) {
-            [rootAccess setObject:accessItem forKey:accessItem.parent_id];
+            [rootAccess setObject:accessItem forKey:accessItem.menu_id];
         }
     }
     
+    [self.dailyOperationAccesses removeAllObjects];
+    [self.financialManagementAccesses removeAllObjects];
+    [self.systemConfigAccesses removeAllObjects];
     for (AppAccessInfo *accessItem in _userData.access_list) {
         if (!accessItem.parent_id) {
             continue;

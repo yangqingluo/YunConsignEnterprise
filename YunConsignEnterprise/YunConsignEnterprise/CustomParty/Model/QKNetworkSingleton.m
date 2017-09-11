@@ -202,7 +202,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
 }
 
 - (void)commonSoapPost:(NSString *)funcId Parm:(NSDictionary *)parm completion:(QKNetworkBlock)completion{
-    if (!funcId.length) {
+    if (!funcId.length || ![UserPublic getInstance].userData.login_token.length) {
         return;
     }
     
@@ -213,7 +213,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
     NSMutableString *xmlString = [NSMutableString stringWithString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"];
     [xmlString appendString:@"<requests>\n"];
     [xmlString appendString:@"<global>\n"];
-    [xmlString appendFormat:@"<token>%@</token>\n", @"8614237952724297FF208865F949185F5C35F2973ABC361F5737A18714625BDF8A94D99A4B021AF7"];
+    [xmlString appendFormat:@"<token>%@</token>\n", [UserPublic getInstance].userData.login_token];
     [xmlString appendString:@"</global>\n"];
     [xmlString appendString:@"<request>\n"];
     [xmlString appendFormat:@"<funcId>%@</funcId>\n", funcId];

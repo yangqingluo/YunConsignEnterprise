@@ -192,7 +192,7 @@ UIButton *NewTextButton(NSString *title, UIColor *textColor) {
 NSDate *dateFromString(NSString *dateString, NSString *format) {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:format];
-    NSDate *destDate= [dateFormatter dateFromString:dateString];
+    NSDate *destDate = [dateFormatter dateFromString:dateString];
     return destDate;
 }
 

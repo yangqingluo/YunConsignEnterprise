@@ -32,6 +32,8 @@
     _headerView.backgroundColor = navigationBarColor;
     _headerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:_headerView belowSubview:self.bannerView];
+    
+    self.bannerView.dataSource = [UserPublic getInstance].dailyOperationAccesses;
 }
 
 - (void)setupNav{
