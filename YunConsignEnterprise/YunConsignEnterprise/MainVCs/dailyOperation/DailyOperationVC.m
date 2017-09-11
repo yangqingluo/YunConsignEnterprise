@@ -9,10 +9,11 @@
 #import "DailyOperationVC.h"
 
 #import "PublicBannerView.h"
+#import "PublicUserHeaderView.h"
 
 @interface DailyOperationVC ()
 
-@property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) PublicUserHeaderView *headerView;
 @property (strong, nonatomic) PublicBannerView *bannerView;
 
 @end
@@ -28,7 +29,7 @@
     _bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:_bannerView];
     
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom, screen_width, self.bannerView.top + 0.7 * (self.bannerView.baseView.height / count_Banner_V) - self.navigationBarView.bottom)];
+    _headerView = [[PublicUserHeaderView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom, screen_width, self.bannerView.top + 0.7 * (self.bannerView.baseView.height / count_Banner_V) - self.navigationBarView.bottom)];
     _headerView.backgroundColor = navigationBarColor;
     _headerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:_headerView belowSubview:self.bannerView];

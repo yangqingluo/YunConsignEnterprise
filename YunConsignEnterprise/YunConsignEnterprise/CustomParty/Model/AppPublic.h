@@ -139,6 +139,8 @@ NSString *stringFromDate(NSDate *date, NSString *format);
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantHeight:(CGFloat)height;
 + (void)adjustLabelWidth:(UILabel *)label;
 + (void)adjustLabelHeight:(UILabel *)label;
++ (UIFont *)appFontOfSize:(CGFloat)fontSize;
++ (UIFont *)appFontOfPxSize:(CGFloat)pxSize;
 
 //切圆角
 + (void)roundCornerRadius:(UIView *)view;

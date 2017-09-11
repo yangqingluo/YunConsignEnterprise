@@ -250,9 +250,17 @@ NSString *stringFromDate(NSDate *date, NSString *format) {
     label.height = [AppPublic textSizeWithString:label.text font:label.font constantWidth:label.width].height;
 }
 
-+ (CGFloat )systemFontOfSize:(CGFloat)pxSize {
++ (CGFloat )systemFontOfPXSize:(CGFloat)pxSize {
     CGFloat pt = (pxSize / 96) * 72;
     return pt;
+}
+
++ (UIFont *)appFontOfSize:(CGFloat)fontSize {
+    return [UIFont systemFontOfSize:fontSize];
+}
+
++ (UIFont *)appFontOfPxSize:(CGFloat)pxSize {
+    return [UIFont systemFontOfSize:[AppPublic systemFontOfPXSize:pxSize]];
 }
 
 //切圆角

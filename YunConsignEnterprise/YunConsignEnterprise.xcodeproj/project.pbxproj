@@ -71,6 +71,7 @@
 		E47AAC3D1F66801D00D7C450 /* tabbar_icon_setting_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47AAC051F66801D00D7C450 /* tabbar_icon_setting_selected@3x.png */; };
 		E47AAC3E1F66801D00D7C450 /* TYBANG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47AAC061F66801D00D7C450 /* TYBANG@2x.png */; };
 		E47AAC3F1F66801D00D7C450 /* TYBANG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47AAC071F66801D00D7C450 /* TYBANG@3x.png */; };
+		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
 		E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2A1F5EA605002EBE41 /* main.m */; };
 		E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2D1F5EA605002EBE41 /* AppDelegate.m */; };
 		E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F301F5EA605002EBE41 /* ViewController.m */; };
@@ -248,6 +249,8 @@
 		E47AAC051F66801D00D7C450 /* tabbar_icon_setting_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_icon_setting_selected@3x.png"; sourceTree = "<group>"; };
 		E47AAC061F66801D00D7C450 /* TYBANG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG@2x.png"; sourceTree = "<group>"; };
 		E47AAC071F66801D00D7C450 /* TYBANG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG@3x.png"; sourceTree = "<group>"; };
+		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
+		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
 		E4AE9F261F5EA605002EBE41 /* YunConsignEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunConsignEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AE9F2A1F5EA605002EBE41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4AE9F2C1F5EA605002EBE41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -683,6 +686,8 @@
 			children = (
 				E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */,
 				E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */,
+				E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */,
+				E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */,
 				E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */,
 				E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */,
 				E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */,
@@ -1268,6 +1273,7 @@
 				E4AEA0DB1F5EA8CE002EBE41 /* UIImage+Color.m in Sources */,
 				E4AEA0BD1F5EA6D0002EBE41 /* UIView+MJExtension.m in Sources */,
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,
+				E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */,
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4AEA0C11F5EA6D0002EBE41 /* SDImageCache.m in Sources */,

@@ -23,6 +23,18 @@
     if (self) {
         [self addSubview:self.baseView];
         [self.baseView addSubview:self.scrollView];
+        for (int i = 1; i < count_Banner_V; i++) {
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, i * self.scrollView.height / count_Banner_V, self.scrollView.width, 1.0)];
+            lineView.backgroundColor = separaterColor;
+            lineView.tag = -1;
+            [self.scrollView addSubview:lineView];
+        }
+        for (int i = 1; i < count_Banner_H; i++) {
+            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(i * self.scrollView.width / count_Banner_H, 0, 1.0, self.scrollView.height)];
+            lineView.backgroundColor = separaterColor;
+            lineView.tag = -1;
+            [self.scrollView addSubview:lineView];
+        }
         [self addSubview:self.pageControl];
         self.pageControl.autoresizingMask = UIViewAutoresizingNone;
     }
@@ -66,13 +78,9 @@
 - (void)setDataSource:(NSArray *)dataSource {
     _dataSource = dataSource;
     for (UIView *subView in self.scrollView.subviews) {
-        [subView removeFromSuperview];
-    }
-    
-    for (int i = 1; i < count_Banner_V; i++) {
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, i * self.scrollView.height / count_Banner_V, self.scrollView.width, 1.0)];
-        lineView.backgroundColor = separaterColor;
-        [self.scrollView addSubview:lineView];
+        if (subView.tag != -1) {
+            [subView removeFromSuperview];
+        }
     }
     
     CGFloat btnWidth = self.scrollView.width / count_Banner_H;
@@ -82,7 +90,10 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(0, 0, btnWidth, btnHeight)];
         button.center = CGPointMake((i / (count_Banner_H * count_Banner_V) * self.scrollView.width) + ((i % count_Banner_H) + 0.5) * btnWidth, ((i % (count_Banner_H * count_Banner_V) / count_Banner_H) + 0.5) * btnHeight);
-        [button sd_setImageWithURL:[NSURL URLWithString:item.menu_icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"tabbar_icon_daily_normal"]];
+        [button setImage:[UIImage imageNamed:@"tabbar_icon_daily_normal"] forState:UIControlStateNormal];
+        if (item.menu_icon.length) {
+            [button sd_setImageWithURL:[NSURL URLWithString:item.menu_icon] forState:UIControlStateNormal];
+        }
         [button setTitle:item.menu_name forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14.0];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
