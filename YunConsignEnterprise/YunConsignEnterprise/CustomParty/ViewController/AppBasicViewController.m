@@ -37,7 +37,7 @@
     
     _navigationBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _nSpaceNavY, self.view.width, 64 - _nSpaceNavY)];
     [self.view addSubview:_navigationBarView];
-    [_navigationBarView setBackgroundColor:navigationBarColor];
+    [_navigationBarView setBackgroundColor:MainColor];
     
     _navView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, StatusbarSize, self.view.width, 44.f)];
     ((UIImageView *)_navView).backgroundColor = [UIColor clearColor];
@@ -45,7 +45,7 @@
     _navView.userInteractionEnabled = YES;
     
     self.navBottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, _navView.bounds.size.height - 0.5, _navView.bounds.size.width, 0.5)];
-    self.navBottomLine.backgroundColor = separaterColor;
+    self.navBottomLine.backgroundColor = baseSeparatorColor;
     self.navBottomLine.hidden = YES;
     [_navView addSubview:self.navBottomLine];
     

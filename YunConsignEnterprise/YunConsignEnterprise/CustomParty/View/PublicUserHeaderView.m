@@ -29,11 +29,19 @@
         _textLabel.font = [AppPublic appFontOfSize:14];
         _textLabel.textColor = [UIColor whiteColor];
         _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.backgroundColor = RGBA(0x00, 0x97, 0xA7, 1.0);
+        _textLabel.backgroundColor = AuxiliaryColor;
         _textLabel.layer.borderColor = [UIColor whiteColor].CGColor;
         _textLabel.layer.borderWidth = 1.0;
         [AppPublic roundCornerRadius:_textLabel cornerRadius:0.5 * _textLabel.height];
         [self addSubview:_textLabel];
+        
+        _detailTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, _textLabel.bottom + 12, self.width - 2 * kEdge, 20)];
+        _detailTextLabel.font = [AppPublic appFontOfSize:12];
+        _detailTextLabel.textColor = AuxiliaryColor;
+        _detailTextLabel.textAlignment = NSTextAlignmentCenter;
+        _detailTextLabel.text = @"  ";
+        [AppPublic adjustLabelHeight:_detailTextLabel];
+        [self addSubview:_detailTextLabel];
     }
     return self;
 }
@@ -46,6 +54,8 @@
     [AppPublic adjustLabelWidth:self.textLabel];
     self.textLabel.width += self.textLabel.height;
     self.textLabel.centerX = 0.5 * self.width;
+    
+    self.detailTextLabel.text = userData.role_name.length ? userData.role_name : @"";
 }
 
 @end

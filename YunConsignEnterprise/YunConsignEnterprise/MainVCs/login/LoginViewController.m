@@ -57,13 +57,13 @@
     [self addTextField:self.passwordTextField imageName:@"密码"];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, inputView.width, 1)];
-    lineView.backgroundColor = separaterColor;
+    lineView.backgroundColor = baseSeparatorColor;
     lineView.center = CGPointMake(0.5 * inputView.width, 0.5 * inputView.height);
     [inputView addSubview:lineView];
     
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     loginButton.frame = CGRectMake(kEdgeBig, inputView.bottom + 30, screen_width - 2 * kEdgeBig, 40);
-    loginButton.backgroundColor = navigationBarColor;
+    loginButton.backgroundColor = MainColor;
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];

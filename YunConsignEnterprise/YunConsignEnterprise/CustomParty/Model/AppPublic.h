@@ -20,9 +20,10 @@
 
 #define RGBA(R, G, B, A) [UIColor colorWithRed:R / 255.f green:G / 255.f blue:B / 255.f alpha:A]
 
-#define navigationBarColor           RGBA(0x00, 0xbc, 0xd4, 1.0)
-#define separaterColor               RGBA(0xdb, 0xdb, 0xdb, 1.0)
-#define separaterAlphaColor          RGBA(0xdb, 0xdb, 0xdb, 0.6)
+#define MainColor                    RGBA(0x00, 0xbc, 0xd4, 1.0)
+#define AuxiliaryColor               RGBA(0x00, 0x97, 0xa7, 1.0)
+#define baseSeparatorColor               RGBA(0xdb, 0xdb, 0xdb, 1.0)
+#define baseSeparatorAlphaColor          RGBA(0xdb, 0xdb, 0xdb, 0.6)
 
 #define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1.0)
 #define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1.0)

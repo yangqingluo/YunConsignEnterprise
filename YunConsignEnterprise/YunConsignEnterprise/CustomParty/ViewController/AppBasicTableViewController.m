@@ -50,7 +50,7 @@
 - (UITableView *)tableView{
     if (_tableView == nil){
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, self.view.width, self.view.height - STATUS_BAR_HEIGHT) style:_style];
-        _tableView.separatorColor = separaterColor;
+        _tableView.separatorColor = baseSeparatorColor;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight |  UIViewAutoresizingFlexibleBottomMargin;
         _tableView.delegate = self;

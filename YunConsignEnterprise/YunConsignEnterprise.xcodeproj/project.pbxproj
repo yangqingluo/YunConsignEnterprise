@@ -14,6 +14,7 @@
 		E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649B1F611C370084F4EB /* FinancialManagementVC.m */; };
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
+		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC081F66801D00D7C450 /* content_icon_direction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47AABD01F66801D00D7C450 /* content_icon_direction@2x.png */; };
 		E47AAC091F66801D00D7C450 /* content_icon_direction@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47AABD11F66801D00D7C450 /* content_icon_direction@3x.png */; };
@@ -191,6 +192,8 @@
 		E447649E1F611C460084F4EB /* DailyOperationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyOperationVC.m; sourceTree = "<group>"; };
 		E44765031F6129040084F4EB /* UserPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPublic.h; sourceTree = "<group>"; };
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
+		E47118301F676ACC004D4337 /* PublicTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTabViewController.h; sourceTree = "<group>"; };
+		E47118311F676ACC004D4337 /* PublicTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTabViewController.m; sourceTree = "<group>"; };
 		E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageAndText.h"; sourceTree = "<group>"; };
 		E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageAndText.m"; sourceTree = "<group>"; };
 		E47AABD01F66801D00D7C450 /* content_icon_direction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "content_icon_direction@2x.png"; sourceTree = "<group>"; };
@@ -703,6 +706,8 @@
 				E4AE9F8C1F5EA6CF002EBE41 /* AppBasicTableViewController.m */,
 				E4AE9F8D1F5EA6CF002EBE41 /* AppBasicViewController.h */,
 				E4AE9F8E1F5EA6CF002EBE41 /* AppBasicViewController.m */,
+				E47118301F676ACC004D4337 /* PublicTabViewController.h */,
+				E47118311F676ACC004D4337 /* PublicTabViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1256,6 +1261,7 @@
 				E4AEA05A1F5EA6CF002EBE41 /* QKNetworkSingleton.m in Sources */,
 				E4AEA0901F5EA6D0002EBE41 /* IQUITextFieldView+Additions.m in Sources */,
 				E4AEA0B61F5EA6D0002EBE41 /* MJRefreshGifHeader.m in Sources */,
+				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
 				E4AEA0AB1F5EA6D0002EBE41 /* MJRefreshAutoFooter.m in Sources */,
 				E4AEA0B31F5EA6D0002EBE41 /* MJRefreshBackGifFooter.m in Sources */,
 				E4AEA0C31F5EA6D0002EBE41 /* SDWebImageCompat.m in Sources */,

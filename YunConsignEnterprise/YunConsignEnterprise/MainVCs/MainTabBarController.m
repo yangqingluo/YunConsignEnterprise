@@ -26,7 +26,7 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
         self.viewControllers = @[[DailyOperationVC new], [FinancialManagementVC new], [SystemConfigVC new]];
         self.tabBar.backgroundImage = [[UIImage imageWithColor:[UIColor whiteColor]] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
-        self.tabBar.tintColor = navigationBarColor;
+        self.tabBar.tintColor = MainColor;
         for (UIViewController *vc in self.viewControllers) {
             NSDictionary *dic = self.tabItemArray[[self.viewControllers indexOfObject:vc]];
             vc.tabBarItem = [[UITabBarItem alloc]initWithTitle:dic[@"title"] image:[[UIImage imageNamed:dic[@"imageName"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:dic[@"selectedImageName"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];

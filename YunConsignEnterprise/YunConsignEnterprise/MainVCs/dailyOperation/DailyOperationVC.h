@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicViewController.h"
+#import "PublicTabViewController.h"
 
-@interface DailyOperationVC : AppBasicViewController
+@interface DailyOperationVC : PublicTabViewController
 
 @end

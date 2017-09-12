@@ -15,8 +15,10 @@
 @implementation SystemConfigVC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     [self setupNav];
+    [super viewDidLoad];
+    
+    self.bannerView.dataSource = [UserPublic getInstance].systemConfigAccesses;
 }
 
 - (void)setupNav{
@@ -43,6 +45,14 @@
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+#pragma UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo{
+    if ([eventName isEqualToString:Event_BannerButtonClicked]) {
+        NSIndexPath *indexPath = (NSIndexPath *)userInfo;
+        NSLog(@"%ld-%ld", (long)indexPath.section, (long)indexPath.row);
+    }
 }
 
 @end

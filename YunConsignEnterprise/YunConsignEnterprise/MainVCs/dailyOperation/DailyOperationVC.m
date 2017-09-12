@@ -8,37 +8,17 @@
 
 #import "DailyOperationVC.h"
 
-#import "PublicBannerView.h"
-#import "PublicUserHeaderView.h"
-
 @interface DailyOperationVC ()
-
-@property (strong, nonatomic) PublicUserHeaderView *headerView;
-@property (strong, nonatomic) PublicBannerView *bannerView;
 
 @end
 
 @implementation DailyOperationVC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     [self setupNav];
-    
-    CGFloat height_banner = screen_width + 32;
-    if (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner <  148) {
-        height_banner += (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner -  148);
-    }
-    _bannerView = [[PublicBannerView alloc] initWithFrame:CGRectMake(0, self.view.height - height_banner, screen_width, height_banner)];
-    _bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [self.view addSubview:_bannerView];
-    
-    _headerView = [[PublicUserHeaderView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom, screen_width, self.bannerView.top + 0.7 * (self.bannerView.baseView.height / count_Banner_V) - self.navigationBarView.bottom)];
-    _headerView.backgroundColor = navigationBarColor;
-    _headerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [self.view insertSubview:_headerView belowSubview:self.bannerView];
+    [super viewDidLoad];
     
     self.bannerView.dataSource = [UserPublic getInstance].dailyOperationAccesses;
-    self.headerView.userData = [UserPublic getInstance].userData;
 }
 
 - (void)setupNav{
@@ -63,5 +43,12 @@
 
 #pragma mark - getter
 
+#pragma UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo{
+    if ([eventName isEqualToString:Event_BannerButtonClicked]) {
+        NSIndexPath *indexPath = (NSIndexPath *)userInfo;
+        NSLog(@"%ld-%ld", (long)indexPath.section, (long)indexPath.row);
+    }
+}
 
 @end
