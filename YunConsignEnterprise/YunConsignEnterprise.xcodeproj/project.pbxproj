@@ -222,6 +222,7 @@
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 		E4F686FC1F70EDE500D80704 /* WayBillOpenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */; };
+		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -557,6 +558,8 @@
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
 		E4F686FA1F70EDE500D80704 /* WayBillOpenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillOpenVC.h; sourceTree = "<group>"; };
 		E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillOpenVC.m; sourceTree = "<group>"; };
+		E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillSRHeaderView.h; sourceTree = "<group>"; };
+		E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillSRHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -834,6 +837,8 @@
 				E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */,
 				E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */,
 				E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */,
+				E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */,
+				E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */,
 				E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */,
 				E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */,
 				E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */,
@@ -1482,6 +1487,7 @@
 				E4AEA07F1F5EA6D0002EBE41 /* AFURLRequestSerialization.m in Sources */,
 				E4AEA09E1F5EA6D0002EBE41 /* MBProgressHUD.m in Sources */,
 				E4AEA0C81F5EA6D0002EBE41 /* SDWebImagePrefetcher.m in Sources */,
+				E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */,
 				E4AEA0921F5EA6D0002EBE41 /* IQUIViewController+Additions.m in Sources */,
 				E4AEA0B51F5EA6D0002EBE41 /* MJRefreshBackStateFooter.m in Sources */,
 				E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */,

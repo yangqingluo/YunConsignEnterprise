@@ -126,15 +126,15 @@ NSString *notNilString(NSString *string);
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead);
 
+//生成视图
 UIButton *NewBackButton(UIColor *color);
 UIButton *NewTextButton(NSString *title, UIColor *textColor);
+UILabel *NewLabel(CGRect frame, UIColor *textColor, UIFont *font, NSTextAlignment alignment);
+UIView *NewSeparatorLine(CGRect frame);
 
 //日期-文本转换
 NSDate *dateFromString(NSString *dateString, NSString *format);
 NSString *stringFromDate(NSDate *date, NSString *format);
-
-+ (NSString *)standardTimeStringWithTString:(NSString *)string;
-+ (NSString *)standardTimeStringWithTString:(NSString *)string originalDateFormat:(NSString *)oFormat destinationalDateFormat:(NSString *)dFormat;
 
 //文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width;

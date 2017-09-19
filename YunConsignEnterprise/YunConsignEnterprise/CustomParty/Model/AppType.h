@@ -75,3 +75,28 @@
 @property (strong, nonatomic) NSString *user_state_text;
 
 @end
+
+@interface AppCustomerInfo : AppType
+
+@property (strong, nonatomic) NSString *freight_cust_name;//客户姓名
+@property (strong, nonatomic) NSString *phone;//电话
+@property (strong, nonatomic) NSString *last_deliver_time;//最后发货时间
+@property (strong, nonatomic) NSString *last_deliver_goods;//最后发货内容
+
+@end
+
+@interface AppServiceInfo : AppType
+
+@property (strong, nonatomic) NSString *open_city_id;//所在城市编号
+@property (strong, nonatomic) NSString *open_city_name;//所在城市名称
+@property (strong, nonatomic) NSString *service_id;//所属门店编号
+@property (strong, nonatomic) NSString *service_name;//所属门店名称
+
+@end
+
+@interface AppSendReceiveInfo : AppType
+
+@property (strong, nonatomic) AppCustomerInfo *customer;
+@property (strong, nonatomic) AppServiceInfo *service;
+
+@end

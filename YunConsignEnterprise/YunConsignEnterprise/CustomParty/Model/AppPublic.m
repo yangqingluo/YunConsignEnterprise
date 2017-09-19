@@ -168,6 +168,7 @@ NSData *dataOfImageCompression(UIImage *image, BOOL isHead) {
     return imageData;
 }
 
+//生成视图
 UIButton *NewBackButton(UIColor *color) {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *i = [UIImage imageNamed:@"navbar_icon_back"];
@@ -188,6 +189,20 @@ UIButton *NewTextButton(NSString *title, UIColor *textColor) {
     return btn;
 }
 
+UILabel *NewLabel(CGRect frame, UIColor *textColor, UIFont *font, NSTextAlignment alignment) {
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.textColor = textColor ? textColor : baseTextColor;
+    label.font = font ? font : [AppPublic appFontOfSize:14.0];
+    label.textAlignment = alignment;
+    return label;
+}
+
+UIView *NewSeparatorLine(CGRect frame) {
+    UIView *lineView = [[UIView alloc] initWithFrame:frame];
+    lineView.backgroundColor = baseSeparatorColor;
+    return lineView;
+}
+
 //日期-文本转换
 NSDate *dateFromString(NSString *dateString, NSString *format) {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -203,22 +218,7 @@ NSString *stringFromDate(NSDate *date, NSString *format) {
     return destDateString;
 }
 
-+ (NSString *)standardTimeStringWithTString:(NSString *)string {
-    return [AppPublic standardTimeStringWithTString:string originalDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS" destinationalDateFormat:@"yyyy-MM-dd HH:mm"];
-}
-
-+ (NSString *)standardTimeStringWithTString:(NSString *)string originalDateFormat:(NSString *)oFormat destinationalDateFormat:(NSString *)dFormat {
-    if (string) {
-        NSArray *array = [string componentsSeparatedByString:@"T"];
-        if (array.count >= 2) {
-            NSDate *date = dateFromString([NSString stringWithFormat:@"%@ %@", array[0], array[1]], oFormat);
-            return stringFromDate(date, dFormat);
-        }
-    }
-    
-    return @"--";
-}
-
+//文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width {
     NSMutableParagraphStyle *paragraphStyle= [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;

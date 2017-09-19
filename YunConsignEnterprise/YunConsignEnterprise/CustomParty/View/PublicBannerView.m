@@ -36,6 +36,18 @@
     [self routerEventWithName:Event_BannerButtonClicked userInfo:[NSIndexPath indexPathForRow:button.tag inSection:self.tag]];
 }
 
+- (void)addSeparatorLines {
+    for (NSUInteger currentPage = 0; currentPage < self.pageControl.numberOfPages; currentPage++) {
+        CGFloat x = currentPage * self.scrollView.width;
+        for (int i = 1; i < count_Banner_V; i++) {
+            [self.scrollView addSubview:NewSeparatorLine(CGRectMake(x + 0, i * self.scrollView.height / count_Banner_V, self.scrollView.width, 1.0))];
+        }
+        for (int i = 1; i < count_Banner_H; i++) {
+            [self.scrollView addSubview:NewSeparatorLine(CGRectMake(x + i * self.scrollView.width / count_Banner_H, 0, 1.0, self.scrollView.height))];
+        }
+    }
+}
+
 #pragma mark - getter
 - (UIView *)baseView {
     if (!_baseView) {
@@ -116,29 +128,13 @@
             [button sd_setImageWithURL:[NSURL URLWithString:item.menu_icon] forState:UIControlStateNormal];
         }
         [button setTitle:item.menu_name forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        button.titleLabel.font = [AppPublic appFontOfSize:14];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageWithColor:baseSeparatorColor] forState:UIControlStateHighlighted];
         [button verticalImageAndTitle:kEdge];
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = i;
         [self.scrollView addSubview:button];
-    }
-}
-
-- (void)addSeparatorLines {
-    for (NSUInteger currentPage = 0; currentPage < self.pageControl.numberOfPages; currentPage++) {
-        CGFloat x = currentPage * self.scrollView.width;
-        for (int i = 1; i < count_Banner_V; i++) {
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(x + 0, i * self.scrollView.height / count_Banner_V, self.scrollView.width, 1.0)];
-            lineView.backgroundColor = baseSeparatorColor;
-            [self.scrollView addSubview:lineView];
-        }
-        for (int i = 1; i < count_Banner_H; i++) {
-            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(x + i * self.scrollView.width / count_Banner_H, 0, 1.0, self.scrollView.height)];
-            lineView.backgroundColor = baseSeparatorColor;
-            [self.scrollView addSubview:lineView];
-        }
     }
 }
 
