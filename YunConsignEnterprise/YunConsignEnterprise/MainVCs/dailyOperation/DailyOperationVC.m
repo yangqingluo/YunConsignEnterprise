@@ -7,7 +7,7 @@
 //
 
 #import "DailyOperationVC.h"
-#import "WayBillOpenViewController.h"
+#import "WayBillOpenVC.h"
 
 @interface DailyOperationVC ()
 
@@ -29,7 +29,6 @@
             UIImage *i = [UIImage imageNamed:@"navbar_icon_menus"];
             [btn setImage:i forState:UIControlStateNormal];
             [btn setFrame:CGRectMake(0, 0, 64, 44)];
-            btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
             [btn addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
@@ -52,7 +51,7 @@
             AppAccessInfo *item = [UserPublic getInstance].dailyOperationAccesses[index];
             switch (item.sort) {
                 case 1:{
-                    WayBillOpenViewController *vc = [[WayBillOpenViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                    WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
                     vc.accessInfo = item;
                     [self.navigationController pushViewController:vc animated:YES];
                 }

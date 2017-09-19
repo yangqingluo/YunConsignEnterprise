@@ -221,6 +221,7 @@
 		E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E01F5EA903002EBE41 /* AppType.m */; };
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
+		E4F686FC1F70EDE500D80704 /* WayBillOpenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -554,6 +555,8 @@
 		E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KGViewExtend.m"; sourceTree = "<group>"; };
 		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
+		E4F686FA1F70EDE500D80704 /* WayBillOpenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillOpenVC.h; sourceTree = "<group>"; };
+		E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillOpenVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,6 +699,8 @@
 			children = (
 				E447649D1F611C460084F4EB /* DailyOperationVC.h */,
 				E447649E1F611C460084F4EB /* DailyOperationVC.m */,
+				E4F686FA1F70EDE500D80704 /* WayBillOpenVC.h */,
+				E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */,
 			);
 			name = DailyOperation;
 			path = dailyOperation;
@@ -1407,6 +1412,7 @@
 				E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */,
 				E4AEA0951F5EA6D0002EBE41 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				E4AEA0CC1F5EA6D0002EBE41 /* UIImage+WebP.m in Sources */,
+				E4F686FC1F70EDE500D80704 /* WayBillOpenVC.m in Sources */,
 				E4AEA0811F5EA6D0002EBE41 /* AFURLSessionManager.m in Sources */,
 				E4AEA0871F5EA6D0002EBE41 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E4AEA08F1F5EA6D0002EBE41 /* IQUIScrollView+Additions.m in Sources */,
