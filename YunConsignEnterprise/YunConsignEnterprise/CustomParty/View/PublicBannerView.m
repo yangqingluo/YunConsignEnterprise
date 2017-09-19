@@ -92,7 +92,26 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(0, 0, btnWidth, btnHeight)];
         button.center = CGPointMake((i / (count_Banner_H * count_Banner_V) * self.scrollView.width) + ((i % count_Banner_H) + 0.5) * btnWidth, ((i % (count_Banner_H * count_Banner_V) / count_Banner_H) + 0.5) * btnHeight);
-        [button setImage:[UIImage imageNamed:@"tabbar_icon_daily_normal"] forState:UIControlStateNormal];
+        UIImage *m_image = [UIImage imageNamed:@"tabbar_icon_daily_normal"];
+        NSString *m_pid_image_prefix = @"";
+        if ([item.parent_id isEqualToString:PID_DAILY_OPERATION]) {
+            m_pid_image_prefix = @"daily_icon_";
+        }
+        else if ([item.parent_id isEqualToString:PID_FINANCIAL_MANAGE]) {
+            m_pid_image_prefix = @"money_icon_";
+        }
+        else if ([item.parent_id isEqualToString:PID_SYSTEM_SET]) {
+            m_pid_image_prefix = @"setting_icon_";
+        }
+        
+        if (m_pid_image_prefix.length) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%d", m_pid_image_prefix, item.sort]];
+            if (image) {
+                m_image = image;
+            }
+
+        }
+        [button setImage:m_image forState:UIControlStateNormal];
         if (item.menu_icon.length) {
             [button sd_setImageWithURL:[NSURL URLWithString:item.menu_icon] forState:UIControlStateNormal];
         }

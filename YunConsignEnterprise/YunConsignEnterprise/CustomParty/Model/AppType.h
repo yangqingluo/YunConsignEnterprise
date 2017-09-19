@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define PID_DAILY_OPERATION       @"1002321896911666177"
+#define PID_FINANCIAL_MANAGE      @"1002321897106275329"
+#define PID_SYSTEM_SET            @"1002321897253223425"
+
 @interface AppType : NSObject
 
 @end

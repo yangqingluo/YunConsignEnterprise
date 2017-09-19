@@ -69,13 +69,13 @@ __strong static UserPublic *_singleManger = nil;
         if (![accessItem.parent_id isEqualToString:@"0"]) {
             AppAccessInfo *parentAccess = rootAccess[accessItem.parent_id];
             if (parentAccess) {
-                if ([parentAccess.menu_name isEqualToString:@"日常操作"]) {
+                if ([parentAccess.menu_code isEqualToString:@"DAILY_OPERATION"]) {
                     [self.dailyOperationAccesses addObject:accessItem];
                 }
-                else if ([parentAccess.menu_name isEqualToString:@"财务管理"]) {
+                else if ([parentAccess.menu_code isEqualToString:@"FINANCIAL_MANAGE"]) {
                     [self.financialManagementAccesses addObject:accessItem];
                 }
-                else if ([parentAccess.menu_name isEqualToString:@"系统设置"]) {
+                else if ([parentAccess.menu_code isEqualToString:@"SYSTEM_SET"]) {
                     [self.systemConfigAccesses addObject:accessItem];
                 }
             }
