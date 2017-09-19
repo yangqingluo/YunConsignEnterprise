@@ -13,6 +13,9 @@
 /** 根据颜色生成纯色图片 */
 + (UIImage *)imageWithColor:(UIColor *)color;
 
+/** 生成虚线边框图片 */
++ (UIImage *)dottedLineImageWithSize:(CGSize)size borderColor:(UIColor *)color borderWidth:(CGFloat)borderWidth;
+
 /** 改变图片颜色 */
 - (UIImage *)imageWithColor:(UIColor *)color;
 

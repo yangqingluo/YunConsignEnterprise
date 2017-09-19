@@ -221,6 +221,7 @@
 		E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E01F5EA903002EBE41 /* AppType.m */; };
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
+		E4F686F91F70E9DF00D80704 /* WayBillOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686F81F70E9DF00D80704 /* WayBillOpenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -554,6 +555,8 @@
 		E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KGViewExtend.m"; sourceTree = "<group>"; };
 		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
+		E4F686F71F70E9DF00D80704 /* WayBillOpenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WayBillOpenViewController.h; path = YunConsignEnterprise/MainVCs/DailyOperation/WayBillOpenViewController.h; sourceTree = SOURCE_ROOT; };
+		E4F686F81F70E9DF00D80704 /* WayBillOpenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WayBillOpenViewController.m; path = YunConsignEnterprise/MainVCs/DailyOperation/WayBillOpenViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,6 +699,8 @@
 			children = (
 				E447649D1F611C460084F4EB /* DailyOperationVC.h */,
 				E447649E1F611C460084F4EB /* DailyOperationVC.m */,
+				E4F686F71F70E9DF00D80704 /* WayBillOpenViewController.h */,
+				E4F686F81F70E9DF00D80704 /* WayBillOpenViewController.m */,
 			);
 			name = DailyOperation;
 			path = dailyOperation;
@@ -1460,6 +1465,7 @@
 				E4AEA0AF1F5EA6D0002EBE41 /* MJRefreshHeader.m in Sources */,
 				E4AEA0AA1F5EA6D0002EBE41 /* NSString+MJExtension.m in Sources */,
 				E44764991F611BF70084F4EB /* SystemConfigVC.m in Sources */,
+				E4F686F91F70E9DF00D80704 /* WayBillOpenViewController.m in Sources */,
 				E4AEA0DB1F5EA8CE002EBE41 /* UIImage+Color.m in Sources */,
 				E4AEA0BD1F5EA6D0002EBE41 /* UIView+MJExtension.m in Sources */,
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,

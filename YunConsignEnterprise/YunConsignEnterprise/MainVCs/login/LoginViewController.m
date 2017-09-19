@@ -45,7 +45,7 @@
     self.usernameTextField.keyboardType = UIKeyboardTypeASCIICapable;
     self.usernameTextField.clearButtonMode = UITextFieldViewModeAlways;
     [inputView addSubview:self.usernameTextField];
-    [self addTextField:self.usernameTextField imageName:@"用户名"];
+    [self addTextField:self.usernameTextField imageName:@"login_icon_phone"];
     
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(kEdge, 0, inputView.width - 2 * kEdge, 44)];
     self.passwordTextField.centerY = 1.5 * inputHeight;
@@ -54,7 +54,7 @@
     self.passwordTextField.secureTextEntry = YES;
     self.passwordTextField.clearButtonMode = UITextFieldViewModeAlways;
     [inputView addSubview:self.passwordTextField];
-    [self addTextField:self.passwordTextField imageName:@"密码"];
+    [self addTextField:self.passwordTextField imageName:@"login_icon_password"];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, inputView.width, 1)];
     lineView.backgroundColor = baseSeparatorColor;

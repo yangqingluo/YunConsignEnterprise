@@ -22,14 +22,15 @@
 
 #define MainColor                    RGBA(0x00, 0xbc, 0xd4, 1.0)
 #define AuxiliaryColor               RGBA(0x00, 0x97, 0xa7, 1.0)
-#define baseSeparatorColor               RGBA(0xdb, 0xdb, 0xdb, 1.0)
-#define baseSeparatorAlphaColor          RGBA(0xdb, 0xdb, 0xdb, 0.6)
+#define baseSeparatorColor           RGBA(0xdb, 0xdb, 0xdb, 1.0)
+#define baseSeparatorAlphaColor      RGBA(0xdb, 0xdb, 0xdb, 0.6)
 
 #define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1.0)
 #define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1.0)
 #define lightWhiteColor              RGBA(0xf8, 0xf8, 0xf8, 1.0)
 #define silverColor                  RGBA(0xc0, 0xc0, 0xc0, 1.0)
-#define baseTextColor                RGBA(0x33, 0x33, 0x33, 1.0)
+#define baseTextColor                RGBA(0x21, 0x21, 0x21, 1.0)
+#define secondaryTextColor           RGBA(0x75, 0x75, 0x75, 1.0)
 
 #define STATUS_HEIGHT                20.0
 #define STATUS_BAR_HEIGHT            64.0
