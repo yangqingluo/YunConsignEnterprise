@@ -22,7 +22,7 @@
 }
 
 - (void)setupNav{
-    [self createNavWithTitle:@"" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:nil createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             UIImage *i = [UIImage imageNamed:@"navbar_icon_menus"];

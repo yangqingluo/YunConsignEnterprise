@@ -22,7 +22,7 @@
 }
 
 - (void)setupNav{
-    [self createNavWithTitle:@"系统设置" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:nil createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewTextButton(@"登出", [UIColor whiteColor]);
             [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];

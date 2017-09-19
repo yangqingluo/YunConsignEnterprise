@@ -103,27 +103,28 @@ NSString *httpRespString(NSError *error, NSObject *object){
 - (void)Post:(id)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion{
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];
     NSString *urlStr = [urlStringWithService(urlString) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    QKWEAKSELF;
     [manager POST:urlStr parameters:userInfo progress:^(NSProgress * _Nonnull progress){
         
     } success:^(NSURLSessionDataTask *task, id responseObject){
-        completion(responseObject, nil);
+        [weakself doResponseCompletion:responseObject block:completion];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        completion(nil, error);
+        [weakself doResponseCompletion:nil block:completion];
     }];
 }
 
 - (void)Post:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block completion:(QKNetworkBlock)completion{
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];
     NSString *urlStr = [urlStringWithService(urlString) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    QKWEAKSELF;
     [manager POST:urlStr parameters:userInfo constructingBodyWithBlock:block progress:^(NSProgress * _Nonnull Progress){
         
     } success:^(NSURLSessionDataTask *task, id responseObject){
-        completion(responseObject, nil);
+        [weakself doResponseCompletion:responseObject block:completion];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        completion(nil, error);
+        [weakself doResponseCompletion:nil block:completion];
     }];
 }
 
@@ -131,12 +132,12 @@ NSString *httpRespString(NSError *error, NSObject *object){
 - (void)Put:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion{
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];
     NSString *urlStr = [urlStringWithService(urlString) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    QKWEAKSELF;
     [manager PUT:urlStr parameters:userInfo success:^(NSURLSessionDataTask *task, id responseObject){
-        completion(responseObject, nil);
+        [weakself doResponseCompletion:responseObject block:completion];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        completion(nil, error);
+        [weakself doResponseCompletion:nil block:completion];
     }];
 }
 
@@ -144,11 +145,12 @@ NSString *httpRespString(NSError *error, NSObject *object){
 - (void)Delete:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion{
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];
     NSString *urlStr = [urlStringWithService(urlString) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    QKWEAKSELF;
     [manager DELETE:urlStr parameters:userInfo success:^(NSURLSessionDataTask *task, id responseObject){
-        completion(responseObject, nil);
+        [weakself doResponseCompletion:responseObject block:completion];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        completion(nil, error);
+        [weakself doResponseCompletion:nil block:completion];
     }];
 }
 
@@ -243,7 +245,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
 //login
 - (void)loginWithID:(NSString *)username Password:(NSString *)password completion:(QKNetworkBlock)completion {
     NSDictionary *m_dic = @{@"login_code" : username, @"login_pass" : password, @"login_type" : @3};//登录方式：1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
-    [self Get:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
+    [self Post:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
         if (!error) {
             [[AppPublic getInstance] loginDoneWithUserData:responseBody username:username password:password];
         }

@@ -22,7 +22,7 @@
 }
 
 - (void)setupNav{
-    [self createNavWithTitle:@"财务管理" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:nil createMenuItem:^UIView *(int nIndex){
         //        if (nIndex == 0){
         //            UIButton *btn = NewTextButton(@"登出", [UIColor whiteColor]);
         //            [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
