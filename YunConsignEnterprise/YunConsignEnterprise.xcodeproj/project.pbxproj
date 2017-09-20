@@ -221,6 +221,9 @@
 		E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E01F5EA903002EBE41 /* AppType.m */; };
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
 		E4ECF7D71F725B2E003F69C0 /* PublicSRSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */; };
+		E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */; };
+		E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */; };
+		E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 		E4F686FC1F70EDE500D80704 /* WayBillOpenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */; };
 		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
@@ -557,6 +560,12 @@
 		E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KGViewExtend.m"; sourceTree = "<group>"; };
 		E4ECF7D51F725B2E003F69C0 /* PublicSRSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSRSelectVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSRSelectVC.h; sourceTree = SOURCE_ROOT; };
 		E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicSRSelectVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSRSelectVC.m; sourceTree = SOURCE_ROOT; };
+		E4ECF7D91F7264E5003F69C0 /* JXTAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXTAlertController.h; sourceTree = "<group>"; };
+		E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXTAlertController.m; sourceTree = "<group>"; };
+		E4ECF7DC1F726653003F69C0 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		E4ECF7DF1F727148003F69C0 /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
+		E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
 		E4F686FA1F70EDE500D80704 /* WayBillOpenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillOpenVC.h; sourceTree = "<group>"; };
@@ -848,6 +857,8 @@
 				E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */,
 				E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */,
 				E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */,
+				E4ECF7DC1F726653003F69C0 /* TextFieldCell.h */,
+				E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -868,6 +879,7 @@
 		E4AE9F931F5EA6CF002EBE41 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				E4ECF7D81F7264E5003F69C0 /* AlertController */,
 				E4AE9F941F5EA6CF002EBE41 /* AFNetworking */,
 				E4AE9FBA1F5EA6CF002EBE41 /* BlockAlertView */,
 				E4AE9FBD1F5EA6CF002EBE41 /* IQKeyboardManager */,
@@ -940,6 +952,8 @@
 			children = (
 				E4AE9FBB1F5EA6CF002EBE41 /* BlockAlertView.h */,
 				E4AE9FBC1F5EA6CF002EBE41 /* BlockAlertView.m */,
+				E4ECF7DF1F727148003F69C0 /* BlockActionSheet.h */,
+				E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */,
 			);
 			path = BlockAlertView;
 			sourceTree = "<group>";
@@ -1218,6 +1232,15 @@
 			path = "UIImage+Categories";
 			sourceTree = "<group>";
 		};
+		E4ECF7D81F7264E5003F69C0 /* AlertController */ = {
+			isa = PBXGroup;
+			children = (
+				E4ECF7D91F7264E5003F69C0 /* JXTAlertController.h */,
+				E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */,
+			);
+			path = AlertController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1404,6 +1427,7 @@
 				E4AEA07E1F5EA6D0002EBE41 /* AFSecurityPolicy.m in Sources */,
 				E4AEA0881F5EA6D0002EBE41 /* UIButton+AFNetworking.m in Sources */,
 				E4AEA0B81F5EA6D0002EBE41 /* MJRefreshStateHeader.m in Sources */,
+				E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */,
 				E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */,
 				E4AEA0961F5EA6D0002EBE41 /* IQTextView.m in Sources */,
 				E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */,
@@ -1412,6 +1436,7 @@
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
 				E4AEA0C21F5EA6D0002EBE41 /* SDImageCacheConfig.m in Sources */,
 				E4AEA0C71F5EA6D0002EBE41 /* SDWebImageManager.m in Sources */,
+				E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */,
 				E4AEA0CD1F5EA6D0002EBE41 /* UIImageView+HighlightedWebCache.m in Sources */,
 				E4AEA0AD1F5EA6D0002EBE41 /* MJRefreshComponent.m in Sources */,
 				E4AEA0DC1F5EA8CE002EBE41 /* UIImage+Gif.m in Sources */,
@@ -1488,6 +1513,7 @@
 				E4AEA0C01F5EA6D0002EBE41 /* NSImage+WebCache.m in Sources */,
 				E4AEA0791F5EA6D0002EBE41 /* AppBasicViewController.m in Sources */,
 				E4AEA07C1F5EA6D0002EBE41 /* AFHTTPSessionManager.m in Sources */,
+				E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */,
 				E4AEA0991F5EA6D0002EBE41 /* IQTitleBarButtonItem.m in Sources */,
 				E4AEA07F1F5EA6D0002EBE41 /* AFURLRequestSerialization.m in Sources */,
 				E4AEA09E1F5EA6D0002EBE41 /* MBProgressHUD.m in Sources */,

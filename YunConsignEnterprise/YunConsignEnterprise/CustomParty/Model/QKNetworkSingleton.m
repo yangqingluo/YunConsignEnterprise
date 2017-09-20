@@ -207,7 +207,6 @@ NSString *httpRespString(NSError *error, NSObject *object){
     if (!funcId.length || ![UserPublic getInstance].userData.login_token.length) {
         return;
     }
-    
     NSString *urlFooter = @"/common/data.do";
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlFooter];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -225,20 +224,18 @@ NSString *httpRespString(NSError *error, NSObject *object){
     [xmlString appendString:@"</request>\n"];
     [xmlString appendString:@"</requests>"];
     // 设置HTTPBody
-    [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error)
-     {
+    [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
          return xmlString;
      }];
     
     NSString *urlStr = [urlStringWithService(urlFooter) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    QKWEAKSELF;
     [manager POST:urlStr parameters:@{} progress:^(NSProgress * _Nonnull progress){
         
     } success:^(NSURLSessionDataTask *task, id responseObject){
-        completion(responseObject, nil);
-        
+        [weakself doResponseCompletion:responseObject block:completion];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
-        completion(nil, error);
+        [weakself doResponseCompletion:nil block:completion];
     }];
 }
 
@@ -247,7 +244,17 @@ NSString *httpRespString(NSError *error, NSObject *object){
     NSDictionary *m_dic = @{@"login_code" : username, @"login_pass" : password, @"login_type" : @3};//登录方式：1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
     [self Post:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
         if (!error) {
-            [[AppPublic getInstance] loginDoneWithUserData:responseBody username:username password:password];
+            id object = nil;
+            if ([responseBody isKindOfClass:[NSArray class]]) {
+                if ([(NSArray *)responseBody count] > 0) {
+                    object = [(NSArray *)responseBody objectAtIndex:0];
+                }
+            }
+            else {
+                object = responseBody;
+            }
+            
+            [[AppPublic getInstance] loginDoneWithUserData:object username:username password:password];
         }
         completion(responseBody, error);
     }];
@@ -255,7 +262,22 @@ NSString *httpRespString(NSError *error, NSObject *object){
 
 #pragma mark - private
 - (BOOL)occuredRemoteLogin:(id)object {
-    
+    if ([object isKindOfClass:[AppResponse class]]) {
+        switch ([(AppResponse *)object global].flag) {
+            case -20100002:{
+                [[AFHTTPSessionManager manager] invalidateSessionCancelingTasks:NO];
+                
+                [[AppPublic getInstance] logout];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"登录信息无效，请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+                return YES;
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
     
     return NO;
 }
@@ -280,9 +302,12 @@ NSString *httpRespString(NSError *error, NSObject *object){
                 completionObject = @{};
                 if (appResponse.responses.count > 0) {
                     ResponseItem *item = appResponse.responses[0];
-                    if (item.items.count > 0) {
-                        completionObject = item.items[0];
-                    }
+                    completionObject = item.items;
+                }
+            }
+            else {
+                if ([self occuredRemoteLogin:appResponse]) {
+                    return;
                 }
             }
         }

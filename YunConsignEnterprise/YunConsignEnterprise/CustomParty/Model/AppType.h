@@ -92,6 +92,8 @@
 @property (strong, nonatomic) NSString *service_id;//所属门店编号
 @property (strong, nonatomic) NSString *service_name;//所属门店名称
 
+- (NSString *)showCityAndServiceName;
+
 @end
 
 @interface AppSendReceiveInfo : AppType

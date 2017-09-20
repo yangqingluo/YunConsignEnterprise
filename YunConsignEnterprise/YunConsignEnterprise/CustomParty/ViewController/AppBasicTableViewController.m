@@ -19,7 +19,6 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.automaticallyAdjustsScrollViewInsets = NO;
         _style = UITableViewStyleGrouped;
     }
     
@@ -37,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:self.tableView];
 }

@@ -81,7 +81,18 @@
 
 @implementation AppServiceInfo
 
-
+- (NSString *)showCityAndServiceName {
+    NSString *connect_string = @"-";
+    NSString *m_string = [NSString stringWithFormat:@"%@%@%@", self.open_city_name.length ? self.open_city_name : @"", connect_string, self.service_name.length ? self.service_name : @""];
+    
+    if ([m_string hasPrefix:connect_string]) {
+        m_string = [m_string substringFromIndex:connect_string.length];
+    }
+    else if ([m_string hasSuffix:connect_string]){
+        m_string = [m_string substringToIndex:m_string.length - connect_string.length];
+    }
+    return m_string;
+}
 
 @end
 
