@@ -73,7 +73,16 @@
     [_senderButton setImage:[UIImage dottedLineImageWithSize:CGSizeMake(92, 60) borderColor:baseSeparatorColor borderWidth:1.0] forState:UIControlStateSelected];
     [_contentView addSubview:_senderButton];
     
+    _receiverDetailLabel = NewLabel(CGRectMake(imageView.right + m_edge, 0, _contentView.right - m_edge - (imageView.right + m_edge), _contentView.height), nil, nil, NSTextAlignmentCenter);
+    _receiverDetailLabel.numberOfLines = 0;
+    [_contentView addSubview:_receiverDetailLabel];
+    
+    _receiverButton = [[UIButton alloc] initWithFrame:CGRectMake(imageView.right + kEdge, kEdge, _contentView.right - kEdge - (imageView.right + kEdge), _contentView.height - 2 * kEdge)];
+    [_receiverButton setImage:[UIImage dottedLineImageWithSize:CGSizeMake(92, 60) borderColor:baseSeparatorColor borderWidth:1.0] forState:UIControlStateSelected];
+    [_contentView addSubview:_receiverButton];
+    
     [self refreshSenderDetailLabel];
+    [self refreshReceiverDetailLabel];
 }
 
 - (void)refreshSenderDetailLabel {
@@ -81,27 +90,44 @@
     self.senderLabel.hidden = !hasSenderInfo;
     self.senderButton.selected = !hasSenderInfo;
     self.senderDetailLabel.width = hasSenderInfo ? self.contentImageView.left - self.senderDetailLabel.left : self.contentImageView.left - 2 * self.senderDetailLabel.left;
-    if (hasSenderInfo) {
+    [self refreshSRInfo:self.senderInfo detailLabel:self.senderDetailLabel placeHolderString:@"发货人" textAlignment:NSTextAlignmentLeft];
+}
+
+- (void)refreshReceiverDetailLabel {
+    BOOL hasReceiver = (self.receiverInfo != nil);
+    self.receiverLabel.hidden = !hasReceiver;
+    self.receiverButton.selected = !hasReceiver;
+    
+    CGFloat m_edge = self.contentView.width - self.receiverDetailLabel.right;
+    self.receiverDetailLabel.width = hasReceiver ? self.receiverDetailLabel.right - self.contentImageView.right : self.receiverDetailLabel.right - self.contentImageView.right - m_edge;
+    self.receiverDetailLabel.right = self.contentView.width - m_edge;
+    [self refreshSRInfo:self.receiverInfo detailLabel:self.receiverDetailLabel placeHolderString:@"收货人" textAlignment:NSTextAlignmentRight];
+}
+
+- (void)refreshSRInfo:(AppSendReceiveInfo *)info detailLabel:(UILabel *)label placeHolderString:(NSString *)holderSring textAlignment:(NSTextAlignment)alignment{
+    if (info) {
         NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle1.lineSpacing = 0.0;
+        paragraphStyle1.alignment = alignment;
         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle2.lineSpacing = kEdge;
+        paragraphStyle2.alignment = alignment;
         NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic appFontOfSize:16], NSForegroundColorAttributeName:baseTextColor, NSParagraphStyleAttributeName : paragraphStyle1};
         NSDictionary *dic2 = @{NSFontAttributeName:[AppPublic appFontOfSize:14], NSForegroundColorAttributeName:baseTextColor, NSParagraphStyleAttributeName : paragraphStyle2};
         NSDictionary *dic3 = @{NSFontAttributeName:[AppPublic appFontOfSize:0], NSForegroundColorAttributeName:baseTextColor, NSParagraphStyleAttributeName : paragraphStyle2};
         
         NSMutableAttributedString *m_string = [NSMutableAttributedString new];
-        [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@-%@\n", self.senderInfo.service.open_city_name, self.senderInfo.service.service_name] attributes:dic1]];
+        [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@-%@\n", info.service.open_city_name, info.service.service_name] attributes:dic1]];
         [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:dic3]];
-        [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", self.senderInfo.customer.freight_cust_name, self.senderInfo.customer.phone] attributes:dic2]];
-        self.senderDetailLabel.attributedText = m_string;
+        [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", info.customer.freight_cust_name, info.customer.phone] attributes:dic2]];
+        label.attributedText = m_string;
     }
     else {
         NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle1.lineSpacing = 0.0;
         paragraphStyle1.alignment = NSTextAlignmentCenter;
         NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic appFontOfSize:16], NSForegroundColorAttributeName:secondaryTextColor, NSParagraphStyleAttributeName : paragraphStyle1};
-        self.senderDetailLabel.attributedText = [[NSAttributedString alloc] initWithString:@"发货人" attributes:dic1];
+        label.attributedText = [[NSAttributedString alloc] initWithString:holderSring attributes:dic1];
     }
 }
 
@@ -109,6 +135,11 @@
 - (void)setSenderInfo:(AppSendReceiveInfo *)senderInfo {
     _senderInfo = senderInfo;
     [self refreshSenderDetailLabel];
+}
+
+- (void)setReceiverInfo:(AppSendReceiveInfo *)receiverInfo {
+    _receiverInfo = receiverInfo;
+    [self refreshReceiverDetailLabel];
 }
 
 @end

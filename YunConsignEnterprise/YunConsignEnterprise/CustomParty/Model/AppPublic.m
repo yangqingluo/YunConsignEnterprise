@@ -150,8 +150,6 @@ NSData *dataOfImageCompression(UIImage *image, BOOL isHead) {
             image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
         }
-        
-        
     }
     
     //调整大小

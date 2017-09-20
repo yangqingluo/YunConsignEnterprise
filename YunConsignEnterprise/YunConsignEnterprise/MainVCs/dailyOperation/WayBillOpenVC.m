@@ -7,6 +7,7 @@
 //
 
 #import "WayBillOpenVC.h"
+#import "PublicSRSelectVC.h"
 
 #import "WayBillSRHeaderView.h"
 
@@ -41,6 +42,11 @@
 }
 
 - (void)senderButtonAction {
+//    PublicSRSelectVC *vc = [PublicSRSelectVC new];
+//    vc.title = @"发货人";
+//    vc.type = SRSelectType_Sender;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    
     if (self.headerView.senderInfo) {
         self.headerView.senderInfo = nil;
     }
@@ -61,11 +67,39 @@
     }
 }
 
+- (void)receiverButtonAction {
+//    PublicSRSelectVC *vc = [PublicSRSelectVC new];
+//    vc.title = @"收货人";
+//    vc.type = SRSelectType_Receiver;
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (self.headerView.receiverInfo) {
+        self.headerView.receiverInfo = nil;
+    }
+    else {
+        AppSendReceiveInfo *receiverInfo = [AppSendReceiveInfo mj_objectWithKeyValues:@{@"customer" : @{
+                                                                                              @"freight_cust_name" : @"张三",
+                                                                                              @"phone": @"13980808080",
+                                                                                              @"last_deliver_time": @"2017-08-02" ,
+                                                                                              @"last_deliver_goods": @"杯子/12/0/1"
+                                                                                              },
+                                                                                      @"service" : @{
+                                                                                              @"open_city_id": @"1",
+                                                                                              @"open_city_name": @"成都",
+                                                                                              @"service_id": @"1",
+                                                                                              @"service_name": @"五块石店"
+                                                                                              }}];
+        self.headerView.receiverInfo = receiverInfo;
+    }
+
+}
+
 #pragma mark - getter
 - (WayBillSRHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[WayBillSRHeaderView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 160)];
         [_headerView.senderButton addTarget:self action:@selector(senderButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_headerView.receiverButton addTarget:self action:@selector(receiverButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headerView;
 }
