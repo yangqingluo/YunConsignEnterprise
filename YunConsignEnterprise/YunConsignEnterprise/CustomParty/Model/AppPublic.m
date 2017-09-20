@@ -216,6 +216,14 @@ NSString *stringFromDate(NSDate *date, NSString *format) {
     return destDateString;
 }
 
+NSString *dateStringWithTimeString(NSString *string){
+    NSDate *date = dateFromString(string, @"yyyy-MM-dd HH:mm:ss");
+    if (date) {
+        return stringFromDate(date, @"yyyy-MM-dd");
+    }
+    return @"--";
+}
+
 //文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width {
     NSMutableParagraphStyle *paragraphStyle= [[NSMutableParagraphStyle alloc] init];

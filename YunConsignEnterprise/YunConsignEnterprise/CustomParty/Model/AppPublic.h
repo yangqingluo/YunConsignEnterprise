@@ -39,6 +39,8 @@
 
 #define appRefreshTime               24 * 60 * 60//自动刷新间隔时间
 #define kButtonCornerRadius          4.0
+#define kViewCornerRadius            4.0
+
 #define kCellHeight                  44.0
 #define kCellHeightFilter            50.0
 #define kCellHeightMiddle            60.0
@@ -89,7 +91,7 @@ typedef enum : NSUInteger {
     PowerType_FollowUpRecord     = 0,
 } PowerType;
 
-typedef void(^DoneBlock)(NSObject *object);
+typedef void(^DoneBlock)(id object);
 
 @interface AppPublic : NSObject
 
@@ -135,6 +137,8 @@ UIView *NewSeparatorLine(CGRect frame);
 //日期-文本转换
 NSDate *dateFromString(NSString *dateString, NSString *format);
 NSString *stringFromDate(NSDate *date, NSString *format);
+
+NSString *dateStringWithTimeString(NSString *string);
 
 //文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width;

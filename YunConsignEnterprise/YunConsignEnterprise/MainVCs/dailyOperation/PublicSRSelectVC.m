@@ -7,12 +7,13 @@
 //
 
 #import "PublicSRSelectVC.h"
+#import "PublicCustomerPhoneVC.h"
 
 #import "TextFieldCell.h"
 #import "BlockActionSheet.h"
 #import "JXTAlertController.h"
 
-@interface PublicSRSelectVC ()<UITextFieldDelegate, UITextViewDelegate>
+@interface PublicSRSelectVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) AppSendReceiveInfo *data;
 @property (strong, nonatomic) NSArray *showArray;
@@ -36,10 +37,11 @@
         case SRSelectType_Sender:
         case SRSelectType_Receiver:{
             self.title = self.type == SRSelectType_Sender ? @"发货人" : @"收货人";
-            _showArray = @[@{@"title":@"始发站",@"subTitle":@"必填，请选择"},
+            _showArray = @[@{@"title": (self.type == SRSelectType_Sender ? @"始发站" : @"终点站"),@"subTitle":@"请选择"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入"}];
             _data = [AppSendReceiveInfo new];
+            _data.customer = [AppCustomerInfo new];
         }
             break;
             
@@ -69,25 +71,40 @@
 }
 
 - (void)saveButtonAction {
+    NSDictionary *dic = nil;
+    if (!self.data.service) {
+        dic = self.showArray[0];
+    }
+    else if (!self.data.customer.phone.length) {
+        dic = self.showArray[1];
+    }
+    else if (!self.data.customer.freight_cust_name.length) {
+        dic = self.showArray[2];
+    }
     
+    if (dic) {
+        [self showHint:[NSString stringWithFormat:@"%@%@", dic[@"title"], dic[@"subTitle"]]];
+    }
+    else {
+        [self doDoneAction];
+    }
+}
+
+- (void)doDoneAction{
+    if (self.doneBlock) {
+        self.doneBlock(self.data);
+    }
+    [self goBack];
 }
 
 - (void)pullServiceArray {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_getCurrentService" Parm:nil  completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:self.type == SRSelectType_Sender ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil  completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
             [self.serviceArray removeAllObjects];
             [self.serviceArray addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            [self.serviceArray addObject:[AppServiceInfo mj_objectWithKeyValues:@{@"open_city_id": @"1",
-                                                                                 @"open_city_name": @"成都",
-                                                                                 @"service_id": @"1",
-                                                                                 @"service_name": @"五块石店"}]];
-            [self.serviceArray addObject:[AppServiceInfo mj_objectWithKeyValues:@{@"open_city_id": @"1",
-                                                                                  @"open_city_name": @"重庆",
-                                                                                  @"service_id": @"1",
-                                                                                  @"service_name": @"朝天门店"}]];
             if (self.serviceArray.count) {
                 self.data.service = self.serviceArray[0];
             }
@@ -97,7 +114,18 @@
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
 
+- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content{
+    if (row == 2) {
+        self.data.customer.freight_cust_name = content;
+    }
+    else {
+//        NSDictionary *dic = self.showArray[row];
+//        [self.data setValue:content forKey:dic[@"key"]];
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - getter
@@ -146,11 +174,21 @@
     cell.textField.placeholder = dic[@"subTitle"];
     cell.textField.text = @"";
     cell.textField.indexPath = [indexPath copy];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = indexPath.row == 0 ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     switch (indexPath.row) {
         case 0:{
             cell.textField.text = [self.data.service showCityAndServiceName];
+        }
+            break;
+            
+        case 1:{
+            cell.textField.text = self.data.customer.phone;
+        }
+            break;
+            
+        case 2:{
+            cell.textField.text = self.data.customer.freight_cust_name;
         }
             break;
             
@@ -161,10 +199,11 @@
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.row) {
-        case 0:{
+        case 0:
             if (self.serviceArray.count) {
                 NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.serviceArray.count];
                 for (AppServiceInfo *item in self.serviceArray) {
@@ -180,26 +219,60 @@
                 } otherButtonTitlesArray:m_array];
                 [sheet showInView:self.view];
                 
-//                [self jxt_showActionSheetWithTitle:@"选择站点" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
-//                    alertMaker.
-//                    addActionCancelTitle(@"cancel").
-//                    addActionDefaultTitles(m_array);
-//                } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
-//                    if (buttonIndex > 0 && (buttonIndex - 1) < weakself.serviceArray.count) {
-//                        weakself.data.service = weakself.serviceArray[buttonIndex - 1];
-//                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//                    }
-//
-//                }];
+                //                [self jxt_showActionSheetWithTitle:@"选择站点" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+                //                    alertMaker.
+                //                    addActionCancelTitle(@"cancel").
+                //                    addActionDefaultTitles(m_array);
+                //                } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+                //                    if (buttonIndex > 0 && (buttonIndex - 1) < weakself.serviceArray.count) {
+                //                        weakself.data.service = weakself.serviceArray[buttonIndex - 1];
+                //                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                //                    }
+                //
+                //                }];
             }
             else {
                 [self pullServiceArray];
             }
+            break;
+            
+        case 1:{
+            PublicCustomerPhoneVC *vc = [PublicCustomerPhoneVC new];
+            vc.data = [self.data copy];
+            vc.title = self.title;
+            QKWEAKSELF;
+            vc.doneBlock = ^(id object){
+                if ([object isKindOfClass:self.data.class]) {
+                    self.data.customer = [[object valueForKey:@"customer"] copy];
+                }
+                [weakself.tableView reloadData];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
         default:
             break;
     }
+}
+
+#pragma  mark - TextField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    return (range.location < kInputLengthMax);
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        [self editAtIndex:indexPath.row andContent:textField.text];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

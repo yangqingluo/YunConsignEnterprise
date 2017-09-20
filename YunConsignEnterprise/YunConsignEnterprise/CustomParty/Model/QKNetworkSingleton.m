@@ -299,10 +299,12 @@ NSString *httpRespString(NSError *error, NSObject *object){
             code = appResponse.global.flag;
             message = appResponse.global.message.length ? appResponse.global.message : [NSString stringWithFormat:@"未知错误码:%d", (int)code];
             if (code == 1) {
-                completionObject = @{};
+                completionObject = [NSArray new];
                 if (appResponse.responses.count > 0) {
                     ResponseItem *item = appResponse.responses[0];
-                    completionObject = item.items;
+                    if (item.items) {
+                        completionObject = item.items;
+                    }
                 }
             }
             else {
