@@ -8,6 +8,12 @@
 
 #import "PublicInputCellView.h"
 
+@implementation IndexPathButton
+
+
+
+@end
+
 @implementation PublicInputCellView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -16,7 +22,7 @@
         _textLabel = NewLabel(self.bounds, nil, nil, NSTextAlignmentLeft);
         [self addSubview:_textLabel];
         
-        _textField = [[IndexPathTextField alloc]initWithFrame:self.bounds];
+        _textField = [[IndexPathTextField alloc]initWithFrame:CGRectMake(cellDetailLeft, 0, self.width - cellDetailLeft, self.height)];
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.font = [UIFont systemFontOfSize:appLabelFontSize];
@@ -31,6 +37,18 @@
         lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     }
     return self;
+}
+
+- (void)showRightButtonWithImage:(UIImage *)image {
+    _rightButton = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [_rightButton setImage:image forState:UIControlStateNormal];
+    _rightButton.centerY = _textField.centerY;
+    _rightButton.right = self.width;
+    [self addSubview:_rightButton];
+    
+    _rightButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    
+    _textField.width -= _rightButton.width;
 }
 
 @end

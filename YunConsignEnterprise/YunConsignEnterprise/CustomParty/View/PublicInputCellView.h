@@ -9,9 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "TextFieldCell.h"
 
+@interface IndexPathButton : UIButton
+
+@property (strong, nonatomic) NSIndexPath *indexPath;
+
+@end
+
 @interface PublicInputCellView : UIView
 
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) IndexPathTextField *textField;
+@property (strong, nonatomic) IndexPathButton *rightButton;
+
+- (void)showRightButtonWithImage:(UIImage *)image;
 
 @end

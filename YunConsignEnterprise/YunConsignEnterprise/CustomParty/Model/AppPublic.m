@@ -183,14 +183,14 @@ UIButton *NewTextButton(NSString *title, UIColor *textColor) {
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 64, 0, 64, 44)];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:textColor forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    btn.titleLabel.font = [UIFont systemFontOfSize:appButtonTitleFontSize];
     return btn;
 }
 
 UILabel *NewLabel(CGRect frame, UIColor *textColor, UIFont *font, NSTextAlignment alignment) {
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.textColor = textColor ? textColor : baseTextColor;
-    label.font = font ? font : [AppPublic appFontOfSize:14.0];
+    label.font = font ? font : [AppPublic appFontOfSize:appLabelFontSize];
     label.textAlignment = alignment;
     return label;
 }

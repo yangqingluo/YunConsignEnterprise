@@ -126,6 +126,7 @@
 		E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */; };
 		E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */; };
 		E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */; };
+		E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F611F73A181007E7D70 /* DoubleInputCell.m */; };
 		E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2A1F5EA605002EBE41 /* main.m */; };
 		E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2D1F5EA605002EBE41 /* AppDelegate.m */; };
 		E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F301F5EA605002EBE41 /* ViewController.m */; };
@@ -374,6 +375,8 @@
 		E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGoodsListHeaderView.m; sourceTree = "<group>"; };
 		E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleInputCell.h; sourceTree = "<group>"; };
 		E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleInputCell.m; sourceTree = "<group>"; };
+		E49C4F601F73A181007E7D70 /* DoubleInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleInputCell.h; sourceTree = "<group>"; };
+		E49C4F611F73A181007E7D70 /* DoubleInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleInputCell.m; sourceTree = "<group>"; };
 		E4AE9F261F5EA605002EBE41 /* YunConsignEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunConsignEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AE9F2A1F5EA605002EBE41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4AE9F2C1F5EA605002EBE41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -895,6 +898,8 @@
 				E420B8051F737B34009794A2 /* PublicInputCellView.m */,
 				E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */,
 				E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */,
+				E49C4F601F73A181007E7D70 /* DoubleInputCell.h */,
+				E49C4F611F73A181007E7D70 /* DoubleInputCell.m */,
 				E49C4F571F738EA3007E7D70 /* PublicListHeaderView.h */,
 				E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */,
 				E49C4F5A1F738FC3007E7D70 /* AddGoodsListHeaderView.h */,
@@ -1503,6 +1508,7 @@
 				E4AEA0C51F5EA6D0002EBE41 /* SDWebImageDownloader.m in Sources */,
 				E4AEA0851F5EA6D0002EBE41 /* AFImageDownloader.m in Sources */,
 				E4AEA0B21F5EA6D0002EBE41 /* MJRefreshAutoStateFooter.m in Sources */,
+				E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */,
 				E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */,
 				E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */,
 				E4AEA0A21F5EA6D0002EBE41 /* MJFoundation.m in Sources */,

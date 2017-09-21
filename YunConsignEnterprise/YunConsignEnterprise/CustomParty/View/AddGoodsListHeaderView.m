@@ -9,6 +9,7 @@
 #import "AddGoodsListHeaderView.h"
 
 #import "SingleInputCell.h"
+#import "DoubleInputCell.h"
 
 @interface AddGoodsListHeaderView ()
 
@@ -51,14 +52,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = self.showArray[indexPath.row];
     if ([item isKindOfClass:[NSDictionary class]]) {
-        static NSString *CellIdentifier = @"select_cell";
+        static NSString *CellIdentifier = @"single_cell";
         SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
             cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            cell.textLabel.font = [UIFont systemFontOfSize:appLabelFontSizeMiddle];
+            [cell.inputView showRightButtonWithImage:[UIImage imageNamed:@"list_icon_common"]];
         }
         cell.inputView.textLabel.text = item[@"title"];
         cell.inputView.textField.placeholder = item[@"subTitle"];
@@ -66,6 +66,31 @@
         cell.inputView.textField.indexPath = [indexPath copy];
         
         return cell;
+    }
+    else if ([item isKindOfClass:[NSArray class]]) {
+        NSArray *m_array = (NSArray *)item;
+        if (m_array.count == 2) {
+            static NSString *CellIdentifier = @"double_cell";
+            DoubleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            if (!cell) {
+                cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            NSDictionary *m_dic1 = m_array[0];
+            NSDictionary *m_dic2 = m_array[1];
+            cell.inputView.textLabel.text = m_dic1[@"title"];
+            cell.inputView.textField.placeholder = m_dic1[@"subTitle"];
+            cell.inputView.textField.text = @"";
+            cell.inputView.textField.indexPath = [indexPath copy];
+            
+            cell.anotherInputView.textLabel.text = m_dic2[@"title"];
+            cell.anotherInputView.textField.placeholder = m_dic2[@"subTitle"];
+            cell.anotherInputView.textField.text = @"";
+            cell.anotherInputView.textField.indexPath = [indexPath copy];
+            
+            return cell;
+        }
     }
     return [UITableViewCell new];
 }

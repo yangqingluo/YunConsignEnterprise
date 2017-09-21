@@ -50,9 +50,10 @@
 #define imageDataMax                 1 * 1024 * 1024//图像大小上限
 #define headImageSizeMax             96//头像图像 宽/高 大小上限
 
-#define appButtonTitleFontSize       14.0
-#define appLabelFontSize             14.0
-#define appLabelFontSizeMiddle       16.0
+#define appButtonTitleFontSize       16.0
+#define appLabelFontSizeSmall        14.0
+#define appLabelFontSize             16.0
+#define appLabelFontSizeMiddle       18.0
 #define appSeparaterLineSize         1.0//分割线尺寸
 #define appPageSize                  20//获取分页数据时分页size
 #define appLineWidthOrHeight         0.5
