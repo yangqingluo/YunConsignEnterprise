@@ -8,7 +8,13 @@
 
 #import "SingleInputCell.h"
 
+#define SingleInputATypeObserverKey @"accessoryType"
+
 @implementation SingleInputCell
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:SingleInputATypeObserverKey];
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -16,6 +22,8 @@
         _inputView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeMiddle, screen_width - 2 * kEdgeMiddle, self.contentView.height - 2 * kEdgeMiddle)];
         _inputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:_inputView];
+        
+        [self addObserver:self forKeyPath:SingleInputATypeObserverKey options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     
     return self;
@@ -32,4 +40,15 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:SingleInputATypeObserverKey]){
+        if (self.accessoryType == UITableViewCellAccessoryNone) {
+            self.inputView.width = screen_width - 2 * kEdgeMiddle;
+        }
+        else {
+            self.inputView.width = screen_width - kEdgeMiddle - kEdgeHuge;
+        }
+    }
+}
 @end

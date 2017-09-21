@@ -12,6 +12,21 @@
 #define PID_FINANCIAL_MANAGE      @"1002321897106275329"
 #define PID_SYSTEM_SET            @"1002321897253223425"
 
+//回单签收方式
+typedef enum : NSUInteger {
+    RECEIPT_SIGN_TYPE_1 = 1,//签字
+    RECEIPT_SIGN_TYPE_2 = 2,//盖章
+    RECEIPT_SIGN_TYPE_3 = 3,//签字+盖章
+    RECEIPT_SIGN_TYPE_4 = 4//无回单
+} RECEIPT_SIGN_TYPE;
+
+//代收款类型
+typedef enum : NSUInteger {
+    CASH_ON_DELIVERY_TYPE_1 = 1,//现金代收
+    CASH_ON_DELIVERY_TYPE_2 = 2,//一般代收
+    CASH_ON_DELIVERY_TYPE_3 = 3//没有代收款
+} CASH_ON_DELIVERY_TYPE;
+
 @interface AppType : NSObject
 
 @end
@@ -125,5 +140,12 @@
 @property (assign, nonatomic) double volume;//体积，方
 @property (assign, nonatomic) long long freight;//运费
 
+@end
+
+//下单数据
+@interface AppWayBillInfo : AppType
+
+@property (assign, nonatomic) RECEIPT_SIGN_TYPE receipt_sign_type;
+@property (assign, nonatomic) CASH_ON_DELIVERY_TYPE cash_on_delivery_type;
 
 @end

@@ -26,9 +26,15 @@
 //系统设置权限
 @property (strong, nonatomic) NSMutableArray *systemConfigAccesses;
 
+@property (strong, nonatomic) NSArray *receptSignTypeArray;
+@property (strong, nonatomic) NSArray *cashOnDeliveryTypeArray;
+
 //保存用户数据
 - (void)saveUserData:(AppUserInfo *)data;
 //清除
 - (void)clear;
+
++ (NSString *)stringForReceptSignType:(RECEIPT_SIGN_TYPE)type;
++ (NSString *)stringForCashOnDeliveryType:(CASH_ON_DELIVERY_TYPE)type;
 
 @end

@@ -113,3 +113,9 @@
 
 
 @end
+
+@implementation AppWayBillInfo
+
+
+
+@end

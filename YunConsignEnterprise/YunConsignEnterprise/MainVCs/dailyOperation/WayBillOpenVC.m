@@ -10,19 +10,29 @@
 #import "PublicSRSelectVC.h"
 #import "AddGoodsVC.h"
 
+#import "BlockActionSheet.h"
 #import "WayBillSRHeaderView.h"
 #import "WayBillTitleCell.h"
 #import "FourItemsDoubleListCell.h"
 #import "GoodsSummaryCell.h"
+#import "SingleInputCell.h"
+#import "DoubleInputCell.h"
 
 @interface WayBillOpenVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) WayBillSRHeaderView *headerView;
 @property (strong, nonatomic) NSMutableArray *goodsArray;
 @property (strong, nonatomic) AppGoodsInfo *goodsSummary;
+@property (strong, nonatomic) NSArray *feeShowArray;
+@property (strong, nonatomic) NSArray *payStyleShowArray;
+
+@property (strong, nonatomic) NSSet *selectorSet;
+@property (strong, nonatomic) NSSet *inputInvalidSet;
 
 @property (strong, nonatomic) UITextField *summaryFreightTextField;
 @property (strong, nonatomic) UILabel *summaryFreightLabel;
+
+@property (strong, nonatomic) AppWayBillInfo *data;
 
 @end
 
@@ -136,6 +146,39 @@
     return _goodsSummary;
 }
 
+- (NSArray *)feeShowArray {
+    if (!_feeShowArray) {
+        _feeShowArray = @[@{@"title":@"回单",@"subTitle":@"请选择",@"key":@"receipt_sign_type"},
+                          @{@"title":@"代收款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},];
+    }
+    return _feeShowArray;
+}
+
+- (NSSet *)selectorSet{
+    if (!_selectorSet) {
+        _selectorSet = [NSSet setWithObjects:@"receipt_sign_type", @"cash_on_delivery_type", nil];
+    }
+    
+    return _selectorSet;
+}
+
+- (NSSet *)inputInvalidSet{
+    if (!_inputInvalidSet) {
+        _inputInvalidSet = [NSSet setWithObjects:@"insurance_fee", nil];
+    }
+    
+    return _inputInvalidSet;
+}
+
+- (AppWayBillInfo *)data {
+    if (!_data) {
+        _data = [AppWayBillInfo new];
+        _data.receipt_sign_type = RECEIPT_SIGN_TYPE_4;
+        _data.cash_on_delivery_type = CASH_ON_DELIVERY_TYPE_1;
+    }
+    return _data;
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
@@ -150,7 +193,7 @@
             break;
             
         case 1:{
-            rows = 1;
+            rows = 1 + self.feeShowArray.count;
         }
             break;
             
@@ -168,6 +211,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 2) {
         return kEdge;
+        
     }
     return 0.01;
 }
@@ -194,6 +238,15 @@
             }
         }
             break;
+            
+        case 1:{
+            if (indexPath.row == 0) {
+                
+            }
+            else {
+                rowHeight = kCellHeightMiddle;
+            }
+        }
             
         default:
             break;
@@ -323,6 +376,39 @@
                 
                 return cell;
             }
+            else {
+                id object = self.feeShowArray[indexPath.row - 1];
+                if ([object isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *m_dic = object;
+                    NSString *key = m_dic[@"key"];
+                    
+                    static NSString *CellIdentifier = @"fee_edit_cell";
+                    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                    if (!cell) {
+                        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                    }
+                    
+                    cell.inputView.textLabel.text = m_dic[@"title"];
+                    cell.inputView.textField.placeholder = m_dic[@"subTitle"];
+                    cell.inputView.textField.text = @"";
+                    cell.inputView.textField.indexPath = [indexPath copy];
+                    if (indexPath.row == 1) {
+                        cell.inputView.textField.text = [UserPublic stringForReceptSignType:self.data.receipt_sign_type];
+                    }
+                    else if (indexPath.row == 2) {
+                        cell.inputView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
+                    }
+                    
+                    cell.inputView.textField.enabled = !([self.selectorSet containsObject:key] || [self.inputInvalidSet containsObject:key]);
+                    
+                    return cell;
+                }
+                else {
+                    
+                }
+            }
         }
             break;
             
@@ -368,7 +454,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
+    switch (indexPath.section) {
+        case 1:{
+            if (indexPath.row == 1) {
+                NSArray *m_array = [UserPublic getInstance].receptSignTypeArray;
+                QKWEAKSELF;
+                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                    if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
+                        weakself.data.receipt_sign_type = buttonIndex;
+                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                } otherButtonTitlesArray:m_array];
+                [sheet showInView:self.view];
+            }
+            else if (indexPath.row == 2) {
+                NSArray *m_array = [UserPublic getInstance].cashOnDeliveryTypeArray;
+                QKWEAKSELF;
+                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                    if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
+                        weakself.data.cash_on_delivery_type = buttonIndex;
+                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                } otherButtonTitlesArray:m_array];
+                [sheet showInView:self.view];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
