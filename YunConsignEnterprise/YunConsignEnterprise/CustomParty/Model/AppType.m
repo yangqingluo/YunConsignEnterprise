@@ -101,3 +101,9 @@
 
 
 @end
+
+@implementation APPWayBillGoodInfo
+
+
+
+@end

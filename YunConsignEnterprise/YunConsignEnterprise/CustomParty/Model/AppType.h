@@ -102,3 +102,16 @@
 @property (strong, nonatomic) AppServiceInfo *service;
 
 @end
+
+@interface APPWayBillGoodInfo : AppType
+
+@property (strong, nonatomic) NSString *waybill_id;//运单内部编号
+@property (strong, nonatomic) NSString *waybill_number;//运单号
+@property (strong, nonatomic) NSString *goods_number;//货物编号
+@property (strong, nonatomic) NSString *waybill_state;//运单状态
+@property (strong, nonatomic) NSString *service_info;//开单门店信息
+@property (strong, nonatomic) NSString *goods_info;//货物信息
+@property (strong, nonatomic) NSString *total_amount;//总费用
+@property (strong, nonatomic) NSString *consignment_time;//托运时间
+
+@end

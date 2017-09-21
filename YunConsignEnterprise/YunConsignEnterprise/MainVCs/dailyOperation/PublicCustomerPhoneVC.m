@@ -9,7 +9,7 @@
 #import "PublicCustomerPhoneVC.h"
 
 #import "TextFieldCell.h"
-#import "SearchCustomerCell.h"
+#import "FourItemsListCell.h"
 
 @interface PublicCustomerPhoneVC ()<UITextFieldDelegate>
 
@@ -85,7 +85,7 @@
         if (!error) {
             [self.customerArray removeAllObjects];
             [self.customerArray addObjectsFromArray:[AppCustomerInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
         }
     }];
 }
@@ -130,7 +130,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
-        return [SearchCustomerCell tableView:tableView heightForRowAtIndexPath:indexPath];
+        return [FourItemsListCell tableView:tableView heightForRowAtIndexPath:indexPath];
     }
     return kCellHeightMiddle;
 }
@@ -197,13 +197,17 @@
     }
     else if (indexPath.section == 1) {
         static NSString *CellIdentifier = @"customer_cell";
-        SearchCustomerCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        FourItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[SearchCustomerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.data = self.customerArray[indexPath.row];
+        AppCustomerInfo *item = self.customerArray[indexPath.row];
+        cell.firstLeftLabel.text = [NSString stringWithFormat:@"姓名：%@", item.freight_cust_name];
+        cell.firstRightLabel.text = [NSString stringWithFormat:@"电话：%@", item.phone];
+        cell.secondLeftLabel.text = [NSString stringWithFormat:@"货物：%@", item.last_deliver_goods];
+        cell.secondRightLabel.text = [NSString stringWithFormat:@"时间：%@", dateStringWithTimeString(item.last_deliver_time)];
         return cell;
     }
     return [UITableViewCell new];

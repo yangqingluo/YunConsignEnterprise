@@ -8,6 +8,7 @@
 
 #import "WayBillOpenVC.h"
 #import "PublicSRSelectVC.h"
+#import "AddGoodsVC.h"
 
 #import "WayBillSRHeaderView.h"
 #import "WayBillTitleCell.h"
@@ -62,6 +63,16 @@
             self.headerView.receiverInfo = [object copy];
         }
     };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)addGoodsButtonAction {
+    if (!self.headerView.senderInfo) {
+        [self showHint:@"请补全发货人信息"];
+        return;
+    }
+    AddGoodsVC *vc = [AddGoodsVC new];
+    vc.senderInfo = [self.headerView.senderInfo copy];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -171,6 +182,7 @@
                     [addGoodsBtn setTitle:@"  添加" forState:UIControlStateNormal];
                     [addGoodsBtn setTitleColor:MainColor forState:UIControlStateNormal];
                     addGoodsBtn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+                    [addGoodsBtn addTarget:self action:@selector(addGoodsButtonAction) forControlEvents:UIControlEventTouchUpInside];
                     [cell.contentView addSubview:addGoodsBtn];
                 }
                 

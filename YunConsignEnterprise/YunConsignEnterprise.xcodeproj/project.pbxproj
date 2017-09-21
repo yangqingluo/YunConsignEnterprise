@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E4055F771F72AB1100B04492 /* PublicCustomerPhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4055F761F72AB1100B04492 /* PublicCustomerPhoneVC.m */; };
+		E420B8031F7379AC009794A2 /* AddGoodsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8021F7379AC009794A2 /* AddGoodsVC.m */; };
+		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
+		E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8081F738963009794A2 /* FourItemsListCell.m */; };
 		E43132FC1F70C792002658A9 /* content_icon_direction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E43132961F70C791002658A9 /* content_icon_direction@2x.png */; };
 		E43132FD1F70C792002658A9 /* content_icon_direction@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E43132971F70C791002658A9 /* content_icon_direction@3x.png */; };
 		E43132FE1F70C792002658A9 /* content_icon_direction_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E43132981F70C791002658A9 /* content_icon_direction_w@2x.png */; };
@@ -221,7 +224,6 @@
 		E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0DA1F5EA8CE002EBE41 /* UIImage+SubImage.m */; };
 		E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E01F5EA903002EBE41 /* AppType.m */; };
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
-		E4CC90181F72B1A50024FEC6 /* SearchCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC90171F72B1A50024FEC6 /* SearchCustomerCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
 		E4ECF7D71F725B2E003F69C0 /* PublicSRSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */; };
 		E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */; };
@@ -235,6 +237,12 @@
 /* Begin PBXFileReference section */
 		E4055F751F72AB1100B04492 /* PublicCustomerPhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicCustomerPhoneVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicCustomerPhoneVC.h; sourceTree = SOURCE_ROOT; };
 		E4055F761F72AB1100B04492 /* PublicCustomerPhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicCustomerPhoneVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicCustomerPhoneVC.m; sourceTree = SOURCE_ROOT; };
+		E420B8011F7379AC009794A2 /* AddGoodsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddGoodsVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/AddGoodsVC.h; sourceTree = SOURCE_ROOT; };
+		E420B8021F7379AC009794A2 /* AddGoodsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddGoodsVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/AddGoodsVC.m; sourceTree = SOURCE_ROOT; };
+		E420B8041F737B34009794A2 /* PublicInputCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicInputCellView.h; sourceTree = "<group>"; };
+		E420B8051F737B34009794A2 /* PublicInputCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicInputCellView.m; sourceTree = "<group>"; };
+		E420B8071F738963009794A2 /* FourItemsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsListCell.h; sourceTree = "<group>"; };
+		E420B8081F738963009794A2 /* FourItemsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourItemsListCell.m; sourceTree = "<group>"; };
 		E43132961F70C791002658A9 /* content_icon_direction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "content_icon_direction@2x.png"; sourceTree = "<group>"; };
 		E43132971F70C791002658A9 /* content_icon_direction@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "content_icon_direction@3x.png"; sourceTree = "<group>"; };
 		E43132981F70C791002658A9 /* content_icon_direction_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "content_icon_direction_w@2x.png"; sourceTree = "<group>"; };
@@ -563,8 +571,6 @@
 		E4AEA0E01F5EA903002EBE41 /* AppType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppType.m; sourceTree = "<group>"; };
 		E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KGViewExtend.h"; sourceTree = "<group>"; };
 		E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KGViewExtend.m"; sourceTree = "<group>"; };
-		E4CC90161F72B1A50024FEC6 /* SearchCustomerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCustomerCell.h; sourceTree = "<group>"; };
-		E4CC90171F72B1A50024FEC6 /* SearchCustomerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCustomerCell.m; sourceTree = "<group>"; };
 		E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillTitleCell.h; sourceTree = "<group>"; };
 		E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillTitleCell.m; sourceTree = "<group>"; };
 		E4ECF7D51F725B2E003F69C0 /* PublicSRSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSRSelectVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSRSelectVC.h; sourceTree = SOURCE_ROOT; };
@@ -729,6 +735,8 @@
 				E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */,
 				E4055F751F72AB1100B04492 /* PublicCustomerPhoneVC.h */,
 				E4055F761F72AB1100B04492 /* PublicCustomerPhoneVC.m */,
+				E420B8011F7379AC009794A2 /* AddGoodsVC.h */,
+				E420B8021F7379AC009794A2 /* AddGoodsVC.m */,
 			);
 			name = DailyOperation;
 			path = dailyOperation;
@@ -870,10 +878,12 @@
 				E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */,
 				E4ECF7DC1F726653003F69C0 /* TextFieldCell.h */,
 				E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */,
-				E4CC90161F72B1A50024FEC6 /* SearchCustomerCell.h */,
-				E4CC90171F72B1A50024FEC6 /* SearchCustomerCell.m */,
+				E420B8071F738963009794A2 /* FourItemsListCell.h */,
+				E420B8081F738963009794A2 /* FourItemsListCell.m */,
 				E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */,
 				E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */,
+				E420B8041F737B34009794A2 /* PublicInputCellView.h */,
+				E420B8051F737B34009794A2 /* PublicInputCellView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1441,6 +1451,7 @@
 				E4AEA0931F5EA6D0002EBE41 /* IQUIWindow+Hierarchy.m in Sources */,
 				E4AEA07E1F5EA6D0002EBE41 /* AFSecurityPolicy.m in Sources */,
 				E4AEA0881F5EA6D0002EBE41 /* UIButton+AFNetworking.m in Sources */,
+				E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */,
 				E4AEA0B81F5EA6D0002EBE41 /* MJRefreshStateHeader.m in Sources */,
 				E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */,
 				E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */,
@@ -1450,6 +1461,7 @@
 				E4AEA0841F5EA6D0002EBE41 /* AFAutoPurgingImageCache.m in Sources */,
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
 				E4AEA0C21F5EA6D0002EBE41 /* SDImageCacheConfig.m in Sources */,
+				E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */,
 				E4AEA0C71F5EA6D0002EBE41 /* SDWebImageManager.m in Sources */,
 				E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */,
 				E4AEA0CD1F5EA6D0002EBE41 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1530,6 +1542,7 @@
 				E4AEA0791F5EA6D0002EBE41 /* AppBasicViewController.m in Sources */,
 				E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */,
 				E4AEA07C1F5EA6D0002EBE41 /* AFHTTPSessionManager.m in Sources */,
+				E420B8031F7379AC009794A2 /* AddGoodsVC.m in Sources */,
 				E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */,
 				E4AEA0991F5EA6D0002EBE41 /* IQTitleBarButtonItem.m in Sources */,
 				E4AEA07F1F5EA6D0002EBE41 /* AFURLRequestSerialization.m in Sources */,
@@ -1539,7 +1552,6 @@
 				E4AEA0921F5EA6D0002EBE41 /* IQUIViewController+Additions.m in Sources */,
 				E4AEA0B51F5EA6D0002EBE41 /* MJRefreshBackStateFooter.m in Sources */,
 				E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */,
-				E4CC90181F72B1A50024FEC6 /* SearchCustomerCell.m in Sources */,
 				E4AEA0861F5EA6D0002EBE41 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E4AEA08C1F5EA6D0002EBE41 /* UIWebView+AFNetworking.m in Sources */,
 				E4ECF7D71F725B2E003F69C0 /* PublicSRSelectVC.m in Sources */,
