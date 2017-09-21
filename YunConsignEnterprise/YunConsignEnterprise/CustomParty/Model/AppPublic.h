@@ -126,6 +126,11 @@ NSString *sha1(NSString *string);
  */
 NSString *notNilString(NSString *string);
 
+/*!
+ @brief 中文序数
+ */
+NSString *indexChineseString(NSUInteger index);
+
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead);
 

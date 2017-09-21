@@ -126,6 +126,26 @@ NSString *notNilString(NSString *string) {
     return string.length ? string : @"";
 }
 
+/*!
+ @brief 中文序数
+ */
+NSString *indexChineseString(NSUInteger index) {
+    NSArray *array = @[@"零", @"一", @"二", @"三", @"四", @"五", @"六", @"七", @"八", @"九", @"十"];
+    if (index <= 10) {
+        return array[index];
+    }
+    else if (index < 100) {
+        NSUInteger single = index % 10;
+        NSUInteger tens = (index - single) / 10;
+        return [NSString stringWithFormat:@"%@十%@", indexChineseString(tens), single == 0 ? @"" : indexChineseString(single)];
+    }
+    else if (index == 100) {
+        return @"一百";
+    }
+    
+    return @"";
+}
+
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead) {
     //头像图片

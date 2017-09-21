@@ -12,6 +12,7 @@
 
 #import "WayBillSRHeaderView.h"
 #import "WayBillTitleCell.h"
+#import "FourItemsDoubleListCell.h"
 
 @interface WayBillOpenVC ()
 
@@ -73,6 +74,13 @@
     }
     AddGoodsVC *vc = [AddGoodsVC new];
     vc.senderInfo = [self.headerView.senderInfo copy];
+    QKWEAKSELF;
+    vc.doneBlock = ^(id object){
+        if ([object isKindOfClass:[AppGoodsInfo class]]) {
+            [weakself.goodsArray addObject:object];
+            [weakself.tableView reloadData];
+        }
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -95,7 +103,7 @@
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -111,11 +119,11 @@
     }
     return rows;
 }
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return kEdgeMiddle;
-//}
-//
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return kEdge;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return kEdge;
 }
@@ -127,13 +135,14 @@
             if (indexPath.row == 0) {
                 
             }
+            else if (self.goodsArray.count == 0) {
+                rowHeight = 114.0;
+            }
+            else if (indexPath.row == self.goodsArray.count + 1) {
+                
+            }
             else {
-                if (self.goodsArray.count == 0) {
-                    rowHeight = 114.0;
-                }
-                else {
-                    
-                }
+                rowHeight = [FourItemsDoubleListCell tableView:tableView heightForRowAtIndexPath:indexPath];
             }
         }
             break;
@@ -171,7 +180,7 @@
     switch (indexPath.section) {
         case 0:{
             if (indexPath.row == 0) {
-                static NSString *CellIdentifier = @"goods_cell";
+                static NSString *CellIdentifier = @"goods_title_cell";
                 WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 if (!cell) {
                     cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -190,23 +199,47 @@
                 
                 return cell;
             }
-            else {
-                if (self.goodsArray.count == 0) {
-                    static NSString *CellIdentifier = @"no_goods_cell";
-                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    
-                    if (!cell) {
-                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                        cell.textLabel.textColor = secondaryTextColor;
-                        cell.textLabel.font = [AppPublic appFontOfSize:appLabelFontSize];
-                    }
-                    
-                    cell.textLabel.text = @"尚未添加货物";
-                    
-                    return cell;
+            else if (self.goodsArray.count == 0) {
+                static NSString *CellIdentifier = @"no_goods_cell";
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (!cell) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                    cell.textLabel.textColor = secondaryTextColor;
+                    cell.textLabel.font = [AppPublic appFontOfSize:appLabelFontSize];
                 }
+                
+                cell.textLabel.text = @"尚未添加货物";
+                
+                return cell;
+            }
+            else if (indexPath.row == self.goodsArray.count + 1) {
+                
+            }
+            else {
+                static NSString *CellIdentifier = @"goods_item_cell";
+                FourItemsDoubleListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                if (!cell) {
+                    cell = [[FourItemsDoubleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                    cell.backgroundColor = [UIColor whiteColor];
+                }
+                
+                AppGoodsInfo *item = self.goodsArray[indexPath.row - 1];
+                [cell addShowContents:@[[NSString stringWithFormat:@"品名%@", indexChineseString(indexPath.row)],
+                                        notNilString(item.goods_name),
+                                        @"包装",
+                                        notNilString(item.packge),
+                                        @"件/吨/方",
+                                        [NSString stringWithFormat:@"%d/%.1f/%.1f", item.number, item.weight, item.volume],
+                                        @"运费",
+                                        [NSString stringWithFormat:@"%.1f", item.freight]]];
+                
+                return cell;
             }
         }
             break;

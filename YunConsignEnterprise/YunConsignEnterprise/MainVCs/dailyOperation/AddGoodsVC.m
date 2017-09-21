@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) AddGoodsListHeaderView *headerView;
 
-@property (strong, nonatomic) NSObject *data;
 @property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
@@ -57,10 +56,18 @@
 }
 
 - (void)doDoneAction{
-    if (self.doneBlock) {
-        self.doneBlock(self.data);
+    if (!self.headerView.data.goods_name) {
+        [self showHint:@"请输入货物名称"];
     }
-    [self goBack];
+    else if (!self.headerView.data.packge) {
+        [self showHint:@"请输入包装类型"];
+    }
+    else {
+        if (self.doneBlock) {
+            self.doneBlock(self.headerView.data);
+        }
+        [self goBack];
+    }
 }
 
 - (void)pullDatasource {
@@ -69,7 +76,7 @@
         [weakself hideHud];
         if (!error) {
             [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:[APPWayBillGoodInfo mj_objectArrayWithKeyValuesArray:responseBody]];
+            [self.dataSource addObjectsFromArray:[AppHistoryGoodsInfo mj_objectArrayWithKeyValuesArray:responseBody]];
             [self.tableView reloadData];
         }
     }];
@@ -133,7 +140,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    APPWayBillGoodInfo *item = self.dataSource[indexPath.row];
+    AppHistoryGoodsInfo *item = self.dataSource[indexPath.row];
     cell.firstLeftLabel.text = [NSString stringWithFormat:@"门店：%@", item.service_info];
     cell.firstRightLabel.text = [NSString stringWithFormat:@"时间：%@", item.consignment_time];
     cell.secondLeftLabel.text = [NSString stringWithFormat:@"明细：%@", item.goods_info];

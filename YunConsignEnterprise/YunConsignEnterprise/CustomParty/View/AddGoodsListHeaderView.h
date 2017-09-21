@@ -10,4 +10,6 @@
 
 @interface AddGoodsListHeaderView : PublicListHeaderView
 
+@property (strong, nonatomic) AppGoodsInfo *data;
+
 @end

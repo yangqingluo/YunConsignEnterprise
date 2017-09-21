@@ -103,7 +103,7 @@
 
 @end
 
-@interface APPWayBillGoodInfo : AppType
+@interface AppHistoryGoodsInfo : AppType
 
 @property (strong, nonatomic) NSString *waybill_id;//运单内部编号
 @property (strong, nonatomic) NSString *waybill_number;//运单号
@@ -113,5 +113,17 @@
 @property (strong, nonatomic) NSString *goods_info;//货物信息
 @property (strong, nonatomic) NSString *total_amount;//总费用
 @property (strong, nonatomic) NSString *consignment_time;//托运时间
+
+@end
+
+@interface AppGoodsInfo : AppType
+
+@property (strong, nonatomic) NSString *goods_name;//货名
+@property (strong, nonatomic) NSString *packge;//包装
+@property (assign, nonatomic) int number;//数量，件
+@property (assign, nonatomic) double weight;//重量，吨
+@property (assign, nonatomic) double volume;//体积，方
+@property (assign, nonatomic) double freight;//运费
+
 
 @end

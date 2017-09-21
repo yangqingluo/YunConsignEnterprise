@@ -127,6 +127,7 @@
 		E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */; };
 		E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */; };
 		E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F611F73A181007E7D70 /* DoubleInputCell.m */; };
+		E49C4F651F73AF03007E7D70 /* FourItemsDoubleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */; };
 		E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2A1F5EA605002EBE41 /* main.m */; };
 		E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2D1F5EA605002EBE41 /* AppDelegate.m */; };
 		E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F301F5EA605002EBE41 /* ViewController.m */; };
@@ -377,6 +378,8 @@
 		E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleInputCell.m; sourceTree = "<group>"; };
 		E49C4F601F73A181007E7D70 /* DoubleInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleInputCell.h; sourceTree = "<group>"; };
 		E49C4F611F73A181007E7D70 /* DoubleInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleInputCell.m; sourceTree = "<group>"; };
+		E49C4F631F73AF03007E7D70 /* FourItemsDoubleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsDoubleListCell.h; sourceTree = "<group>"; };
+		E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourItemsDoubleListCell.m; sourceTree = "<group>"; };
 		E4AE9F261F5EA605002EBE41 /* YunConsignEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunConsignEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AE9F2A1F5EA605002EBE41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4AE9F2C1F5EA605002EBE41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -892,6 +895,8 @@
 				E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */,
 				E420B8071F738963009794A2 /* FourItemsListCell.h */,
 				E420B8081F738963009794A2 /* FourItemsListCell.m */,
+				E49C4F631F73AF03007E7D70 /* FourItemsDoubleListCell.h */,
+				E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */,
 				E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */,
 				E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */,
 				E420B8041F737B34009794A2 /* PublicInputCellView.h */,
@@ -1576,6 +1581,7 @@
 				E4AEA0921F5EA6D0002EBE41 /* IQUIViewController+Additions.m in Sources */,
 				E4AEA0B51F5EA6D0002EBE41 /* MJRefreshBackStateFooter.m in Sources */,
 				E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */,
+				E49C4F651F73AF03007E7D70 /* FourItemsDoubleListCell.m in Sources */,
 				E4AEA0861F5EA6D0002EBE41 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E4AEA08C1F5EA6D0002EBE41 /* UIWebView+AFNetworking.m in Sources */,
 				E4ECF7D71F725B2E003F69C0 /* PublicSRSelectVC.m in Sources */,

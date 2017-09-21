@@ -245,4 +245,5 @@
     }
     return (range.location < kPhoneNumberLength);
 }
+
 @end

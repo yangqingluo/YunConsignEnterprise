@@ -102,7 +102,13 @@
 
 @end
 
-@implementation APPWayBillGoodInfo
+@implementation AppHistoryGoodsInfo
+
+
+
+@end
+
+@implementation AppGoodsInfo
 
 
 

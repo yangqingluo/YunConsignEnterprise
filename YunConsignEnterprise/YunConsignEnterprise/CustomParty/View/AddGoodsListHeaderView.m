@@ -32,6 +32,14 @@
     return self;
 }
 
+#pragma mark - getter
+- (AppGoodsInfo *)data {
+    if (!_data) {
+        _data = [AppGoodsInfo new];
+    }
+    return _data;
+}
+
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.showArray.count;
@@ -58,12 +66,32 @@
         if (!cell) {
             cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             [cell.inputView showRightButtonWithImage:[UIImage imageNamed:@"list_icon_common"]];
         }
         cell.inputView.textLabel.text = item[@"title"];
         cell.inputView.textField.placeholder = item[@"subTitle"];
         cell.inputView.textField.text = @"";
         cell.inputView.textField.indexPath = [indexPath copy];
+        
+        switch (indexPath.row) {
+            case 0:{
+                if (self.data.goods_name.length) {
+                    cell.inputView.textField.text = self.data.goods_name;
+                }
+            }
+                break;
+                
+            case 1:{
+                if (self.data.packge.length) {
+                    cell.inputView.textField.text = self.data.packge;
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
         
         return cell;
     }
@@ -76,6 +104,8 @@
             if (!cell) {
                 cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             }
             NSDictionary *m_dic1 = m_array[0];
             NSDictionary *m_dic2 = m_array[1];
@@ -89,6 +119,23 @@
             cell.anotherInputView.textField.text = @"";
             cell.anotherInputView.textField.indexPath = [indexPath copy];
             
+            switch (indexPath.row) {
+                case 2:{
+                    cell.inputView.textField.text = [NSString stringWithFormat:@"%d", self.data.number];
+                    cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.freight];
+                }
+                    break;
+                    
+                case 3:{
+                    cell.inputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.weight];
+                    cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.volume];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             return cell;
         }
     }
@@ -98,6 +145,54 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+#pragma  mark - TextField
+- (void)textFieldDidChange:(UITextField *)textField {
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textField = (IndexPathTextField *)textField;
+        switch (m_textField.indexPath.row) {
+            case 0:{
+                self.data.goods_name = textField.text;
+            }
+                break;
+                
+            case 1:{
+                self.data.packge = textField.text;
+            }
+                break;
+                
+            case 2:{
+                if (textField.tag == 0) {
+                    self.data.number = [textField.text intValue];
+                }
+                else if (textField.tag == 1) {
+                    self.data.freight = [textField.text doubleValue];
+                }
+            }
+                break;
+                
+            case 3:{
+                if (textField.tag == 0) {
+                    self.data.weight = [textField.text intValue];
+                }
+                else if (textField.tag == 1) {
+                    self.data.volume = [textField.text doubleValue];
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    return (range.location < kInputLengthMax);
 }
 
 @end
