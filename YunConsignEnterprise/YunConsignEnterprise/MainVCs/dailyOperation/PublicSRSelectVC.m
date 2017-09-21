@@ -71,6 +71,7 @@
 }
 
 - (void)saveButtonAction {
+    [self dismissKeyboard];
     NSDictionary *dic = nil;
     if (!self.data.service) {
         dic = self.showArray[0];
@@ -83,7 +84,7 @@
     }
     
     if (dic) {
-        [self showHint:[NSString stringWithFormat:@"%@%@", dic[@"title"], dic[@"subTitle"]]];
+        [self showHint:[NSString stringWithFormat:@"%@%@", dic[@"subTitle"], dic[@"title"]]];
     }
     else {
         [self doDoneAction];

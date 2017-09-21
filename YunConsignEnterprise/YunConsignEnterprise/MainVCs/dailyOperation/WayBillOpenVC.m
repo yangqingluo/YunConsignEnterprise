@@ -10,10 +10,12 @@
 #import "PublicSRSelectVC.h"
 
 #import "WayBillSRHeaderView.h"
+#import "WayBillTitleCell.h"
 
 @interface WayBillOpenVC ()
 
 @property (strong, nonatomic) WayBillSRHeaderView *headerView;
+@property (strong, nonatomic) NSMutableArray *goodsArray;
 
 @end
 
@@ -73,31 +75,65 @@
     return _headerView;
 }
 
+- (NSMutableArray *)goodsArray {
+    if (!_goodsArray) {
+        _goodsArray = [NSMutableArray new];
+    }
+    return _goodsArray;
+}
+
 #pragma mark - UITableView
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 3;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 1;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSUInteger rows = 0;
+    switch (section) {
+        case 0:{
+            rows = 1 + 1 + self.goodsArray.count;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return rows;
+}
 //
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 //    return kEdgeMiddle;
 //}
 //
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    if (section == 0){
-//        return 0.01;
-//    }
-//    else{
-//        return kCellHeight;
-//    }
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return [CheeseBoardCell tableView:tableView heightForRowAtIndexPath:indexPath withData:self.showArrays[indexPath.section]];
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kEdge;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat rowHeight = kCellHeight;
+    switch (indexPath.section) {
+        case 0:{
+            if (indexPath.row == 0) {
+                
+            }
+            else {
+                if (self.goodsArray.count == 0) {
+                    rowHeight = 114.0;
+                }
+                else {
+                    
+                }
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    return rowHeight;
+}
 //
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    if (section == 0){
@@ -120,20 +156,74 @@
 //    return contentView;
 //}
 //
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier = @"work_cell";
-//    CheeseBoardCell *cell = (CheeseBoardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    
-//    if (!cell) {
-//        cell = [[CheeseBoardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//    }
-//    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0:{
+            if (indexPath.row == 0) {
+                static NSString *CellIdentifier = @"goods_cell";
+                WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    UIButton *addGoodsBtn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 100, 0, 120, kCellHeight)];
+                    [addGoodsBtn setImage:[UIImage imageNamed:@"list_icon_add"] forState:UIControlStateNormal];
+                    [addGoodsBtn setTitle:@"  添加" forState:UIControlStateNormal];
+                    [addGoodsBtn setTitleColor:MainColor forState:UIControlStateNormal];
+                    addGoodsBtn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+                    [cell.contentView addSubview:addGoodsBtn];
+                }
+                
+                cell.textLabel.text = @"货物信息";
+                
+                return cell;
+            }
+            else {
+                if (self.goodsArray.count == 0) {
+                    static NSString *CellIdentifier = @"no_goods_cell";
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                    
+                    if (!cell) {
+                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                        cell.textLabel.textColor = secondaryTextColor;
+                        cell.textLabel.font = [AppPublic appFontOfSize:appLabelFontSize];
+                    }
+                    
+                    cell.textLabel.text = @"尚未添加货物";
+                    
+                    return cell;
+                }
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    
+    
+    static NSString *CellIdentifier = @"wayBill_cell";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+    }
+//
 //    cell.tag = indexPath.section;
 //    cell.data = self.showArrays[indexPath.section];
 //    
-//    return cell;
-//}
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+}
 
 @end

@@ -63,6 +63,7 @@
 }
 
 - (void)saveButtonAction {
+    [self dismissKeyboard];
     [self doDoneAction];
 }
 

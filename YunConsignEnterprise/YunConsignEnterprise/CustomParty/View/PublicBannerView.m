@@ -40,10 +40,10 @@
     for (NSUInteger currentPage = 0; currentPage < self.pageControl.numberOfPages; currentPage++) {
         CGFloat x = currentPage * self.scrollView.width;
         for (int i = 1; i < count_Banner_V; i++) {
-            [self.scrollView addSubview:NewSeparatorLine(CGRectMake(x + 0, i * self.scrollView.height / count_Banner_V, self.scrollView.width, 1.0))];
+            [self.scrollView addSubview:NewSeparatorLine(CGRectMake(x + 0, i * self.scrollView.height / count_Banner_V, self.scrollView.width, appLineWidthOrHeight))];
         }
         for (int i = 1; i < count_Banner_H; i++) {
-            [self.scrollView addSubview:NewSeparatorLine(CGRectMake(x + i * self.scrollView.width / count_Banner_H, 0, 1.0, self.scrollView.height))];
+            [self.scrollView addSubview:NewSeparatorLine(CGRectMake(x + i * self.scrollView.width / count_Banner_H, 0, appLineWidthOrHeight, self.scrollView.height))];
         }
     }
 }
