@@ -64,7 +64,7 @@
 #define kEdgeBig                     16.0
 #define kEdgeHuge                    28.0
 
-#define cellDetailLeft               (kEdgeMiddle + 80 + kEdge)
+#define cellDetailLeft               (kEdgeMiddle + 60 + kEdge)
 #define cellDetailRightWhenIndicator (screen_width - kEdgeHuge)
 
 #define kPhoneNumberLength           0x0b

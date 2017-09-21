@@ -41,6 +41,17 @@
             CGFloat y = (i / lines) * height;
             CGFloat width = (i % lines < (lines / 2)) ? (separatorX - 2 * kEdge) : (_baseView.width - separatorX - 2 * kEdge);
             UILabel *label = NewLabel(CGRectMake(x, y, width, height), nil, nil, textAlignment);
+            label.numberOfLines = 0;
+            label.adjustsFontSizeToFitWidth = YES;
+            CGFloat titleWidth = 60;
+            if (i % 2 == 0) {
+                label.width = titleWidth;
+            }
+            else {
+                label.width -= titleWidth;
+                label.right = (i % lines < (lines / 2)) ? separatorX - kEdge : _baseView.width - kEdge;
+            }
+            
             [_baseView addSubview:label];
             [self.labelArray addObject:label];
         }

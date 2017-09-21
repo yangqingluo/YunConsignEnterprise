@@ -166,6 +166,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 2) {
+        return kEdge;
+    }
     return 0.01;
 }
 

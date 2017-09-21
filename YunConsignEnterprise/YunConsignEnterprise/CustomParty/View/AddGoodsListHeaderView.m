@@ -11,7 +11,7 @@
 #import "SingleInputCell.h"
 #import "DoubleInputCell.h"
 
-@interface AddGoodsListHeaderView ()
+@interface AddGoodsListHeaderView ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) NSArray *showArray;
 
@@ -67,6 +67,8 @@
             cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+            cell.inputView.textField.delegate = self;
+            
             [cell.inputView showRightButtonWithImage:[UIImage imageNamed:@"list_icon_common"]];
         }
         cell.inputView.textLabel.text = item[@"title"];
@@ -106,6 +108,8 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
                 [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                cell.inputView.textField.delegate = self;
+                cell.anotherInputView.textField.delegate = self;
             }
             NSDictionary *m_dic1 = m_array[0];
             NSDictionary *m_dic2 = m_array[1];
@@ -121,12 +125,16 @@
             
             switch (indexPath.row) {
                 case 2:{
+                    cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                    cell.anotherInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
                     cell.inputView.textField.text = [NSString stringWithFormat:@"%d", self.data.number];
                     cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%lld", self.data.freight];
                 }
                     break;
                     
                 case 3:{
+                    cell.inputView.textField.keyboardType = UIKeyboardTypeDecimalPad;
+                    cell.anotherInputView.textField.keyboardType = UIKeyboardTypeDecimalPad;
                     cell.inputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.weight];
                     cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.volume];
                 }
@@ -192,9 +200,12 @@
     if ([string isEqualToString:@""]) {
         return YES;
     }
+    BOOL m_bool = YES;
+    
     NSInteger length = kInputLengthMax;
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         IndexPathTextField *m_textField = (IndexPathTextField *)textField;
+        
         switch (m_textField.indexPath.row) {
             case 0:
             case 1:{
@@ -203,8 +214,12 @@
                 break;
                 
             case 2:{
+                NSCharacterSet *notNumber=[[NSCharacterSet characterSetWithCharactersInString:NumberWithoutPoint] invertedSet];
+                NSString *string1 = [[string componentsSeparatedByCharactersInSet:notNumber] componentsJoinedByString:@""];
+                m_bool = [string isEqualToString:string1];
+                
                 if (m_textField.tag == 0) {
-                    
+                    length = kNumberLengthMax;
                 }
                 else if (m_textField.tag == 1) {
                     length = kPriceLengthMax;
@@ -212,12 +227,25 @@
             }
                 break;
                 
+            case 3:{
+                if ([string isEqualToString:@"."]) {
+                    if ([textField.text rangeOfString:@"."].location != NSNotFound) {
+                        return NO;
+                    }
+                }
+                NSCharacterSet *notNumber=[[NSCharacterSet characterSetWithCharactersInString:NumberWithPoint] invertedSet];
+                NSString *string1 = [[string componentsSeparatedByCharactersInSet:notNumber] componentsJoinedByString:@""];
+                m_bool = [string isEqualToString:string1];
+                
+                length = kNumberLengthMax;
+            }
+                
             default:
                 break;
         }
     }
     
-    return (range.location < length);
+    return m_bool && (range.location < length);
 }
 
 @end
