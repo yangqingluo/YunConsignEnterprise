@@ -77,4 +77,21 @@
     return kCellHeight + 2 * kEdgeMiddle;
 }
 
+- (void)addShowContents:(NSArray *)array {
+    for (NSUInteger i = 0; i < array.count; i++) {
+        id object = array[i];
+        if ([object isKindOfClass:[NSString class]] && i < self.showArray.count) {
+            [self.showArray[i] setValue:object forKey:@"text"];
+        }
+    }
+}
+
+#pragma mark - getter
+- (NSMutableArray *)showArray {
+    if (!_showArray) {
+        _showArray = [NSMutableArray new];
+    }
+    return _showArray;
+}
+
 @end

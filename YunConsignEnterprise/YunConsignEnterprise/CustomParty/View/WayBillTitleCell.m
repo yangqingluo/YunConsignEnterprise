@@ -21,6 +21,8 @@
         UIView *lineView = NewSeparatorLine(CGRectMake(0, self.height - appLineWidthOrHeight, screen_width, appLineWidthOrHeight));
         lineView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         [self addSubview:lineView];
+        
+        self.textLabel.font = [UIFont boldSystemFontOfSize:appLabelFontSizeMiddle];
     }
     
     return self;

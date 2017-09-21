@@ -15,5 +15,6 @@
 @property (strong, nonatomic) UIView *baseView;
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)addShowContents:(NSArray *)array;
 
 @end

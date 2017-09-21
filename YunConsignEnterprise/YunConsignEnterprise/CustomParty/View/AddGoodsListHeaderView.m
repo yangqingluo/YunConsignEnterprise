@@ -122,7 +122,7 @@
             switch (indexPath.row) {
                 case 2:{
                     cell.inputView.textField.text = [NSString stringWithFormat:@"%d", self.data.number];
-                    cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.freight];
+                    cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%lld", self.data.freight];
                 }
                     break;
                     
@@ -192,7 +192,32 @@
     if ([string isEqualToString:@""]) {
         return YES;
     }
-    return (range.location < kInputLengthMax);
+    NSInteger length = kInputLengthMax;
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textField = (IndexPathTextField *)textField;
+        switch (m_textField.indexPath.row) {
+            case 0:
+            case 1:{
+                length = kNameLengthMax;
+            }
+                break;
+                
+            case 2:{
+                if (m_textField.tag == 0) {
+                    
+                }
+                else if (m_textField.tag == 1) {
+                    length = kPriceLengthMax;
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    return (range.location < length);
 }
 
 @end

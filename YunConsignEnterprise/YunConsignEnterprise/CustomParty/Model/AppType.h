@@ -123,7 +123,7 @@
 @property (assign, nonatomic) int number;//数量，件
 @property (assign, nonatomic) double weight;//重量，吨
 @property (assign, nonatomic) double volume;//体积，方
-@property (assign, nonatomic) double freight;//运费
+@property (assign, nonatomic) long long freight;//运费
 
 
 @end

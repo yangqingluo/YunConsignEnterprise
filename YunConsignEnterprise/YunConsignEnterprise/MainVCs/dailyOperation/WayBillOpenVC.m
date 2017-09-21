@@ -15,10 +15,14 @@
 #import "FourItemsDoubleListCell.h"
 #import "GoodsSummaryCell.h"
 
-@interface WayBillOpenVC ()
+@interface WayBillOpenVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) WayBillSRHeaderView *headerView;
 @property (strong, nonatomic) NSMutableArray *goodsArray;
+@property (strong, nonatomic) AppGoodsInfo *goodsSummary;
+
+@property (strong, nonatomic) UITextField *summaryFreightTextField;
+@property (strong, nonatomic) UILabel *summaryFreightLabel;
 
 @end
 
@@ -78,11 +82,34 @@
     QKWEAKSELF;
     vc.doneBlock = ^(id object){
         if ([object isKindOfClass:[AppGoodsInfo class]]) {
-            [weakself.goodsArray addObject:object];
+            AppGoodsInfo *item = (AppGoodsInfo *)object;
+            weakself.goodsSummary.freight += item.freight;
+            weakself.goodsSummary.number += item.number;
+            weakself.goodsSummary.weight += item.weight;
+            weakself.goodsSummary.volume += item.volume;
+            [weakself.goodsArray addObject:item];
             [weakself.tableView reloadData];
         }
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)removeGoodsAtIndex:(NSUInteger)index {
+    if (index < self.goodsArray.count) {
+        [self.goodsArray removeObjectAtIndex:index];
+        [self caclateGoodsSummary];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)caclateGoodsSummary {
+    _goodsSummary = nil;
+    for (AppGoodsInfo *item in self.goodsArray) {
+        self.goodsSummary.freight += item.freight;
+        self.goodsSummary.number += item.number;
+        self.goodsSummary.weight += item.weight;
+        self.goodsSummary.volume += item.volume;
+    }
 }
 
 #pragma mark - getter
@@ -102,9 +129,16 @@
     return _goodsArray;
 }
 
+- (AppGoodsInfo *)goodsSummary {
+    if (!_goodsSummary) {
+        _goodsSummary = [AppGoodsInfo new];
+    }
+    return _goodsSummary;
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -115,6 +149,16 @@
         }
             break;
             
+        case 1:{
+            rows = 1;
+        }
+            break;
+            
+        case 2:{
+            rows = 1;
+        }
+            break;
+            
         default:
             break;
     }
@@ -122,7 +166,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return kEdge;
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -224,8 +268,17 @@
                     cell = [[GoodsSummaryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                    
+                    _summaryFreightTextField = (UITextField *)cell.showArray[1];
+                    _summaryFreightTextField.delegate = self;
+                    [_summaryFreightTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
                 }
                 
+                AppGoodsInfo *item = self.goodsSummary;
+                [cell addShowContents:@[@"运费：",
+                                        [NSString stringWithFormat:@"%lld", item.freight],
+                                        @"总数：",
+                                        [NSString stringWithFormat:@"%d/%.1f/%.1f", item.number, item.weight, item.volume]]];
                 return cell;
             }
             else {
@@ -247,7 +300,44 @@
                                         @"件/吨/方",
                                         [NSString stringWithFormat:@"%d/%.1f/%.1f", item.number, item.weight, item.volume],
                                         @"运费",
-                                        [NSString stringWithFormat:@"%.1f", item.freight]]];
+                                        [NSString stringWithFormat:@"%lld", item.freight]]];
+                
+                return cell;
+            }
+        }
+            break;
+            
+        case 1:{
+            if (indexPath.row == 0) {
+                static NSString *CellIdentifier = @"fee_title_cell";
+                WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                
+                cell.textLabel.text = @"费用信息";
+                
+                return cell;
+            }
+        }
+            break;
+            
+        case 2:{
+            if (indexPath.row == 0) {
+                static NSString *CellIdentifier = @"pay_sytle_title_cell";
+                WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (!cell) {
+                    cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    _summaryFreightLabel = NewLabel(CGRectMake(0, 0, 200, kCellHeight), nil, nil, NSTextAlignmentRight);
+                    _summaryFreightLabel.right = screen_width - kEdgeMiddle;
+                    [cell.contentView addSubview:_summaryFreightLabel];
+                }
+                
+                cell.textLabel.text = @"结算方式";
+                _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
                 
                 return cell;
             }
@@ -257,9 +347,6 @@
         default:
             break;
     }
-    
-    
-    
     
     static NSString *CellIdentifier = @"wayBill_cell";
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -279,6 +366,65 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && self.goodsArray.count > 0) {
+        if (indexPath.row > 0 && indexPath.row < self.goodsArray.count + 1) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && self.goodsArray.count > 0) {
+        if (indexPath.row > 0 && indexPath.row < self.goodsArray.count + 1) {
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                [self removeGoodsAtIndex:indexPath.row - 1];
+            }
+        }
+    }
+    
+}
+
+#pragma  mark - TextField
+- (void)textFieldDidChange:(UITextField *)textField {
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textField = (IndexPathTextField *)textField;
+        switch (m_textField.indexPath.section) {
+            case 0:{
+                self.goodsSummary.freight = [textField.text longLongValue];
+                _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    NSInteger length = kInputLengthMax;
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textField = (IndexPathTextField *)textField;
+        switch (m_textField.indexPath.section) {
+            case 0:{
+                length = kPriceLengthMax;
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    return (range.location < length);
 }
 
 @end
