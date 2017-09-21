@@ -13,6 +13,7 @@
 #import "WayBillSRHeaderView.h"
 #import "WayBillTitleCell.h"
 #import "FourItemsDoubleListCell.h"
+#import "GoodsSummaryCell.h"
 
 @interface WayBillOpenVC ()
 
@@ -139,7 +140,7 @@
                 rowHeight = 114.0;
             }
             else if (indexPath.row == self.goodsArray.count + 1) {
-                
+                rowHeight = [GoodsSummaryCell tableView:tableView heightForRowAtIndexPath:indexPath];
             }
             else {
                 rowHeight = [FourItemsDoubleListCell tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -216,7 +217,16 @@
                 return cell;
             }
             else if (indexPath.row == self.goodsArray.count + 1) {
+                static NSString *CellIdentifier = @"goods_summary_cell";
+                GoodsSummaryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
                 
+                if (!cell) {
+                    cell = [[GoodsSummaryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                }
+                
+                return cell;
             }
             else {
                 static NSString *CellIdentifier = @"goods_item_cell";

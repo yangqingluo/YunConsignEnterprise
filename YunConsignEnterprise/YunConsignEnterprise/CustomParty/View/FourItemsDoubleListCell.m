@@ -19,7 +19,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdge, screen_width - 2 * kEdgeMiddle, kCellHeightHuge - kEdge)];
+        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeMiddle, screen_width - 2 * kEdgeMiddle, kCellHeightHuge - kEdgeMiddle)];
         _baseView.backgroundColor = [UIColor whiteColor];
         _baseView.layer.borderColor = baseSeparatorColor.CGColor;
         _baseView.layer.borderWidth = 1.0;
@@ -47,6 +47,7 @@
     }
     return self;
 }
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

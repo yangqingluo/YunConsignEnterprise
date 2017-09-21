@@ -120,6 +120,7 @@
 		E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649B1F611C370084F4EB /* FinancialManagementVC.m */; };
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
+		E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */; };
 		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
@@ -364,6 +365,8 @@
 		E447649E1F611C460084F4EB /* DailyOperationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyOperationVC.m; sourceTree = "<group>"; };
 		E44765031F6129040084F4EB /* UserPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPublic.h; sourceTree = "<group>"; };
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
+		E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSummaryCell.h; sourceTree = "<group>"; };
+		E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSummaryCell.m; sourceTree = "<group>"; };
 		E47118301F676ACC004D4337 /* PublicTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTabViewController.h; sourceTree = "<group>"; };
 		E47118311F676ACC004D4337 /* PublicTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTabViewController.m; sourceTree = "<group>"; };
 		E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageAndText.h"; sourceTree = "<group>"; };
@@ -897,6 +900,8 @@
 				E420B8081F738963009794A2 /* FourItemsListCell.m */,
 				E49C4F631F73AF03007E7D70 /* FourItemsDoubleListCell.h */,
 				E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */,
+				E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */,
+				E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */,
 				E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */,
 				E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */,
 				E420B8041F737B34009794A2 /* PublicInputCellView.h */,
@@ -1509,6 +1514,7 @@
 				E4AEA0CF1F5EA6D0002EBE41 /* UIView+WebCache.m in Sources */,
 				E4AEA08E1F5EA6D0002EBE41 /* IQNSArray+Sort.m in Sources */,
 				E4AEA0A61F5EA6D0002EBE41 /* NSObject+MJClass.m in Sources */,
+				E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */,
 				E4AEA0B01F5EA6D0002EBE41 /* MJRefreshAutoGifFooter.m in Sources */,
 				E4AEA0C51F5EA6D0002EBE41 /* SDWebImageDownloader.m in Sources */,
 				E4AEA0851F5EA6D0002EBE41 /* AFImageDownloader.m in Sources */,
