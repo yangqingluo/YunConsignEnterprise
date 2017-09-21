@@ -175,7 +175,7 @@ UIButton *NewBackButton(UIColor *color) {
     }
     [btn setImage:i forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(0, 0, 64, 44)];
-//    btn.imageEdgeInsets = UIEdgeInsetsMake(10, kEdge, 10, 64 - kEdge - 14);
+    btn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     return btn;
 }
 

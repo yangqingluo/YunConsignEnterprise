@@ -46,7 +46,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma getter
+#pragma mark - getter
 - (UITableView *)tableView{
     if (_tableView == nil){
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, self.view.width, self.view.height - STATUS_BAR_HEIGHT) style:_style];

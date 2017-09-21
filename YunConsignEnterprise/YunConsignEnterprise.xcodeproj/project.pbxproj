@@ -123,6 +123,9 @@
 		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
+		E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */; };
+		E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */; };
+		E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */; };
 		E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2A1F5EA605002EBE41 /* main.m */; };
 		E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2D1F5EA605002EBE41 /* AppDelegate.m */; };
 		E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F301F5EA605002EBE41 /* ViewController.m */; };
@@ -365,6 +368,12 @@
 		E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageAndText.m"; sourceTree = "<group>"; };
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
+		E49C4F571F738EA3007E7D70 /* PublicListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicListHeaderView.h; sourceTree = "<group>"; };
+		E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicListHeaderView.m; sourceTree = "<group>"; };
+		E49C4F5A1F738FC3007E7D70 /* AddGoodsListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGoodsListHeaderView.h; sourceTree = "<group>"; };
+		E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGoodsListHeaderView.m; sourceTree = "<group>"; };
+		E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleInputCell.h; sourceTree = "<group>"; };
+		E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleInputCell.m; sourceTree = "<group>"; };
 		E4AE9F261F5EA605002EBE41 /* YunConsignEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunConsignEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AE9F2A1F5EA605002EBE41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4AE9F2C1F5EA605002EBE41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -884,6 +893,12 @@
 				E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */,
 				E420B8041F737B34009794A2 /* PublicInputCellView.h */,
 				E420B8051F737B34009794A2 /* PublicInputCellView.m */,
+				E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */,
+				E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */,
+				E49C4F571F738EA3007E7D70 /* PublicListHeaderView.h */,
+				E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */,
+				E49C4F5A1F738FC3007E7D70 /* AddGoodsListHeaderView.h */,
+				E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1489,6 +1504,7 @@
 				E4AEA0851F5EA6D0002EBE41 /* AFImageDownloader.m in Sources */,
 				E4AEA0B21F5EA6D0002EBE41 /* MJRefreshAutoStateFooter.m in Sources */,
 				E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */,
+				E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */,
 				E4AEA0A21F5EA6D0002EBE41 /* MJFoundation.m in Sources */,
 				E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */,
 				E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */,
@@ -1515,6 +1531,7 @@
 				E4AEA0901F5EA6D0002EBE41 /* IQUITextFieldView+Additions.m in Sources */,
 				E4AEA0B61F5EA6D0002EBE41 /* MJRefreshGifHeader.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
+				E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */,
 				E4AEA0AB1F5EA6D0002EBE41 /* MJRefreshAutoFooter.m in Sources */,
 				E4AEA0B31F5EA6D0002EBE41 /* MJRefreshBackGifFooter.m in Sources */,
 				E4AEA0C31F5EA6D0002EBE41 /* SDWebImageCompat.m in Sources */,
@@ -1546,6 +1563,7 @@
 				E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */,
 				E4AEA0991F5EA6D0002EBE41 /* IQTitleBarButtonItem.m in Sources */,
 				E4AEA07F1F5EA6D0002EBE41 /* AFURLRequestSerialization.m in Sources */,
+				E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */,
 				E4AEA09E1F5EA6D0002EBE41 /* MBProgressHUD.m in Sources */,
 				E4AEA0C81F5EA6D0002EBE41 /* SDWebImagePrefetcher.m in Sources */,
 				E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */,

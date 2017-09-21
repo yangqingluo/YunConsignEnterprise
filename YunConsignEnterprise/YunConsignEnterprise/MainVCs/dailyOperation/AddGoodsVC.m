@@ -9,8 +9,11 @@
 #import "AddGoodsVC.h"
 
 #import "FourItemsListCell.h"
+#import "AddGoodsListHeaderView.h"
 
 @interface AddGoodsVC ()
+
+@property (strong, nonatomic) AddGoodsListHeaderView *headerView;
 
 @property (strong, nonatomic) NSObject *data;
 @property (strong, nonatomic) NSMutableArray *dataSource;
@@ -23,6 +26,7 @@
     [super viewDidLoad];
     [self setupNav];
     
+    self.tableView.tableHeaderView = self.headerView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self pullDatasource];
 }
@@ -66,7 +70,7 @@
         if (!error) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:[APPWayBillGoodInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
+            [self.tableView reloadData];
         }
     }];
 }
@@ -79,58 +83,39 @@
     return _dataSource;
 }
 
-#pragma mark - UITableView
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+- (AddGoodsListHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [AddGoodsListHeaderView new];
+    }
+    return _headerView;
 }
 
+#pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:{
-//            return self.showArray.count;
-        }
-            break;
-            
-        case 1:{
-            return self.dataSource.count;
-        }
-            break;
-            
-        default:
-            break;
-    }
-    return 0;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        return [FourItemsListCell tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
-    return kCellHeightMiddle;
+    return [FourItemsListCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
-        return STATUS_HEIGHT;
-    }
-    return 0.01;
+    return 30;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        if (self.dataSource.count) {
-            UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, STATUS_HEIGHT)];
-            bgView.backgroundColor = [UIColor clearColor];
-            
-            UILabel *titleLable1 = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, 0, bgView.width - 2 * kEdge, bgView.height)];
-            titleLable1.textAlignment = NSTextAlignmentCenter;
-            titleLable1.font = [AppPublic appFontOfSize:appLabelFontSize];
-            titleLable1.textColor = baseTextColor;
-            [bgView addSubview:titleLable1];
-            titleLable1.text = @"历史发货";
-            
-            return bgView;
-        }
+    if (self.dataSource.count) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 30)];
+        bgView.backgroundColor = [UIColor clearColor];
+        
+        UILabel *titleLable1 = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, 0, bgView.width - 2 * kEdge, bgView.height)];
+        titleLable1.textAlignment = NSTextAlignmentCenter;
+        titleLable1.font = [AppPublic appFontOfSize:appLabelFontSize];
+        titleLable1.textColor = baseTextColor;
+        [bgView addSubview:titleLable1];
+        titleLable1.text = @"历史发货";
+        
+        return bgView;
     }
     return nil;
 }
@@ -140,34 +125,26 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        
+    static NSString *CellIdentifier = @"history_cell";
+    FourItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    else if (indexPath.section == 1) {
-        static NSString *CellIdentifier = @"history_cell";
-        FourItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        
-        APPWayBillGoodInfo *item = self.dataSource[indexPath.row];
-        cell.firstLeftLabel.text = [NSString stringWithFormat:@"门店：%@", item.service_info];
-        cell.firstRightLabel.text = [NSString stringWithFormat:@"时间：%@", item.consignment_time];
-        cell.secondLeftLabel.text = [NSString stringWithFormat:@"明细：%@", item.goods_info];
-        cell.secondRightLabel.text = [NSString stringWithFormat:@"价格：%@", item.total_amount];
-        
-        return cell;
-    }
-    return [UITableViewCell new];
+    
+    APPWayBillGoodInfo *item = self.dataSource[indexPath.row];
+    cell.firstLeftLabel.text = [NSString stringWithFormat:@"门店：%@", item.service_info];
+    cell.firstRightLabel.text = [NSString stringWithFormat:@"时间：%@", item.consignment_time];
+    cell.secondLeftLabel.text = [NSString stringWithFormat:@"明细：%@", item.goods_info];
+    cell.secondRightLabel.text = [NSString stringWithFormat:@"价格：%@", item.total_amount];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 1) {
-        
-    }
+    
 }
 
 @end

@@ -21,7 +21,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeSmall, screen_width - 2 * kEdgeMiddle, kCellHeightHuge - 2 * kEdgeSmall)];
+        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, 0, screen_width - 2 * kEdgeMiddle, kCellHeightHuge - kEdge)];
         _baseView.backgroundColor = [UIColor whiteColor];
         _baseView.layer.borderColor = baseSeparatorColor.CGColor;
         _baseView.layer.borderWidth = 1.0;
