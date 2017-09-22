@@ -9,7 +9,7 @@
 #import "PublicSRSelectVC.h"
 #import "PublicCustomerPhoneVC.h"
 
-#import "TextFieldCell.h"
+#import "SingleInputCell.h"
 #import "BlockActionSheet.h"
 #import "JXTAlertController.h"
 
@@ -143,7 +143,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kCellHeightFilter;
+    CGFloat rowHeight = kCellHeightFilter;
+    if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
+        rowHeight += kEdge;
+    }
+    return rowHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -158,45 +162,41 @@
     NSDictionary *dic = self.showArray[indexPath.row];
     
     static NSString *CellIdentifier = @"select_cell";
-    TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        cell.textLabel.font = [UIFont systemFontOfSize:appLabelFontSize];
-        
-        cell.textField.font = cell.textLabel.font;
-        cell.textField.textAlignment = NSTextAlignmentRight;
-        cell.textField.frame = CGRectMake(cellDetailLeft, kEdge, cellDetailRightWhenIndicator - cellDetailLeft, kCellHeightMiddle - 2 * kEdge);
-        cell.textField.delegate = self;
+        cell.inputView.textField.delegate = self;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
-    cell.textLabel.text = dic[@"title"];
-    cell.textField.placeholder = dic[@"subTitle"];
-    cell.textField.text = @"";
-    cell.textField.indexPath = [indexPath copy];
+    cell.inputView.textLabel.text = dic[@"title"];
+    cell.inputView.textField.placeholder = dic[@"subTitle"];
+    cell.inputView.textField.text = @"";
+    cell.inputView.textField.indexPath = [indexPath copy];
     cell.accessoryType = indexPath.row == 0 ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     switch (indexPath.row) {
         case 0:{
-            cell.textField.text = [self.data.service showCityAndServiceName];
+            cell.inputView.textField.text = [self.data.service showCityAndServiceName];
         }
             break;
             
         case 1:{
-            cell.textField.text = self.data.customer.phone;
+            cell.inputView.textField.text = self.data.customer.phone;
         }
             break;
             
         case 2:{
-            cell.textField.text = self.data.customer.freight_cust_name;
+            cell.inputView.textField.text = self.data.customer.freight_cust_name;
         }
             break;
             
         default:
             break;
     }
-    cell.textField.enabled = (indexPath.row == 2);
+    cell.inputView.textField.enabled = (indexPath.row == 2);
+    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;
 }

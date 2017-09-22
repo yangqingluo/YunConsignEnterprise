@@ -32,17 +32,24 @@
         lineView.centerY = 0.5 * _baseView.height;
         [_baseView addSubview:lineView];
         
-        _firstLeftLabel = NewLabel(CGRectMake(kEdge, 0, _baseView.width - 2 * kEdge, 0.5 * _baseView.height), nil, nil, NSTextAlignmentLeft);
+        _firstLeftLabel = NewLabel(CGRectMake(kEdge, 0, 0.5 * _baseView.width - 2 * kEdge, 0.5 * _baseView.height), nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
         [_baseView addSubview:_firstLeftLabel];
         
-        _firstRightLabel = NewLabel(_firstLeftLabel.frame, nil, nil, NSTextAlignmentRight);
+        _firstRightLabel = NewLabel(_firstLeftLabel.frame, nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentRight);
+        _firstRightLabel.left = 0.5 * _baseView.width + _firstLeftLabel.left;
         [_baseView addSubview:_firstRightLabel];
         
-        _secondLeftLabel = NewLabel(CGRectMake(kEdge, 0.5 * _baseView.height, _baseView.width - 2 * kEdge, 0.5 * _baseView.height), nil, nil, NSTextAlignmentLeft);
+        _secondLeftLabel = NewLabel(CGRectMake(kEdge, 0.5 * _baseView.height, 0.5 * _baseView.width - 2 * kEdge, 0.5 * _baseView.height), nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
         [_baseView addSubview:_secondLeftLabel];
         
-        _secondRightLabel = NewLabel(_secondLeftLabel.frame, nil, nil, NSTextAlignmentRight);
+        _secondRightLabel = NewLabel(_secondLeftLabel.frame, nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentRight);
+        _secondRightLabel.left = 0.5 * _baseView.width + _secondLeftLabel.left;
         [_baseView addSubview:_secondRightLabel];
+        
+        _firstLeftLabel.numberOfLines = 0;
+        _firstRightLabel.numberOfLines = 0;
+        _secondLeftLabel.numberOfLines = 0;
+        _secondRightLabel.numberOfLines = 0;
     }
     
     return self;

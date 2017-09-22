@@ -8,13 +8,14 @@
 
 #import "PublicCustomerPhoneVC.h"
 
+#import "PublicInputCellView.h"
 #import "TextFieldCell.h"
 #import "FourItemsListCell.h"
 
 @interface PublicCustomerPhoneVC ()<UITextFieldDelegate>
 
-@property (strong, nonatomic) NSArray *showArray;
-@property (strong, nonatomic) NSMutableArray *customerArray;
+@property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
@@ -39,7 +40,8 @@
 //    UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
 //    self.tableView.separatorEffect = vibrancyEffect;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self pullCustomerArray:self.data.customer.phone];
+    self.tableView.tableHeaderView = self.headerView;
+    [self pulldataSource:self.data.customer.phone];
 }
 
 - (void)setupNav {
@@ -74,7 +76,7 @@
     [self goBack];
 }
 
-- (void)pullCustomerArray:(NSString *)prefix {
+- (void)pulldataSource:(NSString *)prefix {
     if (prefix.length < 4) {
         return;
     }
@@ -83,80 +85,70 @@
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryCustListByPhoneAndCityFunction" Parm:@{@"phone" : prefix, @"city" : self.data.service.open_city_id}  completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
-            [self.customerArray removeAllObjects];
-            [self.customerArray addObjectsFromArray:[AppCustomerInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
+            [self.dataSource removeAllObjects];
+            [self.dataSource addObjectsFromArray:[AppCustomerInfo mj_objectArrayWithKeyValuesArray:responseBody]];
+            [self.tableView reloadData];
         }
     }];
 }
 
 #pragma mark - getter
-- (NSMutableArray *)customerArray {
-    if (!_customerArray) {
-        _customerArray = [NSMutableArray new];
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
     }
-    return _customerArray;
+    return _dataSource;
 }
 
-- (NSArray *)showArray {
-    if (!_showArray) {
-        _showArray = @[@{@"title":@"客户电话",@"subTitle":@"请输入"}];
+- (UIView *)headerView {
+    if (!_headerView) {
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightFilter)];
+        
+        PublicInputCellView *inputView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, 0, _headerView.width - 2 * kEdgeMiddle, _headerView.height)];
+        [inputView.lineView removeFromSuperview];
+        inputView.textField.keyboardType = UIKeyboardTypePhonePad;
+        inputView.textField.delegate = self;
+        [inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        NSDictionary *dic = @{@"title":@"客户电话",@"subTitle":@"请输入"};
+        inputView.textLabel.text = dic[@"title"];
+        inputView.textField.placeholder = dic[@"subTitle"];
+        inputView.textField.text = @"";
+        if (self.data.customer.phone.length) {
+            inputView.textField.text = self.data.customer.phone;
+        }
+        [_headerView addSubview:inputView];
+        [_headerView addSubview:NewSeparatorLine(CGRectMake(0, 0, _headerView.width, appSeparaterLineSize))];
+        [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _headerView.height - appSeparaterLineSize, _headerView.width, appSeparaterLineSize))];
     }
-    return _showArray;
+    return _headerView;
 }
 
 #pragma mark - UITableView
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case 0:{
-            return self.showArray.count;
-        }
-            break;
-            
-        case 1:{
-            return self.customerArray.count;
-        }
-            break;
-            
-        default:
-            break;
-    }
-    return 0;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        return [FourItemsListCell tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
-    return kCellHeightFilter;
+    return [FourItemsListCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
-        return STATUS_HEIGHT;
-    }
-    return 0.01;
+    return 30;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        if (self.customerArray.count) {
-            UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, STATUS_HEIGHT)];
-            bgView.backgroundColor = [UIColor clearColor];
-            
-            UILabel *titleLable1 = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, 0, bgView.width - 2 * kEdge, bgView.height)];
-            titleLable1.textAlignment = NSTextAlignmentCenter;
-            titleLable1.font = [AppPublic appFontOfSize:appLabelFontSize];
-            titleLable1.textColor = baseTextColor;
-            [bgView addSubview:titleLable1];
-            titleLable1.text = @"相似客户";
-            
-            return bgView;
-        }
+    if (self.dataSource.count) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 30)];
+        bgView.backgroundColor = [UIColor clearColor];
+        
+        UILabel *titleLable1 = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, 0, bgView.width - 2 * kEdge, bgView.height)];
+        titleLable1.textAlignment = NSTextAlignmentCenter;
+        titleLable1.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+        titleLable1.textColor = baseTextColor;
+        [bgView addSubview:titleLable1];
+        titleLable1.text = @"相似客户";
+        
+        return bgView;
     }
     return nil;
 }
@@ -166,59 +158,26 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        NSDictionary *dic = self.showArray[indexPath.row];
-        
-        static NSString *CellIdentifier = @"select_cell";
-        TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            cell.textLabel.font = [UIFont systemFontOfSize:appLabelFontSizeMiddle];
-            
-            cell.textField.font = cell.textLabel.font;
-            cell.textField.textAlignment = NSTextAlignmentRight;
-            cell.textField.frame = CGRectMake(cellDetailLeft, kEdge, cellDetailRightWhenIndicator - cellDetailLeft, kCellHeightMiddle - 2 * kEdge);
-            cell.textField.delegate = self;
-            cell.textField.keyboardType = UIKeyboardTypePhonePad;
-            [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        }
-        cell.textLabel.text = dic[@"title"];
-        cell.textField.placeholder = dic[@"subTitle"];
-        cell.textField.text = @"";
-        cell.textField.indexPath = [indexPath copy];
-        if (self.data.customer.phone.length) {
-            cell.textField.text = self.data.customer.phone;
-        }
-        
-        return cell;
+    static NSString *CellIdentifier = @"customer_cell";
+    FourItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    else if (indexPath.section == 1) {
-        static NSString *CellIdentifier = @"customer_cell";
-        FourItemsListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (!cell) {
-            cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        AppCustomerInfo *item = self.customerArray[indexPath.row];
-        cell.firstLeftLabel.text = [NSString stringWithFormat:@"姓名：%@", item.freight_cust_name];
-        cell.firstRightLabel.text = [NSString stringWithFormat:@"电话：%@", item.phone];
-        cell.secondLeftLabel.text = [NSString stringWithFormat:@"货物：%@", item.last_deliver_goods];
-        cell.secondRightLabel.text = [NSString stringWithFormat:@"时间：%@", dateStringWithTimeString(item.last_deliver_time)];
-        return cell;
-    }
-    return [UITableViewCell new];
+    AppCustomerInfo *item = self.dataSource[indexPath.row];
+    cell.firstLeftLabel.text = [NSString stringWithFormat:@"姓名：%@", item.freight_cust_name];
+    cell.firstRightLabel.text = [NSString stringWithFormat:@"电话：%@", item.phone];
+    cell.secondLeftLabel.text = [NSString stringWithFormat:@"货物：%@", item.last_deliver_goods];
+    cell.secondRightLabel.text = [NSString stringWithFormat:@"时间：%@", dateStringWithTimeString(item.last_deliver_time)];
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 1) {
-        self.data.customer = self.customerArray[indexPath.row];
-        [self doDoneAction];
-    }
+    
+    self.data.customer = self.dataSource[indexPath.row];
+    [self doDoneAction];
 }
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -236,7 +195,7 @@
 #pragma  mark - TextField
 - (void)textFieldDidChange:(UITextField *)textField {
     self.data.customer.phone = textField.text;
-    [self pullCustomerArray:self.data.customer.phone];
+    [self pulldataSource:self.data.customer.phone];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

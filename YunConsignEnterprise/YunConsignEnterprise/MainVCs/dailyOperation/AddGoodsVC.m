@@ -117,7 +117,7 @@
         
         UILabel *titleLable1 = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, 0, bgView.width - 2 * kEdge, bgView.height)];
         titleLable1.textAlignment = NSTextAlignmentCenter;
-        titleLable1.font = [AppPublic appFontOfSize:appLabelFontSize];
+        titleLable1.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
         titleLable1.textColor = baseTextColor;
         [bgView addSubview:titleLable1];
         titleLable1.text = @"历史发货";

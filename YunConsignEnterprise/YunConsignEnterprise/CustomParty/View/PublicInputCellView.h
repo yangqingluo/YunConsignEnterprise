@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IndexPathTextField *textField;
 @property (strong, nonatomic) IndexPathButton *rightButton;
 @property (strong, nonatomic) UIImageView *rightImageView;
+@property (strong, nonatomic) UIView *lineView;
 
 - (void)showRightButtonWithImage:(UIImage *)image;
 - (void)showRightImageWithImage:(UIImage *)image;
