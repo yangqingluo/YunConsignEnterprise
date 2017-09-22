@@ -221,7 +221,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat rowHeight = kCellHeight;
+    CGFloat rowHeight = kCellHeightFilter;
     switch (indexPath.section) {
         case 0:{
             if (indexPath.row == 0) {
@@ -243,8 +243,11 @@
             if (indexPath.row == 0) {
                 
             }
+            else if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
+                rowHeight += kEdge;
+            }
             else {
-                rowHeight = kCellHeightMiddle;
+                
             }
         }
             
@@ -388,6 +391,8 @@
                         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                        
+                        [cell.inputView showRightImageWithImage:[[UIImage imageNamed:@"DisclosureIndicator_icon"] imageWithColor:[UIColor lightGrayColor]]];
                     }
                     
                     cell.inputView.textLabel.text = m_dic[@"title"];
@@ -402,6 +407,7 @@
                     }
                     
                     cell.inputView.textField.enabled = !([self.selectorSet containsObject:key] || [self.inputInvalidSet containsObject:key]);
+                    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
                     
                     return cell;
                 }

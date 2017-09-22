@@ -121,6 +121,8 @@
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
 		E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */; };
+		E44AD0EA1F742218004B9867 /* DisclosureIndicator_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E44AD0E81F742218004B9867 /* DisclosureIndicator_icon@2x.png */; };
+		E44AD0EB1F742218004B9867 /* DisclosureIndicator_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E44AD0E91F742218004B9867 /* DisclosureIndicator_icon@3x.png */; };
 		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
@@ -367,6 +369,8 @@
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
 		E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSummaryCell.h; sourceTree = "<group>"; };
 		E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSummaryCell.m; sourceTree = "<group>"; };
+		E44AD0E81F742218004B9867 /* DisclosureIndicator_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DisclosureIndicator_icon@2x.png"; sourceTree = "<group>"; };
+		E44AD0E91F742218004B9867 /* DisclosureIndicator_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DisclosureIndicator_icon@3x.png"; sourceTree = "<group>"; };
 		E47118301F676ACC004D4337 /* PublicTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTabViewController.h; sourceTree = "<group>"; };
 		E47118311F676ACC004D4337 /* PublicTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTabViewController.m; sourceTree = "<group>"; };
 		E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageAndText.h"; sourceTree = "<group>"; };
@@ -621,6 +625,8 @@
 		E43132951F70C791002658A9 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				E44AD0E81F742218004B9867 /* DisclosureIndicator_icon@2x.png */,
+				E44AD0E91F742218004B9867 /* DisclosureIndicator_icon@3x.png */,
 				E43132961F70C791002658A9 /* content_icon_direction@2x.png */,
 				E43132971F70C791002658A9 /* content_icon_direction@3x.png */,
 				E43132981F70C791002658A9 /* content_icon_direction_w@2x.png */,
@@ -1366,6 +1372,7 @@
 				E43133091F70C792002658A9 /* daily_icon_3@3x.png in Resources */,
 				E43133391F70C792002658A9 /* money_icon_2@3x.png in Resources */,
 				E43133151F70C792002658A9 /* daily_icon_9@3x.png in Resources */,
+				E44AD0EA1F742218004B9867 /* DisclosureIndicator_icon@2x.png in Resources */,
 				E431330B1F70C792002658A9 /* daily_icon_4@3x.png in Resources */,
 				E43133361F70C792002658A9 /* money_icon_1@2x.png in Resources */,
 				E43133601F70C792002658A9 /* TYBANG_s@2x.png in Resources */,
@@ -1391,6 +1398,7 @@
 				E431330E1F70C792002658A9 /* daily_icon_6@2x.png in Resources */,
 				E43133341F70C792002658A9 /* login_icon_phone@2x.png in Resources */,
 				E43132FC1F70C792002658A9 /* content_icon_direction@2x.png in Resources */,
+				E44AD0EB1F742218004B9867 /* DisclosureIndicator_icon@3x.png in Resources */,
 				E431335D1F70C792002658A9 /* tabbar_icon_setting_selected@3x.png in Resources */,
 				E43133241F70C792002658A9 /* list_icon_details_open@2x.png in Resources */,
 				E43133041F70C792002658A9 /* daily_icon_1@2x.png in Resources */,

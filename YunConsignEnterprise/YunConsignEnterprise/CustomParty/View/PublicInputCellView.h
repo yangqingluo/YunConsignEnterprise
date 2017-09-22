@@ -20,7 +20,9 @@
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) IndexPathTextField *textField;
 @property (strong, nonatomic) IndexPathButton *rightButton;
+@property (strong, nonatomic) UIImageView *rightImageView;
 
 - (void)showRightButtonWithImage:(UIImage *)image;
+- (void)showRightImageWithImage:(UIImage *)image;
 
 @end

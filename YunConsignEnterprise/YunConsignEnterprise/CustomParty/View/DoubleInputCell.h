@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) PublicInputCellView *inputView;
 @property (strong, nonatomic) PublicInputCellView *anotherInputView;
+@property (assign, nonatomic) BOOL isShowBottomEdge;
 
 @end

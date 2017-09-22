@@ -47,8 +47,16 @@
     [self addSubview:_rightButton];
     
     _rightButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    
     _textField.width -= _rightButton.width;
 }
 
+- (void)showRightImageWithImage:(UIImage *)image {
+    _rightImageView = [[UIImageView alloc] initWithImage:image];
+    _rightImageView.centerY = _textField.centerY;
+    _rightImageView.right = self.width;
+    [self addSubview:_rightImageView];
+    
+    _rightImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    _textField.width -= _rightImageView.width;
+}
 @end

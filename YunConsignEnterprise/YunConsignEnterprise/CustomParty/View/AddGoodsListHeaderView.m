@@ -20,7 +20,7 @@
 @implementation AddGoodsListHeaderView
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, screen_width, 4 * kCellHeightMiddle)];
+    self = [super initWithFrame:CGRectMake(0, 0, screen_width, 4 * kCellHeightFilter + kEdge)];
     if (self) {
         _showArray = @[@{@"title":@"货物名称",@"subTitle":@"请输入"},
                        @{@"title":@"包装类型",@"subTitle":@"请输入"},
@@ -46,7 +46,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kCellHeightMiddle;
+    CGFloat rowHeight = kCellHeightFilter;
+    if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
+        rowHeight += kEdge;
+    }
+    return rowHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -143,6 +147,8 @@
                 default:
                     break;
             }
+            
+            cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
             
             return cell;
         }

@@ -22,9 +22,11 @@
         self.textField = [[IndexPathTextField alloc]initWithFrame:CGRectMake(kEdgeMiddle, 0, screen_width - 2 * kEdgeMiddle, 40)];
         self.textField.borderStyle = UITextBorderStyleNone;
         self.textField.returnKeyType = UIReturnKeyDone;
-        self.textField.centerY = 0.5 * kCellHeightMiddle;
+        self.textField.centerY = 0.5 * self.contentView.height;
         self.textField.font = [UIFont systemFontOfSize:appLabelFontSize];
         [self.contentView addSubview:self.textField];
+        
+        self.textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     }
     
     return self;

@@ -35,10 +35,10 @@
     CGFloat leftSX = (4.0 / 17.0) * _headerView.width;
     CGFloat rightSX = (13.0 / 17.0) * _headerView.width;
     
-    [_headerView addSubview:NewSeparatorLine(CGRectMake(0, 0, _headerView.width, appLineWidthOrHeight))];
-    [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _headerView.height - appLineWidthOrHeight, _headerView.width, appLineWidthOrHeight))];
-    [_headerView addSubview:NewSeparatorLine(CGRectMake(leftSX , 0, appLineWidthOrHeight, _headerView.height))];
-    [_headerView addSubview:NewSeparatorLine(CGRectMake(rightSX, 0, appLineWidthOrHeight, _headerView.height))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(0, 0, _headerView.width, appSeparaterLineSize))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _headerView.height - appSeparaterLineSize, _headerView.width, appSeparaterLineSize))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(leftSX , 0, appSeparaterLineSize, _headerView.height))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(rightSX, 0, appSeparaterLineSize, _headerView.height))];
     
     _dateLabel = NewLabel(CGRectMake(leftSX, 0, rightSX - leftSX, _headerView.height), nil, nil, NSTextAlignmentCenter);
     [_headerView addSubview:_dateLabel];
@@ -82,7 +82,7 @@
     [_receiverButton setImage:[UIImage dottedLineImageWithSize:CGSizeMake(92, 60) borderColor:baseSeparatorColor borderWidth:1.0] forState:UIControlStateSelected];
     [_contentView addSubview:_receiverButton];
     
-    [_contentView addSubview:NewSeparatorLine(CGRectMake(0, _contentView.height - appLineWidthOrHeight, _contentView.width, appLineWidthOrHeight))];
+    [_contentView addSubview:NewSeparatorLine(CGRectMake(0, _contentView.height - appSeparaterLineSize, _contentView.width, appSeparaterLineSize))];
     
     [self refreshSenderDetailLabel];
     [self refreshReceiverDetailLabel];

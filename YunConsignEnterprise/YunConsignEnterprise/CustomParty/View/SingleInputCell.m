@@ -19,7 +19,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _inputView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeMiddle, screen_width - 2 * kEdgeMiddle, self.contentView.height - 2 * kEdgeMiddle)];
+        _inputView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, 0, screen_width - 2 * kEdgeMiddle, self.contentView.height)];
         _inputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:_inputView];
         
@@ -40,6 +40,17 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - setter
+- (void)setIsShowBottomEdge:(BOOL)isShowBottomEdge {
+    _isShowBottomEdge = isShowBottomEdge;
+    if (_isShowBottomEdge) {
+        self.inputView.height = self.contentView.height - kEdge;
+    }
+    else {
+        self.inputView.height = self.contentView.height;
+    }
+}
+
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if([keyPath isEqualToString:SingleInputATypeObserverKey]){
@@ -51,4 +62,5 @@
         }
     }
 }
+
 @end

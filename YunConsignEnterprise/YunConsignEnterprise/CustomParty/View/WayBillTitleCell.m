@@ -18,7 +18,7 @@
         leftColorView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:leftColorView];
         
-        UIView *lineView = NewSeparatorLine(CGRectMake(0, self.height - appLineWidthOrHeight, screen_width, appLineWidthOrHeight));
+        UIView *lineView = NewSeparatorLine(CGRectMake(0, self.height - appSeparaterLineSize, screen_width, appSeparaterLineSize));
         lineView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         [self addSubview:lineView];
         

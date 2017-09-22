@@ -12,5 +12,6 @@
 @interface SingleInputCell : UITableViewCell
 
 @property (strong, nonatomic) PublicInputCellView *inputView;
+@property (assign, nonatomic) BOOL isShowBottomEdge;
 
 @end
