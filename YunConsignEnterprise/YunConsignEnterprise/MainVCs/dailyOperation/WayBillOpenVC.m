@@ -21,6 +21,8 @@
 @interface WayBillOpenVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) WayBillSRHeaderView *headerView;
+@property (strong, nonatomic) UIView *footerView;
+
 @property (strong, nonatomic) NSMutableArray *goodsArray;
 @property (strong, nonatomic) AppGoodsInfo *goodsSummary;
 @property (strong, nonatomic) NSArray *feeShowArray;
@@ -43,6 +45,7 @@
     [self setupNav];
     
     self.tableView.tableHeaderView = self.headerView;
+    self.tableView.tableFooterView = self.footerView;
 }
 
 - (void)setupNav {
@@ -80,6 +83,10 @@
         }
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)saveButtonAction {
+    
 }
 
 - (void)addGoodsButtonAction {
@@ -132,6 +139,21 @@
     return _headerView;
 }
 
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightMiddle)];
+        
+        UIButton *btn = [[UIButton alloc] initWithFrame:_footerView.bounds];
+        btn.backgroundColor = MainColor;
+        btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+        [btn setTitle:@"保存运单" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(saveButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:btn];
+    }
+    return _footerView;
+}
+
 - (NSMutableArray *)goodsArray {
     if (!_goodsArray) {
         _goodsArray = [NSMutableArray new];
@@ -149,9 +171,30 @@
 - (NSArray *)feeShowArray {
     if (!_feeShowArray) {
         _feeShowArray = @[@{@"title":@"回单",@"subTitle":@"请选择",@"key":@"receipt_sign_type"},
-                          @{@"title":@"代收款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},];
+                          @{@"title":@"代收款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},
+                          @{@"title":@"代收款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_amount"},
+                          @{@"title":@"运费代扣",@"subTitle":@"请选择",@"key":@"is_deduction_freight"},
+                          @{@"title":@"急货",@"subTitle":@"请选择",@"key":@"is_urgent"},
+                          @{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
+                          @[@{@"title":@"报价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
+                            @{@"title":@"报价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
+                          @[@{@"title":@"接货费",@"subTitle":@"请输入",@"key":@"take_goods_fee"},
+                            @{@"title":@"送货费",@"subTitle":@"请输入",@"key":@"deliver_goods_fee"}],
+                          @[@{@"title":@"回扣费",@"subTitle":@"请输入",@"key":@"rebate_fee"},
+                            @{@"title":@"垫付费",@"subTitle":@"请输入",@"key":@"pay_for_sb_fee"}],];
     }
     return _feeShowArray;
+}
+
+- (NSArray *)payStyleShowArray {
+    if (!_payStyleShowArray) {
+        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount"},
+                               @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount"},
+                               @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount"},
+                               @{@"title":@"运单备注",@"subTitle":@"请输入",@"key":@"note"},
+                               @{@"title":@"内部备注",@"subTitle":@"请输入",@"key":@"inner_note"},];
+    }
+    return _payStyleShowArray;
 }
 
 - (NSSet *)selectorSet{
@@ -164,7 +207,7 @@
 
 - (NSSet *)inputInvalidSet{
     if (!_inputInvalidSet) {
-        _inputInvalidSet = [NSSet setWithObjects:@"insurance_fee", nil];
+        _inputInvalidSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", nil];
     }
     
     return _inputInvalidSet;
@@ -198,7 +241,7 @@
             break;
             
         case 2:{
-            rows = 1;
+            rows = 1 + self.payStyleShowArray.count;
         }
             break;
             
@@ -210,8 +253,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 2) {
-        return kEdge;
-        
+        return kEdgeHuge;
     }
     return 0.01;
 }
@@ -250,6 +292,20 @@
                 
             }
         }
+            break;
+            
+        case 2:{
+            if (indexPath.row == 0) {
+                
+            }
+            else if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
+                rowHeight += kEdge;
+            }
+            else {
+                
+            }
+        }
+            break;
             
         default:
             break;
@@ -390,6 +446,7 @@
                     if (!cell) {
                         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
                         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
                     }
                     
@@ -404,14 +461,44 @@
                         cell.inputView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
                     }
                     
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.accessoryType = [self.selectorSet containsObject:key] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
                     cell.inputView.textField.enabled = !([self.selectorSet containsObject:key] || [self.inputInvalidSet containsObject:key]);
-                    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
                     
                     return cell;
                 }
-                else {
-                    
+                else if ([object isKindOfClass:[NSArray class]]){
+                    NSArray *m_array = (NSArray *)object;
+                    if (m_array.count == 2) {
+                        static NSString *CellIdentifier = @"double_cell";
+                        DoubleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                        
+                        if (!cell) {
+                            cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                            [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                            [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                            cell.inputView.textField.delegate = self;
+                            cell.anotherInputView.textField.delegate = self;
+                            cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                            cell.anotherInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                            cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                        }
+                        NSDictionary *m_dic1 = m_array[0];
+                        NSDictionary *m_dic2 = m_array[1];
+                        cell.inputView.textLabel.text = m_dic1[@"title"];
+                        cell.inputView.textField.placeholder = m_dic1[@"subTitle"];
+                        cell.inputView.textField.text = @"";
+                        cell.inputView.textField.indexPath = [indexPath copy];
+                        
+                        cell.anotherInputView.textLabel.text = m_dic2[@"title"];
+                        cell.anotherInputView.textField.placeholder = m_dic2[@"subTitle"];
+                        cell.anotherInputView.textField.text = @"";
+                        cell.anotherInputView.textField.indexPath = [indexPath copy];
+                        
+                        cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+                        
+                        return cell;
+                    }
                 }
             }
         }
@@ -434,6 +521,32 @@
                 _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
                 
                 return cell;
+            }
+            else {
+                id object = self.payStyleShowArray[indexPath.row - 1];
+                if ([object isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *m_dic = object;
+                    NSString *key = m_dic[@"key"];
+                    
+                    static NSString *CellIdentifier = @"pay_style_cell";
+                    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                    if (!cell) {
+                        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                    }
+                    
+                    cell.inputView.textLabel.text = m_dic[@"title"];
+                    cell.inputView.textField.placeholder = m_dic[@"subTitle"];
+                    cell.inputView.textField.text = @"";
+                    cell.inputView.textField.indexPath = [indexPath copy];
+                    
+                    
+                    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+                    
+                    return cell;
+                }
             }
         }
             break;
