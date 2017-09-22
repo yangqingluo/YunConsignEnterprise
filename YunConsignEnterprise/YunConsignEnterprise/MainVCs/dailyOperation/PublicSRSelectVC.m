@@ -164,7 +164,7 @@
         cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.textLabel.font = [UIFont systemFontOfSize:appLabelFontSizeMiddle];
+        cell.textLabel.font = [UIFont systemFontOfSize:appLabelFontSize];
         
         cell.textField.font = cell.textLabel.font;
         cell.textField.textAlignment = NSTextAlignmentRight;

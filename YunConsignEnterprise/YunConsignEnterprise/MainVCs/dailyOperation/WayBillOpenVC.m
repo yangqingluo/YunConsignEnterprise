@@ -290,7 +290,7 @@
                     cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     
-                    UIButton *addGoodsBtn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 100, 0, 120, kCellHeight)];
+                    UIButton *addGoodsBtn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 100, 0, 120, [self tableView:tableView heightForRowAtIndexPath:indexPath])];
                     [addGoodsBtn setImage:[UIImage imageNamed:@"list_icon_add"] forState:UIControlStateNormal];
                     [addGoodsBtn setTitle:@"  添加" forState:UIControlStateNormal];
                     [addGoodsBtn setTitleColor:MainColor forState:UIControlStateNormal];
@@ -391,8 +391,6 @@
                         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-                        
-                        [cell.inputView showRightImageWithImage:[[UIImage imageNamed:@"DisclosureIndicator_icon"] imageWithColor:[UIColor lightGrayColor]]];
                     }
                     
                     cell.inputView.textLabel.text = m_dic[@"title"];
@@ -406,6 +404,7 @@
                         cell.inputView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
                     }
                     
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.inputView.textField.enabled = !([self.selectorSet containsObject:key] || [self.inputInvalidSet containsObject:key]);
                     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
                     
@@ -426,7 +425,7 @@
                     cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     
-                    _summaryFreightLabel = NewLabel(CGRectMake(0, 0, 200, kCellHeight), nil, nil, NSTextAlignmentRight);
+                    _summaryFreightLabel = NewLabel(CGRectMake(0, 0, 200, [self tableView:tableView heightForRowAtIndexPath:indexPath]), nil, nil, NSTextAlignmentRight);
                     _summaryFreightLabel.right = screen_width - kEdgeMiddle;
                     [cell.contentView addSubview:_summaryFreightLabel];
                 }

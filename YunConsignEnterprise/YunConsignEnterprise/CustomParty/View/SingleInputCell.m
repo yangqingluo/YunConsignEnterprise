@@ -55,10 +55,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if([keyPath isEqualToString:SingleInputATypeObserverKey]){
         if (self.accessoryType == UITableViewCellAccessoryNone) {
-            self.inputView.width = screen_width - 2 * kEdgeMiddle;
+            self.inputView.textField.width = self.inputView.width - cellDetailLeft;
         }
         else {
-            self.inputView.width = screen_width - kEdgeMiddle - kEdgeHuge;
+            self.inputView.textField.width = self.inputView.width - cellDetailLeft - kEdgeHuge + (screen_width - self.inputView.right);
         }
     }
 }
