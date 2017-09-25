@@ -24,7 +24,7 @@
     [self.view addSubview:headerView];
     
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TYBANG_s"]];
-    logoView.top = 40;
+    logoView.top = 40 * headerView.height / 294;
     logoView.right = headerView.width - 32;
     [headerView addSubview:logoView];
 
@@ -35,6 +35,22 @@
     nameLabel.centerX = logoView.centerX;
     nameLabel.top = logoView.bottom + kEdge;
     [headerView addSubview:nameLabel];
+    
+    UIFont *noteFont = [AppPublic appFontOfSize:appLabelFontSize];
+    UILabel *noteLabel = NewLabel(CGRectMake(0, 0, 20, 200), [UIColor whiteColor], noteFont, NSTextAlignmentCenter);
+    noteLabel.width = 1.5 * [AppPublic textSizeWithString:@"托" font:noteFont constantHeight:noteLabel.height].width;
+    noteLabel.top = nameLabel.bottom + 24;
+    noteLabel.centerX = nameLabel.centerX;
+    noteLabel.numberOfLines = 0;
+    noteLabel.text = @"您身边的物流管家";
+    [AppPublic adjustLabelHeight:noteLabel];
+    noteLabel.height += (2 * kEdge);
+    noteLabel.layer.borderWidth = 1.0;
+    noteLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+    [headerView addSubview:noteLabel];
+    if (noteLabel.bottom > headerView.height - kEdgeSmall) {
+        noteLabel.bottom = headerView.height - kEdgeSmall;
+    }
     
     float inputHeight = 56;
     UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.bottom + kEdgeBig, screen_width * 560.0 / 720.0, inputHeight * 2 + kEdgeBig)];
