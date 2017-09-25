@@ -10,8 +10,8 @@
 
 @interface DoubleInputCell : UITableViewCell
 
-@property (strong, nonatomic) PublicInputCellView *inputView;
-@property (strong, nonatomic) PublicInputCellView *anotherInputView;
+@property (strong, nonatomic) PublicInputCellView *baseView;
+@property (strong, nonatomic) PublicInputCellView *anotherBaseView;
 @property (assign, nonatomic) BOOL isShowBottomEdge;
 
 @end

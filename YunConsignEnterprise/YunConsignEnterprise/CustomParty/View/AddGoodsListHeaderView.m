@@ -70,29 +70,29 @@
         if (!cell) {
             cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-            cell.inputView.textField.delegate = self;
+            [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+            cell.baseView.textField.delegate = self;
             
             UIButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
             [btn setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
-            [cell.inputView addRightView:btn];
+            [cell.baseView addRightView:btn];
         }
-        cell.inputView.textLabel.text = item[@"title"];
-        cell.inputView.textField.placeholder = item[@"subTitle"];
-        cell.inputView.textField.text = @"";
-        cell.inputView.textField.indexPath = [indexPath copy];
+        cell.baseView.textLabel.text = item[@"title"];
+        cell.baseView.textField.placeholder = item[@"subTitle"];
+        cell.baseView.textField.text = @"";
+        cell.baseView.textField.indexPath = [indexPath copy];
         
         switch (indexPath.row) {
             case 0:{
                 if (self.data.goods_name.length) {
-                    cell.inputView.textField.text = self.data.goods_name;
+                    cell.baseView.textField.text = self.data.goods_name;
                 }
             }
                 break;
                 
             case 1:{
                 if (self.data.packge.length) {
-                    cell.inputView.textField.text = self.data.packge;
+                    cell.baseView.textField.text = self.data.packge;
                 }
             }
                 break;
@@ -112,37 +112,37 @@
             if (!cell) {
                 cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                cell.inputView.textField.delegate = self;
-                cell.anotherInputView.textField.delegate = self;
+                [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                cell.baseView.textField.delegate = self;
+                cell.anotherBaseView.textField.delegate = self;
             }
             NSDictionary *m_dic1 = m_array[0];
             NSDictionary *m_dic2 = m_array[1];
-            cell.inputView.textLabel.text = m_dic1[@"title"];
-            cell.inputView.textField.placeholder = m_dic1[@"subTitle"];
-            cell.inputView.textField.text = @"";
-            cell.inputView.textField.indexPath = [indexPath copy];
+            cell.baseView.textLabel.text = m_dic1[@"title"];
+            cell.baseView.textField.placeholder = m_dic1[@"subTitle"];
+            cell.baseView.textField.text = @"";
+            cell.baseView.textField.indexPath = [indexPath copy];
             
-            cell.anotherInputView.textLabel.text = m_dic2[@"title"];
-            cell.anotherInputView.textField.placeholder = m_dic2[@"subTitle"];
-            cell.anotherInputView.textField.text = @"";
-            cell.anotherInputView.textField.indexPath = [indexPath copy];
+            cell.anotherBaseView.textLabel.text = m_dic2[@"title"];
+            cell.anotherBaseView.textField.placeholder = m_dic2[@"subTitle"];
+            cell.anotherBaseView.textField.text = @"";
+            cell.anotherBaseView.textField.indexPath = [indexPath copy];
             
             switch (indexPath.row) {
                 case 2:{
-                    cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                    cell.anotherInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                    cell.inputView.textField.text = [NSString stringWithFormat:@"%d", self.data.number];
-                    cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%lld", self.data.freight];
+                    cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                    cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%d", self.data.number];
+                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%lld", self.data.freight];
                 }
                     break;
                     
                 case 3:{
-                    cell.inputView.textField.keyboardType = UIKeyboardTypeDecimalPad;
-                    cell.anotherInputView.textField.keyboardType = UIKeyboardTypeDecimalPad;
-                    cell.inputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.weight];
-                    cell.anotherInputView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.volume];
+                    cell.baseView.textField.keyboardType = UIKeyboardTypeDecimalPad;
+                    cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeDecimalPad;
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.weight];
+                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.volume];
                 }
                     break;
                     

@@ -33,7 +33,7 @@
         NSUInteger rows = 2;
         NSUInteger lines = 4;
         NSUInteger total = rows * lines;
-        CGFloat separatorX = 0.6 * _baseView.width;
+        CGFloat separatorX = 0.55 * _baseView.width;
         CGFloat height = _baseView.height / rows;
         for (int i = 0; i < total; i++) {
             NSTextAlignment textAlignment = (i % 2 == 0) ? NSTextAlignmentLeft : NSTextAlignmentRight;

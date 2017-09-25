@@ -18,6 +18,7 @@
 #import "SingleInputCell.h"
 #import "DoubleInputCell.h"
 #import "SwitchorCell.h"
+#import "SwitchedInputCell.h"
 
 @interface WayBillOpenVC ()<UITextFieldDelegate>
 
@@ -194,8 +195,8 @@
         _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount"},
                                @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount"},
                                @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount"},
-                               @{@"title":@"运单备注",@"subTitle":@"请输入",@"key":@"note"},
-                               @{@"title":@"内部备注",@"subTitle":@"请输入",@"key":@"inner_note"},];
+                               @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
+                               @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},];
     }
     return _payStyleShowArray;
 }
@@ -240,11 +241,10 @@
     return _data;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView switchorCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject {
-    static NSString *CellIdentifier = @"fee_edit_switchor_cell";
-    SwitchorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView switchorCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    SwitchorCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
-        cell = [[SwitchorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[SwitchorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
@@ -258,28 +258,45 @@
     if (!cell) {
         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
-    cell.inputView.textLabel.text = showObject[@"title"];
-    cell.inputView.textField.placeholder = showObject[@"subTitle"];
-    cell.inputView.textField.text = @"";
-    cell.inputView.textField.indexPath = [indexPath copy];
-    cell.inputView.textField.enabled = YES;
+    cell.baseView.textLabel.text = showObject[@"title"];
+    cell.baseView.textField.placeholder = showObject[@"subTitle"];
+    cell.baseView.textField.text = @"";
+    cell.baseView.textField.indexPath = [indexPath copy];
+    cell.baseView.textField.enabled = YES;
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     NSString *key = showObject[@"key"];
     if ([self.selectorSet containsObject:key]) {
-        cell.inputView.textField.enabled = NO;
+        cell.baseView.textField.enabled = NO;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if ([key isEqualToString:@"receipt_sign_type"]) {
-            cell.inputView.textField.text = [UserPublic stringForReceptSignType:self.data.receipt_sign_type];
+            cell.baseView.textField.text = [UserPublic stringForReceptSignType:self.data.receipt_sign_type];
         }
         else if ([key isEqualToString:@"cash_on_delivery_type"]) {
-            cell.inputView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
+            cell.baseView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
         }
     }
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView switchedInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    SwitchedInputCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[SwitchedInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+    }
+    cell.baseView.textLabel.text = showObject[@"title"];
+    cell.baseView.textField.placeholder = showObject[@"subTitle"];
+    cell.baseView.textField.text = @"";
+    cell.baseView.textField.indexPath = [indexPath copy];
+    cell.baseView.textField.enabled = YES;
+    
     return cell;
 }
 
@@ -290,25 +307,25 @@
     if (!cell) {
         cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        cell.inputView.textField.delegate = self;
-        cell.anotherInputView.textField.delegate = self;
-        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-        cell.anotherInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        cell.baseView.textField.delegate = self;
+        cell.anotherBaseView.textField.delegate = self;
+        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
     NSDictionary *m_dic1 = m_array[0];
     NSDictionary *m_dic2 = m_array[1];
-    cell.inputView.textLabel.text = m_dic1[@"title"];
-    cell.inputView.textField.placeholder = m_dic1[@"subTitle"];
-    cell.inputView.textField.text = @"";
-    cell.inputView.textField.indexPath = [indexPath copy];
+    cell.baseView.textLabel.text = m_dic1[@"title"];
+    cell.baseView.textField.placeholder = m_dic1[@"subTitle"];
+    cell.baseView.textField.text = @"";
+    cell.baseView.textField.indexPath = [indexPath copy];
     
-    cell.anotherInputView.textLabel.text = m_dic2[@"title"];
-    cell.anotherInputView.textField.placeholder = m_dic2[@"subTitle"];
-    cell.anotherInputView.textField.text = @"";
-    cell.anotherInputView.textField.indexPath = [indexPath copy];
+    cell.anotherBaseView.textLabel.text = m_dic2[@"title"];
+    cell.anotherBaseView.textField.placeholder = m_dic2[@"subTitle"];
+    cell.anotherBaseView.textField.text = @"";
+    cell.anotherBaseView.textField.indexPath = [indexPath copy];
     
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
@@ -548,8 +565,8 @@
                     NSDictionary *m_dic = object;
                     NSString *key = m_dic[@"key"];
                     
-                    if ([self.switchorSet containsObject:key]) {
-                        return [self tableView:tableView switchorCellForRowAtIndexPath:indexPath showObject:m_dic];
+                    if ([self.switchorSet containsObject:key]) {static NSString *CellIdentifier = @"fee_edit_switchor_cell";
+                        return [self tableView:tableView switchorCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
                     }
                     else {
                         static NSString *CellIdentifier = @"fee_edit_cell";
@@ -577,8 +594,14 @@
                 if ([object isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *m_dic = object;
                     NSString *key = m_dic[@"key"];
-                    static NSString *CellIdentifier = @"pay_style_edit_cell";
-                    return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
+                    if ([self.inputForSelectorSet containsObject:key]) {
+                        static NSString *CellIdentifier = @"pay_style_switchedInput_cell";
+                        return [self tableView:tableView switchedInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
+                    }
+                    else {
+                        static NSString *CellIdentifier = @"pay_style_edit_cell";
+                        return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
+                    }
                 }
             }
         }

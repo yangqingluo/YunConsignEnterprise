@@ -10,7 +10,7 @@
 
 @interface SingleInputCell : UITableViewCell
 
-@property (strong, nonatomic) PublicInputCellView *inputView;
+@property (strong, nonatomic) PublicInputCellView *baseView;
 @property (assign, nonatomic) BOOL isShowBottomEdge;
 
 @end

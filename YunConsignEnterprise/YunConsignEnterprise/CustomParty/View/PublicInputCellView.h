@@ -12,7 +12,6 @@
 @interface PublicInputCellView : PublicCellView
 
 @property (strong, nonatomic) IndexPathTextField *textField;
-
 @property (strong, nonatomic) UIView *rightView;
 
 - (void)addRightView:(UIView *)view;

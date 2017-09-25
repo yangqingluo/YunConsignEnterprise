@@ -167,35 +167,35 @@
     if (!cell) {
         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.inputView.textField.delegate = self;
+        cell.baseView.textField.delegate = self;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
-    cell.inputView.textLabel.text = dic[@"title"];
-    cell.inputView.textField.placeholder = dic[@"subTitle"];
-    cell.inputView.textField.text = @"";
-    cell.inputView.textField.indexPath = [indexPath copy];
+    cell.baseView.textLabel.text = dic[@"title"];
+    cell.baseView.textField.placeholder = dic[@"subTitle"];
+    cell.baseView.textField.text = @"";
+    cell.baseView.textField.indexPath = [indexPath copy];
     cell.accessoryType = indexPath.row == 0 ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     switch (indexPath.row) {
         case 0:{
-            cell.inputView.textField.text = [self.data.service showCityAndServiceName];
+            cell.baseView.textField.text = [self.data.service showCityAndServiceName];
         }
             break;
             
         case 1:{
-            cell.inputView.textField.text = self.data.customer.phone;
+            cell.baseView.textField.text = self.data.customer.phone;
         }
             break;
             
         case 2:{
-            cell.inputView.textField.text = self.data.customer.freight_cust_name;
+            cell.baseView.textField.text = self.data.customer.freight_cust_name;
         }
             break;
             
         default:
             break;
     }
-    cell.inputView.textField.enabled = (indexPath.row == 2);
+    cell.baseView.textField.enabled = (indexPath.row == 2);
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;

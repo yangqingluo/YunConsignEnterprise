@@ -13,15 +13,15 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _inputView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, 0, 0.5 * screen_width - 2 * kEdgeMiddle, self.contentView.height)];
-        _inputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _inputView.textField.tag = 0;
-        [self.contentView addSubview:_inputView];
+        _baseView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, 0, 0.5 * screen_width - 2 * kEdgeMiddle, self.contentView.height)];
+        _baseView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        _baseView.textField.tag = 0;
+        [self.contentView addSubview:_baseView];
         
-        _anotherInputView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(0.5 * screen_width + kEdgeMiddle, 0, 0.5 * screen_width - 2 * kEdgeMiddle, self.contentView.height)];
-        _anotherInputView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _anotherInputView.textField.tag = 1;
-        [self.contentView addSubview:_anotherInputView];
+        _anotherBaseView = [[PublicInputCellView alloc] initWithFrame:CGRectMake(0.5 * screen_width + kEdgeMiddle, 0, 0.5 * screen_width - 2 * kEdgeMiddle, self.contentView.height)];
+        _anotherBaseView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        _anotherBaseView.textField.tag = 1;
+        [self.contentView addSubview:_anotherBaseView];
     }
     
     return self;
@@ -42,12 +42,12 @@
 - (void)setIsShowBottomEdge:(BOOL)isShowBottomEdge {
     _isShowBottomEdge = isShowBottomEdge;
     if (_isShowBottomEdge) {
-        self.inputView.height = self.contentView.height - kEdge;
-        self.anotherInputView.height = self.contentView.height - kEdge;
+        self.baseView.height = self.contentView.height - kEdge;
+        self.anotherBaseView.height = self.contentView.height - kEdge;
     }
     else {
-        self.inputView.height = self.contentView.height;
-        self.anotherInputView.height = self.contentView.height;
+        self.baseView.height = self.contentView.height;
+        self.anotherBaseView.height = self.contentView.height;
     }
 }
 

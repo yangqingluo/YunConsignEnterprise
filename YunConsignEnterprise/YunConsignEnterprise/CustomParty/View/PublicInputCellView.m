@@ -8,6 +8,10 @@
 
 #import "PublicInputCellView.h"
 
+@interface PublicInputCellView ()
+
+@end
+
 @implementation PublicInputCellView
 
 - (instancetype)initWithFrame:(CGRect)frame {
