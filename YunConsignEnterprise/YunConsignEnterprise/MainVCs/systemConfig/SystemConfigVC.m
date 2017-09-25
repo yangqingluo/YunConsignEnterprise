@@ -7,6 +7,7 @@
 //
 
 #import "SystemConfigVC.h"
+#import "BlockAlertView.h"
 
 @interface SystemConfigVC ()
 
@@ -34,6 +35,16 @@
 }
 
 - (void)logout {
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定退出登录" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [weakself doLogoutFunction];
+        }
+    } otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+- (void)doLogoutFunction {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] Get:@{@"login_token" : [UserPublic getInstance].userData.login_token} HeadParm:nil URLFooter:@"/login/logout.do" completion:^(id responseBody, NSError *error){

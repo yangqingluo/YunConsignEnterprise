@@ -19,27 +19,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    if (logoView.width > 0.25 * screen_width) {
-        logoView.frame = CGRectMake(0, 0, 0.25 * screen_width, 0.25 * screen_width);
-    }
-    logoView.center = CGPointMake(0.5 * screen_width, 40 + 0.5 * logoView.height);
-    [self.view addSubview:logoView];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_width * 588.0 / 720.0)];
+    headerView.layer.contents = (__bridge id _Nullable)([UIImage imageNamed:@"login_bg"].CGImage);
+    [self.view addSubview:headerView];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, logoView.bottom + 10, screen_width, 20)];
-    nameLabel.textColor = [UIColor blackColor];
-    nameLabel.font = [UIFont systemFontOfSize:14.0];
-    nameLabel.textAlignment = NSTextAlignmentCenter;
-    nameLabel.text = @"托运邦企业版";
-    [self.view addSubview:nameLabel];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TYBANG_s"]];
+    logoView.top = 40;
+    logoView.right = headerView.width - 32;
+    [headerView addSubview:logoView];
+
+    UILabel *nameLabel = NewLabel(CGRectMake(0, 0, 200, 20), [UIColor whiteColor], nil, NSTextAlignmentCenter);
+    nameLabel.text = @"托运邦";
+    [AppPublic adjustLabelWidth:nameLabel];
+    [AppPublic adjustLabelHeight:nameLabel];
+    nameLabel.centerX = logoView.centerX;
+    nameLabel.top = logoView.bottom + kEdge;
+    [headerView addSubview:nameLabel];
     
-    float inputHeight = 50;
-    UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, nameLabel.bottom + 30, screen_width, inputHeight * 2)];
-    inputView.backgroundColor = [UIColor whiteColor];
+    float inputHeight = 56;
+    UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.bottom + kEdgeBig, screen_width * 560.0 / 720.0, inputHeight * 2 + kEdgeBig)];
+    inputView.centerX = 0.5 * screen_width;
     [self.view addSubview:inputView];
     
-    self.usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(kEdge, 0, inputView.width - 2 * kEdge, 44)];
-    self.usernameTextField.centerY = 0.5 * inputHeight;
+    self.usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(kEdge, 0, inputView.width - 2 * kEdge, inputHeight)];
     self.usernameTextField.placeholder = @"请输入用户名";
     self.usernameTextField.font = [UIFont systemFontOfSize:14.0];
     self.usernameTextField.keyboardType = UIKeyboardTypeASCIICapable;
@@ -47,8 +49,7 @@
     [inputView addSubview:self.usernameTextField];
     [self addTextField:self.usernameTextField imageName:@"login_icon_phone"];
     
-    self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(kEdge, 0, inputView.width - 2 * kEdge, 44)];
-    self.passwordTextField.centerY = 1.5 * inputHeight;
+    self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(kEdge, inputHeight + kEdgeBig, inputView.width - 2 * kEdge, inputHeight)];
     self.passwordTextField.placeholder = @"请输入密码";
     self.passwordTextField.font = [UIFont systemFontOfSize:14.0];
     self.passwordTextField.secureTextEntry = YES;
@@ -56,19 +57,19 @@
     [inputView addSubview:self.passwordTextField];
     [self addTextField:self.passwordTextField imageName:@"login_icon_password"];
     
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, inputView.width, 1)];
-    lineView.backgroundColor = baseSeparatorColor;
-    lineView.center = CGPointMake(0.5 * inputView.width, 0.5 * inputView.height);
-    [inputView addSubview:lineView];
+    [inputView addSubview:NewSeparatorLine(CGRectMake(0, self.usernameTextField.bottom - appSeparaterLineSize, inputView.width, appSeparaterLineSize))];
+    [inputView addSubview:NewSeparatorLine(CGRectMake(0, self.passwordTextField.bottom - appSeparaterLineSize, inputView.width, appSeparaterLineSize))];
     
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    loginButton.frame = CGRectMake(kEdgeBig, inputView.bottom + 30, screen_width - 2 * kEdgeBig, 40);
-    loginButton.backgroundColor = MainColor;
-    [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    loginButton.frame = CGRectMake(inputView.left, inputView.bottom + 40, inputView.width, 40);
+    loginButton.backgroundColor =[UIColor clearColor];
+    [loginButton setTitle:@"立即登录" forState:UIControlStateNormal];
+    [loginButton setTitleColor:baseTextColor forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    loginButton.layer.cornerRadius = kButtonCornerRadius;
-    loginButton.layer.masksToBounds = YES;
+    [AppPublic roundCornerRadius:loginButton cornerRadius:kButtonCornerRadius];
+    loginButton.layer.borderColor = baseSeparatorColor.CGColor;
+    loginButton.layer.borderWidth = 1.0;
+    
     [loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginButton];
     
