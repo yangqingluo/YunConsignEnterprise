@@ -61,7 +61,7 @@
 #define appLabelFontSize             16.0
 #define appLabelFontSizeMiddle       18.0
 #define appSeparaterLineSize         0.5//分割线尺寸
-#define appPageSize                  20//获取分页数据时分页size
+#define appPageSize                  10//获取分页数据时分页size
 
 #define kEdgeSmall                   4.0
 #define kEdge                        8.0

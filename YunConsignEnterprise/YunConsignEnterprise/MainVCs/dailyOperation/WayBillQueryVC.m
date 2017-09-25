@@ -9,6 +9,7 @@
 #import "WayBillQueryVC.h"
 
 #import "WayBillCell.h"
+#import "MJRefresh.h"
 
 @interface WayBillQueryVC ()
 
@@ -23,7 +24,13 @@
     [self setupNav];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self queryWaybillListByConditionFunction];
+    //设置下拉刷新回调
+    QKWEAKSELF;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself loadFirstPageData];
+    }];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)setupNav {
@@ -41,24 +48,53 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)queryWaybillListByConditionFunction {
-    [self showHudInView:self.view hint:nil];
-    
-    NSDictionary *m_dic = @{@"start_time" : @"2017-09-23", @"end_time" : @"2017-09-25", @"start" : @"0", @"limit" : @"10", @"is_cancel" : @"0"};
+- (void)loadFirstPageData{
+    [self queryWaybillListByConditionFunction:YES];
+}
+
+- (void)loadMoreData{
+    [self queryWaybillListByConditionFunction:NO];
+}
+
+- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+    NSDate *date_now = [NSDate date];
+    NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:-2 * 24 * 60 * 60], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"0"};
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself endRefreshing];
         if (!error) {
-            ResponseItem *item = responseBody;
-            if (item.items.count) {
-                [weakself.dataSource addObjectsFromArray:[AppWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
-                [weakself.tableView reloadData];
+            if (isReset) {
+                [weakself.dataSource removeAllObjects];
             }
+            ResponseItem *item = responseBody;
+            [weakself.dataSource addObjectsFromArray:[AppWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            
+            if (item.total < appPageSize) {
+                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else {
+                [weakself updateTableViewFooter];
+            }
+            [weakself.tableView reloadData];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+- (void)updateTableViewFooter{
+    QKWEAKSELF;
+    if (!self.tableView.mj_footer) {
+        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [weakself loadMoreData];
+        }];
+    }
+}
+
+- (void)endRefreshing {
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 #pragma mark - getter

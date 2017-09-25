@@ -145,7 +145,8 @@
     
     self.payOnReceiptLabel.text = [NSString stringWithFormat:@"回单付：%@", _data.pay_on_receipt_amount];
     [AppPublic adjustLabelWidth:self.payOnReceiptLabel];
-    self.payOnReceiptLabel.left = self.payNowLabel.right + kEdgeBig;
+    self.payOnReceiptLabel.left = self.payNowLabel.right +
+    kEdgeBig;
 }
 
 @end
