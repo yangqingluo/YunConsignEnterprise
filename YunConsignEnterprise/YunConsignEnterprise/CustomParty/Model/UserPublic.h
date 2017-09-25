@@ -34,7 +34,6 @@
 //清除
 - (void)clear;
 
-+ (NSString *)stringForReceptSignType:(RECEIPT_SIGN_TYPE)type;
-+ (NSString *)stringForCashOnDeliveryType:(CASH_ON_DELIVERY_TYPE)type;
++ (NSString *)stringForType:(NSInteger)type key:(NSString *)key;
 
 @end

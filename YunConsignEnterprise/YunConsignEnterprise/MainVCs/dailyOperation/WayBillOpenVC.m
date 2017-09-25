@@ -91,8 +91,7 @@
 
 - (void)saveButtonAction {
     [self dismissKeyboard];
-    
-    NSLog(@"***");
+    [self pushSaveWaybillFunction];
 }
 
 - (void)addGoodsButtonAction {
@@ -168,6 +167,38 @@
         default:
             break;
     }
+}
+
+- (void)pushSaveWaybillFunction {
+    if (!self.headerView.senderInfo) {
+        [self showHint:@"请补全发货人信息"];
+        return;
+    }
+    if (!self.headerView.receiverInfo) {
+        [self showHint:@"请补全收货人信息"];
+        return;
+    }
+    if (!self.goodsArray.count) {
+        [self showHint:@"请添加货物信息"];
+        return;
+    }
+    else {
+        self.data.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
+    }
+    
+    self.data.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
+    
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_saveWaybillFunction" Parm:[self.data app_keyValues] completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
 }
 
 #pragma mark - getter
@@ -272,8 +303,13 @@
 - (AppWayBillInfo *)data {
     if (!_data) {
         _data = [AppWayBillInfo new];
-        _data.receipt_sign_type = RECEIPT_SIGN_TYPE_4;
-        _data.cash_on_delivery_type = CASH_ON_DELIVERY_TYPE_1;
+        _data.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)RECEIPT_SIGN_TYPE_4];
+        _data.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)CASH_ON_DELIVERY_TYPE_1];
+        _data.freight = @"0";
+        _data.total_amount = @"0";
+        _data.pay_now_amount = @"0";
+        _data.pay_on_delivery_amount = @"0";
+        _data.pay_on_receipt_amount = @"0";
     }
     return _data;
 }
@@ -311,12 +347,7 @@
     if ([self.selectorSet containsObject:key]) {
         cell.baseView.textField.enabled = NO;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if ([key isEqualToString:@"receipt_sign_type"]) {
-            cell.baseView.textField.text = [UserPublic stringForReceptSignType:self.data.receipt_sign_type];
-        }
-        else if ([key isEqualToString:@"cash_on_delivery_type"]) {
-            cell.baseView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
-        }
+        cell.baseView.textField.text = [UserPublic stringForType:[[self.data valueForKey:key] integerValue] key:key];
     }
     else {
         NSString *value = [self.data valueForKey:key];
@@ -689,7 +720,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                        weakself.data.receipt_sign_type = buttonIndex;
+                        weakself.data.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];
@@ -700,7 +731,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                        weakself.data.cash_on_delivery_type = buttonIndex;
+                        weakself.data.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];

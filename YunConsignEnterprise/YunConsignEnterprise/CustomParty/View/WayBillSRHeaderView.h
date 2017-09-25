@@ -23,5 +23,6 @@
 
 @property (strong, nonatomic) AppSendReceiveInfo *senderInfo;
 @property (strong, nonatomic) AppSendReceiveInfo *receiverInfo;
+@property (strong, nonatomic) NSDate *date;
 
 @end

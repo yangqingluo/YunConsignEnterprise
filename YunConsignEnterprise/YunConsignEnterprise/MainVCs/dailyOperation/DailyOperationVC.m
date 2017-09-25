@@ -8,6 +8,7 @@
 
 #import "DailyOperationVC.h"
 #import "WayBillOpenVC.h"
+#import "WayBillQueryVC.h"
 
 @interface DailyOperationVC ()
 
@@ -52,6 +53,13 @@
             switch (item.sort) {
                 case 1:{
                     WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
+                    vc.accessInfo = item;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                    
+                case 2: {
+                    WayBillQueryVC *vc = [[WayBillQueryVC alloc]initWithStyle:UITableViewStyleGrouped];
                     vc.accessInfo = item;
                     [self.navigationController pushViewController:vc animated:YES];
                 }

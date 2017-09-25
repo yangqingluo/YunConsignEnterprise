@@ -219,7 +219,10 @@ NSString *httpRespString(NSError *error, NSObject *object){
     [xmlString appendString:@"<request>\n"];
     [xmlString appendFormat:@"<funcId>%@</funcId>\n", funcId];
     for (NSString *key in parm) {
-        [xmlString appendFormat:@"<%@><![CDATA[%@]]></%@>\n", key, parm[key], key];
+        NSObject *value = parm[key];
+        if ([value isKindOfClass:[NSString class]]) {
+            [xmlString appendFormat:@"<%@><![CDATA[%@]]></%@>\n", key, value, key];
+        }
     }
     [xmlString appendString:@"</request>\n"];
     [xmlString appendString:@"</requests>"];

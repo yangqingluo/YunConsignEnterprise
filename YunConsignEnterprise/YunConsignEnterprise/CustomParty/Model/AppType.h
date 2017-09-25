@@ -174,7 +174,9 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *return_waybill_number;//原货返货运单号
 @property (strong, nonatomic) NSString *consignment_time;//托运日期
 @property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
-@property (assign, nonatomic) RECEIPT_SIGN_TYPE receipt_sign_type;//回单签收方式
-@property (assign, nonatomic) CASH_ON_DELIVERY_TYPE cash_on_delivery_type;//代收款类型
+@property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式
+@property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
+
+- (NSDictionary *)app_keyValues;
 
 @end

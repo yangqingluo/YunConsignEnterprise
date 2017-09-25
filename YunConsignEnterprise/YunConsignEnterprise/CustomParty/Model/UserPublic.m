@@ -48,20 +48,19 @@ __strong static UserPublic *_singleManger = nil;
     _singleManger = nil;
 }
 
-+ (NSString *)stringForReceptSignType:(RECEIPT_SIGN_TYPE)type {
++ (NSString *)stringForType:(NSInteger)type key:(NSString *)key {
     NSString *m_string = @"";
-    NSArray *m_array = [UserPublic getInstance].receptSignTypeArray;
-    NSUInteger index = type - RECEIPT_SIGN_TYPE_1;
-    if (index < m_array.count) {
-        m_string = m_array[index];
+    NSArray *m_array = nil;
+    NSUInteger index = 0;
+    if ([key isEqualToString:@"receipt_sign_type"]) {
+        m_array = [UserPublic getInstance].receptSignTypeArray;
+        index = type - RECEIPT_SIGN_TYPE_1;
     }
-    return m_string;
-}
-
-+ (NSString *)stringForCashOnDeliveryType:(CASH_ON_DELIVERY_TYPE)type {
-    NSString *m_string = @"";
-    NSArray *m_array = [UserPublic getInstance].cashOnDeliveryTypeArray;
-    NSUInteger index = type - CASH_ON_DELIVERY_TYPE_1;
+    else if ([key isEqualToString:@"cash_on_delivery_type"]) {
+        m_array = [UserPublic getInstance].cashOnDeliveryTypeArray;
+        index = type - CASH_ON_DELIVERY_TYPE_1;
+    }
+    
     if (index < m_array.count) {
         m_string = m_array[index];
     }

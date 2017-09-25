@@ -240,6 +240,7 @@
 		E4AF3BE31F78E4E9009EB766 /* TYBANG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AF3B791F78E4E9009EB766 /* TYBANG@3x.png */; };
 		E4AF3BE41F78E4E9009EB766 /* TYBANG_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AF3B7A1F78E4E9009EB766 /* TYBANG_s@2x.png */; };
 		E4AF3BE51F78E4E9009EB766 /* TYBANG_s@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AF3B7B1F78E4E9009EB766 /* TYBANG_s@3x.png */; };
+		E4B889661F790A4300A54399 /* WayBillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B889651F790A4300A54399 /* WayBillQueryVC.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
 		E4ECF7D71F725B2E003F69C0 /* PublicSRSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */; };
 		E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */; };
@@ -615,6 +616,8 @@
 		E4AF3B791F78E4E9009EB766 /* TYBANG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG@3x.png"; sourceTree = "<group>"; };
 		E4AF3B7A1F78E4E9009EB766 /* TYBANG_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG_s@2x.png"; sourceTree = "<group>"; };
 		E4AF3B7B1F78E4E9009EB766 /* TYBANG_s@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG_s@3x.png"; sourceTree = "<group>"; };
+		E4B889641F790A4300A54399 /* WayBillQueryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WayBillQueryVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/WayBillQueryVC.h; sourceTree = SOURCE_ROOT; };
+		E4B889651F790A4300A54399 /* WayBillQueryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WayBillQueryVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/WayBillQueryVC.m; sourceTree = SOURCE_ROOT; };
 		E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillTitleCell.h; sourceTree = "<group>"; };
 		E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillTitleCell.m; sourceTree = "<group>"; };
 		E4ECF7D51F725B2E003F69C0 /* PublicSRSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSRSelectVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSRSelectVC.h; sourceTree = SOURCE_ROOT; };
@@ -666,6 +669,8 @@
 				E447649E1F611C460084F4EB /* DailyOperationVC.m */,
 				E4F686FA1F70EDE500D80704 /* WayBillOpenVC.h */,
 				E4F686FB1F70EDE500D80704 /* WayBillOpenVC.m */,
+				E4B889641F790A4300A54399 /* WayBillQueryVC.h */,
+				E4B889651F790A4300A54399 /* WayBillQueryVC.m */,
 				E4ECF7D51F725B2E003F69C0 /* PublicSRSelectVC.h */,
 				E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */,
 				E4055F751F72AB1100B04492 /* PublicCustomerPhoneVC.h */,
@@ -1559,6 +1564,7 @@
 				E4AEA08D1F5EA6D0002EBE41 /* BlockAlertView.m in Sources */,
 				E4AEA0561F5EA6CF002EBE41 /* AppPublic.m in Sources */,
 				E4AEA0971F5EA6D0002EBE41 /* IQBarButtonItem.m in Sources */,
+				E4B889661F790A4300A54399 /* WayBillQueryVC.m in Sources */,
 				E4AEA0CF1F5EA6D0002EBE41 /* UIView+WebCache.m in Sources */,
 				E4AEA08E1F5EA6D0002EBE41 /* IQNSArray+Sort.m in Sources */,
 				E4AEA0A61F5EA6D0002EBE41 /* NSObject+MJClass.m in Sources */,

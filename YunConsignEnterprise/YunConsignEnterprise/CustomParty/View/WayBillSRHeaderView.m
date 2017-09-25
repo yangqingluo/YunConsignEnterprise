@@ -49,7 +49,7 @@
     _receiverLabel = NewLabel(CGRectMake(rightSX, 0, _headerView.width - rightSX, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
     [_headerView addSubview:_receiverLabel];
     
-    self.dateLabel.text = stringFromDate([NSDate date], @"yyyy年MM月dd日");
+    self.dateLabel.text = stringFromDate(self.date, @"yyyy年MM月dd日");
     self.senderLabel.text = @"发货人";
     self.senderLabel.hidden = YES;
     self.receiverLabel.text = @"收货人";
@@ -132,6 +132,14 @@
         NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic appFontOfSize:16], NSForegroundColorAttributeName:secondaryTextColor, NSParagraphStyleAttributeName : paragraphStyle1};
         label.attributedText = [[NSAttributedString alloc] initWithString:holderSring attributes:dic1];
     }
+}
+
+#pragma mark - getter
+- (NSDate *)date {
+    if (!_date) {
+        _date = [NSDate date];
+    }
+    return _date;
 }
 
 #pragma mark - setter

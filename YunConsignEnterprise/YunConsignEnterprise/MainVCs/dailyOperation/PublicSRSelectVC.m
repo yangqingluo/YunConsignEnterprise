@@ -28,7 +28,7 @@
     [self setupNav];
     
     [self initializeData];
-    [self pullServiceArray];
+    [self pullServiceArrayFunction];
 }
 
 //初始化数据
@@ -98,10 +98,10 @@
     [self goBack];
 }
 
-- (void)pullServiceArray {
+- (void)pullServiceArrayFunction {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:self.type == SRSelectType_Sender ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil  completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:self.type == SRSelectType_Sender ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
             [self.serviceArray removeAllObjects];
@@ -233,7 +233,7 @@
                 //                }];
             }
             else {
-                [self pullServiceArray];
+                [self pullServiceArrayFunction];
             }
             break;
             
