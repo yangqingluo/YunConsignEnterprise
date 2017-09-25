@@ -117,7 +117,7 @@
     }];
 }
 
-- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content{
+- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content {
     if (row == 2) {
         self.data.customer.freight_cust_name = content;
     }

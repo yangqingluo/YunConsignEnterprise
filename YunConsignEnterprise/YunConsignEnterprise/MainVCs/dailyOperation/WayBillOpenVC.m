@@ -35,7 +35,7 @@
 @property (strong, nonatomic) NSSet *switchorSet;
 //@property (strong, nonatomic) NSSet *inputInvalidSet;
 
-@property (strong, nonatomic) UITextField *summaryFreightTextField;
+@property (strong, nonatomic) IndexPathTextField *summaryFreightTextField;
 @property (strong, nonatomic) UILabel *summaryFreightLabel;
 
 @property (strong, nonatomic) AppWayBillInfo *data;
@@ -90,7 +90,9 @@
 }
 
 - (void)saveButtonAction {
+    [self dismissKeyboard];
     
+    NSLog(@"***");
 }
 
 - (void)addGoodsButtonAction {
@@ -115,6 +117,14 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)checkButtonAction:(IndexPathButton *)button {
+    if (button.indexPath.section == 2) {
+        NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
+        [self.data setValue:@(!button.selected) forKey:m_dic[@"subKey"]];
+        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)removeGoodsAtIndex:(NSUInteger)index {
     if (index < self.goodsArray.count) {
         [self.goodsArray removeObjectAtIndex:index];
@@ -130,6 +140,33 @@
         self.goodsSummary.number += item.number;
         self.goodsSummary.weight += item.weight;
         self.goodsSummary.volume += item.volume;
+    }
+}
+
+- (void)editAtIndexPath:(NSIndexPath *)indexPath andContent:(NSString *)content {
+    switch (indexPath.section) {
+        case 0: {
+            self.goodsSummary.freight = [content longLongValue];
+            _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
+        }
+            break;
+            
+        case 1: {
+       
+        }
+            break;
+            
+        case 2: {
+            if (indexPath.row > 0 && indexPath.row - 1 < self.payStyleShowArray.count) {
+                NSDictionary *m_dic = self.payStyleShowArray[indexPath.row - 1];
+                [self.data setValue:content forKey:m_dic[@"key"]];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -192,9 +229,9 @@
 
 - (NSArray *)payStyleShowArray {
     if (!_payStyleShowArray) {
-        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount"},
-                               @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount"},
-                               @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount"},
+        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
+                               @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
+                               @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
                                @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
                                @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},];
     }
@@ -258,8 +295,10 @@
     if (!cell) {
         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+//        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        cell.baseView.textField.delegate = self;
+        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     cell.baseView.textLabel.text = showObject[@"title"];
     cell.baseView.textField.placeholder = showObject[@"subTitle"];
@@ -279,6 +318,14 @@
             cell.baseView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
         }
     }
+    else {
+        NSString *value = [self.data valueForKey:key];
+        if (value) {
+            cell.baseView.textField.text = value;
+        }
+    }
+    BOOL isKeybordDefault = [key isEqualToString:@"note"] || [key isEqualToString:@"inner_note"];
+    cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     return cell;
 }
@@ -288,14 +335,32 @@
     if (!cell) {
         cell = [[SwitchedInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+//        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        cell.baseView.textField.delegate = self;
+        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.baseView.checkBtn addTarget:self action:@selector(checkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.baseView.textLabel.text = showObject[@"title"];
     cell.baseView.textField.placeholder = showObject[@"subTitle"];
     cell.baseView.textField.text = @"";
     cell.baseView.textField.indexPath = [indexPath copy];
-    cell.baseView.textField.enabled = YES;
+    cell.baseView.textField.hidden = YES;
+    cell.baseView.checkBtn.indexPath = [indexPath copy];
+    
+    NSString *key = showObject[@"key"];
+    NSString *value = [self.data valueForKey:key];
+    if (value) {
+        cell.baseView.textField.text = value;
+    }
+    
+    NSString *subKey = showObject[@"subKey"];
+    NSString *subValue = [self.data valueForKey:subKey];
+    if (subValue) {
+        BOOL yn = [subValue boolValue];
+        cell.baseView.checkBtn.selected = yn;
+        cell.baseView.textField.hidden = !yn;
+    }
     
     return cell;
 }
@@ -307,8 +372,8 @@
     if (!cell) {
         cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.baseView.textField.delegate = self;
         cell.anotherBaseView.textField.delegate = self;
         cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -516,9 +581,10 @@
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
                     
-                    _summaryFreightTextField = (UITextField *)cell.showArray[1];
+                    _summaryFreightTextField = (IndexPathTextField *)cell.showArray[1];
                     _summaryFreightTextField.delegate = self;
                     [_summaryFreightTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                    _summaryFreightTextField.indexPath = indexPath;
                 }
                 
                 AppGoodsInfo *item = self.goodsSummary;
@@ -672,17 +738,15 @@
 #pragma  mark - TextField
 - (void)textFieldDidChange:(UITextField *)textField {
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        IndexPathTextField *m_textField = (IndexPathTextField *)textField;
-        switch (m_textField.indexPath.section) {
-            case 0:{
-                self.goodsSummary.freight = [textField.text longLongValue];
-                _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
-            }
-                break;
-                
-            default:
-                break;
-        }
+        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        [self editAtIndexPath:indexPath andContent:textField.text];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        [self editAtIndexPath:indexPath andContent:textField.text];
     }
 }
 

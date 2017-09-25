@@ -145,7 +145,36 @@ typedef enum : NSUInteger {
 //下单数据
 @interface AppWayBillInfo : AppType
 
-@property (assign, nonatomic) RECEIPT_SIGN_TYPE receipt_sign_type;
-@property (assign, nonatomic) CASH_ON_DELIVERY_TYPE cash_on_delivery_type;
+@property (strong, nonatomic) NSString *end_station_service_id;//到站城市编号
+@property (strong, nonatomic) NSString *shipper_name;//发货人名称
+@property (strong, nonatomic) NSString *shipper_phone;//发货人电话
+@property (strong, nonatomic) NSString *consignee_name;//收货人名称
+@property (strong, nonatomic) NSString *consignee_phone;//string 	收货人电话
+@property (strong, nonatomic) NSString *freight;//运费
+@property (strong, nonatomic) NSString *insurance_amount;//保价金额
+@property (strong, nonatomic) NSString *insurance_fee;//保价费
+@property (strong, nonatomic) NSString *take_goods_fee;//接货费
+@property (strong, nonatomic) NSString *deliver_goods_fee;//送货费
+@property (strong, nonatomic) NSString *rebate_fee;//回扣费
+@property (strong, nonatomic) NSString *forklift_fee;//叉车费
+@property (strong, nonatomic) NSString *return_fee;//原货返回费
+@property (strong, nonatomic) NSString *pay_for_sb_fee;//垫付费
+@property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
+@property (assign, nonatomic) BOOL is_deduction_freight;//是否运费代扣
+@property (assign, nonatomic) BOOL is_urgent;//是否急货
+@property (strong, nonatomic) NSString *total_amount;//总费用
+@property (assign, nonatomic) BOOL is_pay_now;//是否现付
+@property (strong, nonatomic) NSString *pay_now_amount;//现付金额
+@property (assign, nonatomic) BOOL is_pay_on_delivery;//是否提付
+@property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付金额
+@property (assign, nonatomic) BOOL is_pay_on_receipt;//是否回单付
+@property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
+@property (strong, nonatomic) NSString *note;//运单内部
+@property (strong, nonatomic) NSString *inner_note;//运单内部备注
+@property (strong, nonatomic) NSString *return_waybill_number;//原货返货运单号
+@property (strong, nonatomic) NSString *consignment_time;//托运日期
+@property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
+@property (assign, nonatomic) RECEIPT_SIGN_TYPE receipt_sign_type;//回单签收方式
+@property (assign, nonatomic) CASH_ON_DELIVERY_TYPE cash_on_delivery_type;//代收款类型
 
 @end

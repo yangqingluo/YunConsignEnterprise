@@ -6,8 +6,7 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "TextFieldCell.h"
+#import "AppResponder.h"
 
 @interface GoodsSummaryCell : UITableViewCell
 
