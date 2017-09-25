@@ -114,7 +114,18 @@
 
 @end
 
-@implementation AppWayBillInfo
+@implementation AppSaveWayBillInfo
+
+- (void)appendSenderInfo:(AppSendReceiveInfo *)info {
+    self.shipper_name = [info.customer.freight_cust_name copy];
+    self.shipper_phone = [info.customer.phone copy];
+}
+
+- (void)appendReceiverInfo:(AppSendReceiveInfo *)info {
+    self.consignee_name = [info.customer.freight_cust_name copy];
+    self.consignee_phone = [info.customer.phone copy];
+    self.end_station_service_id = info.service.service_id;
+}
 
 - (NSDictionary *)app_keyValues {
     NSMutableDictionary *m_dic = [self mj_keyValues];
@@ -133,5 +144,17 @@
     }
     return edit_dic;
 }
+
+@end
+
+@implementation AppSaveBackWayBillInfo
+
+
+
+@end
+
+@implementation AppWayBillInfo
+
+
 
 @end

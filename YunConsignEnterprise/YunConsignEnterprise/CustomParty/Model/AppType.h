@@ -49,7 +49,7 @@ typedef enum : NSUInteger {
 @interface AppResponse : AppType
 
 @property (strong, nonatomic) Global *global;
-@property (strong, nonatomic) NSArray *responses;
+@property (strong, nonatomic) NSArray<ResponseItem *> *responses;
 
 @end
 
@@ -143,13 +143,13 @@ typedef enum : NSUInteger {
 @end
 
 //下单数据
-@interface AppWayBillInfo : AppType
+@interface AppSaveWayBillInfo : AppType
 
 @property (strong, nonatomic) NSString *end_station_service_id;//到站城市编号
 @property (strong, nonatomic) NSString *shipper_name;//发货人名称
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称
-@property (strong, nonatomic) NSString *consignee_phone;//string 	收货人电话
+@property (strong, nonatomic) NSString *consignee_phone;//收货人电话
 @property (strong, nonatomic) NSString *freight;//运费
 @property (strong, nonatomic) NSString *insurance_amount;//保价金额
 @property (strong, nonatomic) NSString *insurance_fee;//保价费
@@ -176,7 +176,38 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式
 @property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
-
+- (void)appendSenderInfo:(AppSendReceiveInfo *)info;
+- (void)appendReceiverInfo:(AppSendReceiveInfo *)info;
 - (NSDictionary *)app_keyValues;
+
+@end
+
+//下单返回
+@interface AppSaveBackWayBillInfo : AppType
+
+@property (strong, nonatomic) NSString *waybill_id;//运单内部编号
+@property (strong, nonatomic) NSString *waybill_number;//运单号
+@property (strong, nonatomic) NSString *goods_number;//货号
+@property (strong, nonatomic) NSString *print_check_code;//运单验证码
+
+@end
+
+@interface AppWayBillInfo : AppType
+
+@property (strong, nonatomic) NSString *waybill_id;//运单内部编号
+@property (strong, nonatomic) NSString *waybill_number;//运单号
+@property (strong, nonatomic) NSString *goods_number;//货物编号
+@property (strong, nonatomic) NSString *waybill_state;//运单状态
+@property (strong, nonatomic) NSString *route;//线路信息
+@property (strong, nonatomic) NSString *goods;//货物信息
+@property (strong, nonatomic) NSString *cust;//客户信息
+@property (strong, nonatomic) NSString *pay_now_amount;//现付
+@property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付
+@property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付
+@property (strong, nonatomic) NSString *is_urgent;//是否急货
+@property (strong, nonatomic) NSString *is_cash_on_delivery;//是否有代收款
+@property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
+@property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
+@property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
 
 @end

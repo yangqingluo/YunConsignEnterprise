@@ -248,13 +248,11 @@ NSString *httpRespString(NSError *error, NSObject *object){
     [self Post:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
         if (!error) {
             id object = nil;
-            if ([responseBody isKindOfClass:[NSArray class]]) {
-                if ([(NSArray *)responseBody count] > 0) {
-                    object = [(NSArray *)responseBody objectAtIndex:0];
+            if ([responseBody isKindOfClass:[ResponseItem class]]) {
+                ResponseItem *item = (ResponseItem *)responseBody;
+                if (item.items.count) {
+                    object = item.items[0];
                 }
-            }
-            else {
-                object = responseBody;
             }
             
             [[AppPublic getInstance] loginDoneWithUserData:object username:username password:password];
@@ -302,12 +300,9 @@ NSString *httpRespString(NSError *error, NSObject *object){
             code = appResponse.global.flag;
             message = appResponse.global.message.length ? appResponse.global.message : [NSString stringWithFormat:@"未知错误码:%d", (int)code];
             if (code == 1) {
-                completionObject = [NSArray new];
+                completionObject = [ResponseItem new];
                 if (appResponse.responses.count > 0) {
-                    ResponseItem *item = appResponse.responses[0];
-                    if (item.items) {
-                        completionObject = item.items;
-                    }
+                    completionObject = appResponse.responses[0];
                 }
             }
             else {

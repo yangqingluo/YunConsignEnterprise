@@ -10,6 +10,7 @@
 #import "PublicSRSelectVC.h"
 #import "AddGoodsVC.h"
 
+#import "BlockAlertView.h"
 #import "BlockActionSheet.h"
 #import "WayBillSRHeaderView.h"
 #import "WayBillTitleCell.h"
@@ -38,7 +39,7 @@
 @property (strong, nonatomic) IndexPathTextField *summaryFreightTextField;
 @property (strong, nonatomic) UILabel *summaryFreightLabel;
 
-@property (strong, nonatomic) AppWayBillInfo *data;
+@property (strong, nonatomic) AppSaveWayBillInfo *data;
 
 @end
 
@@ -91,7 +92,35 @@
 
 - (void)saveButtonAction {
     [self dismissKeyboard];
-    [self pushSaveWaybillFunction];
+    
+    if (!self.headerView.senderInfo) {
+        [self showHint:@"请补全发货人信息"];
+        return;
+    }
+    else {
+        [self.data appendSenderInfo:self.headerView.senderInfo];
+    }
+    
+    if (!self.headerView.receiverInfo) {
+        [self showHint:@"请补全收货人信息"];
+        return;
+    }
+    else {
+        [self.data appendReceiverInfo:self.headerView.receiverInfo];
+    }
+    
+    if (!self.goodsArray.count) {
+        [self showHint:@"请添加货物信息"];
+        return;
+    }
+    else {
+        self.data.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
+        self.data.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
+        self.data.total_amount = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
+    }
+    
+    self.data.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
+    [self pushSaveWaybillFunction:self.data];
 }
 
 - (void)addGoodsButtonAction {
@@ -169,36 +198,33 @@
     }
 }
 
-- (void)pushSaveWaybillFunction {
-    if (!self.headerView.senderInfo) {
-        [self showHint:@"请补全发货人信息"];
-        return;
-    }
-    if (!self.headerView.receiverInfo) {
-        [self showHint:@"请补全收货人信息"];
-        return;
-    }
-    if (!self.goodsArray.count) {
-        [self showHint:@"请添加货物信息"];
-        return;
-    }
-    else {
-        self.data.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
-    }
-    
-    self.data.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
-    
+- (void)pushSaveWaybillFunction:(AppSaveWayBillInfo *)saveInfo {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_saveWaybillFunction" Parm:[self.data app_keyValues] completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_saveWaybillFunction" Parm:[saveInfo app_keyValues] completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
-            
+            ResponseItem *item = responseBody;
+            if (item.flag == 1 && item.items.count) {
+                AppSaveBackWayBillInfo *info = [AppSaveBackWayBillInfo mj_objectWithKeyValues:item.items[0]];
+                [weakself saveWayBillSuccess:info];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+- (void)saveWayBillSuccess:(AppSaveBackWayBillInfo *)info {
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已保存" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+        [weakself goBack];
+    } otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - getter
@@ -300,9 +326,9 @@
 //    return _inputInvalidSet;
 //}
 
-- (AppWayBillInfo *)data {
+- (AppSaveWayBillInfo *)data {
     if (!_data) {
-        _data = [AppWayBillInfo new];
+        _data = [AppSaveWayBillInfo new];
         _data.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)RECEIPT_SIGN_TYPE_4];
         _data.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)CASH_ON_DELIVERY_TYPE_1];
         _data.freight = @"0";

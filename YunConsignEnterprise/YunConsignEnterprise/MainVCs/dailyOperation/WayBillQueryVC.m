@@ -10,6 +10,8 @@
 
 @interface WayBillQueryVC ()
 
+@property (strong, nonatomic) NSMutableArray *dataSource;
+
 @end
 
 @implementation WayBillQueryVC
@@ -38,17 +40,30 @@
 - (void)queryWaybillListByConditionFunction {
     [self showHudInView:self.view hint:nil];
     
-    NSDictionary *m_dic = @{@"start_time" : @"2017-09-20", @"end_time" : @"2017-09-25", @"start" : @"1", @"limit" : @"10", @"is_cancel" : @"2"};
+    NSDictionary *m_dic = @{@"start_time" : @"2017-09-23", @"end_time" : @"2017-09-25", @"start" : @"0", @"limit" : @"10", @"is_cancel" : @"0"};
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"queryWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.items.count) {
+                [weakself.dataSource addObjectsFromArray:[AppWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
+                [weakself.tableView reloadData];
+            }
             
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+#pragma mark - getter
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
 }
 
 @end

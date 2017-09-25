@@ -85,9 +85,9 @@
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryCustListByPhoneAndCityFunction" Parm:@{@"phone" : prefix, @"city" : self.data.service.open_city_id}  completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
-            [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:[AppCustomerInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            [self.tableView reloadData];
+            [weakself.dataSource removeAllObjects];
+            [weakself.dataSource addObjectsFromArray:[AppCustomerInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
+            [weakself.tableView reloadData];
         }
     }];
 }

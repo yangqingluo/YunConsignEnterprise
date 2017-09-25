@@ -104,12 +104,12 @@
     [[QKNetworkSingleton sharedManager] commonSoapPost:self.type == SRSelectType_Sender ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
-            [self.serviceArray removeAllObjects];
-            [self.serviceArray addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            if (self.serviceArray.count) {
-                self.data.service = self.serviceArray[0];
-            }
-            [self.tableView reloadData];
+            [weakself.serviceArray removeAllObjects];
+            [weakself.serviceArray addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
+             if (weakself.serviceArray.count) {
+                 weakself.data.service = weakself.serviceArray[0];
+             }
+             [weakself.tableView reloadData];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];

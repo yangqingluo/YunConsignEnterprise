@@ -75,9 +75,9 @@
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryShipperHistoryWaybillFunction" Parm:@{@"shipper_phone" : self.senderInfo.customer.phone}  completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
-            [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:[AppHistoryGoodsInfo mj_objectArrayWithKeyValuesArray:responseBody]];
-            [self.tableView reloadData];
+            [weakself.dataSource removeAllObjects];
+            [weakself.dataSource addObjectsFromArray:[AppHistoryGoodsInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
+            [weakself.tableView reloadData];
         }
     }];
 }
