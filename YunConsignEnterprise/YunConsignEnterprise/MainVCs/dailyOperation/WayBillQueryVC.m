@@ -8,6 +8,8 @@
 
 #import "WayBillQueryVC.h"
 
+#import "WayBillCell.h"
+
 @interface WayBillQueryVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
@@ -19,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self queryWaybillListByConditionFunction];
 }
 
@@ -50,7 +54,6 @@
                 [weakself.dataSource addObjectsFromArray:[AppWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
                 [weakself.tableView reloadData];
             }
-            
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -64,6 +67,40 @@
         _dataSource = [NSMutableArray new];
     }
     return _dataSource;
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [WayBillCell tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kEdgeSmall;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return kEdgeSmall;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"way_bill_cell";
+    WayBillCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[WayBillCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
 }
 
 @end
