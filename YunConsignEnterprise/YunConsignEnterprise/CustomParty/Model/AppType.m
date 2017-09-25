@@ -155,6 +155,24 @@
 
 @implementation AppWayBillInfo
 
-
+- (NSString *)statusStringForState {
+    NSString *m_string = @"未知状态";
+    NSArray *m_array = @[@"等待装车", @"已装车", @"运输中", @"已到站", @"已完成", @"审核中"];
+    NSInteger index = [self.waybill_state integerValue] - 1;
+    if (index >= 0 && index < m_array.count) {
+        m_string = m_array[index];
+    }
+    return m_string;
+}
+- (UIColor *)statusColorForState {
+    UIColor *m_color = [UIColor clearColor];
+    NSArray *m_array = @[RGBA(0xec, 0xda, 0x60, 1), appLightGreenColor, appLightBlueColor, appLightRedColor, [UIColor lightGrayColor], appDarkOrangeColor];
+    NSInteger index = [self.waybill_state integerValue] - 1;
+    if (index >= 0 && index < m_array.count) {
+        m_color = m_array[index];
+    }
+    
+    return m_color;
+}
 
 @end

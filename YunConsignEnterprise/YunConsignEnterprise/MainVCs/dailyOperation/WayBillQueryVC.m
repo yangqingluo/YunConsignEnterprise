@@ -95,6 +95,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    cell.data = self.dataSource[indexPath.row];
     return cell;
 }
 

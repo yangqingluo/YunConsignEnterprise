@@ -210,4 +210,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
 @property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
 
+- (NSString *)statusStringForState;
+- (UIColor *)statusColorForState;
+
 @end

@@ -32,6 +32,12 @@
 #define baseTextColor                RGBA(0x21, 0x21, 0x21, 1.0)
 #define secondaryTextColor           RGBA(0x75, 0x75, 0x75, 1.0)
 
+#define appGreenColor                RGBA(0x22, 0xb5, 0x89, 1.0)
+#define appLightRedColor             RGBA(0xff, 0x8b, 0x74, 1.0)
+#define appLightGreenColor           RGBA(0xa5, 0xd5, 0x32, 1.0)
+#define appLightBlueColor            RGBA(0x3f, 0xcc, 0xe9, 1.0)
+#define appDarkOrangeColor           RGBA(0xff, 0x8c, 0x00, 1.0)
+
 #define STATUS_HEIGHT                20.0
 #define STATUS_BAR_HEIGHT            64.0
 #define TAB_BAR_HEIGHT               49.0
