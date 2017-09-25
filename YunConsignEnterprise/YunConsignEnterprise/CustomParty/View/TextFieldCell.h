@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface IndexPathTextField : UITextField
-
-@property (strong, nonatomic) NSIndexPath *indexPath;
-
-@end
+#import "AppResponder.h"
 
 @interface TextFieldCell : UITableViewCell
 

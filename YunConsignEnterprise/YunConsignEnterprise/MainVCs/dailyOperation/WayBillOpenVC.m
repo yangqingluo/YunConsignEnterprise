@@ -17,6 +17,7 @@
 #import "GoodsSummaryCell.h"
 #import "SingleInputCell.h"
 #import "DoubleInputCell.h"
+#import "SwitchorCell.h"
 
 @interface WayBillOpenVC ()<UITextFieldDelegate>
 
@@ -29,7 +30,9 @@
 @property (strong, nonatomic) NSArray *payStyleShowArray;
 
 @property (strong, nonatomic) NSSet *selectorSet;
-@property (strong, nonatomic) NSSet *inputInvalidSet;
+@property (strong, nonatomic) NSSet *inputForSelectorSet;
+@property (strong, nonatomic) NSSet *switchorSet;
+//@property (strong, nonatomic) NSSet *inputInvalidSet;
 
 @property (strong, nonatomic) UITextField *summaryFreightTextField;
 @property (strong, nonatomic) UILabel *summaryFreightLabel;
@@ -197,7 +200,7 @@
     return _payStyleShowArray;
 }
 
-- (NSSet *)selectorSet{
+- (NSSet *)selectorSet {
     if (!_selectorSet) {
         _selectorSet = [NSSet setWithObjects:@"receipt_sign_type", @"cash_on_delivery_type", nil];
     }
@@ -205,13 +208,28 @@
     return _selectorSet;
 }
 
-- (NSSet *)inputInvalidSet{
-    if (!_inputInvalidSet) {
-        _inputInvalidSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", nil];
+- (NSSet *)inputForSelectorSet {
+    if (!_inputForSelectorSet) {
+        _inputForSelectorSet = [NSSet setWithObjects:@"pay_now_amount", @"pay_on_delivery_amount", @"pay_on_receipt_amount", nil];
+    }
+    return _inputForSelectorSet;
+}
+
+- (NSSet *)switchorSet {
+    if (!_switchorSet) {
+        _switchorSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", nil];
     }
     
-    return _inputInvalidSet;
+    return _switchorSet;
 }
+
+//- (NSSet *)inputInvalidSet {
+//    if (!_inputInvalidSet) {
+//        _inputInvalidSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", nil];
+//    }
+//    
+//    return _inputInvalidSet;
+//}
 
 - (AppWayBillInfo *)data {
     if (!_data) {
@@ -220,6 +238,119 @@
         _data.cash_on_delivery_type = CASH_ON_DELIVERY_TYPE_1;
     }
     return _data;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView switchorCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject {
+    static NSString *CellIdentifier = @"fee_edit_switchor_cell";
+    SwitchorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[SwitchorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+    }
+    
+    cell.baseView.textLabel.text = showObject[@"title"];
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView singleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+    }
+    cell.inputView.textLabel.text = showObject[@"title"];
+    cell.inputView.textField.placeholder = showObject[@"subTitle"];
+    cell.inputView.textField.text = @"";
+    cell.inputView.textField.indexPath = [indexPath copy];
+    cell.inputView.textField.enabled = YES;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    NSString *key = showObject[@"key"];
+    if ([self.selectorSet containsObject:key]) {
+        cell.inputView.textField.enabled = NO;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if ([key isEqualToString:@"receipt_sign_type"]) {
+            cell.inputView.textField.text = [UserPublic stringForReceptSignType:self.data.receipt_sign_type];
+        }
+        else if ([key isEqualToString:@"cash_on_delivery_type"]) {
+            cell.inputView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
+        }
+    }
+    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView doubleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    NSArray *m_array = showObject;
+    DoubleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    if (!cell) {
+        cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        cell.inputView.textField.delegate = self;
+        cell.anotherInputView.textField.delegate = self;
+        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.anotherInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+    }
+    NSDictionary *m_dic1 = m_array[0];
+    NSDictionary *m_dic2 = m_array[1];
+    cell.inputView.textLabel.text = m_dic1[@"title"];
+    cell.inputView.textField.placeholder = m_dic1[@"subTitle"];
+    cell.inputView.textField.text = @"";
+    cell.inputView.textField.indexPath = [indexPath copy];
+    
+    cell.anotherInputView.textLabel.text = m_dic2[@"title"];
+    cell.anotherInputView.textField.placeholder = m_dic2[@"subTitle"];
+    cell.anotherInputView.textField.text = @"";
+    cell.anotherInputView.textField.indexPath = [indexPath copy];
+    
+    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        switch (indexPath.section) {
+            case 0:{
+                UIButton *addGoodsBtn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 100, 0, 120, [self tableView:tableView heightForRowAtIndexPath:indexPath])];
+                [addGoodsBtn setImage:[UIImage imageNamed:@"list_icon_add"] forState:UIControlStateNormal];
+                [addGoodsBtn setTitle:@"  添加" forState:UIControlStateNormal];
+                [addGoodsBtn setTitleColor:MainColor forState:UIControlStateNormal];
+                addGoodsBtn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+                [addGoodsBtn addTarget:self action:@selector(addGoodsButtonAction) forControlEvents:UIControlEventTouchUpInside];
+                [cell.contentView addSubview:addGoodsBtn];
+            }
+                break;
+                
+            case 2:{
+                _summaryFreightLabel = NewLabel(CGRectMake(0, 0, 200, [self tableView:tableView heightForRowAtIndexPath:indexPath]), nil, nil, NSTextAlignmentRight);
+                _summaryFreightLabel.right = screen_width - kEdgeMiddle;
+                [cell.contentView addSubview:_summaryFreightLabel];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    cell.textLabel.text = showObject;
+    if (indexPath.section == 2) {
+        _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
+    }
+    
+    return cell;
 }
 
 #pragma mark - UITableView
@@ -341,23 +472,7 @@
         case 0:{
             if (indexPath.row == 0) {
                 static NSString *CellIdentifier = @"goods_title_cell";
-                WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                if (!cell) {
-                    cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    
-                    UIButton *addGoodsBtn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 100, 0, 120, [self tableView:tableView heightForRowAtIndexPath:indexPath])];
-                    [addGoodsBtn setImage:[UIImage imageNamed:@"list_icon_add"] forState:UIControlStateNormal];
-                    [addGoodsBtn setTitle:@"  添加" forState:UIControlStateNormal];
-                    [addGoodsBtn setTitleColor:MainColor forState:UIControlStateNormal];
-                    addGoodsBtn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
-                    [addGoodsBtn addTarget:self action:@selector(addGoodsButtonAction) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.contentView addSubview:addGoodsBtn];
-                }
-                
-                cell.textLabel.text = @"货物信息";
-                
-                return cell;
+                return [self tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:@"货物信息" reuseIdentifier:CellIdentifier];
             }
             else if (self.goodsArray.count == 0) {
                 static NSString *CellIdentifier = @"no_goods_cell";
@@ -425,15 +540,7 @@
         case 1:{
             if (indexPath.row == 0) {
                 static NSString *CellIdentifier = @"fee_title_cell";
-                WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                if (!cell) {
-                    cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-                
-                cell.textLabel.text = @"费用信息";
-                
-                return cell;
+                return [self tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:@"费用信息" reuseIdentifier:CellIdentifier];
             }
             else {
                 id object = self.feeShowArray[indexPath.row - 1];
@@ -441,63 +548,19 @@
                     NSDictionary *m_dic = object;
                     NSString *key = m_dic[@"key"];
                     
-                    static NSString *CellIdentifier = @"fee_edit_cell";
-                    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    if (!cell) {
-                        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+                    if ([self.switchorSet containsObject:key]) {
+                        return [self tableView:tableView switchorCellForRowAtIndexPath:indexPath showObject:m_dic];
                     }
-                    
-                    cell.inputView.textLabel.text = m_dic[@"title"];
-                    cell.inputView.textField.placeholder = m_dic[@"subTitle"];
-                    cell.inputView.textField.text = @"";
-                    cell.inputView.textField.indexPath = [indexPath copy];
-                    if (indexPath.row == 1) {
-                        cell.inputView.textField.text = [UserPublic stringForReceptSignType:self.data.receipt_sign_type];
+                    else {
+                        static NSString *CellIdentifier = @"fee_edit_cell";
+                        return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
                     }
-                    else if (indexPath.row == 2) {
-                        cell.inputView.textField.text = [UserPublic stringForCashOnDeliveryType:self.data.cash_on_delivery_type];
-                    }
-                    
-                    cell.accessoryType = [self.selectorSet containsObject:key] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-                    cell.inputView.textField.enabled = !([self.selectorSet containsObject:key] || [self.inputInvalidSet containsObject:key]);
-                    
-                    return cell;
                 }
                 else if ([object isKindOfClass:[NSArray class]]){
                     NSArray *m_array = (NSArray *)object;
                     if (m_array.count == 2) {
                         static NSString *CellIdentifier = @"double_cell";
-                        DoubleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                        
-                        if (!cell) {
-                            cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                            [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                            [cell.anotherInputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                            cell.inputView.textField.delegate = self;
-                            cell.anotherInputView.textField.delegate = self;
-                            cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                            cell.anotherInputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                            cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-                        }
-                        NSDictionary *m_dic1 = m_array[0];
-                        NSDictionary *m_dic2 = m_array[1];
-                        cell.inputView.textLabel.text = m_dic1[@"title"];
-                        cell.inputView.textField.placeholder = m_dic1[@"subTitle"];
-                        cell.inputView.textField.text = @"";
-                        cell.inputView.textField.indexPath = [indexPath copy];
-                        
-                        cell.anotherInputView.textLabel.text = m_dic2[@"title"];
-                        cell.anotherInputView.textField.placeholder = m_dic2[@"subTitle"];
-                        cell.anotherInputView.textField.text = @"";
-                        cell.anotherInputView.textField.indexPath = [indexPath copy];
-                        
-                        cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
-                        
-                        return cell;
+                        return [self tableView:tableView doubleInputCellForRowAtIndexPath:indexPath showObject:m_array reuseIdentifier:CellIdentifier];
                     }
                 }
             }
@@ -507,45 +570,15 @@
         case 2:{
             if (indexPath.row == 0) {
                 static NSString *CellIdentifier = @"pay_sytle_title_cell";
-                WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                if (!cell) {
-                    cell = [[WayBillTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    
-                    _summaryFreightLabel = NewLabel(CGRectMake(0, 0, 200, [self tableView:tableView heightForRowAtIndexPath:indexPath]), nil, nil, NSTextAlignmentRight);
-                    _summaryFreightLabel.right = screen_width - kEdgeMiddle;
-                    [cell.contentView addSubview:_summaryFreightLabel];
-                }
-                
-                cell.textLabel.text = @"结算方式";
-                _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
-                
-                return cell;
+                return [self tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:@"结算方式" reuseIdentifier:CellIdentifier];
             }
             else {
                 id object = self.payStyleShowArray[indexPath.row - 1];
                 if ([object isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *m_dic = object;
                     NSString *key = m_dic[@"key"];
-                    
-                    static NSString *CellIdentifier = @"pay_style_cell";
-                    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    if (!cell) {
-                        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        cell.inputView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-                    }
-                    
-                    cell.inputView.textLabel.text = m_dic[@"title"];
-                    cell.inputView.textField.placeholder = m_dic[@"subTitle"];
-                    cell.inputView.textField.text = @"";
-                    cell.inputView.textField.indexPath = [indexPath copy];
-                    
-                    
-                    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
-                    
-                    return cell;
+                    static NSString *CellIdentifier = @"pay_style_edit_cell";
+                    return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
                 }
             }
         }
@@ -555,19 +588,7 @@
             break;
     }
     
-    static NSString *CellIdentifier = @"wayBill_cell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-    }
-//
-//    cell.tag = indexPath.section;
-//    cell.data = self.showArrays[indexPath.section];
-//    
-    return cell;
+    return [UITableViewCell new];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -6,24 +6,15 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "TextFieldCell.h"
+#import "PublicCellView.h"
+#import "AppResponder.h"
 
-@interface IndexPathButton : UIButton
+@interface PublicInputCellView : PublicCellView
 
-@property (strong, nonatomic) NSIndexPath *indexPath;
-
-@end
-
-@interface PublicInputCellView : UIView
-
-@property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) IndexPathTextField *textField;
-@property (strong, nonatomic) IndexPathButton *rightButton;
-@property (strong, nonatomic) UIImageView *rightImageView;
-@property (strong, nonatomic) UIView *lineView;
 
-- (void)showRightButtonWithImage:(UIImage *)image;
-- (void)showRightImageWithImage:(UIImage *)image;
+@property (strong, nonatomic) UIView *rightView;
+
+- (void)addRightView:(UIView *)view;
 
 @end

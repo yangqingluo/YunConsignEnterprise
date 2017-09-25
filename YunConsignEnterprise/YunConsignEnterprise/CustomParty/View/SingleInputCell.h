@@ -6,7 +6,6 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "PublicInputCellView.h"
 
 @interface SingleInputCell : UITableViewCell

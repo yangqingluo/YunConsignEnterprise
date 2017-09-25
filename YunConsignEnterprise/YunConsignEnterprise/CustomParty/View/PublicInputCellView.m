@@ -8,20 +8,11 @@
 
 #import "PublicInputCellView.h"
 
-@implementation IndexPathButton
-
-
-
-@end
-
 @implementation PublicInputCellView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _textLabel = NewLabel(self.bounds, nil, nil, NSTextAlignmentLeft);
-        [self addSubview:_textLabel];
-        
         _textField = [[IndexPathTextField alloc]initWithFrame:CGRectMake(cellDetailLeft, 0, self.width - cellDetailLeft, self.height)];
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.returnKeyType = UIReturnKeyDone;
@@ -29,34 +20,26 @@
         _textField.textAlignment = NSTextAlignmentRight;
         [self addSubview:_textField];
         
-        _lineView = NewSeparatorLine(CGRectMake(0, self.height - appSeparaterLineSize, self.width, appSeparaterLineSize));
-        [self addSubview:_lineView];
-        
-        self.textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.textField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     }
     return self;
 }
 
-- (void)showRightButtonWithImage:(UIImage *)image {
-    _rightButton = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [_rightButton setImage:image forState:UIControlStateNormal];
-    _rightButton.centerY = _textField.centerY;
-    _rightButton.right = self.width;
-    [self addSubview:_rightButton];
+- (void)addRightView:(UIView *)view {
+    if (!view) {
+        return;
+    }
     
-    _rightButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    _textField.width -= _rightButton.width;
+    if (self.rightView) {
+        [self.rightView removeFromSuperview];
+    }
+    
+    _rightView = view;
+    _rightView.centerY = _textField.centerY;
+    _rightView.right = self.width;
+    [self addSubview:_rightView];
+    _rightView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    _textField.width = self.width - cellDetailLeft - _rightView.width;
 }
 
-- (void)showRightImageWithImage:(UIImage *)image {
-    _rightImageView = [[UIImageView alloc] initWithImage:image];
-    _rightImageView.centerY = _textField.centerY;
-    _rightImageView.right = self.width;
-    [self addSubview:_rightImageView];
-    
-    _rightImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    _textField.width -= _rightImageView.width;
-}
 @end

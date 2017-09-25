@@ -8,12 +8,6 @@
 
 #import "TextFieldCell.h"
 
-@implementation IndexPathTextField
-
-
-
-@end
-
 @implementation TextFieldCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{

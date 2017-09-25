@@ -230,6 +230,10 @@
 		E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0DA1F5EA8CE002EBE41 /* UIImage+SubImage.m */; };
 		E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E01F5EA903002EBE41 /* AppType.m */; };
 		E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */; };
+		E4AF3B011F78CB4E009EB766 /* AppResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF3B001F78CB4E009EB766 /* AppResponder.m */; };
+		E4AF3B041F78CBBD009EB766 /* PublicCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF3B031F78CBBD009EB766 /* PublicCellView.m */; };
+		E4AF3B071F78CC8B009EB766 /* PublicSwitchorCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF3B061F78CC8B009EB766 /* PublicSwitchorCellView.m */; };
+		E4AF3B0A1F78CD87009EB766 /* SwitchorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF3B091F78CD87009EB766 /* SwitchorCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
 		E4ECF7D71F725B2E003F69C0 /* PublicSRSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7D61F725B2E003F69C0 /* PublicSRSelectVC.m */; };
 		E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */; };
@@ -589,6 +593,14 @@
 		E4AEA0E01F5EA903002EBE41 /* AppType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppType.m; sourceTree = "<group>"; };
 		E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KGViewExtend.h"; sourceTree = "<group>"; };
 		E4AEA0E31F5EA98A002EBE41 /* UIView+KGViewExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KGViewExtend.m"; sourceTree = "<group>"; };
+		E4AF3AFF1F78CB4E009EB766 /* AppResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppResponder.h; sourceTree = "<group>"; };
+		E4AF3B001F78CB4E009EB766 /* AppResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppResponder.m; sourceTree = "<group>"; };
+		E4AF3B021F78CBBD009EB766 /* PublicCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicCellView.h; sourceTree = "<group>"; };
+		E4AF3B031F78CBBD009EB766 /* PublicCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicCellView.m; sourceTree = "<group>"; };
+		E4AF3B051F78CC8B009EB766 /* PublicSwitchorCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicSwitchorCellView.h; sourceTree = "<group>"; };
+		E4AF3B061F78CC8B009EB766 /* PublicSwitchorCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicSwitchorCellView.m; sourceTree = "<group>"; };
+		E4AF3B081F78CD87009EB766 /* SwitchorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchorCell.h; sourceTree = "<group>"; };
+		E4AF3B091F78CD87009EB766 /* SwitchorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchorCell.m; sourceTree = "<group>"; };
 		E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillTitleCell.h; sourceTree = "<group>"; };
 		E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillTitleCell.m; sourceTree = "<group>"; };
 		E4ECF7D51F725B2E003F69C0 /* PublicSRSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSRSelectVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSRSelectVC.h; sourceTree = SOURCE_ROOT; };
@@ -904,16 +916,24 @@
 				E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */,
 				E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */,
 				E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */,
+				E4AF3B021F78CBBD009EB766 /* PublicCellView.h */,
+				E4AF3B031F78CBBD009EB766 /* PublicCellView.m */,
 				E420B8041F737B34009794A2 /* PublicInputCellView.h */,
 				E420B8051F737B34009794A2 /* PublicInputCellView.m */,
+				E4AF3B051F78CC8B009EB766 /* PublicSwitchorCellView.h */,
+				E4AF3B061F78CC8B009EB766 /* PublicSwitchorCellView.m */,
 				E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */,
 				E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */,
 				E49C4F601F73A181007E7D70 /* DoubleInputCell.h */,
 				E49C4F611F73A181007E7D70 /* DoubleInputCell.m */,
+				E4AF3B081F78CD87009EB766 /* SwitchorCell.h */,
+				E4AF3B091F78CD87009EB766 /* SwitchorCell.m */,
 				E49C4F571F738EA3007E7D70 /* PublicListHeaderView.h */,
 				E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */,
 				E49C4F5A1F738FC3007E7D70 /* AddGoodsListHeaderView.h */,
 				E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */,
+				E4AF3AFF1F78CB4E009EB766 /* AppResponder.h */,
+				E4AF3B001F78CB4E009EB766 /* AppResponder.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1499,8 +1519,10 @@
 				E4AEA0DC1F5EA8CE002EBE41 /* UIImage+Gif.m in Sources */,
 				E4AEA0AC1F5EA6D0002EBE41 /* MJRefreshBackFooter.m in Sources */,
 				E4AEA08B1F5EA6D0002EBE41 /* UIRefreshControl+AFNetworking.m in Sources */,
+				E4AF3B071F78CC8B009EB766 /* PublicSwitchorCellView.m in Sources */,
 				E4AEA0BC1F5EA6D0002EBE41 /* UIScrollView+MJRefresh.m in Sources */,
 				E4AEA0B71F5EA6D0002EBE41 /* MJRefreshNormalHeader.m in Sources */,
+				E4AF3B011F78CB4E009EB766 /* AppResponder.m in Sources */,
 				E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */,
 				E4AEA0951F5EA6D0002EBE41 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				E4AEA0CC1F5EA6D0002EBE41 /* UIImage+WebP.m in Sources */,
@@ -1532,6 +1554,8 @@
 				E4AEA0A31F5EA6D0002EBE41 /* MJProperty.m in Sources */,
 				E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */,
 				E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */,
+				E4AF3B0A1F78CD87009EB766 /* SwitchorCell.m in Sources */,
+				E4AF3B041F78CBBD009EB766 /* PublicCellView.m in Sources */,
 				E4AEA0911F5EA6D0002EBE41 /* IQUIView+Hierarchy.m in Sources */,
 				E4AEA0B11F5EA6D0002EBE41 /* MJRefreshAutoNormalFooter.m in Sources */,
 				E4AEA0BE1F5EA6D0002EBE41 /* MKAnnotationView+WebCache.m in Sources */,

@@ -73,7 +73,9 @@
             [cell.inputView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             cell.inputView.textField.delegate = self;
             
-            [cell.inputView showRightButtonWithImage:[UIImage imageNamed:@"list_icon_common"]];
+            UIButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+            [btn setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
+            [cell.inputView addRightView:btn];
         }
         cell.inputView.textLabel.text = item[@"title"];
         cell.inputView.textField.placeholder = item[@"subTitle"];
