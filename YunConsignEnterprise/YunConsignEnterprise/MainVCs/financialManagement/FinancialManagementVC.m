@@ -36,8 +36,17 @@
 #pragma UIResponder+Router
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo{
     if ([eventName isEqualToString:Event_BannerButtonClicked]) {
-        NSIndexPath *indexPath = (NSIndexPath *)userInfo;
-        NSLog(@"%ld-%ld", (long)indexPath.section, (long)indexPath.row);
+        NSInteger index = [(NSIndexPath *)userInfo row];
+        NSArray *m_array = [UserPublic getInstance].financialManagementAccesses;
+        if (index >= 0 && index < m_array.count) {
+            AppAccessInfo *item = m_array[index];
+            switch (item.sort) {
+                default:{
+                    [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
+                }
+                    break;
+            }
+        }
     }
 }
 

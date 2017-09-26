@@ -48,8 +48,9 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo{
     if ([eventName isEqualToString:Event_BannerButtonClicked]) {
         NSInteger index = [(NSIndexPath *)userInfo row];
-        if (index >= 0 && index < [UserPublic getInstance].dailyOperationAccesses.count) {
-            AppAccessInfo *item = [UserPublic getInstance].dailyOperationAccesses[index];
+        NSArray *m_array = [UserPublic getInstance].dailyOperationAccesses;
+        if (index >= 0 && index < m_array.count) {
+            AppAccessInfo *item = m_array[index];
             switch (item.sort) {
                 case 1:{
                     WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
@@ -65,7 +66,9 @@
                 }
                     break;
                     
-                default:
+                default:{
+                    [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
+                }
                     break;
             }
         }

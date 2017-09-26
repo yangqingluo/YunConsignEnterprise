@@ -34,7 +34,7 @@
 @property (strong, nonatomic) NSSet *selectorSet;
 @property (strong, nonatomic) NSSet *inputForSelectorSet;
 @property (strong, nonatomic) NSSet *switchorSet;
-//@property (strong, nonatomic) NSSet *inputInvalidSet;
+@property (strong, nonatomic) NSSet *inputInvalidSet;
 
 @property (strong, nonatomic) IndexPathTextField *summaryFreightTextField;
 @property (strong, nonatomic) UILabel *summaryFreightLabel;
@@ -171,7 +171,7 @@
     }
 }
 
-- (void)editAtIndexPath:(NSIndexPath *)indexPath andContent:(NSString *)content {
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     switch (indexPath.section) {
         case 0: {
             self.goodsSummary.freight = [content longLongValue];
@@ -180,15 +180,35 @@
             break;
             
         case 1: {
-       
+            if (indexPath.row > 0 && indexPath.row - 1 < self.feeShowArray.count) {
+                id object = self.feeShowArray[indexPath.row - 1];
+                if ([object isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *m_dic = object;
+                    [self.data setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
+                }
+                else if ([object isKindOfClass:[NSArray class]]) {
+                    NSArray *m_array = object;
+                    if (m_array.count == 2 && tag >= 0 && tag <= 1) {
+                        NSDictionary *m_dic = m_array[tag];
+                        int value = [content intValue];
+                        [self.data setValue:[NSString stringWithFormat:@"%d", value] forKey:m_dic[@"key"]];
+                        NSString *key = m_dic[@"key"];
+                        if ([key isEqualToString:@"insurance_amount"]) {
+                            self.data.insurance_fee = [NSString stringWithFormat:@"%.0f", floor(value * 0.03)];
+                            DoubleInputCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                            cell.anotherBaseView.textField.text = self.data.insurance_fee;
+                        }
+                    }
+                }
+            }
         }
             break;
             
         case 2: {
             if (indexPath.row > 0 && indexPath.row - 1 < self.payStyleShowArray.count) {
                 NSDictionary *m_dic = self.payStyleShowArray[indexPath.row - 1];
-                [self.data setValue:content forKey:m_dic[@"key"]];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [self.data setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
+//                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
             break;
@@ -274,8 +294,8 @@
                           @{@"title":@"运费代扣",@"subTitle":@"请选择",@"key":@"is_deduction_freight"},
                           @{@"title":@"急货",@"subTitle":@"请选择",@"key":@"is_urgent"},
                           @{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
-                          @[@{@"title":@"报价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
-                            @{@"title":@"报价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
+                          @[@{@"title":@"保价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
+                            @{@"title":@"保价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
                           @[@{@"title":@"接货费",@"subTitle":@"请输入",@"key":@"take_goods_fee"},
                             @{@"title":@"送货费",@"subTitle":@"请输入",@"key":@"deliver_goods_fee"}],
                           @[@{@"title":@"回扣费",@"subTitle":@"请输入",@"key":@"rebate_fee"},
@@ -318,13 +338,13 @@
     return _switchorSet;
 }
 
-//- (NSSet *)inputInvalidSet {
-//    if (!_inputInvalidSet) {
-//        _inputInvalidSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", nil];
-//    }
-//    
-//    return _inputInvalidSet;
-//}
+- (NSSet *)inputInvalidSet {
+    if (!_inputInvalidSet) {
+        _inputInvalidSet = [NSSet setWithObjects:@"insurance_fee", nil];
+    }
+    
+    return _inputInvalidSet;
+}
 
 - (AppSaveWayBillInfo *)data {
     if (!_data) {
@@ -336,6 +356,14 @@
         _data.pay_now_amount = @"0";
         _data.pay_on_delivery_amount = @"0";
         _data.pay_on_receipt_amount = @"0";
+        _data.cash_on_delivery_amount = @"0";
+//        _data.insurance_amount = @"0";//保价金额
+        _data.insurance_fee = @"0";//保价费
+        _data.take_goods_fee = @"0";//接货费
+        _data.deliver_goods_fee = @"0";//送货费
+        _data.rebate_fee = @"0";//回扣费
+        _data.forklift_fee = @"0";//叉车费
+        _data.pay_for_sb_fee = @"0";//垫付费
     }
     return _data;
 }
@@ -429,7 +457,7 @@
     if (!cell) {
         cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.baseView.textField.delegate = self;
         cell.anotherBaseView.textField.delegate = self;
@@ -449,6 +477,19 @@
     cell.anotherBaseView.textField.text = @"";
     cell.anotherBaseView.textField.indexPath = [indexPath copy];
     
+    NSString *key1 = m_dic1[@"key"];
+    NSString *value1 = [self.data valueForKey:key1];
+    if (value1) {
+        cell.baseView.textField.text = value1;
+    }
+    
+    NSString *key2 = m_dic2[@"key"];
+    NSString *value2 = [self.data valueForKey:key2];
+    if (value2) {
+        cell.anotherBaseView.textField.text = value2;
+    }
+    
+    cell.anotherBaseView.textField.enabled = ![self.inputInvalidSet containsObject:key2];
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;
@@ -796,14 +837,14 @@
 - (void)textFieldDidChange:(UITextField *)textField {
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndexPath:indexPath andContent:textField.text];
+        [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndexPath:indexPath andContent:textField.text];
+        [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
     }
 }
 

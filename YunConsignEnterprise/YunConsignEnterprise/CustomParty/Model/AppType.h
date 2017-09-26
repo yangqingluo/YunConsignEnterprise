@@ -198,6 +198,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *waybill_number;//运单号
 @property (strong, nonatomic) NSString *goods_number;//货物编号
 @property (strong, nonatomic) NSString *waybill_state;//运单状态
+@property (strong, nonatomic) NSString *waybill_state_text;//运单状态文本
 @property (strong, nonatomic) NSString *route;//线路信息
 @property (strong, nonatomic) NSString *goods;//货物信息
 @property (strong, nonatomic) NSString *cust;//客户信息
