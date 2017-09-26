@@ -37,7 +37,7 @@
 @property (strong, nonatomic) NSSet *inputInvalidSet;
 
 @property (strong, nonatomic) IndexPathTextField *summaryFreightTextField;
-@property (strong, nonatomic) UILabel *summaryFreightLabel;
+@property (strong, nonatomic) UILabel *totalAmountLabel;
 
 @property (strong, nonatomic) AppSaveWayBillInfo *data;
 
@@ -45,12 +45,18 @@
 
 @implementation WayBillOpenVC
 
+- (void)dealloc {
+    [self.data removeObserver:self forKeyPath:@"total_amount"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
     
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
+    
+    [self.data addObserver:self forKeyPath:@"total_amount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
 - (void)setupNav {
@@ -116,7 +122,6 @@
     else {
         self.data.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
         self.data.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
-        self.data.total_amount = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
     }
     
     self.data.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
@@ -175,7 +180,7 @@
     switch (indexPath.section) {
         case 0: {
             self.goodsSummary.freight = [content longLongValue];
-            _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
+            self.data.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
         }
             break;
             
@@ -207,8 +212,13 @@
         case 2: {
             if (indexPath.row > 0 && indexPath.row - 1 < self.payStyleShowArray.count) {
                 NSDictionary *m_dic = self.payStyleShowArray[indexPath.row - 1];
-                [self.data setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
-//                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                NSString *key = m_dic[@"key"];
+                if ([key isEqualToString:@"note"] || [key isEqualToString:@"inner_note"]) {
+                    [self.data setValue:content forKey:key];
+                }
+                else {
+                    [self.data setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
+                }
             }
         }
             break;
@@ -352,7 +362,6 @@
         _data.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)RECEIPT_SIGN_TYPE_4];
         _data.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)CASH_ON_DELIVERY_TYPE_1];
         _data.freight = @"0";
-        _data.total_amount = @"0";
         _data.pay_now_amount = @"0";
         _data.pay_on_delivery_amount = @"0";
         _data.pay_on_receipt_amount = @"0";
@@ -364,6 +373,7 @@
         _data.rebate_fee = @"0";//回扣费
         _data.forklift_fee = @"0";//叉车费
         _data.pay_for_sb_fee = @"0";//垫付费
+        _data.is_pay_on_delivery = YES;
     }
     return _data;
 }
@@ -386,7 +396,9 @@
         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-//        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        if (indexPath.section == 1) {
+            [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        }
         cell.baseView.textField.delegate = self;
         cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
@@ -458,7 +470,7 @@
         cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-//        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.baseView.textField.delegate = self;
         cell.anotherBaseView.textField.delegate = self;
         cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -514,9 +526,11 @@
                 break;
                 
             case 2:{
-                _summaryFreightLabel = NewLabel(CGRectMake(0, 0, 200, [self tableView:tableView heightForRowAtIndexPath:indexPath]), nil, nil, NSTextAlignmentRight);
-                _summaryFreightLabel.right = screen_width - kEdgeMiddle;
-                [cell.contentView addSubview:_summaryFreightLabel];
+                if (!_totalAmountLabel) {
+                    _totalAmountLabel = NewLabel(CGRectMake(0, 0, 200, [self tableView:tableView heightForRowAtIndexPath:indexPath]), nil, nil, NSTextAlignmentRight);
+                    _totalAmountLabel.right = screen_width - kEdgeMiddle;
+                }
+                [cell.contentView addSubview:self.totalAmountLabel];
             }
                 break;
                 
@@ -527,7 +541,7 @@
     
     cell.textLabel.text = showObject;
     if (indexPath.section == 2) {
-        _summaryFreightLabel.text = [NSString stringWithFormat:@"总运费：%lld", self.goodsSummary.freight];
+        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.data.total_amount];
     }
     
     return cell;
@@ -621,8 +635,6 @@
         default:
             break;
     }
-    
-    
     return rowHeight;
 }
 //
@@ -867,6 +879,14 @@
     }
     
     return (range.location < length);
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"total_amount"]) {
+//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
+        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.data.total_amount];
+    }
 }
 
 @end

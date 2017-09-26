@@ -116,6 +116,22 @@
 
 @implementation AppSaveWayBillInfo
 
+- (void) dealloc {
+    for (NSString *keyPath in [self defaultKVOArray]) {
+        [self removeObserver:self forKeyPath:keyPath];
+    }
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        for (NSString *keyPath in [self defaultKVOArray]) {
+            [self addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        }
+    }
+    return self;
+}
+
 - (void)appendSenderInfo:(AppSendReceiveInfo *)info {
     self.shipper_name = [info.customer.freight_cust_name copy];
     self.shipper_phone = [info.customer.phone copy];
@@ -143,6 +159,29 @@
         }
     }
     return edit_dic;
+}
+
+- (void)calculateTotalAmount {
+    long long amount = 0;
+    for (NSString *keyPath in [self defaultKVOArray]) {
+        NSString *value = [self valueForKey:keyPath];
+        amount += [value longLongValue];
+    }
+    
+    self.total_amount = [NSString stringWithFormat:@"%lld", amount];
+}
+
+#pragma mark - getter
+- (NSArray *)defaultKVOArray {
+    return @[@"freight", @"insurance_fee", @"take_goods_fee", @"deliver_goods_fee", @"rebate_fee", @"forklift_fee", @"pay_for_sb_fee"];
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSArray *m_array = [self defaultKVOArray];
+    if([m_array containsObject:keyPath]){
+        [self calculateTotalAmount];
+    }
 }
 
 @end
