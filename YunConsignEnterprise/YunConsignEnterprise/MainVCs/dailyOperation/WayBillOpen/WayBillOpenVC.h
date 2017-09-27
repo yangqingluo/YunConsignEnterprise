@@ -10,6 +10,4 @@
 
 @interface WayBillOpenVC : AppBasicTableViewController
 
-@property (copy, nonatomic) AppAccessInfo *accessInfo;
-
 @end

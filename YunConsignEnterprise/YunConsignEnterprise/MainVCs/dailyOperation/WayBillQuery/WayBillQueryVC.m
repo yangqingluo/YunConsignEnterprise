@@ -23,13 +23,7 @@
     [super viewDidLoad];
     [self setupNav];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    //设置下拉刷新回调
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-    
+    [self updateTableViewHeader];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -80,6 +74,13 @@
         else {
             [weakself showHint:error.userInfo[@"message"]];
         }
+    }];
+}
+
+- (void)updateTableViewHeader {
+    QKWEAKSELF;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself loadFirstPageData];
     }];
 }
 

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *navBottomLine;
 @property (copy,   nonatomic) DoneBlock doneBlock;
+@property (copy,   nonatomic) AppAccessInfo *accessInfo;
 
 - (void)createNavWithTitle:(NSString *)szTitle createMenuItem:(UIView *(^)(int nIndex))menuItem;
 - (void)dismissKeyboard;

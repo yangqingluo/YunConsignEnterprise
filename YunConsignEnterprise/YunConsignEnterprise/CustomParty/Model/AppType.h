@@ -215,3 +215,21 @@ typedef enum : NSUInteger {
 - (UIColor *)statusColorForState;
 
 @end
+
+@interface AppTransportTrunkInfo : AppType
+
+@property (strong, nonatomic) NSString *transport_truck_id;//登记派车编号
+@property (strong, nonatomic) NSString *route;//线路
+@property (strong, nonatomic) NSString *truck_info;//车辆信息
+@property (strong, nonatomic) NSString *cost_register;//登记运费
+@property (strong, nonatomic) NSString *cost_check;//结算运费
+@property (strong, nonatomic) NSString *load_quantity;//装车货量
+@property (strong, nonatomic) NSString *end_station_city_name;//
+@property (strong, nonatomic) NSString *operate_time;//
+@property (strong, nonatomic) NSString *operator_name;//
+@property (strong, nonatomic) NSString *start_station_city_name;//
+@property (strong, nonatomic) NSString *truck_driver_name;//
+@property (strong, nonatomic) NSString *truck_driver_phone;//
+@property (strong, nonatomic) NSString *truck_number_plate;//
+
+@end

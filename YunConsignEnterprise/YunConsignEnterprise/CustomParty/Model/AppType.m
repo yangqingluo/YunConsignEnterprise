@@ -209,3 +209,10 @@
 }
 
 @end
+
+
+@implementation AppTransportTrunkInfo
+
+
+
+@end

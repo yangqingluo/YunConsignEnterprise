@@ -74,7 +74,9 @@
         [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
         [_footerView addSubview:btn];
-        [_footerView addSubview:NewSeparatorLine(CGRectMake(btn.right, 0, appSeparaterLineSize, _footerView.height))];
+        if (i != count - 1) {
+            [_footerView addSubview:NewSeparatorLine(CGRectMake(btn.right, 0, appSeparaterLineSize, _footerView.height))];
+        }
     }
 }
 

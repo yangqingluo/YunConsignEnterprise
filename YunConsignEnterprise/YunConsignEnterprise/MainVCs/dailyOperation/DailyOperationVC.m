@@ -9,6 +9,7 @@
 #import "DailyOperationVC.h"
 #import "WayBillOpenVC.h"
 #import "WayBillQueryVC.h"
+#import "TransportTruckVC.h"
 
 @interface DailyOperationVC ()
 
@@ -61,6 +62,13 @@
                     
                 case 2: {
                     WayBillQueryVC *vc = [[WayBillQueryVC alloc]initWithStyle:UITableViewStyleGrouped];
+                    vc.accessInfo = item;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                    
+                case 3: {
+                    TransportTruckVC *vc = [TransportTruckVC new];
                     vc.accessInfo = item;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
