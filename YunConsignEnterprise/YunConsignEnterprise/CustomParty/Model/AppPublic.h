@@ -164,6 +164,9 @@ NSString *dateStringWithTimeString(NSString *string);
 + (void)roundCornerRadius:(UIView *)view;
 + (void)roundCornerRadius:(UIView *)view cornerRadius:(CGFloat)radius;
 
+//View转Image
++ (UIImage *)viewToImage:(UIView *)view;
+
 //顶部状态栏颜色
 + (void)changeStatusBarLightContent:(BOOL)isWhite;
 
