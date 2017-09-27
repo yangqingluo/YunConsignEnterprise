@@ -121,8 +121,16 @@
     }
     else {
         self.data.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
-        self.data.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
     }
+    
+//    long long amount = [self.data.total_amount longLongValue];
+//    long long payNowAmount = self.data.is_pay_now ? [self.data.pay_now_amount longLongValue] : 0LL;
+//    long long payOnReceiptAmount = self.data.is_pay_on_receipt ? [self.data.pay_on_receipt_amount longLongValue] : 0LL;
+//    long long payOnDeliveryAmount = self.data.is_pay_on_delivery ? [self.data.pay_on_delivery_amount longLongValue] : 0LL;
+//    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
+//        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
+//        return;
+//    }
     
     self.data.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
     [self pushSaveWaybillFunction:self.data];
@@ -139,12 +147,10 @@
     vc.doneBlock = ^(id object){
         if ([object isKindOfClass:[AppGoodsInfo class]]) {
             AppGoodsInfo *item = (AppGoodsInfo *)object;
-            weakself.goodsSummary.freight += item.freight;
-            weakself.goodsSummary.number += item.number;
-            weakself.goodsSummary.weight += item.weight;
-            weakself.goodsSummary.volume += item.volume;
             [weakself.goodsArray addObject:item];
-            [weakself.tableView reloadData];
+            [weakself caclateGoodsSummary];
+            [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+            weakself.data.freight = [NSString stringWithFormat:@"%lld", weakself.goodsSummary.freight];
         }
     };
     [self.navigationController pushViewController:vc animated:YES];
@@ -162,7 +168,8 @@
     if (index < self.goodsArray.count) {
         [self.goodsArray removeObjectAtIndex:index];
         [self caclateGoodsSummary];
-        [self.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        self.data.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
     }
 }
 
@@ -637,28 +644,7 @@
     }
     return rowHeight;
 }
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    if (section == 0){
-//        return nil;
-//    }
-//    
-//    UIView *contentView = [[UIView alloc] init];
-//    [contentView setBackgroundColor:[UIColor whiteColor]];
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kEdge, 0, screen_width - 2 * kEdge, kCellHeight)];
-//    label.font = [UIFont systemFontOfSize:16.0];
-//    
-//    if (section == 1) {
-//        label.text = @"应用管理";
-//    }
-//    else if (section == 2) {
-//        label.text = @"统计报表";
-//    }
-//    
-//    [contentView addSubview:label];
-//    return contentView;
-//}
-//
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:{
@@ -884,8 +870,13 @@
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"total_amount"]) {
-//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
+        long long amount = [self.data.total_amount longLongValue];
+        long long payNowAmount = self.data.is_pay_now ? [self.data.pay_now_amount longLongValue] : 0LL;
+        long long payOnReceiptAmount = self.data.is_pay_on_receipt ? [self.data.pay_on_receipt_amount longLongValue] : 0LL;
+        self.data.pay_on_delivery_amount = [NSString stringWithFormat:@"%lld", MAX(0, amount - payNowAmount - payOnReceiptAmount)];
+        
         self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.data.total_amount];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 
