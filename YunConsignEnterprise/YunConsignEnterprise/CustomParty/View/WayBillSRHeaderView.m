@@ -21,7 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         [self setupHeader];
         [self setupContent];
     }
@@ -29,7 +29,8 @@
 }
 
 - (void)setupHeader {
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, kEdge, self.width, 40)];
+    _headerView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_headerView];
     
     CGFloat leftSX = (4.0 / 17.0) * _headerView.width;
@@ -58,6 +59,7 @@
 
 - (void)setupContent {
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.width, self.height - self.headerView.bottom)];
+    _contentView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_contentView];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"content_icon_direction"]];
