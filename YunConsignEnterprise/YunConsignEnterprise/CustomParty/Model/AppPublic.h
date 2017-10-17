@@ -143,6 +143,7 @@ NSData *dataOfImageCompression(UIImage *image, BOOL isHead);
 
 //生成视图
 UIButton *NewBackButton(UIColor *color);
+UIButton *NewRightButton(UIImage *image, UIColor *color);
 UIButton *NewTextButton(NSString *title, UIColor *textColor);
 UILabel *NewLabel(CGRect frame, UIColor *textColor, UIFont *font, NSTextAlignment alignment);
 UIView *NewSeparatorLine(CGRect frame);

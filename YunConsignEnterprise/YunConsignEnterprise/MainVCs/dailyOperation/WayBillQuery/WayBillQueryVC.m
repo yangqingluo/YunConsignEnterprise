@@ -34,12 +34,21 @@
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
+        else if (nIndex == 1){
+            UIButton *btn = NewRightButton([UIImage imageNamed:@"navbar_icon_search"], nil);
+            [btn addTarget:self action:@selector(searchBtnAction) forControlEvents:UIControlEventTouchUpInside];
+            return btn;
+        }
         return nil;
     }];
 }
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)searchBtnAction {
+    
 }
 
 - (void)loadFirstPageData{

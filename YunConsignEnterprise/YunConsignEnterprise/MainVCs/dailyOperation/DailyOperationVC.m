@@ -11,6 +11,7 @@
 #import "WayBillQueryVC.h"
 #import "TransportTruckVC.h"
 #import "SearchQuantityVC.h"
+#import "WaybillLoadVC.h"
 
 @interface DailyOperationVC ()
 
@@ -73,9 +74,11 @@
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-//            else if ([item.menu_code isEqualToString:@"WAYBILL_LOAD"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"WAYBILL_LOAD"]) {
+                WaybillLoadVC *vc = [WaybillLoadVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
 //            else if ([item.menu_code isEqualToString:@"WAYBILL_ARRIVAL"]) {
 //                
 //            }

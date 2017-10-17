@@ -223,14 +223,19 @@ typedef enum : NSUInteger {
 
 @end
 
-@interface AppTransportTrunkInfo : AppType
+@interface AppTrunkInfo : AppType
 
 @property (strong, nonatomic) NSString *transport_truck_id;//登记派车编号
 @property (strong, nonatomic) NSString *route;//线路
 @property (strong, nonatomic) NSString *truck_info;//车辆信息
+@property (strong, nonatomic) NSString *load_quantity;//装车货量
+
+@end
+
+@interface AppTransportTrunkInfo : AppTrunkInfo
+
 @property (strong, nonatomic) NSString *cost_register;//登记运费
 @property (strong, nonatomic) NSString *cost_check;//结算运费
-@property (strong, nonatomic) NSString *load_quantity;//装车货量
 @property (strong, nonatomic) NSString *end_station_city_name;//
 @property (strong, nonatomic) NSString *operate_time;//
 @property (strong, nonatomic) NSString *operator_name;//
@@ -239,6 +244,12 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *truck_driver_phone;//
 @property (strong, nonatomic) NSString *truck_number_plate;//
 
+@end
+
+@interface AppCanLoadTransportTruckInfo : AppTrunkInfo
+
+@property (strong, nonatomic) NSString *register_time;//登记时间
+@property (strong, nonatomic) NSString *transport_truck_state;//车辆状态
 @end
 
 @interface AppSearchQuantityInfo : AppType
@@ -286,4 +297,3 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *is_load;//装车次数，0表示没有装车，一般为1，如果存在拆分多次装车，则为大于1的数字
 
 @end
-

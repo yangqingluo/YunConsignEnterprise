@@ -199,6 +199,16 @@ UIButton *NewBackButton(UIColor *color) {
     return btn;
 }
 
+UIButton *NewRightButton(UIImage *image, UIColor *color) {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 64, 0, 64, 44)];
+    if (color) {
+        image = [image imageWithColor:color];
+    }
+    [btn setImage:image forState:UIControlStateNormal];
+    btn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    return btn;
+}
+
 UIButton *NewTextButton(NSString *title, UIColor *textColor) {
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(screen_width - 64, 0, 64, 44)];
     [btn setTitle:title forState:UIControlStateNormal];

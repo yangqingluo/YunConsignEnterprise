@@ -217,8 +217,17 @@
 @end
 
 
+@implementation AppTrunkInfo
+
+
+@end
+
 @implementation AppTransportTrunkInfo
 
+
+@end
+
+@implementation AppCanLoadTransportTruckInfo
 
 
 @end
