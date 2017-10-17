@@ -15,8 +15,11 @@ typedef enum : NSUInteger {
 
 @interface PublicMutableLabelView : UIView
 
+@property (strong, nonatomic) NSMutableArray *showViews;
 @property (assign, nonatomic) PublicMutableLabelAlignment labelAlignment;
+@property (assign, nonatomic) BOOL showVerticalSeparator;
 
 - (void)updateDataSourceWithArray:(NSArray *)array;
+- (void)updateEdgeSourceWithArray:(NSArray *)array;
 
 @end

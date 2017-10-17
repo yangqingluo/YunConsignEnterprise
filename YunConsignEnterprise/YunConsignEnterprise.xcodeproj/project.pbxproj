@@ -260,6 +260,7 @@
 		E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */; };
 		E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
+		E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */; };
 		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
 /* End PBXBuildFile section */
 
@@ -668,6 +669,8 @@
 		E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
+		E4F45BA31F95F99A002F8AFD /* ServiceGoodsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGoodsDetailCell.h; sourceTree = "<group>"; };
+		E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodsDetailCell.m; sourceTree = "<group>"; };
 		E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillSRHeaderView.h; sourceTree = "<group>"; };
 		E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillSRHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -989,6 +992,8 @@
 				E45995321F95E012009F35A6 /* PublicMutableLabelView.m */,
 				E45995341F95E61E009F35A6 /* SearchQuantityResultCell.h */,
 				E45995351F95E61E009F35A6 /* SearchQuantityResultCell.m */,
+				E4F45BA31F95F99A002F8AFD /* ServiceGoodsDetailCell.h */,
+				E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1765,6 +1770,7 @@
 				E4AEA05F1F5EA6CF002EBE41 /* UIResponder+Router.m in Sources */,
 				E4AEA0591F5EA6CF002EBE41 /* NSData+HTTPRequest.m in Sources */,
 				E4AEA09B1F5EA6D0002EBE41 /* IQUIView+IQKeyboardToolbar.m in Sources */,
+				E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */,
 				E4AEA0BA1F5EA6D0002EBE41 /* MJRefreshConst.m in Sources */,
 				E4AEA0C41F5EA6D0002EBE41 /* SDWebImageDecoder.m in Sources */,
 				E4AEA0AF1F5EA6D0002EBE41 /* MJRefreshHeader.m in Sources */,

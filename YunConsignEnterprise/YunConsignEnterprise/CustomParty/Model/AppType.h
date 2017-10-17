@@ -278,3 +278,12 @@ typedef enum : NSUInteger {
 
 @end
 
+@interface AppServiceGoodsDetailInfo : AppType
+
+@property (strong, nonatomic) NSString *goods_number;//货号
+@property (strong, nonatomic) NSString *goods_name;//货物
+@property (strong, nonatomic) NSString *total_amount;//运费
+@property (strong, nonatomic) NSString *is_load;//装车次数，0表示没有装车，一般为1，如果存在拆分多次装车，则为大于1的数字
+
+@end
+

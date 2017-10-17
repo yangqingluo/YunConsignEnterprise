@@ -63,15 +63,15 @@
 }
 
 - (void)loadFirstPageData{
-    [self queryWaybillListByConditionFunction:YES];
+    [self pullDataFunction:YES];
 }
 
 - (void)loadMoreData{
-    [self queryWaybillListByConditionFunction:NO];
+    [self pullDataFunction:NO];
 }
 
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start_time" : stringFromDate(self.data.start_time, @"yyyy-MM-dd"), @"end_time" : stringFromDate(self.data.end_time, @"yyyy-MM-dd")}];
+- (void)pullDataFunction:(BOOL)isReset {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start_time" : stringFromDate(self.data.start_time, @"yyyy-MM-dd"), @"end_time" : stringFromDate(self.data.end_time, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.data.start_station_city) {
         [m_dic setObject:self.data.start_station_city.open_city_id forKey:@"start_station_city_id"];
     }
@@ -186,7 +186,7 @@
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count + 1;
+    return self.dataSource.count ? self.dataSource.count + 1 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -197,7 +197,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kEdgeSmall;
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

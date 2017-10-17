@@ -259,3 +259,10 @@
 
 
 @end
+
+
+@implementation AppServiceGoodsDetailInfo
+
+
+
+@end
