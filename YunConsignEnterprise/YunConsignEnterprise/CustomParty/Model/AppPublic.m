@@ -241,7 +241,8 @@ NSString *dateStringWithTimeString(NSString *string){
     if (date) {
         return stringFromDate(date, @"yyyy-MM-dd");
     }
-    return @"--";
+
+    return string.length ? string : @"--";
 }
 
 //文本尺寸
