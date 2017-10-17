@@ -26,6 +26,11 @@
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
 		E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */; };
+		E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E459952C1F95D26A009F35A6 /* SearchQuantityResultVC.m */; };
+		E45995301F95D282009F35A6 /* SearchQuantityResultTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E459952F1F95D282009F35A6 /* SearchQuantityResultTableVC.m */; };
+		E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995321F95E012009F35A6 /* PublicMutableLabelView.m */; };
+		E45995361F95E61E009F35A6 /* SearchQuantityResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995351F95E61E009F35A6 /* SearchQuantityResultCell.m */; };
+		E45995391F95EBD3009F35A6 /* ServiceGoodsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995381F95EBD3009F35A6 /* ServiceGoodsDetailVC.m */; };
 		E45B3CAC1F7B4E9B001D9FDB /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */; };
 		E45B3CB21F7B5233001D9FDB /* TransportTrunkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CB11F7B5233001D9FDB /* TransportTrunkCell.m */; };
 		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
@@ -297,6 +302,16 @@
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
 		E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSummaryCell.h; sourceTree = "<group>"; };
 		E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSummaryCell.m; sourceTree = "<group>"; };
+		E459952B1F95D26A009F35A6 /* SearchQuantityResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQuantityResultVC.h; sourceTree = "<group>"; };
+		E459952C1F95D26A009F35A6 /* SearchQuantityResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuantityResultVC.m; sourceTree = "<group>"; };
+		E459952E1F95D282009F35A6 /* SearchQuantityResultTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQuantityResultTableVC.h; sourceTree = "<group>"; };
+		E459952F1F95D282009F35A6 /* SearchQuantityResultTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuantityResultTableVC.m; sourceTree = "<group>"; };
+		E45995311F95E012009F35A6 /* PublicMutableLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMutableLabelView.h; sourceTree = "<group>"; };
+		E45995321F95E012009F35A6 /* PublicMutableLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMutableLabelView.m; sourceTree = "<group>"; };
+		E45995341F95E61E009F35A6 /* SearchQuantityResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQuantityResultCell.h; sourceTree = "<group>"; };
+		E45995351F95E61E009F35A6 /* SearchQuantityResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuantityResultCell.m; sourceTree = "<group>"; };
+		E45995371F95EBD3009F35A6 /* ServiceGoodsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGoodsDetailVC.h; sourceTree = "<group>"; };
+		E45995381F95EBD3009F35A6 /* ServiceGoodsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodsDetailVC.m; sourceTree = "<group>"; };
 		E45B3CAA1F7B4E9B001D9FDB /* QCSlideSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSlideSwitchView.h; sourceTree = "<group>"; };
 		E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSlideSwitchView.m; sourceTree = "<group>"; };
 		E45B3CB01F7B5233001D9FDB /* TransportTrunkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTrunkCell.h; sourceTree = "<group>"; };
@@ -689,6 +704,12 @@
 			children = (
 				E40F7CAA1F95A73E00946C18 /* SearchQuantityVC.h */,
 				E40F7CAB1F95A73E00946C18 /* SearchQuantityVC.m */,
+				E459952B1F95D26A009F35A6 /* SearchQuantityResultVC.h */,
+				E459952C1F95D26A009F35A6 /* SearchQuantityResultVC.m */,
+				E459952E1F95D282009F35A6 /* SearchQuantityResultTableVC.h */,
+				E459952F1F95D282009F35A6 /* SearchQuantityResultTableVC.m */,
+				E45995371F95EBD3009F35A6 /* ServiceGoodsDetailVC.h */,
+				E45995381F95EBD3009F35A6 /* ServiceGoodsDetailVC.m */,
 			);
 			name = SearchQuantity;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/SearchQuantity;
@@ -914,6 +935,8 @@
 		E4AE9F5B1F5EA6CF002EBE41 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4AF3AFF1F78CB4E009EB766 /* AppResponder.h */,
+				E4AF3B001F78CB4E009EB766 /* AppResponder.m */,
 				E45B3CAA1F7B4E9B001D9FDB /* QCSlideSwitchView.h */,
 				E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */,
 				E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */,
@@ -958,12 +981,14 @@
 				E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */,
 				E49C4F5A1F738FC3007E7D70 /* AddGoodsListHeaderView.h */,
 				E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */,
-				E4AF3AFF1F78CB4E009EB766 /* AppResponder.h */,
-				E4AF3B001F78CB4E009EB766 /* AppResponder.m */,
 				E4E0C7FD1F792FCE002053CD /* WayBillCell.h */,
 				E4E0C7FE1F792FCE002053CD /* WayBillCell.m */,
 				E45B3CB01F7B5233001D9FDB /* TransportTrunkCell.h */,
 				E45B3CB11F7B5233001D9FDB /* TransportTrunkCell.m */,
+				E45995311F95E012009F35A6 /* PublicMutableLabelView.h */,
+				E45995321F95E012009F35A6 /* PublicMutableLabelView.m */,
+				E45995341F95E61E009F35A6 /* SearchQuantityResultCell.h */,
+				E45995351F95E61E009F35A6 /* SearchQuantityResultCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1643,9 +1668,11 @@
 				E4AEA0CE1F5EA6D0002EBE41 /* UIImageView+WebCache.m in Sources */,
 				E4AEA0D01F5EA6D0002EBE41 /* UIView+WebCacheOperation.m in Sources */,
 				E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */,
+				E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */,
 				E4AEA0CA1F5EA6D0002EBE41 /* UIImage+GIF.m in Sources */,
 				E4AEA08A1F5EA6D0002EBE41 /* UIProgressView+AFNetworking.m in Sources */,
 				E4AEA0931F5EA6D0002EBE41 /* IQUIWindow+Hierarchy.m in Sources */,
+				E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */,
 				E4AEA07E1F5EA6D0002EBE41 /* AFSecurityPolicy.m in Sources */,
 				E4AEA0881F5EA6D0002EBE41 /* UIButton+AFNetworking.m in Sources */,
 				E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */,
@@ -1660,6 +1687,7 @@
 				E4AEA0C21F5EA6D0002EBE41 /* SDImageCacheConfig.m in Sources */,
 				E40F7CA61F95A71700946C18 /* PublicCustomerPhoneVC.m in Sources */,
 				E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */,
+				E45995391F95EBD3009F35A6 /* ServiceGoodsDetailVC.m in Sources */,
 				E4AEA0C71F5EA6D0002EBE41 /* SDWebImageManager.m in Sources */,
 				E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */,
 				E4AEA0CD1F5EA6D0002EBE41 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1667,6 +1695,7 @@
 				E4AEA0DC1F5EA8CE002EBE41 /* UIImage+Gif.m in Sources */,
 				E4AEA0AC1F5EA6D0002EBE41 /* MJRefreshBackFooter.m in Sources */,
 				E4AEA08B1F5EA6D0002EBE41 /* UIRefreshControl+AFNetworking.m in Sources */,
+				E45995361F95E61E009F35A6 /* SearchQuantityResultCell.m in Sources */,
 				E4AF3B071F78CC8B009EB766 /* PublicSwitchorCellView.m in Sources */,
 				E4AEA0BC1F5EA6D0002EBE41 /* UIScrollView+MJRefresh.m in Sources */,
 				E4AEA0B71F5EA6D0002EBE41 /* MJRefreshNormalHeader.m in Sources */,
@@ -1751,6 +1780,7 @@
 				E4AEA0DD1F5EA8CE002EBE41 /* UIImage+Rotate.m in Sources */,
 				E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */,
 				E4AEA09F1F5EA6D0002EBE41 /* UIViewController+HUD.m in Sources */,
+				E45995301F95D282009F35A6 /* SearchQuantityResultTableVC.m in Sources */,
 				E4AEA0C01F5EA6D0002EBE41 /* NSImage+WebCache.m in Sources */,
 				E4AEA0791F5EA6D0002EBE41 /* AppBasicViewController.m in Sources */,
 				E40F7CA71F95A71700946C18 /* PublicSRSelectVC.m in Sources */,

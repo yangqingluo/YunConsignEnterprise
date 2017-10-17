@@ -222,3 +222,40 @@
 
 
 @end
+
+@implementation AppSearchQuantityInfo
+
+- (NSString *)showStartTimeString {
+    return stringFromDate(self.start_time, @"yyyy-MM-dd");
+}
+- (NSString *)showEndTimeString {
+    return stringFromDate(self.end_time, @"yyyy-MM-dd");
+}
+- (NSString *)showStartStationString {
+    return self.start_station_city ? self.start_station_city.open_city_name : @"全部";
+}
+- (NSString *)showEndStationString {
+    return self.end_station_city ? self.end_station_city.open_city_name : @"全部";
+}
+
+@end
+
+
+@implementation AppGoodsQuantityInfo
+
+
+
+@end
+
+@implementation AppRouteGoodsQuantityInfo
+
+
+
+@end
+
+
+@implementation AppServiceGoodsQuantityInfo
+
+
+
+@end

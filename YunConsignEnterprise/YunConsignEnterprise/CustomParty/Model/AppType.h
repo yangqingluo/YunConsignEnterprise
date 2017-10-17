@@ -240,3 +240,41 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *truck_number_plate;//
 
 @end
+
+@interface AppSearchQuantityInfo : AppType
+
+@property (strong, nonatomic) NSDate *start_time;//开始时间
+@property (strong, nonatomic) NSDate *end_time;//结束时间
+@property (strong, nonatomic) AppCityInfo *start_station_city;//始发站
+@property (strong, nonatomic) AppCityInfo *end_station_city;//终点站
+
+- (NSString *)showStartTimeString;
+- (NSString *)showEndTimeString;
+- (NSString *)showStartStationString;
+- (NSString *)showEndStationString;
+
+@end
+
+@interface AppGoodsQuantityInfo : AppType
+
+@property (strong, nonatomic) NSString *quantity;//货量
+
+@end
+
+@interface AppRouteGoodsQuantityInfo : AppGoodsQuantityInfo
+
+@property (strong, nonatomic) NSString *end_station_city_id;
+@property (strong, nonatomic) NSString *end_station_city_name;
+@property (strong, nonatomic) NSString *route;
+@property (strong, nonatomic) NSString *start_station_city_id;
+@property (strong, nonatomic) NSString *start_station_city_name;
+
+@end
+
+@interface AppServiceGoodsQuantityInfo : AppGoodsQuantityInfo
+
+@property (strong, nonatomic) NSString *service_id;//所属门店编号
+@property (strong, nonatomic) NSString *service_name;//所属门店名称
+
+@end
+

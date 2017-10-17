@@ -7,29 +7,15 @@
 //
 
 #import "SearchQuantityVC.h"
+#import "SearchQuantityResultVC.h"
 
 #import "BlockActionSheet.h"
 #import "SingleInputCell.h"
 #import "PublicDatePickerView.h"
 
-@interface SearchQuantityData : AppType
-
-@property (strong, nonatomic) NSDate *start_time;//开始时间
-@property (strong, nonatomic) NSDate *end_time;//结束时间
-@property (strong, nonatomic) AppCityInfo *start_station_city;//始发站
-@property (strong, nonatomic) AppCityInfo *end_station_city;//终点站
-
-@end
-
-@implementation SearchQuantityData
-
-
-
-@end
-
 @interface SearchQuantityVC ()
 
-@property (strong, nonatomic) SearchQuantityData *data;
+@property (strong, nonatomic) AppSearchQuantityInfo *data;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSMutableArray *cityArray;
 
@@ -65,11 +51,11 @@
 
 //初始化数据
 - (void)initializeData{
-    _showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择"},
-                   @{@"title":@"结束时间",@"subTitle":@"请选择"},
+    _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择"},
+                   @{@"title":@"结束时间",@"subTitle":@"必填，请选择"},
                    @{@"title":@"始发站",@"subTitle":@"请选择"},
                    @{@"title":@"终点站",@"subTitle":@"请选择"}];
-    _data = [SearchQuantityData new];
+    _data = [AppSearchQuantityInfo new];
     _data.end_time = [NSDate date];
     _data.start_time = [_data.end_time dateByAddingTimeInterval:-2 * 24 * 60 * 60];
 }
@@ -91,7 +77,9 @@
 }
 
 - (void)searchButtonAction {
-    
+    SearchQuantityResultVC *vc = [SearchQuantityResultVC new];
+    vc.data = self.data;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - getter
@@ -160,12 +148,12 @@
     
     switch (indexPath.row) {
         case 0:{
-            cell.baseView.textField.text = stringFromDate(self.data.start_time, @"yyyy-MM-dd");
+            cell.baseView.textField.text = self.data.showStartTimeString;
         }
             break;
             
         case 1:{
-            cell.baseView.textField.text = stringFromDate(self.data.end_time, @"yyyy-MM-dd");
+            cell.baseView.textField.text = self.data.showEndTimeString;
         }
             break;
             
