@@ -10,6 +10,7 @@
 #import "WayBillOpenVC.h"
 #import "WayBillQueryVC.h"
 #import "TransportTruckVC.h"
+#import "SearchQuantityVC.h"
 
 @interface DailyOperationVC ()
 
@@ -52,32 +53,43 @@
         NSArray *m_array = [UserPublic getInstance].dailyOperationAccesses;
         if (index >= 0 && index < m_array.count) {
             AppAccessInfo *item = m_array[index];
-            switch (item.sort) {
-                case 1:{
-                    WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
-                    vc.accessInfo = item;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                    
-                case 2: {
-                    WayBillQueryVC *vc = [[WayBillQueryVC alloc]initWithStyle:UITableViewStyleGrouped];
-                    vc.accessInfo = item;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                    
-                case 3: {
-                    TransportTruckVC *vc = [TransportTruckVC new];
-                    vc.accessInfo = item;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                    
-                default:{
-                    [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
-                }
-                    break;
+            if ([item.menu_code isEqualToString:@"WAYBILL_OPEN"]) {
+                WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if ([item.menu_code isEqualToString:@"WAYBILL_QUERY"]) {
+                WayBillQueryVC *vc = [[WayBillQueryVC alloc]initWithStyle:UITableViewStyleGrouped];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if ([item.menu_code isEqualToString:@"REGISTERED_TRUCK"]) {
+                TransportTruckVC *vc = [TransportTruckVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if ([item.menu_code isEqualToString:@"SEARCH_QUANTITY"]) {
+                SearchQuantityVC *vc = [SearchQuantityVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+//            else if ([item.menu_code isEqualToString:@"WAYBILL_LOAD"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"WAYBILL_ARRIVAL"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"WAYBILL_RECEIVE"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"PAY_ON_RECEIPT"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"CUST_MANAGE"]) {
+//                
+//            }
+            else {
+                [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
             }
         }
     }

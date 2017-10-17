@@ -111,6 +111,13 @@ typedef enum : NSUInteger {
 
 @end
 
+@interface AppCityInfo : AppType
+
+@property (strong, nonatomic) NSString *open_city_id;//所在城市编号
+@property (strong, nonatomic) NSString *open_city_name;//所在城市名称
+
+@end
+
 @interface AppSendReceiveInfo : AppType
 
 @property (strong, nonatomic) AppCustomerInfo *customer;

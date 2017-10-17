@@ -96,6 +96,12 @@
 
 @end
 
+@implementation AppCityInfo
+
+
+
+@end
+
 @implementation AppSendReceiveInfo
 
 
