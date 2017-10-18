@@ -266,7 +266,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *note;
 @property (strong, nonatomic) NSString *start_car_time;
 
-
 @end
 
 

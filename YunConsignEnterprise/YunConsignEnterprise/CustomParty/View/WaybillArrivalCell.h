@@ -10,6 +10,9 @@
 
 @interface WaybillArrivalCell : PublicHeaderBodyFooterCell
 
+@property (strong, nonatomic) UILabel *arriveTimeLabel;
+@property (strong, nonatomic) UILabel *noHandoverLabel;
+
 @property (copy, nonatomic) AppCanArrivalTransportTruckInfo *data;
 
 @end

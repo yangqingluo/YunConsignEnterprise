@@ -39,10 +39,10 @@
     
     [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _headerView.height - appSeparaterLineSize, _headerView.width, appSeparaterLineSize))];
     
-    _titleLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, 0.5 * _headerView.width, _headerView.height), nil, nil, NSTextAlignmentLeft);
+    _titleLabel = NewLabel(CGRectMake(kEdge, 0, 0.5 * _headerView.width, _headerView.height), nil, nil, NSTextAlignmentLeft);
     [_headerView addSubview:_titleLabel];
     
-    _statusLabel = NewLabel(CGRectMake(_headerView.width - kEdgeMiddle - 200, 0, 200, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentRight);
+    _statusLabel = NewLabel(CGRectMake(_headerView.width - kEdge - 200, 0, 200, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentRight);
     [_headerView addSubview:_statusLabel];
 }
 
@@ -58,7 +58,7 @@
     _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.baseView.width, self.footerView.top - self.headerView.bottom)];
     [self.baseView addSubview:_bodyView];
     
-    _bodyLabel1 = NewLabel(CGRectMake(kEdgeMiddle, kEdgeBig, _bodyView.width - 2 * kEdgeMiddle, 24), nil, nil, NSTextAlignmentLeft);
+    _bodyLabel1 = NewLabel(CGRectMake(kEdge, kEdgeBig, _bodyView.width - 2 * kEdge, 24), nil, nil, NSTextAlignmentLeft);
     //    _bodyLabel1.adjustsFontSizeToFitWidth = YES;
     [_bodyView addSubview:_bodyLabel1];
     

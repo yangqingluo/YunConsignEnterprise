@@ -62,7 +62,7 @@
     NSDate *date_now = [NSDate date];
     NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:-2 * 24 * 60 * 60], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"0"};
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_queryCanLoadTransportTruckByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_queryCanArrivalTransportTruckByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
@@ -154,9 +154,22 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        NSIndexPath *indexPath = m_dic[@"indexPath"];
-        NSNumber *tagNumber = m_dic[@"tag"];
-        NSLog(@"%ld-%d", (long)indexPath.row, [tagNumber intValue]);
+//        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                
+            }
+                break;
+                
+            case 1:{
+                [self showHint:@"该车已到站"];
+            }
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 
