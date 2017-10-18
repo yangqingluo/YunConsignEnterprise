@@ -1,23 +1,23 @@
 //
-//  WaybillLoadVC.m
+//  WaybillArrivalVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/10/17.
+//  Created by 7kers on 2017/10/18.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillLoadVC.h"
+#import "WaybillArrivalVC.h"
 
-#import "WaybillLoadCell.h"
+#import "WaybillArrivalCell.h"
 #import "MJRefresh.h"
 
-@interface WaybillLoadVC ()
+@interface WaybillArrivalVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
-@implementation WaybillLoadVC
+@implementation WaybillArrivalVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,7 +69,7 @@
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCanLoadTransportTruckInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppCanArrivalTransportTruckInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total < appPageSize) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -120,7 +120,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillLoadCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [WaybillArrivalCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -132,11 +132,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"way_bill_load_cell";
-    WaybillLoadCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"way_bill_arrival_cell";
+    WaybillArrivalCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[WaybillLoadCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[WaybillArrivalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
@@ -159,4 +159,6 @@
         NSLog(@"%ld-%d", (long)indexPath.row, [tagNumber intValue]);
     }
 }
+
+
 @end

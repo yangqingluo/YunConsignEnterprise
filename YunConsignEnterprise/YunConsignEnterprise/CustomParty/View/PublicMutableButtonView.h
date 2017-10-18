@@ -8,6 +8,8 @@
 
 #import "PublicMutableContentView.h"
 
+#define Event_PublicMutableButtonClicked @"Event_PublicMutableButtonClicked"
+
 @interface PublicMutableButtonView : PublicMutableContentView
 
 

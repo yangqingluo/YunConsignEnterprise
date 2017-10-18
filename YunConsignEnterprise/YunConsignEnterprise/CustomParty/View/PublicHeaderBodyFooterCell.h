@@ -11,6 +11,7 @@
 
 @interface PublicHeaderBodyFooterCell : UITableViewCell
 
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) UIView *baseView;
 
 @property (strong, nonatomic) UIView *headerView;

@@ -227,7 +227,18 @@
 
 @end
 
+@implementation AppQueryTransportTrunkInfo
+
+
+@end
+
 @implementation AppCanLoadTransportTruckInfo
+
+
+@end
+
+@implementation AppCanArrivalTransportTruckInfo
+
 
 
 @end

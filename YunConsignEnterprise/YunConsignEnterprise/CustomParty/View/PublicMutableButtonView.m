@@ -8,6 +8,8 @@
 
 #import "PublicMutableButtonView.h"
 
+#import "UIResponder+Router.h"
+
 @interface PublicMutableButtonView ()
 
 @end
@@ -43,11 +45,12 @@
             btn.left = x;
             x += width;
             [btn setTitle:m_array[i] forState:UIControlStateNormal];
-            [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            [btn setTitleColor:secondaryTextColor forState:UIControlStateNormal];
             btn.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
             [self addSubview:btn];
             [self.showViews addObject:btn];
-            
+            btn.tag = i;
+            [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
             if (btn.left != 0.0 && self.showVerticalSeparator) {
                 [self addSubview:NewSeparatorLine(CGRectMake(btn.left, 0, appSeparaterLineSize, self.height))];
             }
@@ -56,5 +59,10 @@
     [self refreshHorizontalSeparators];
 }
 
+- (void)btnAction:(UIButton *)button {
+    if (self.indexPath) {
+        [self routerEventWithName:Event_PublicMutableButtonClicked userInfo:@{@"indexPath" : self.indexPath, @"tag" : @(button.tag)}];
+    }
+}
 
 @end

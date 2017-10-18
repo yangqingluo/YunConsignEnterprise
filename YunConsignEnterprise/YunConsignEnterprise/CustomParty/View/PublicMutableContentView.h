@@ -15,6 +15,7 @@ typedef enum : NSUInteger {
 
 @interface PublicMutableContentView : UIView
 
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSMutableArray *edgeSource;
 @property (strong, nonatomic) NSMutableArray *showViews;

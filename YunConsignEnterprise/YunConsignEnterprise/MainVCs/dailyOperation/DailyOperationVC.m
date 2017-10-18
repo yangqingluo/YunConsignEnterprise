@@ -12,6 +12,7 @@
 #import "TransportTruckVC.h"
 #import "SearchQuantityVC.h"
 #import "WaybillLoadVC.h"
+#import "WaybillArrivalVC.h"
 
 @interface DailyOperationVC ()
 
@@ -47,8 +48,8 @@
 
 #pragma mark - getter
 
-#pragma UIResponder+Router
-- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo{
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_BannerButtonClicked]) {
         NSInteger index = [(NSIndexPath *)userInfo row];
         NSArray *m_array = [UserPublic getInstance].dailyOperationAccesses;
@@ -79,9 +80,11 @@
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-//            else if ([item.menu_code isEqualToString:@"WAYBILL_ARRIVAL"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"WAYBILL_ARRIVAL"]) {
+                WaybillArrivalVC *vc = [WaybillArrivalVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
 //            else if ([item.menu_code isEqualToString:@"WAYBILL_RECEIVE"]) {
 //                
 //            }

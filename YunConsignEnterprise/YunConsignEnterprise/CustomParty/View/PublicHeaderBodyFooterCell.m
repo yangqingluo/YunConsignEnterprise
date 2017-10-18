@@ -42,7 +42,7 @@
     _titleLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, 0.5 * _headerView.width, _headerView.height), nil, nil, NSTextAlignmentLeft);
     [_headerView addSubview:_titleLabel];
     
-    _statusLabel = NewLabel(CGRectMake(_headerView.width - kEdgeMiddle - 200, 0, 200, _headerView.height), secondaryTextColor, nil, NSTextAlignmentRight);
+    _statusLabel = NewLabel(CGRectMake(_headerView.width - kEdgeMiddle - 200, 0, 200, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentRight);
     [_headerView addSubview:_statusLabel];
 }
 
@@ -84,5 +84,13 @@
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return height_PublicHeaderBodyFooterCell;
+}
+
+#pragma mark - setter
+- (void)setIndexPath:(NSIndexPath *)indexPath {
+    _indexPath = indexPath;
+    if (self.footerView) {
+        self.footerView.indexPath = [indexPath copy];
+    }
 }
 @end

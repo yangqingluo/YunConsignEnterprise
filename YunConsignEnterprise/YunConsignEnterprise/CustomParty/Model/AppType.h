@@ -249,23 +249,36 @@ typedef enum : NSUInteger {
 
 @end
 
-@interface AppCanLoadTransportTruckInfo : AppTrunkInfo
+@interface AppQueryTransportTrunkInfo : AppTrunkInfo
 
 @property (strong, nonatomic) NSString *register_time;//登记时间
 @property (strong, nonatomic) NSString *transport_truck_state;//车辆状态
 @property (strong, nonatomic) NSString *transport_truck_state_text;//车辆状态文本
-//    "check_id" = "";
-//    "check_name" = "";
-//    "check_time" = "";
-//    "driver_account" = "";
-//    "driver_account_bank" = "";
-//    "driver_account_name" = "";
-//    "end_station_service_id" = 1002321896911666302;
-//    "end_station_service_name" = "\U5f00\U53d1\U533a\U5e97";
-//    "join_id" = 1002321896911666177;
-//    note = "";
-//    "register_time" = "2017-10-18";
-//    "start_car_time" = "";
+@property (strong, nonatomic) NSString *check_id;
+@property (strong, nonatomic) NSString *check_name;
+@property (strong, nonatomic) NSString *check_time;
+@property (strong, nonatomic) NSString *driver_account;
+@property (strong, nonatomic) NSString *driver_account_bank;
+@property (strong, nonatomic) NSString *driver_account_name;
+@property (strong, nonatomic) NSString *end_station_service_id;
+@property (strong, nonatomic) NSString *end_station_service_name;
+@property (strong, nonatomic) NSString *join_id;
+@property (strong, nonatomic) NSString *note;
+@property (strong, nonatomic) NSString *start_car_time;
+
+
+@end
+
+
+@interface AppCanLoadTransportTruckInfo : AppQueryTransportTrunkInfo
+
+
+@end
+
+@interface AppCanArrivalTransportTruckInfo : AppQueryTransportTrunkInfo
+
+@property (strong, nonatomic) NSString *arrival_time;//到车时间
+@property (strong, nonatomic) NSString *nohandover_count;//未交接运单数量
 
 @end
 
