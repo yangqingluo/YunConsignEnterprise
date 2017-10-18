@@ -1,23 +1,23 @@
 //
-//  WaybillReceiveVC.m
+//  PayOnReceiptVC.m
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/10/18.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillReceiveVC.h"
+#import "PayOnReceiptVC.h"
 
-#import "WaybillReceiveCell.h"
+#import "PayOnReceiptCell.h"
 #import "MJRefresh.h"
 
-@interface WaybillReceiveVC ()
+@interface PayOnReceiptVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
-@implementation WaybillReceiveVC
+@implementation PayOnReceiptVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,14 +62,14 @@
     NSDate *date_now = [NSDate date];
     NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"0"};
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_queryCanReceiveWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receipt_queryNeedReceiptWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCanReceiveWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppNeedReceiptWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total < appPageSize) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -120,7 +120,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [PayOnReceiptCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -132,11 +132,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"way_bill_receive_cell";
-    WaybillReceiveCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"PayOnReceiptCell";
+    PayOnReceiptCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[WaybillReceiveCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[PayOnReceiptCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     

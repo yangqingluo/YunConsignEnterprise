@@ -20,6 +20,13 @@ typedef enum : NSUInteger {
     RECEIPT_SIGN_TYPE_4 = 4//无回单
 } RECEIPT_SIGN_TYPE;
 
+//回单状态
+typedef enum : NSUInteger {
+    RECEIPT_STATE_TYPE_1 = 1,//未到站
+    RECEIPT_STATE_TYPE_2 = 2,//未付款
+    RECEIPT_STATE_TYPE_3 = 3,//已付款
+} RECEIPT_STATE_TYPE;
+
 //代收款类型
 typedef enum : NSUInteger {
     CASH_ON_DELIVERY_TYPE_1 = 1,//现金代收
@@ -214,9 +221,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *route;//线路信息
 @property (strong, nonatomic) NSString *goods;//货物信息
 @property (strong, nonatomic) NSString *cust;//客户信息
-@property (strong, nonatomic) NSString *pay_now_amount;//现付
-@property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付
-@property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付
+@property (strong, nonatomic) NSString *pay_now_amount;//现付金额
+@property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付金额
+@property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
 @property (strong, nonatomic) NSString *is_urgent;//是否急货
 @property (strong, nonatomic) NSString *is_cash_on_delivery;//是否有代收款
 @property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
@@ -263,6 +270,18 @@ BOOL isTrue(NSString *string);
 - (NSString *)payStyleStringForState;
 
 @end
+
+@interface AppNeedReceiptWayBillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *shipper;//发货人
+@property (strong, nonatomic) NSString *receipt_sign_type;//回单类型 RECEIPT_SIGN_TYPE 签字、盖章、签字+盖章
+@property (strong, nonatomic) NSString *receipt_state;//回单状态 RECEIPT_STATE 未到站、未付款、已付款
+@property (strong, nonatomic) NSString *receipt_state_text;//回单状态
+
+- (NSString *)showReceiptSignTypeString;
+
+@end
+
 
 @interface AppTrunkInfo : AppType
 

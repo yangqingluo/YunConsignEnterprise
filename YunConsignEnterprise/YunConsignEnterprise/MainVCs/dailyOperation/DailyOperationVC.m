@@ -14,6 +14,7 @@
 #import "WaybillLoadVC.h"
 #import "WaybillArrivalVC.h"
 #import "WaybillReceiveVC.h"
+#import "PayOnReceiptVC.h"
 
 @interface DailyOperationVC ()
 
@@ -91,9 +92,11 @@
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-//            else if ([item.menu_code isEqualToString:@"PAY_ON_RECEIPT"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"PAY_ON_RECEIPT"]) {
+                PayOnReceiptVC *vc = [PayOnReceiptVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
 //            else if ([item.menu_code isEqualToString:@"CUST_MANAGE"]) {
 //                
 //            }

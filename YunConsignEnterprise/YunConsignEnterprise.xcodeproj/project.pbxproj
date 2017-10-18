@@ -19,6 +19,9 @@
 		E40F7CA91F95A71700946C18 /* WayBillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CA11F95A71700946C18 /* WayBillQueryVC.m */; };
 		E40F7CAC1F95A73E00946C18 /* SearchQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAB1F95A73E00946C18 /* SearchQuantityVC.m */; };
 		E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */; };
+		E41BF7E31F97854E00C23CEA /* PayOnReceiptVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */; };
+		E41BF7E61F97859300C23CEA /* CustomerManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E51F97859300C23CEA /* CustomerManageVC.m */; };
+		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
 		E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8081F738963009794A2 /* FourItemsListCell.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
@@ -298,6 +301,12 @@
 		E40F7CAB1F95A73E00946C18 /* SearchQuantityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuantityVC.m; sourceTree = "<group>"; };
 		E40F7CAD1F95B36700946C18 /* PublicDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicDatePickerView.h; sourceTree = "<group>"; };
 		E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicDatePickerView.m; sourceTree = "<group>"; };
+		E41BF7E11F97854E00C23CEA /* PayOnReceiptVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptVC.h; sourceTree = "<group>"; };
+		E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptVC.m; sourceTree = "<group>"; };
+		E41BF7E41F97859300C23CEA /* CustomerManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerManageVC.h; sourceTree = "<group>"; };
+		E41BF7E51F97859300C23CEA /* CustomerManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerManageVC.m; sourceTree = "<group>"; };
+		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
+		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
 		E420B8041F737B34009794A2 /* PublicInputCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicInputCellView.h; sourceTree = "<group>"; };
 		E420B8051F737B34009794A2 /* PublicInputCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicInputCellView.m; sourceTree = "<group>"; };
 		E420B8071F738963009794A2 /* FourItemsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsListCell.h; sourceTree = "<group>"; };
@@ -716,6 +725,8 @@
 		E40F7C8C1F95A71700946C18 /* CustomerManage */ = {
 			isa = PBXGroup;
 			children = (
+				E41BF7E41F97859300C23CEA /* CustomerManageVC.h */,
+				E41BF7E51F97859300C23CEA /* CustomerManageVC.m */,
 			);
 			name = CustomerManage;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/CustomerManage;
@@ -724,6 +735,8 @@
 		E40F7C8D1F95A71700946C18 /* PayOnReceipt */ = {
 			isa = PBXGroup;
 			children = (
+				E41BF7E11F97854E00C23CEA /* PayOnReceiptVC.h */,
+				E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */,
 			);
 			name = PayOnReceipt;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/PayOnReceipt;
@@ -1027,6 +1040,8 @@
 				E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */,
 				E43229581F97536A000400B8 /* WaybillReceiveCell.h */,
 				E43229591F97536A000400B8 /* WaybillReceiveCell.m */,
+				E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */,
+				E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */,
 				E40E49DA1F960F44000C8B0B /* PublicHeaderBodyFooterCell.h */,
 				E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */,
 				E40E49D71F9608AB000C8B0B /* PublicMutableContentView.h */,
@@ -1774,6 +1789,7 @@
 				E4AEA0B21F5EA6D0002EBE41 /* MJRefreshAutoStateFooter.m in Sources */,
 				E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */,
 				E4E744351F96041D00CEC8FA /* WaybillLoadVC.m in Sources */,
+				E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */,
 				E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */,
 				E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */,
 				E4AEA0A21F5EA6D0002EBE41 /* MJFoundation.m in Sources */,
@@ -1828,6 +1844,7 @@
 				E4AEA0AA1F5EA6D0002EBE41 /* NSString+MJExtension.m in Sources */,
 				E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */,
 				E44764991F611BF70084F4EB /* SystemConfigVC.m in Sources */,
+				E41BF7E31F97854E00C23CEA /* PayOnReceiptVC.m in Sources */,
 				E4AEA0DB1F5EA8CE002EBE41 /* UIImage+Color.m in Sources */,
 				E4AEA0BD1F5EA6D0002EBE41 /* UIView+MJExtension.m in Sources */,
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,
@@ -1845,6 +1862,7 @@
 				E40F7CA71F95A71700946C18 /* PublicSRSelectVC.m in Sources */,
 				E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */,
 				E4AEA07C1F5EA6D0002EBE41 /* AFHTTPSessionManager.m in Sources */,
+				E41BF7E61F97859300C23CEA /* CustomerManageVC.m in Sources */,
 				E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */,
 				E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */,
 				E4AEA0991F5EA6D0002EBE41 /* IQTitleBarButtonItem.m in Sources */,
