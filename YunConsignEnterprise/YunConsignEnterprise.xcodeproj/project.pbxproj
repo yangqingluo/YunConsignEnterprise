@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E40E49D61F96083D000C8B0B /* PublicMutableButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E49D51F96083D000C8B0B /* PublicMutableButtonView.m */; };
+		E40E49D91F9608AC000C8B0B /* PublicMutableContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E49D81F9608AB000C8B0B /* PublicMutableContentView.m */; };
+		E40E49DC1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */; };
 		E40F7CA31F95A71700946C18 /* TransportTruckTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7C911F95A71700946C18 /* TransportTruckTableVC.m */; };
 		E40F7CA41F95A71700946C18 /* TransportTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7C931F95A71700946C18 /* TransportTruckVC.m */; };
 		E40F7CA51F95A71700946C18 /* AddGoodsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7C981F95A71700946C18 /* AddGoodsVC.m */; };
@@ -267,6 +270,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E40E49D41F96083D000C8B0B /* PublicMutableButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMutableButtonView.h; sourceTree = "<group>"; };
+		E40E49D51F96083D000C8B0B /* PublicMutableButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMutableButtonView.m; sourceTree = "<group>"; };
+		E40E49D71F9608AB000C8B0B /* PublicMutableContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMutableContentView.h; sourceTree = "<group>"; };
+		E40E49D81F9608AB000C8B0B /* PublicMutableContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMutableContentView.m; sourceTree = "<group>"; };
+		E40E49DA1F960F44000C8B0B /* PublicHeaderBodyFooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicHeaderBodyFooterCell.h; sourceTree = "<group>"; };
+		E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicHeaderBodyFooterCell.m; sourceTree = "<group>"; };
 		E40F7C901F95A71700946C18 /* TransportTruckTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckTableVC.h; sourceTree = "<group>"; };
 		E40F7C911F95A71700946C18 /* TransportTruckTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckTableVC.m; sourceTree = "<group>"; };
 		E40F7C921F95A71700946C18 /* TransportTruckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckVC.h; sourceTree = "<group>"; };
@@ -998,8 +1007,14 @@
 				E45B3CB11F7B5233001D9FDB /* TransportTrunkCell.m */,
 				E4E744361F96066400CEC8FA /* WaybillLoadCell.h */,
 				E4E744371F96066400CEC8FA /* WaybillLoadCell.m */,
+				E40E49DA1F960F44000C8B0B /* PublicHeaderBodyFooterCell.h */,
+				E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */,
+				E40E49D71F9608AB000C8B0B /* PublicMutableContentView.h */,
+				E40E49D81F9608AB000C8B0B /* PublicMutableContentView.m */,
 				E45995311F95E012009F35A6 /* PublicMutableLabelView.h */,
 				E45995321F95E012009F35A6 /* PublicMutableLabelView.m */,
+				E40E49D41F96083D000C8B0B /* PublicMutableButtonView.h */,
+				E40E49D51F96083D000C8B0B /* PublicMutableButtonView.m */,
 				E45995341F95E61E009F35A6 /* SearchQuantityResultCell.h */,
 				E45995351F95E61E009F35A6 /* SearchQuantityResultCell.m */,
 				E4F45BA31F95F99A002F8AFD /* ServiceGoodsDetailCell.h */,
@@ -1688,12 +1703,14 @@
 				E4AEA08A1F5EA6D0002EBE41 /* UIProgressView+AFNetworking.m in Sources */,
 				E4AEA0931F5EA6D0002EBE41 /* IQUIWindow+Hierarchy.m in Sources */,
 				E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */,
+				E40E49DC1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m in Sources */,
 				E4AEA07E1F5EA6D0002EBE41 /* AFSecurityPolicy.m in Sources */,
 				E4AEA0881F5EA6D0002EBE41 /* UIButton+AFNetworking.m in Sources */,
 				E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */,
 				E4AEA0B81F5EA6D0002EBE41 /* MJRefreshStateHeader.m in Sources */,
 				E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */,
 				E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */,
+				E40E49D61F96083D000C8B0B /* PublicMutableButtonView.m in Sources */,
 				E4AEA0961F5EA6D0002EBE41 /* IQTextView.m in Sources */,
 				E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */,
 				E4AEA0A51F5EA6D0002EBE41 /* MJPropertyType.m in Sources */,
@@ -1753,6 +1770,7 @@
 				E4AF3B041F78CBBD009EB766 /* PublicCellView.m in Sources */,
 				E4AEA0911F5EA6D0002EBE41 /* IQUIView+Hierarchy.m in Sources */,
 				E4AEA0B11F5EA6D0002EBE41 /* MJRefreshAutoNormalFooter.m in Sources */,
+				E40E49D91F9608AC000C8B0B /* PublicMutableContentView.m in Sources */,
 				E4AEA0BE1F5EA6D0002EBE41 /* MKAnnotationView+WebCache.m in Sources */,
 				E4AEA0891F5EA6D0002EBE41 /* UIImageView+AFNetworking.m in Sources */,
 				E4AEA0BB1F5EA6D0002EBE41 /* UIScrollView+MJExtension.m in Sources */,

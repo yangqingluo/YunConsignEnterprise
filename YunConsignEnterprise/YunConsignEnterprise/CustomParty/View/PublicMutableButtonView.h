@@ -1,5 +1,5 @@
 //
-//  PublicMutableLabelListView.h
+//  PublicMutableButtonView.h
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/10/17.
@@ -8,7 +8,8 @@
 
 #import "PublicMutableContentView.h"
 
-@interface PublicMutableLabelView : PublicMutableContentView
+@interface PublicMutableButtonView : PublicMutableContentView
+
 
 
 @end

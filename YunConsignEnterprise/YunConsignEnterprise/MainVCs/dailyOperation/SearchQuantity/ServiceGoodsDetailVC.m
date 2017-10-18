@@ -179,8 +179,8 @@
             cell.backgroundColor = [UIColor whiteColor];
             
             PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, [self tableView:tableView heightForRowAtIndexPath:indexPath])];
-            [m_view updateDataSourceWithArray:@[@"货物编号", @"货物", @"运费", @"装车"]];
             [m_view updateEdgeSourceWithArray:@[@0.4, @0.2, @0.2, @0.2]];
+            [m_view updateDataSourceWithArray:@[@"货物编号", @"货物", @"运费", @"装车"]];
             [cell.contentView addSubview:m_view];
         }
         return cell;

@@ -6,8 +6,10 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PublicHeaderBodyFooterCell.h"
 
-@interface WaybillLoadCell : UITableViewCell
+@interface WaybillLoadCell : PublicHeaderBodyFooterCell
+
+@property (copy, nonatomic) AppCanLoadTransportTruckInfo *data;
 
 @end

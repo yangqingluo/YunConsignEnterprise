@@ -226,23 +226,26 @@ typedef enum : NSUInteger {
 @interface AppTrunkInfo : AppType
 
 @property (strong, nonatomic) NSString *transport_truck_id;//登记派车编号
+@property (strong, nonatomic) NSString *end_station_city_id;
+@property (strong, nonatomic) NSString *end_station_city_name;
+@property (strong, nonatomic) NSString *start_station_city_id;
+@property (strong, nonatomic) NSString *start_station_city_name;
 @property (strong, nonatomic) NSString *route;//线路
 @property (strong, nonatomic) NSString *truck_info;//车辆信息
 @property (strong, nonatomic) NSString *load_quantity;//装车货量
+@property (strong, nonatomic) NSString *cost_register;//登记运费
+@property (strong, nonatomic) NSString *cost_check;//结算运费
+@property (strong, nonatomic) NSString *operate_time;
+@property (strong, nonatomic) NSString *operator_id;
+@property (strong, nonatomic) NSString *operator_name;
+@property (strong, nonatomic) NSString *truck_driver_name;//
+@property (strong, nonatomic) NSString *truck_driver_phone;//
+@property (strong, nonatomic) NSString *truck_number_plate;//
 
 @end
 
 @interface AppTransportTrunkInfo : AppTrunkInfo
 
-@property (strong, nonatomic) NSString *cost_register;//登记运费
-@property (strong, nonatomic) NSString *cost_check;//结算运费
-@property (strong, nonatomic) NSString *end_station_city_name;//
-@property (strong, nonatomic) NSString *operate_time;//
-@property (strong, nonatomic) NSString *operator_name;//
-@property (strong, nonatomic) NSString *start_station_city_name;//
-@property (strong, nonatomic) NSString *truck_driver_name;//
-@property (strong, nonatomic) NSString *truck_driver_phone;//
-@property (strong, nonatomic) NSString *truck_number_plate;//
 
 @end
 
@@ -250,6 +253,20 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) NSString *register_time;//登记时间
 @property (strong, nonatomic) NSString *transport_truck_state;//车辆状态
+@property (strong, nonatomic) NSString *transport_truck_state_text;//车辆状态文本
+//    "check_id" = "";
+//    "check_name" = "";
+//    "check_time" = "";
+//    "driver_account" = "";
+//    "driver_account_bank" = "";
+//    "driver_account_name" = "";
+//    "end_station_service_id" = 1002321896911666302;
+//    "end_station_service_name" = "\U5f00\U53d1\U533a\U5e97";
+//    "join_id" = 1002321896911666177;
+//    note = "";
+//    "register_time" = "2017-10-18";
+//    "start_car_time" = "";
+
 @end
 
 @interface AppSearchQuantityInfo : AppType

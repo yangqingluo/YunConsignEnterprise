@@ -49,8 +49,8 @@
     _data = data;
     [self.baseView updateDataSourceWithArray:@[data.goods_number, data.goods_name, data.total_amount, [data.is_load intValue] > 0 ? @"√" : @""]];
     if (self.baseView.showViews.count == 4) {
-        UIButton *btn = self.baseView.showViews[3];
-        [btn setTitleColor:MainColor forState:UIControlStateNormal];
+        UILabel *label = self.baseView.showViews[3];
+        label.textColor = MainColor;
     }
 }
 
