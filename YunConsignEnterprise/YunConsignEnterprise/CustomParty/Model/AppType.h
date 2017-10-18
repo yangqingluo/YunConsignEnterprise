@@ -105,10 +105,13 @@ BOOL isTrue(NSString *string);
 
 @interface AppCustomerInfo : AppType
 
+@property (strong, nonatomic) NSString *freight_cust_id;//客户编号
 @property (strong, nonatomic) NSString *freight_cust_name;//客户姓名
 @property (strong, nonatomic) NSString *phone;//电话
 @property (strong, nonatomic) NSString *last_deliver_time;//最后发货时间
 @property (strong, nonatomic) NSString *last_deliver_goods;//最后发货内容
+@property (strong, nonatomic) NSString *belong_city_name;//所属城市
+@property (strong, nonatomic) NSString *note;//备注
 
 @end
 

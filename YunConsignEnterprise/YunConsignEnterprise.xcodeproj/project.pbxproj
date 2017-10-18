@@ -34,6 +34,7 @@
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
 		E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */; };
+		E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E456501C1F978D2200F7694B /* CustomerManageCell.m */; };
 		E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E459952C1F95D26A009F35A6 /* SearchQuantityResultVC.m */; };
 		E45995301F95D282009F35A6 /* SearchQuantityResultTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E459952F1F95D282009F35A6 /* SearchQuantityResultTableVC.m */; };
 		E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995321F95E012009F35A6 /* PublicMutableLabelView.m */; };
@@ -331,6 +332,8 @@
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
 		E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSummaryCell.h; sourceTree = "<group>"; };
 		E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSummaryCell.m; sourceTree = "<group>"; };
+		E456501B1F978D2200F7694B /* CustomerManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerManageCell.h; sourceTree = "<group>"; };
+		E456501C1F978D2200F7694B /* CustomerManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerManageCell.m; sourceTree = "<group>"; };
 		E459952B1F95D26A009F35A6 /* SearchQuantityResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQuantityResultVC.h; sourceTree = "<group>"; };
 		E459952C1F95D26A009F35A6 /* SearchQuantityResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuantityResultVC.m; sourceTree = "<group>"; };
 		E459952E1F95D282009F35A6 /* SearchQuantityResultTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchQuantityResultTableVC.h; sourceTree = "<group>"; };
@@ -1042,6 +1045,8 @@
 				E43229591F97536A000400B8 /* WaybillReceiveCell.m */,
 				E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */,
 				E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */,
+				E456501B1F978D2200F7694B /* CustomerManageCell.h */,
+				E456501C1F978D2200F7694B /* CustomerManageCell.m */,
 				E40E49DA1F960F44000C8B0B /* PublicHeaderBodyFooterCell.h */,
 				E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */,
 				E40E49D71F9608AB000C8B0B /* PublicMutableContentView.h */,
@@ -1852,6 +1857,7 @@
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
+				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,
 				E4AEA0C11F5EA6D0002EBE41 /* SDImageCache.m in Sources */,
 				E4AEA0DD1F5EA8CE002EBE41 /* UIImage+Rotate.m in Sources */,
 				E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */,
