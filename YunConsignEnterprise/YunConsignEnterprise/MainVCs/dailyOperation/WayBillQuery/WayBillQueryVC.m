@@ -15,6 +15,7 @@
 @interface WayBillQueryVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) NSDictionary *condition;
 
 @end
 
@@ -53,7 +54,10 @@
     vc.type = QueryConditionType_WaybillQuery;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
-        
+        if ([object isKindOfClass:[NSDictionary class]]) {
+            weakself.condition = (NSDictionary *)object;
+            [weakself.tableView.mj_header beginRefreshing];
+        }
     };
     
     MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:vc];
@@ -72,7 +76,10 @@
 
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
     NSDate *date_now = [NSDate date];
-    NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"2", @"query_column" : @"goods_number", @"query_val" : @"AB"};
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"2"}];
+    if (self.condition.count) {
+        [m_dic addEntriesFromDictionary:self.condition];
+    }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];

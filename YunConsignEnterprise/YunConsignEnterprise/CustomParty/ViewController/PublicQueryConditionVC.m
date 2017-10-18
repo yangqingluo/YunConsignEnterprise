@@ -16,7 +16,8 @@
 
 @property (strong, nonatomic) NSDate *start_time;//开始时间
 @property (strong, nonatomic) NSDate *end_time;//结束时间
-
+@property (strong, nonatomic) NSDictionary *query_column;//查询字段
+@property (strong, nonatomic) NSString *query_val;//查询内容
 
 @end
 
@@ -26,7 +27,9 @@
 
 @end
 
-@interface PublicQueryConditionVC ()
+@interface PublicQueryConditionVC ()<UITextFieldDelegate>{
+    NSDictionary *doneDic;
+}
 
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 @property (strong, nonatomic) NSArray *showArray;
@@ -66,6 +69,7 @@
             NSDate *date_now = [NSDate date];
             self.condition.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
             self.condition.end_time = date_now;
+            self.condition.query_column = [self dictionaryArrayForQueryKey:nil][0];
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
@@ -86,7 +90,11 @@
 }
 
 - (void)searchButtonAction {
-    
+    doneDic = @{@"start_time" : stringFromDate(self.condition.start_time, @"yyyy-MM-dd"),
+                @"end_time" : stringFromDate(self.condition.end_time, @"yyyy-MM-dd"),
+                @"query_column" : self.condition.query_column[@"key"],
+                @"query_val" : self.condition.query_val};
+    [self goBackWithDone:YES];
 }
 
 - (void)goBackWithDone:(BOOL)done{
@@ -100,8 +108,14 @@
 
 - (void)doDoneAction{
     if (self.doneBlock) {
-        self.doneBlock(self.condition);
+        self.doneBlock(doneDic);
     }
+}
+
+- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content {
+    NSDictionary *m_dic = self.showArray[row];
+    [self.condition setValue:content forKey:m_dic[@"key"]];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - getter
@@ -136,6 +150,18 @@
     return _footerView;
 }
 
+- (NSArray *)dictionaryArrayForQueryKey:(NSString *)key {
+    NSArray *m_array = @[@{@"name":@"货物编号", @"key":@"goods_number"},
+                         @{@"name":@"发货单号", @"key":@"waybill_number"},
+                         @{@"name":@"收货人电话", @"key":@"consignee_phone"},
+                         @{@"name":@"收货人姓名", @"key":@"consignee_name"},
+                         @{@"name":@"发货人电话", @"key":@"shipper_phone"},
+                         @{@"name":@"发货人姓名", @"key":@"shipper_name"},
+                         @{@"name":@"开单人", @"key":@"user_name"}];
+    
+    return m_array;
+}
+
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.showArray.count;
@@ -168,6 +194,7 @@
         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+        cell.baseView.textField.delegate = self;
     }
     cell.baseView.textLabel.text = dic[@"title"];
     cell.baseView.textField.placeholder = dic[@"subTitle"];
@@ -177,15 +204,19 @@
     cell.accessoryType = [self.inputValidSet containsObject:key] ? UITableViewCellAccessoryNone:
     UITableViewCellAccessoryDisclosureIndicator;
     cell.baseView.textField.enabled = [self.inputValidSet containsObject:key];
-    
-    if ([AppPublic getVariableWithClass:self.condition.class varName:key]) {
-        id value = [self.condition valueForKey:key];
-        if (value) {
-            if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
-                cell.baseView.textField.text = stringFromDate(value, @"yyyy-MM-dd");
-            }
-            else {
-                cell.baseView.textField.text = value;
+    if ([key isEqualToString:@"query_column"]) {
+        cell.baseView.textField.text = self.condition.query_column[@"name"];
+    }
+    else {
+        if ([AppPublic getVariableWithClass:self.condition.class varName:key]) {
+            id value = [self.condition valueForKey:key];
+            if (value) {
+                if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
+                    cell.baseView.textField.text = stringFromDate(value, @"yyyy-MM-dd");
+                }
+                else {
+                    cell.baseView.textField.text = value;
+                }
             }
         }
     }
@@ -218,6 +249,44 @@
         }
         [view show];
     }
-    
+    else if ([key isEqualToString:@"query_column"]) {
+        NSArray *dictionaryArray = [self dictionaryArrayForQueryKey:nil];
+        if (dictionaryArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dictionaryArray.count];
+            for (NSDictionary *dic in dictionaryArray) {
+                [m_array addObject:dic[@"name"]];
+            }
+            NSDictionary *m_dic = self.showArray[indexPath.row];
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dictionaryArray.count) {
+                    [weakself.condition setValue:dictionaryArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+    }
 }
+
+#pragma  mark - TextField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    return (range.location < kInputLengthMax);
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        [self editAtIndex:indexPath.row andContent:textField.text];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 @end

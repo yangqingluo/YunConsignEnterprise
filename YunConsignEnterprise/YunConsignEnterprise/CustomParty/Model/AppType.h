@@ -218,20 +218,33 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *waybill_id;//运单内部编号
 @property (strong, nonatomic) NSString *waybill_number;//运单号
-@property (strong, nonatomic) NSString *goods_number;//货物编号
 @property (strong, nonatomic) NSString *waybill_state;//运单状态
 @property (strong, nonatomic) NSString *waybill_state_text;//运单状态文本
 @property (strong, nonatomic) NSString *route;//线路信息
-@property (strong, nonatomic) NSString *goods;//货物信息
 @property (strong, nonatomic) NSString *cust;//客户信息
 @property (strong, nonatomic) NSString *pay_now_amount;//现付金额
 @property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付金额
 @property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
 @property (strong, nonatomic) NSString *is_urgent;//是否急货
 @property (strong, nonatomic) NSString *is_cash_on_delivery;//是否有代收款
+@property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
 @property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
 @property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
-@property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
+@property (strong, nonatomic) NSString *cash_on_delivery_type_text;
+@property (strong, nonatomic) NSString *consignee_name;
+@property (strong, nonatomic) NSString *consignee_phone;
+@property (strong, nonatomic) NSString *goods;//货物信息
+@property (strong, nonatomic) NSString *goods_name;
+@property (strong, nonatomic) NSString *goods_number;//货物编号
+@property (strong, nonatomic) NSString *goods_packge;
+@property (strong, nonatomic) NSString *goods_total_count;
+@property (strong, nonatomic) NSString *goods_total_volume;
+@property (strong, nonatomic) NSString *goods_total_weight;
+@property (strong, nonatomic) NSString *shipper_name;
+@property (strong, nonatomic) NSString *end_station_city_name;
+@property (strong, nonatomic) NSString *start_station_city_name;
+@property (strong, nonatomic) NSString *start_station_service_name;
+@property (strong, nonatomic) NSString *total_amount;
 
 - (NSString *)statusStringForState;
 - (UIColor *)statusColorForState;
@@ -242,18 +255,18 @@ BOOL isTrue(NSString *string);
 
 //@property (strong, nonatomic) NSString *cash_on_delivery_amount;
 //@property (strong, nonatomic) NSString *cash_on_delivery_type;
-@property (strong, nonatomic) NSString *cash_on_delivery_type_text;
-@property (strong, nonatomic) NSString *consignee_name;
-@property (strong, nonatomic) NSString *consignee_phone;
+//@property (strong, nonatomic) NSString *cash_on_delivery_type_text;
+//@property (strong, nonatomic) NSString *consignee_name;
+//@property (strong, nonatomic) NSString *consignee_phone;
 //@property (strong, nonatomic) NSString *cust;
-@property (strong, nonatomic) NSString *end_station_city_name;
+//@property (strong, nonatomic) NSString *end_station_city_name;
 //@property (strong, nonatomic) NSString *goods;
-@property (strong, nonatomic) NSString *goods_name;
+//@property (strong, nonatomic) NSString *goods_name;
 //@property (strong, nonatomic) NSString *goods_number;
-@property (strong, nonatomic) NSString *goods_packge;
-@property (strong, nonatomic) NSString *goods_total_count;
-@property (strong, nonatomic) NSString *goods_total_volume;
-@property (strong, nonatomic) NSString *goods_total_weight;
+//@property (strong, nonatomic) NSString *goods_packge;
+//@property (strong, nonatomic) NSString *goods_total_count;
+//@property (strong, nonatomic) NSString *goods_total_volume;
+//@property (strong, nonatomic) NSString *goods_total_weight;
 //@property (strong, nonatomic) NSString *is_cash_on_delivery;
 //@property (strong, nonatomic) NSString *is_deduction_freight;
 //@property (strong, nonatomic) NSString *is_urgent;
@@ -261,10 +274,10 @@ BOOL isTrue(NSString *string);
 //@property (strong, nonatomic) NSString *pay_on_delivery_amount;
 //@property (strong, nonatomic) NSString *pay_on_receipt_amount;
 //@property (strong, nonatomic) NSString *route;
-@property (strong, nonatomic) NSString *shipper_name;
-@property (strong, nonatomic) NSString *start_station_city_name;
-@property (strong, nonatomic) NSString *start_station_service_name;
-@property (strong, nonatomic) NSString *total_amount;
+//@property (strong, nonatomic) NSString *shipper_name;
+//@property (strong, nonatomic) NSString *start_station_city_name;
+//@property (strong, nonatomic) NSString *start_station_service_name;
+//@property (strong, nonatomic) NSString *total_amount;
 //@property (strong, nonatomic) NSString *waybill_id;
 //@property (strong, nonatomic) NSString *waybill_number;
 //@property (strong, nonatomic) NSString *waybill_state;
