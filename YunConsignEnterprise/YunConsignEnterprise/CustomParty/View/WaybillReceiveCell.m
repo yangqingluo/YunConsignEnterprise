@@ -37,14 +37,14 @@
     self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", _data.route, _data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
-    if ([_data.is_urgent boolValue]) {
+    if (isTrue(_data.is_urgent)) {
         self.urgentLabel.hidden = NO;
         self.urgentLabel.left = self.titleLabel.right + kEdgeMiddle;
     }
     else {
         self.urgentLabel.hidden = YES;
     }
-    self.statusLabel.text = [_data statusStringForState];
+    self.statusLabel.text = _data.total_amount;
 
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods];
     self.bodyLabel2.text = [NSString stringWithFormat:@"客户：%@", _data.cust];

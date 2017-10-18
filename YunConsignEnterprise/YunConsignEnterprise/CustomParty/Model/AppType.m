@@ -10,6 +10,17 @@
 
 @implementation AppType
 
+/*!
+ @brief 服务器返回的数据布尔值判断
+ */
+BOOL isTrue(NSString *string) {
+    if ([string isEqualToString:@"1"]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone{
     return [[self class] mj_objectWithKeyValues:[self mj_keyValues]];
 }
@@ -158,7 +169,7 @@
         NSString *value = m_dic[key];
         if ([set_bool containsObject:key]) {
             BOOL yn = [value boolValue];
-            [edit_dic setValue:yn ? @"1" : @"0" forKey:key];
+            [edit_dic setValue:yn ? @"1" : @"2" forKey:key];
         }
         else {
             [edit_dic setValue:value forKey:key];
@@ -221,10 +232,10 @@
 
 - (NSString *)payStyleStringForState {
     NSMutableString *m_string = [NSMutableString new];
-    if ([self.is_cash_on_delivery boolValue]) {
+    if (isTrue(self.is_cash_on_delivery)) {
         [m_string appendString:@"[现金代收]"];
     }
-    if ([self.is_deduction_freight boolValue]) {
+    if (isTrue(self.is_deduction_freight)) {
         [m_string appendString:@"[运费代扣]"];
     }
     

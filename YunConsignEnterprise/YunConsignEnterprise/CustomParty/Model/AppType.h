@@ -29,6 +29,11 @@ typedef enum : NSUInteger {
 
 @interface AppType : NSObject
 
+/*!
+ @brief 服务器返回的数据布尔值判断
+ */
+BOOL isTrue(NSString *string);
+
 @end
 
 @interface Global : NSObject

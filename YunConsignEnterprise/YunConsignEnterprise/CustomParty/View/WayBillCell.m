@@ -58,7 +58,7 @@
     self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", _data.route, _data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
-    if ([_data.is_urgent boolValue]) {
+    if (isTrue(_data.is_urgent)) {
         self.urgentLabel.hidden = NO;
         self.urgentLabel.left = self.titleLabel.right + kEdgeMiddle;
     }
