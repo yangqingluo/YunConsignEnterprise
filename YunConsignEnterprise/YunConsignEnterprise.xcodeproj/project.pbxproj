@@ -42,6 +42,7 @@
 		E45995391F95EBD3009F35A6 /* ServiceGoodsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995381F95EBD3009F35A6 /* ServiceGoodsDetailVC.m */; };
 		E45B3CAC1F7B4E9B001D9FDB /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */; };
 		E45B3CB21F7B5233001D9FDB /* TransportTrunkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CB11F7B5233001D9FDB /* TransportTrunkCell.m */; };
+		E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */; };
 		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
@@ -348,6 +349,8 @@
 		E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSlideSwitchView.m; sourceTree = "<group>"; };
 		E45B3CB01F7B5233001D9FDB /* TransportTrunkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTrunkCell.h; sourceTree = "<group>"; };
 		E45B3CB11F7B5233001D9FDB /* TransportTrunkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTrunkCell.m; sourceTree = "<group>"; };
+		E47042C61F979E9900BA7E22 /* PublicQueryConditionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicQueryConditionVC.h; sourceTree = "<group>"; };
+		E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicQueryConditionVC.m; sourceTree = "<group>"; };
 		E47118301F676ACC004D4337 /* PublicTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTabViewController.h; sourceTree = "<group>"; };
 		E47118311F676ACC004D4337 /* PublicTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTabViewController.m; sourceTree = "<group>"; };
 		E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageAndText.h"; sourceTree = "<group>"; };
@@ -1072,6 +1075,8 @@
 				E4AE9F8E1F5EA6CF002EBE41 /* AppBasicViewController.m */,
 				E47118301F676ACC004D4337 /* PublicTabViewController.h */,
 				E47118311F676ACC004D4337 /* PublicTabViewController.m */,
+				E47042C61F979E9900BA7E22 /* PublicQueryConditionVC.h */,
+				E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1855,6 +1860,7 @@
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,
 				E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */,
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
+				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,

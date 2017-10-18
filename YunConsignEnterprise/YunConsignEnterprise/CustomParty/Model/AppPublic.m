@@ -205,7 +205,7 @@ UIButton *NewRightButton(UIImage *image, UIColor *color) {
         image = [image imageWithColor:color];
     }
     [btn setImage:image forState:UIControlStateNormal];
-    btn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    btn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -10);
     return btn;
 }
 
@@ -331,7 +331,10 @@ NSString *dateStringWithTimeString(NSString *string){
     for (i = 0; i < outCount; i++) {
         Ivar property = ivars[i];
         NSString *keyName = [NSString stringWithCString:ivar_getName(property) encoding:NSUTF8StringEncoding];
-        keyName = [keyName stringByReplacingOccurrencesOfString:@"_" withString:@""];
+        if ([keyName hasPrefix:@"_"]) {
+            keyName = [keyName substringFromIndex:1];
+        }
+//        keyName = [keyName stringByReplacingOccurrencesOfString:@"_" withString:@""];
         if ([keyName isEqualToString:name]) {
             return YES;
         }
