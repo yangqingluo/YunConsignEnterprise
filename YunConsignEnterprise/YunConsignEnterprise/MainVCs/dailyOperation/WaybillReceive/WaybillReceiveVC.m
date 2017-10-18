@@ -1,23 +1,23 @@
 //
-//  WaybillLoadVC.m
+//  WaybillReceiveVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/10/17.
+//  Created by 7kers on 2017/10/18.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillLoadVC.h"
+#import "WaybillReceiveVC.h"
 
-#import "WaybillLoadCell.h"
+#import "WaybillReceiveCell.h"
 #import "MJRefresh.h"
 
-@interface WaybillLoadVC ()
+@interface WaybillReceiveVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
-@implementation WaybillLoadVC
+@implementation WaybillReceiveVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,14 +62,14 @@
     NSDate *date_now = [NSDate date];
     NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"0"};
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_queryCanLoadTransportTruckByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_queryCanReceiveWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCanLoadTransportTruckInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppCanReceiveWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total < appPageSize) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -120,7 +120,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillLoadCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [WaybillReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -132,11 +132,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"way_bill_load_cell";
-    WaybillLoadCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"way_bill_arrival_cell";
+    WaybillReceiveCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[WaybillLoadCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[WaybillReceiveCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
@@ -154,9 +154,23 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        NSIndexPath *indexPath = m_dic[@"indexPath"];
-        NSNumber *tagNumber = m_dic[@"tag"];
-        NSLog(@"%ld-%d", (long)indexPath.row, [tagNumber intValue]);
+        //        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                
+            }
+                break;
+                
+            case 1:{
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
     }
 }
+
 @end

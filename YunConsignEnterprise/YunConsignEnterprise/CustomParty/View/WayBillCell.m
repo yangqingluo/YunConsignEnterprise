@@ -68,7 +68,7 @@
     
     self.statusLabel.text = [_data statusStringForState];
     [AppPublic adjustLabelWidth:self.statusLabel];
-    self.statusLabel.right = self.headerView.right - kEdgeMiddle;
+    self.statusLabel.right = self.headerView.right - kEdge;
     self.statusImageView.right = self.statusLabel.left - kEdge;
     self.statusImageView.backgroundColor = [_data statusColorForState];
     

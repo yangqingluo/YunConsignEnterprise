@@ -43,6 +43,7 @@
 #define TAB_BAR_HEIGHT               49.0
 #define DEFAULT_BAR_HEIGHT           44.0
 
+#define defaultAddingTimeInterval    (-2 * 24 * 60 * 60)//默认请求时间差
 #define appRefreshTime               24 * 60 * 60//自动刷新间隔时间
 #define kButtonCornerRadius          4.0
 #define kViewCornerRadius            4.0

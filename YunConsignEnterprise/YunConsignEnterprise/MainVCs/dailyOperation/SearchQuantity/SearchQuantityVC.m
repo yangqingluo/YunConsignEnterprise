@@ -57,7 +57,7 @@
                    @{@"title":@"终点站",@"subTitle":@"请选择"}];
     _data = [AppSearchQuantityInfo new];
     _data.end_time = [NSDate date];
-    _data.start_time = [_data.end_time dateByAddingTimeInterval:-2 * 24 * 60 * 60];
+    _data.start_time = [_data.end_time dateByAddingTimeInterval:defaultAddingTimeInterval];
 }
 
 - (void)pullCityArrayFunction {

@@ -21,6 +21,8 @@
 		E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
 		E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8081F738963009794A2 /* FourItemsListCell.m */; };
+		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
+		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
 		E44764941F611AC70084F4EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E447648E1F611AC70084F4EB /* LoginViewController.m */; };
 		E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44764901F611AC70084F4EB /* MainTabBarController.m */; };
 		E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44764921F611AC70084F4EB /* MainTabNavController.m */; };
@@ -300,6 +302,10 @@
 		E420B8051F737B34009794A2 /* PublicInputCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicInputCellView.m; sourceTree = "<group>"; };
 		E420B8071F738963009794A2 /* FourItemsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsListCell.h; sourceTree = "<group>"; };
 		E420B8081F738963009794A2 /* FourItemsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourItemsListCell.m; sourceTree = "<group>"; };
+		E43229551F97531C000400B8 /* WaybillReceiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveVC.h; sourceTree = "<group>"; };
+		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
+		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
+		E43229591F97536A000400B8 /* WaybillReceiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveCell.m; sourceTree = "<group>"; };
 		E447648D1F611AC70084F4EB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		E447648E1F611AC70084F4EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E447648F1F611AC70084F4EB /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -800,6 +806,8 @@
 		E40F7CA21F95A71700946C18 /* WaybillReceive */ = {
 			isa = PBXGroup;
 			children = (
+				E43229551F97531C000400B8 /* WaybillReceiveVC.h */,
+				E43229561F97531C000400B8 /* WaybillReceiveVC.m */,
 			);
 			name = WaybillReceive;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillReceive;
@@ -1017,6 +1025,8 @@
 				E4E744371F96066400CEC8FA /* WaybillLoadCell.m */,
 				E4BC30B21F97255E00CAADAE /* WaybillArrivalCell.h */,
 				E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */,
+				E43229581F97536A000400B8 /* WaybillReceiveCell.h */,
+				E43229591F97536A000400B8 /* WaybillReceiveCell.m */,
 				E40E49DA1F960F44000C8B0B /* PublicHeaderBodyFooterCell.h */,
 				E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */,
 				E40E49D71F9608AB000C8B0B /* PublicMutableContentView.h */,
@@ -1767,6 +1777,7 @@
 				E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */,
 				E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */,
 				E4AEA0A21F5EA6D0002EBE41 /* MJFoundation.m in Sources */,
+				E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */,
 				E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */,
 				E40F7CA91F95A71700946C18 /* WayBillQueryVC.m in Sources */,
 				E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */,
@@ -1834,6 +1845,7 @@
 				E40F7CA71F95A71700946C18 /* PublicSRSelectVC.m in Sources */,
 				E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */,
 				E4AEA07C1F5EA6D0002EBE41 /* AFHTTPSessionManager.m in Sources */,
+				E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */,
 				E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */,
 				E4AEA0991F5EA6D0002EBE41 /* IQTitleBarButtonItem.m in Sources */,
 				E4AEA07F1F5EA6D0002EBE41 /* AFURLRequestSerialization.m in Sources */,

@@ -217,6 +217,22 @@
 @end
 
 
+@implementation AppCanReceiveWayBillInfo
+
+- (NSString *)payStyleStringForState {
+    NSMutableString *m_string = [NSMutableString new];
+    if ([self.is_cash_on_delivery boolValue]) {
+        [m_string appendString:@"[现金代收]"];
+    }
+    if ([self.is_deduction_freight boolValue]) {
+        [m_string appendString:@"[运费代扣]"];
+    }
+    
+    return m_string;
+}
+
+@end
+
 @implementation AppTrunkInfo
 
 

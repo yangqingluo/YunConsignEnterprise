@@ -13,6 +13,7 @@
 #import "SearchQuantityVC.h"
 #import "WaybillLoadVC.h"
 #import "WaybillArrivalVC.h"
+#import "WaybillReceiveVC.h"
 
 @interface DailyOperationVC ()
 
@@ -85,9 +86,11 @@
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-//            else if ([item.menu_code isEqualToString:@"WAYBILL_RECEIVE"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"WAYBILL_RECEIVE"]) {
+                WaybillReceiveVC *vc = [WaybillReceiveVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
 //            else if ([item.menu_code isEqualToString:@"PAY_ON_RECEIPT"]) {
 //                
 //            }
