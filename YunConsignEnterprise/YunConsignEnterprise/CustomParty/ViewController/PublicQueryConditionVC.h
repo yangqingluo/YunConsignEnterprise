@@ -12,6 +12,7 @@ typedef enum : NSUInteger {
     QueryConditionType_Default = 0,
     QueryConditionType_WaybillQuery,//运单查询
     QueryConditionType_TransportTruck,//派车查询
+    QueryConditionType_WaybillLoad,//配载装车
 } QueryConditionType;
 
 @interface PublicQueryConditionVC : AppBasicTableViewController

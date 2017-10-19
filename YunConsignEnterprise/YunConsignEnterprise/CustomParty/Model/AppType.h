@@ -419,10 +419,11 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppServiceInfo *end_service;
 @property (strong, nonatomic) NSString *is_cancel;//是否作废
 
-/*派车相关*/
+/*车辆相关*/
 @property (strong, nonatomic) AppCityInfo *start_station_city;
 @property (strong, nonatomic) AppCityInfo *end_station_city;
 @property (strong, nonatomic) NSString *truck_number_plate;//车辆牌照
+@property (strong, nonatomic) AppDataDictionary *transport_truck_state;//车辆状态
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

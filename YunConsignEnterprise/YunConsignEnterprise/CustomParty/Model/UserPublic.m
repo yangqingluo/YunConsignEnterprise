@@ -102,7 +102,7 @@ __strong static UserPublic *_singleManger = nil;
     }
 }
 
-#pragma getter
+#pragma mark - getter
 - (AppUserInfo *)userData{
     if (!_userData) {
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -148,6 +148,13 @@ __strong static UserPublic *_singleManger = nil;
         _cashOnDeliveryTypeArray = @[@"现金代收", @"一般代收", @"没有代收款"];
     }
     return _cashOnDeliveryTypeArray;
+}
+
+- (NSMutableDictionary *)dataMapDic {
+    if (!_dataMapDic) {
+        _dataMapDic = [NSMutableDictionary new];
+    }
+    return _dataMapDic;
 }
 
 @end

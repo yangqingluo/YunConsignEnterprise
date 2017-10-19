@@ -14,8 +14,8 @@
 
 @interface PublicQueryConditionVC ()<UITextFieldDelegate>
 
-@property (strong, nonatomic) NSMutableDictionary *dataDic;
 @property (strong, nonatomic) NSArray *showArray;
+@property (strong, nonatomic) NSSet *dataDicSet;
 @property (strong, nonatomic) NSSet *inputValidSet;
 @property (strong, nonatomic) NSSet *boolValidSet;
 
@@ -70,6 +70,15 @@
         }
             break;
             
+        case QueryConditionType_WaybillLoad:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
+                           @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
+                           @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
+        }
+            break;
+            
         default:
             break;
     }
@@ -84,7 +93,7 @@
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [weakself.dataDic setObject:m_array forKey:dict_code];
+            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
                 if (![self.condition valueForKey:dict_code]) {
                     if ([dict_code isEqualToString:@"query_column"]) {
@@ -111,7 +120,7 @@
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [weakself.dataDic setObject:m_array forKey:dict_code];
+            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
@@ -131,7 +140,7 @@
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [weakself.dataDic setObject:m_array forKey:dict_code];
+            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
@@ -197,8 +206,8 @@
         }
         [view show];
     }
-    else if ([key isEqualToString:@"query_column"]) {
-        NSArray *dicArray = [self.dataDic objectForKey:key];
+    else if ([self.dataDicSet containsObject:key]) {
+        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dicArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
             for (AppDataDictionary *m_data in dicArray) {
@@ -219,7 +228,7 @@
         }
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
-        NSArray *dataArray = [self.dataDic objectForKey:key];
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
             for (AppServiceInfo *m_data in dataArray) {
@@ -240,7 +249,7 @@
         }
     }
     else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
-        NSArray *dataArray = [self.dataDic objectForKey:key];
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
             for (AppCityInfo *m_data in dataArray) {
@@ -282,11 +291,11 @@
     return _condition;
 }
 
-- (NSMutableDictionary *)dataDic {
-    if (!_dataDic) {
-        _dataDic = [NSMutableDictionary new];
+- (NSSet *)dataDicSet {
+    if (!_dataDicSet) {
+        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", nil];
     }
-    return _dataDic;
+    return _dataDicSet;
 }
 
 - (NSSet *)inputValidSet {
@@ -362,8 +371,8 @@
     cell.accessoryType = [self.inputValidSet containsObject:key] ? UITableViewCellAccessoryNone:
     UITableViewCellAccessoryDisclosureIndicator;
     cell.baseView.textField.enabled = [self.inputValidSet containsObject:key];
-    if ([key isEqualToString:@"query_column"]) {
-        cell.baseView.textField.text = self.condition.query_column.item_name;
+    if ([self.dataDicSet containsObject:key]) {
+        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"service_name"];

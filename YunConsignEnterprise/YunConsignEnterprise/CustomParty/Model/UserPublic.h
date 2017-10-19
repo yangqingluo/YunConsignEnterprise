@@ -29,6 +29,9 @@
 @property (strong, nonatomic) NSArray *receptSignTypeArray;
 @property (strong, nonatomic) NSArray *cashOnDeliveryTypeArray;
 
+//数据字典数据
+@property (strong, nonatomic) NSMutableDictionary *dataMapDic;
+
 //保存用户数据
 - (void)saveUserData:(AppUserInfo *)data;
 //清除

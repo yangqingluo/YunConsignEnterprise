@@ -7,6 +7,7 @@
 //
 
 #import "WaybillLoadVC.h"
+#import "PublicQueryConditionVC.h"
 
 #import "WaybillLoadCell.h"
 #import "MJRefresh.h"
@@ -14,6 +15,7 @@
 @interface WaybillLoadVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end
 
@@ -48,8 +50,23 @@
 }
 
 - (void)searchBtnAction {
+    PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
+    vc.type = QueryConditionType_WaybillLoad;
+    vc.condition = [self.condition copy];
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            weakself.condition = (AppQueryConditionInfo *)object;
+            [weakself.tableView.mj_header beginRefreshing];
+        }
+    };
     
+    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:NO completion:^{
+        
+    }];
 }
+
 - (void)loadFirstPageData{
     [self queryWaybillListByConditionFunction:YES];
 }
@@ -59,8 +76,24 @@
 }
 
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSDate *date_now = [NSDate date];
-    NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]};
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.end_station_city) {
+            [m_dic setObject:self.condition.end_station_city.open_city_id forKey:@"end_station_city_id"];
+        }
+        if (self.condition.truck_number_plate) {
+            [m_dic setObject:self.condition.truck_number_plate forKey:@"truck_number_plate"];
+        }
+        if (self.condition.transport_truck_state) {
+            [m_dic setObject:self.condition.transport_truck_state.item_val forKey:@"transport_truck_state"];
+        }
+    }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_queryCanLoadTransportTruckByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -107,6 +140,13 @@
 }
 
 #pragma mark - getter
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+    }
+    return _condition;
+}
+
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
