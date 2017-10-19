@@ -34,7 +34,7 @@
             CGFloat width = (i % lines < (lines / 2)) ? (separatorX - 2 * kEdge) : (_baseView.width - separatorX - 2 * kEdge);
             
             if (i == 1) {
-                IndexPathTextField *textField = [[IndexPathTextField alloc] initWithFrame:CGRectMake(x + cellDetailLeft, y + kEdgeSmall, width - cellDetailLeft, height - 2 * kEdgeSmall)];
+                IndexPathTextField *textField = [[IndexPathTextField alloc] initWithFrame:CGRectMake(x + 60, y + kEdgeSmall, width - 60, height - 2 * kEdgeSmall)];
                 textField.textColor = baseTextColor;
                 textField.font = [AppPublic appFontOfSize:appLabelFontSize];
                 textField.textAlignment = textAlignment;

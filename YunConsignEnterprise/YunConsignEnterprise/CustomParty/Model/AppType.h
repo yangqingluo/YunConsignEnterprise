@@ -176,6 +176,19 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppWaybillItemInfo : AppType
+
+@property (strong, nonatomic) NSString *waybill_id;
+@property (strong, nonatomic) NSString *waybill_item_id;
+@property (strong, nonatomic) NSString *waybill_item_name;
+@property (strong, nonatomic) NSString *freight;//运费
+@property (strong, nonatomic) NSString *number;//数量，件
+@property (strong, nonatomic) NSString *packge;//包装
+@property (strong, nonatomic) NSString *volume;//体积，方
+@property (strong, nonatomic) NSString *weight;//重量，吨
+
+@end
+
 //下单数据
 @interface AppSaveWayBillInfo : AppType
 
@@ -311,7 +324,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *is_return_waybill;//是否原货返货 YES_NO
 @property (strong, nonatomic) NSString *return_waybill_number ;//原货返回运单号
 @property (strong, nonatomic) NSString *waybill_change_count;//运单修改次数
-
+@property (strong, nonatomic) NSArray *waybill_items;//货物信息
 @end
 
 @interface AppCanReceiveWayBillInfo : AppWayBillInfo

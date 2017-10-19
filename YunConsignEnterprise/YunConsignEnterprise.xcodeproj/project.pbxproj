@@ -276,6 +276,7 @@
 		E4AF3BE31F78E4E9009EB766 /* TYBANG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AF3B791F78E4E9009EB766 /* TYBANG@3x.png */; };
 		E4AF3BE41F78E4E9009EB766 /* TYBANG_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AF3B7A1F78E4E9009EB766 /* TYBANG_s@2x.png */; };
 		E4AF3BE51F78E4E9009EB766 /* TYBANG_s@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AF3B7B1F78E4E9009EB766 /* TYBANG_s@3x.png */; };
+		E4AFFF591F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFFF581F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m */; };
 		E4BC30B11F9723CD00CAADAE /* WaybillArrivalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B01F9723CD00CAADAE /* WaybillArrivalVC.m */; };
 		E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
@@ -717,6 +718,8 @@
 		E4AF3B791F78E4E9009EB766 /* TYBANG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG@3x.png"; sourceTree = "<group>"; };
 		E4AF3B7A1F78E4E9009EB766 /* TYBANG_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG_s@2x.png"; sourceTree = "<group>"; };
 		E4AF3B7B1F78E4E9009EB766 /* TYBANG_s@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TYBANG_s@3x.png"; sourceTree = "<group>"; };
+		E4AFFF571F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicDailyOpenWaybillVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicDailyOpenWaybillVC.h; sourceTree = SOURCE_ROOT; };
+		E4AFFF581F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicDailyOpenWaybillVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicDailyOpenWaybillVC.m; sourceTree = SOURCE_ROOT; };
 		E4BC30AF1F9723CD00CAADAE /* WaybillArrivalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillArrivalVC.h; sourceTree = "<group>"; };
 		E4BC30B01F9723CD00CAADAE /* WaybillArrivalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalVC.m; sourceTree = "<group>"; };
 		E4BC30B21F97255E00CAADAE /* WaybillArrivalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillArrivalCell.h; sourceTree = "<group>"; };
@@ -884,6 +887,8 @@
 			children = (
 				E447649D1F611C460084F4EB /* DailyOperationVC.h */,
 				E447649E1F611C460084F4EB /* DailyOperationVC.m */,
+				E4AFFF571F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.h */,
+				E4AFFF581F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m */,
 				E40F7C8C1F95A71700946C18 /* CustomerManage */,
 				E40F7C8D1F95A71700946C18 /* PayOnReceipt */,
 				E40F7C8E1F95A71700946C18 /* SearchQuantity */,
@@ -1932,6 +1937,7 @@
 				E4AEA0C01F5EA6D0002EBE41 /* NSImage+WebCache.m in Sources */,
 				E4AEA0791F5EA6D0002EBE41 /* AppBasicViewController.m in Sources */,
 				E40F7CA71F95A71700946C18 /* PublicSRSelectVC.m in Sources */,
+				E4AFFF591F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m in Sources */,
 				E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */,
 				E4AEA07C1F5EA6D0002EBE41 /* AFHTTPSessionManager.m in Sources */,
 				E41BF7E61F97859300C23CEA /* CustomerManageVC.m in Sources */,

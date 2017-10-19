@@ -6,9 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicDailyOpenWaybillVC.h"
 
-@interface WayBillDetailVC : AppBasicTableViewController
+@interface WayBillDetailVC : PublicDailyOpenWaybillVC
 
 @property (copy, nonatomic) AppWayBillInfo *data;
 

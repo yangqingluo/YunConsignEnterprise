@@ -138,6 +138,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppWaybillItemInfo
+
+
+
+@end
+
 @implementation AppSaveWayBillInfo
 
 - (void) dealloc {
@@ -237,7 +243,19 @@ BOOL isTrue(NSString *string) {
 
 @implementation AppWayBillDetailInfo
 
-
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [[self class] mj_setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"waybill_items" : [AppWaybillItemInfo class],
+                     };
+        }];
+    }
+    
+    
+    return self;
+}
 
 @end
 
