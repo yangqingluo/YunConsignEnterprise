@@ -16,5 +16,6 @@ typedef enum : NSUInteger {
 @interface PublicQueryConditionVC : AppBasicTableViewController
 
 @property (assign, nonatomic) QueryConditionType type;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end

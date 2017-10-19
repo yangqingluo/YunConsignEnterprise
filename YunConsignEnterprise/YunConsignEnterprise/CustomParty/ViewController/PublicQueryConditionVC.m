@@ -14,10 +14,10 @@
 
 @interface PublicQueryConditionVC ()<UITextFieldDelegate>
 
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 @property (strong, nonatomic) NSMutableDictionary *dataDic;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSSet *inputValidSet;
+@property (strong, nonatomic) NSSet *boolValidSet;
 
 @property (strong, nonatomic) UIView *footerView;
 
@@ -53,6 +53,7 @@
             NSDate *date_now = [NSDate date];
             self.condition.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
             self.condition.end_time = date_now;
+            self.condition.is_cancel = @"2";
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
@@ -217,6 +218,18 @@
             [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
+    else if ([self.boolValidSet containsObject:key]) {
+        NSArray *m_array = @[@"是", @"否"];
+        NSDictionary *m_dic = self.showArray[indexPath.row];
+        QKWEAKSELF;
+        BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+            if (buttonIndex > 0) {
+                [weakself.condition setValue:buttonIndex == 1 ? @"1" : @"2" forKey:key];
+                [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        } otherButtonTitlesArray:m_array];
+        [sheet showInView:self.view];
+    }
 }
 
 #pragma mark - getter
@@ -234,11 +247,18 @@
     return _dataDic;
 }
 
-- (NSSet *)inputValidSet{
+- (NSSet *)inputValidSet {
     if (!_inputValidSet) {
         _inputValidSet = [NSSet setWithObjects:@"query_val", nil];
     }
     return _inputValidSet;
+}
+
+- (NSSet *)boolValidSet {
+    if (!_boolValidSet) {
+        _boolValidSet = [NSSet setWithObjects:@"is_cancel", nil];
+    }
+    return _boolValidSet;
 }
 
 - (UIView *)footerView {
@@ -310,7 +330,10 @@
         if ([AppPublic getVariableWithClass:self.condition.class varName:key]) {
             id value = [self.condition valueForKey:key];
             if (value) {
-                if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
+                if ([self.boolValidSet containsObject:key]) {
+                    cell.baseView.textField.text = isTrue(value) ? @"是" : @"否";
+                }
+                else if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
                     cell.baseView.textField.text = stringFromDate(value, @"yyyy-MM-dd");
                 }
                 else {

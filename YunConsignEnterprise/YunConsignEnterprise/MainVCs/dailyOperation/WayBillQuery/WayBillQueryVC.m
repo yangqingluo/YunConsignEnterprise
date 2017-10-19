@@ -15,7 +15,7 @@
 @interface WayBillQueryVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) NSDictionary *condition;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end
 
@@ -52,10 +52,11 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_WaybillQuery;
+    vc.condition = [self.condition copy];
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
-        if ([object isKindOfClass:[NSDictionary class]]) {
-            weakself.condition = (NSDictionary *)object;
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            weakself.condition = (AppQueryConditionInfo *)object;
             [weakself.tableView.mj_header beginRefreshing];
         }
     };
@@ -75,10 +76,27 @@
 }
 
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSDate *date_now = [NSDate date];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize], @"is_cancel" : @"2"}];
-    if (self.condition.count) {
-        [m_dic addEntriesFromDictionary:self.condition];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.query_column && self.condition.query_val) {
+            [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
+            [m_dic setObject:self.condition.query_val forKey:@"query_val"];
+        }
+        if (self.condition.start_service) {
+            [m_dic setObject:self.condition.start_service.service_id forKey:@"start_service_id"];
+        }
+        if (self.condition.end_service) {
+            [m_dic setObject:self.condition.end_service.service_id forKey:@"end_service_id"];
+        }
+        if (self.condition.is_cancel) {
+            [m_dic setObject:self.condition.is_cancel forKey:@"is_cancel"];
+        }
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -131,6 +149,17 @@
         _dataSource = [NSMutableArray new];
     }
     return _dataSource;
+}
+
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+        NSDate *date_now = [NSDate date];
+        _condition.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
+        _condition.end_time = date_now;
+        _condition.is_cancel = @"2";
+    }
+    return _condition;
 }
 
 #pragma mark - UITableView

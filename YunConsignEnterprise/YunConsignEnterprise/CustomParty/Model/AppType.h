@@ -44,7 +44,7 @@ BOOL isTrue(NSString *string);
 @end
 
 //数据字典
-@interface AppDataDictionary : NSObject
+@interface AppDataDictionary : AppType
 
 @property (strong, nonatomic) NSString *dict_id;//字典编号
 @property (strong, nonatomic) NSString *item_id;//项目编号
@@ -55,7 +55,7 @@ BOOL isTrue(NSString *string);
 
 @end
 
-@interface Global : NSObject
+@interface Global : AppType
 
 @property (assign, nonatomic) int flag;
 @property (strong, nonatomic) NSString *message;
@@ -420,7 +420,7 @@ BOOL isTrue(NSString *string);
 
 
 //查询条件
-@interface AppQueryConditionInfo : NSObject
+@interface AppQueryConditionInfo : AppType
 
 @property (strong, nonatomic) NSDate *start_time;//开始时间
 @property (strong, nonatomic) NSDate *end_time;//结束时间
@@ -428,5 +428,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *query_val;//查询内容
 @property (strong, nonatomic) AppServiceInfo *start_service;
 @property (strong, nonatomic) AppServiceInfo *end_service;
+
+@property (strong, nonatomic) NSString *is_cancel;//是否作废
 
 @end

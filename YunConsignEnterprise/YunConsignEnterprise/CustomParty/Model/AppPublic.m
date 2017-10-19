@@ -240,6 +240,9 @@ NSDate *dateFromString(NSString *dateString, NSString *format) {
 }
 
 NSString *stringFromDate(NSDate *date, NSString *format) {
+    if (!format) {
+        format = defaultDateFormat;
+    }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:format];
     NSString *destDateString = [dateFormatter stringFromDate:date];

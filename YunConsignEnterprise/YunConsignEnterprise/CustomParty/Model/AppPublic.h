@@ -89,6 +89,7 @@
 #define kUserName                    @"username_CRM"
 #define kUserData                    @"userdata_CRM"
 
+#define defaultDateFormat            @"yyyy-MM-dd"
 #define defaultHeadImageName         @"默认头像"
 #define kNotifi_Customer_Refresh     @"kNotification_Customer_Refresh_CRM"
 #define kNotifi_Order_Refresh        @"kNotification_Order_Refresh_CRM"
