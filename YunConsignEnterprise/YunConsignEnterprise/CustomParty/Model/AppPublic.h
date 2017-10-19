@@ -51,6 +51,7 @@
 #define kButtonCornerRadius          4.0
 #define kViewCornerRadius            4.0
 
+#define kCellHeightSmall             32.0
 #define kCellHeight                  44.0
 #define kCellHeightFilter            50.0
 #define kCellHeightMiddle            60.0

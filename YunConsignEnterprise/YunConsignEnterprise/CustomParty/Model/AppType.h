@@ -466,6 +466,35 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppWaybillChangeDetailItemInfo : AppType
+
+@property (strong, nonatomic) NSString *change_field_id;
+@property (strong, nonatomic) NSString *change_id;
+@property (strong, nonatomic) NSString *field;
+@property (strong, nonatomic) NSString *field_name;//修改字段名称
+@property (strong, nonatomic) NSString *prev_value;//修改前
+@property (strong, nonatomic) NSString *cur_value;//修改后
+
+- (NSArray *)showStringListForChangeDetail;
+
+@end
+
+@interface AppWaybillChangeInfo : AppType
+
+@property (strong, nonatomic) NSString *change_id;//运单修改编号
+@property (strong, nonatomic) NSString *service_id;//门店id
+@property (strong, nonatomic) NSString *service_name;//门店名称
+@property (strong, nonatomic) NSString *operator_name;//修改人
+@property (strong, nonatomic) NSString *operate_time;//修改时间
+@property (strong, nonatomic) NSString *change_cause;//修改原因
+@property (strong, nonatomic) NSArray *detail_list;//修改详情
+@property (strong, nonatomic) NSString *open_city_name;
+@property (strong, nonatomic) NSString *operator_id;
+@property (strong, nonatomic) NSString *waybill_id;
+
+@end
+
+
 
 
 

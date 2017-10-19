@@ -195,4 +195,28 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        //        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                
+            }
+                break;
+                
+            case 1:{
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+
 @end

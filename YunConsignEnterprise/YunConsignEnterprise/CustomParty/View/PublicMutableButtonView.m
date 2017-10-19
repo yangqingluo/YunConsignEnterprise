@@ -60,9 +60,11 @@
 }
 
 - (void)btnAction:(UIButton *)button {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"tag" : @(button.tag)}];
     if (self.indexPath) {
-        [self routerEventWithName:Event_PublicMutableButtonClicked userInfo:@{@"indexPath" : self.indexPath, @"tag" : @(button.tag)}];
+        [m_dic setObject:self.indexPath forKey:@"indexPath"];
     }
+    [self routerEventWithName:Event_PublicMutableButtonClicked userInfo:[NSDictionary dictionaryWithDictionary:m_dic]];
 }
 
 @end

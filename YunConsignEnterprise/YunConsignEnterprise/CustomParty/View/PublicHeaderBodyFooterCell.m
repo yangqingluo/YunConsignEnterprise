@@ -33,7 +33,7 @@
 }
 
 - (void)setupHeader {
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.baseView.width, 32)];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.baseView.width, kCellHeightSmall)];
     _headerView.backgroundColor = CellHeaderLightBlueColor;
     [self.baseView addSubview:_headerView];
     
@@ -47,7 +47,7 @@
 }
 
 - (void)setupFooter {
-    _footerView = [[PublicMutableButtonView alloc] initWithFrame:CGRectMake(0, self.baseView.height - 32, self.baseView.width, 32)];
+    _footerView = [[PublicMutableButtonView alloc] initWithFrame:CGRectMake(0, self.baseView.height - kCellHeightSmall, self.baseView.width, kCellHeightSmall)];
     _footerView.showTopHorizontalSeparator = YES;
     _footerView.defaultWidthScale = 1.0 / 4;
     _footerView.mutableContentAlignment = PublicMutableContentAlignmentRight;

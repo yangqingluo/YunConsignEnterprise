@@ -7,6 +7,7 @@
 //
 
 #import "WayBillDetailVC.h"
+#import "WaybillChangeListVC.h"
 
 #import "MJRefresh.h"
 #import "PublicMutableButtonView.h"
@@ -188,10 +189,6 @@
 }
 
 #pragma mark - UITableView
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSUInteger rows = 0;
     switch (section) {
@@ -214,17 +211,6 @@
             break;
     }
     return rows;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 2) {
-        return kEdgeHuge;
-    }
-    return 0.01;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kEdge;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -393,5 +379,33 @@
     return [UITableViewCell new];
 }
 
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                
+            }
+                break;
+                
+            case 1:{
+                
+            }
+                break;
+                
+            case 2:{
+                WaybillChangeListVC *vc = [WaybillChangeListVC new];
+                vc.detailData = [self.detailData copy];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
 
 @end
