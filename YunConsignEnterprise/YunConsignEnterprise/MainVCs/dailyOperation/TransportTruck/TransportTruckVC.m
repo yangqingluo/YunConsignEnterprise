@@ -8,6 +8,7 @@
 
 #import "TransportTruckVC.h"
 #import "TransportTruckTableVC.h"
+#import "PublicQueryConditionVC.h"
 
 #import "QCSlideSwitchView.h"
 
@@ -15,6 +16,7 @@
 
 @property (strong, nonatomic) QCSlideSwitchView *slidePageView;
 @property (strong, nonatomic) NSMutableArray *viewArray;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end
 
@@ -24,6 +26,7 @@
     [super viewDidLoad];
     [self setupNav];
     
+    [self updateQueryCondition];
     [self.view addSubview:self.slidePageView];
     [self.slidePageView buildUI];
 }
@@ -49,10 +52,44 @@
 }
 
 - (void)searchBtnAction {
+    PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
+    vc.type = QueryConditionType_TransportTruck;
+    vc.condition = [self.condition copy];
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            weakself.condition = (AppQueryConditionInfo *)object;
+            [weakself updateQueryCondition];
+        }
+    };
     
+    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:NO completion:^{
+        
+    }];
+}
+
+- (void)updateQueryCondition {
+    for (NSDictionary *m_dic in self.viewArray) {
+        TransportTruckTableVC *vc = m_dic[@"VC"];
+        if (vc) {
+            vc.condition = [self.condition copy];
+            vc.isResetCondition = YES;
+            if ([self.viewArray indexOfObject:m_dic] == self.slidePageView.selectedIndex) {
+                [vc becomeListed];
+            }
+        }
+    }
 }
 
 #pragma mark - getter
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+    }
+    return _condition;
+}
+
 - (QCSlideSwitchView *)slidePageView{
     if (!_slidePageView) {
         _slidePageView = [[QCSlideSwitchView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom, self.view.width, self.view.height - self.navigationBarView.bottom)];

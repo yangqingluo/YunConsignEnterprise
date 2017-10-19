@@ -154,9 +154,6 @@
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
-        NSDate *date_now = [NSDate date];
-        _condition.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
-        _condition.end_time = date_now;
         _condition.is_cancel = @"2";
     }
     return _condition;

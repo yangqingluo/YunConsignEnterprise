@@ -17,9 +17,7 @@
     BOOL _isBuildUI;                                //是否建立了ui
     
     NSInteger _userSelectedChannelID;               //点击按钮选择名字ID
-    
-    
-    
+
     UIColor *_tabItemNormalColor;                   //正常时tab文字颜色
     UIColor *_tabItemSelectedColor;                 //选中时tab文字颜色
     UIImage *_tabItemNormalBackgroundImage;         //正常时tab的背景
@@ -36,7 +34,6 @@
 @property (nonatomic, strong) UIScrollView *topScrollView;
 @property (nonatomic, assign) CGFloat userContentOffsetX;
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
-@property (nonatomic, assign) NSInteger scrollViewSelectedChannelID;
 @property (nonatomic, weak)  id<QCSlideSwitchViewDelegate> delegate;
 @property (nonatomic, strong) UIColor *tabItemNormalColor;
 @property (nonatomic, strong) UIColor *tabItemSelectedColor;
@@ -44,7 +41,8 @@
 @property (nonatomic, strong) UIImage *tabItemSelectedBackgroundImage;
 
 @property (nonatomic, strong) NSMutableArray *viewArray;
-@property (nonatomic, strong) IBOutlet UIButton *rigthSideButton;
+@property (nonatomic, strong) UIButton *rigthSideButton;
+@property (nonatomic, assign, readonly) NSUInteger selectedIndex;
 
 /*!
  * @method 创建子视图UI

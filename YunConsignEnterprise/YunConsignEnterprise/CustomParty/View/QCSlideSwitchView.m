@@ -68,6 +68,9 @@ static const NSUInteger kTagOfRightSideButton = 999;
 }
 
 #pragma mark getter/setter
+- (NSUInteger)selectedIndex {
+    return _userSelectedChannelID - 100;
+}
 
 - (void)setRigthSideButton:(UIButton *)rigthSideButton
 {

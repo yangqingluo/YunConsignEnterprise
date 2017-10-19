@@ -345,6 +345,14 @@ BOOL isTrue(NSString *string) {
 
 @implementation AppQueryConditionInfo
 
-
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        NSDate *date_now = [NSDate date];
+        self.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
+        self.end_time = date_now;
+    }
+    return self;
+}
 
 @end

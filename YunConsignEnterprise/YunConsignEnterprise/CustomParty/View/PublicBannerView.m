@@ -117,11 +117,16 @@
         }
         
         if (m_pid_image_prefix.length) {
-            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%d", m_pid_image_prefix, item.sort]];
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@", m_pid_image_prefix, item.menu_code]];
             if (image) {
                 m_image = image;
             }
-
+            else {
+                UIImage *image_sort = [UIImage imageNamed:[NSString stringWithFormat:@"%@%d", m_pid_image_prefix, item.sort]];
+                if (image_sort) {
+                    m_image = image_sort;
+                }
+            }
         }
         [button setImage:m_image forState:UIControlStateNormal];
         if (item.menu_icon.length) {

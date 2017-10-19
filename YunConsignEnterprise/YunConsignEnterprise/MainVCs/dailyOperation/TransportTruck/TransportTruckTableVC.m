@@ -38,7 +38,8 @@
 
 - (void)becomeListed{
     NSDate *lastRefreshTime = [[NSUserDefaults standardUserDefaults] objectForKey:self.dateKey];
-    if (!self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
+    if (self.isResetCondition || !self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
+        self.isResetCondition = NO;
         [self.tableView.mj_header beginRefreshing];
     }
 }
@@ -56,8 +57,24 @@
 }
 
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSDate *date_now = [NSDate date];
-    NSDictionary *m_dic = @{@"transport_truck_state" : [NSString stringWithFormat:@"%d", (int)self.indextag + 1],  @"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]};
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_state" : [NSString stringWithFormat:@"%d", (int)self.indextag + 1], @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.start_station_city) {
+            [m_dic setObject:self.condition.start_station_city.open_city_id forKey:@"start_station_city_id"];
+        }
+        if (self.condition.end_station_city) {
+            [m_dic setObject:self.condition.end_station_city.open_city_id forKey:@"end_station_city_id"];
+        }
+        if (self.condition.truck_number_plate) {
+            [m_dic setObject:self.condition.truck_number_plate forKey:@"truck_number_plate"];
+        }
+    }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryTransportTruckByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];

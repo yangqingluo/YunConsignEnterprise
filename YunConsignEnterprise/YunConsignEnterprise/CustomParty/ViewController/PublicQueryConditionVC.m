@@ -50,10 +50,6 @@
 - (void)initializeData{
     switch (self.type) {
         case QueryConditionType_WaybillQuery:{
-            NSDate *date_now = [NSDate date];
-            self.condition.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
-            self.condition.end_time = date_now;
-            self.condition.is_cancel = @"2";
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
@@ -62,6 +58,15 @@
                            @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
             [self pullDataDictionaryFunctionForCode:@"query_column" selectionInIndexPath:nil];
+        }
+            break;
+            
+        case QueryConditionType_TransportTruck:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"起点城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
+                           @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
+                           @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
         }
             break;
             
@@ -100,16 +105,32 @@
 }
 
 - (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    if (!([dict_code isEqualToString:@"start_service"] || [dict_code isEqualToString:@"end_service"])) {
-        return;
-    }
-    
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:[dict_code isEqualToString:@"start_service"] ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            [weakself.dataDic setObject:m_array forKey:dict_code];
+            if (m_array.count) {
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             [weakself.dataDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
                 if (indexPath) {
@@ -218,6 +239,27 @@
             [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
+    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
+        NSArray *dataArray = [self.dataDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppCityInfo *m_data in dataArray) {
+                [m_array addObject:m_data.open_city_name];
+            }
+            NSDictionary *m_dic = self.showArray[indexPath.row];
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    [weakself.condition setValue:dataArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
     else if ([self.boolValidSet containsObject:key]) {
         NSArray *m_array = @[@"是", @"否"];
         NSDictionary *m_dic = self.showArray[indexPath.row];
@@ -249,7 +291,7 @@
 
 - (NSSet *)inputValidSet {
     if (!_inputValidSet) {
-        _inputValidSet = [NSSet setWithObjects:@"query_val", nil];
+        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", nil];
     }
     return _inputValidSet;
 }
@@ -325,6 +367,9 @@
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"service_name"];
+    }
+    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
+        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"open_city_name"];
     }
     else {
         if ([AppPublic getVariableWithClass:self.condition.class varName:key]) {
