@@ -7,6 +7,7 @@
 //
 
 #import "PayOnReceiptVC.h"
+#import "PublicQueryConditionVC.h"
 
 #import "PayOnReceiptCell.h"
 #import "MJRefresh.h"
@@ -14,6 +15,7 @@
 @interface PayOnReceiptVC ()
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end
 
@@ -48,8 +50,19 @@
 }
 
 - (void)searchBtnAction {
-    
+    PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
+    vc.type = QueryConditionType_PayOnReceipt;
+    vc.condition = [self.condition copy];
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            weakself.condition = (AppQueryConditionInfo *)object;
+            [weakself.tableView.mj_header beginRefreshing];
+        }
+    };
+    [vc showFromVC:self];
 }
+
 - (void)loadFirstPageData{
     [self queryWaybillListByConditionFunction:YES];
 }
@@ -59,8 +72,19 @@
 }
 
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSDate *date_now = [NSDate date];
-    NSDictionary *m_dic = @{@"start_time" : stringFromDate([date_now dateByAddingTimeInterval:defaultAddingTimeInterval], @"yyyy-MM-dd"), @"end_time" : stringFromDate(date_now, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]};
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.query_column && self.condition.query_val) {
+            [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
+            [m_dic setObject:self.condition.query_val forKey:@"query_val"];
+        }
+    }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receipt_queryNeedReceiptWaybillListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -107,6 +131,13 @@
 }
 
 #pragma mark - getter
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+    }
+    return _condition;
+}
+
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
