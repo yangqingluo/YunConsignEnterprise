@@ -234,32 +234,83 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *waybill_state_text;//运单状态文本
 @property (strong, nonatomic) NSString *route;//线路信息
 @property (strong, nonatomic) NSString *cust;//客户信息
-@property (strong, nonatomic) NSString *pay_now_amount;//现付金额
-@property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付金额
-@property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
-@property (strong, nonatomic) NSString *is_urgent;//是否急货
-@property (strong, nonatomic) NSString *is_cash_on_delivery;//是否有代收款
-@property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
-@property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
-@property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
+@property (strong, nonatomic) NSString *total_amount;//总费用
+//代收款
+@property (strong, nonatomic) NSString *is_cash_on_delivery;
+@property (strong, nonatomic) NSString *cash_on_delivery_amount;
+@property (strong, nonatomic) NSString *cash_on_delivery_type;
 @property (strong, nonatomic) NSString *cash_on_delivery_type_text;
-@property (strong, nonatomic) NSString *consignee_name;
-@property (strong, nonatomic) NSString *consignee_phone;
+//现付
+@property (strong, nonatomic) NSString *is_pay_now;
+@property (strong, nonatomic) NSString *pay_now_amount;
+//提付
+@property (strong, nonatomic) NSString *is_pay_on_delivery;
+@property (strong, nonatomic) NSString *pay_on_delivery_amount;
+//回单付
+@property (strong, nonatomic) NSString *is_pay_on_receipt;
+@property (strong, nonatomic) NSString *pay_on_receipt_amount;
+
+@property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
+@property (strong, nonatomic) NSString *is_urgent;//是否急货
+@property (strong, nonatomic) NSString *start_station_city_id;//发站城市编号
+@property (strong, nonatomic) NSString *start_station_city_name;//发站城市名称
+@property (strong, nonatomic) NSString *start_station_service_id;//发站网点编号
+@property (strong, nonatomic) NSString *start_station_service_name ;//发站网点名称
+@property (strong, nonatomic) NSString *end_station_city_id;//到站城市编号
+@property (strong, nonatomic) NSString *end_station_city_name;//到站城市名称
+@property (strong, nonatomic) NSString *end_station_service_id;//到站网点编号
+@property (strong, nonatomic) NSString *end_station_service_name;//到站网点名称
+@property (strong, nonatomic) NSString *shipper_name;//发货人名称
+@property (strong, nonatomic) NSString *shipper_phone;//发货人电话
+@property (strong, nonatomic) NSString *consignee_name;//收货人名称
+@property (strong, nonatomic) NSString *consignee_phone;//收货人电话
 @property (strong, nonatomic) NSString *goods;//货物信息
-@property (strong, nonatomic) NSString *goods_name;
+@property (strong, nonatomic) NSString *goods_name;//品名
+@property (strong, nonatomic) NSString *goods_packge;//包装
+@property (strong, nonatomic) NSString *goods_total_count;//物品总件数
+@property (strong, nonatomic) NSString *goods_total_weight;//物品总重量
+@property (strong, nonatomic) NSString *goods_total_volume;//物品总体积
 @property (strong, nonatomic) NSString *goods_number;//货物编号
-@property (strong, nonatomic) NSString *goods_packge;
-@property (strong, nonatomic) NSString *goods_total_count;
-@property (strong, nonatomic) NSString *goods_total_volume;
-@property (strong, nonatomic) NSString *goods_total_weight;
-@property (strong, nonatomic) NSString *shipper_name;
-@property (strong, nonatomic) NSString *end_station_city_name;
-@property (strong, nonatomic) NSString *start_station_city_name;
-@property (strong, nonatomic) NSString *start_station_service_name;
-@property (strong, nonatomic) NSString *total_amount;
 
 - (NSString *)statusStringForState;
 - (UIColor *)statusColorForState;
+
+@end
+
+@interface AppWayBillDetailInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *receipt_state;//回单状态 RECEIPT_STATE 未到站、未付款、已付款
+@property (strong, nonatomic) NSString *cash_on_delivery_state;//代收款状态 CASH_ON_DELIVERY_STATE 未收款、已收款、已申请、已审核、已放款
+@property (strong, nonatomic) NSString *consignment_time;//托运时间
+@property (strong, nonatomic) NSString *location_type;//当前位置类型 LOCATION_TYPE 固定门店、专线车辆、已送达客户
+@property (strong, nonatomic) NSString *location_id;//当前位置编号
+@property (strong, nonatomic) NSString *location_time;//位置变更时间
+@property (strong, nonatomic) NSString *freight;//运费
+@property (strong, nonatomic) NSString *is_insured;//是否保价 YES_NO
+@property (strong, nonatomic) NSString *insurance_amount;//保价金额
+@property (strong, nonatomic) NSString *insurance_fee;//保价费
+@property (strong, nonatomic) NSString *is_take_goods;//是否上门接货 YES_NO
+@property (strong, nonatomic) NSString *take_goods_fee;//接货费
+@property (strong, nonatomic) NSString *is_deliver_goods;//是否送货上门 YES_NO
+@property (strong, nonatomic) NSString *deliver_goods_fee;//送货费
+@property (strong, nonatomic) NSString *is_receipt;//是否有回单 YES_NO
+@property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式 RECEIPT_SIGN_TYPE 无回单、签字、盖章、签字+盖章
+@property (strong, nonatomic) NSString *rebate_fee;//回扣费
+@property (strong, nonatomic) NSString *forklift_fee;//叉车费
+@property (strong, nonatomic) NSString *return_fee;//原货返回费
+@property (strong, nonatomic) NSString *pay_for_sb_fee;//垫付款
+@property (strong, nonatomic) NSString *operator_id;//开单人编号
+@property (strong, nonatomic) NSString *operator_name;//开单人名称
+@property (strong, nonatomic) NSString *operate_time;//开单时间
+@property (strong, nonatomic) NSString *join_id;//加盟商编号
+@property (strong, nonatomic) NSString *join_short_name;//加盟商简称
+@property (strong, nonatomic) NSString *service_id;//门店编号
+@property (strong, nonatomic) NSString *service_name;//门店名称
+@property (strong, nonatomic) NSString *note;//备注
+@property (strong, nonatomic) NSString *inner_note;//内部备注
+@property (strong, nonatomic) NSString *is_return_waybill;//是否原货返货 YES_NO
+@property (strong, nonatomic) NSString *return_waybill_number ;//原货返回运单号
+@property (strong, nonatomic) NSString *waybill_change_count;//运单修改次数
 
 @end
 

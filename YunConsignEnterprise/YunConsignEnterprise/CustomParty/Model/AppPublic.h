@@ -24,6 +24,9 @@
 #define AuxiliaryColor               RGBA(0x00, 0x97, 0xa7, 1.0)
 #define baseSeparatorColor           RGBA(0xdb, 0xdb, 0xdb, 1.0)
 #define baseSeparatorAlphaColor      RGBA(0xdb, 0xdb, 0xdb, 0.6)
+#define EmphasizedColor              RGBA(0xec, 0xda, 0x60, 1.0)//强调色
+#define WarningColor                 RGBA(0xc5, 0x2c, 0x2c, 1.0)//警告色
+#define CellHeaderLightBlueColor     RGBA(0xf4, 0xfb, 0xfc, 1.0)//表格表头/列表标题背景色
 
 #define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1.0)
 #define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1.0)
@@ -162,6 +165,7 @@ NSString *dateStringWithTimeString(NSString *string);
 + (void)adjustLabelWidth:(UILabel *)label;
 + (void)adjustLabelHeight:(UILabel *)label;
 + (UIFont *)appFontOfSize:(CGFloat)fontSize;
++ (UIFont *)boldAppFontOfSize:(CGFloat)fontSize;
 + (UIFont *)appFontOfPxSize:(CGFloat)pxSize;
 
 //切圆角

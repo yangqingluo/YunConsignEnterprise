@@ -235,6 +235,12 @@ BOOL isTrue(NSString *string) {
 @end
 
 
+@implementation AppWayBillDetailInfo
+
+
+
+@end
+
 @implementation AppCanReceiveWayBillInfo
 
 - (NSString *)payStyleStringForState {

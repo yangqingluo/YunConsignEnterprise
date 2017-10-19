@@ -34,7 +34,7 @@
 
 - (void)setupHeader {
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.baseView.width, 32)];
-    _headerView.backgroundColor = RGBA(0xf4, 0xfb, 0xfc, 1.0);
+    _headerView.backgroundColor = CellHeaderLightBlueColor;
     [self.baseView addSubview:_headerView];
     
     [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _headerView.height - appSeparaterLineSize, _headerView.width, appSeparaterLineSize))];

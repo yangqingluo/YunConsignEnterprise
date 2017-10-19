@@ -298,6 +298,10 @@ NSString *dateStringWithTimeString(NSString *string){
     return [UIFont systemFontOfSize:fontSize];
 }
 
++ (UIFont *)boldAppFontOfSize:(CGFloat)fontSize {
+    return [UIFont boldSystemFontOfSize:fontSize];
+}
+
 + (UIFont *)appFontOfPxSize:(CGFloat)pxSize {
     return [UIFont systemFontOfSize:[AppPublic systemFontOfPXSize:pxSize]];
 }

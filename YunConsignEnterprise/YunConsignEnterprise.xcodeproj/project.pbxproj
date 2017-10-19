@@ -280,6 +280,8 @@
 		E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
 		E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C7FE1F792FCE002053CD /* WayBillCell.m */; };
+		E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E29E171F98923000A24504 /* WayBillDetailVC.m */; };
+		E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */; };
 		E4E744351F96041D00CEC8FA /* WaybillLoadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E744341F96041D00CEC8FA /* WaybillLoadVC.m */; };
 		E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E744371F96066400CEC8FA /* WaybillLoadCell.m */; };
 		E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DA1F7264E5003F69C0 /* JXTAlertController.m */; };
@@ -723,6 +725,10 @@
 		E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillTitleCell.m; sourceTree = "<group>"; };
 		E4E0C7FD1F792FCE002053CD /* WayBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillCell.h; sourceTree = "<group>"; };
 		E4E0C7FE1F792FCE002053CD /* WayBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillCell.m; sourceTree = "<group>"; };
+		E4E29E161F98923000A24504 /* WayBillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillDetailVC.h; sourceTree = "<group>"; };
+		E4E29E171F98923000A24504 /* WayBillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillDetailVC.m; sourceTree = "<group>"; };
+		E4E29E191F9899FE00A24504 /* WayBillDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillDetailHeaderView.h; sourceTree = "<group>"; };
+		E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillDetailHeaderView.m; sourceTree = "<group>"; };
 		E4E744331F96041D00CEC8FA /* WaybillLoadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadVC.h; sourceTree = "<group>"; };
 		E4E744341F96041D00CEC8FA /* WaybillLoadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadVC.m; sourceTree = "<group>"; };
 		E4E744361F96066400CEC8FA /* WaybillLoadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadCell.h; sourceTree = "<group>"; };
@@ -841,6 +847,8 @@
 			children = (
 				E40F7CA01F95A71700946C18 /* WayBillQueryVC.h */,
 				E40F7CA11F95A71700946C18 /* WayBillQueryVC.m */,
+				E4E29E161F98923000A24504 /* WayBillDetailVC.h */,
+				E4E29E171F98923000A24504 /* WayBillDetailVC.m */,
 			);
 			name = WayBillQuery;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WayBillQuery;
@@ -1026,6 +1034,8 @@
 				E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */,
 				E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */,
 				E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */,
+				E4E29E191F9899FE00A24504 /* WayBillDetailHeaderView.h */,
+				E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */,
 				E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */,
 				E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */,
 				E4AEA0E21F5EA98A002EBE41 /* UIView+KGViewExtend.h */,
@@ -1810,6 +1820,7 @@
 				E4AEA0841F5EA6D0002EBE41 /* AFAutoPurgingImageCache.m in Sources */,
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
 				E4AEA0C21F5EA6D0002EBE41 /* SDImageCacheConfig.m in Sources */,
+				E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */,
 				E40F7CA61F95A71700946C18 /* PublicCustomerPhoneVC.m in Sources */,
 				E4BC30B11F9723CD00CAADAE /* WaybillArrivalVC.m in Sources */,
 				E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */,
@@ -1912,6 +1923,7 @@
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,
+				E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */,
 				E4AEA0C11F5EA6D0002EBE41 /* SDImageCache.m in Sources */,
 				E4AEA0DD1F5EA8CE002EBE41 /* UIImage+Rotate.m in Sources */,
 				E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */,

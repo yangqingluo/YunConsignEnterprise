@@ -8,6 +8,7 @@
 
 #import "WayBillQueryVC.h"
 #import "PublicQueryConditionVC.h"
+#import "WayBillDetailVC.h"
 
 #import "WayBillCell.h"
 #import "MJRefresh.h"
@@ -189,6 +190,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    WayBillDetailVC *vc = [WayBillDetailVC new];
+    vc.data = self.dataSource[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
