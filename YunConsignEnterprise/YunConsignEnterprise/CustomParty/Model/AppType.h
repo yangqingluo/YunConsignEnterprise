@@ -43,6 +43,18 @@ BOOL isTrue(NSString *string);
 
 @end
 
+//数据字典
+@interface AppDataDictionary : NSObject
+
+@property (strong, nonatomic) NSString *dict_id;//字典编号
+@property (strong, nonatomic) NSString *item_id;//项目编号
+@property (strong, nonatomic) NSString *item_name;//项目名称
+@property (strong, nonatomic) NSString *item_val;//项目值
+@property (strong, nonatomic) NSString *item_note;//项目备注
+@property (assign, nonatomic) int item_sort;//排序
+
+@end
+
 @interface Global : NSObject
 
 @property (assign, nonatomic) int flag;
@@ -400,5 +412,21 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_name;//货物
 @property (strong, nonatomic) NSString *total_amount;//运费
 @property (strong, nonatomic) NSString *is_load;//装车次数，0表示没有装车，一般为1，如果存在拆分多次装车，则为大于1的数字
+
+@end
+
+
+
+
+
+//查询条件
+@interface AppQueryConditionInfo : NSObject
+
+@property (strong, nonatomic) NSDate *start_time;//开始时间
+@property (strong, nonatomic) NSDate *end_time;//结束时间
+@property (strong, nonatomic) AppDataDictionary *query_column;//查询字段
+@property (strong, nonatomic) NSString *query_val;//查询内容
+@property (strong, nonatomic) AppServiceInfo *start_service;
+@property (strong, nonatomic) AppServiceInfo *end_service;
 
 @end

@@ -27,6 +27,13 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppDataDictionary
+
+
+
+@end
+
+
 @implementation Global
 
 
@@ -323,6 +330,20 @@ BOOL isTrue(NSString *string) {
 
 
 @implementation AppServiceGoodsDetailInfo
+
+
+
+@end
+
+
+
+
+
+
+
+
+
+@implementation AppQueryConditionInfo
 
 
 

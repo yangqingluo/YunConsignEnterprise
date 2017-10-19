@@ -12,26 +12,10 @@
 #import "SingleInputCell.h"
 #import "PublicDatePickerView.h"
 
-@interface AppQueryConditionInfo : AppType
-
-@property (strong, nonatomic) NSDate *start_time;//开始时间
-@property (strong, nonatomic) NSDate *end_time;//结束时间
-@property (strong, nonatomic) NSDictionary *query_column;//查询字段
-@property (strong, nonatomic) NSString *query_val;//查询内容
-
-@end
-
-@implementation AppQueryConditionInfo
-
-
-
-@end
-
-@interface PublicQueryConditionVC ()<UITextFieldDelegate>{
-    NSDictionary *doneDic;
-}
+@interface PublicQueryConditionVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
+@property (strong, nonatomic) NSMutableDictionary *dataDic;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSSet *inputValidSet;
 
@@ -69,14 +53,14 @@
             NSDate *date_now = [NSDate date];
             self.condition.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
             self.condition.end_time = date_now;
-            self.condition.query_column = [self dictionaryArrayForQueryKey:nil][0];
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
-                           @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service_id"},
-                           @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service_id"},
+                           @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
+                           @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
+            [self pullDataDictionaryFunctionForCode:@"query_column" selectionInIndexPath:nil];
         }
             break;
             
@@ -85,15 +69,64 @@
     }
 }
 
+- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSString *m_code = [dict_code uppercaseString];
+    
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            [weakself.dataDic setObject:m_array forKey:dict_code];
+            if (m_array.count) {
+                if (![self.condition valueForKey:dict_code]) {
+                    if ([dict_code isEqualToString:@"query_column"]) {
+                        [self.condition setValue:m_array[0] forKey:dict_code];
+                        [weakself.tableView reloadData];
+                    }
+                }
+                
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    if (!([dict_code isEqualToString:@"start_service"] || [dict_code isEqualToString:@"end_service"])) {
+        return;
+    }
+    
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:[dict_code isEqualToString:@"start_service"] ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            [weakself.dataDic setObject:m_array forKey:dict_code];
+            if (m_array.count) {
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)cancelButtonAction{
     [self goBackWithDone:NO];
 }
 
 - (void)searchButtonAction {
-    doneDic = @{@"start_time" : stringFromDate(self.condition.start_time, @"yyyy-MM-dd"),
-                @"end_time" : stringFromDate(self.condition.end_time, @"yyyy-MM-dd"),
-                @"query_column" : self.condition.query_column[@"key"],
-                @"query_val" : self.condition.query_val};
     [self goBackWithDone:YES];
 }
 
@@ -108,7 +141,7 @@
 
 - (void)doDoneAction{
     if (self.doneBlock) {
-        self.doneBlock(doneDic);
+        self.doneBlock(self.condition);
     }
 }
 
@@ -118,12 +151,87 @@
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
+        QKWEAKSELF;
+        PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [weakself.condition setValue:pickerView.datePicker.date forKey:key];
+                [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+        view.datePicker.maximumDate = [NSDate date];
+        id value = [self.condition valueForKey:key];
+        if (value) {
+            view.datePicker.date = value;
+        }
+        if ([key isEqualToString:@"start_time"]) {
+            id end_time = [self.condition valueForKey:@"end_time"];
+            if (end_time) {
+                view.datePicker.maximumDate = end_time;
+            }
+        }
+        [view show];
+    }
+    else if ([key isEqualToString:@"query_column"]) {
+        NSArray *dicArray = [self.dataDic objectForKey:key];
+        if (dicArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
+            for (AppDataDictionary *m_data in dicArray) {
+                [m_array addObject:m_data.item_name];
+            }
+            NSDictionary *m_dic = self.showArray[indexPath.row];
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
+                    [weakself.condition setValue:dicArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
+    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
+        NSArray *dataArray = [self.dataDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppServiceInfo *m_data in dataArray) {
+                [m_array addObject:m_data.service_name];
+            }
+            NSDictionary *m_dic = self.showArray[indexPath.row];
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    [weakself.condition setValue:dataArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
+}
+
 #pragma mark - getter
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
     }
     return _condition;
+}
+
+- (NSMutableDictionary *)dataDic {
+    if (!_dataDic) {
+        _dataDic = [NSMutableDictionary new];
+    }
+    return _dataDic;
 }
 
 - (NSSet *)inputValidSet{
@@ -148,18 +256,6 @@
         [AppPublic roundCornerRadius:btn cornerRadius:kButtonCornerRadius];
     }
     return _footerView;
-}
-
-- (NSArray *)dictionaryArrayForQueryKey:(NSString *)key {
-    NSArray *m_array = @[@{@"name":@"货物编号", @"key":@"goods_number"},
-                         @{@"name":@"发货单号", @"key":@"waybill_number"},
-                         @{@"name":@"收货人电话", @"key":@"consignee_phone"},
-                         @{@"name":@"收货人姓名", @"key":@"consignee_name"},
-                         @{@"name":@"发货人电话", @"key":@"shipper_phone"},
-                         @{@"name":@"发货人姓名", @"key":@"shipper_name"},
-                         @{@"name":@"开单人", @"key":@"user_name"}];
-    
-    return m_array;
 }
 
 #pragma mark - UITableView
@@ -205,7 +301,10 @@
     UITableViewCellAccessoryDisclosureIndicator;
     cell.baseView.textField.enabled = [self.inputValidSet containsObject:key];
     if ([key isEqualToString:@"query_column"]) {
-        cell.baseView.textField.text = self.condition.query_column[@"name"];
+        cell.baseView.textField.text = self.condition.query_column.item_name;
+    }
+    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
+        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"service_name"];
     }
     else {
         if ([AppPublic getVariableWithClass:self.condition.class varName:key]) {
@@ -226,47 +325,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSDictionary *m_dic = self.showArray[indexPath.row];
-    NSString *key = m_dic[@"key"];
-    if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
-        QKWEAKSELF;
-        PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
-            if (buttonIndex == 1) {
-                [weakself.condition setValue:pickerView.datePicker.date forKey:key];
-                [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            }
-        }];
-        view.datePicker.maximumDate = [NSDate date];
-        id value = [self.condition valueForKey:key];
-        if (value) {
-            view.datePicker.date = value;
-        }
-        if ([key isEqualToString:@"start_time"]) {
-            id end_time = [self.condition valueForKey:@"end_time"];
-            if (end_time) {
-                view.datePicker.maximumDate = end_time;
-            }
-        }
-        [view show];
-    }
-    else if ([key isEqualToString:@"query_column"]) {
-        NSArray *dictionaryArray = [self dictionaryArrayForQueryKey:nil];
-        if (dictionaryArray.count) {
-            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dictionaryArray.count];
-            for (NSDictionary *dic in dictionaryArray) {
-                [m_array addObject:dic[@"name"]];
-            }
-            NSDictionary *m_dic = self.showArray[indexPath.row];
-            QKWEAKSELF;
-            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                if (buttonIndex > 0 && (buttonIndex - 1) < dictionaryArray.count) {
-                    [weakself.condition setValue:dictionaryArray[buttonIndex - 1] forKey:key];
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
-            } otherButtonTitlesArray:m_array];
-            [sheet showInView:self.view];
-        }
-    }
+    [self selectRowAtIndexPath:indexPath];
 }
 
 #pragma  mark - TextField
