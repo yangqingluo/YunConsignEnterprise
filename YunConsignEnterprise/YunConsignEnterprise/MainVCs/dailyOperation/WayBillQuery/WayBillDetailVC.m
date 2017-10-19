@@ -28,6 +28,19 @@
     [super viewDidLoad];
     [self setupNav];
     
+    self.feeShowArray = @[@{@"title":@"回单",@"subTitle":@"未知",@"key":@"receipt_sign_type"},
+                          @{@"title":@"代收款",@"subTitle":@"未知",@"key":@"cash_on_delivery_type"},
+                          @{@"title":@"代收款金额",@"subTitle":@"0",@"key":@"cash_on_delivery_amount"},
+                          @{@"title":@"运费代扣",@"subTitle":@"未知",@"key":@"is_deduction_freight"},
+                          @{@"title":@"叉车费",@"subTitle":@"0",@"key":@"forklift_fee"},
+                          @[@{@"title":@"保价",@"subTitle":@"0",@"key":@"insurance_amount"},
+                            @{@"title":@"保价费",@"subTitle":@"0",@"key":@"insurance_fee"}],
+                          @[@{@"title":@"接货费",@"subTitle":@"0",@"key":@"take_goods_fee"},
+                            @{@"title":@"送货费",@"subTitle":@"0",@"key":@"deliver_goods_fee"}],
+                          @[@{@"title":@"回扣费",@"subTitle":@"0",@"key":@"rebate_fee"},
+                            @{@"title":@"垫付费",@"subTitle":@"0",@"key":@"pay_for_sb_fee"}],
+                          @{@"title":@"原返费",@"subTitle":@"0",@"key":@"return_fee"},
+                          @{@"title":@"原返运单",@"subTitle":@"无",@"key":@"return_waybill_number"},];
     self.footerView.bottom = self.view.height;
     self.footerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:self.footerView];
@@ -124,6 +137,54 @@
         }
     }
     return _footerView;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    UITableViewCell *cell = [super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    if (indexPath.section == 2) {
+        self.totalAmountLabel.text = [NSString stringWithFormat:@"总运费：%@", self.detailData.total_amount];
+    }
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView singleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    SingleInputCell *cell = (SingleInputCell *)[super tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    cell.baseView.textField.enabled = NO;
+    NSString *key = showObject[@"key"];
+    if ([self.selectorSet containsObject:key]) {
+        cell.baseView.textField.text = [UserPublic stringForType:[[self.detailData valueForKey:key] integerValue] key:key];
+    }
+    else if ([self.switchorSet containsObject:key]) {
+        cell.baseView.textField.text = isTrue([self.detailData valueForKey:key]) ? @"是" : @"否";
+    }
+    else {
+        NSString *value = [self.detailData valueForKey:key];
+        if (value) {
+            cell.baseView.textField.text = value;
+        }
+    }
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView doubleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    NSArray *m_array = showObject;
+    DoubleInputCell *cell = (DoubleInputCell *)[super tableView:tableView doubleInputCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    cell.baseView.textField.enabled = NO;
+    cell.anotherBaseView.textField.enabled = NO;
+    NSDictionary *m_dic1 = m_array[0];
+    NSDictionary *m_dic2 = m_array[1];
+    NSString *key1 = m_dic1[@"key"];
+    NSString *value1 = [self.detailData valueForKey:key1];
+    if (value1) {
+        cell.baseView.textField.text = value1;
+    }
+    NSString *key2 = m_dic2[@"key"];
+    NSString *value2 = [self.detailData valueForKey:key2];
+    if (value2) {
+        cell.anotherBaseView.textField.text = value2;
+    }
+    
+    return cell;
 }
 
 #pragma mark - UITableView
@@ -295,15 +356,8 @@
                 id object = self.feeShowArray[indexPath.row - 1];
                 if ([object isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *m_dic = object;
-                    NSString *key = m_dic[@"key"];
-                    
-                    if ([self.switchorSet containsObject:key]) {static NSString *CellIdentifier = @"fee_edit_switchor_cell";
-                        return [self tableView:tableView switchorCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
-                    }
-                    else {
-                        static NSString *CellIdentifier = @"fee_edit_cell";
-                        return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
-                    }
+                    static NSString *CellIdentifier = @"fee_edit_cell";
+                    return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
                 }
                 else if ([object isKindOfClass:[NSArray class]]){
                     NSArray *m_array = (NSArray *)object;
@@ -325,7 +379,6 @@
                 id object = self.payStyleShowArray[indexPath.row - 1];
                 if ([object isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *m_dic = object;
-                    NSString *key = m_dic[@"key"];
                     static NSString *CellIdentifier = @"pay_style_edit_cell";
                     return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
                 }
