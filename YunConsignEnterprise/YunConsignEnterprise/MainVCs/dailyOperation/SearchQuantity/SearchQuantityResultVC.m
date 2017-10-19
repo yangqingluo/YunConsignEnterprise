@@ -65,11 +65,11 @@
     if (!_viewArray) {
         _viewArray = [NSMutableArray new];
         SearchQuantityResultTableVC *vc0 = [[SearchQuantityResultTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:0];
-        vc0.data = [self.data copy];
+        vc0.condition = [self.condition copy];
         [_viewArray addObject:@{@"title":@"线路货量",@"VC":vc0}];
         
         SearchQuantityResultTableVC *vc1 = [[SearchQuantityResultTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:1];
-        vc1.data = [self.data copy];
+        vc1.condition = [self.condition copy];
         [_viewArray addObject:@{@"title":@"门店货量",@"VC":vc1}];
     }
     

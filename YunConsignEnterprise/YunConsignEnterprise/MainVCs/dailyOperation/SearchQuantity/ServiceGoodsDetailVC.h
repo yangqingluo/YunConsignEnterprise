@@ -10,7 +10,7 @@
 
 @interface ServiceGoodsDetailVC : AppBasicTableViewController
 
-@property (copy, nonatomic) AppSearchQuantityInfo *searchData;
+@property (copy, nonatomic) AppQueryConditionInfo *condition;
 @property (copy, nonatomic) AppServiceGoodsQuantityInfo *serviceQuantityData;
 
 @end

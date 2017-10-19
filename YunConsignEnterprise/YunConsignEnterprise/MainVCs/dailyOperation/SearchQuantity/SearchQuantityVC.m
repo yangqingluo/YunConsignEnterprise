@@ -15,7 +15,7 @@
 
 @interface SearchQuantityVC ()
 
-@property (strong, nonatomic) AppSearchQuantityInfo *data;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSMutableArray *cityArray;
 
@@ -55,9 +55,6 @@
                    @{@"title":@"结束时间",@"subTitle":@"必填，请选择"},
                    @{@"title":@"始发站",@"subTitle":@"请选择"},
                    @{@"title":@"终点站",@"subTitle":@"请选择"}];
-    _data = [AppSearchQuantityInfo new];
-    _data.end_time = [NSDate date];
-    _data.start_time = [_data.end_time dateByAddingTimeInterval:defaultAddingTimeInterval];
 }
 
 - (void)pullCityArrayFunction {
@@ -78,11 +75,18 @@
 
 - (void)searchButtonAction {
     SearchQuantityResultVC *vc = [SearchQuantityResultVC new];
-    vc.data = self.data;
+    vc.condition = self.condition;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - getter
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+    }
+    return _condition;
+}
+
 - (NSMutableArray *)cityArray {
     if (!_cityArray) {
         _cityArray = [NSMutableArray new];
@@ -148,22 +152,22 @@
     
     switch (indexPath.row) {
         case 0:{
-            cell.baseView.textField.text = self.data.showStartTimeString;
+            cell.baseView.textField.text = self.condition.showStartTimeString;
         }
             break;
             
         case 1:{
-            cell.baseView.textField.text = self.data.showEndTimeString;
+            cell.baseView.textField.text = self.condition.showEndTimeString;
         }
             break;
             
         case 2:{
-            cell.baseView.textField.text = self.data.start_station_city.open_city_name;
+            cell.baseView.textField.text = self.condition.start_station_city.open_city_name;
         }
             break;
             
         case 3:{
-            cell.baseView.textField.text = self.data.end_station_city.open_city_name;
+            cell.baseView.textField.text = self.condition.end_station_city.open_city_name;
         }
             break;
             
@@ -184,15 +188,15 @@
             QKWEAKSELF;
             PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
-                    weakself.data.start_time = pickerView.datePicker.date;
+                    weakself.condition.start_time = pickerView.datePicker.date;
                     [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }
             }];
-            if (self.data.start_time) {
-                view.datePicker.date = self.data.start_time;
+            if (self.condition.start_time) {
+                view.datePicker.date = self.condition.start_time;
             }
-            if (self.data.end_time) {
-                view.datePicker.maximumDate = self.data.end_time;
+            if (self.condition.end_time) {
+                view.datePicker.maximumDate = self.condition.end_time;
             }
             [view show];
         }
@@ -203,13 +207,13 @@
             QKWEAKSELF;
             PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
-                    weakself.data.end_time = pickerView.datePicker.date;
+                    weakself.condition.end_time = pickerView.datePicker.date;
                     [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }
             }];
             view.datePicker.maximumDate = [NSDate date];
-            if (self.data.end_time) {
-                view.datePicker.date = self.data.end_time;
+            if (self.condition.end_time) {
+                view.datePicker.date = self.condition.end_time;
             }
             [view show];
         }
@@ -225,7 +229,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < weakself.cityArray.count) {
-                        weakself.data.start_station_city = weakself.cityArray[buttonIndex - 1];
+                        weakself.condition.start_station_city = weakself.cityArray[buttonIndex - 1];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];
@@ -247,7 +251,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < weakself.cityArray.count) {
-                        weakself.data.end_station_city = weakself.cityArray[buttonIndex - 1];
+                        weakself.condition.end_station_city = weakself.cityArray[buttonIndex - 1];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];

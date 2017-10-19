@@ -71,12 +71,20 @@
 }
 
 - (void)pullDataFunction:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start_time" : stringFromDate(self.data.start_time, @"yyyy-MM-dd"), @"end_time" : stringFromDate(self.data.end_time, @"yyyy-MM-dd"), @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
-    if (self.data.start_station_city) {
-        [m_dic setObject:self.data.start_station_city.open_city_id forKey:@"start_station_city_id"];
-    }
-    if (self.data.end_station_city) {
-        [m_dic setObject:self.data.end_station_city.open_city_id forKey:@"end_station_city_id"];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_state" : [NSString stringWithFormat:@"%d", (int)self.indextag + 1], @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.start_station_city) {
+            [m_dic setObject:self.condition.start_station_city.open_city_id forKey:@"start_station_city_id"];
+        }
+        if (self.condition.end_station_city) {
+            [m_dic setObject:self.condition.end_station_city.open_city_id forKey:@"end_station_city_id"];
+        }
     }
     
     QKWEAKSELF;
@@ -140,7 +148,7 @@
     }
     else if (self.indextag == 1) {
         ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];
-        vc.searchData = self.data;
+        vc.condition = [self.condition copy];
         vc.serviceQuantityData = self.dataSource[button.tag];
         [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
     }
@@ -171,11 +179,11 @@
         [_headerView addSubview:baseView];
         
         UILabel *timeLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, baseView.width - 2 * kEdgeMiddle, baseView.height), nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-        timeLabel.text = [NSString stringWithFormat:@"%@~%@", self.data.showStartTimeString, self.data.showEndTimeString];
+        timeLabel.text = [NSString stringWithFormat:@"%@~%@", self.condition.showStartTimeString, self.condition.showEndTimeString];
         [baseView addSubview:timeLabel];
         
         UILabel *stationLabel = NewLabel(timeLabel.frame, timeLabel.textColor, timeLabel.font, NSTextAlignmentRight);
-        stationLabel.text = [NSString stringWithFormat:@"%@->%@", self.data.showStartStationString, self.data.showEndStationString];
+        stationLabel.text = [NSString stringWithFormat:@"%@->%@", self.condition.showStartStationString, self.condition.showEndStationString];
         [baseView addSubview:stationLabel];
         
         [baseView addSubview:NewSeparatorLine(CGRectMake(0, 0, baseView.width, appSeparaterLineSize))];

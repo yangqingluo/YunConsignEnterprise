@@ -10,6 +10,6 @@
 
 @interface SearchQuantityResultVC : AppBasicViewController
 
-@property (strong, nonatomic) AppSearchQuantityInfo *data;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end

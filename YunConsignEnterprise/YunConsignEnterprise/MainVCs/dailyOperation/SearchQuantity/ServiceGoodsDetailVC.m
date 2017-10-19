@@ -66,12 +66,20 @@
 }
 
 - (void)pullDataFunction:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start_time" : stringFromDate(self.searchData.start_time, @"yyyy-MM-dd"), @"end_time" : stringFromDate(self.searchData.end_time, @"yyyy-MM-dd"), @"service_id" : self.serviceQuantityData.service_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
-    if (self.searchData.start_station_city) {
-        [m_dic setObject:self.searchData.start_station_city.open_city_id forKey:@"start_station_city_id"];
-    }
-    if (self.searchData.end_station_city) {
-        [m_dic setObject:self.searchData.end_station_city.open_city_id forKey:@"end_station_city_id"];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : self.serviceQuantityData.service_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.start_station_city) {
+            [m_dic setObject:self.condition.start_station_city.open_city_id forKey:@"start_station_city_id"];
+        }
+        if (self.condition.end_station_city) {
+            [m_dic setObject:self.condition.end_station_city.open_city_id forKey:@"end_station_city_id"];
+        }
     }
     
     QKWEAKSELF;
@@ -136,11 +144,11 @@
         [_headerView addSubview:baseView];
         
         UILabel *timeLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, baseView.width - 2 * kEdgeMiddle, baseView.height), nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-        timeLabel.text = [NSString stringWithFormat:@"%@~%@", self.searchData.showStartTimeString, self.searchData.showEndTimeString];
+        timeLabel.text = [NSString stringWithFormat:@"%@~%@", self.condition.showStartTimeString, self.condition.showEndTimeString];
         [baseView addSubview:timeLabel];
         
         UILabel *stationLabel = NewLabel(timeLabel.frame, timeLabel.textColor, timeLabel.font, NSTextAlignmentRight);
-        stationLabel.text = [NSString stringWithFormat:@"%@->%@", self.searchData.showStartStationString, self.searchData.showEndStationString];
+        stationLabel.text = [NSString stringWithFormat:@"%@->%@", self.condition.showStartStationString, self.condition.showEndStationString];
         [baseView addSubview:stationLabel];
         
         [baseView addSubview:NewSeparatorLine(CGRectMake(0, 0, baseView.width, appSeparaterLineSize))];

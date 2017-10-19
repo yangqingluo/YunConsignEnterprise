@@ -291,23 +291,6 @@ BOOL isTrue(NSString *string) {
 
 @end
 
-@implementation AppSearchQuantityInfo
-
-- (NSString *)showStartTimeString {
-    return stringFromDate(self.start_time, @"yyyy-MM-dd");
-}
-- (NSString *)showEndTimeString {
-    return stringFromDate(self.end_time, @"yyyy-MM-dd");
-}
-- (NSString *)showStartStationString {
-    return self.start_station_city ? self.start_station_city.open_city_name : @"全部";
-}
-- (NSString *)showEndStationString {
-    return self.end_station_city ? self.end_station_city.open_city_name : @"全部";
-}
-
-@end
-
 
 @implementation AppGoodsQuantityInfo
 
@@ -353,6 +336,19 @@ BOOL isTrue(NSString *string) {
         self.end_time = date_now;
     }
     return self;
+}
+
+- (NSString *)showStartTimeString {
+    return stringFromDate(self.start_time, @"yyyy-MM-dd");
+}
+- (NSString *)showEndTimeString {
+    return stringFromDate(self.end_time, @"yyyy-MM-dd");
+}
+- (NSString *)showStartStationString {
+    return self.start_station_city ? self.start_station_city.open_city_name : @"全部";
+}
+- (NSString *)showEndStationString {
+    return self.end_station_city ? self.end_station_city.open_city_name : @"全部";
 }
 
 @end

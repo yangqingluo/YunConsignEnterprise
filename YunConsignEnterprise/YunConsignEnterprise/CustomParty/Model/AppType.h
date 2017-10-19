@@ -369,19 +369,6 @@ BOOL isTrue(NSString *string);
 
 @end
 
-@interface AppSearchQuantityInfo : AppType
-
-@property (strong, nonatomic) NSDate *start_time;//开始时间
-@property (strong, nonatomic) NSDate *end_time;//结束时间
-@property (strong, nonatomic) AppCityInfo *start_station_city;//始发站
-@property (strong, nonatomic) AppCityInfo *end_station_city;//终点站
-
-- (NSString *)showStartTimeString;
-- (NSString *)showEndTimeString;
-- (NSString *)showStartStationString;
-- (NSString *)showEndStationString;
-
-@end
 
 @interface AppGoodsQuantityInfo : AppType
 
@@ -436,5 +423,10 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppCityInfo *start_station_city;
 @property (strong, nonatomic) AppCityInfo *end_station_city;
 @property (strong, nonatomic) NSString *truck_number_plate;//车辆牌照
+
+- (NSString *)showStartTimeString;
+- (NSString *)showEndTimeString;
+- (NSString *)showStartStationString;
+- (NSString *)showEndStationString;
 
 @end

@@ -10,7 +10,7 @@
 
 @interface SearchQuantityResultTableVC : UITableViewController
 
-@property (copy, nonatomic) AppSearchQuantityInfo *data;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index;
 - (void)becomeListed;
