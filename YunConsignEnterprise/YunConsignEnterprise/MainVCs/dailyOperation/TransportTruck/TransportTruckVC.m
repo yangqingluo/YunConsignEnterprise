@@ -62,11 +62,7 @@
             [weakself updateQueryCondition];
         }
     };
-    
-    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:NO completion:^{
-        
-    }];
+    [vc showFromVC:self];
 }
 
 - (void)updateQueryCondition {

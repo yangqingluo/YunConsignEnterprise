@@ -25,6 +25,14 @@
 
 @implementation PublicQueryConditionVC
 
+- (void)showFromVC:(AppBasicViewController *)fromVC {
+    [fromVC.navigationController pushViewController:self animated:YES];
+    //    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:self];
+    //    [fromVC presentViewController:nav animated:NO completion:^{
+    //
+    //    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
@@ -57,7 +65,7 @@
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
-            [self pullDataDictionaryFunctionForCode:@"query_column" selectionInIndexPath:nil];
+            [self checkDataMapExistedFor:@"query_column"];
         }
             break;
             
@@ -79,8 +87,39 @@
         }
             break;
             
+        case QueryConditionType_WaybillArrival:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"始发城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
+                           @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
+                           @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
+        }
+            break;
+            
+        case QueryConditionType_WaybillReceive:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
+                           @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                           @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            [self checkDataMapExistedFor:@"query_column"];
+        }
+            break;
+            
         default:
             break;
+    }
+}
+
+- (void)checkDataMapExistedFor:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if (![self.condition valueForKey:key]) {
+            [self.condition setValue:dataArray[0] forKey:key];
+        }
+    }
+    else {
+        [self pullDataDictionaryFunctionForCode:@"query_column" selectionInIndexPath:nil];
     }
 }
 
@@ -162,12 +201,16 @@
 }
 
 - (void)goBackWithDone:(BOOL)done{
-    QKWEAKSELF;
-    [self.navigationController dismissViewControllerAnimated:NO completion:^{
-        if (done) {
-            [weakself doDoneAction];
-        }
-    }];
+    if (done) {
+        [self doDoneAction];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+//    QKWEAKSELF;
+//    [self.navigationController dismissViewControllerAnimated:NO completion:^{
+//        if (done) {
+//            [weakself doDoneAction];
+//        }
+//    }];
 }
 
 - (void)doDoneAction{

@@ -60,11 +60,7 @@
             [weakself.tableView.mj_header beginRefreshing];
         }
     };
-    
-    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:NO completion:^{
-        
-    }];
+    [vc showFromVC:self];
 }
 
 - (void)loadFirstPageData{
