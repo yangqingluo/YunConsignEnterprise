@@ -329,36 +329,6 @@ BOOL isTrue(NSString *string);
 
 @interface AppCanReceiveWayBillInfo : AppWayBillInfo
 
-//@property (strong, nonatomic) NSString *cash_on_delivery_amount;
-//@property (strong, nonatomic) NSString *cash_on_delivery_type;
-//@property (strong, nonatomic) NSString *cash_on_delivery_type_text;
-//@property (strong, nonatomic) NSString *consignee_name;
-//@property (strong, nonatomic) NSString *consignee_phone;
-//@property (strong, nonatomic) NSString *cust;
-//@property (strong, nonatomic) NSString *end_station_city_name;
-//@property (strong, nonatomic) NSString *goods;
-//@property (strong, nonatomic) NSString *goods_name;
-//@property (strong, nonatomic) NSString *goods_number;
-//@property (strong, nonatomic) NSString *goods_packge;
-//@property (strong, nonatomic) NSString *goods_total_count;
-//@property (strong, nonatomic) NSString *goods_total_volume;
-//@property (strong, nonatomic) NSString *goods_total_weight;
-//@property (strong, nonatomic) NSString *is_cash_on_delivery;
-//@property (strong, nonatomic) NSString *is_deduction_freight;
-//@property (strong, nonatomic) NSString *is_urgent;
-//@property (strong, nonatomic) NSString *pay_now_amount;
-//@property (strong, nonatomic) NSString *pay_on_delivery_amount;
-//@property (strong, nonatomic) NSString *pay_on_receipt_amount;
-//@property (strong, nonatomic) NSString *route;
-//@property (strong, nonatomic) NSString *shipper_name;
-//@property (strong, nonatomic) NSString *start_station_city_name;
-//@property (strong, nonatomic) NSString *start_station_service_name;
-//@property (strong, nonatomic) NSString *total_amount;
-//@property (strong, nonatomic) NSString *waybill_id;
-//@property (strong, nonatomic) NSString *waybill_number;
-//@property (strong, nonatomic) NSString *waybill_state;
-//@property (strong, nonatomic) NSString *waybill_state_text;
-
 - (NSString *)payStyleStringForState;
 
 @end

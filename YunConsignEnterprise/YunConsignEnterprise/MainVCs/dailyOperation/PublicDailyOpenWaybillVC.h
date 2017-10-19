@@ -15,7 +15,7 @@
 #import "SwitchorCell.h"
 #import "SwitchedInputCell.h"
 
-@interface PublicDailyOpenWaybillVC : AppBasicTableViewController
+@interface PublicDailyOpenWaybillVC : AppBasicTableViewController<UITextFieldDelegate>
 
 @property (strong, nonatomic) NSArray *feeShowArray;
 @property (strong, nonatomic) NSArray *payStyleShowArray;

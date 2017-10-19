@@ -14,7 +14,7 @@
 #import "BlockActionSheet.h"
 #import "WayBillSRHeaderView.h"
 
-@interface WayBillOpenVC ()<UITextFieldDelegate>
+@interface WayBillOpenVC ()
 
 @property (strong, nonatomic) WayBillSRHeaderView *headerView;
 @property (strong, nonatomic) UIView *footerView;

@@ -9,6 +9,7 @@
 #import "WayBillQueryVC.h"
 #import "PublicQueryConditionVC.h"
 #import "WayBillDetailVC.h"
+#import "WaybillEditVC.h"
 
 #import "WayBillCell.h"
 #import "MJRefresh.h"
@@ -199,7 +200,7 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        //        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
@@ -208,7 +209,11 @@
                 break;
                 
             case 1:{
+                AppWayBillInfo *item = self.dataSource[indexPath.row];
                 
+                WaybillEditVC *vc = [WaybillEditVC new];
+                vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
+                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
                 

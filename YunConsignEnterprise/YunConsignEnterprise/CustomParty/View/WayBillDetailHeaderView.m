@@ -73,9 +73,19 @@
     _receiverDetailLabel.numberOfLines = 0;
     _receiverDetailLabel.textAlignment = NSTextAlignmentRight;
     [_contentView addSubview:_receiverDetailLabel];
-    
-//    [self refreshSenderDetailLabel];
-//    [self refreshReceiverDetailLabel];
+}
+
+- (void)refreshDetailLabel:(UILabel *)label text:(NSString *)text subText:(NSString *)subText {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = kEdge;
+    NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic boldAppFontOfSize:appLabelFontSizeMiddle]};
+    NSDictionary *dic2 = @{NSFontAttributeName:[AppPublic appFontOfSize:appLabelFontSizeSmall]};
+    NSDictionary *dic3 = @{NSFontAttributeName:[AppPublic appFontOfSize:0], NSParagraphStyleAttributeName : paragraphStyle};
+    NSMutableAttributedString *m_string = [NSMutableAttributedString new];
+    [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:text attributes:dic1]];
+    [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:dic3]];
+    [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:subText attributes:dic2]];
+    label.attributedText = m_string;
 }
 
 #pragma mark - getter
@@ -100,18 +110,5 @@
     
     [self refreshDetailLabel:self.senderDetailLabel text:[NSString stringWithFormat:@"%@-%@\n",data.start_station_city_name, data.start_station_service_name] subText:[NSString stringWithFormat:@"%@-%@", data.shipper_name, data.shipper_phone]];
     [self refreshDetailLabel:self.receiverDetailLabel text:[NSString stringWithFormat:@"%@-%@\n",data.end_station_city_name, data.end_station_service_name] subText:[NSString stringWithFormat:@"%@-%@", data.consignee_name, data.consignee_phone]];
-}
-
-- (void)refreshDetailLabel:(UILabel *)label text:(NSString *)text subText:(NSString *)subText {
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = kEdge;
-    NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic boldAppFontOfSize:appLabelFontSizeMiddle]};
-    NSDictionary *dic2 = @{NSFontAttributeName:[AppPublic appFontOfSize:appLabelFontSizeSmall]};
-    NSDictionary *dic3 = @{NSFontAttributeName:[AppPublic appFontOfSize:0], NSParagraphStyleAttributeName : paragraphStyle};
-    NSMutableAttributedString *m_string = [NSMutableAttributedString new];
-    [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:text attributes:dic1]];
-    [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:dic3]];
-    [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:subText attributes:dic2]];
-    label.attributedText = m_string;
 }
 @end

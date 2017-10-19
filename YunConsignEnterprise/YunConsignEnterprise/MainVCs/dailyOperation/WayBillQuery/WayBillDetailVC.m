@@ -8,6 +8,7 @@
 
 #import "WayBillDetailVC.h"
 #import "WaybillChangeListVC.h"
+#import "WaybillEditVC.h"
 
 #import "MJRefresh.h"
 #import "PublicMutableButtonView.h"
@@ -74,7 +75,14 @@
 }
 
 - (void)editBtnAction {
-    
+    WaybillEditVC *vc = [WaybillEditVC new];
+    if (self.detailData) {
+        vc.detailData = self.detailData;
+    }
+    else {
+        vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[self.data mj_keyValues]];
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)pullWaybillDetailData {
