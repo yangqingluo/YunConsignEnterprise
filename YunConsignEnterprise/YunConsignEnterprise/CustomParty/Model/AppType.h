@@ -192,7 +192,7 @@ BOOL isTrue(NSString *string);
 //下单数据
 @interface AppSaveWayBillInfo : AppType
 
-@property (strong, nonatomic) NSString *end_station_service_id;//到站城市编号
+@property (strong, nonatomic) NSString *end_station_service_id;//到站门店编号
 @property (strong, nonatomic) NSString *shipper_name;//发货人名称
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称

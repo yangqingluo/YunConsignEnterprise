@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WaybillTitleView.h"
 
 @interface WaybillEditHeaderView : UIView
 
-@property (strong, nonatomic) UIView *titleView;
+@property (strong, nonatomic) WaybillTitleView *titleView;
 @property (strong, nonatomic) UILabel *senderLabel;
 @property (strong, nonatomic) UILabel *receiverLabel;
 @property (strong, nonatomic) UILabel *dateLabel;
@@ -21,6 +22,6 @@
 @property (strong, nonatomic) UILabel *senderDetailLabel;
 @property (strong, nonatomic) UILabel *receiverDetailLabel;
 
-@property (copy, nonatomic) AppWayBillDetailInfo *detailData;
+@property (weak, nonatomic) AppWayBillDetailInfo *detailData;
 
 @end

@@ -62,7 +62,7 @@
         }
     }
     
-    cell.textLabel.text = showObject;
+    cell.baseView.textLabel.text = showObject;
     return cell;
 }
 

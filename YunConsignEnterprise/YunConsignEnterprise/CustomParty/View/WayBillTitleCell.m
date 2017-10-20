@@ -13,16 +13,10 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIView *leftColorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kEdgeSmall, self.contentView.height)];
-        leftColorView.backgroundColor = MainColor;
-        leftColorView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        [self.contentView addSubview:leftColorView];
+        _baseView = [[WaybillTitleView alloc] initWithFrame:self.contentView.bounds];
+        [self.contentView addSubview:_baseView];
         
-        UIView *lineView = NewSeparatorLine(CGRectMake(0, self.height - appSeparaterLineSize, screen_width, appSeparaterLineSize));
-        lineView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-        [self addSubview:lineView];
-        
-        self.textLabel.font = [UIFont boldSystemFontOfSize:appLabelFontSizeMiddle];
+        self.baseView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     
     return self;

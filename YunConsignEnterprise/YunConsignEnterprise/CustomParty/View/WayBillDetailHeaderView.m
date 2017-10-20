@@ -104,7 +104,7 @@
 - (void)setData:(AppWayBillDetailInfo *)data {
     _data = data;
     
-    self.numberLabel.text = [NSString stringWithFormat:@"运单号： %@/%@", data.waybill_number, data.goods_number];
+    self.numberLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", data.waybill_number, data.goods_number];
     self.dateLabel.text = [NSString stringWithFormat:@"时间：%@", dateStringWithTimeString(data.operate_time)];
     self.urgentImageView.hidden = !isTrue(data.is_urgent);
     

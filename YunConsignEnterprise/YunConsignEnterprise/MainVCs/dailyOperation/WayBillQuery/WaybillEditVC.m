@@ -7,6 +7,7 @@
 //
 
 #import "WaybillEditVC.h"
+#import "PublicSRSelectVC.h"
 
 #import "WaybillEditHeaderView.h"
 
@@ -43,14 +44,14 @@
 }
 
 - (void)senderButtonAction {
-//    PublicSRSelectVC *vc = [PublicSRSelectVC new];
-//    vc.type = SRSelectType_Sender;
-//    vc.doneBlock = ^(id object){
-//        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
-//            self.headerView.senderInfo = [object copy];
-//        }
-//    };
-//    [self.navigationController pushViewController:vc animated:YES];
+    PublicSRSelectVC *vc = [PublicSRSelectVC new];
+    vc.type = SRSelectType_Sender;
+    vc.doneBlock = ^(id object){
+        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
+            
+        }
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)receiverButtonAction {
@@ -92,7 +93,7 @@
 }
 
 - (void)updateSubviews {
-    self.headerView.detailData = [self.detailData copy];
+    self.headerView.detailData = self.detailData;
     [self.tableView reloadData];
 }
 

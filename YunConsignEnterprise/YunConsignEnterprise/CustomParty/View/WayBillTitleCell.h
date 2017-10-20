@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WaybillTitleView.h"
 
 @interface WayBillTitleCell : UITableViewCell
+
+@property (strong, nonatomic) WaybillTitleView *baseView;
 
 @end

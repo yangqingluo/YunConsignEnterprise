@@ -36,21 +36,28 @@
     _headerView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_headerView];
     
+    _titleView = [[WaybillTitleView alloc] initWithFrame:CGRectMake(0, 0, _headerView.width, kCellHeightFilter)];
+    _titleView.textLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+    [_headerView addSubview:_titleView];
+    
     CGFloat leftSX = (4.0 / 17.0) * _headerView.width;
     CGFloat rightSX = (13.0 / 17.0) * _headerView.width;
+    CGFloat topSX = _titleView.bottom;
+    CGFloat heightSX = _headerView.height - _titleView.bottom;
     
     [_headerView addSubview:NewSeparatorLine(CGRectMake(0, 0, _headerView.width, appSeparaterLineSize))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _titleView.bottom - appSeparaterLineSize, _headerView.width, appSeparaterLineSize))];
     [_headerView addSubview:NewSeparatorLine(CGRectMake(0, _headerView.height - appSeparaterLineSize, _headerView.width, appSeparaterLineSize))];
-    [_headerView addSubview:NewSeparatorLine(CGRectMake(leftSX , 0, appSeparaterLineSize, _headerView.height))];
-    [_headerView addSubview:NewSeparatorLine(CGRectMake(rightSX, 0, appSeparaterLineSize, _headerView.height))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(leftSX , topSX, appSeparaterLineSize, heightSX))];
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(rightSX, topSX, appSeparaterLineSize, heightSX))];
     
-    _dateLabel = NewLabel(CGRectMake(leftSX, 0, rightSX - leftSX, _headerView.height), nil, nil, NSTextAlignmentCenter);
+    _dateLabel = NewLabel(CGRectMake(leftSX, topSX, rightSX - leftSX, heightSX), nil, nil, NSTextAlignmentCenter);
     [_headerView addSubview:_dateLabel];
     
-    _senderLabel = NewLabel(CGRectMake(0, 0, leftSX - 0, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
+    _senderLabel = NewLabel(CGRectMake(0, topSX, leftSX - 0, heightSX), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
     [_headerView addSubview:_senderLabel];
     
-    _receiverLabel = NewLabel(CGRectMake(rightSX, 0, _headerView.width - rightSX, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
+    _receiverLabel = NewLabel(CGRectMake(rightSX, topSX, _headerView.width - rightSX, heightSX), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
     [_headerView addSubview:_receiverLabel];
     
 //    self.dateLabel.text = stringFromDate(self.date, @"yyyy年MM月dd日");
@@ -158,6 +165,7 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_name, NSString *se
 - (void)setDetailData:(AppWayBillDetailInfo *)detailData {
     _detailData = detailData;
     
+    self.titleView.textLabel.text = [NSString stringWithFormat:@"运单号/货号：%@/%@", detailData.waybill_number, detailData.goods_number];
     self.dateLabel.text = dateStringWithTimeString(detailData.operate_time);
     [self refreshSenderDetailLabel];
     [self refreshReceiverDetailLabel];

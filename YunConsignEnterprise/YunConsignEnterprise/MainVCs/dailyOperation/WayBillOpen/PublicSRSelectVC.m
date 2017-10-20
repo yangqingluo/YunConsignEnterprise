@@ -206,6 +206,11 @@
     switch (indexPath.row) {
         case 0:
             if (self.serviceArray.count) {
+                if (self.type == SRSelectType_Sender) {
+                    //始发站默认为当前所属站点
+                    return;
+                }
+                
                 NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.serviceArray.count];
                 for (AppServiceInfo *item in self.serviceArray) {
                     [m_array addObject:item.showCityAndServiceName];
@@ -276,4 +281,5 @@
     [textField resignFirstResponder];
     return YES;
 }
+
 @end
