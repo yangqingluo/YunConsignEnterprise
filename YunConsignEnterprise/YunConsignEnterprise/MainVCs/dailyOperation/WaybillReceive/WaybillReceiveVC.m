@@ -97,7 +97,7 @@
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppCanReceiveWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
-            if (item.total < appPageSize) {
+            if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             else {

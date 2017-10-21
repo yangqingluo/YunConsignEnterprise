@@ -15,18 +15,12 @@
 
 @implementation WayBillOpenVC
 
-//- (void)dealloc {
-//    [self.toSavedata removeObserver:self forKeyPath:@"total_amount"];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
     
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
-    
-//    [self.toSavedata addObserver:self forKeyPath:@"total_amount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
 - (void)setupNav {
@@ -125,11 +119,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)switchorButtonAction:(IndexPathButton *)button {
+- (void)switchorButtonAction:(IndexPathSwitch *)button {
     if (button.indexPath.section == 1) {
         NSDictionary *m_dic = self.feeShowArray[button.indexPath.row - 1];
-        [self.toSavedata setValue:!button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
-        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.toSavedata setValue:!button.isOn ? @"2" : @"1" forKey:m_dic[@"key"]];
+//        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 
@@ -692,18 +686,5 @@
     
     return (range.location < length);
 }
-
-//#pragma mark - kvo
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    if ([keyPath isEqualToString:@"total_amount"]) {
-//        long long amount = [self.toSavedata.total_amount longLongValue];
-//        long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-//        long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-//        self.toSavedata.pay_on_delivery_amount = [NSString stringWithFormat:@"%lld", MAX(0, amount - payNowAmount - payOnReceiptAmount)];
-//        
-//        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSavedata.total_amount];
-//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
-//    }
-//}
 
 @end

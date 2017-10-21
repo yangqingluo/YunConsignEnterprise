@@ -72,10 +72,11 @@
         cell = [[SwitchorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-        [cell.baseView.switchor addTarget:self action:@selector(switchorButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.baseView.switchor addTarget:self action:@selector(switchorButtonAction:) forControlEvents:UIControlEventValueChanged];
     }
     
     cell.baseView.textLabel.text = showObject[@"title"];
+    cell.baseView.switchor.indexPath = [indexPath copy];
     return cell;
 }
 

@@ -55,7 +55,7 @@
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
-    NSDictionary *m_dic = @{@"waybill_id" : self.detailData.waybill_id};
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : self.detailData.waybill_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryWaybillChangeListByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -66,7 +66,7 @@
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppWaybillChangeInfo  mj_objectArrayWithKeyValuesArray:item.items]];
             
-            if (item.total < appPageSize) {
+            if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             else {
