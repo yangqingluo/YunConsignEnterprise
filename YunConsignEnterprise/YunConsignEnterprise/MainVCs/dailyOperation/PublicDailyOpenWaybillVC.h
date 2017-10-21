@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSSet *inputForSelectorSet;
 @property (strong, nonatomic) NSSet *switchorSet;
 @property (strong, nonatomic) NSSet *inputInvalidSet;
+@property (strong, nonatomic) NSSet *defaultKeyBoardTypeSet;
 
 @property (strong, nonatomic) IndexPathTextField *summaryFreightTextField;//物品总重量
 @property (strong, nonatomic) UILabel *totalAmountLabel;//总费用

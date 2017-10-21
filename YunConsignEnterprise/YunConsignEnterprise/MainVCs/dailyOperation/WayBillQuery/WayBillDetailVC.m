@@ -82,6 +82,13 @@
     else {
         vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[self.data mj_keyValues]];
     }
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
+            weakself.detailData = (AppWayBillDetailInfo *)object;
+            [weakself updateSubviews];
+        }
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -213,6 +213,12 @@
                 
                 WaybillEditVC *vc = [WaybillEditVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
+                QKWEAKSELF;
+                vc.doneBlock = ^(NSObject *object){
+                    if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
+                        [weakself.tableView.mj_header beginRefreshing];
+                    }
+                };
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;

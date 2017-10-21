@@ -140,6 +140,11 @@ NSString *sha1(NSString *string);
 NSString *notNilString(NSString *string);
 
 /*!
+ @brief 字典转中文字符串
+ */
++ (NSString *)logDic:(NSDictionary *)dic;
+
+/*!
  @brief 中文序数
  */
 NSString *indexChineseString(NSUInteger index);

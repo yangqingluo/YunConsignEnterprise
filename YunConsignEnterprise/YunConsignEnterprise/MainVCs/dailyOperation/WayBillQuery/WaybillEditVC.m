@@ -18,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
+      @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
+      @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
+      @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
+      @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},
+      @{@"title":@"修改原因",@"subTitle":@"无",@"key":@"change_cause"},];
+    
     [self.headerView setupTitle];
     self.tableView.tableHeaderView = self.headerView;
     self.title = @"运单修改";
@@ -56,25 +63,43 @@
         [self.toSavedata appendReceiverInfo:self.headerView.receiverInfo];
     }
     
-    if (!self.goodsArray.count) {
-        [self showHint:@"请添加货物信息"];
-        return;
-    }
-    else {
-        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
-    }
+//    if (!self.goodsArray.count) {
+//        [self showHint:@"请添加货物信息"];
+//        return;
+//    }
+//    else {
+//        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
+//    }
     
-    //    long long amount = [self.toSavedata.total_amount longLongValue];
-    //    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-    //    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-    //    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
-    //    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
-    //        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
-    //        return;
-    //    }
+//    long long amount = [self.toSavedata.total_amount longLongValue];
+//    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
+//    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
+//    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
+//    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
+//        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
+//        return;
+//    }
     
     self.toSavedata.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
-    [self pushUpdateWaybillFunction:@{@"waybill_id" : self.detailData.waybill_id, @"note" : @"yang_note"}];
+    NSDictionary *toSaveDic = [self.toSavedata mj_keyValues];
+    NSDictionary *detailDic = [self.detailData mj_keyValues];
+    NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    for (NSString *key in toSaveDic.allKeys) {
+        if ([key isEqualToString:@"waybill_items"]) {
+            continue;
+        }
+        if (![toSaveDic[key] isEqual:detailDic[key]]) {
+            [m_dic setObject:toSaveDic[key] forKey:key];
+        }
+    }
+    if (m_dic.count) {
+        NSLog(@"%@", [AppPublic logDic:m_dic]);
+        [m_dic setObject:self.detailData.waybill_id forKey:@"waybill_id"];
+        [self pushUpdateWaybillFunction:m_dic];
+    }
+    else {
+        [self updateWayBillSuccessWithChange:nil];
+    }
 }
 
 - (void)pushUpdateWaybillFunction:(NSDictionary *)parm {
@@ -85,7 +110,7 @@
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                [weakself updateWayBillSuccess];
+                [weakself updateWayBillSuccessWithChange:parm];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -97,12 +122,20 @@
     }];
 }
 
-- (void)updateWayBillSuccess {
-    QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已保存" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
-        [weakself goBackWithDone:YES];
-    } otherButtonTitles:nil];
-    [alert show];
+- (void)updateWayBillSuccessWithChange:(NSDictionary *)changedDic {
+    if (changedDic) {
+        for (NSString *key in changedDic.allKeys) {
+            [self.detailData setValue:changedDic[key] forKey:key];
+        }
+        QKWEAKSELF;
+        BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已更新" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+            [weakself goBackWithDone:YES];
+        } otherButtonTitles:nil];
+        [alert show];
+    }
+    else {
+        [self goBackWithDone:NO];
+    }
 }
 
 - (void)pullWaybillDetailData {

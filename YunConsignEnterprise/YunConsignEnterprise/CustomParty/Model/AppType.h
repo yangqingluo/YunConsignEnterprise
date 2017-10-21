@@ -227,6 +227,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_total_count;//物品总件数
 @property (strong, nonatomic) NSString *goods_total_weight;//物品总重量
 @property (strong, nonatomic) NSString *goods_total_volume;//物品总体积
+@property (strong, nonatomic) NSString *change_cause;//修改原因
 
 - (void)appendSenderInfo:(AppSendReceiveInfo *)info;
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info;

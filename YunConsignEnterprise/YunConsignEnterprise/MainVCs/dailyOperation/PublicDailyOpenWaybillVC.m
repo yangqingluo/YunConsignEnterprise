@@ -72,6 +72,7 @@
         cell = [[SwitchorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+        [cell.baseView.switchor addTarget:self action:@selector(switchorButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     cell.baseView.textLabel.text = showObject[@"title"];
@@ -98,7 +99,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     NSString *key = showObject[@"key"];
-    BOOL isKeybordDefault = [key isEqualToString:@"note"] || [key isEqualToString:@"inner_note"];
+    BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
     cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
@@ -220,6 +221,14 @@
     }
     
     return _inputInvalidSet;
+}
+
+- (NSSet *)defaultKeyBoardTypeSet {
+    if (!_defaultKeyBoardTypeSet) {
+        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"note", @"inner_note", @"change_cause", nil];
+    }
+    
+    return _defaultKeyBoardTypeSet;
 }
 
 #pragma mark - UITableView
