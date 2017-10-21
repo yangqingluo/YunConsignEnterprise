@@ -20,6 +20,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, screen_width, 160 + kEdge)];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        self.date = [NSDate date];
         [self setupHeader];
         [self setupContent];
     }
@@ -145,12 +146,24 @@
     }
 }
 
-#pragma mark - getter
-- (NSDate *)date {
-    if (!_date) {
-        _date = [NSDate date];
-    }
-    return _date;
+AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open_city_name, NSString *service_id, NSString *service_name, NSString *freight_cust_name, NSString *phone) {
+    AppSendReceiveInfo *info = [AppSendReceiveInfo new];
+    info.service = [AppServiceInfo new];
+    info.service.open_city_id = [open_city_id copy];
+    info.service.open_city_name = [open_city_name copy];
+    info.service.service_id = [service_id copy];
+    info.service.service_name = [service_name copy];
+    info.customer = [AppCustomerInfo new];
+    info.customer.freight_cust_name = [freight_cust_name copy];
+    info.customer.phone = [phone copy];
+    return info;
+}
+
+- (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData {
+    self.titleView.textLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", detailData.waybill_number, detailData.goods_number];
+    self.date = dateFromString(detailData.consignment_time, defaultDateFormat);
+    self.senderInfo = NewAppSendReceiveInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone);
+    self.receiverInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
 }
 
 #pragma mark - setter
@@ -164,4 +177,8 @@
     [self refreshReceiverDetailLabel];
 }
 
+- (void)setDate:(NSDate *)date {
+    _date = date;
+    self.dateLabel.text = stringFromDate(self.date, @"yyyy年MM月dd日");
+}
 @end

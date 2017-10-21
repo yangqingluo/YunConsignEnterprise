@@ -15,9 +15,9 @@
 
 @implementation WayBillOpenVC
 
-- (void)dealloc {
-    [self.toSavedata removeObserver:self forKeyPath:@"total_amount"];
-}
+//- (void)dealloc {
+//    [self.toSavedata removeObserver:self forKeyPath:@"total_amount"];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,7 +26,7 @@
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
     
-    [self.toSavedata addObserver:self forKeyPath:@"total_amount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+//    [self.toSavedata addObserver:self forKeyPath:@"total_amount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
 - (void)setupNav {
@@ -103,7 +103,7 @@
 //    }
     
     self.toSavedata.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
-    [self pushSaveWaybillFunction:self.toSavedata];
+    [self pushSaveWaybillFunction:[self.toSavedata app_keyValues]];
 }
 
 - (void)addGoodsButtonAction {
@@ -120,10 +120,17 @@
             [weakself.goodsArray addObject:item];
             [weakself caclateGoodsSummary];
             [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-            weakself.toSavedata.freight = [NSString stringWithFormat:@"%lld", weakself.goodsSummary.freight];
         }
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)switchorButtonAction:(IndexPathButton *)button {
+    if (button.indexPath.section == 1) {
+        NSDictionary *m_dic = self.feeShowArray[button.indexPath.row - 1];
+        [self.toSavedata setValue:!button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
+        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (void)checkButtonAction:(IndexPathButton *)button {
@@ -139,25 +146,30 @@
         [self.goodsArray removeObjectAtIndex:index];
         [self caclateGoodsSummary];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-        self.toSavedata.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
     }
 }
 
 - (void)caclateGoodsSummary {
-    _goodsSummary = nil;
+    long long freight = 0;
+    int number = 0;
+    double weight = 0.0;
+    double volume = 0.0;
     for (AppGoodsInfo *item in self.goodsArray) {
-        self.goodsSummary.freight += item.freight;
-        self.goodsSummary.number += item.number;
-        self.goodsSummary.weight += item.weight;
-        self.goodsSummary.volume += item.volume;
+        freight += item.freight;
+        number += item.number;
+        weight += item.weight;
+        volume += item.volume;
     }
+    self.toSavedata.freight = [NSString stringWithFormat:@"%lld", freight];
+    self.toSavedata.goods_total_count = [NSString stringWithFormat:@"%d", number];
+    self.toSavedata.goods_total_weight = [NSString stringWithFormat:@"%.1f", weight];
+    self.toSavedata.goods_total_volume = [NSString stringWithFormat:@"%.1f", volume];
 }
 
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     switch (indexPath.section) {
         case 0: {
-            self.goodsSummary.freight = [content longLongValue];
-            self.toSavedata.freight = [NSString stringWithFormat:@"%lld", self.goodsSummary.freight];
+            self.toSavedata.freight = [NSString stringWithFormat:@"%lld", [content longLongValue]];
         }
             break;
             
@@ -205,10 +217,10 @@
     }
 }
 
-- (void)pushSaveWaybillFunction:(AppSaveWayBillInfo *)saveInfo {
+- (void)pushSaveWaybillFunction:(NSDictionary *)parm {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_saveWaybillFunction" Parm:[saveInfo app_keyValues] completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_saveWaybillFunction" Parm:parm completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
             ResponseItem *item = responseBody;
@@ -266,12 +278,12 @@
     return _goodsArray;
 }
 
-- (AppGoodsInfo *)goodsSummary {
-    if (!_goodsSummary) {
-        _goodsSummary = [AppGoodsInfo new];
-    }
-    return _goodsSummary;
-}
+//- (AppGoodsInfo *)goodsSummary {
+//    if (!_goodsSummary) {
+//        _goodsSummary = [AppGoodsInfo new];
+//    }
+//    return _goodsSummary;
+//}
 
 - (AppSaveWayBillInfo *)toSavedata {
     if (!_toSavedata) {
@@ -498,11 +510,10 @@
                     self.summaryFreightTextField.indexPath = indexPath;
                 }
                 
-                AppGoodsInfo *item = self.goodsSummary;
                 [cell addShowContents:@[@"运费：",
-                                        [NSString stringWithFormat:@"%lld", item.freight],
+                                        self.toSavedata.freight,
                                         @"总数：",
-                                        [NSString stringWithFormat:@"%d/%.1f/%.1f", item.number, item.weight, item.volume]]];
+                                        [NSString stringWithFormat:@"%@/%@/%@", self.toSavedata.goods_total_count, self.toSavedata.goods_total_weight, self.toSavedata.goods_total_volume]]];
                 return cell;
             }
             else {
@@ -682,17 +693,17 @@
     return (range.location < length);
 }
 
-#pragma mark - kvo
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"total_amount"]) {
-        long long amount = [self.toSavedata.total_amount longLongValue];
-        long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-        long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-        self.toSavedata.pay_on_delivery_amount = [NSString stringWithFormat:@"%lld", MAX(0, amount - payNowAmount - payOnReceiptAmount)];
-        
-        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSavedata.total_amount];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
-    }
-}
+//#pragma mark - kvo
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    if ([keyPath isEqualToString:@"total_amount"]) {
+//        long long amount = [self.toSavedata.total_amount longLongValue];
+//        long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
+//        long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
+//        self.toSavedata.pay_on_delivery_amount = [NSString stringWithFormat:@"%lld", MAX(0, amount - payNowAmount - payOnReceiptAmount)];
+//        
+//        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSavedata.total_amount];
+//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
+//    }
+//}
 
 @end

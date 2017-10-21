@@ -33,5 +33,6 @@
 - (void)setupTitle;
 - (void)setupHeader;
 - (void)setupContent;
+- (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData;
 
 @end

@@ -20,7 +20,7 @@
 @property (strong, nonatomic) UIView *footerView;
 
 @property (strong, nonatomic) NSMutableArray *goodsArray;
-@property (strong, nonatomic) AppGoodsInfo *goodsSummary;
+//@property (strong, nonatomic) AppGoodsInfo *goodsSummary;
 
 @property (strong, nonatomic) AppSaveWayBillInfo *toSavedata;
 

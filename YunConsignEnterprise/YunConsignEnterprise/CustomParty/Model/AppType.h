@@ -197,7 +197,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称
 @property (strong, nonatomic) NSString *consignee_phone;//收货人电话
-@property (strong, nonatomic) NSString *freight;//运费
 @property (strong, nonatomic) NSString *insurance_amount;//保价金额
 @property (strong, nonatomic) NSString *insurance_fee;//保价费
 @property (strong, nonatomic) NSString *take_goods_fee;//接货费
@@ -223,6 +222,12 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式
 @property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
+@property (strong, nonatomic) NSString *freight;//运费
+@property (strong, nonatomic) NSString *goods_packge;//包装
+@property (strong, nonatomic) NSString *goods_total_count;//物品总件数
+@property (strong, nonatomic) NSString *goods_total_weight;//物品总重量
+@property (strong, nonatomic) NSString *goods_total_volume;//物品总体积
+
 - (void)appendSenderInfo:(AppSendReceiveInfo *)info;
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info;
 - (NSDictionary *)app_keyValues;
