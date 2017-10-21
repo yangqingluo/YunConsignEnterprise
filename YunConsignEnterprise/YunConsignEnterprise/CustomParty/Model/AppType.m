@@ -181,7 +181,7 @@ BOOL isTrue(NSString *string) {
     for (NSString *key in m_dic.allKeys) {
         NSString *value = m_dic[key];
         if ([set_bool containsObject:key]) {
-            BOOL yn = [value boolValue];
+            BOOL yn = isTrue(value);
             [edit_dic setValue:yn ? @"1" : @"2" forKey:key];
         }
         else {

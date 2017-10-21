@@ -235,6 +235,7 @@
 }
 
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
     NSDictionary *m_dic = self.showArray[indexPath.row];
     NSString *key = m_dic[@"key"];
     if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {

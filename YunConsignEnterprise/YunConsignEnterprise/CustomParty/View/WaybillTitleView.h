@@ -11,8 +11,5 @@
 @interface WaybillTitleView : UIView
 
 @property (strong, nonatomic) UILabel *textLabel;
-@property (strong, nonatomic) UIView *rightView;
-
-- (void)addRightView:(UIView *)view;
 
 @end

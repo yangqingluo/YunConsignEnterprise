@@ -9,12 +9,7 @@
 #import "WaybillEditVC.h"
 #import "PublicSRSelectVC.h"
 
-#import "WaybillEditHeaderView.h"
-
 @interface WaybillEditVC ()
-
-@property (strong, nonatomic) WaybillEditHeaderView *headerView;
-@property (strong, nonatomic) UIView *footerView;
 
 @end
 
@@ -22,51 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupNav];
     
+    [self.headerView setupTitle];
     self.tableView.tableHeaderView = self.headerView;
+    self.title = @"运单修改";
     [self pullWaybillDetailData];
-}
-
-- (void)setupNav {
-    [self createNavWithTitle:@"运单修改" createMenuItem:^UIView *(int nIndex){
-        if (nIndex == 0){
-            UIButton *btn = NewBackButton(nil);
-            [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-            return btn;
-        }
-        return nil;
-    }];
-}
-
-- (void)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)senderButtonAction {
-    PublicSRSelectVC *vc = [PublicSRSelectVC new];
-    vc.type = SRSelectType_Sender;
-    vc.doneBlock = ^(id object){
-        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
-            
-        }
-    };
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)receiverButtonAction {
-//    PublicSRSelectVC *vc = [PublicSRSelectVC new];
-//    vc.type = SRSelectType_Receiver;
-//    vc.doneBlock = ^(id object){
-//        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
-//            self.headerView.receiverInfo = [object copy];
-//        }
-//    };
-//    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)saveButtonAction {
-    
 }
 
 - (void)pullWaybillDetailData {
@@ -93,33 +48,33 @@
 }
 
 - (void)updateSubviews {
-    self.headerView.detailData = self.detailData;
+    [self.goodsArray removeAllObjects];
+    for (AppWaybillItemInfo *item in self.detailData.waybill_items) {
+        AppGoodsInfo *goods = [AppGoodsInfo mj_objectWithKeyValues:[item mj_keyValues]];
+        goods.goods_name = [item.waybill_item_name copy];
+        [self.goodsArray addObject:goods];
+    }
+    self.goodsSummary.freight = [self.detailData.freight longLongValue];
+    self.goodsSummary.number = [self.detailData.goods_total_count intValue];
+    self.goodsSummary.weight = [self.detailData.goods_total_weight doubleValue];
+    self.goodsSummary.volume = [self.detailData.goods_total_volume doubleValue];
+    self.headerView.titleView.textLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", self.detailData.waybill_number, self.detailData.goods_number];
+    [self.toSavedata removeObserver:self forKeyPath:@"total_amount"];
+    self.toSavedata = [AppSaveWayBillInfo mj_objectWithKeyValues:[self.detailData mj_keyValues]];
+    [self.toSavedata addObserver:self forKeyPath:@"total_amount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    
     [self.tableView reloadData];
 }
 
-#pragma mark - getter
-- (WaybillEditHeaderView *)headerView {
-    if (!_headerView) {
-        _headerView = [WaybillEditHeaderView new];
-        [_headerView.senderButton addTarget:self action:@selector(senderButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [_headerView.receiverButton addTarget:self action:@selector(receiverButtonAction) forControlEvents:UIControlEventTouchUpInside];
+- (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    if (indexPath.section == 0) {
+        reuseIdentifier = @"goods_title_cell";
     }
-    return _headerView;
-}
-
-- (UIView *)footerView {
-    if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightMiddle)];
-        
-        UIButton *btn = [[UIButton alloc] initWithFrame:_footerView.bounds];
-        btn.backgroundColor = MainColor;
-        btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
-        [btn setTitle:@"保存运单" forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(saveButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [_footerView addSubview:btn];
+    UITableViewCell *cell = [super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    if (indexPath.section == 2) {
+        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSavedata.total_amount];
     }
-    return _footerView;
+    return cell;
 }
 
 @end

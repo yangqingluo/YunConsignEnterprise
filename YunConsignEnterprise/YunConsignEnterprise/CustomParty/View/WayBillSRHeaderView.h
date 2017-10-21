@@ -8,8 +8,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WaybillTitleView.h"
 
 @interface WayBillSRHeaderView : UIView
+
+@property (strong, nonatomic) WaybillTitleView *titleView;
+@property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) UIView *contentView;
 
 @property (strong, nonatomic) UILabel *senderLabel;
 @property (strong, nonatomic) UILabel *receiverLabel;
@@ -24,5 +29,9 @@
 @property (strong, nonatomic) AppSendReceiveInfo *senderInfo;
 @property (strong, nonatomic) AppSendReceiveInfo *receiverInfo;
 @property (strong, nonatomic) NSDate *date;
+
+- (void)setupTitle;
+- (void)setupHeader;
+- (void)setupContent;
 
 @end

@@ -10,22 +10,31 @@
 
 @interface WayBillSRHeaderView ()
 
-@property (strong, nonatomic) UIView *headerView;
-@property (strong, nonatomic) UIView *contentView;
 @property (strong, nonatomic) UIImageView *contentImageView;
 
 @end
 
 @implementation WayBillSRHeaderView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super initWithFrame:CGRectMake(0, 0, screen_width, 160 + kEdge)];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         [self setupHeader];
         [self setupContent];
     }
     return self;
+}
+
+- (void)setupTitle {
+    if (!_titleView) {
+        self.height += kCellHeightFilter;
+        _titleView = [[WaybillTitleView alloc] initWithFrame:CGRectMake(0, kEdge, self.width, kCellHeightFilter)];
+        _titleView.textLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+        [self addSubview:_titleView];
+        self.headerView.top = self.titleView.bottom;
+        self.contentView.top = self.headerView.bottom;
+    }
 }
 
 - (void)setupHeader {

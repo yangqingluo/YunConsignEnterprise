@@ -30,21 +30,4 @@
     return self;
 }
 
-- (void)addRightView:(UIView *)view {
-    if (!view) {
-        return;
-    }
-    
-    if (self.rightView) {
-        [self.rightView removeFromSuperview];
-    }
-    
-    _rightView = view;
-    _rightView.centerY = self.textLabel.centerY;
-    _rightView.right = self.width;
-    [self addSubview:_rightView];
-    _rightView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    self.textLabel.width = _rightView.left - 2 * kEdgeMiddle;
-}
-
 @end

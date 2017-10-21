@@ -293,7 +293,6 @@
 		E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 		E4F1C43F1F98F42700D5DB3D /* WaybillEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */; };
-		E4F1C4421F98F7B200D5DB3D /* WaybillEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F1C4411F98F7B200D5DB3D /* WaybillEditHeaderView.m */; };
 		E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */; };
 		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
 /* End PBXBuildFile section */
@@ -757,8 +756,6 @@
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
 		E4F1C43D1F98F42700D5DB3D /* WaybillEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillEditVC.h; sourceTree = "<group>"; };
 		E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillEditVC.m; sourceTree = "<group>"; };
-		E4F1C4401F98F7B200D5DB3D /* WaybillEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillEditHeaderView.h; sourceTree = "<group>"; };
-		E4F1C4411F98F7B200D5DB3D /* WaybillEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillEditHeaderView.m; sourceTree = "<group>"; };
 		E4F45BA31F95F99A002F8AFD /* ServiceGoodsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGoodsDetailCell.h; sourceTree = "<group>"; };
 		E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodsDetailCell.m; sourceTree = "<group>"; };
 		E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillSRHeaderView.h; sourceTree = "<group>"; };
@@ -1058,8 +1055,6 @@
 				E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */,
 				E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */,
 				E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */,
-				E4F1C4401F98F7B200D5DB3D /* WaybillEditHeaderView.h */,
-				E4F1C4411F98F7B200D5DB3D /* WaybillEditHeaderView.m */,
 				E4E29E191F9899FE00A24504 /* WayBillDetailHeaderView.h */,
 				E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */,
 				E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */,
@@ -1893,7 +1888,6 @@
 				E4AEA0E11F5EA903002EBE41 /* AppType.m in Sources */,
 				E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */,
 				E4AEA0A21F5EA6D0002EBE41 /* MJFoundation.m in Sources */,
-				E4F1C4421F98F7B200D5DB3D /* WaybillEditHeaderView.m in Sources */,
 				E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */,
 				E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */,
 				E40F7CA91F95A71700946C18 /* WayBillQueryVC.m in Sources */,

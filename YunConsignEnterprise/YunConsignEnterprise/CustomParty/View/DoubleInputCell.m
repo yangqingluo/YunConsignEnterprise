@@ -10,6 +10,10 @@
 
 @implementation DoubleInputCell
 
+- (void)dealloc {
+    [self.baseView.textLabel removeObserver:self forKeyPath:@"text"];
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -22,6 +26,8 @@
         _anotherBaseView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _anotherBaseView.textField.tag = 1;
         [self.contentView addSubview:_anotherBaseView];
+        
+        [self.baseView.textLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     
     return self;
@@ -51,4 +57,17 @@
     }
 }
 
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"text"]) {
+        [AppPublic adjustLabelWidth:self.baseView.textLabel];
+        self.baseView.textField.left = self.baseView.textLabel.right + kEdge;
+        if (self.baseView.rightView) {
+            self.baseView.textField.width = self.baseView.rightView.left - kEdgeSmall - self.baseView.textField.left;
+        }
+        else {
+            self.baseView.textField.width = self.baseView.width - kEdgeSmall - self.baseView.textField.left;
+        }
+    }
+}
 @end

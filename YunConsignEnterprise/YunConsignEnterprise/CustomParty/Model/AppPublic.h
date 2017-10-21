@@ -82,10 +82,10 @@
 #define kVCodeNumberLength           0x06
 #define kPasswordLengthMin           0x03
 #define kPasswordLengthMax           0x10
-#define kNameLengthMax               0x30
+#define kNameLengthMax               0x20
 #define kNumberLengthMax             0x09
 #define kPriceLengthMax              0x06
-#define kInputLengthMax              0x60
+#define kInputLengthMax              0x30
 
 #define NumberWithoutPoint           @"0123456789"
 #define NumberWithPoint              @"0123456789."
