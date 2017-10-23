@@ -26,6 +26,12 @@
     
     [self.view addSubview:self.slidePageView];
     [self.slidePageView buildUI];
+    for (NSDictionary *m_dic in self.viewArray) {
+        WaybillLogTableVC *vc = m_dic[@"VC"];
+        if (vc) {
+            vc.detailData = [self.detailData copy];
+        }
+    }
 }
 
 - (void)setupNav {

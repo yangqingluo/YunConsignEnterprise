@@ -374,6 +374,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppWaybillLogInfo
+
+
+
+@end
+
 
 
 

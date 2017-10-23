@@ -6,9 +6,11 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface WaybillLogTableVC : AppBasicTableViewController
+@interface WaybillLogTableVC : UITableViewController
+
+@property (strong, nonatomic) AppWayBillDetailInfo *detailData;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index;
 - (void)becomeListed;

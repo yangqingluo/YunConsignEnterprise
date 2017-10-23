@@ -470,6 +470,15 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppWaybillLogInfo : AppType
+
+@property (strong, nonatomic) NSString *follow_note;
+@property (strong, nonatomic) NSString *follow_time;
+@property (strong, nonatomic) NSString *waybill_cod_log_id;
+@property (strong, nonatomic) NSString *waybill_id;
+@property (strong, nonatomic) NSString *waybill_transport_log_id;
+
+@end
 
 
 
