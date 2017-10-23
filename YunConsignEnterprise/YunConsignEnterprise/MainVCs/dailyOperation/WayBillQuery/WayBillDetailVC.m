@@ -9,6 +9,7 @@
 #import "WayBillDetailVC.h"
 #import "WaybillChangeListVC.h"
 #import "WaybillEditVC.h"
+#import "WaybillLogVC.h"
 
 #import "MJRefresh.h"
 #import "PublicMutableButtonView.h"
@@ -412,6 +413,13 @@
                 
             case 2:{
                 WaybillChangeListVC *vc = [WaybillChangeListVC new];
+                vc.detailData = [self.detailData copy];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 3:{
+                WaybillLogVC *vc = [WaybillLogVC new];
                 vc.detailData = [self.detailData copy];
                 [self.navigationController pushViewController:vc animated:YES];
             }

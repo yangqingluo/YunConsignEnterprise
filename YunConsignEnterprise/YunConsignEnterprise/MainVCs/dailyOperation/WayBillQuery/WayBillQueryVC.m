@@ -10,6 +10,7 @@
 #import "PublicQueryConditionVC.h"
 #import "WayBillDetailVC.h"
 #import "WaybillEditVC.h"
+#import "WaybillLogVC.h"
 
 #import "WayBillCell.h"
 #import "MJRefresh.h"
@@ -210,7 +211,6 @@
                 
             case 1:{
                 AppWayBillInfo *item = self.dataSource[indexPath.row];
-                
                 WaybillEditVC *vc = [WaybillEditVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
                 QKWEAKSELF;
@@ -219,6 +219,14 @@
                         [weakself.tableView.mj_header beginRefreshing];
                     }
                 };
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 3:{
+                AppWayBillInfo *item = self.dataSource[indexPath.row];
+                WaybillLogVC *vc = [WaybillLogVC new];
+                vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
