@@ -12,7 +12,9 @@
 #import "SingleInputCell.h"
 #import "WaybillLogCell.h"
 
-@interface WaybillLogTableVC ()
+@interface WaybillLogTableVC (){
+    BOOL hasPulledData;
+}
 
 @property (assign, nonatomic) NSInteger indextag;
 
@@ -33,10 +35,15 @@
     }
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index{
     self = [super initWithStyle:style];
     if (self) {
         self.indextag = index;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waybillLogNotification:) name:kNotification_WaybillLogRefresh object:nil];
     }
     return self;
 }
@@ -78,26 +85,9 @@
             ResponseItem *item = responseBody;
             if (item.items.count) {
                 NSDictionary *m_dic = item.items[0];
-                self.detailData.join_short_name = m_dic[@"join_name"];
-                switch (self.indextag) {
-                    case 0:{
-                        [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppWaybillLogInfo mj_objectArrayWithKeyValuesArray:m_dic[@"transport_log"]]]];
-                    }
-                        break;
-                        
-                    case 1:{
-                        [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppWaybillLogInfo mj_objectArrayWithKeyValuesArray:m_dic[@"cash_on_delivery_log"]]]];
-                    }
-                        break;
-                        
-                    case 2:{
-                        [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppWaybillLogInfo mj_objectArrayWithKeyValuesArray:m_dic[@"receipt_log"]]]];
-                    }
-                        break;
-                        
-                    default:
-                        break;
-                }
+                [weakself pulledLogData:m_dic];
+                hasPulledData = YES;
+                [weakself postNotificationName:kNotification_WaybillLogRefresh object:m_dic];
             }
 //            [weakself.dataSource addObjectsFromArray:[AppTransportTrunkInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
@@ -138,9 +128,39 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+- (void)pulledLogData:(NSDictionary *)dic {
+    self.detailData.join_short_name = dic[@"join_name"];
+    [self.dataSource removeAllObjects];
+    switch (self.indextag) {
+        case 0:{
+            [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppWaybillLogInfo mj_objectArrayWithKeyValuesArray:dic[@"transport_log"]]]];
+        }
+            break;
+            
+        case 1:{
+            [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppWaybillLogInfo mj_objectArrayWithKeyValuesArray:dic[@"cash_on_delivery_log"]]]];
+        }
+            break;
+            
+        case 2:{
+            [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppWaybillLogInfo mj_objectArrayWithKeyValuesArray:dic[@"receipt_log"]]]];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (NSArray *)sortArrayByTime:(NSArray *)array {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"follow_time" ascending:NO];
     return [array sortedArrayUsingDescriptors:@[sortDescriptor]];
+}
+
+- (void)postNotificationName:(NSString *)name object:(id)anObject{
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [[NSNotificationCenter defaultCenter] postNotificationName:name object:anObject];
+    });
 }
 
 #pragma mark - getter
@@ -242,6 +262,17 @@
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
             [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
         }
+    }
+}
+
+#pragma mark - notification
+- (void)waybillLogNotification:(NSNotification *)notification {
+    if (!hasPulledData) {
+        [self pulledLogData:notification.object];
+        //记录刷新时间
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
+        hasPulledData = YES;
+        [self.tableView reloadData];
     }
 }
 
