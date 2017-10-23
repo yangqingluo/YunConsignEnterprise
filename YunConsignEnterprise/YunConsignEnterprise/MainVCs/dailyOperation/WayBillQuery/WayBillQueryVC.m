@@ -15,7 +15,7 @@
 #import "WayBillCell.h"
 #import "MJRefresh.h"
 
-@interface WayBillQueryVC ()
+@interface WayBillQueryVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
@@ -121,6 +121,33 @@
     }];
 }
 
+- (void)cancelWaybill:(NSString *)waybill_id cause:(NSString *)change_cause {
+    if (!waybill_id) {
+        return;
+    }
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
+    if (change_cause) {
+        [m_dic setObject:change_cause forKey:@"change_cause"];
+    }
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_cancelWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself cancelWayBillSuccess];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)updateTableViewHeader {
     QKWEAKSELF;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -138,8 +165,17 @@
 }
 
 - (void)endRefreshing {
+    [self hideHud];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
+}
+
+- (void)cancelWayBillSuccess {
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已作废" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+        [weakself.tableView.mj_header beginRefreshing];
+    } otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - getter
@@ -197,20 +233,54 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - TextField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    return (range.location < kInputLengthMax);
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (textField.text.length > kInputLengthMax) {
+        textField.text = [textField.text substringToIndex:kInputLengthMax];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - UIResponder+Router
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppWayBillInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"作废" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        UITextField *textField = [view textFieldAtIndex:0];
+                        [weakself cancelWaybill:item.waybill_id cause:textField.text];
+                    }
+                }otherButtonTitles:@"确定", nil];
                 
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                UITextField *alertTextField = [alert textFieldAtIndex:0];
+                alertTextField.clearButtonMode = UITextFieldViewModeAlways;
+                alertTextField.returnKeyType = UIReturnKeyDone;
+                alertTextField.delegate = self;
+                alertTextField.placeholder = @"作废原因";
+                [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [alert show];
             }
                 break;
                 
             case 1:{
-                AppWayBillInfo *item = self.dataSource[indexPath.row];
                 WaybillEditVC *vc = [WaybillEditVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
                 QKWEAKSELF;
@@ -224,7 +294,6 @@
                 break;
                 
             case 3:{
-                AppWayBillInfo *item = self.dataSource[indexPath.row];
                 WaybillLogVC *vc = [WaybillLogVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
                 [self.navigationController pushViewController:vc animated:YES];

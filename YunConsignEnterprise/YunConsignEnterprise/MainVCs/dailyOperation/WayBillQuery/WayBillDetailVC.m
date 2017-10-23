@@ -16,7 +16,7 @@
 #import "WayBillDetailHeaderView.h"
 
 
-@interface WayBillDetailVC ()
+@interface WayBillDetailVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) WayBillDetailHeaderView *headerView;
 @property (strong, nonatomic) PublicMutableButtonView *footerView;
@@ -111,6 +111,34 @@
     }];
 }
 
+
+- (void)cancelWaybill:(NSString *)waybill_id cause:(NSString *)change_cause {
+    if (!waybill_id) {
+        return;
+    }
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
+    if (change_cause) {
+        [m_dic setObject:change_cause forKey:@"change_cause"];
+    }
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_cancelWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself cancelWayBillSuccess];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)updateTableViewHeader {
     QKWEAKSELF;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -119,8 +147,17 @@
 }
 
 - (void)endRefreshing {
+    [self hideHud];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
+}
+
+- (void)cancelWayBillSuccess {
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已作废" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+        [weakself goBack];
+    } otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)updateSubviews {
@@ -395,6 +432,25 @@
     return [UITableViewCell new];
 }
 
+#pragma mark - TextField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    return (range.location < kInputLengthMax);
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (textField.text.length > kInputLengthMax) {
+        textField.text = [textField.text substringToIndex:kInputLengthMax];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - UIResponder+Router
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
@@ -402,7 +458,22 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"作废" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        UITextField *textField = [view textFieldAtIndex:0];
+                        [weakself cancelWaybill:weakself.detailData.waybill_id cause:textField.text];
+                    }
+                }otherButtonTitles:@"确定", nil];
                 
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                UITextField *alertTextField = [alert textFieldAtIndex:0];
+                alertTextField.clearButtonMode = UITextFieldViewModeAlways;
+                alertTextField.returnKeyType = UIReturnKeyDone;
+                alertTextField.delegate = self;
+                alertTextField.placeholder = @"作废原因";
+                [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [alert show];
             }
                 break;
                 

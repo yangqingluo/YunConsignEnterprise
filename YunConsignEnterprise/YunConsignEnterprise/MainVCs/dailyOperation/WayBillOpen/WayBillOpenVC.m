@@ -130,7 +130,7 @@
 - (void)checkButtonAction:(IndexPathButton *)button {
     if (button.indexPath.section == 2) {
         NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
-        [self.toSavedata setValue:!button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
+        [self.toSavedata setValue:button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
         [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
