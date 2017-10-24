@@ -29,6 +29,7 @@
 #define EmphasizedColor              RGBA(0xec, 0xda, 0x60, 1.0)//强调色
 #define WarningColor                 RGBA(0xc5, 0x2c, 0x2c, 1.0)//警告色
 #define CellHeaderLightBlueColor     RGBA(0xf4, 0xfb, 0xfc, 1.0)//表格表头/列表标题背景色
+#define baseFooterBarColor           RGBA(0xef, 0xef, 0xef, 1.0)
 
 #define baseRedColor                 RGBA(0xd9, 0x55, 0x55, 1.0)
 #define baseBlueColor                RGBA(0x00, 0x84, 0xff, 1.0)

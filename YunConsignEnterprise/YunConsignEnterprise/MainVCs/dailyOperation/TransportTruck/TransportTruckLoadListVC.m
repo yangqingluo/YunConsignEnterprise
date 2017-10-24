@@ -10,10 +10,13 @@
 
 #import "MJRefresh.h"
 #import "TransportTruckLoadListCell.h"
+#import "PublicFooterSummaryView.h"
 
 @interface TransportTruckLoadListVC ()
 
+@property (strong, nonatomic) PublicFooterSummaryView *footerView;
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) AppTransportTruckLoadInfo *summaryInfo;
 
 @end
 
@@ -22,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
+    
+    self.footerView.bottom = self.view.height;
+    [self.view addSubview:self.footerView];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
@@ -69,7 +75,7 @@
             else {
                 [weakself updateTableViewFooter];
             }
-            [weakself.tableView reloadData];
+            [weakself updateSubviews];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -98,12 +104,48 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+- (void)updateSubviews {
+    int load_quantity = 0;
+    int load_count_first = 0;
+    int load_count_second = 0;
+    for (AppTransportTruckLoadInfo *item in self.dataSource) {
+        load_quantity += [item.load_quantity intValue];
+        NSArray *m_array = [item.load_count componentsSeparatedByString:@"/"];
+        if (m_array.count == 2) {
+            load_count_first += [m_array[0] intValue];
+            load_count_second += [m_array[1] intValue];
+        }
+    }
+    self.summaryInfo.load_quantity = [NSString stringWithFormat:@"%d", load_quantity];
+    self.summaryInfo.load_count = [NSString stringWithFormat:@"%d/%d", load_count_first, load_count_second];
+    
+    self.footerView.textLabel.text = [NSString stringWithFormat:@"%@：%@/%@", self.summaryInfo.load_service_name, self.summaryInfo.load_quantity, self.summaryInfo.load_count];
+    [self.tableView reloadData];
+}
+
 #pragma mark - getter
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
     }
     return _dataSource;
+}
+
+- (PublicFooterSummaryView *)footerView {
+    if (!_footerView) {
+        _footerView = [[PublicFooterSummaryView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
+    }
+    return _footerView;
+}
+
+- (AppTransportTruckLoadInfo *)summaryInfo {
+    if (!_summaryInfo) {
+        _summaryInfo = [AppTransportTruckLoadInfo new];
+        _summaryInfo.load_service_name = @"总计";
+        _summaryInfo.load_quantity = @"0";
+        _summaryInfo.load_count = @"0/0";
+    }
+    return _summaryInfo;
 }
 
 #pragma mark - UITableView
