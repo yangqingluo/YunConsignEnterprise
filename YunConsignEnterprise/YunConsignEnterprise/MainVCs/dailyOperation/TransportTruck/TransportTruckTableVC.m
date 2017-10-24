@@ -9,6 +9,7 @@
 #import "TransportTruckTableVC.h"
 #import "TTLoadListVC.h"
 #import "TTPayCostVC.h"
+#import "PublicSaveTransportTruckVC.h"
 
 #import "MJRefresh.h"
 #import "TransportTruckCell.h"
@@ -186,7 +187,8 @@
 }
 
 - (void)saveButtonAction {
-    
+    PublicSaveTransportTruckVC *vc = [PublicSaveTransportTruckVC new];
+    [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
 }
 
 - (void)updateSubviews {
@@ -313,7 +315,7 @@
                 else if (self.indextag == 2) {
                     //发放运费
                     TTPayCostVC *vc = [TTPayCostVC new];
-                    vc.TruckData = item;
+                    vc.truckData = item;
                     [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
                 }
             }

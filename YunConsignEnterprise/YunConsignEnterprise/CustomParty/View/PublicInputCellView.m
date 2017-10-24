@@ -43,7 +43,7 @@
     _rightView.right = self.width;
     [self addSubview:_rightView];
     _rightView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    _textField.width = self.width - cellDetailLeft - _rightView.width;
+    _textField.width = self.rightView.left - cellDetailLeft;
 }
 
 @end

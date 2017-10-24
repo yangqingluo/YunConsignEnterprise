@@ -290,6 +290,8 @@
 		E4BC30B11F9723CD00CAADAE /* WaybillArrivalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B01F9723CD00CAADAE /* WaybillArrivalVC.m */; };
 		E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
+		E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */; };
+		E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */; };
 		E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C7FE1F792FCE002053CD /* WayBillCell.m */; };
 		E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E29E171F98923000A24504 /* WayBillDetailVC.m */; };
 		E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */; };
@@ -758,6 +760,10 @@
 		E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalCell.m; sourceTree = "<group>"; };
 		E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillTitleCell.h; sourceTree = "<group>"; };
 		E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillTitleCell.m; sourceTree = "<group>"; };
+		E4E050D91F9F62510068FD04 /* PublicSaveTransportTruckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSaveTransportTruckVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSaveTransportTruckVC.h; sourceTree = SOURCE_ROOT; };
+		E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicSaveTransportTruckVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSaveTransportTruckVC.m; sourceTree = SOURCE_ROOT; };
+		E4E050DC1F9F6E5D0068FD04 /* PublicEndStationSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicEndStationSelectVC.h; sourceTree = "<group>"; };
+		E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicEndStationSelectVC.m; sourceTree = "<group>"; };
 		E4E0C7FD1F792FCE002053CD /* WayBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillCell.h; sourceTree = "<group>"; };
 		E4E0C7FE1F792FCE002053CD /* WayBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillCell.m; sourceTree = "<group>"; };
 		E4E29E161F98923000A24504 /* WayBillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillDetailVC.h; sourceTree = "<group>"; };
@@ -937,6 +943,10 @@
 				E447649E1F611C460084F4EB /* DailyOperationVC.m */,
 				E4AFFF571F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.h */,
 				E4AFFF581F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m */,
+				E4E050D91F9F62510068FD04 /* PublicSaveTransportTruckVC.h */,
+				E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */,
+				E4E050DC1F9F6E5D0068FD04 /* PublicEndStationSelectVC.h */,
+				E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */,
 				E40F7C8C1F95A71700946C18 /* CustomerManage */,
 				E40F7C8D1F95A71700946C18 /* PayOnReceipt */,
 				E40F7C8E1F95A71700946C18 /* SearchQuantity */,
@@ -1907,6 +1917,7 @@
 				E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */,
 				E4AEA0951F5EA6D0002EBE41 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				E4AEA0CC1F5EA6D0002EBE41 /* UIImage+WebP.m in Sources */,
+				E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */,
 				E4AEA0811F5EA6D0002EBE41 /* AFURLSessionManager.m in Sources */,
 				E4AEA0871F5EA6D0002EBE41 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E4AEA08F1F5EA6D0002EBE41 /* IQUIScrollView+Additions.m in Sources */,
@@ -1955,6 +1966,7 @@
 				E4AEA0A11F5EA6D0002EBE41 /* MJExtensionConst.m in Sources */,
 				E4F1C43F1F98F42700D5DB3D /* WaybillEditVC.m in Sources */,
 				E4AEA0A41F5EA6D0002EBE41 /* MJPropertyKey.m in Sources */,
+				E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */,
 				E40F7CA31F95A71700946C18 /* TransportTruckTableVC.m in Sources */,
 				E4AEA0A81F5EA6D0002EBE41 /* NSObject+MJKeyValue.m in Sources */,
 				E45B3CB21F7B5233001D9FDB /* TransportTruckCell.m in Sources */,

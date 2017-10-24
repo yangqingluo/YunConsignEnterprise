@@ -266,7 +266,6 @@
             for (AppDataDictionary *m_data in dicArray) {
                 [m_array addObject:m_data.item_name];
             }
-            NSDictionary *m_dic = self.showArray[indexPath.row];
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
@@ -287,7 +286,6 @@
             for (AppServiceInfo *m_data in dataArray) {
                 [m_array addObject:m_data.service_name];
             }
-            NSDictionary *m_dic = self.showArray[indexPath.row];
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
@@ -308,7 +306,6 @@
             for (AppCityInfo *m_data in dataArray) {
                 [m_array addObject:m_data.open_city_name];
             }
-            NSDictionary *m_dic = self.showArray[indexPath.row];
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
@@ -324,7 +321,6 @@
     }
     else if ([self.boolValidSet containsObject:key]) {
         NSArray *m_array = @[@"是", @"否"];
-        NSDictionary *m_dic = self.showArray[indexPath.row];
         QKWEAKSELF;
         BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
             if (buttonIndex > 0) {

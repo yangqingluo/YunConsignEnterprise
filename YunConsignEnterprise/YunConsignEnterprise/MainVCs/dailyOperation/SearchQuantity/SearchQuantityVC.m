@@ -17,7 +17,6 @@
 
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 @property (strong, nonatomic) NSArray *showArray;
-@property (strong, nonatomic) NSMutableArray *cityArray;
 
 @property (strong, nonatomic) UIView *footerView;
 
@@ -31,7 +30,6 @@
     self.tableView.tableFooterView = self.footerView;
     
     [self initializeData];
-    [self pullCityArrayFunction];
 }
 
 - (void)setupNav {
@@ -51,21 +49,25 @@
 
 //初始化数据
 - (void)initializeData{
-    _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择"},
-                   @{@"title":@"结束时间",@"subTitle":@"必填，请选择"},
-                   @{@"title":@"始发站",@"subTitle":@"请选择"},
-                   @{@"title":@"终点站",@"subTitle":@"请选择"}];
+    _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                   @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                   @{@"title":@"始发站",@"subTitle":@"请选择",@"key":@"start_station_city"},
+                   @{@"title":@"终点站",@"subTitle":@"请选择",@"key":@"end_station_city"}];
 }
 
-- (void)pullCityArrayFunction {
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
-            [weakself.cityArray removeAllObjects];
-            [weakself.cityArray addObjectsFromArray:[AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
-            [weakself.tableView reloadData];
+            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+            if (m_array.count) {
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -79,19 +81,59 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
+        QKWEAKSELF;
+        PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [weakself.condition setValue:pickerView.datePicker.date forKey:key];
+                [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+        view.datePicker.maximumDate = [NSDate date];
+        id value = [self.condition valueForKey:key];
+        if (value) {
+            view.datePicker.date = value;
+        }
+        if ([key isEqualToString:@"start_time"]) {
+            id end_time = [self.condition valueForKey:@"end_time"];
+            if (end_time) {
+                view.datePicker.maximumDate = end_time;
+            }
+        }
+        [view show];
+    }
+    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppCityInfo *m_data in dataArray) {
+                [m_array addObject:m_data.open_city_name];
+            }
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    [weakself.condition setValue:dataArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
+}
+
 #pragma mark - getter
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
     }
     return _condition;
-}
-
-- (NSMutableArray *)cityArray {
-    if (!_cityArray) {
-        _cityArray = [NSMutableArray new];
-    }
-    return _cityArray;
 }
 
 - (UIView *)footerView {
@@ -182,90 +224,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    switch (indexPath.row) {
-        case 0:{
-            NSDictionary *m_dic = self.showArray[indexPath.row];
-            QKWEAKSELF;
-            PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
-                if (buttonIndex == 1) {
-                    weakself.condition.start_time = pickerView.datePicker.date;
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
-            }];
-            if (self.condition.start_time) {
-                view.datePicker.date = self.condition.start_time;
-            }
-            if (self.condition.end_time) {
-                view.datePicker.maximumDate = self.condition.end_time;
-            }
-            [view show];
-        }
-            break;
-            
-        case 1:{
-            NSDictionary *m_dic = self.showArray[indexPath.row];
-            QKWEAKSELF;
-            PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
-                if (buttonIndex == 1) {
-                    weakself.condition.end_time = pickerView.datePicker.date;
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
-            }];
-            view.datePicker.maximumDate = [NSDate date];
-            if (self.condition.end_time) {
-                view.datePicker.date = self.condition.end_time;
-            }
-            [view show];
-        }
-            break;
-            
-        case 2:{
-            if (self.cityArray.count) {
-                NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.cityArray.count];
-                for (AppCityInfo *item in self.cityArray) {
-                    [m_array addObject:item.open_city_name];
-                }
-                NSDictionary *m_dic = self.showArray[indexPath.row];
-                QKWEAKSELF;
-                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                    if (buttonIndex > 0 && (buttonIndex - 1) < weakself.cityArray.count) {
-                        weakself.condition.start_station_city = weakself.cityArray[buttonIndex - 1];
-                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                    }
-                } otherButtonTitlesArray:m_array];
-                [sheet showInView:self.view];
-            }
-            else {
-                [self pullCityArrayFunction];
-            }
-        }
-            break;
-            
-        case 3:{
-            if (self.cityArray.count) {
-                NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.cityArray.count];
-                for (AppCityInfo *item in self.cityArray) {
-                    [m_array addObject:item.open_city_name];
-                }
-                NSDictionary *m_dic = self.showArray[indexPath.row];
-                QKWEAKSELF;
-                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                    if (buttonIndex > 0 && (buttonIndex - 1) < weakself.cityArray.count) {
-                        weakself.condition.end_station_city = weakself.cityArray[buttonIndex - 1];
-                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                    }
-                } otherButtonTitlesArray:m_array];
-                [sheet showInView:self.view];
-            }
-            else {
-                [self pullCityArrayFunction];
-            }
-        }
-            break;
-            
-        default:
-            break;
-    }
+    [self selectRowAtIndexPath:indexPath];
 }
 
 @end

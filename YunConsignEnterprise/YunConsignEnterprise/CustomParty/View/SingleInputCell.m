@@ -55,9 +55,15 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if([keyPath isEqualToString:SingleInputATypeObserverKey]){
         if (self.accessoryType == UITableViewCellAccessoryNone) {
-            self.baseView.textField.width = self.baseView.width - cellDetailLeft;
+            if (self.baseView.rightView) {
+                self.baseView.textField.width = self.baseView.rightView.left - cellDetailLeft;
+            }
+            else {
+                self.baseView.textField.width = self.baseView.width - cellDetailLeft;
+            }
         }
         else {
+            //UITableViewCellAccessoryDisclosureIndicator下baseView.rightView暂时没有同时存在的情况
             self.baseView.textField.width = self.baseView.width - cellDetailLeft - kEdgeHuge + (screen_width - self.baseView.right);
         }
     }
