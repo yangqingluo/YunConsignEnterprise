@@ -64,7 +64,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if ([item.menu_code isEqualToString:@"WAYBILL_QUERY"]) {
-                WayBillQueryVC *vc = [[WayBillQueryVC alloc]initWithStyle:UITableViewStyleGrouped];
+                WayBillQueryVC *vc = [[WayBillQueryVC alloc] initWithStyle:UITableViewStyleGrouped];
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }

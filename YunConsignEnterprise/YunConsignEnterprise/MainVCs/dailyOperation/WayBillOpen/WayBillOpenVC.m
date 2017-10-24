@@ -196,7 +196,7 @@
             if (indexPath.row > 0 && indexPath.row - 1 < self.payStyleShowArray.count) {
                 NSDictionary *m_dic = self.payStyleShowArray[indexPath.row - 1];
                 NSString *key = m_dic[@"key"];
-                if ([key isEqualToString:@"note"] || [key isEqualToString:@"inner_note"]) {
+                if ([self.defaultKeyBoardTypeSet containsObject:key]) {
                     [self.toSavedata setValue:content forKey:key];
                 }
                 else {

@@ -124,7 +124,11 @@
 
 - (void)updateWayBillSuccessWithChange:(NSDictionary *)changedDic {
     if (changedDic) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillListRefresh object:nil];
         for (NSString *key in changedDic.allKeys) {
+            if ([key isEqualToString:@"change_cause"]) {
+                continue;
+            }
             [self.detailData setValue:changedDic[key] forKey:key];
         }
         QKWEAKSELF;

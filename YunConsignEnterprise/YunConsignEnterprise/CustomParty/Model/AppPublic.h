@@ -97,6 +97,8 @@
 
 #define defaultDateFormat            @"yyyy-MM-dd"
 #define defaultHeadImageName         @"默认头像"
+#define kNotification_WaybillListRefresh    @"kNotification_WaybillListRefresh"
+#define kNotification_WaybillLogRefresh    @"kNotification_WaybillLogRefresh"
 
 typedef enum : NSUInteger {
     PowerType_CustomerManagement = 1,

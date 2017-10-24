@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define kNotification_WaybillLogRefresh    @"kNotification_WaybillLogRefresh"
-
 @interface WaybillLogTableVC : UITableViewController
 
 @property (strong, nonatomic) AppWayBillDetailInfo *detailData;

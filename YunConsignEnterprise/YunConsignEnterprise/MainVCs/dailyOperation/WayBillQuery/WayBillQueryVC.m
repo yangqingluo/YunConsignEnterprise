@@ -24,6 +24,18 @@
 
 @implementation WayBillQueryVC
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waybillListNotification:) name:kNotification_WaybillListRefresh object:nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
@@ -252,6 +264,11 @@
     return YES;
 }
 
+#pragma mark - notification
+- (void)waybillListNotification:(NSNotification *)notification {
+    [self.tableView.mj_header beginRefreshing];
+}
+
 #pragma mark - UIResponder+Router
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
@@ -283,12 +300,12 @@
             case 1:{
                 WaybillEditVC *vc = [WaybillEditVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
-                QKWEAKSELF;
-                vc.doneBlock = ^(NSObject *object){
-                    if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
-                        [weakself.tableView.mj_header beginRefreshing];
-                    }
-                };
+//                QKWEAKSELF;
+//                vc.doneBlock = ^(NSObject *object){
+//                    if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
+//                        [weakself.tableView.mj_header beginRefreshing];
+//                    }
+//                };
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
