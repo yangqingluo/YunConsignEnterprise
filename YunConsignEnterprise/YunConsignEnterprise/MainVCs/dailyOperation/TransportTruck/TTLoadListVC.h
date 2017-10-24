@@ -8,8 +8,8 @@
 
 #import "AppBasicTableViewController.h"
 
-@interface TransportTruckLoadListVC : AppBasicTableViewController
+@interface TTLoadListVC : AppBasicTableViewController
 
-@property (copy, nonatomic) AppTransportTrunkInfo *data;
+@property (copy, nonatomic) AppTransportTruckInfo *data;
 
 @end

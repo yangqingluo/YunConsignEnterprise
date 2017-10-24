@@ -120,6 +120,13 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation APPEndStationInfo
+
+
+
+@end
+
+
 @implementation AppSendReceiveInfo
 
 
@@ -287,17 +294,33 @@ BOOL isTrue(NSString *string) {
 
 @end
 
-@implementation AppTrunkInfo
+@implementation AppTruckInfo
 
 
 @end
 
-@implementation AppTransportTrunkInfo
+@implementation AppTransportTruckInfo
 
 
 @end
 
-@implementation AppQueryTransportTrunkInfo
+@implementation AppTransportTruckDetailInfo
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [[self class] mj_setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"end_station" : [APPEndStationInfo class],
+                     };
+        }];
+    }
+    return self;
+}
+
+@end
+
+@implementation AppQueryTransportTruckInfo
 
 
 @end

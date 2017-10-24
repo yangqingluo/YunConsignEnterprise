@@ -1,5 +1,5 @@
 //
-//  TransportTrunkCell.h
+//  TransportTruckCell.h
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/9/27.
@@ -8,11 +8,11 @@
 
 #import "PublicHeaderBodyFooterCell.h"
 
-@interface TransportTrunkCell : PublicHeaderBodyFooterCell
+@interface TransportTruckCell : PublicHeaderBodyFooterCell
 
 @property (strong, nonatomic) UILabel *costCheckLabel;
 
 @property (assign, nonatomic) NSInteger indextag;
-@property (copy, nonatomic) AppTransportTrunkInfo *data;
+@property (copy, nonatomic) AppTransportTruckInfo *data;
 
 @end

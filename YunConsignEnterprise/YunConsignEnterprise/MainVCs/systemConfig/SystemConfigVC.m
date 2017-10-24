@@ -22,14 +22,13 @@
     self.bannerView.dataSource = [UserPublic getInstance].systemConfigAccesses;
 }
 
-- (void)setupNav{
+- (void)setupNav {
     [self createNavWithTitle:nil createMenuItem:^UIView *(int nIndex){
         if (nIndex == 1){
             UIButton *btn = NewTextButton(@"登出", [UIColor whiteColor]);
             [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
-        
         return nil;
     }];
 }

@@ -89,7 +89,7 @@
                 hasPulledData = YES;
                 [weakself postNotificationName:kNotification_WaybillLogRefresh object:m_dic];
             }
-//            [weakself.dataSource addObjectsFromArray:[AppTransportTrunkInfo mj_objectArrayWithKeyValuesArray:item.items]];
+//            [weakself.dataSource addObjectsFromArray:[AppTransportTruckInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
 //            if (item.total <= weakself.dataSource.count) {
 //                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];

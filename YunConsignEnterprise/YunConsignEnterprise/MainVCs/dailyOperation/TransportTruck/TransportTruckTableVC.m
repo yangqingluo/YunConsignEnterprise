@@ -7,10 +7,11 @@
 //
 
 #import "TransportTruckTableVC.h"
-#import "TransportTruckLoadListVC.h"
+#import "TTLoadListVC.h"
+#import "TTPayCostVC.h"
 
 #import "MJRefresh.h"
-#import "TransportTrunkCell.h"
+#import "TransportTruckCell.h"
 #import "PublicFooterSummaryView.h"
 
 @interface TransportTruckTableVC ()
@@ -100,7 +101,7 @@
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppTransportTrunkInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppTransportTruckInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -116,7 +117,7 @@
     }];
 }
 
-- (void)doCancelTransportTruck:(AppTransportTrunkInfo *)item {
+- (void)doCancelTransportTruck:(AppTransportTruckInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
     [[UserPublic getInstance].mainTabNav showHudInView:[UserPublic getInstance].mainTabNav.view hint:nil];
     QKWEAKSELF;
@@ -138,7 +139,7 @@
     }];
 }
 
-- (void)doStartTransportTruck:(AppTransportTrunkInfo *)item {
+- (void)doStartTransportTruck:(AppTransportTruckInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
     [[UserPublic getInstance].mainTabNav showHudInView:[UserPublic getInstance].mainTabNav.view hint:nil];
     QKWEAKSELF;
@@ -192,7 +193,7 @@
     if (self.indextag == 2) {
         int cost_register = 0;
         int cost_check = 0;
-        for (AppTransportTrunkInfo *item in self.dataSource) {
+        for (AppTransportTruckInfo *item in self.dataSource) {
             cost_register += [item.cost_register intValue];
             cost_check += [item.cost_check intValue];
         }
@@ -253,7 +254,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [TransportTrunkCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [TransportTruckCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -265,16 +266,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"TransportTrunk_cell";
-    TransportTrunkCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"TransportTruck_cell";
+    TransportTruckCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[TransportTrunkCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[TransportTruckCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indextag = self.indextag;
     }
-    
     cell.data = self.dataSource[indexPath.row];
+    cell.indexPath = [indexPath copy];
     return cell;
 }
 
@@ -288,11 +289,11 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
-        AppTransportTrunkInfo *item = self.dataSource[indexPath.row];
+        AppTransportTruckInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                TransportTruckLoadListVC *vc = [TransportTruckLoadListVC new];
+                TTLoadListVC *vc = [TTLoadListVC new];
                 vc.data = item;
                 [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
             }
@@ -311,7 +312,9 @@
                 }
                 else if (self.indextag == 2) {
                     //发放运费
-                    
+                    TTPayCostVC *vc = [TTPayCostVC new];
+                    vc.TruckData = item;
+                    [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
                 }
             }
                 break;

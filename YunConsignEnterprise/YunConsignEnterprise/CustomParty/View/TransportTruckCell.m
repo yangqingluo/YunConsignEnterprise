@@ -1,14 +1,14 @@
 //
-//  TransportTrunkCell.m
+//  TransportTruckCell.m
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/9/27.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "TransportTrunkCell.h"
+#import "TransportTruckCell.h"
 
-@implementation TransportTrunkCell
+@implementation TransportTruckCell
 
 - (void)setupFooter {
     [super setupFooter];
@@ -49,7 +49,7 @@
 }
 
 #pragma mark - setter
-- (void)setData:(AppTransportTrunkInfo *)data {
+- (void)setData:(AppTransportTruckInfo *)data {
     _data = data;
     self.titleLabel.text = data.route;
     self.statusLabel.text = dateStringWithTimeString(data.operate_time);

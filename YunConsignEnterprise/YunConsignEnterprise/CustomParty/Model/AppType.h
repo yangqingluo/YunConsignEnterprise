@@ -145,6 +145,20 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface APPEndStationInfo : AppType
+
+@property (strong, nonatomic) NSString *arrival_time;
+@property (strong, nonatomic) NSString *end_station_city_id;
+@property (strong, nonatomic) NSString *end_station_city_name;
+@property (strong, nonatomic) NSString *end_station_service_id;
+@property (strong, nonatomic) NSString *end_station_service_name;
+@property (strong, nonatomic) NSString *start_station_city_id;
+@property (strong, nonatomic) NSString *start_station_city_name;
+@property (strong, nonatomic) NSString *transport_truck_id;
+@property (strong, nonatomic) NSString *transport_truck_route_id;
+
+@end
+
 @interface AppSendReceiveInfo : AppType
 
 @property (strong, nonatomic) AppCustomerInfo *customer;
@@ -351,7 +365,7 @@ BOOL isTrue(NSString *string);
 @end
 
 
-@interface AppTrunkInfo : AppType
+@interface AppTruckInfo : AppType
 
 @property (strong, nonatomic) NSString *transport_truck_id;//登记派车编号
 @property (strong, nonatomic) NSString *end_station_city_id;
@@ -372,12 +386,45 @@ BOOL isTrue(NSString *string);
 
 @end
 
-@interface AppTransportTrunkInfo : AppTrunkInfo
+@interface AppTransportTruckInfo : AppTruckInfo
 
 
 @end
 
-@interface AppQueryTransportTrunkInfo : AppTrunkInfo
+@interface AppTransportTruckDetailInfo : AppType
+
+@property (strong, nonatomic) NSString *transport_truck_id;//登记派车编号
+@property (strong, nonatomic) NSString *register_time;//登记日期
+@property (strong, nonatomic) NSString *start_station_city_id;
+@property (strong, nonatomic) NSString *start_station_city_name;//始发站
+@property (strong, nonatomic) NSArray *end_station;//终点站
+@property (strong, nonatomic) NSString *truck_number_plate;//车牌
+@property (strong, nonatomic) NSString *truck_driver_name;//司机
+@property (strong, nonatomic) NSString *truck_driver_phone;//电话
+@property (strong, nonatomic) NSString *cost_register;//登记运费
+@property (strong, nonatomic) NSString *cost_check;//结算运费
+@property (strong, nonatomic) NSString *check_time;//结算时间
+@property (strong, nonatomic) NSString *driver_account;//打款账号
+@property (strong, nonatomic) NSString *driver_account_name;//户主
+@property (strong, nonatomic) NSString *driver_account_bank;//开户行
+@property (strong, nonatomic) NSString *load_quantity;//装车货量
+@property (strong, nonatomic) NSString *check_id;
+@property (strong, nonatomic) NSString *check_name;
+@property (strong, nonatomic) NSString *end_station_city_id;
+@property (strong, nonatomic) NSString *end_station_city_name;
+@property (strong, nonatomic) NSString *end_station_service_id;
+@property (strong, nonatomic) NSString *end_station_service_name;
+@property (strong, nonatomic) NSString *join_id;
+@property (strong, nonatomic) NSString *note;
+@property (strong, nonatomic) NSString *operate_time;
+@property (strong, nonatomic) NSString *operator_id;
+@property (strong, nonatomic) NSString *operator_name;
+@property (strong, nonatomic) NSString *start_car_time;
+@property (strong, nonatomic) NSString *transport_truck_state;
+
+@end
+
+@interface AppQueryTransportTruckInfo : AppTruckInfo
 
 @property (strong, nonatomic) NSString *register_time;//登记时间
 @property (strong, nonatomic) NSString *transport_truck_state;//车辆状态
@@ -397,12 +444,12 @@ BOOL isTrue(NSString *string);
 @end
 
 
-@interface AppCanLoadTransportTruckInfo : AppQueryTransportTrunkInfo
+@interface AppCanLoadTransportTruckInfo : AppQueryTransportTruckInfo
 
 
 @end
 
-@interface AppCanArrivalTransportTruckInfo : AppQueryTransportTrunkInfo
+@interface AppCanArrivalTransportTruckInfo : AppQueryTransportTruckInfo
 
 @property (strong, nonatomic) NSString *arrival_time;//到车时间
 @property (strong, nonatomic) NSString *nohandover_count;//未交接运单数量

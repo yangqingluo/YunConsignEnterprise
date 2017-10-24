@@ -6,13 +6,13 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "TransportTruckLoadListVC.h"
+#import "TTLoadListVC.h"
 
 #import "MJRefresh.h"
 #import "TransportTruckLoadListCell.h"
 #import "PublicFooterSummaryView.h"
 
-@interface TransportTruckLoadListVC ()
+@interface TTLoadListVC ()
 
 @property (strong, nonatomic) PublicFooterSummaryView *footerView;
 @property (strong, nonatomic) NSMutableArray *dataSource;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation TransportTruckLoadListVC
+@implementation TTLoadListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +46,7 @@
     }];
 }
 
-- (void)goBack{
+- (void)goBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

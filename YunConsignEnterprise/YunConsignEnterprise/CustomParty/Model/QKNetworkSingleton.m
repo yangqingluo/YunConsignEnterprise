@@ -21,7 +21,7 @@
 
 - (AFHTTPSessionManager *)baseHttpRequestWithParm:(NSDictionary *)parm andSuffix:(NSString *)suffix{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setTimeoutInterval:20];
+    [manager.requestSerializer setTimeoutInterval:15];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     for (NSString *key in parm.allKeys) {
         if (parm[key]) {
