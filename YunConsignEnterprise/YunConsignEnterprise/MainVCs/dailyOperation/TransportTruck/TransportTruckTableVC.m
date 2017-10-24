@@ -100,6 +100,50 @@
     }];
 }
 
+- (void)doCancelTransportTruck:(AppTransportTrunkInfo *)item {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
+    [[UserPublic getInstance].mainTabNav showHudInView:[UserPublic getInstance].mainTabNav.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_cancelTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself showHint:@"取消派车成功"];
+                [weakself.tableView.mj_header beginRefreshing];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doStartTransportTruck:(AppTransportTrunkInfo *)item {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
+    [[UserPublic getInstance].mainTabNav showHudInView:[UserPublic getInstance].mainTabNav.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_startTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself showHint:@"发车成功"];
+                [weakself.tableView.mj_header beginRefreshing];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)updateTableViewHeader {
     QKWEAKSELF;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -119,6 +163,7 @@
 - (void)endRefreshing{
     //记录刷新时间
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
+    [[UserPublic getInstance].mainTabNav hideHud];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
@@ -187,6 +232,38 @@
                 TransportTruckLoadListVC *vc = [TransportTruckLoadListVC new];
                 vc.data = item;
                 [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 1:{
+                if (self.indextag == 0) {
+                    //取消派车
+                    QKWEAKSELF;
+                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消派车吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                        if (buttonIndex == 1) {
+                            [weakself doCancelTransportTruck:item];
+                        }
+                    } otherButtonTitles:@"确定", nil];
+                    [alert show];
+                }
+                else if (self.indextag == 2) {
+                    //发放运费
+                    
+                }
+            }
+                break;
+                
+            case 2:{
+                if (self.indextag == 0) {
+                    //发车
+                    QKWEAKSELF;
+                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定发车吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                        if (buttonIndex == 1) {
+                            [weakself doStartTransportTruck:item];
+                        }
+                    } otherButtonTitles:@"确定", nil];
+                    [alert show];
+                }
             }
                 break;
                 

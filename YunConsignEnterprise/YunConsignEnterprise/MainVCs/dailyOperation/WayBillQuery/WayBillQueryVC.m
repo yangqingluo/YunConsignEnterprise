@@ -279,7 +279,7 @@
         switch (tag) {
             case 0:{
                 QKWEAKSELF;
-                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"作废" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定作废运单吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
                         UITextField *textField = [view textFieldAtIndex:0];
                         [weakself cancelWaybill:item.waybill_id cause:textField.text];

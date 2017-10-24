@@ -28,6 +28,7 @@
     
     self.footerView.bottom = self.view.height;
     [self.view addSubview:self.footerView];
+    self.tableView.height = self.footerView.top - self.tableView.top;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
@@ -134,6 +135,7 @@
 - (PublicFooterSummaryView *)footerView {
     if (!_footerView) {
         _footerView = [[PublicFooterSummaryView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
+        _footerView.textLabel.text = @"总计：";
     }
     return _footerView;
 }

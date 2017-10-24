@@ -16,6 +16,8 @@
         self.backgroundColor = baseFooterBarColor;
         _textLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, self.width - 2 * kEdgeMiddle, self.height), secondaryTextColor, nil, NSTextAlignmentLeft);
         [self addSubview:_textLabel];
+        
+        [self addSubview:NewSeparatorLine(CGRectMake(0, 0, self.width, appSeparaterLineSize))];
     }
     return self;
 }
