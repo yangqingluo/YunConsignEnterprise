@@ -14,7 +14,7 @@
 
 @interface PublicSaveTransportTruckVC ()<UITextFieldDelegate>
 
-@property (strong, nonatomic) AppTransportTruckDetailInfo *detailData;
+@property (strong, nonatomic) AppSaveTransportTruckInfo *toSavedata;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSSet *defaultKeyBoardTypeSet;
 
@@ -50,7 +50,48 @@
 
 - (void)saveButtonAction {
     [self dismissKeyboard];
-    
+    if (!self.toSavedata.start_station_city_id) {
+        [self showHint:@"请选择始发站"];
+        return;
+    }
+    else if (!self.toSavedata.end_station.count) {
+        [self showHint:@"请选择终点站"];
+        return;
+    }
+    else {
+        NSMutableDictionary *m_dic = [NSMutableDictionary new];
+        [m_dic setObject:self.toSavedata.start_station_city_id forKey:@"start_station_city_id"];
+        [m_dic setObject:self.toSavedata.saveStringForEndStationServices forKey:@"end_station_service_id"];
+        for (int section = 1; section < self.showArray.count; section++) {
+            NSArray *m_array = self.showArray[section];
+            for (NSDictionary *dic in m_array) {
+                NSString *key = dic[@"key"];
+                NSString *value = [self.toSavedata valueForKey:key];
+                if (!value.length) {
+                    [self showHint:[NSString stringWithFormat:@"请补全%@", dic[@"title"]]];
+                    return;
+                }
+                [m_dic setObject:value forKey:key];
+            }
+        }
+        [self showHudInView:self.view hint:nil];
+        QKWEAKSELF;
+        [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_saveTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+            [weakself hideHud];
+            if (!error) {
+                ResponseItem *item = responseBody;
+                if (item.flag == 1) {
+                    [weakself saveTransportTruckCostSuccess];
+                }
+                else {
+                    [weakself showHint:item.message.length ? item.message : @"数据出错"];
+                }
+            }
+            else {
+                [weakself showHint:error.userInfo[@"message"]];
+            }
+        }];
+    }
 }
 
 - (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
@@ -77,9 +118,9 @@
     if (indexPath.section == 1 || indexPath.section == 2 ) {
         NSArray *m_array = self.showArray[indexPath.section];
         if (indexPath.row < m_array.count) {
-//            NSDictionary *m_dic = m_array[indexPath.row];
-//            NSString *key = m_dic[@"key"];
-//            [self.detailData setValue:content forKey:key];
+            NSDictionary *m_dic = m_array[indexPath.row];
+            NSString *key = m_dic[@"key"];
+            [self.toSavedata setValue:content forKey:key];
         }
     }
 }
@@ -103,8 +144,8 @@
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
                     AppCityInfo *city = dataArray[buttonIndex - 1];
-                    weakself.detailData.start_station_city_id = [city.open_city_id copy];
-                    weakself.detailData.start_station_city_name = [city.open_city_name copy];
+                    weakself.toSavedata.start_station_city_id = [city.open_city_id copy];
+                    weakself.toSavedata.start_station_city_name = [city.open_city_name copy];
                     [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }
             } otherButtonTitlesArray:m_array];
@@ -116,16 +157,33 @@
     }
     else if ([key isEqualToString:@"end_station"]) {
         PublicEndStationSelectVC *vc = [PublicEndStationSelectVC new];
+        QKWEAKSELF;
+        vc.doneBlock = ^(NSObject *object){
+            if ([object isKindOfClass:[NSArray class]]) {
+                [weakself.toSavedata.end_station removeAllObjects];
+                [weakself.toSavedata.end_station addObjectsFromArray:(NSArray *)object];
+                [weakself.tableView reloadData];
+            }
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
+- (void)saveTransportTruckCostSuccess {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_TransportTruckSaveRefresh object:nil];
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"派车已完成" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+        [weakself goBack];
+    } otherButtonTitles:nil];
+    [alert show];
+}
+
 #pragma mark - getter
-- (AppTransportTruckDetailInfo *)detailData {
-    if (!_detailData) {
-        _detailData = [AppTransportTruckDetailInfo new];
+- (AppSaveTransportTruckInfo *)toSavedata {
+    if (!_toSavedata) {
+        _toSavedata = [AppSaveTransportTruckInfo new];
     }
-    return _detailData;
+    return _toSavedata;
 }
 
 - (NSArray *)showArray {
@@ -143,7 +201,7 @@
 
 - (NSSet *)defaultKeyBoardTypeSet {
     if (!_defaultKeyBoardTypeSet) {
-        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"note", @"dtruck_driver_name", @"truck_number_plate", nil];
+        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"note", @"truck_driver_name", @"truck_number_plate", nil];
     }
     
     return _defaultKeyBoardTypeSet;
@@ -156,14 +214,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1 + MAX(1, self.detailData.end_station.count);
+        return 1 + MAX(1, self.toSavedata.end_station.count);
     }
     NSArray *m_array = self.showArray[section];
     return m_array.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == [self numberOfSectionsInTableView:tableView]) {
+    if (section == [self numberOfSectionsInTableView:tableView] - 1) {
         return kEdge;
     }
     return 0.01;
@@ -174,6 +232,11 @@
         return 0.01;
     }
     return kEdge;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat rowHeight = kCellHeightFilter;
+    return rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,13 +291,13 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             if (indexPath.row == 0) {
-                cell.baseView.textField.text = self.detailData.start_station_city_name;
+                cell.baseView.textField.text = self.toSavedata.start_station_city_name;
             }
             else {
                 NSUInteger index = indexPath.row - 1;
-                if (index < self.detailData.end_station.count) {
-                    APPEndStationInfo *station = self.detailData.end_station[index];
-                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@-%@", station.end_station_city_name, station.end_station_service_name];
+                if (index < self.toSavedata.end_station.count) {
+                    AppServiceInfo *service = self.toSavedata.end_station[index];
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@-%@", service.open_city_name, service.service_name];
                 }
                 else {
                     cell.baseView.textField.text = @"";
@@ -246,7 +309,7 @@
         case 1:
         case 2:{
             NSString *key = m_dic[@"key"];
-            cell.baseView.textField.text = [self.detailData valueForKey:key];
+            cell.baseView.textField.text = [self.toSavedata valueForKey:key];
             BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
             cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
             cell.baseView.textField.enabled = YES;

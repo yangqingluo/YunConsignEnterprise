@@ -22,6 +22,18 @@
 
 @implementation TransportTruckVC
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportTruckSaveNotification:) name:kNotification_TransportTruckSaveRefresh object:nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
@@ -147,6 +159,11 @@
     if ([listVC respondsToSelector:@selector(becomeUnListed)]) {
         [listVC performSelector:@selector(becomeUnListed)];
     }
+}
+
+#pragma mark - notification
+- (void)transportTruckSaveNotification:(NSNotification *)notification {
+    [self updateQueryCondition];
 }
 
 @end

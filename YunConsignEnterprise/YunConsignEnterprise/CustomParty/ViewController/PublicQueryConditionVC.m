@@ -201,7 +201,7 @@
     }];
 }
 
-- (void)cancelButtonAction{
+- (void)cancelButtonAction {
     [self goBackWithDone:NO];
 }
 
@@ -209,7 +209,7 @@
     [self goBackWithDone:YES];
 }
 
-- (void)goBackWithDone:(BOOL)done{
+- (void)goBackWithDone:(BOOL)done {
     if (done) {
         [self doDoneAction];
     }
@@ -222,7 +222,7 @@
 //    }];
 }
 
-- (void)doDoneAction{
+- (void)doDoneAction {
     if (self.doneBlock) {
         self.doneBlock(self.condition);
     }

@@ -157,4 +157,7 @@ __strong static UserPublic *_singleManger = nil;
     return _dataMapDic;
 }
 
+NSString *serviceDataMapKeyForCity(NSString *open_city_id) {
+    return [NSString stringWithFormat:@"key_service_for_city_%@", open_city_id];
+}
 @end

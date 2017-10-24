@@ -171,7 +171,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == [self numberOfSectionsInTableView:tableView]) {
+    if (section == [self numberOfSectionsInTableView:tableView] - 1) {
         return kEdge;
     }
     return 0.01;
@@ -182,6 +182,11 @@
         return 0.01;
     }
     return kEdge;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat rowHeight = kCellHeightFilter;
+    return rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

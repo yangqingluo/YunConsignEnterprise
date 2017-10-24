@@ -133,6 +133,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *open_city_name;//所在城市名称
 @property (strong, nonatomic) NSString *service_id;//所属门店编号
 @property (strong, nonatomic) NSString *service_name;//所属门店名称
+@property (strong, nonatomic) NSString *service_code;//开单代码
 
 - (NSString *)showCityAndServiceName;
 
@@ -421,6 +422,23 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *operator_name;
 @property (strong, nonatomic) NSString *start_car_time;
 @property (strong, nonatomic) NSString *transport_truck_state;
+
+@end
+
+@interface AppSaveTransportTruckInfo : AppType
+
+@property (strong, nonatomic) NSString *start_station_city_id;
+@property (strong, nonatomic) NSString *start_station_city_name;//始发站
+@property (strong, nonatomic) NSString *truck_number_plate;//车牌
+@property (strong, nonatomic) NSString *truck_driver_name;//司机
+@property (strong, nonatomic) NSString *truck_driver_phone;//电话
+@property (strong, nonatomic) NSString *cost_register;//登记运费
+@property (strong, nonatomic) NSString *truck_id;//常用车辆编号，如果存在，保存时，会自动获取司机银行账号信息
+@property (strong, nonatomic) NSString *end_station_service_id;//终点门店，多个用逗号隔开
+@property (strong, nonatomic) NSString *note;//备注
+@property (strong, nonatomic) NSMutableArray *end_station;//终点站
+
+- (NSString *)saveStringForEndStationServices;
 
 @end
 

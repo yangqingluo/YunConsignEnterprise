@@ -320,6 +320,26 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppSaveTransportTruckInfo
+
+- (NSMutableArray *)end_station {
+    if (!_end_station) {
+        _end_station = [NSMutableArray new];
+    }
+    return _end_station;
+}
+
+- (NSString *)saveStringForEndStationServices {
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.end_station.count];
+    for (AppServiceInfo *service in self.end_station) {
+        [m_array addObject:service.service_id];
+        
+    }
+    return [m_array componentsJoinedByString:@","];
+}
+
+@end
+
 @implementation AppQueryTransportTruckInfo
 
 
