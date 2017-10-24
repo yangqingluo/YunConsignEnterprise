@@ -6,9 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AppBasicTableViewController.h"
 
-@interface TransportTruckTableVC : UITableViewController
+@interface TransportTruckTableVC : AppBasicTableViewController
 
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 @property (assign, nonatomic) BOOL isResetCondition;

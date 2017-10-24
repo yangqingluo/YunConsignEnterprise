@@ -51,22 +51,22 @@
     [self updateTableViewHeader];
 }
 
-- (void)becomeListed{
+- (void)becomeListed {
     NSDate *lastRefreshTime = [[NSUserDefaults standardUserDefaults] objectForKey:self.dateKey];
     if (!self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
         [self.tableView.mj_header beginRefreshing];
     }
 }
 
-- (void)becomeUnListed{
+- (void)becomeUnListed {
     
 }
 
-- (void)loadFirstPageData{
+- (void)loadFirstPageData {
     [self pullDataFunction:YES];
 }
 
-- (void)loadMoreData{
+- (void)loadMoreData {
     [self pullDataFunction:NO];
 }
 

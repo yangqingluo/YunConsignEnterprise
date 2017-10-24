@@ -71,8 +71,10 @@
         if (vc) {
             vc.condition = [self.condition copy];
             vc.isResetCondition = YES;
-            if ([self.viewArray indexOfObject:m_dic] == self.slidePageView.selectedIndex) {
-                [vc becomeListed];
+            if (self.slidePageView.superview) {
+                if ([self.viewArray indexOfObject:m_dic] == self.slidePageView.selectedIndex) {
+                    [vc becomeListed];
+                }
             }
         }
     }

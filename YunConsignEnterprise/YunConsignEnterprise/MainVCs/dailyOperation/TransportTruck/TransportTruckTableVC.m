@@ -11,6 +11,7 @@
 
 #import "MJRefresh.h"
 #import "TransportTrunkCell.h"
+#import "PublicFooterSummaryView.h"
 
 @interface TransportTruckTableVC ()
 
@@ -18,6 +19,8 @@
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSString *dateKey;
+
+@property (strong, nonatomic) UIView *footerView;
 
 @end
 
@@ -33,11 +36,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.top = 0;
+    if (self.indextag != 1) {
+        self.footerView.bottom = self.view.height;
+        [self.view addSubview:self.footerView];
+        self.footerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        self.tableView.height = self.footerView.top - self.tableView.top;
+        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    }
+    else {
+        self.tableView.height = self.view.height;
+    }
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
 }
 
-- (void)becomeListed{
+- (void)becomeListed {
     NSDate *lastRefreshTime = [[NSUserDefaults standardUserDefaults] objectForKey:self.dateKey];
     if (self.isResetCondition || !self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
         self.isResetCondition = NO;
@@ -45,15 +61,15 @@
     }
 }
 
-- (void)becomeUnListed{
+- (void)becomeUnListed {
     
 }
 
-- (void)loadFirstPageData{
+- (void)loadFirstPageData {
     [self queryWaybillListByConditionFunction:YES];
 }
 
-- (void)loadMoreData{
+- (void)loadMoreData {
     [self queryWaybillListByConditionFunction:NO];
 }
 
@@ -92,7 +108,7 @@
             else {
                 [weakself updateTableViewFooter];
             }
-            [weakself.tableView reloadData];
+            [weakself updateSubviews];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -168,6 +184,24 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+- (void)saveButtonAction {
+    
+}
+
+- (void)updateSubviews {
+    if (self.indextag == 2) {
+        int cost_register = 0;
+        int cost_check = 0;
+        for (AppTransportTrunkInfo *item in self.dataSource) {
+            cost_register += [item.cost_register intValue];
+            cost_check += [item.cost_check intValue];
+        }
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总登记费用：%d", cost_register];
+        ((PublicFooterSummaryView *)self.footerView).subTextLabel.text = [NSString stringWithFormat:@"总发放运费：%d", cost_check];
+    }
+    [self.tableView reloadData];
+}
+
 #pragma mark - getter
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
@@ -184,21 +218,50 @@
     return _dateKey;
 }
 
+- (UIView *)footerView {
+    if (!_footerView) {
+        switch (self.indextag) {
+            case 0:{
+                _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightFilter)];
+                
+                UIButton *btn = [[UIButton alloc] initWithFrame:_footerView.bounds];
+                btn.backgroundColor = MainColor;
+                btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+                [btn setTitle:@"派车" forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [btn addTarget:self action:@selector(saveButtonAction) forControlEvents:UIControlEventTouchUpInside];
+                [_footerView addSubview:btn];
+            }
+                break;
+                
+            case 2:{
+                _footerView = [[PublicFooterSummaryView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
+                _footerView.backgroundColor = [UIColor clearColor];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    return _footerView;
+}
+
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [TransportTrunkCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return kEdgeSmall;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return kEdgeSmall;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return kEdge;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
