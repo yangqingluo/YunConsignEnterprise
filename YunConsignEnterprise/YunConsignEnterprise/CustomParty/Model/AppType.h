@@ -480,6 +480,22 @@ BOOL isTrue(NSString *string);
 
 @end
 
+//装车货量
+@interface AppTransportTruckLoadInfo : AppType
+
+@property (strong, nonatomic) NSString *load_service_id;//门店编号
+@property (strong, nonatomic) NSString *load_service_name;//门店名称
+@property (strong, nonatomic) NSString *load_quantity;//装车货量
+@property (strong, nonatomic) NSString *load_count;//票数/件数
+@property (strong, nonatomic) NSString *start_time;
+@property (strong, nonatomic) NSString *end_time;
+@property (strong, nonatomic) NSString *transport_load_id;
+@property (strong, nonatomic) NSString *transport_truck_id;
+
+- (NSArray *)showStringListForDetail;
+
+@end
+
 
 
 

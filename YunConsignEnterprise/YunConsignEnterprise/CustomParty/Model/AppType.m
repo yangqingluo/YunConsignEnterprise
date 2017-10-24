@@ -353,7 +353,7 @@ BOOL isTrue(NSString *string) {
         [m_array addObject:self.prev_value];
         [m_array addObject:self.cur_value];
     }
-    return m_array;
+    return [NSArray arrayWithArray:m_array];
 }
 
 @end
@@ -379,6 +379,19 @@ BOOL isTrue(NSString *string) {
 
 
 @end
+
+@implementation AppTransportTruckLoadInfo
+
+- (NSArray *)showStringListForDetail {
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:3];
+    [m_array addObject:self.load_service_name];
+    [m_array addObject:self.load_quantity];
+    [m_array addObject:self.load_count];
+    return [NSArray arrayWithArray:m_array];
+}
+
+@end
+
 
 
 

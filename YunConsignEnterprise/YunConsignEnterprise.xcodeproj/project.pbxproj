@@ -40,6 +40,8 @@
 		E421754D1F9D835100F40F60 /* WaybillLogTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E421754C1F9D835100F40F60 /* WaybillLogTableVC.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
+		E4443F5F1F9ED2E600D2FE18 /* TransportTruckLoadListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F5E1F9ED2E600D2FE18 /* TransportTruckLoadListVC.m */; };
+		E4443F621F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */; };
 		E44764941F611AC70084F4EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E447648E1F611AC70084F4EB /* LoginViewController.m */; };
 		E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44764901F611AC70084F4EB /* MainTabBarController.m */; };
 		E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44764921F611AC70084F4EB /* MainTabNavController.m */; };
@@ -356,6 +358,10 @@
 		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
 		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
 		E43229591F97536A000400B8 /* WaybillReceiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveCell.m; sourceTree = "<group>"; };
+		E4443F5D1F9ED2E600D2FE18 /* TransportTruckLoadListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckLoadListVC.h; sourceTree = "<group>"; };
+		E4443F5E1F9ED2E600D2FE18 /* TransportTruckLoadListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckLoadListVC.m; sourceTree = "<group>"; };
+		E4443F601F9ED3BF00D2FE18 /* TransportTruckLoadListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckLoadListCell.h; sourceTree = "<group>"; };
+		E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckLoadListCell.m; sourceTree = "<group>"; };
 		E447648D1F611AC70084F4EB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		E447648E1F611AC70084F4EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E447648F1F611AC70084F4EB /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -828,6 +834,8 @@
 				E40F7C931F95A71700946C18 /* TransportTruckVC.m */,
 				E40F7C901F95A71700946C18 /* TransportTruckTableVC.h */,
 				E40F7C911F95A71700946C18 /* TransportTruckTableVC.m */,
+				E4443F5D1F9ED2E600D2FE18 /* TransportTruckLoadListVC.h */,
+				E4443F5E1F9ED2E600D2FE18 /* TransportTruckLoadListVC.m */,
 			);
 			name = TransportTruck;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/TransportTruck;
@@ -1141,6 +1149,8 @@
 				E49B06971F9D98A100EE4437 /* PublicRoundPointView.m */,
 				E49B06931F9D959600EE4437 /* WaybillLogCell.h */,
 				E49B06941F9D959600EE4437 /* WaybillLogCell.m */,
+				E4443F601F9ED3BF00D2FE18 /* TransportTruckLoadListCell.h */,
+				E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1898,6 +1908,7 @@
 				E4AEA0A61F5EA6D0002EBE41 /* NSObject+MJClass.m in Sources */,
 				E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */,
 				E4AEA0B01F5EA6D0002EBE41 /* MJRefreshAutoGifFooter.m in Sources */,
+				E4443F621F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m in Sources */,
 				E4AEA0C51F5EA6D0002EBE41 /* SDWebImageDownloader.m in Sources */,
 				E4AEA0851F5EA6D0002EBE41 /* AFImageDownloader.m in Sources */,
 				E40F7CA41F95A71700946C18 /* TransportTruckVC.m in Sources */,
@@ -1940,6 +1951,7 @@
 				E4AEA0A71F5EA6D0002EBE41 /* NSObject+MJCoding.m in Sources */,
 				E4AEA0AE1F5EA6D0002EBE41 /* MJRefreshFooter.m in Sources */,
 				E4AEA05A1F5EA6CF002EBE41 /* QKNetworkSingleton.m in Sources */,
+				E4443F5F1F9ED2E600D2FE18 /* TransportTruckLoadListVC.m in Sources */,
 				E4AEA0901F5EA6D0002EBE41 /* IQUITextFieldView+Additions.m in Sources */,
 				E4AEA0B61F5EA6D0002EBE41 /* MJRefreshGifHeader.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,

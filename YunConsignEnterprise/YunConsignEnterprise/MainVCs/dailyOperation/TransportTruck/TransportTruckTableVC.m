@@ -7,6 +7,7 @@
 //
 
 #import "TransportTruckTableVC.h"
+#import "TransportTruckLoadListVC.h"
 
 #import "MJRefresh.h"
 #import "TransportTrunkCell.h"
@@ -172,6 +173,27 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppTransportTrunkInfo *item = self.dataSource[indexPath.row];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                TransportTruckLoadListVC *vc = [TransportTruckLoadListVC new];
+                vc.data = item;
+                [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
 
 @end
