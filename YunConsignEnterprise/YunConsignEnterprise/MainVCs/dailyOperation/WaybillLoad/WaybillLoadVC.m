@@ -9,6 +9,7 @@
 #import "WaybillLoadVC.h"
 #import "PublicQueryConditionVC.h"
 #import "WaybillLoadTTVC.h"
+#import "WaybillLoadedVC.h"
 
 #import "MJRefresh.h"
 #import "WaybillLoadCell.h"
@@ -214,6 +215,13 @@
         switch (tag) {
             case 0:{
                 WaybillLoadTTVC *vc = [WaybillLoadTTVC new];
+                vc.truckData = self.dataSource[indexPath.row];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 1:{
+                WaybillLoadedVC *vc = [WaybillLoadedVC new];
                 vc.truckData = self.dataSource[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
             }

@@ -95,6 +95,15 @@
         }
             break;
             
+        case QueryConditionType_WaybillLoaded:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
+                           @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                           @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+        }
+            break;
+            
         case QueryConditionType_WaybillArrival:{
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},

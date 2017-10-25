@@ -66,6 +66,7 @@
 		E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47118311F676ACC004D4337 /* PublicTabViewController.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
+		E48FE5991FA0935200AC21FB /* WaybillLoadedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */; };
 		E49B06951F9D959600EE4437 /* WaybillLogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49B06941F9D959600EE4437 /* WaybillLogCell.m */; };
 		E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49B06971F9D98A100EE4437 /* PublicRoundPointView.m */; };
 		E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */; };
@@ -420,6 +421,8 @@
 		E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageAndText.m"; sourceTree = "<group>"; };
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
+		E48FE5971FA0935200AC21FB /* WaybillLoadedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadedVC.h; sourceTree = "<group>"; };
+		E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadedVC.m; sourceTree = "<group>"; };
 		E49B06931F9D959600EE4437 /* WaybillLogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLogCell.h; sourceTree = "<group>"; };
 		E49B06941F9D959600EE4437 /* WaybillLogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLogCell.m; sourceTree = "<group>"; };
 		E49B06961F9D98A100EE4437 /* PublicRoundPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicRoundPointView.h; sourceTree = "<group>"; };
@@ -890,6 +893,8 @@
 				E4E744341F96041D00CEC8FA /* WaybillLoadVC.m */,
 				E4CE60251FA033E6007F427C /* WaybillLoadTTVC.h */,
 				E4CE60261FA033E6007F427C /* WaybillLoadTTVC.m */,
+				E48FE5971FA0935200AC21FB /* WaybillLoadedVC.h */,
+				E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */,
 			);
 			name = WaybillLoad;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillLoad;
@@ -1927,6 +1932,7 @@
 				E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */,
 				E4AEA0C21F5EA6D0002EBE41 /* SDImageCacheConfig.m in Sources */,
 				E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */,
+				E48FE5991FA0935200AC21FB /* WaybillLoadedVC.m in Sources */,
 				E40F7CA61F95A71700946C18 /* PublicCustomerPhoneVC.m in Sources */,
 				E4BC30B11F9723CD00CAADAE /* WaybillArrivalVC.m in Sources */,
 				E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */,

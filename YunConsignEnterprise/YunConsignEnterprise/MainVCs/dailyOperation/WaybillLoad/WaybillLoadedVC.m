@@ -1,19 +1,19 @@
 //
-//  WaybillLoadTTVC.m
+//  WaybillLoadedVC.m
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/10/25.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillLoadTTVC.h"
+#import "WaybillLoadedVC.h"
 #import "PublicQueryConditionVC.h"
 
 #import "MJRefresh.h"
 #import "PublicTTLoadFooterView.h"
 #import "WaybillLoadSelectCell.h"
 
-@interface WaybillLoadTTVC ()
+@interface WaybillLoadedVC ()
 
 @property (strong, nonatomic) NSMutableSet *selectSet;
 @property (strong, nonatomic) NSMutableArray *dataSource;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation WaybillLoadTTVC
+@implementation WaybillLoadedVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +39,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:@"运单配载" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:@"装车详情" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -83,9 +83,9 @@
         return;
     }
     QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定配载？" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定取消配载？" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            [weakself loadWaybillToTransportTruckFunction];
+            [weakself cancelLoadWaybillToTransportTruckFunction];
         }
     } otherButtonTitles:@"确定", nil];
     [alert show];
@@ -114,7 +114,7 @@
         }
     }
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_queryCanLoadWaybillByTransportTruckIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_queryLoadedWaybillByTransportTruckIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
@@ -138,7 +138,7 @@
     }];
 }
 
-- (void)loadWaybillToTransportTruckFunction{
+- (void)cancelLoadWaybillToTransportTruckFunction{
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id}];
     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
     for (AppCanLoadWayBillInfo *item in self.selectSet) {
@@ -146,12 +146,12 @@
     }
     [m_dic setObject:[m_array componentsJoinedByString:@","] forKey:@"waybill_ids"];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_loadWaybillToTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_cancelLoadWaybillInTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                [weakself loadWayBillSuccess];
+                [weakself cancelLoadWayBillSuccess];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -210,17 +210,18 @@
     self.footerView.summaryView.textLabel.text = [NSString stringWithFormat:@"合计：%d票/%d件/货量%d", count, goods_total_count, goods_total_weight];
 }
 
-- (void)loadWayBillSuccess {
+- (void)cancelLoadWayBillSuccess {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillLoadRefresh object:nil];
-    [self showHint:@"配载成功"];
-    [self goBack];
+    [self showHint:@"取消配载成功"];
+    [self.tableView.mj_header beginRefreshing];
+//    [self goBack];
 }
 
 #pragma mark - getter
 - (PublicTTLoadFooterView *)footerView {
     if (!_footerView) {
         _footerView = [PublicTTLoadFooterView new];
-        [_footerView.actionBtn setTitle:@"确定配载" forState:UIControlStateNormal];
+        [_footerView.actionBtn setTitle:@"取消配载" forState:UIControlStateNormal];
         [_footerView.selectBtn addTarget:self action:@selector(footerSelectBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [_footerView.actionBtn addTarget:self action:@selector(footerActionBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
