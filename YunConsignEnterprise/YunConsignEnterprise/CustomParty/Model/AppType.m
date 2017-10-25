@@ -300,6 +300,13 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppCanArrivalWayBillInfo
+
+
+
+@end
+
+
 @implementation AppNeedReceiptWayBillInfo
 
 - (NSString *)showReceiptSignTypeString {

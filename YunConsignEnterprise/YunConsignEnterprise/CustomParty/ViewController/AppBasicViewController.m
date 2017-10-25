@@ -96,4 +96,9 @@
     return _titleLabel;
 }
 
+#pragma mark - notification
+- (void)needRefreshNotification:(NSNotification *)notification {
+    self.needRefresh = YES;
+}
+
 @end

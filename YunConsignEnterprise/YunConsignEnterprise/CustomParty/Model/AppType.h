@@ -361,6 +361,15 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppCanArrivalWayBillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *goods_info;//货物
+@property (strong, nonatomic) NSString *cust_info;//客户
+@property (strong, nonatomic) NSString *handover_state;//交接状态，YES_NO，1是，2否
+@property (strong, nonatomic) NSString *print_state;//打印状态，YES_NO，1是，2否
+
+@end
+
 @interface AppNeedReceiptWayBillInfo : AppWayBillInfo
 
 @property (strong, nonatomic) NSString *shipper;//发货人
@@ -584,12 +593,14 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppServiceInfo *start_service;
 @property (strong, nonatomic) AppServiceInfo *end_service;
 @property (strong, nonatomic) NSString *is_cancel;//是否作废
+@property (strong, nonatomic) AppServiceInfo *load_service;//装车网点
 
 /*车辆相关*/
 @property (strong, nonatomic) AppCityInfo *start_station_city;
 @property (strong, nonatomic) AppCityInfo *end_station_city;
 @property (strong, nonatomic) NSString *truck_number_plate;//车辆牌照
 @property (strong, nonatomic) AppDataDictionary *transport_truck_state;//车辆状态
+@property (strong, nonatomic) NSString *transport_truck_id;//车辆id
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

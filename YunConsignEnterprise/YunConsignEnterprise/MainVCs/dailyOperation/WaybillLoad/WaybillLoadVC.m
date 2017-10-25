@@ -30,7 +30,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waybillLoadNotification:) name:kNotification_WaybillLoadRefresh object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_WaybillLoadRefresh object:nil];
     }
     return self;
 }
@@ -229,11 +229,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-}
-
-#pragma mark - notification
-- (void)waybillLoadNotification:(NSNotification *)notification {
-    self.needRefresh = YES;
 }
 
 #pragma mark - UIResponder+Router

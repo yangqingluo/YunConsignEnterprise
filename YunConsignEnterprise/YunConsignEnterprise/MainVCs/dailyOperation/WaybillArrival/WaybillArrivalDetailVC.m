@@ -1,29 +1,30 @@
 //
-//  WaybillLoadedVC.m
+//  WaybillArrivalDetailVC.m
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/10/25.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillLoadedVC.h"
+#import "WaybillArrivalDetailVC.h"
 #import "PublicQueryConditionVC.h"
 
 #import "MJRefresh.h"
-#import "PublicTTLoadFooterView.h"
-#import "WaybillLoadedSelectCell.h"
+#import "PublicWaybillArrivalFooterView.h"
+#import "WaybillArrivalDetailCell.h"
 
-@interface WaybillLoadedVC ()
+@interface WaybillArrivalDetailVC ()
 
 @property (strong, nonatomic) NSMutableSet *selectSet;
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) NSMutableArray *originalDataSource;
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 
-@property (strong, nonatomic) PublicTTLoadFooterView *footerView;
+@property (strong, nonatomic) PublicWaybillArrivalFooterView *footerView;
 
 @end
 
-@implementation WaybillLoadedVC
+@implementation WaybillArrivalDetailVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +40,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:@"装车详情" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:@"到货交接" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -60,7 +61,7 @@
 
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
-    vc.type = QueryConditionType_WaybillLoadTT;
+    vc.type = QueryConditionType_WaybillArrivalDetail;
     vc.condition = [self.condition copy];
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
@@ -72,21 +73,36 @@
     [vc showFromVC:self];
 }
 
+- (void)footerIgnoreBtnAction:(UIButton *)button {
+    button.selected = !button.selected;
+    [self updateSubviewsWithDataReset:YES];
+}
+
 - (void)footerSelectBtnAction:(UIButton *)button {
     button.selected = !button.selected;
     [self updateSubviewsWithDataReset:YES];
 }
 
-- (void)footerActionBtnAction {
+- (void)footerArriveBtnAction {
     if (!self.selectSet.count) {
-        [self showHint:@"请选择配载的运单"];
+        [self showHint:@"请选择交接的运单"];
         return;
     }
-    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
-    for (AppCanLoadWayBillInfo *item in self.selectSet) {
-        [m_array addObject:item.waybill_id];
-    }
-    [self cancelLoadWaybill:[m_array componentsJoinedByString:@","]];
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定到货交接吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [weakself arrivalWaybillToTransportTruckFunction];
+        }
+    } otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+- (void)footerPrintBtn1Action {
+    
+}
+
+- (void)footerPrintBtn2Action {
+    
 }
 
 - (void)loadFirstPageData {
@@ -100,11 +116,8 @@
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
-        if (self.condition.start_time) {
-            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
-        }
-        if (self.condition.end_time) {
-            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        if (self.condition.load_service) {
+            [m_dic setObject:self.condition.load_service.service_id forKey:@"load_service_id"];
         }
         if (self.condition.query_column && self.condition.query_val) {
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
@@ -112,17 +125,16 @@
         }
     }
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_queryLoadedWaybillByTransportTruckIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_queryCanArrivalWaybillByTransportTruckIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
-                [weakself.dataSource removeAllObjects];
-                [weakself.selectSet removeAllObjects];
+                [weakself.originalDataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCanLoadWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.originalDataSource addObjectsFromArray:[AppCanArrivalWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
-            if (item.total <= weakself.dataSource.count) {
+            if (item.total <= weakself.originalDataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             else {
@@ -136,19 +148,21 @@
     }];
 }
 
-- (void)cancelLoadWaybillToTransportTruckFunction:(NSString *)waybill_ids {
-    if (!waybill_ids) {
-        return;
+- (void)arrivalWaybillToTransportTruckFunction{
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id}];
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
+    for (AppCanLoadWayBillInfo *item in self.selectSet) {
+        [m_array addObject:item.waybill_id];
     }
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id, @"waybill_ids" : waybill_ids}];
+    [m_dic setObject:[m_array componentsJoinedByString:@","] forKey:@"waybill_ids"];
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_cancelLoadWaybillInTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_arrivalWaybillInTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                [weakself cancelLoadWayBillSuccess];
+                [weakself arrivalWayBillSuccess];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -183,6 +197,15 @@
 }
 
 - (void)updateSubviewsWithDataReset:(BOOL)isReset {
+    [self.dataSource removeAllObjects];
+    [self.selectSet removeAllObjects];
+    for (AppCanArrivalWayBillInfo *item in self.originalDataSource) {
+        if (self.footerView.ignoreBtn.selected && isTrue(item.print_state)) {
+            continue;
+        }
+        [self.dataSource addObject:item];
+    }
+    
     if (isReset) {
         if (self.footerView.selectBtn.selected) {
             [self.selectSet addObjectsFromArray:self.dataSource];
@@ -196,45 +219,24 @@
 }
 
 - (void)updateFooterSummary {
-    int count = 0;
-    int goods_total_count = 0;
-    int goods_total_weight = 0;
-    for (AppCanLoadWayBillInfo *item in self.selectSet) {
-        count++;
-        goods_total_count += [item.goods_total_count intValue];
-        goods_total_weight += [item.goods_total_weight intValue];
-    }
-    self.footerView.summaryView.textLabel.text = [NSString stringWithFormat:@"合计：%d票/%d件/货量%d", count, goods_total_count, goods_total_weight];
+    
 }
 
-- (void)cancelLoadWaybill:(NSString *)waybill_ids {
-    if (!waybill_ids) {
-        [self showHint:@"运单数据错误"];
-        return;
-    }
-    QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定取消配载吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            [weakself cancelLoadWaybillToTransportTruckFunction:waybill_ids];
-        }
-    } otherButtonTitles:@"确定", nil];
-    [alert show];
-}
-
-- (void)cancelLoadWayBillSuccess {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillLoadRefresh object:nil];
-    [self showHint:@"取消配载成功"];
+- (void)arrivalWayBillSuccess {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillArrivalRefresh object:nil];
+    [self showHint:@"到货交接完成"];
     [self.tableView.mj_header beginRefreshing];
-//    [self goBack];
 }
 
 #pragma mark - getter
-- (PublicTTLoadFooterView *)footerView {
+- (PublicWaybillArrivalFooterView *)footerView {
     if (!_footerView) {
-        _footerView = [PublicTTLoadFooterView new];
-        [_footerView.actionBtn setTitle:@"取消配载" forState:UIControlStateNormal];
+        _footerView = [PublicWaybillArrivalFooterView new];
         [_footerView.selectBtn addTarget:self action:@selector(footerSelectBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_footerView.actionBtn addTarget:self action:@selector(footerActionBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView.ignoreBtn addTarget:self action:@selector(footerIgnoreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView.arriveBtn addTarget:self action:@selector(footerArriveBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView.printBtn1 addTarget:self action:@selector(footerPrintBtn1Action) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView.printBtn2 addTarget:self action:@selector(footerPrintBtn2Action) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footerView;
 }
@@ -242,6 +244,7 @@
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
+        _condition.transport_truck_id = self.truckData.transport_truck_id;
     }
     return _condition;
 }
@@ -251,6 +254,13 @@
         _dataSource = [NSMutableArray new];
     }
     return _dataSource;
+}
+
+- (NSMutableArray *)originalDataSource {
+    if (!_originalDataSource) {
+        _originalDataSource = [NSMutableArray new];
+    }
+    return _originalDataSource;
 }
 
 - (NSMutableSet *)selectSet {
@@ -266,7 +276,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillLoadedSelectCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [WaybillArrivalDetailCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -278,11 +288,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"way_bill_load_cell";
-    WaybillLoadedSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"way_bill_arrival_cell";
+    WaybillArrivalDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[WaybillLoadedSelectCell alloc] initWithHeaderStyle:PublicHeaderCellStyleSelection reuseIdentifier:CellIdentifier];
+        cell = [[WaybillArrivalDetailCell alloc] initWithHeaderStyle:PublicHeaderCellStyleSelection reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     id item = self.dataSource[indexPath.row];
@@ -318,21 +328,7 @@
         [self updateFooterSummary];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
-    else if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
-        NSDictionary *m_dic = (NSDictionary *)userInfo;
-        NSIndexPath *indexPath = m_dic[@"indexPath"];
-        int tag = [m_dic[@"tag"] intValue];
-        switch (tag) {
-            case 0:{
-                AppCanLoadWayBillInfo *item = self.dataSource[indexPath.row];
-                [self cancelLoadWaybill:item.waybill_id];
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }
 }
+
 
 @end

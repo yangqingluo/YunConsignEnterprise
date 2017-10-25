@@ -32,6 +32,7 @@
 //数据字典数据
 @property (strong, nonatomic) NSMutableDictionary *dataMapDic;
 NSString *serviceDataMapKeyForCity(NSString *open_city_id);
+NSString *serviceDataMapKeyForTruck(NSString *transport_truck_id);
 
 //保存用户数据
 - (void)saveUserData:(AppUserInfo *)data;

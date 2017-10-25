@@ -22,5 +22,6 @@
 
 - (void)createNavWithTitle:(NSString *)szTitle createMenuItem:(UIView *(^)(int nIndex))menuItem;
 - (void)dismissKeyboard;
+- (void)needRefreshNotification:(NSNotification *)notification;
 
 @end

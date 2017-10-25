@@ -102,6 +102,7 @@
 #define kNotification_WaybillLogRefresh    @"kNotification_WaybillLogRefresh"
 #define kNotification_WaybillLoadRefresh    @"kNotification_WaybillLoadRefresh"//配载装车更新
 #define kNotification_TransportTruckSaveRefresh    @"kNotification_TransportTruckSaveRefresh"//派车更新
+#define kNotification_WaybillArrivalRefresh    @"kNotification_WaybillArrivalRefresh"//到车更新
 
 typedef enum : NSUInteger {
     PowerType_CustomerManagement = 1,

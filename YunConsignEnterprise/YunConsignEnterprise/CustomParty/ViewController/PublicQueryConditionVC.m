@@ -92,6 +92,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            [self checkDataMapExistedFor:@"query_column"];
         }
             break;
             
@@ -101,6 +102,7 @@
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            [self checkDataMapExistedFor:@"query_column"];
         }
             break;
             
@@ -110,6 +112,14 @@
                            @{@"title":@"始发城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
                            @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
                            @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
+        }
+            break;
+            
+        case QueryConditionType_WaybillArrivalDetail:{
+            _showArray = @[@{@"title":@"装车网点",@"subTitle":@"必填，请选择",@"key":@"load_service"},
+                           @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                           @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            [self checkDataMapExistedFor:@"query_column"];
         }
             break;
             
@@ -206,6 +216,27 @@
         if (!error) {
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+            if (m_array.count) {
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = @{@"transport_truck_id" : transport_truck_id};
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_queryServiceListByTransportTruckId" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForTruck(transport_truck_id)];
             if (m_array.count) {
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
@@ -336,6 +367,26 @@
             [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
+    else if ([key isEqualToString:@"load_service"]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:serviceDataMapKeyForTruck(self.condition.transport_truck_id)];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppServiceInfo *m_data in dataArray) {
+                [m_array addObject:m_data.service_name];
+            }
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    [weakself.condition setValue:dataArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullLoadServiceArrayFunctionForTransportTruckID:self.condition.transport_truck_id selectionInIndexPath:indexPath];
+        }
+    }
     else if ([self.boolValidSet containsObject:key]) {
         NSArray *m_array = @[@"是", @"否"];
         QKWEAKSELF;
@@ -440,7 +491,7 @@
     if ([self.dataDicSet containsObject:key]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
     }
-    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
+    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"load_service"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"service_name"];
     }
     else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {

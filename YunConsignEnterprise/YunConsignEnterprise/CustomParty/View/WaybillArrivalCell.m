@@ -22,7 +22,14 @@
 
 - (void)setupFooter {
     [super setupFooter];
+    [self updateFooter];
+}
+
+- (void)updateFooter {
     NSArray *m_array = @[@"运单明细", @"已到车"];
+    if (self.data.arrival_time) {
+        m_array = @[@"运单明细"];
+    }
     [self.footerView updateDataSourceWithArray:m_array];
 }
 
@@ -35,7 +42,7 @@
     self.bodyLabel2.text = [NSString stringWithFormat:@"登记：%@", data.register_time];
     self.bodyLabel3.text = [NSString stringWithFormat:@"货量：%@",data.load_quantity];
     
-    self.arriveTimeLabel.text = [NSString stringWithFormat:@"到车：%@", data.arrival_time];
+    self.arriveTimeLabel.text = [NSString stringWithFormat:@"到车：%@", data.arrival_time ? data.arrival_time : @"未到车"];
     NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic appFontOfSize:appLabelFontSize], NSForegroundColorAttributeName:baseTextColor};
     NSDictionary *dic2 = @{NSFontAttributeName:[AppPublic appFontOfSize:appLabelFontSize], NSForegroundColorAttributeName:MainColor};
     
@@ -43,6 +50,8 @@
     [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:@"未交接：" attributes:dic1]];
     [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", data.nohandover_count] attributes:dic2]];
     self.noHandoverLabel.attributedText = m_string;
+    
+    [self updateFooter];
 }
 
 @end

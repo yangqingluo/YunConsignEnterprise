@@ -83,7 +83,7 @@
         return;
     }
     QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定配载？" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定配载吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [weakself loadWaybillToTransportTruckFunction];
         }

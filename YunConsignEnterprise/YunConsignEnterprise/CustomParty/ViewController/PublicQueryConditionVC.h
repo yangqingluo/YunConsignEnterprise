@@ -16,6 +16,7 @@ typedef enum : NSUInteger {
     QueryConditionType_WaybillLoadTT,//配载装车-运单配载
     QueryConditionType_WaybillLoaded,//配载装车-已配载
     QueryConditionType_WaybillArrival,//到货交接
+    QueryConditionType_WaybillArrivalDetail,//到货交接详情
     QueryConditionType_WaybillReceive,//客户自提
     QueryConditionType_PayOnReceipt,//回单付款
     QueryConditionType_CustomerManage,//客户管理
