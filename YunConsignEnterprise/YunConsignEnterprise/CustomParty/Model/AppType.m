@@ -204,7 +204,20 @@ BOOL isTrue(NSString *string) {
         NSString *value = [self valueForKey:keyPath];
         amount += [value longLongValue];
     }
-    
+//    @property (assign, nonatomic) NSString *is_pay_now;//是否现付
+//    @property (strong, nonatomic) NSString *pay_now_amount;//现付金额
+//    @property (assign, nonatomic) NSString *is_pay_on_delivery;//是否提付
+//    @property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付金额
+//    @property (assign, nonatomic) NSString *is_pay_on_receipt;//是否回单付
+//    @property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
+    long long pay_now_amount = [self.pay_now_amount longLongValue];
+    long long pay_on_receipt_amount = [self.pay_on_receipt_amount longLongValue];
+    long long pay_on_delivery_amount = amount - pay_now_amount - pay_on_receipt_amount;
+    if (isTrue(self.is_pay_on_delivery)) {
+        if (pay_on_delivery_amount > 0) {
+            self.pay_on_delivery_amount = [NSString stringWithFormat:@"%lld", pay_on_delivery_amount];
+        }
+    }
     self.total_amount = [NSString stringWithFormat:@"%lld", amount];
 }
 

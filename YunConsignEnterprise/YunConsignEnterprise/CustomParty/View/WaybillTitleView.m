@@ -25,7 +25,11 @@
         _textLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, self.width - 2 * kEdgeMiddle, self.height), baseTextColor, [UIFont boldSystemFontOfSize:appLabelFontSizeMiddle], NSTextAlignmentLeft);
         [self addSubview:_textLabel];
         
+        _subTextLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, self.width - 2 * kEdgeMiddle, self.height), nil, nil, NSTextAlignmentRight);
+        [self addSubview:_subTextLabel];
+        
         self.textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.subTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     return self;
 }

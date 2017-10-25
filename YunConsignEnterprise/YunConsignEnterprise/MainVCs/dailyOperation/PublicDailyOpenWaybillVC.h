@@ -27,7 +27,6 @@
 @property (strong, nonatomic) NSSet *defaultKeyBoardTypeSet;
 
 @property (strong, nonatomic) IndexPathTextField *summaryFreightTextField;//物品总重量
-@property (strong, nonatomic) UILabel *totalAmountLabel;//总费用
 
 - (void)addGoodsButtonAction;
 - (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier;

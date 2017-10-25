@@ -11,5 +11,6 @@
 @interface WaybillTitleView : UIView
 
 @property (strong, nonatomic) UILabel *textLabel;
+@property (strong, nonatomic) UILabel *subTextLabel;
 
 @end

@@ -48,15 +48,6 @@
             }
                 break;
                 
-            case 2:{
-                if (!_totalAmountLabel) {
-                    _totalAmountLabel = NewLabel(CGRectMake(0, 0, 200, [self tableView:tableView heightForRowAtIndexPath:indexPath]), nil, nil, NSTextAlignmentRight);
-                    _totalAmountLabel.right = screen_width - kEdgeMiddle;
-                }
-                [cell.contentView addSubview:self.totalAmountLabel];
-            }
-                break;
-                
             default:
                 break;
         }
@@ -124,6 +115,7 @@
     cell.baseView.textField.indexPath = [indexPath copy];
     cell.baseView.textField.hidden = YES;
     cell.baseView.checkBtn.indexPath = [indexPath copy];
+    cell.baseView.checkBtn.selected = NO;
     
     return cell;
 }

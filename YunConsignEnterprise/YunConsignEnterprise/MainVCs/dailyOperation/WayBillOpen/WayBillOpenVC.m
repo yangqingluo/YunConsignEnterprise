@@ -68,7 +68,7 @@
         return;
     }
     else {
-        [self.toSavedata appendSenderInfo:self.headerView.senderInfo];
+        [self.toSaveData appendSenderInfo:self.headerView.senderInfo];
     }
     
     if (!self.headerView.receiverInfo) {
@@ -76,7 +76,7 @@
         return;
     }
     else {
-        [self.toSavedata appendReceiverInfo:self.headerView.receiverInfo];
+        [self.toSaveData appendReceiverInfo:self.headerView.receiverInfo];
     }
     
     if (!self.goodsArray.count) {
@@ -84,20 +84,20 @@
         return;
     }
     else {
-        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
+        self.toSaveData.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
     }
     
-//    long long amount = [self.toSavedata.total_amount longLongValue];
-//    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-//    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-//    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
+//    long long amount = [self.toSaveData.total_amount longLongValue];
+//    long long payNowAmount = self.toSaveData.is_pay_now ? [self.toSaveData.pay_now_amount longLongValue] : 0LL;
+//    long long payOnReceiptAmount = self.toSaveData.is_pay_on_receipt ? [self.toSaveData.pay_on_receipt_amount longLongValue] : 0LL;
+//    long long payOnDeliveryAmount = self.toSaveData.is_pay_on_delivery ? [self.toSaveData.pay_on_delivery_amount longLongValue] : 0LL;
 //    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
 //        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
 //        return;
 //    }
     
-    self.toSavedata.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
-    [self pushSaveWaybillFunction:[self.toSavedata app_keyValues]];
+    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
+    [self pushSaveWaybillFunction:[self.toSaveData app_keyValues]];
 }
 
 - (void)addGoodsButtonAction {
@@ -122,7 +122,7 @@
 - (void)switchorButtonAction:(IndexPathSwitch *)button {
     if (button.indexPath.section == 1) {
         NSDictionary *m_dic = self.feeShowArray[button.indexPath.row - 1];
-        [self.toSavedata setValue:!button.isOn ? @"2" : @"1" forKey:m_dic[@"key"]];
+        [self.toSaveData setValue:!button.isOn ? @"2" : @"1" forKey:m_dic[@"key"]];
 //        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -130,7 +130,7 @@
 - (void)checkButtonAction:(IndexPathButton *)button {
     if (button.indexPath.section == 2) {
         NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
-        [self.toSavedata setValue:button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
+        [self.toSaveData setValue:button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
         [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -154,16 +154,17 @@
         weight += item.weight;
         volume += item.volume;
     }
-    self.toSavedata.freight = [NSString stringWithFormat:@"%lld", freight];
-    self.toSavedata.goods_total_count = [NSString stringWithFormat:@"%d", number];
-    self.toSavedata.goods_total_weight = [NSString stringWithFormat:@"%.1f", weight];
-    self.toSavedata.goods_total_volume = [NSString stringWithFormat:@"%.1f", volume];
+    self.toSaveData.freight = [NSString stringWithFormat:@"%lld", freight];
+    self.toSaveData.goods_total_count = [NSString stringWithFormat:@"%d", number];
+    self.toSaveData.goods_total_weight = [NSString stringWithFormat:@"%.1f", weight];
+    self.toSaveData.goods_total_volume = [NSString stringWithFormat:@"%.1f", volume];
 }
 
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     switch (indexPath.section) {
         case 0: {
-            self.toSavedata.freight = [NSString stringWithFormat:@"%lld", [content longLongValue]];
+            self.toSaveData.freight = [NSString stringWithFormat:@"%lld", [content longLongValue]];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
         }
             break;
             
@@ -172,22 +173,23 @@
                 id object = self.feeShowArray[indexPath.row - 1];
                 if ([object isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *m_dic = object;
-                    [self.toSavedata setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
+                    [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
                 }
                 else if ([object isKindOfClass:[NSArray class]]) {
                     NSArray *m_array = object;
                     if (m_array.count == 2 && tag >= 0 && tag <= 1) {
                         NSDictionary *m_dic = m_array[tag];
                         int value = [content intValue];
-                        [self.toSavedata setValue:[NSString stringWithFormat:@"%d", value] forKey:m_dic[@"key"]];
+                        [self.toSaveData setValue:[NSString stringWithFormat:@"%d", value] forKey:m_dic[@"key"]];
                         NSString *key = m_dic[@"key"];
                         if ([key isEqualToString:@"insurance_amount"]) {
-                            self.toSavedata.insurance_fee = [NSString stringWithFormat:@"%.0f", floor(value * 0.03)];
+                            self.toSaveData.insurance_fee = [NSString stringWithFormat:@"%.0f", floor(value * 0.03)];
                             DoubleInputCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                            cell.anotherBaseView.textField.text = self.toSavedata.insurance_fee;
+                            cell.anotherBaseView.textField.text = self.toSaveData.insurance_fee;
                         }
                     }
                 }
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
             break;
@@ -197,10 +199,10 @@
                 NSDictionary *m_dic = self.payStyleShowArray[indexPath.row - 1];
                 NSString *key = m_dic[@"key"];
                 if ([self.defaultKeyBoardTypeSet containsObject:key]) {
-                    [self.toSavedata setValue:content forKey:key];
+                    [self.toSaveData setValue:content forKey:key];
                 }
                 else {
-                    [self.toSavedata setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
+                    [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
                 }
             }
         }
@@ -279,32 +281,34 @@
 //    return _goodsSummary;
 //}
 
-- (AppSaveWayBillInfo *)toSavedata {
-    if (!_toSavedata) {
-        _toSavedata = [AppSaveWayBillInfo new];
-        _toSavedata.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)RECEIPT_SIGN_TYPE_4];
-        _toSavedata.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)CASH_ON_DELIVERY_TYPE_1];
-        _toSavedata.freight = @"0";
-        _toSavedata.pay_now_amount = @"0";
-        _toSavedata.pay_on_delivery_amount = @"0";
-        _toSavedata.pay_on_receipt_amount = @"0";
-        _toSavedata.cash_on_delivery_amount = @"0";
-//        _toSavedata.insurance_amount = @"0";//保价金额
-        _toSavedata.insurance_fee = @"0";//保价费
-        _toSavedata.take_goods_fee = @"0";//接货费
-        _toSavedata.deliver_goods_fee = @"0";//送货费
-        _toSavedata.rebate_fee = @"0";//回扣费
-        _toSavedata.forklift_fee = @"0";//叉车费
-        _toSavedata.pay_for_sb_fee = @"0";//垫付费
-        _toSavedata.is_pay_on_delivery = @"2";
+- (AppSaveWayBillInfo *)toSaveData {
+    if (!_toSaveData) {
+        _toSaveData = [AppSaveWayBillInfo new];
+        _toSaveData.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)RECEIPT_SIGN_TYPE_4];
+        _toSaveData.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)CASH_ON_DELIVERY_TYPE_1];
+        _toSaveData.freight = @"0";
+        _toSaveData.pay_now_amount = @"0";
+        _toSaveData.pay_on_delivery_amount = @"0";
+        _toSaveData.pay_on_receipt_amount = @"0";
+        _toSaveData.cash_on_delivery_amount = @"0";
+//        _toSaveData.insurance_amount = @"0";//保价金额
+        _toSaveData.insurance_fee = @"0";//保价费
+        _toSaveData.take_goods_fee = @"0";//接货费
+        _toSaveData.deliver_goods_fee = @"0";//送货费
+        _toSaveData.rebate_fee = @"0";//回扣费
+        _toSaveData.forklift_fee = @"0";//叉车费
+        _toSaveData.pay_for_sb_fee = @"0";//垫付费
+        _toSaveData.is_pay_on_delivery = @"1";//默认提付
+        _toSaveData.is_pay_now = @"2";
+        _toSaveData.is_pay_on_receipt = @"2";
     }
-    return _toSavedata;
+    return _toSaveData;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
-    UITableViewCell *cell = [super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    WayBillTitleCell *cell = (WayBillTitleCell *)[super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     if (indexPath.section == 2) {
-        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSavedata.total_amount];
+        cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSaveData.total_amount];
     }
     return cell;
 }
@@ -313,7 +317,7 @@
     SwitchorCell *cell = (SwitchorCell *)[super tableView:tableView switchorCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     NSString *key = showObject[@"key"];
     if ([self.switchorSet containsObject:key]) {
-        NSString *value = [self.toSavedata valueForKey:key];
+        NSString *value = [self.toSaveData valueForKey:key];
         cell.baseView.switchor.on = isTrue(value);
     }
     return cell;
@@ -325,10 +329,10 @@
     if ([self.selectorSet containsObject:key]) {
         cell.baseView.textField.enabled = NO;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.baseView.textField.text = [UserPublic stringForType:[[self.toSavedata valueForKey:key] integerValue] key:key];
+        cell.baseView.textField.text = [UserPublic stringForType:[[self.toSaveData valueForKey:key] integerValue] key:key];
     }
     else {
-        NSString *value = [self.toSavedata valueForKey:key];
+        NSString *value = [self.toSaveData valueForKey:key];
         if (value) {
             cell.baseView.textField.text = value;
         }
@@ -340,13 +344,13 @@
     SwitchedInputCell *cell = (SwitchedInputCell *)[super tableView:tableView switchedInputCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     
     NSString *key = showObject[@"key"];
-    NSString *value = [self.toSavedata valueForKey:key];
+    NSString *value = [self.toSaveData valueForKey:key];
     if (value) {
         cell.baseView.textField.text = value;
     }
     
     NSString *subKey = showObject[@"subKey"];
-    NSString *subValue = [self.toSavedata valueForKey:subKey];
+    NSString *subValue = [self.toSaveData valueForKey:subKey];
     if (subValue) {
         BOOL yn = isTrue(subValue);
         cell.baseView.checkBtn.selected = yn;
@@ -362,12 +366,12 @@
     NSDictionary *m_dic1 = m_array[0];
     NSDictionary *m_dic2 = m_array[1];
     NSString *key1 = m_dic1[@"key"];
-    NSString *value1 = [self.toSavedata valueForKey:key1];
+    NSString *value1 = [self.toSaveData valueForKey:key1];
     if (value1) {
         cell.baseView.textField.text = value1;
     }
     NSString *key2 = m_dic2[@"key"];
-    NSString *value2 = [self.toSavedata valueForKey:key2];
+    NSString *value2 = [self.toSaveData valueForKey:key2];
     if (value2) {
         cell.anotherBaseView.textField.text = value2;
     }
@@ -505,9 +509,9 @@
                 }
                 
                 [cell addShowContents:@[@"运费：",
-                                        self.toSavedata.freight,
+                                        self.toSaveData.freight,
                                         @"总数：",
-                                        [NSString stringWithFormat:@"%@/%@/%@", self.toSavedata.goods_total_count, self.toSavedata.goods_total_weight, self.toSavedata.goods_total_volume]]];
+                                        [NSString stringWithFormat:@"%@/%@/%@", self.toSaveData.goods_total_count, self.toSaveData.goods_total_weight, self.toSaveData.goods_total_volume]]];
                 return cell;
             }
             else {
@@ -605,7 +609,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                        weakself.toSavedata.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
+                        weakself.toSaveData.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];
@@ -616,7 +620,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                        weakself.toSavedata.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
+                        weakself.toSaveData.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];

@@ -52,7 +52,7 @@
         return;
     }
     else {
-        [self.toSavedata appendSenderInfo:self.headerView.senderInfo];
+        [self.toSaveData appendSenderInfo:self.headerView.senderInfo];
     }
     
     if (!self.headerView.receiverInfo) {
@@ -60,7 +60,7 @@
         return;
     }
     else {
-        [self.toSavedata appendReceiverInfo:self.headerView.receiverInfo];
+        [self.toSaveData appendReceiverInfo:self.headerView.receiverInfo];
     }
     
 //    if (!self.goodsArray.count) {
@@ -80,8 +80,8 @@
 //        return;
 //    }
     
-    self.toSavedata.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
-    NSDictionary *toSaveDic = [self.toSavedata mj_keyValues];
+    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
+    NSDictionary *toSaveDic = [self.toSaveData mj_keyValues];
     NSDictionary *detailDic = [self.detailData mj_keyValues];
     NSMutableDictionary *m_dic = [NSMutableDictionary new];
     for (NSString *key in toSaveDic.allKeys) {
@@ -173,7 +173,7 @@
         [self.goodsArray addObject:goods];
     }
     [self.headerView updateDataForWaybillDetailInfo:self.detailData];
-    self.toSavedata = [AppSaveWayBillInfo mj_objectWithKeyValues:[self.detailData mj_keyValues]];
+    self.toSaveData = [AppSaveWayBillInfo mj_objectWithKeyValues:[self.detailData mj_keyValues]];
     
     [self.tableView reloadData];
 }
@@ -182,9 +182,9 @@
     if (indexPath.section == 0) {
         reuseIdentifier = @"goods_title_cell";
     }
-    UITableViewCell *cell = [super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    WayBillTitleCell *cell = (WayBillTitleCell *)[super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     if (indexPath.section == 2) {
-        self.totalAmountLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSavedata.total_amount];
+        cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"总费用：%@", self.toSaveData.total_amount];
     }
     return cell;
 }

@@ -195,9 +195,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
-    UITableViewCell *cell = [super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    WayBillTitleCell *cell = (WayBillTitleCell *)[super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     if (indexPath.section == 2) {
-        self.totalAmountLabel.text = [NSString stringWithFormat:@"总运费：%@", self.detailData.total_amount];
+        cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"总费用：%@", self.detailData.total_amount];
     }
     return cell;
 }
