@@ -13,11 +13,12 @@
 
 @interface AppBasicViewController : UIViewController
 
-@property (nonatomic, strong) UIImageView *navigationBarView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIView *navBottomLine;
+@property (strong, nonatomic) UIImageView *navigationBarView;
+@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UIView *navBottomLine;
 @property (copy,   nonatomic) DoneBlock doneBlock;
 @property (copy,   nonatomic) AppAccessInfo *accessInfo;
+@property (assign, nonatomic) BOOL needRefresh;
 
 - (void)createNavWithTitle:(NSString *)szTitle createMenuItem:(UIView *(^)(int nIndex))menuItem;
 - (void)dismissKeyboard;

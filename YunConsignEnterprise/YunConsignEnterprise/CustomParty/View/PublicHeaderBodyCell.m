@@ -19,7 +19,7 @@
 @implementation PublicHeaderBodyCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self = [[PublicHeaderBodyCell alloc] initWithHeaderStyle:PublicHeaderCellStyleDefault reuseIdentifier:reuseIdentifier];
+    self = [self initWithHeaderStyle:PublicHeaderCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
         
     }
@@ -32,13 +32,15 @@
     if (self) {
         self.headerStyle = style;
         self.backgroundColor = [UIColor clearColor];
-        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeSmall, screen_width - 2 * kEdgeMiddle, height_PublicHeaderBodyCell - 2 * kEdgeSmall)];
+        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeSmall, screen_width - 2 * kEdgeMiddle, self.contentView.height - 2 * kEdgeSmall)];
         _baseView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_baseView];
         
         [AppPublic roundCornerRadius:_baseView cornerRadius:kViewCornerRadius];
         _baseView.layer.borderColor = baseSeparatorColor.CGColor;
         _baseView.layer.borderWidth = appSeparaterLineSize;
+        
+        self.baseView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         
         [self setupHeader];
         [self setupBody];
@@ -72,7 +74,7 @@
 }
 
 - (void)setupBody {
-    _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.baseView.width, self.baseView.height - self.headerView.bottom)];
+    _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.baseView.width, height_PublicHeaderBodyCell - self.headerView.bottom)];
     [self.baseView addSubview:_bodyView];
     
     _bodyLabel1 = NewLabel(CGRectMake(kEdge, kEdgeBig, _bodyView.width - 2 * kEdge, 24), nil, nil, NSTextAlignmentLeft);

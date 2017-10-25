@@ -11,7 +11,7 @@
 
 #import "MJRefresh.h"
 #import "PublicTTLoadFooterView.h"
-#import "WaybillLoadSelectCell.h"
+#import "WaybillLoadedSelectCell.h"
 
 @interface WaybillLoadedVC ()
 
@@ -82,13 +82,11 @@
         [self showHint:@"请选择配载的运单"];
         return;
     }
-    QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定取消配载？" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            [weakself cancelLoadWaybillToTransportTruckFunction];
-        }
-    } otherButtonTitles:@"确定", nil];
-    [alert show];
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
+    for (AppCanLoadWayBillInfo *item in self.selectSet) {
+        [m_array addObject:item.waybill_id];
+    }
+    [self cancelLoadWaybill:[m_array componentsJoinedByString:@","]];
 }
 
 - (void)loadFirstPageData {
@@ -138,13 +136,12 @@
     }];
 }
 
-- (void)cancelLoadWaybillToTransportTruckFunction{
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id}];
-    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
-    for (AppCanLoadWayBillInfo *item in self.selectSet) {
-        [m_array addObject:item.waybill_id];
+- (void)cancelLoadWaybillToTransportTruckFunction:(NSString *)waybill_ids {
+    if (!waybill_ids) {
+        return;
     }
-    [m_dic setObject:[m_array componentsJoinedByString:@","] forKey:@"waybill_ids"];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id, @"waybill_ids" : waybill_ids}];
+    [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_cancelLoadWaybillInTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -210,6 +207,20 @@
     self.footerView.summaryView.textLabel.text = [NSString stringWithFormat:@"合计：%d票/%d件/货量%d", count, goods_total_count, goods_total_weight];
 }
 
+- (void)cancelLoadWaybill:(NSString *)waybill_ids {
+    if (!waybill_ids) {
+        [self showHint:@"运单数据错误"];
+        return;
+    }
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定取消配载？" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [weakself cancelLoadWaybillToTransportTruckFunction:waybill_ids];
+        }
+    } otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
 - (void)cancelLoadWayBillSuccess {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillLoadRefresh object:nil];
     [self showHint:@"取消配载成功"];
@@ -255,7 +266,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillLoadSelectCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [WaybillLoadedSelectCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -268,10 +279,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"way_bill_load_cell";
-    WaybillLoadSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    WaybillLoadedSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[WaybillLoadSelectCell alloc] initWithHeaderStyle:PublicHeaderCellStyleSelection reuseIdentifier:CellIdentifier];
+        cell = [[WaybillLoadedSelectCell alloc] initWithHeaderStyle:PublicHeaderCellStyleSelection reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     id item = self.dataSource[indexPath.row];
@@ -306,6 +317,21 @@
         }
         [self updateFooterSummary];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+    else if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                AppCanLoadWayBillInfo *item = self.dataSource[indexPath.row];
+                [self cancelLoadWaybill:item.waybill_id];
+            }
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 

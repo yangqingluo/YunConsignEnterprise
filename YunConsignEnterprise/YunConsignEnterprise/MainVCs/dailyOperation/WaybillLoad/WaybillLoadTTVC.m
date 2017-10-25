@@ -145,6 +145,7 @@
         [m_array addObject:item.waybill_id];
     }
     [m_dic setObject:[m_array componentsJoinedByString:@","] forKey:@"waybill_ids"];
+    [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_loadWaybillToTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];

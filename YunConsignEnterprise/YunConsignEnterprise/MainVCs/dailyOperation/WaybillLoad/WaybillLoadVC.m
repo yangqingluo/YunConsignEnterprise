@@ -35,6 +35,13 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        self.needRefresh = NO;
+        [self.tableView.mj_header beginRefreshing];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,6 +136,28 @@
     }];
 }
 
+- (void)doStartTransportTruck:(AppCanLoadTransportTruckInfo *)item {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_startTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself showHint:@"发车成功"];
+                [weakself.tableView.mj_header beginRefreshing];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)updateTableViewHeader {
     QKWEAKSELF;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -146,6 +175,7 @@
 }
 
 - (void)endRefreshing {
+    [self hideHud];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
@@ -203,7 +233,7 @@
 
 #pragma mark - notification
 - (void)waybillLoadNotification:(NSNotification *)notification {
-    [self.tableView.mj_header beginRefreshing];
+    self.needRefresh = YES;
 }
 
 #pragma mark - UIResponder+Router
@@ -224,6 +254,18 @@
                 WaybillLoadedVC *vc = [WaybillLoadedVC new];
                 vc.truckData = self.dataSource[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 3:{
+                //发车
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定发车吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doStartTransportTruck:weakself.dataSource[indexPath.row]];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
             }
                 break;
                 
