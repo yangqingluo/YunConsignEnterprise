@@ -6,9 +6,9 @@
 
 @implementation UDImageLabelButton
 
-- (void)dealloc{
-    [self.downLabel removeObserver:self forKeyPath:@"text"];
-}
+//- (void)dealloc{
+//    [self.downLabel removeObserver:self forKeyPath:@"text"];
+//}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -25,7 +25,7 @@
         self.downLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.downLabel];
         
-        [self.downLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+//        [self.downLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     
     return self;

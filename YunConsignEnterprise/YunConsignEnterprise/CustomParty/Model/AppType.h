@@ -308,6 +308,7 @@ BOOL isTrue(NSString *string);
 
 - (NSString *)statusStringForState;
 - (UIColor *)statusColorForState;
+- (NSString *)payStyleStringForState;
 
 @end
 
@@ -350,7 +351,13 @@ BOOL isTrue(NSString *string);
 
 @interface AppCanReceiveWayBillInfo : AppWayBillInfo
 
-- (NSString *)payStyleStringForState;
+
+@end
+
+@interface AppCanLoadWayBillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *goods_info;//货物
+@property (strong, nonatomic) NSString *cust_info;//客户
 
 @end
 

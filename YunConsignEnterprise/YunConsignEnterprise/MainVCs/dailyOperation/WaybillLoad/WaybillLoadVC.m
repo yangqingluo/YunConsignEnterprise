@@ -10,8 +10,8 @@
 #import "PublicQueryConditionVC.h"
 #import "WaybillLoadTTVC.h"
 
-#import "WaybillLoadCell.h"
 #import "MJRefresh.h"
+#import "WaybillLoadCell.h"
 
 @interface WaybillLoadVC ()
 
@@ -21,6 +21,19 @@
 @end
 
 @implementation WaybillLoadVC
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waybillLoadNotification:) name:kNotification_WaybillLoadRefresh object:nil];
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -185,6 +198,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+#pragma mark - notification
+- (void)waybillLoadNotification:(NSNotification *)notification {
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - UIResponder+Router

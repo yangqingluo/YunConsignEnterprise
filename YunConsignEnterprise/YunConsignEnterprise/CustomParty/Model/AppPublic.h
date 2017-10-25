@@ -100,6 +100,7 @@
 #define defaultHeadImageName         @"默认头像"
 #define kNotification_WaybillListRefresh    @"kNotification_WaybillListRefresh"
 #define kNotification_WaybillLogRefresh    @"kNotification_WaybillLogRefresh"
+#define kNotification_WaybillLoadRefresh    @"kNotification_WaybillLoadRefresh"//配载装车更新
 #define kNotification_TransportTruckSaveRefresh    @"kNotification_TransportTruckSaveRefresh"//派车更新
 
 typedef enum : NSUInteger {
