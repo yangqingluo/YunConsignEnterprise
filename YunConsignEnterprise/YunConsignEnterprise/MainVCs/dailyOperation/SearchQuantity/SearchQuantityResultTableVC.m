@@ -8,6 +8,7 @@
 
 #import "SearchQuantityResultTableVC.h"
 #import "ServiceGoodsDetailVC.h"
+#import "PublicSaveTransportTruckVC.h"
 
 #import "MJRefresh.h"
 #import "PublicMutableLabelView.h"
@@ -143,8 +144,9 @@
 
 - (void)cellActionBtnAction:(UIButton *)button {
     if (self.indextag == 0) {
-        AppRouteGoodsQuantityInfo *m_data = self.dataSource[button.tag];
-        
+//        AppRouteGoodsQuantityInfo *m_data = self.dataSource[button.tag];
+        PublicSaveTransportTruckVC *vc = [PublicSaveTransportTruckVC new];
+        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
     }
     else if (self.indextag == 1) {
         ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];

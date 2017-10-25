@@ -171,11 +171,13 @@
 
 - (void)saveTransportTruckCostSuccess {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_TransportTruckSaveRefresh object:nil];
-    QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"派车已完成" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
-        [weakself goBack];
-    } otherButtonTitles:nil];
-    [alert show];
+    [self showHint:@"派车已完成"];
+    [self goBack];
+//    QKWEAKSELF;
+//    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"派车已完成" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+//        [weakself goBack];
+//    } otherButtonTitles:nil];
+//    [alert show];
 }
 
 #pragma mark - getter
