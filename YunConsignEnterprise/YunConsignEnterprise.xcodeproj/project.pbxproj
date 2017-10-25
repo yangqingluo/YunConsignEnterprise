@@ -291,6 +291,9 @@
 		E4BC30B11F9723CD00CAADAE /* WaybillArrivalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B01F9723CD00CAADAE /* WaybillArrivalVC.m */; };
 		E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
+		E4CE60271FA033E6007F427C /* WaybillLoadTTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CE60261FA033E6007F427C /* WaybillLoadTTVC.m */; };
+		E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CE60291FA037B3007F427C /* PublicTTLoadFooterView.m */; };
+		E4CE602D1FA03EDF007F427C /* UDImageLabelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CE602C1FA03EDF007F427C /* UDImageLabelButton.m */; };
 		E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */; };
 		E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */; };
 		E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C7FE1F792FCE002053CD /* WayBillCell.m */; };
@@ -763,6 +766,12 @@
 		E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalCell.m; sourceTree = "<group>"; };
 		E4CC90191F73655C0024FEC6 /* WayBillTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillTitleCell.h; sourceTree = "<group>"; };
 		E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillTitleCell.m; sourceTree = "<group>"; };
+		E4CE60251FA033E6007F427C /* WaybillLoadTTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadTTVC.h; sourceTree = "<group>"; };
+		E4CE60261FA033E6007F427C /* WaybillLoadTTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadTTVC.m; sourceTree = "<group>"; };
+		E4CE60281FA037B3007F427C /* PublicTTLoadFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTTLoadFooterView.h; sourceTree = "<group>"; };
+		E4CE60291FA037B3007F427C /* PublicTTLoadFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTTLoadFooterView.m; sourceTree = "<group>"; };
+		E4CE602B1FA03EDF007F427C /* UDImageLabelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDImageLabelButton.h; sourceTree = "<group>"; };
+		E4CE602C1FA03EDF007F427C /* UDImageLabelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDImageLabelButton.m; sourceTree = "<group>"; };
 		E4E050D91F9F62510068FD04 /* PublicSaveTransportTruckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSaveTransportTruckVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSaveTransportTruckVC.h; sourceTree = SOURCE_ROOT; };
 		E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicSaveTransportTruckVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSaveTransportTruckVC.m; sourceTree = SOURCE_ROOT; };
 		E4E050DC1F9F6E5D0068FD04 /* PublicEndStationSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicEndStationSelectVC.h; sourceTree = "<group>"; };
@@ -873,6 +882,8 @@
 			children = (
 				E4E744331F96041D00CEC8FA /* WaybillLoadVC.h */,
 				E4E744341F96041D00CEC8FA /* WaybillLoadVC.m */,
+				E4CE60251FA033E6007F427C /* WaybillLoadTTVC.h */,
+				E4CE60261FA033E6007F427C /* WaybillLoadTTVC.m */,
 			);
 			name = WaybillLoad;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillLoad;
@@ -1092,6 +1103,8 @@
 				E4AF3B001F78CB4E009EB766 /* AppResponder.m */,
 				E45B3CAA1F7B4E9B001D9FDB /* QCSlideSwitchView.h */,
 				E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */,
+				E4CE602B1FA03EDF007F427C /* UDImageLabelButton.h */,
+				E4CE602C1FA03EDF007F427C /* UDImageLabelButton.m */,
 				E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */,
 				E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */,
 				E40F7CAD1F95B36700946C18 /* PublicDatePickerView.h */,
@@ -1120,6 +1133,8 @@
 				E4BB91A11F99EE1A00337A52 /* WaybillTitleView.m */,
 				E4E5ED821F9EDD3B00ACDD3D /* PublicFooterSummaryView.h */,
 				E4E5ED831F9EDD3B00ACDD3D /* PublicFooterSummaryView.m */,
+				E4CE60281FA037B3007F427C /* PublicTTLoadFooterView.h */,
+				E4CE60291FA037B3007F427C /* PublicTTLoadFooterView.m */,
 				E4AF3B021F78CBBD009EB766 /* PublicCellView.h */,
 				E4AF3B031F78CBBD009EB766 /* PublicCellView.m */,
 				E420B8041F737B34009794A2 /* PublicInputCellView.h */,
@@ -1929,6 +1944,7 @@
 				E40F7CA81F95A71700946C18 /* WayBillOpenVC.m in Sources */,
 				E4AEA08D1F5EA6D0002EBE41 /* BlockAlertView.m in Sources */,
 				E4AEA0561F5EA6CF002EBE41 /* AppPublic.m in Sources */,
+				E4CE602D1FA03EDF007F427C /* UDImageLabelButton.m in Sources */,
 				E4AEA0971F5EA6D0002EBE41 /* IQBarButtonItem.m in Sources */,
 				E4AEA0CF1F5EA6D0002EBE41 /* UIView+WebCache.m in Sources */,
 				E4AEA08E1F5EA6D0002EBE41 /* IQNSArray+Sort.m in Sources */,
@@ -1975,6 +1991,7 @@
 				E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */,
 				E40F7CA31F95A71700946C18 /* TransportTruckTableVC.m in Sources */,
 				E4AEA0A81F5EA6D0002EBE41 /* NSObject+MJKeyValue.m in Sources */,
+				E4CE60271FA033E6007F427C /* WaybillLoadTTVC.m in Sources */,
 				E45B3CB21F7B5233001D9FDB /* TransportTruckCell.m in Sources */,
 				E4AEA0BF1F5EA6D0002EBE41 /* NSData+ImageContentType.m in Sources */,
 				E4AEA0A71F5EA6D0002EBE41 /* NSObject+MJCoding.m in Sources */,
@@ -1983,6 +2000,7 @@
 				E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */,
 				E4AEA0901F5EA6D0002EBE41 /* IQUITextFieldView+Additions.m in Sources */,
 				E4AEA0B61F5EA6D0002EBE41 /* MJRefreshGifHeader.m in Sources */,
+				E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
 				E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */,
 				E4AEA0AB1F5EA6D0002EBE41 /* MJRefreshAutoFooter.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "WaybillLoadVC.h"
 #import "PublicQueryConditionVC.h"
+#import "WaybillLoadTTVC.h"
 
 #import "WaybillLoadCell.h"
 #import "MJRefresh.h"
@@ -191,8 +192,18 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
-        NSNumber *tagNumber = m_dic[@"tag"];
-        NSLog(@"%ld-%d", (long)indexPath.row, [tagNumber intValue]);
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                WaybillLoadTTVC *vc = [WaybillLoadTTVC new];
+                vc.truckData = self.dataSource[indexPath.row];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 @end
