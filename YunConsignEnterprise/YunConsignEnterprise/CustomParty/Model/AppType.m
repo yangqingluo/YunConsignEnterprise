@@ -307,6 +307,13 @@ BOOL isTrue(NSString *string) {
 @end
 
 
+@implementation AppPaymentWaybillInfo
+
+
+
+@end
+
+
 @implementation AppNeedReceiptWayBillInfo
 
 - (NSString *)showReceiptSignTypeString {
@@ -320,6 +327,13 @@ BOOL isTrue(NSString *string) {
 }
 
 @end
+
+@implementation WaybillToCustReceiveInfo
+
+
+
+@end
+
 
 @implementation AppTruckInfo
 

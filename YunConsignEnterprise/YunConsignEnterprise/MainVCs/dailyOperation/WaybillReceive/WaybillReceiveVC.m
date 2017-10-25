@@ -8,6 +8,7 @@
 
 #import "WaybillReceiveVC.h"
 #import "PublicQueryConditionVC.h"
+#import "WaybillCustReceiveVC.h"
 
 #import "WaybillReceiveCell.h"
 #import "MJRefresh.h"
@@ -20,6 +21,26 @@
 @end
 
 @implementation WaybillReceiveVC
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_WaybillReceiveRefresh object:nil];
+    }
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        self.needRefresh = NO;
+        [self.tableView.mj_header beginRefreshing];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -111,6 +132,29 @@
     }];
 }
 
+
+- (void)doCancelReceiveWaybillFunction:(AppCanReceiveWayBillInfo *)item {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : item.waybill_id}];
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_cancelReceiveWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+//                [weakself showHint:@"操作完成"];
+                [weakself.tableView.mj_header beginRefreshing];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)updateTableViewHeader {
     QKWEAKSELF;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -128,6 +172,7 @@
 }
 
 - (void)endRefreshing {
+    [self hideHud];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
@@ -187,16 +232,25 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        //        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                
+                //取消自提
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定原货返回吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doCancelReceiveWaybillFunction:weakself.dataSource[indexPath.row]];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
             }
                 break;
                 
-            case 1:{
-                
+            case 2:{
+                WaybillCustReceiveVC *vc = [WaybillCustReceiveVC new];
+                vc.billData = self.dataSource[indexPath.row];
+                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
                 

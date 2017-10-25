@@ -21,7 +21,7 @@
 @property (strong, nonatomic) WayBillDetailHeaderView *headerView;
 @property (strong, nonatomic) PublicMutableButtonView *footerView;
 
-@property (copy, nonatomic) AppWayBillDetailInfo *detailData;
+@property (strong, nonatomic) AppWayBillDetailInfo *detailData;
 
 @end
 
@@ -111,7 +111,6 @@
     }];
 }
 
-
 - (void)cancelWaybill:(NSString *)waybill_id cause:(NSString *)change_cause {
     if (!waybill_id) {
         return;
@@ -149,7 +148,6 @@
 - (void)endRefreshing {
     [self hideHud];
     [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)cancelWayBillSuccess {

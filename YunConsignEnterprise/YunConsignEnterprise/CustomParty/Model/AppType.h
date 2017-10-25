@@ -286,6 +286,7 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
 @property (strong, nonatomic) NSString *is_urgent;//是否急货
+@property (strong, nonatomic) NSString *is_receipt;//是否有回单
 @property (strong, nonatomic) NSString *start_station_city_id;//发站城市编号
 @property (strong, nonatomic) NSString *start_station_city_name;//发站城市名称
 @property (strong, nonatomic) NSString *start_station_service_id;//发站网点编号
@@ -328,7 +329,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *take_goods_fee;//接货费
 @property (strong, nonatomic) NSString *is_deliver_goods;//是否送货上门 YES_NO
 @property (strong, nonatomic) NSString *deliver_goods_fee;//送货费
-@property (strong, nonatomic) NSString *is_receipt;//是否有回单 YES_NO
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式 RECEIPT_SIGN_TYPE 无回单、签字、盖章、签字+盖章
 @property (strong, nonatomic) NSString *rebate_fee;//回扣费
 @property (strong, nonatomic) NSString *forklift_fee;//叉车费
@@ -370,6 +370,12 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppPaymentWaybillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *goods_total;//件吨方
+
+@end
+
 @interface AppNeedReceiptWayBillInfo : AppWayBillInfo
 
 @property (strong, nonatomic) NSString *shipper;//发货人
@@ -378,6 +384,26 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *receipt_state_text;//回单状态
 
 - (NSString *)showReceiptSignTypeString;
+
+@end
+
+//进行自提提交数据
+@interface WaybillToCustReceiveInfo : AppType
+
+@property (strong, nonatomic) NSString *waybill_id;//运单内部编号
+@property (strong, nonatomic) NSString *consignee_name;//提货人
+@property (strong, nonatomic) NSString *consignee_phone;//提货电话
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_type;//代收款少款类型，CASH_ON_DELIVERY_CAUSES_TYPE，1不少款、2运费代扣、3其他，默认1不少款
+
+@property (strong, nonatomic) NSString *consignee_id_card;//提货人身份证
+@property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款，0表示没有收到代收款
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//代收款减少原因备注
+@property (strong, nonatomic) NSString *waybill_receive_note;//自提备注
+@property (strong, nonatomic) NSString *less_indemnity_amount;//少款
+@property (strong, nonatomic) NSString *payment_indemnity_amount;//赔款
+@property (strong, nonatomic) NSString *deliver_indemnity_amount;//包送
+@property (strong, nonatomic) NSString *receipt_form_voucher;//签收单留底
 
 @end
 
