@@ -12,6 +12,7 @@
 
 - (void)dealloc {
     [self.baseView.textLabel removeObserver:self forKeyPath:@"text"];
+    [self.anotherBaseView.textLabel removeObserver:self forKeyPath:@"text"];
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -28,6 +29,7 @@
         [self.contentView addSubview:_anotherBaseView];
         
         [self.baseView.textLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        [self.anotherBaseView.textLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     
     return self;
@@ -44,29 +46,42 @@
     // Configure the view for the selected state
 }
 
+- (void)adjustBaseView:(PublicInputCellView *)m_view {
+    [AppPublic adjustLabelWidth:m_view.textLabel];
+    m_view.textField.left = m_view.textLabel.right + kEdge;
+    if (m_view.rightView) {
+        m_view.textField.width = m_view.rightView.left - kEdgeSmall - m_view.textField.left;
+    }
+    else {
+        m_view.textField.width = m_view.width - kEdgeSmall - m_view.textField.left;
+    }
+}
+
 #pragma mark - setter
 - (void)setIsShowBottomEdge:(BOOL)isShowBottomEdge {
     _isShowBottomEdge = isShowBottomEdge;
     if (_isShowBottomEdge) {
-        self.baseView.height = self.contentView.height - kEdge;
-        self.anotherBaseView.height = self.contentView.height - kEdge;
+//        self.baseView.height = self.contentView.height - kEdge;
+//        self.anotherBaseView.height = self.contentView.height - kEdge;
+        self.baseView.lineView.bottom = self.baseView.height - kEdge;
+        self.anotherBaseView.lineView.bottom = self.baseView.height - kEdge;
     }
     else {
-        self.baseView.height = self.contentView.height;
-        self.anotherBaseView.height = self.contentView.height;
+//        self.baseView.height = self.contentView.height;
+//        self.anotherBaseView.height = self.contentView.height;
+        self.baseView.lineView.bottom = self.baseView.height;
+        self.anotherBaseView.lineView.bottom = self.baseView.height;
     }
 }
 
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"text"]) {
-        [AppPublic adjustLabelWidth:self.baseView.textLabel];
-        self.baseView.textField.left = self.baseView.textLabel.right + kEdge;
-        if (self.baseView.rightView) {
-            self.baseView.textField.width = self.baseView.rightView.left - kEdgeSmall - self.baseView.textField.left;
+        if ([object isEqual:self.baseView.textLabel]) {
+            [self adjustBaseView:self.baseView];
         }
-        else {
-            self.baseView.textField.width = self.baseView.width - kEdgeSmall - self.baseView.textField.left;
+        else if ([object isEqual:self.anotherBaseView.textLabel]) {
+            [self adjustBaseView:self.anotherBaseView];
         }
     }
 }

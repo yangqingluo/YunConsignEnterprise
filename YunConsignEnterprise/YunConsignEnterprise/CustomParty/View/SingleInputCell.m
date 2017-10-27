@@ -44,10 +44,12 @@
 - (void)setIsShowBottomEdge:(BOOL)isShowBottomEdge {
     _isShowBottomEdge = isShowBottomEdge;
     if (_isShowBottomEdge) {
-        self.baseView.height = self.contentView.height - kEdge;
+//        self.baseView.height = self.contentView.height - kEdge;
+        self.baseView.lineView.bottom = self.baseView.height - kEdge;
     }
     else {
-        self.baseView.height = self.contentView.height;
+//        self.baseView.height = self.contentView.height;
+        self.baseView.lineView.bottom = self.baseView.height;
     }
 }
 
