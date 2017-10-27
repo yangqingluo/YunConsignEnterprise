@@ -300,11 +300,11 @@ NSString *dateStringWithTimeString(NSString *string){
 }
 
 + (void)adjustLabelWidth:(UILabel *)label {
-    label.width = [AppPublic textSizeWithString:label.text font:label.font constantHeight:label.height].width;
+    label.width = ceil([AppPublic textSizeWithString:label.text font:label.font constantHeight:label.height].width);//根据苹果官方文档介绍，计算出来的值比实际需要的值略小，故需要对其向上取整，这样子获取的高度才是我们所需要的。
 }
 
 + (void)adjustLabelHeight:(UILabel *)label {
-    label.height = [AppPublic textSizeWithString:label.text font:label.font constantWidth:label.width].height;
+    label.height = ceil([AppPublic textSizeWithString:label.text font:label.font constantWidth:label.width].height);
 }
 
 + (CGFloat )systemFontOfPXSize:(CGFloat)pxSize {

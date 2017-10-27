@@ -13,6 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         UIView *leftColorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kEdgeSmall, self.height)];
         leftColorView.backgroundColor = MainColor;
         leftColorView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
