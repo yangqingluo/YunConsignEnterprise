@@ -72,6 +72,7 @@
 		E4763CF71FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4763CF61FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
+		E488B11C1FA2ADF3001680ED /* FreightCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */; };
 		E48FE5991FA0935200AC21FB /* WaybillLoadedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */; };
 		E49B06951F9D959600EE4437 /* WaybillLogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49B06941F9D959600EE4437 /* WaybillLogCell.m */; };
 		E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49B06971F9D98A100EE4437 /* PublicRoundPointView.m */; };
@@ -439,6 +440,8 @@
 		E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageAndText.m"; sourceTree = "<group>"; };
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
+		E488B11A1FA2ADF3001680ED /* FreightCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckVC.h; sourceTree = "<group>"; };
+		E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckVC.m; sourceTree = "<group>"; };
 		E48FE5971FA0935200AC21FB /* WaybillLoadedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadedVC.h; sourceTree = "<group>"; };
 		E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadedVC.m; sourceTree = "<group>"; };
 		E49B06931F9D959600EE4437 /* WaybillLogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLogCell.h; sourceTree = "<group>"; };
@@ -1013,6 +1016,15 @@
 			children = (
 				E447649A1F611C370084F4EB /* FinancialManagementVC.h */,
 				E447649B1F611C370084F4EB /* FinancialManagementVC.m */,
+				E488B1111FA2ADDB001680ED /* CodCheck */,
+				E488B1121FA2ADDB001680ED /* CodLoanApply */,
+				E488B1131FA2ADDB001680ED /* CodLoanCheck */,
+				E488B1141FA2ADDB001680ED /* CodQuery */,
+				E488B1151FA2ADDB001680ED /* CodRemit */,
+				E488B1161FA2ADDB001680ED /* CodWaitPay */,
+				E488B1171FA2ADDB001680ED /* DailyReimbursementApply */,
+				E488B1181FA2ADDB001680ED /* DailyReimbursementCheck */,
+				E488B1191FA2ADDB001680ED /* FreightCheck */,
 			);
 			name = FinancialManagement;
 			path = financialManagement;
@@ -1053,6 +1065,80 @@
 			);
 			path = Pics;
 			sourceTree = "<group>";
+		};
+		E488B1111FA2ADDB001680ED /* CodCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CodCheck;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodCheck;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1121FA2ADDB001680ED /* CodLoanApply */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CodLoanApply;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodLoanApply;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1131FA2ADDB001680ED /* CodLoanCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CodLoanCheck;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodLoanCheck;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1141FA2ADDB001680ED /* CodQuery */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CodQuery;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodQuery;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1151FA2ADDB001680ED /* CodRemit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CodRemit;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodRemit;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1161FA2ADDB001680ED /* CodWaitPay */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CodWaitPay;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodWaitPay;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1171FA2ADDB001680ED /* DailyReimbursementApply */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DailyReimbursementApply;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/DailyReimbursementApply;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1181FA2ADDB001680ED /* DailyReimbursementCheck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DailyReimbursementCheck;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/DailyReimbursementCheck;
+			sourceTree = SOURCE_ROOT;
+		};
+		E488B1191FA2ADDB001680ED /* FreightCheck */ = {
+			isa = PBXGroup;
+			children = (
+				E488B11A1FA2ADF3001680ED /* FreightCheckVC.h */,
+				E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */,
+			);
+			name = FreightCheck;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/FreightCheck;
+			sourceTree = SOURCE_ROOT;
 		};
 		E4AE9F1D1F5EA605002EBE41 = {
 			isa = PBXGroup;
@@ -2033,6 +2119,7 @@
 				E40E49D91F9608AC000C8B0B /* PublicMutableContentView.m in Sources */,
 				E4AEA0BE1F5EA6D0002EBE41 /* MKAnnotationView+WebCache.m in Sources */,
 				E4AEA0891F5EA6D0002EBE41 /* UIImageView+AFNetworking.m in Sources */,
+				E488B11C1FA2ADF3001680ED /* FreightCheckVC.m in Sources */,
 				E46826051FA07019009C4918 /* WaybillLoadSelectCell.m in Sources */,
 				E4AEA0BB1F5EA6D0002EBE41 /* UIScrollView+MJExtension.m in Sources */,
 				E4AEA0A91F5EA6D0002EBE41 /* NSObject+MJProperty.m in Sources */,

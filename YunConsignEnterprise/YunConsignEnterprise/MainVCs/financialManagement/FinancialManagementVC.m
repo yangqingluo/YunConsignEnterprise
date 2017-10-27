@@ -40,11 +40,37 @@
         NSArray *m_array = [UserPublic getInstance].financialManagementAccesses;
         if (index >= 0 && index < m_array.count) {
             AppAccessInfo *item = m_array[index];
-            switch (item.sort) {
-                default:{
-                    [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
-                }
-                    break;
+            if ([item.menu_code isEqualToString:@"FREIGHT_CHECK"]) {
+//                WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
+//                vc.accessInfo = item;
+//                [self.navigationController pushViewController:vc animated:YES];
+            }
+//            else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"COD_WAIT_PAY"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"COD_CHECK"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"COD_LOAN_APPLY"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"COD_LOAN_CHECK"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"COD_REMIT"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_APPLY"]) {
+//                
+//            }
+//            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_CHECK"]) {
+//                
+//            }
+            else {
+                [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
             }
         }
     }

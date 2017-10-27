@@ -64,7 +64,9 @@
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
-                           @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
+                           @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"},
+                           @{@"title":@"时间类型",@"subTitle":@"请选择",@"key":@"search_time_type"},
+                           @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
             [self checkDataMapExistedFor:@"query_column"];
         }
             break;
@@ -332,7 +334,7 @@
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
             for (AppServiceInfo *m_data in dataArray) {
-                [m_array addObject:m_data.service_name];
+                [m_array addObject:m_data.showCityAndServiceName];
             }
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
@@ -372,7 +374,7 @@
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
             for (AppServiceInfo *m_data in dataArray) {
-                [m_array addObject:m_data.service_name];
+                [m_array addObject:m_data.showCityAndServiceName];
             }
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
@@ -410,7 +412,7 @@
 
 - (NSSet *)dataDicSet {
     if (!_dataDicSet) {
-        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", nil];
+        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", nil];
     }
     return _dataDicSet;
 }
@@ -492,7 +494,7 @@
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"load_service"]) {
-        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"service_name"];
+        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"showCityAndServiceName"];
     }
     else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"open_city_name"];
