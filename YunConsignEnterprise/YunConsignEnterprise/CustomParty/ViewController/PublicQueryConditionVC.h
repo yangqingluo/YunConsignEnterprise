@@ -20,6 +20,7 @@ typedef enum : NSUInteger {
     QueryConditionType_WaybillReceive,//客户自提
     QueryConditionType_PayOnReceipt,//回单付款
     QueryConditionType_CustomerManage,//客户管理
+    QueryConditionType_FreightCheck,//运输款对账
 } QueryConditionType;
 
 @interface PublicQueryConditionVC : AppBasicTableViewController
@@ -27,6 +28,14 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) QueryConditionType type;
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 
+@property (strong, nonatomic) NSArray *showArray;
+@property (strong, nonatomic) NSSet *dataDicSet;
+@property (strong, nonatomic) NSSet *inputValidSet;
+@property (strong, nonatomic) NSSet *boolValidSet;
+
+@property (strong, nonatomic) UIView *footerView;
+
 - (void)showFromVC:(AppBasicViewController *)fromVC;
+- (void)checkDataMapExistedFor:(NSString *)key;
 
 @end

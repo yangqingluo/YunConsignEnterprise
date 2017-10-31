@@ -12,6 +12,17 @@
 #define PID_FINANCIAL_MANAGE      @"1002321897106275329"
 #define PID_SYSTEM_SET            @"1002321897253223425"
 
+typedef NS_ENUM(NSInteger, USER_ROLE) {
+    USER_ROLE_DEFAULT = 0,
+    USER_ROLE_1 = 1,//网点操作员
+    USER_ROLE_2 = 2,//调度员
+    USER_ROLE_3 = 3,//财务
+    USER_ROLE_4 = 4,//代收款收款员
+    USER_ROLE_5 = 5,//代收款放款员
+    USER_ROLE_6 = 6,//系统设置员
+    USER_ROLE_7 = 7,//开单员
+};
+
 //回单签收方式
 typedef enum : NSUInteger {
     RECEIPT_SIGN_TYPE_1 = 1,//签字
@@ -621,6 +632,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppServiceInfo *start_service;
 @property (strong, nonatomic) AppServiceInfo *end_service;
 @property (strong, nonatomic) NSString *is_cancel;//是否作废
+@property (strong, nonatomic) AppServiceInfo *power_service;//收款网点
 @property (strong, nonatomic) AppServiceInfo *load_service;//装车网点
 
 /*车辆相关*/

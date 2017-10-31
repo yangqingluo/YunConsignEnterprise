@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicQueryConditionVC.h"
 
-@interface FreightCheckVC : AppBasicTableViewController
+@interface FreightCheckVC : PublicQueryConditionVC
 
 @end

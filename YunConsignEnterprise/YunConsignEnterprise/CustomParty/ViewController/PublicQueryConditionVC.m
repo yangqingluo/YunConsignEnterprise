@@ -12,14 +12,9 @@
 #import "SingleInputCell.h"
 #import "PublicDatePickerView.h"
 
-@interface PublicQueryConditionVC ()<UITextFieldDelegate>
-
-@property (strong, nonatomic) NSArray *showArray;
-@property (strong, nonatomic) NSSet *dataDicSet;
-@property (strong, nonatomic) NSSet *inputValidSet;
-@property (strong, nonatomic) NSSet *boolValidSet;
-
-@property (strong, nonatomic) UIView *footerView;
+@interface PublicQueryConditionVC ()<UITextFieldDelegate>{
+    NSUInteger hudCount;
+}
 
 @end
 
@@ -55,7 +50,7 @@
 }
 
 //初始化数据
-- (void)initializeData{
+- (void)initializeData {
     switch (self.type) {
         case QueryConditionType_WaybillQuery:{
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
@@ -64,9 +59,7 @@
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
-                           @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"},
-                           @{@"title":@"时间类型",@"subTitle":@"请选择",@"key":@"search_time_type"},
-                           @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
+                           @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
             [self checkDataMapExistedFor:@"query_column"];
         }
             break;
@@ -149,6 +142,22 @@
     }
 }
 
+- (void)doShowHudFunction {
+    if (hudCount == 0) {
+        [self showHudInView:self.view hint:nil];
+    }
+    hudCount++;
+}
+
+- (void)doHideHudFunction {
+    if (hudCount > 0) {
+        hudCount--;
+        if (hudCount == 0) {
+            [self hideHud];
+        }
+    }
+}
+
 - (void)checkDataMapExistedFor:(NSString *)key {
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
@@ -157,28 +166,26 @@
         }
     }
     else {
-        [self pullDataDictionaryFunctionForCode:@"query_column" selectionInIndexPath:nil];
+        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
     }
 }
 
 - (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
     NSString *m_code = [dict_code uppercaseString];
-    
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
                 if (![self.condition valueForKey:dict_code]) {
-                    if ([dict_code isEqualToString:@"query_column"]) {
+                    if ([self.dataDicSet containsObject:dict_code]) {
                         [self.condition setValue:m_array[0] forKey:dict_code];
                         [weakself.tableView reloadData];
                     }
                 }
-                
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }
@@ -191,14 +198,28 @@
 }
 
 - (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    [self showHudInView:self.view hint:nil];
+    NSString *functionCode = nil;
+    if ([dict_code isEqualToString:@"start_service"]) {
+        functionCode = @"hex_waybill_getCurrentService";
+    }
+    else if ([dict_code isEqualToString:@"start_service"]) {
+        functionCode = @"hex_waybill_getEndService";
+    }
+    else if ([dict_code isEqualToString:@"power_service"]) {
+        functionCode = @"hex_waybill_getPowerService";
+    }
+    
+    if (!functionCode) {
+        return;
+    }
+    [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:[dict_code isEqualToString:@"start_service"] ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+    [[QKNetworkSingleton sharedManager] commonSoapPost:functionCode Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
         if (!error) {
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }
@@ -211,14 +232,14 @@
 }
 
 - (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }
@@ -232,14 +253,14 @@
 
 - (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *m_dic = @{@"transport_truck_id" : transport_truck_id};
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_queryServiceListByTransportTruckId" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForTruck(transport_truck_id)];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForTruck(transport_truck_id)];
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }
@@ -329,7 +350,7 @@
             [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
-    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"]) {
+    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
@@ -493,7 +514,7 @@
     if ([self.dataDicSet containsObject:key]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
     }
-    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"load_service"]) {
+    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"load_service"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"showCityAndServiceName"];
     }
     else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
