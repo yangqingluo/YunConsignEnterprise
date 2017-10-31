@@ -405,6 +405,23 @@ BOOL isTrue(NSString *string);
 
 @end
 
+//代收款综合信息
+@interface AppCashOnDeliveryWayBillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
+@property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额，没有收款，显示未收款
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note ;//少款原因
+@property (strong, nonatomic) NSString *remitter_name;//放款人，没有放款，显示未放款
+@property (strong, nonatomic) NSString *remittance_time;//放款时间
+@property (strong, nonatomic) NSString *cash_on_delivery_state;
+@property (strong, nonatomic) NSString *cash_on_delivery_state_text;
+@property (strong, nonatomic) NSString *cust_info;
+@property (strong, nonatomic) NSString *is_get_cash_on_delivery;
+@property (strong, nonatomic) NSString *loan_apply_state;
+
+@end
+
 //进行自提提交数据
 @interface WaybillToCustReceiveInfo : AppType
 
@@ -638,7 +655,6 @@ BOOL isTrue(NSString *string);
 /*订单相关*/
 @property (strong, nonatomic) AppDataDictionary *query_column;//查询字段
 @property (strong, nonatomic) NSString *query_val;//查询内容
-@property (strong, nonatomic) AppDataDictionary *search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *show_column;//显示字段
 @property (strong, nonatomic) AppServiceInfo *start_service;
 @property (strong, nonatomic) AppServiceInfo *end_service;
@@ -652,6 +668,12 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *truck_number_plate;//车辆牌照
 @property (strong, nonatomic) AppDataDictionary *transport_truck_state;//车辆状态
 @property (strong, nonatomic) NSString *transport_truck_id;//车辆id
+
+/*财务管理相关*/
+@property (strong, nonatomic) AppDataDictionary *search_time_type;//时间类型
+@property (strong, nonatomic) AppDataDictionary *cash_on_delivery_type;//代收方式
+@property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
+@property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

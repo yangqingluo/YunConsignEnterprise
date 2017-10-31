@@ -181,7 +181,7 @@
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
                 if (![self.condition valueForKey:dict_code]) {
-                    if ([self.dataDicSet containsObject:dict_code]) {
+                    if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"]) {
                         [self.condition setValue:m_array[0] forKey:dict_code];
                         [weakself.tableView reloadData];
                     }
@@ -202,7 +202,7 @@
     if ([dict_code isEqualToString:@"start_service"]) {
         functionCode = @"hex_waybill_getCurrentService";
     }
-    else if ([dict_code isEqualToString:@"start_service"]) {
+    else if ([dict_code isEqualToString:@"end_service"]) {
         functionCode = @"hex_waybill_getEndService";
     }
     else if ([dict_code isEqualToString:@"power_service"]) {
@@ -433,7 +433,7 @@
 
 - (NSSet *)dataDicSet {
     if (!_dataDicSet) {
-        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", nil];
+        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", nil];
     }
     return _dataDicSet;
 }
@@ -454,9 +454,9 @@
 
 - (UIView *)footerView {
     if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 60)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 48 + 2 * kEdgeMiddle)];
         
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(kEdge, kEdgeMiddle, _footerView.width - 2 * kEdge, _footerView.height - kEdgeMiddle)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(kEdge, kEdgeMiddle, _footerView.width - 2 * kEdge, _footerView.height - 2 * kEdgeMiddle)];
         btn.backgroundColor = MainColor;
         btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
         [btn setTitle:@"立即查询" forState:UIControlStateNormal];

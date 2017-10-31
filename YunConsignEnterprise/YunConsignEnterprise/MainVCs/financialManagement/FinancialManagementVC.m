@@ -8,6 +8,7 @@
 
 #import "FinancialManagementVC.h"
 #import "FreightCheckVC.h"
+#import "CodQueryVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -41,14 +42,13 @@
         NSArray *m_array = [UserPublic getInstance].financialManagementAccesses;
         if (index >= 0 && index < m_array.count) {
             AppAccessInfo *item = m_array[index];
+            AppBasicViewController *vc = nil;
             if ([item.menu_code isEqualToString:@"FREIGHT_CHECK"]) {
-                FreightCheckVC *vc = [FreightCheckVC new];
-                vc.accessInfo = item;
-                [self.navigationController pushViewController:vc animated:YES];
+                vc = [FreightCheckVC new];
             }
-//            else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
+                vc = [CodQueryVC new];
+            }
 //            else if ([item.menu_code isEqualToString:@"COD_WAIT_PAY"]) {
 //                
 //            }
@@ -70,6 +70,11 @@
 //            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_CHECK"]) {
 //                
 //            }
+            
+            if (vc) {
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             else {
                 [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
             }

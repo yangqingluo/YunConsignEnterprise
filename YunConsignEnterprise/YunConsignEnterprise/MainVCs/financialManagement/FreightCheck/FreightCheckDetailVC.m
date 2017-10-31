@@ -87,6 +87,13 @@
         if (self.condition.search_time_type) {
             [m_dic setObject:self.condition.search_time_type.item_val forKey:@"time_type"];
         }
+        if (self.condition.power_service) {
+            [m_dic setObject:self.condition.power_service.service_id forKey:@"power_service_id"];
+        }
+        if (self.condition.query_column && self.condition.query_val) {
+            [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
+            [m_dic setObject:self.condition.query_val forKey:@"query_val"];
+        }
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_queryCheckFreightListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -183,17 +190,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return [FreightCheckCell tableView:tableView heightForRowAtIndexPath:nil];
+    return self.dataSource.count ? [FreightCheckCell tableView:tableView heightForRowAtIndexPath:nil] : 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGFloat m_height = [FreightCheckCell tableView:tableView heightForRowAtIndexPath:nil];
-    PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, m_height)];
-    m_view.backgroundColor = CellHeaderLightBlueColor;
-    [m_view updateEdgeSourceWithArray:[FreightCheckCell edgeSourceArray]];
-    [m_view updateDataSourceWithArray:@[@"序号", @"货号", @"现付", @"提付", @"回单付"]];
-    [m_view addSubview:NewSeparatorLine(CGRectMake(0, 0, m_view.width, appSeparaterLineSize))];
-    return m_view;
+    if (self.dataSource.count) {
+        CGFloat m_height = [FreightCheckCell tableView:tableView heightForRowAtIndexPath:nil];
+        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, m_height)];
+        m_view.backgroundColor = CellHeaderLightBlueColor;
+        [m_view updateEdgeSourceWithArray:[FreightCheckCell edgeSourceArray]];
+        [m_view updateDataSourceWithArray:@[@"序号", @"货号", @"现付", @"提付", @"回单付"]];
+        [m_view addSubview:NewSeparatorLine(CGRectMake(0, 0, m_view.width, appSeparaterLineSize))];
+        return m_view;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

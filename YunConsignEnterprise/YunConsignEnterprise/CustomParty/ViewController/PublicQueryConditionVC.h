@@ -21,6 +21,7 @@ typedef enum : NSUInteger {
     QueryConditionType_PayOnReceipt,//回单付款
     QueryConditionType_CustomerManage,//客户管理
     QueryConditionType_FreightCheck,//运输款对账
+    QueryConditionType_CodQuery,//代收款查询
 } QueryConditionType;
 
 @interface PublicQueryConditionVC : AppBasicTableViewController
