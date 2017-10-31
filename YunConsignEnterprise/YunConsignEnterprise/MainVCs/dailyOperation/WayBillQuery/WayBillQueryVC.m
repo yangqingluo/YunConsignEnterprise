@@ -28,8 +28,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (instancetype)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
+- (instancetype)init {
+    self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waybillListNotification:) name:kNotification_WaybillListRefresh object:nil];
     }

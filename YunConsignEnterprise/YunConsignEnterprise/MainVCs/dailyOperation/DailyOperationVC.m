@@ -59,12 +59,12 @@
         if (index >= 0 && index < m_array.count) {
             AppAccessInfo *item = m_array[index];
             if ([item.menu_code isEqualToString:@"WAYBILL_OPEN"]) {
-                WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
+                WayBillOpenVC *vc = [WayBillOpenVC new];
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if ([item.menu_code isEqualToString:@"WAYBILL_QUERY"]) {
-                WayBillQueryVC *vc = [[WayBillQueryVC alloc] initWithStyle:UITableViewStyleGrouped];
+                WayBillQueryVC *vc = [WayBillQueryVC new];
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }

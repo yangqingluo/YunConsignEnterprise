@@ -7,6 +7,7 @@
 //
 
 #import "FinancialManagementVC.h"
+#import "FreightCheckVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -41,9 +42,9 @@
         if (index >= 0 && index < m_array.count) {
             AppAccessInfo *item = m_array[index];
             if ([item.menu_code isEqualToString:@"FREIGHT_CHECK"]) {
-//                WayBillOpenVC *vc = [[WayBillOpenVC alloc] initWithStyle:UITableViewStyleGrouped];
-//                vc.accessInfo = item;
-//                [self.navigationController pushViewController:vc animated:YES];
+                FreightCheckVC *vc = [FreightCheckVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
             }
 //            else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
 //                
