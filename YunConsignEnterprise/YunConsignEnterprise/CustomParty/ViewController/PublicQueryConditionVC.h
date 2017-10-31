@@ -35,7 +35,11 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) UIView *footerView;
 
+- (void)doShowHudFunction;
+- (void)doHideHudFunction;
+- (void)searchButtonAction;
 - (void)showFromVC:(AppBasicViewController *)fromVC;
 - (void)checkDataMapExistedFor:(NSString *)key;
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

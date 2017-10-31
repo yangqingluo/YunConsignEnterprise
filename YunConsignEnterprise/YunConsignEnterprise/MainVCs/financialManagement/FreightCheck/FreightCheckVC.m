@@ -7,8 +7,11 @@
 //
 
 #import "FreightCheckVC.h"
+#import "FreightCheckDetailVC.h"
 
 @interface FreightCheckVC ()
+
+@property (strong, nonatomic) AppCheckUserFinanceInfo *financeData;
 
 @end
 
@@ -39,6 +42,56 @@
                        @{@"title":@"显示字段",@"subTitle":@"现付、提付、回单付",@"key":@"show_column"}];
     [self checkDataMapExistedFor:@"search_time_type"];
     [self checkDataMapExistedFor:@"query_column"];
+}
+
+- (void)searchButtonAction {
+    if (!self.condition.search_time_type) {
+        [self showHint:@"请选择时间类型"];
+        return;
+    }
+    FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
+    vc.condition = [self.condition copy];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"power_service"]) {
+        if (self.financeData) {
+            if (!isTrue(self.financeData.is_finance)) {
+                [self showHint:@"只有财务才能选择收款网点"];
+                return;
+            }
+        }
+        else {
+            [self doCheckUserIsOrNotFinanceFunction:indexPath];
+            return;
+        }
+    }
+    
+    [super selectRowAtIndexPath:indexPath];
+}
+
+- (void)doCheckUserIsOrNotFinanceFunction:(NSIndexPath *)indexPath {
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_checkUserIsOrNotFinanceFunction" Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            if ([responseBody isKindOfClass:[ResponseItem class]]) {
+                ResponseItem *item = (ResponseItem *)responseBody;
+                if (item.items.count) {
+                    weakself.financeData = [AppCheckUserFinanceInfo mj_objectWithKeyValues:item.items[0]];
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
 }
 
 @end

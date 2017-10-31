@@ -8,7 +8,7 @@
 
 #import "PublicMutableContentView.h"
 
-@interface PublicMutableContentView ()
+@interface PublicMutableContentView () 
 
 @end
 
@@ -23,12 +23,14 @@
 }
 
 - (void)updateDataSourceWithArray:(NSArray *)array {
+    self.hasChangedForDataSourceCount = array.count == self.dataSource.count;
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:array];
     [self refreshContent];
 }
 
 - (void)updateEdgeSourceWithArray:(NSArray *)array {
+    self.hasChangedForEdgeSource = YES;
     [self.edgeSource removeAllObjects];
     [self.edgeSource addObjectsFromArray:array];
 //    [self refreshContent];

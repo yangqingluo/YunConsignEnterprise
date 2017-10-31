@@ -43,6 +43,8 @@
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
+		E43FCB561FA8590300AFEE6D /* FreightCheckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */; };
+		E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */; };
 		E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F5E1F9ED2E600D2FE18 /* TTLoadListVC.m */; };
 		E4443F621F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */; };
 		E44764941F611AC70084F4EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E447648E1F611AC70084F4EB /* LoginViewController.m */; };
@@ -382,6 +384,10 @@
 		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
 		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
 		E43229591F97536A000400B8 /* WaybillReceiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveCell.m; sourceTree = "<group>"; };
+		E43FCB541FA8590300AFEE6D /* FreightCheckDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckDetailVC.h; sourceTree = "<group>"; };
+		E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckDetailVC.m; sourceTree = "<group>"; };
+		E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckCell.h; sourceTree = "<group>"; };
+		E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckCell.m; sourceTree = "<group>"; };
 		E4443F5D1F9ED2E600D2FE18 /* TTLoadListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTLoadListVC.h; sourceTree = "<group>"; };
 		E4443F5E1F9ED2E600D2FE18 /* TTLoadListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTLoadListVC.m; sourceTree = "<group>"; };
 		E4443F601F9ED3BF00D2FE18 /* TransportTruckLoadListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckLoadListCell.h; sourceTree = "<group>"; };
@@ -1135,6 +1141,8 @@
 			children = (
 				E488B11A1FA2ADF3001680ED /* FreightCheckVC.h */,
 				E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */,
+				E43FCB541FA8590300AFEE6D /* FreightCheckDetailVC.h */,
+				E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */,
 			);
 			name = FreightCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/FreightCheck;
@@ -1322,6 +1330,8 @@
 				E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */,
 				E4B05EF61F9F7B9900895591 /* EndServiceCell.h */,
 				E4B05EF71F9F7B9900895591 /* EndServiceCell.m */,
+				E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */,
+				E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2046,6 +2056,7 @@
 				E4AEA0A51F5EA6D0002EBE41 /* MJPropertyType.m in Sources */,
 				E4266F761FA0C0C800C240C5 /* WaybillArrivalDetailVC.m in Sources */,
 				E4AEA0841F5EA6D0002EBE41 /* AFAutoPurgingImageCache.m in Sources */,
+				E43FCB561FA8590300AFEE6D /* FreightCheckDetailVC.m in Sources */,
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
 				E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */,
 				E4AEA0C21F5EA6D0002EBE41 /* SDImageCacheConfig.m in Sources */,
@@ -2059,6 +2070,7 @@
 				E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */,
 				E4AEA0CD1F5EA6D0002EBE41 /* UIImageView+HighlightedWebCache.m in Sources */,
 				E4AEA0AD1F5EA6D0002EBE41 /* MJRefreshComponent.m in Sources */,
+				E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */,
 				E4AEA0DC1F5EA8CE002EBE41 /* UIImage+Gif.m in Sources */,
 				E4AEA0AC1F5EA6D0002EBE41 /* MJRefreshBackFooter.m in Sources */,
 				E4AEA08B1F5EA6D0002EBE41 /* UIRefreshControl+AFNetworking.m in Sources */,

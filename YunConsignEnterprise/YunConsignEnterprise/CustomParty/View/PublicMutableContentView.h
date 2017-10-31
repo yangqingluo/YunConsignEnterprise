@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSMutableArray *edgeSource;
 @property (strong, nonatomic) NSMutableArray *showViews;
+@property (assign, nonatomic) BOOL hasChangedForDataSourceCount;
+@property (assign, nonatomic) BOOL hasChangedForEdgeSource;
 @property (assign, nonatomic) BOOL showVerticalSeparator;
 @property (assign, nonatomic) BOOL showTopHorizontalSeparator;
 @property (assign, nonatomic) BOOL showBottomHorizontalSeparator;

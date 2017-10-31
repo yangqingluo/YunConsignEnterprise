@@ -328,6 +328,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppCheckFreightWayBillInfo
+
+
+
+@end
+
 @implementation WaybillToCustReceiveInfo
 
 
@@ -473,6 +479,12 @@ BOOL isTrue(NSString *string) {
     [m_array addObject:self.load_count];
     return [NSArray arrayWithArray:m_array];
 }
+
+@end
+
+@implementation AppCheckUserFinanceInfo
+
+
 
 @end
 

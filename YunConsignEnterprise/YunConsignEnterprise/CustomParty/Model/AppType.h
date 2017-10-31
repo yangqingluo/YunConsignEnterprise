@@ -398,6 +398,13 @@ BOOL isTrue(NSString *string);
 
 @end
 
+//运输款对账运单信息
+@interface AppCheckFreightWayBillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *goods_info;//货物
+
+@end
+
 //进行自提提交数据
 @interface WaybillToCustReceiveInfo : AppType
 
@@ -405,7 +412,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *consignee_name;//提货人
 @property (strong, nonatomic) NSString *consignee_phone;//提货电话
 @property (strong, nonatomic) NSString *cash_on_delivery_causes_type;//代收款少款类型，CASH_ON_DELIVERY_CAUSES_TYPE，1不少款、2运费代扣、3其他，默认1不少款
-
 @property (strong, nonatomic) NSString *consignee_id_card;//提货人身份证
 @property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款，0表示没有收到代收款
 @property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额
@@ -614,7 +620,12 @@ BOOL isTrue(NSString *string);
 
 @end
 
+//用户财务身份检查
+@interface AppCheckUserFinanceInfo : AppType
 
+@property (strong, nonatomic) NSString *is_finance;
+
+@end
 
 
 
