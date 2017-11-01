@@ -55,7 +55,7 @@
     self.textLabel.width += self.textLabel.height;
     self.textLabel.centerX = 0.5 * self.width;
     
-    self.detailTextLabel.text = userData.role_name.length ? userData.role_name : @"";
+//    self.detailTextLabel.text = userData.role_name.length ? userData.role_name : @"";
 }
 
 @end

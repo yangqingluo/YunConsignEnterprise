@@ -76,6 +76,12 @@
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
 		E488B11C1FA2ADF3001680ED /* FreightCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */; };
+		E48C72B61FA9B925007F7FC8 /* CodWaitPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72B51FA9B925007F7FC8 /* CodWaitPayVC.m */; };
+		E48C72B91FA9B939007F7FC8 /* CodCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72B81FA9B939007F7FC8 /* CodCheckVC.m */; };
+		E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72BB1FA9B993007F7FC8 /* CodWaitPayDetailVC.m */; };
+		E48C72BF1FA9B9A0007F7FC8 /* CodCheckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72BE1FA9B9A0007F7FC8 /* CodCheckDetailVC.m */; };
+		E48C72C21FA9BD52007F7FC8 /* CodCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */; };
+		E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */; };
 		E48FE5991FA0935200AC21FB /* WaybillLoadedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */; };
 		E49533EB1FA86F1000EA5428 /* CodQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49533EA1FA86F1000EA5428 /* CodQueryVC.m */; };
 		E49533EE1FA87BCD00EA5428 /* CodQueryDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49533ED1FA87BCD00EA5428 /* CodQueryDetailVC.m */; };
@@ -453,6 +459,18 @@
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
 		E488B11A1FA2ADF3001680ED /* FreightCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckVC.h; sourceTree = "<group>"; };
 		E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckVC.m; sourceTree = "<group>"; };
+		E48C72B41FA9B925007F7FC8 /* CodWaitPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodWaitPayVC.h; sourceTree = "<group>"; };
+		E48C72B51FA9B925007F7FC8 /* CodWaitPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodWaitPayVC.m; sourceTree = "<group>"; };
+		E48C72B71FA9B939007F7FC8 /* CodCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodCheckVC.h; sourceTree = "<group>"; };
+		E48C72B81FA9B939007F7FC8 /* CodCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodCheckVC.m; sourceTree = "<group>"; };
+		E48C72BA1FA9B993007F7FC8 /* CodWaitPayDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodWaitPayDetailVC.h; sourceTree = "<group>"; };
+		E48C72BB1FA9B993007F7FC8 /* CodWaitPayDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodWaitPayDetailVC.m; sourceTree = "<group>"; };
+		E48C72BD1FA9B9A0007F7FC8 /* CodCheckDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodCheckDetailVC.h; sourceTree = "<group>"; };
+		E48C72BE1FA9B9A0007F7FC8 /* CodCheckDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodCheckDetailVC.m; sourceTree = "<group>"; };
+		E48C72C01FA9BD52007F7FC8 /* CodCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodCheckCell.h; sourceTree = "<group>"; };
+		E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodCheckCell.m; sourceTree = "<group>"; };
+		E48C72C31FA9BD83007F7FC8 /* PublicMutableLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMutableLabelCell.h; sourceTree = "<group>"; };
+		E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMutableLabelCell.m; sourceTree = "<group>"; };
 		E48FE5971FA0935200AC21FB /* WaybillLoadedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadedVC.h; sourceTree = "<group>"; };
 		E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadedVC.m; sourceTree = "<group>"; };
 		E49533E91FA86F1000EA5428 /* CodQueryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodQueryVC.h; sourceTree = "<group>"; };
@@ -1084,6 +1102,10 @@
 		E488B1111FA2ADDB001680ED /* CodCheck */ = {
 			isa = PBXGroup;
 			children = (
+				E48C72B71FA9B939007F7FC8 /* CodCheckVC.h */,
+				E48C72B81FA9B939007F7FC8 /* CodCheckVC.m */,
+				E48C72BD1FA9B9A0007F7FC8 /* CodCheckDetailVC.h */,
+				E48C72BE1FA9B9A0007F7FC8 /* CodCheckDetailVC.m */,
 			);
 			name = CodCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodCheck;
@@ -1128,6 +1150,10 @@
 		E488B1161FA2ADDB001680ED /* CodWaitPay */ = {
 			isa = PBXGroup;
 			children = (
+				E48C72B41FA9B925007F7FC8 /* CodWaitPayVC.h */,
+				E48C72B51FA9B925007F7FC8 /* CodWaitPayVC.m */,
+				E48C72BA1FA9B993007F7FC8 /* CodWaitPayDetailVC.h */,
+				E48C72BB1FA9B993007F7FC8 /* CodWaitPayDetailVC.m */,
 			);
 			name = CodWaitPay;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodWaitPay;
@@ -1343,10 +1369,14 @@
 				E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */,
 				E4B05EF61F9F7B9900895591 /* EndServiceCell.h */,
 				E4B05EF71F9F7B9900895591 /* EndServiceCell.m */,
+				E48C72C31FA9BD83007F7FC8 /* PublicMutableLabelCell.h */,
+				E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */,
 				E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */,
 				E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */,
 				E43C68AD1FA99EA000464885 /* CodQueryCell.h */,
 				E43C68AE1FA99EA000464885 /* CodQueryCell.m */,
+				E48C72C01FA9BD52007F7FC8 /* CodCheckCell.h */,
+				E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2116,6 +2146,7 @@
 				E4AEA0C51F5EA6D0002EBE41 /* SDWebImageDownloader.m in Sources */,
 				E4AEA0851F5EA6D0002EBE41 /* AFImageDownloader.m in Sources */,
 				E40F7CA41F95A71700946C18 /* TransportTruckVC.m in Sources */,
+				E48C72C21FA9BD52007F7FC8 /* CodCheckCell.m in Sources */,
 				E4AEA0B21F5EA6D0002EBE41 /* MJRefreshAutoStateFooter.m in Sources */,
 				E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */,
 				E4E744351F96041D00CEC8FA /* WaybillLoadVC.m in Sources */,
@@ -2161,7 +2192,9 @@
 				E4AEA0BF1F5EA6D0002EBE41 /* NSData+ImageContentType.m in Sources */,
 				E4AEA0A71F5EA6D0002EBE41 /* NSObject+MJCoding.m in Sources */,
 				E4AEA0AE1F5EA6D0002EBE41 /* MJRefreshFooter.m in Sources */,
+				E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */,
 				E4AEA05A1F5EA6CF002EBE41 /* QKNetworkSingleton.m in Sources */,
+				E48C72B61FA9B925007F7FC8 /* CodWaitPayVC.m in Sources */,
 				E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */,
 				E46826021FA06EF8009C4918 /* PublicHeaderBodyCell.m in Sources */,
 				E4AEA0901F5EA6D0002EBE41 /* IQUITextFieldView+Additions.m in Sources */,
@@ -2169,6 +2202,7 @@
 				E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
 				E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */,
+				E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */,
 				E4AEA0AB1F5EA6D0002EBE41 /* MJRefreshAutoFooter.m in Sources */,
 				E4AEA0B31F5EA6D0002EBE41 /* MJRefreshBackGifFooter.m in Sources */,
 				E4AEA0C31F5EA6D0002EBE41 /* SDWebImageCompat.m in Sources */,
@@ -2198,6 +2232,7 @@
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,
 				E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */,
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
+				E48C72BF1FA9B9A0007F7FC8 /* CodCheckDetailVC.m in Sources */,
 				E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */,
 				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
@@ -2206,6 +2241,7 @@
 				E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */,
 				E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */,
 				E4AEA0C11F5EA6D0002EBE41 /* SDImageCache.m in Sources */,
+				E48C72B91FA9B939007F7FC8 /* CodCheckVC.m in Sources */,
 				E4AEA0DD1F5EA8CE002EBE41 /* UIImage+Rotate.m in Sources */,
 				E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */,
 				E4ADAC061F9F128100085185 /* TTPayCostVC.m in Sources */,

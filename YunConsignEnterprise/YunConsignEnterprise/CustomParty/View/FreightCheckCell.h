@@ -6,15 +6,10 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "PublicMutableLabelView.h"
+#import "PublicMutableLabelCell.h"
 
-@interface FreightCheckCell : UITableViewCell
+@interface FreightCheckCell : PublicMutableLabelCell
 
-@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (copy, nonatomic) AppCheckFreightWayBillInfo *data;
-
-+ (NSArray *)edgeSourceArray;
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

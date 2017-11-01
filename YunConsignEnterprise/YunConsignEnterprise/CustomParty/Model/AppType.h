@@ -422,6 +422,17 @@ BOOL isTrue(NSString *string);
 
 @end
 
+//代收款对账运单信息
+@interface AppCheckCodWayBillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *goods_info;//货物
+@property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
+@property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额，没有收款，显示未收款
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note ;//少款原因
+
+@end
+
 //进行自提提交数据
 @interface WaybillToCustReceiveInfo : AppType
 
@@ -674,6 +685,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_type;//代收方式
 @property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
 @property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
+@property (strong, nonatomic) AppDataDictionary *waybill_receive_state;//收货状态
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

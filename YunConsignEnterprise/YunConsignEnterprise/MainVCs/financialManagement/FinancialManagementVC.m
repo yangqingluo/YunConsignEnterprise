@@ -9,6 +9,8 @@
 #import "FinancialManagementVC.h"
 #import "FreightCheckVC.h"
 #import "CodQueryVC.h"
+#import "CodWaitPayVC.h"
+#import "CodCheckVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -49,12 +51,12 @@
             else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
                 vc = [CodQueryVC new];
             }
-//            else if ([item.menu_code isEqualToString:@"COD_WAIT_PAY"]) {
-//                
-//            }
-//            else if ([item.menu_code isEqualToString:@"COD_CHECK"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"COD_WAIT_PAY"]) {
+                vc = [CodWaitPayVC new];
+            }
+            else if ([item.menu_code isEqualToString:@"COD_CHECK"]) {
+                vc = [CodCheckVC new];
+            }
 //            else if ([item.menu_code isEqualToString:@"COD_LOAN_APPLY"]) {
 //                
 //            }

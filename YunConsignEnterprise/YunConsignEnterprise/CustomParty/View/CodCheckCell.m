@@ -1,27 +1,25 @@
 //
-//  FreightCheckCell.m
+//  CodCheckCell.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/10/31.
+//  Created by 7kers on 2017/11/1.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "FreightCheckCell.h"
+#import "CodCheckCell.h"
 
-@implementation FreightCheckCell
-
-
+@implementation CodCheckCell
 
 #pragma mark - setter
-- (void)setData:(AppCheckFreightWayBillInfo *)data {
+- (void)setData:(AppCheckCodWayBillInfo *)data {
     _data = data;
     
     NSMutableArray *m_array = [NSMutableArray new];
     [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.indexPath.row + 1]];
     [m_array addObject:data.goods_number];
-    [m_array addObject:data.pay_now_amount];
-    [m_array addObject:data.pay_on_delivery_amount];
-    [m_array addObject:data.pay_on_receipt_amount];
+    [m_array addObject:data.cash_on_delivery_amount];
+    [m_array addObject:data.cash_on_delivery_real_amount];
+    [m_array addObject:data.cash_on_delivery_causes_amount];
     [self.baseView updateDataSourceWithArray:m_array];
 }
 

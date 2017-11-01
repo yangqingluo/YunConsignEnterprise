@@ -334,6 +334,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppCheckCodWayBillInfo
+
+
+
+@end
+
 
 @implementation AppCashOnDeliveryWayBillInfo
 

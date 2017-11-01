@@ -433,7 +433,7 @@
 
 - (NSSet *)dataDicSet {
     if (!_dataDicSet) {
-        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", nil];
+        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", @"waybill_receive_state", nil];
     }
     return _dataDicSet;
 }
