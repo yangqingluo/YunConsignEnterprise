@@ -27,12 +27,9 @@
 
 - (void)setupBody {
     [super setupBody];
-    self.bodyLabel1.top = kEdge;
-    self.bodyLabel2.top = self.bodyLabel1.bottom + kEdgeSmall;
-    self.bodyLabel3.top = self.bodyLabel2.bottom + kEdgeSmall;
     
     _bodyLabel4 = NewLabel(self.bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
-    _bodyLabel4.top = self.bodyLabel3.bottom + kEdgeSmall;
+    _bodyLabel4.top = self.bodyLabel3.bottom + kEdge;
     [self.bodyView addSubview:_bodyLabel4];
     
     _bodyLabelRight2 = NewLabel(CGRectMake(kEdge + 0.5 * self.bodyView.width, self.bodyLabel2.top, 0.5 * self.bodyView.width - 1 * kEdge, self.bodyLabel2.height), nil, nil, NSTextAlignmentLeft);
@@ -43,6 +40,10 @@
     
     _bodyLabelRight4 = NewLabel(CGRectMake(kEdge + 0.5 * self.bodyView.width, self.bodyLabel4.top, 0.5 * self.bodyView.width - 1 * kEdge, self.bodyLabel2.height), nil, nil, NSTextAlignmentLeft);
     [self.bodyView addSubview:_bodyLabelRight4];
+}
+
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:4];
 }
 
 #pragma mark - setter

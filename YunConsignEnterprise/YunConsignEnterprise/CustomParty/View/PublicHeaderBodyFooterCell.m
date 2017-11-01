@@ -44,6 +44,10 @@
     return [super tableView:tableView heightForRowAtIndexPath:indexPath] + kCellHeightSmall;
 }
 
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath bodyLabelLines:(NSUInteger)lines {
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines] + kCellHeightSmall;
+}
+
 #pragma mark - setter
 - (void)setIndexPath:(NSIndexPath *)indexPath {
     super.indexPath = indexPath;

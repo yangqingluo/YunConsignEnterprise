@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, PublicHeaderCellStyle) {
 @property (strong, nonatomic) UILabel *bodyLabel3;
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath bodyLabelLines:(NSUInteger)lines;
++ (CGFloat)heightForBodyWithLabelLines:(NSUInteger)lines;
+
 - (instancetype)initWithHeaderStyle:(PublicHeaderCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setupHeader;
 - (void)setupBody;

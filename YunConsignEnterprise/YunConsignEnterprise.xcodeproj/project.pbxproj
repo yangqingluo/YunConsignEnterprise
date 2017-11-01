@@ -43,6 +43,7 @@
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
+		E43C68AF1FA99EA000464885 /* CodQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43C68AE1FA99EA000464885 /* CodQueryCell.m */; };
 		E43FCB561FA8590300AFEE6D /* FreightCheckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */; };
 		E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */; };
 		E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F5E1F9ED2E600D2FE18 /* TTLoadListVC.m */; };
@@ -386,6 +387,8 @@
 		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
 		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
 		E43229591F97536A000400B8 /* WaybillReceiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveCell.m; sourceTree = "<group>"; };
+		E43C68AD1FA99EA000464885 /* CodQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodQueryCell.h; sourceTree = "<group>"; };
+		E43C68AE1FA99EA000464885 /* CodQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodQueryCell.m; sourceTree = "<group>"; };
 		E43FCB541FA8590300AFEE6D /* FreightCheckDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckDetailVC.h; sourceTree = "<group>"; };
 		E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckDetailVC.m; sourceTree = "<group>"; };
 		E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckCell.h; sourceTree = "<group>"; };
@@ -1342,6 +1345,8 @@
 				E4B05EF71F9F7B9900895591 /* EndServiceCell.m */,
 				E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */,
 				E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */,
+				E43C68AD1FA99EA000464885 /* CodQueryCell.h */,
+				E43C68AE1FA99EA000464885 /* CodQueryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2189,6 +2194,7 @@
 				E41BF7E31F97854E00C23CEA /* PayOnReceiptVC.m in Sources */,
 				E4AEA0DB1F5EA8CE002EBE41 /* UIImage+Color.m in Sources */,
 				E4AEA0BD1F5EA6D0002EBE41 /* UIView+MJExtension.m in Sources */,
+				E43C68AF1FA99EA000464885 /* CodQueryCell.m in Sources */,
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,
 				E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */,
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,

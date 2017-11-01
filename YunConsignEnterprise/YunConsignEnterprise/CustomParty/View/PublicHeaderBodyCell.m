@@ -10,8 +10,6 @@
 
 #import "UIResponder+Router.h"
 
-#define height_PublicHeaderBodyCell 168.0
-
 @interface PublicHeaderBodyCell ()
 
 @end
@@ -74,19 +72,19 @@
 }
 
 - (void)setupBody {
-    _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.baseView.width, height_PublicHeaderBodyCell - self.headerView.bottom)];
+    _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.baseView.width, [[self class] tableView:nil heightForRowAtIndexPath:nil] - self.headerView.bottom)];
     [self.baseView addSubview:_bodyView];
     
-    _bodyLabel1 = NewLabel(CGRectMake(kEdge, kEdgeBig, _bodyView.width - 2 * kEdge, 24), nil, nil, NSTextAlignmentLeft);
+    _bodyLabel1 = NewLabel(CGRectMake(kEdge, kEdgeMiddle, _bodyView.width - 2 * kEdge, 24), nil, nil, NSTextAlignmentLeft);
     //    _bodyLabel1.adjustsFontSizeToFitWidth = YES;
     [_bodyView addSubview:_bodyLabel1];
     
     _bodyLabel2 = NewLabel(_bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
-    _bodyLabel2.top = _bodyLabel1.bottom + kEdgeMiddle;
+    _bodyLabel2.top = _bodyLabel1.bottom + kEdge;
     [_bodyView addSubview:_bodyLabel2];
     
     _bodyLabel3 = NewLabel(_bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
-    _bodyLabel3.top = _bodyLabel2.bottom + kEdgeMiddle;
+    _bodyLabel3.top = _bodyLabel2.bottom + kEdge;
     [_bodyView addSubview:_bodyLabel3];
 }
 
@@ -102,7 +100,16 @@
 }
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return height_PublicHeaderBodyCell;
+    return [PublicHeaderBodyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:3];
+}
+
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath bodyLabelLines:(NSUInteger)lines {
+    return 2 * kEdgeSmall + kCellHeightSmall + [PublicHeaderBodyCell heightForBodyWithLabelLines:lines];
+}
+
++ (CGFloat)heightForBodyWithLabelLines:(NSUInteger)lines {
+    NSUInteger m_lines = MAX(1, lines);
+    return 2 * kEdgeMiddle + m_lines * 24.0 + (m_lines - 1) * kEdge;
 }
 
 - (void)selectBtnAction:(UIButton *)button {

@@ -197,8 +197,9 @@
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppCanReceiveWayBillInfo *item = self.dataSource[indexPath.row];
+    return [WaybillReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:isTrue(item.is_cash_on_delivery) ? 3 : 2];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

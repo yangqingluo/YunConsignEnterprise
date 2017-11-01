@@ -23,7 +23,7 @@
 }
 
 - (void)updateDataSourceWithArray:(NSArray *)array {
-    self.hasChangedForDataSourceCount = array.count == self.dataSource.count;
+    self.hasChangedForDataSourceCount = (array.count != self.dataSource.count);
     [self.dataSource removeAllObjects];
     [self.dataSource addObjectsFromArray:array];
     [self refreshContent];

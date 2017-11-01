@@ -9,6 +9,7 @@
 #import "CodQueryDetailVC.h"
 
 #import "MJRefresh.h"
+#import "CodQueryCell.h"
 
 @interface CodQueryDetailVC ()
 
@@ -137,6 +138,49 @@
         _dataSource = [NSMutableArray new];
     }
     return _dataSource;
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger lines = 3;
+    AppCashOnDeliveryWayBillInfo *item = self.dataSource[indexPath.row];
+    if ([item.cash_on_delivery_causes_amount intValue] > 0) {
+        lines++;
+    }
+    if (item.remitter_name.length) {
+        lines++;
+    }
+    return [CodQueryCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kEdgeSmall;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return kEdgeSmall;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"CodQueryCell";
+    CodQueryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[CodQueryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.indexPath = [indexPath copy];
+    cell.data = self.dataSource[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
 }
 
 @end
