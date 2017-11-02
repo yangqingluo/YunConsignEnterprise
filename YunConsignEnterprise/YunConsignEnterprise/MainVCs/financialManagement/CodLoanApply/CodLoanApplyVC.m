@@ -1,0 +1,263 @@
+//
+//  CodLoanApplyVC.m
+//  YunConsignEnterprise
+//
+//  Created by 7kers on 2017/11/2.
+//  Copyright © 2017年 yangqingluo. All rights reserved.
+//
+
+#import "CodLoanApplyVC.h"
+#import "PublicQueryConditionVC.h"
+
+#import "MJRefresh.h"
+#import "CodLoanApplyCell.h"
+
+@interface CodLoanApplyVC ()
+
+@property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) AppQueryConditionInfo *condition;
+
+@property (strong, nonatomic) UIView *footerView;
+
+@end
+
+@implementation CodLoanApplyVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupNav];
+    
+    self.footerView.bottom = self.view.height;
+    [self.view addSubview:self.footerView];
+    self.tableView.height -= self.footerView.height;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self updateTableViewHeader];
+    [self.tableView.mj_header beginRefreshing];
+}
+
+- (void)setupNav {
+    [self createNavWithTitle:self.accessInfo.menu_name createMenuItem:^UIView *(int nIndex){
+        if (nIndex == 0){
+            UIButton *btn = NewBackButton(nil);
+            [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            return btn;
+        }
+        else if (nIndex == 1){
+            UIButton *btn = NewRightButton([UIImage imageNamed:@"navbar_icon_search"], nil);
+            [btn addTarget:self action:@selector(searchBtnAction) forControlEvents:UIControlEventTouchUpInside];
+            return btn;
+        }
+        return nil;
+    }];
+}
+
+- (void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)searchBtnAction {
+    PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
+    vc.type = QueryConditionType_CodLoanApply;
+    vc.condition = [self.condition copy];
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            weakself.condition = (AppQueryConditionInfo *)object;
+            [weakself.tableView.mj_header beginRefreshing];
+        }
+    };
+    [vc showFromVC:self];
+}
+
+- (void)applyButtonAction {
+    
+}
+
+- (void)loadFirstPageData{
+    [self queryWaybillListByConditionFunction:YES];
+}
+
+- (void)loadMoreData{
+    [self queryWaybillListByConditionFunction:NO];
+}
+
+- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition) {
+        if (self.condition.start_time) {
+            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
+        }
+        if (self.condition.end_time) {
+            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.bank_card_owner) {
+            [m_dic setObject:self.condition.bank_card_owner forKey:@"bank_card_owner"];
+        }
+        if (self.condition.contact_phone) {
+            [m_dic setObject:self.condition.contact_phone forKey:@"contact_phone"];
+        }
+        if (self.condition.loan_apply_state) {
+            [m_dic setObject:self.condition.loan_apply_state.item_val forKey:@"loan_apply_state"];
+        }
+    }
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_queryLoanApplyListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            if (isReset) {
+                [weakself.dataSource removeAllObjects];
+            }
+            ResponseItem *item = responseBody;
+            [weakself.dataSource addObjectsFromArray:[AppCodLoanApplyInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            
+            if (item.total <= weakself.dataSource.count) {
+                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else {
+                [weakself updateTableViewFooter];
+            }
+            [weakself.tableView reloadData];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doStartTransportTruck:(AppCanLoadTransportTruckInfo *)item {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_startTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself showHint:@"发车成功"];
+                [weakself.tableView.mj_header beginRefreshing];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)updateTableViewHeader {
+    QKWEAKSELF;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself loadFirstPageData];
+    }];
+}
+
+- (void)updateTableViewFooter{
+    QKWEAKSELF;
+    if (!self.tableView.mj_footer) {
+        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [weakself loadMoreData];
+        }];
+    }
+}
+
+- (void)endRefreshing {
+    [self hideHud];
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+}
+
+#pragma mark - getter
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+    }
+    return _condition;
+}
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightFilter)];
+        
+        UIButton *btn = [[UIButton alloc] initWithFrame:_footerView.bounds];
+        btn.backgroundColor = MainColor;
+        btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+        [btn setTitle:@"申请放款" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(applyButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:btn];
+    }
+    return _footerView;
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kEdgeSmall;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return kEdgeSmall;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"CodLoanApplyCell";
+    CodLoanApplyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[CodLoanApplyCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.indexPath = [indexPath copy];
+    cell.data = self.dataSource[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+}
+
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                //取消申请
+                
+            }
+                break;
+                
+            case 1:{
+                //运单明细
+                
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
+    }
+}
+
+@end

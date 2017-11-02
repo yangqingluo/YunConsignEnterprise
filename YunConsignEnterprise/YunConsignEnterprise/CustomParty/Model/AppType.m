@@ -501,6 +501,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppCodLoanApplyInfo
+
+
+
+@end
+
 
 
 

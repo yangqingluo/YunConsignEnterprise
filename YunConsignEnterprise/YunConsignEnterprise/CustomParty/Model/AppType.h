@@ -655,6 +655,28 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppCodLoanApplyInfo : AppType
+
+@property (strong, nonatomic) NSString *loan_apply_id;//申请放款编号
+@property (strong, nonatomic) NSString *loan_apply_state;//申请放款状态
+@property (strong, nonatomic) NSString *loan_apply_state_text;
+@property (strong, nonatomic) NSString *cust_info;//客户信息
+@property (strong, nonatomic) NSString *bank_info;//银行信息
+@property (strong, nonatomic) NSString *apply_amount;//申请放款金额
+@property (strong, nonatomic) NSString *apply_time;//申请时间
+@property (strong, nonatomic) NSString *apply_note;//申请备注
+@property (strong, nonatomic) NSString *audit_amount;//审核放款金额
+@property (strong, nonatomic) NSString *audit_time;//审核时间
+@property (strong, nonatomic) NSString *bank_card_account;
+@property (strong, nonatomic) NSString *bank_card_owner;
+@property (strong, nonatomic) NSString *bank_name;
+@property (strong, nonatomic) NSString *contact_phone;
+
+
+@end
+
+
+
 
 
 //查询条件
@@ -686,6 +708,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
 @property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
 @property (strong, nonatomic) AppDataDictionary *waybill_receive_state;//收货状态
+@property (strong, nonatomic) NSString *bank_card_owner;//客户姓名
+@property (strong, nonatomic) NSString *contact_phone;//联系电话
+@property (strong, nonatomic) AppDataDictionary *loan_apply_state;//放款申请审核状态
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

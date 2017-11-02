@@ -11,6 +11,7 @@
 #import "CodQueryVC.h"
 #import "CodWaitPayVC.h"
 #import "CodCheckVC.h"
+#import "CodLoanApplyVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -57,9 +58,9 @@
             else if ([item.menu_code isEqualToString:@"COD_CHECK"]) {
                 vc = [CodCheckVC new];
             }
-//            else if ([item.menu_code isEqualToString:@"COD_LOAN_APPLY"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"COD_LOAN_APPLY"]) {
+                vc = [CodLoanApplyVC new];
+            }
 //            else if ([item.menu_code isEqualToString:@"COD_LOAN_CHECK"]) {
 //                
 //            }

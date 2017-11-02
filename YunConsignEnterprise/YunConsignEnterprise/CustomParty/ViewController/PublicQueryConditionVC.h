@@ -23,8 +23,13 @@ typedef enum : NSUInteger {
     QueryConditionType_CustomerManage,//客户管理
     QueryConditionType_FreightCheck,//运输款对账
     QueryConditionType_CodQuery,//代收款查询
-    QueryConditionType_CodWaitPay,//代收未收款
+    QueryConditionType_CodWaitPay,//代收款未收款
     QueryConditionType_CodCheck,//代收款对账
+    QueryConditionType_CodLoanApply,//代收款放款申请
+    QueryConditionType_CodLoanCheck,//代收款放款审核
+    QueryConditionType_CodRemit,//代收款放款
+    QueryConditionType_DailyReimbursementApply,//日常报销申请
+    QueryConditionType_DailyReimbursementCheck,//日常报销审核
 } QueryConditionType;
 
 @interface PublicQueryConditionVC : AppBasicTableViewController
