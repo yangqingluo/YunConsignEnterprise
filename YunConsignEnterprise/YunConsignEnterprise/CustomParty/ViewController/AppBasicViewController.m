@@ -10,6 +10,7 @@
 
 @interface AppBasicViewController (){
     float _nSpaceNavY;
+    NSUInteger hudCount;
 }
 
 @property (nonatomic, strong) UIView *navView;
@@ -75,6 +76,44 @@
 
 - (void)dismissKeyboard{
     [self.view endEditing:YES];
+}
+
+- (void)doShowHudFunction {
+    [self doShowHudFunction:nil];
+}
+- (void)doShowHudFunction:(NSString *)hint {
+    if (hudCount == 0) {
+        if (self.parentVC) {
+            [self.parentVC showHudInView:self.parentVC.view hint:hint];
+        }
+        else {
+            [self showHudInView:self.view hint:hint];
+        }
+    }
+    hudCount++;
+}
+
+- (void)doHideHudFunction {
+    if (hudCount > 0) {
+        hudCount--;
+        if (hudCount == 0) {
+            if (self.parentVC) {
+                [self.parentVC hideHud];
+            }
+            else {
+                [self hideHud];
+            }
+        }
+    }
+}
+
+- (void)doPushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (self.parentVC) {
+        [self.parentVC.navigationController pushViewController:viewController animated:animated];
+    }
+    else {
+        [self.navigationController pushViewController:viewController animated:animated];
+    }
 }
 
 #pragma setter

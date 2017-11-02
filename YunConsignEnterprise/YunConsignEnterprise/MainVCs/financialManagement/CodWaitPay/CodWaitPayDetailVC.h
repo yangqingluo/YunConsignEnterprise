@@ -6,10 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
-@interface CodWaitPayDetailVC : AppBasicTableViewController
+@interface CodWaitPayDetailVC : PublicResultTableVC
 
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end

@@ -12,9 +12,7 @@
 #import "SingleInputCell.h"
 #import "PublicDatePickerView.h"
 
-@interface PublicQueryConditionVC ()<UITextFieldDelegate>{
-    NSUInteger hudCount;
-}
+@interface PublicQueryConditionVC ()<UITextFieldDelegate>
 
 @end
 
@@ -148,22 +146,6 @@
             
         default:
             break;
-    }
-}
-
-- (void)doShowHudFunction {
-    if (hudCount == 0) {
-        [self showHudInView:self.view hint:nil];
-    }
-    hudCount++;
-}
-
-- (void)doHideHudFunction {
-    if (hudCount > 0) {
-        hudCount--;
-        if (hudCount == 0) {
-            [self hideHud];
-        }
     }
 }
 

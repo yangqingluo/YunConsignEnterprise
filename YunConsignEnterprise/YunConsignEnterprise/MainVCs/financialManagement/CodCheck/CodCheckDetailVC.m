@@ -8,13 +8,11 @@
 
 #import "CodCheckDetailVC.h"
 
-#import "MJRefresh.h"
 #import "CodCheckCell.h"
 
 @interface CodCheckDetailVC ()
 
 @property (strong, nonatomic) PublicMutableLabelView *footerView;
-@property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
@@ -67,14 +65,6 @@
     
 }
 
-- (void)loadFirstPageData{
-    [self pullBaseListData:YES];
-}
-
-- (void)loadMoreData{
-    [self pullBaseListData:NO];
-}
-
 - (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
@@ -122,27 +112,6 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 - (void)updateSubviews {
     int count = 0;
     int cash_on_delivery_amount = 0;
@@ -165,13 +134,6 @@
 }
 
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
 - (PublicMutableLabelView *)footerView {
     if (!_footerView) {
         _footerView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];

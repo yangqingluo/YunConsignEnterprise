@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicViewController.h"
+#import "PublicSlideVC.h"
 
-@interface TransportTruckVC : AppBasicViewController
+@interface TransportTruckVC : PublicSlideVC
 
 @end

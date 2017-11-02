@@ -13,6 +13,7 @@
 
 @interface AppBasicViewController : UIViewController
 
+@property (weak, nonatomic) AppBasicViewController *parentVC;
 @property (strong, nonatomic) UIImageView *navigationBarView;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIView *navBottomLine;
@@ -23,5 +24,8 @@
 - (void)createNavWithTitle:(NSString *)szTitle createMenuItem:(UIView *(^)(int nIndex))menuItem;
 - (void)dismissKeyboard;
 - (void)needRefreshNotification:(NSNotification *)notification;
-
+- (void)doShowHudFunction;
+- (void)doShowHudFunction:(NSString *)hint;
+- (void)doHideHudFunction;
+- (void)doPushViewController:(UIViewController *)viewController animated:(BOOL)animated;
 @end

@@ -8,14 +8,12 @@
 
 #import "TTLoadListVC.h"
 
-#import "MJRefresh.h"
 #import "TransportTruckLoadListCell.h"
 #import "PublicFooterSummaryView.h"
 
 @interface TTLoadListVC ()
 
 @property (strong, nonatomic) PublicFooterSummaryView *footerView;
-@property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) AppTransportTruckLoadInfo *summaryInfo;
 
 @end
@@ -50,14 +48,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)loadFirstPageData{
-    [self pullBaseListData:YES];
-}
-
-- (void)loadMoreData{
-    [self pullBaseListData:NO];
-}
-
 - (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.data.transport_truck_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     QKWEAKSELF;
@@ -84,27 +74,6 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 - (void)updateSubviews {
     int load_quantity = 0;
     int load_count_first = 0;
@@ -125,13 +94,6 @@
 }
 
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
 - (PublicFooterSummaryView *)footerView {
     if (!_footerView) {
         _footerView = [[PublicFooterSummaryView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];

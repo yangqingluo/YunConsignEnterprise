@@ -8,15 +8,12 @@
 
 #import "WaybillChangeListVC.h"
 
-#import "MJRefresh.h"
 #import "SingleInputCell.h"
 #import "WaybillChangeDetailCell.h"
 
 @interface WaybillChangeListVC (){
     NSInteger selectedSection;
 }
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
@@ -46,14 +43,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)loadFirstPageData{
-    [self pullBaseListData:YES];
-}
-
-- (void)loadMoreData{
-    [self pullBaseListData:NO];
-}
-
 - (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : self.detailData.waybill_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     QKWEAKSELF;
@@ -80,34 +69,8 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
+
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

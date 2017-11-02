@@ -8,12 +8,10 @@
 
 #import "CodQueryDetailVC.h"
 
-#import "MJRefresh.h"
 #import "CodQueryCell.h"
 
 @interface CodQueryDetailVC ()
 
-@property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
@@ -41,14 +39,6 @@
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)loadFirstPageData{
-    [self pullBaseListData:YES];
-}
-
-- (void)loadMoreData{
-    [self pullBaseListData:NO];
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
@@ -107,38 +97,8 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
-- (void)updateSubviews {
-    [self.tableView reloadData];
-}
-
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
+
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

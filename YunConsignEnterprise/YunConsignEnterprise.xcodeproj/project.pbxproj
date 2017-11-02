@@ -31,6 +31,8 @@
 		E40F7CA91F95A71700946C18 /* WayBillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CA11F95A71700946C18 /* WayBillQueryVC.m */; };
 		E40F7CAC1F95A73E00946C18 /* SearchQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAB1F95A73E00946C18 /* SearchQuantityVC.m */; };
 		E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */; };
+		E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E5D1FAACD420094F30E /* PublicSlideVC.m */; };
+		E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E601FAAE6810094F30E /* PublicResultTableVC.m */; };
 		E41BF7E31F97854E00C23CEA /* PayOnReceiptVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */; };
 		E41BF7E61F97859300C23CEA /* CustomerManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E51F97859300C23CEA /* CustomerManageVC.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
@@ -371,6 +373,10 @@
 		E40F7CAB1F95A73E00946C18 /* SearchQuantityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchQuantityVC.m; sourceTree = "<group>"; };
 		E40F7CAD1F95B36700946C18 /* PublicDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicDatePickerView.h; sourceTree = "<group>"; };
 		E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicDatePickerView.m; sourceTree = "<group>"; };
+		E4110E5C1FAACD420094F30E /* PublicSlideVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicSlideVC.h; sourceTree = "<group>"; };
+		E4110E5D1FAACD420094F30E /* PublicSlideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicSlideVC.m; sourceTree = "<group>"; };
+		E4110E5F1FAAE6810094F30E /* PublicResultTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultTableVC.h; sourceTree = "<group>"; };
+		E4110E601FAAE6810094F30E /* PublicResultTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicResultTableVC.m; sourceTree = "<group>"; };
 		E41BF7E11F97854E00C23CEA /* PayOnReceiptVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptVC.h; sourceTree = "<group>"; };
 		E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptVC.m; sourceTree = "<group>"; };
 		E41BF7E41F97859300C23CEA /* CustomerManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerManageVC.h; sourceTree = "<group>"; };
@@ -1402,6 +1408,10 @@
 				E47118311F676ACC004D4337 /* PublicTabViewController.m */,
 				E47042C61F979E9900BA7E22 /* PublicQueryConditionVC.h */,
 				E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */,
+				E4110E5C1FAACD420094F30E /* PublicSlideVC.h */,
+				E4110E5D1FAACD420094F30E /* PublicSlideVC.m */,
+				E4110E5F1FAAE6810094F30E /* PublicResultTableVC.h */,
+				E4110E601FAAE6810094F30E /* PublicResultTableVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2218,6 +2228,7 @@
 				E4AEA0C31F5EA6D0002EBE41 /* SDWebImageCompat.m in Sources */,
 				E4684CB61F98DD0800E1EFE0 /* WaybillChangeListVC.m in Sources */,
 				E4AEA0B41F5EA6D0002EBE41 /* MJRefreshBackNormalFooter.m in Sources */,
+				E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */,
 				E421754D1F9D835100F40F60 /* WaybillLogTableVC.m in Sources */,
 				E4AF3B101F78E28B009EB766 /* PublicSwitchedInputCellView.m in Sources */,
 				E4AEA0941F5EA6D0002EBE41 /* IQKeyboardManager.m in Sources */,
@@ -2245,6 +2256,7 @@
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
 				E48C72BF1FA9B9A0007F7FC8 /* CodCheckDetailVC.m in Sources */,
 				E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */,
+				E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */,
 				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,

@@ -6,9 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
-@interface WaybillChangeListVC : AppBasicTableViewController
+@interface WaybillChangeListVC : PublicResultTableVC
 
 @property (copy, nonatomic) AppWayBillDetailInfo *detailData;
 

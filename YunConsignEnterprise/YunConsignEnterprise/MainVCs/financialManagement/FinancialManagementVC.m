@@ -61,9 +61,9 @@
             else if ([item.menu_code isEqualToString:@"COD_LOAN_APPLY"]) {
                 vc = [CodLoanApplyVC new];
             }
-//            else if ([item.menu_code isEqualToString:@"COD_LOAN_CHECK"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"COD_LOAN_CHECK"]) {
+                
+            }
 //            else if ([item.menu_code isEqualToString:@"COD_REMIT"]) {
 //                
 //            }

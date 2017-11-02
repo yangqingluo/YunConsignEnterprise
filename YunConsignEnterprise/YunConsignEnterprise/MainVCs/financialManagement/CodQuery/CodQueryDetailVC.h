@@ -6,10 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
-@interface CodQueryDetailVC : AppBasicTableViewController
+@interface CodQueryDetailVC : PublicResultTableVC
 
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end

@@ -11,30 +11,16 @@
 #import "TTPayCostVC.h"
 #import "PublicSaveTransportTruckVC.h"
 
-#import "MJRefresh.h"
 #import "TransportTruckCell.h"
 #import "PublicFooterSummaryView.h"
 
 @interface TransportTruckTableVC ()
-
-@property (assign, nonatomic) NSInteger indextag;
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) NSString *dateKey;
 
 @property (strong, nonatomic) UIView *footerView;
 
 @end
 
 @implementation TransportTruckTableVC
-
-- (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.indextag = index;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,27 +41,7 @@
     [self updateTableViewHeader];
 }
 
-- (void)becomeListed {
-    NSDate *lastRefreshTime = [[NSUserDefaults standardUserDefaults] objectForKey:self.dateKey];
-    if (self.isResetCondition || !self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
-        self.isResetCondition = NO;
-        [self.tableView.mj_header beginRefreshing];
-    }
-}
-
-- (void)becomeUnListed {
-    
-}
-
-- (void)loadFirstPageData {
-    [self queryWaybillListByConditionFunction:YES];
-}
-
-- (void)loadMoreData {
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_state" : [NSString stringWithFormat:@"%d", (int)self.indextag + 1], @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.start_time) {
@@ -120,7 +86,7 @@
 
 - (void)doCancelTransportTruck:(AppTransportTruckInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
-    [[UserPublic getInstance].mainTabNav showHudInView:[UserPublic getInstance].mainTabNav.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_cancelTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -142,7 +108,7 @@
 
 - (void)doStartTransportTruck:(AppTransportTruckInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
-    [[UserPublic getInstance].mainTabNav showHudInView:[UserPublic getInstance].mainTabNav.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_startTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -162,33 +128,9 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-    
-- (void)updateTableViewFooter {
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing{
-    //记录刷新时间
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
-    [[UserPublic getInstance].mainTabNav hideHud];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 - (void)saveButtonAction {
     PublicSaveTransportTruckVC *vc = [PublicSaveTransportTruckVC new];
-    [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+    [self doPushViewController:vc animated:YES];
 }
 
 - (void)updateSubviews {
@@ -206,21 +148,6 @@
 }
 
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
-
-- (NSString *)dateKey{
-    if (!_dateKey) {
-        _dateKey = [NSString stringWithFormat:@"TransportTruck_dateKey_%d",(int)self.indextag];
-    }
-    return _dateKey;
-}
-
 - (UIView *)footerView {
     if (!_footerView) {
         switch (self.indextag) {
@@ -297,7 +224,7 @@
             case 0:{
                 TTLoadListVC *vc = [TTLoadListVC new];
                 vc.data = item;
-                [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 
