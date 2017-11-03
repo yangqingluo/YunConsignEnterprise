@@ -711,6 +711,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *bank_card_owner;//客户姓名
 @property (strong, nonatomic) NSString *contact_phone;//联系电话
 @property (strong, nonatomic) AppDataDictionary *loan_apply_state;//放款申请审核状态
+@property (strong, nonatomic) AppDataDictionary *daily_name;//申请科目 叉车费、回扣费、赔款、水电费、其他
+@property (strong, nonatomic) AppDataDictionary *daily_apply_state;//申请状态 CHECK_STATE 等待审核、审核通过、驳回
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

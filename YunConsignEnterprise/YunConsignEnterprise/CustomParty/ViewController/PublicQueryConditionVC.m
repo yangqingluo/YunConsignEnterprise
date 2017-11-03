@@ -144,6 +144,31 @@
         }
             break;
             
+        case QueryConditionType_CodLoanCheck:
+        case QueryConditionType_CodRemit:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
+                           @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"}];
+        }
+            break;
+            
+        case QueryConditionType_DailyReimbursementApply:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
+                           @{@"title":@"报销状态",@"subTitle":@"请选择",@"key":@"daily_apply_state"}];
+        }
+            break;
+            
+        case QueryConditionType_DailyReimbursementCheck:{
+            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
+                           @{@"title":@"报销状态",@"subTitle":@"请选择",@"key":@"daily_apply_state"}];
+        }
+            break;
+            
         default:
             break;
     }
@@ -424,7 +449,7 @@
 
 - (NSSet *)dataDicSet {
     if (!_dataDicSet) {
-        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", @"waybill_receive_state", @"loan_apply_state", nil];
+        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", @"waybill_receive_state", @"loan_apply_state", @"daily_name", @"daily_apply_state", nil];
     }
     return _dataDicSet;
 }

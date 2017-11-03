@@ -12,6 +12,10 @@
 #import "CodWaitPayVC.h"
 #import "CodCheckVC.h"
 #import "CodLoanApplyVC.h"
+#import "CodLoanCheckVC.h"
+#import "CodRemitVC.h"
+#import "DailyReimbursementApplyVC.h"
+#import "DailyReimbursementCheckVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -62,17 +66,17 @@
                 vc = [CodLoanApplyVC new];
             }
             else if ([item.menu_code isEqualToString:@"COD_LOAN_CHECK"]) {
-                
+                vc = [CodLoanCheckVC new];
             }
-//            else if ([item.menu_code isEqualToString:@"COD_REMIT"]) {
-//                
-//            }
-//            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_APPLY"]) {
-//                
-//            }
-//            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_CHECK"]) {
-//                
-//            }
+            else if ([item.menu_code isEqualToString:@"COD_REMIT"]) {
+                vc = [CodRemitVC new];
+            }
+            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_APPLY"]) {
+                vc = [DailyReimbursementApplyVC new];
+            }
+            else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_CHECK"]) {
+                vc = [DailyReimbursementCheckVC new];
+            }
             
             if (vc) {
                 vc.accessInfo = item;

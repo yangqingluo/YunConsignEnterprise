@@ -95,6 +95,14 @@
 		E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F611F73A181007E7D70 /* DoubleInputCell.m */; };
 		E49C4F651F73AF03007E7D70 /* FourItemsDoubleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */; };
 		E4ADAC061F9F128100085185 /* TTPayCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ADAC051F9F128100085185 /* TTPayCostVC.m */; };
+		E4AE0F6E1FAAF652002DBE91 /* CodLoanCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F6D1FAAF652002DBE91 /* CodLoanCheckVC.m */; };
+		E4AE0F711FAAF6A1002DBE91 /* CodLoanCheckTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F701FAAF6A1002DBE91 /* CodLoanCheckTableVC.m */; };
+		E4AE0F741FAC1B63002DBE91 /* CodRemitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F731FAC1B63002DBE91 /* CodRemitVC.m */; };
+		E4AE0F771FAC1B74002DBE91 /* DailyReimbursementApplyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F761FAC1B74002DBE91 /* DailyReimbursementApplyVC.m */; };
+		E4AE0F7A1FAC1B82002DBE91 /* DailyReimbursementCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F791FAC1B82002DBE91 /* DailyReimbursementCheckVC.m */; };
+		E4AE0F7D1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F7C1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m */; };
+		E4AE0F801FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F7F1FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.m */; };
+		E4AE0F831FAC1BAE002DBE91 /* CodRemitTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F821FAC1BAE002DBE91 /* CodRemitTableVC.m */; };
 		E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2A1F5EA605002EBE41 /* main.m */; };
 		E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2D1F5EA605002EBE41 /* AppDelegate.m */; };
 		E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F301F5EA605002EBE41 /* ViewController.m */; };
@@ -501,6 +509,22 @@
 		E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourItemsDoubleListCell.m; sourceTree = "<group>"; };
 		E4ADAC041F9F128100085185 /* TTPayCostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPayCostVC.h; sourceTree = "<group>"; };
 		E4ADAC051F9F128100085185 /* TTPayCostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPayCostVC.m; sourceTree = "<group>"; };
+		E4AE0F6C1FAAF652002DBE91 /* CodLoanCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckVC.h; sourceTree = "<group>"; };
+		E4AE0F6D1FAAF652002DBE91 /* CodLoanCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanCheckVC.m; sourceTree = "<group>"; };
+		E4AE0F6F1FAAF6A1002DBE91 /* CodLoanCheckTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckTableVC.h; sourceTree = "<group>"; };
+		E4AE0F701FAAF6A1002DBE91 /* CodLoanCheckTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanCheckTableVC.m; sourceTree = "<group>"; };
+		E4AE0F721FAC1B63002DBE91 /* CodRemitVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitVC.h; sourceTree = "<group>"; };
+		E4AE0F731FAC1B63002DBE91 /* CodRemitVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitVC.m; sourceTree = "<group>"; };
+		E4AE0F751FAC1B74002DBE91 /* DailyReimbursementApplyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementApplyVC.h; sourceTree = "<group>"; };
+		E4AE0F761FAC1B74002DBE91 /* DailyReimbursementApplyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementApplyVC.m; sourceTree = "<group>"; };
+		E4AE0F781FAC1B82002DBE91 /* DailyReimbursementCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementCheckVC.h; sourceTree = "<group>"; };
+		E4AE0F791FAC1B82002DBE91 /* DailyReimbursementCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementCheckVC.m; sourceTree = "<group>"; };
+		E4AE0F7B1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementCheckTableVC.h; sourceTree = "<group>"; };
+		E4AE0F7C1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementCheckTableVC.m; sourceTree = "<group>"; };
+		E4AE0F7E1FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementApplyTableVC.h; sourceTree = "<group>"; };
+		E4AE0F7F1FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementApplyTableVC.m; sourceTree = "<group>"; };
+		E4AE0F811FAC1BAE002DBE91 /* CodRemitTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitTableVC.h; sourceTree = "<group>"; };
+		E4AE0F821FAC1BAE002DBE91 /* CodRemitTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitTableVC.m; sourceTree = "<group>"; };
 		E4AE9F261F5EA605002EBE41 /* YunConsignEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunConsignEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AE9F2A1F5EA605002EBE41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4AE9F2C1F5EA605002EBE41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1136,6 +1160,10 @@
 		E488B1131FA2ADDB001680ED /* CodLoanCheck */ = {
 			isa = PBXGroup;
 			children = (
+				E4AE0F6C1FAAF652002DBE91 /* CodLoanCheckVC.h */,
+				E4AE0F6D1FAAF652002DBE91 /* CodLoanCheckVC.m */,
+				E4AE0F6F1FAAF6A1002DBE91 /* CodLoanCheckTableVC.h */,
+				E4AE0F701FAAF6A1002DBE91 /* CodLoanCheckTableVC.m */,
 			);
 			name = CodLoanCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodLoanCheck;
@@ -1156,6 +1184,10 @@
 		E488B1151FA2ADDB001680ED /* CodRemit */ = {
 			isa = PBXGroup;
 			children = (
+				E4AE0F721FAC1B63002DBE91 /* CodRemitVC.h */,
+				E4AE0F731FAC1B63002DBE91 /* CodRemitVC.m */,
+				E4AE0F811FAC1BAE002DBE91 /* CodRemitTableVC.h */,
+				E4AE0F821FAC1BAE002DBE91 /* CodRemitTableVC.m */,
 			);
 			name = CodRemit;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodRemit;
@@ -1176,6 +1208,10 @@
 		E488B1171FA2ADDB001680ED /* DailyReimbursementApply */ = {
 			isa = PBXGroup;
 			children = (
+				E4AE0F751FAC1B74002DBE91 /* DailyReimbursementApplyVC.h */,
+				E4AE0F761FAC1B74002DBE91 /* DailyReimbursementApplyVC.m */,
+				E4AE0F7E1FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.h */,
+				E4AE0F7F1FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.m */,
 			);
 			name = DailyReimbursementApply;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/DailyReimbursementApply;
@@ -1184,6 +1220,10 @@
 		E488B1181FA2ADDB001680ED /* DailyReimbursementCheck */ = {
 			isa = PBXGroup;
 			children = (
+				E4AE0F781FAC1B82002DBE91 /* DailyReimbursementCheckVC.h */,
+				E4AE0F791FAC1B82002DBE91 /* DailyReimbursementCheckVC.m */,
+				E4AE0F7B1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.h */,
+				E4AE0F7C1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m */,
 			);
 			name = DailyReimbursementCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/DailyReimbursementCheck;
@@ -2120,6 +2160,7 @@
 				E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */,
 				E4AEA0A51F5EA6D0002EBE41 /* MJPropertyType.m in Sources */,
 				E4266F761FA0C0C800C240C5 /* WaybillArrivalDetailVC.m in Sources */,
+				E4AE0F741FAC1B63002DBE91 /* CodRemitVC.m in Sources */,
 				E4AEA0841F5EA6D0002EBE41 /* AFAutoPurgingImageCache.m in Sources */,
 				E43FCB561FA8590300AFEE6D /* FreightCheckDetailVC.m in Sources */,
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
@@ -2134,6 +2175,7 @@
 				E4AEA0C71F5EA6D0002EBE41 /* SDWebImageManager.m in Sources */,
 				E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */,
 				E4AEA0CD1F5EA6D0002EBE41 /* UIImageView+HighlightedWebCache.m in Sources */,
+				E4AE0F801FAC1BA2002DBE91 /* DailyReimbursementApplyTableVC.m in Sources */,
 				E4AEA0AD1F5EA6D0002EBE41 /* MJRefreshComponent.m in Sources */,
 				E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */,
 				E4AEA0DC1F5EA8CE002EBE41 /* UIImage+Gif.m in Sources */,
@@ -2180,6 +2222,7 @@
 				E4AEA0E41F5EA98A002EBE41 /* UIView+KGViewExtend.m in Sources */,
 				E49B06951F9D959600EE4437 /* WaybillLogCell.m in Sources */,
 				E4B05EF81F9F7B9900895591 /* EndServiceCell.m in Sources */,
+				E4AE0F7A1FAC1B82002DBE91 /* DailyReimbursementCheckVC.m in Sources */,
 				E4AEA09D1F5EA6D0002EBE41 /* MBProgressHUD+Add.m in Sources */,
 				E4AEA0CB1F5EA6D0002EBE41 /* UIImage+MultiFormat.m in Sources */,
 				E4AEA0C61F5EA6D0002EBE41 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -2193,12 +2236,14 @@
 				E4AEA0911F5EA6D0002EBE41 /* IQUIView+Hierarchy.m in Sources */,
 				E4AEA0B11F5EA6D0002EBE41 /* MJRefreshAutoNormalFooter.m in Sources */,
 				E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */,
+				E4AE0F711FAAF6A1002DBE91 /* CodLoanCheckTableVC.m in Sources */,
 				E421754A1F9D833A00F40F60 /* WaybillLogVC.m in Sources */,
 				E40E49D91F9608AC000C8B0B /* PublicMutableContentView.m in Sources */,
 				E4AEA0BE1F5EA6D0002EBE41 /* MKAnnotationView+WebCache.m in Sources */,
 				E4AEA0891F5EA6D0002EBE41 /* UIImageView+AFNetworking.m in Sources */,
 				E488B11C1FA2ADF3001680ED /* FreightCheckVC.m in Sources */,
 				E46826051FA07019009C4918 /* WaybillLoadSelectCell.m in Sources */,
+				E4AE0F831FAC1BAE002DBE91 /* CodRemitTableVC.m in Sources */,
 				E4AEA0BB1F5EA6D0002EBE41 /* UIScrollView+MJExtension.m in Sources */,
 				E4AEA0A91F5EA6D0002EBE41 /* NSObject+MJProperty.m in Sources */,
 				E4AEA0A11F5EA6D0002EBE41 /* MJExtensionConst.m in Sources */,
@@ -2209,6 +2254,7 @@
 				E4AEA0A81F5EA6D0002EBE41 /* NSObject+MJKeyValue.m in Sources */,
 				E4CE60271FA033E6007F427C /* WaybillLoadTTVC.m in Sources */,
 				E45B3CB21F7B5233001D9FDB /* TransportTruckCell.m in Sources */,
+				E4AE0F6E1FAAF652002DBE91 /* CodLoanCheckVC.m in Sources */,
 				E4AEA0BF1F5EA6D0002EBE41 /* NSData+ImageContentType.m in Sources */,
 				E4AEA0A71F5EA6D0002EBE41 /* NSObject+MJCoding.m in Sources */,
 				E4AEA0AE1F5EA6D0002EBE41 /* MJRefreshFooter.m in Sources */,
@@ -2239,6 +2285,7 @@
 				E4AEA09B1F5EA6D0002EBE41 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				E49533EE1FA87BCD00EA5428 /* CodQueryDetailVC.m in Sources */,
 				E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */,
+				E4AE0F7D1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m in Sources */,
 				E4D2BB241FAAC239006A2AAC /* CodLoanApplyCell.m in Sources */,
 				E4AEA0BA1F5EA6D0002EBE41 /* MJRefreshConst.m in Sources */,
 				E4684CB91F98E66A00E1EFE0 /* WaybillChangeDetailCell.m in Sources */,
@@ -2290,6 +2337,7 @@
 				E40F7CA51F95A71700946C18 /* AddGoodsVC.m in Sources */,
 				E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */,
 				E40F7CAC1F95A73E00946C18 /* SearchQuantityVC.m in Sources */,
+				E4AE0F771FAC1B74002DBE91 /* DailyReimbursementApplyVC.m in Sources */,
 				E4AEA0921F5EA6D0002EBE41 /* IQUIViewController+Additions.m in Sources */,
 				E4AEA0B51F5EA6D0002EBE41 /* MJRefreshBackStateFooter.m in Sources */,
 				E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */,
