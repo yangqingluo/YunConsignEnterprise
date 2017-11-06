@@ -454,9 +454,16 @@
 
 - (NSSet *)inputValidSet {
     if (!_inputValidSet) {
-        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", nil];
+        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", nil];
     }
     return _inputValidSet;
+}
+
+- (NSSet *)numberInputSet {
+    if (!_numberInputSet) {
+        _numberInputSet = [NSSet setWithObjects:@"daily_fee", nil];
+    }
+    return _numberInputSet;
 }
 
 - (NSSet *)boolValidSet {
@@ -525,6 +532,7 @@
     cell.accessoryType = [self.inputValidSet containsObject:key] ? UITableViewCellAccessoryNone:
     UITableViewCellAccessoryDisclosureIndicator;
     cell.baseView.textField.enabled = [self.inputValidSet containsObject:key];
+    cell.baseView.textField.keyboardType = [self.numberInputSet containsObject:key] ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
     if ([[self.condition valueForKey:key] isKindOfClass:[AppDataDictionary class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
     }

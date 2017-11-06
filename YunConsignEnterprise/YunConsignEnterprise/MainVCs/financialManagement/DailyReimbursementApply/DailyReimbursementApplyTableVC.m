@@ -20,6 +20,18 @@
 
 @implementation DailyReimbursementApplyTableVC
 
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+//
+//- (instancetype)initWithStyle:(UITableViewStyle)style parentVC:(AppBasicViewController *)pVC andIndexTag:(NSInteger)index {
+//    self = [super initWithStyle:style parentVC:pVC andIndexTag:index];
+//    if (self) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_DailyReimbursementApplyRefresh object:nil];
+//    }
+//    return self;
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.top = 0;
@@ -70,13 +82,43 @@
             [weakself updateSubviews];
         }
         else {
-            [weakself showHint:error.userInfo[@"message"]];
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doReimburseDeleteDailyReimburseFunction:(NSString *)daily_apply_id{
+    if (!daily_apply_id) {
+        return;
+    }
+    [self doShowHudFunction];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"daily_apply_id" : daily_apply_id}];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_deleteDailyReimburseFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself dailyReimbursementDeleteSuccess:@"取消成功"];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
 }
 
 - (void)applyButtonAction {
     SaveDailyReimbursementApplyVC *vc = [SaveDailyReimbursementApplyVC new];
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            [weakself.tableView.mj_header beginRefreshing];
+        }
+    };
     [self doPushViewController:vc animated:YES];
 }
 
@@ -89,6 +131,11 @@
         ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"已打款总金额：%d", daily_fee];
     }
     [self.tableView reloadData];
+}
+
+- (void)dailyReimbursementDeleteSuccess:(NSString *)hint {
+    [self doShowHintFunction:hint];
+    [self beginRefreshing];
 }
 
 #pragma mark - getter
@@ -162,6 +209,7 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppDailyReimbursementApplyInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
@@ -176,7 +224,7 @@
                     QKWEAKSELF;
                     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
                         if (buttonIndex == 1) {
-                            //                            [weakself doCancelTransportTruck:item];
+                            [weakself doReimburseDeleteDailyReimburseFunction:item.daily_apply_id];
                         }
                     } otherButtonTitles:@"确定", nil];
                     [alert show];

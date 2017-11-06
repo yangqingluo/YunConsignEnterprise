@@ -83,7 +83,7 @@
             [weakself updateSubviews];
         }
         else {
-            [weakself showHint:error.userInfo[@"message"]];
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
 }
@@ -103,11 +103,11 @@
                 [weakself dailyReimbursementCheckSuccess];
             }
             else {
-                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
             }
         }
         else {
-            [weakself showHint:error.userInfo[@"message"]];
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
 }
@@ -130,11 +130,11 @@
                 [weakself dailyReimbursementCheckSuccess];
             }
             else {
-                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
             }
         }
         else {
-            [weakself showHint:error.userInfo[@"message"]];
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
 }
@@ -198,7 +198,7 @@
 
 - (void)dailyReimbursementCheckSuccess {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_DailyReimbursementCheckRefresh object:nil];
-    [self showHint:@"操作成功"];
+    [self doShowHintFunction:@"操作成功"];
     [self beginRefreshing];
 }
 

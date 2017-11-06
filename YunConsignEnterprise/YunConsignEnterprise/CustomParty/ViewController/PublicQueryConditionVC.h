@@ -29,6 +29,7 @@ typedef enum : NSUInteger {
     QueryConditionType_CodLoanCheck,//代收款放款审核
     QueryConditionType_CodRemit,//代收款放款
     QueryConditionType_DailyReimbursementApply,//日常报销申请
+    QueryConditionType_DailyReimbursementSave,//日常报销提交
     QueryConditionType_DailyReimbursementCheck,//日常报销审核
 } QueryConditionType;
 
@@ -40,10 +41,13 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSArray *showArray;
 //@property (strong, nonatomic) NSSet *dataDicSet;
 @property (strong, nonatomic) NSSet *inputValidSet;
+@property (strong, nonatomic) NSSet *numberInputSet;
 @property (strong, nonatomic) NSSet *boolValidSet;
 
 @property (strong, nonatomic) UIView *footerView;
 
+- (void)cancelButtonAction;
+- (void)goBackWithDone:(BOOL)done;
 - (void)searchButtonAction;
 - (void)showFromVC:(AppBasicViewController *)fromVC;
 - (void)checkDataMapExistedFor:(NSString *)key;

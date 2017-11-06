@@ -703,16 +703,6 @@ BOOL isTrue(NSString *string);
 
 @end
 
-@interface AppDailyReimbursementApplySaveInfo : AppType
-
-@property (strong, nonatomic) AppDataDictionary *daily_name;//报销科目
-@property (strong, nonatomic) NSString *daily_fee;//报销金额
-@property (strong, nonatomic) NSString *bind_waybill_id;//绑定运单
-@property (strong, nonatomic) NSString *note;//报销备注
-@property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
-
-@end
-
 
 
 
@@ -751,6 +741,10 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *loan_apply_state;//放款申请审核状态
 @property (strong, nonatomic) AppDataDictionary *daily_name;//申请科目 叉车费、回扣费、赔款、水电费、其他
 @property (strong, nonatomic) AppDataDictionary *daily_apply_state;//申请状态 CHECK_STATE 等待审核、审核通过、驳回
+@property (strong, nonatomic) NSString *daily_fee;//报销金额
+@property (strong, nonatomic) NSString *bind_waybill_id;//绑定运单
+@property (strong, nonatomic) NSString *note;//报销备注
+@property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

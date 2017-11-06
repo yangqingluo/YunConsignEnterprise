@@ -8,6 +8,6 @@
 
 #import "PublicQueryConditionVC.h"
 
-@interface SaveDailyReimbursementApplyVC : AppBasicTableViewController
+@interface SaveDailyReimbursementApplyVC : PublicQueryConditionVC
 
 @end
