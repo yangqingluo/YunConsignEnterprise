@@ -344,7 +344,7 @@
         }
         [view show];
     }
-    else if ([self.dataDicSet containsObject:key]) {
+    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppDataDictionary class] varName:key]) {
         NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dicArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
@@ -445,12 +445,12 @@
     return _condition;
 }
 
-- (NSSet *)dataDicSet {
-    if (!_dataDicSet) {
-        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", @"waybill_receive_state", @"loan_apply_state", @"daily_name", @"daily_apply_state", nil];
-    }
-    return _dataDicSet;
-}
+//- (NSSet *)dataDicSet {
+//    if (!_dataDicSet) {
+//        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", @"waybill_receive_state", @"loan_apply_state", @"daily_name", @"daily_apply_state", nil];
+//    }
+//    return _dataDicSet;
+//}
 
 - (NSSet *)inputValidSet {
     if (!_inputValidSet) {
@@ -525,7 +525,7 @@
     cell.accessoryType = [self.inputValidSet containsObject:key] ? UITableViewCellAccessoryNone:
     UITableViewCellAccessoryDisclosureIndicator;
     cell.baseView.textField.enabled = [self.inputValidSet containsObject:key];
-    if ([self.dataDicSet containsObject:key]) {
+    if ([[self.condition valueForKey:key] isKindOfClass:[AppDataDictionary class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"load_service"]) {

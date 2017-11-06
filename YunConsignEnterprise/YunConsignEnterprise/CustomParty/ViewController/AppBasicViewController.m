@@ -145,6 +145,25 @@
     return _titleLabel;
 }
 
+#pragma mark - TextField
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    return (range.location < kInputLengthMax);
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (textField.text.length > kInputLengthMax) {
+        textField.text = [textField.text substringToIndex:kInputLengthMax];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - notification
 - (void)needRefreshNotification:(NSNotification *)notification {
     self.needRefresh = YES;

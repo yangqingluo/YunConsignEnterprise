@@ -153,6 +153,11 @@ __strong static UserPublic *_singleManger = nil;
 - (NSMutableDictionary *)dataMapDic {
     if (!_dataMapDic) {
         _dataMapDic = [NSMutableDictionary new];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"daily_name" ofType:@"txt"];
+        if (path) {
+            NSArray *m_array = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
+            [_dataMapDic setObject:m_array forKey:@"daily_name"];
+        }
     }
     return _dataMapDic;
 }

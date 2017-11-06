@@ -104,6 +104,7 @@
 #define kNotification_TransportTruckSaveRefresh    @"kNotification_TransportTruckSaveRefresh"//派车更新
 #define kNotification_WaybillArrivalRefresh    @"kNotification_WaybillArrivalRefresh"//到车更新
 #define kNotification_WaybillReceiveRefresh    @"kNotification_WaybillReceiveRefresh"//自提更新
+#define kNotification_DailyReimbursementApplyRefresh    @"kNotification_DailyReimbursementApplyRefresh"//报销申请更新
 #define kNotification_DailyReimbursementCheckRefresh    @"kNotification_DailyReimbursementCheckRefresh"//报销审核更新
 
 typedef enum : NSUInteger {
@@ -193,6 +194,7 @@ NSString *dateStringWithTimeString(NSString *string);
 
 //判断类是否有某属性
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name;
++ (BOOL)getVariableWithClass:(Class)myClass subClass:(Class)subClass varName:(NSString *)name;
 
 - (void)logout;
 - (void)loginDoneWithUserData:(NSDictionary *)data username:(NSString *)username password:(NSString *)password;

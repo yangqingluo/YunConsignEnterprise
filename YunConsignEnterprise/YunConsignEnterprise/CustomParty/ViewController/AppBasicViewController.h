@@ -29,4 +29,6 @@
 - (void)doShowHudFunction:(NSString *)hint;
 - (void)doHideHudFunction;
 - (void)doPushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)textFieldDidChange:(UITextField *)textField;
+
 @end

@@ -703,6 +703,16 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppDailyReimbursementApplySaveInfo : AppType
+
+@property (strong, nonatomic) AppDataDictionary *daily_name;//报销科目
+@property (strong, nonatomic) NSString *daily_fee;//报销金额
+@property (strong, nonatomic) NSString *bind_waybill_id;//绑定运单
+@property (strong, nonatomic) NSString *note;//报销备注
+@property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
+
+@end
+
 
 
 

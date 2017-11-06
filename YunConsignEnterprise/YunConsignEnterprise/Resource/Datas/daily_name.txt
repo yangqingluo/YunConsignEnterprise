@@ -1,0 +1,42 @@
+[
+{
+    "dict_id" = 0;
+    "item_id" = 0;
+    "item_name" = "叉车费";
+    "item_note" = "";
+    "item_sort" = 1;
+    "item_val" = 1;
+},
+{
+    "dict_id" = 0;
+    "item_id" = 0;
+    "item_name" = "回扣费";
+    "item_note" = "";
+    "item_sort" = 2;
+    "item_val" = 2;
+},
+{
+    "dict_id" = 0;
+    "item_id" = 0;
+    "item_name" = "赔费";
+    "item_note" = "";
+    "item_sort" = 3;
+    "item_val" = 3;
+},
+{
+    "dict_id" = 0;
+    "item_id" = 0;
+    "item_name" = "水电费";
+    "item_note" = "";
+    "item_sort" = 4;
+    "item_val" = 4;
+},
+{
+    "dict_id" = 0;
+    "item_id" = 0;
+    "item_name" = "其他";
+    "item_note" = "";
+    "item_sort" = 5;
+    "item_val" = 5;
+}
+]

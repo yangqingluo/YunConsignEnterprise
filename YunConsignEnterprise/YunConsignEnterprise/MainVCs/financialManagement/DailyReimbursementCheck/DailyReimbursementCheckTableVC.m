@@ -12,7 +12,7 @@
 #import "PublicFooterSummaryView.h"
 #import "PublicTTLoadFooterView.h"
 
-@interface DailyReimbursementCheckTableVC ()
+@interface DailyReimbursementCheckTableVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) UIView *footerView;
 
@@ -71,6 +71,7 @@
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
+                [weakself.selectSet removeAllObjects];
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
@@ -98,6 +99,33 @@
     NSDictionary *m_dic = @{@"daily_apply_id" : daily_apply_id};
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_checkDailyReimburseFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself dailyReimbursementCheckSuccess];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doReimburseCancelDailyReimburseFunction:(NSString *)daily_apply_id cause:(NSString *)causeString{
+    if (!daily_apply_id) {
+        return;
+    }
+    [self doShowHudFunction];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"daily_apply_id" : daily_apply_id}];
+    if (causeString) {
+        [m_dic setObject:causeString forKey:@"check_note"];
+    }
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_cancelDailyReimburseFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             ResponseItem *item = responseBody;
@@ -173,7 +201,7 @@
 
 - (void)dailyReimbursementCheckSuccess {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_DailyReimbursementCheckRefresh object:nil];
-//    [self showHint:@"操作完成"];
+    [self showHint:@"操作成功"];
     [self beginRefreshing];
 }
 
@@ -245,6 +273,7 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppDailyReimbursementCheckInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
@@ -256,6 +285,39 @@
             case 1:{
                 //报销历史
                 
+            }
+                break;
+                
+            case 2:{
+                //审核通过
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定通过审核吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doReimburseCheckDailyReimburseFunction:item.daily_apply_id];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
+            }
+                break;
+                
+            case 3:{
+                //驳回
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定驳回申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        UITextField *textField = [view textFieldAtIndex:0];
+                        [weakself doReimburseCancelDailyReimburseFunction:item.daily_apply_id cause:textField.text];
+                    }
+                }otherButtonTitles:@"确定", nil];
+                
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                UITextField *alertTextField = [alert textFieldAtIndex:0];
+                alertTextField.clearButtonMode = UITextFieldViewModeAlways;
+                alertTextField.returnKeyType = UIReturnKeyDone;
+                alertTextField.delegate = self;
+                alertTextField.placeholder = @"驳回原因";
+                [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [alert show];
             }
                 break;
                 

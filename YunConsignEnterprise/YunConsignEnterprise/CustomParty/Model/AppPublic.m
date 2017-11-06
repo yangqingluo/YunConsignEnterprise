@@ -352,19 +352,70 @@ NSString *dateStringWithTimeString(NSString *string){
 //判断类是否有某属性
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name {
     unsigned int outCount, i;
-    Ivar *ivars = class_copyIvarList(myClass, &outCount);
+    //Ivar得到的属性名称会有"_"前缀
+//    Ivar *ivars = class_copyIvarList(myClass, &outCount);
+//    for (i = 0; i < outCount; i++) {
+//        Ivar property = ivars[i];
+//        NSString *keyName = [NSString stringWithCString:ivar_getName(property) encoding:NSUTF8StringEncoding];
+//        if ([keyName hasPrefix:@"_"]) {
+//            keyName = [keyName substringFromIndex:1];
+//        }
+////        keyName = [keyName stringByReplacingOccurrencesOfString:@"_" withString:@""];
+//        if ([keyName isEqualToString:name]) {
+//            return YES;
+//        }
+//    }
+    objc_property_t* props = class_copyPropertyList(myClass, &outCount);
     for (i = 0; i < outCount; i++) {
-        Ivar property = ivars[i];
-        NSString *keyName = [NSString stringWithCString:ivar_getName(property) encoding:NSUTF8StringEncoding];
-        if ([keyName hasPrefix:@"_"]) {
-            keyName = [keyName substringFromIndex:1];
-        }
-//        keyName = [keyName stringByReplacingOccurrencesOfString:@"_" withString:@""];
+        objc_property_t property = props[i];
+        NSString *keyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
         if ([keyName isEqualToString:name]) {
             return YES;
         }
     }
     return NO;
+}
+
++ (BOOL)getVariableWithClass:(Class)myClass subClass:(Class)subClass varName:(NSString *)varName {
+    BOOL yn = NO;
+    unsigned int count;
+    objc_property_t* props = class_copyPropertyList(myClass, &count);
+    for (int i = 0; i < count; i++) {
+        objc_property_t property = props[i];
+        NSString *propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+        if (![propertyName isEqualToString:varName]) {
+            continue;
+        }
+        const char *type = property_getAttributes(property);
+//        NSString *attr = [NSString stringWithCString:type encoding:NSUTF8StringEncoding];
+        NSString * typeString = [NSString stringWithUTF8String:type];
+        NSArray * attributes = [typeString componentsSeparatedByString:@","];
+        NSString * typeAttribute = [attributes objectAtIndex:0];
+//        NSString * propertyType = [typeAttribute substringFromIndex:1];
+//        const char * rawPropertyType = [propertyType UTF8String];
+        
+//        if (strcmp(rawPropertyType, @encode(float)) == 0) {
+//            //it's a float
+//        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
+//            //it's an int
+//        } else if (strcmp(rawPropertyType, @encode(id)) == 0) {
+//            //it's some sort of object
+//        } else {
+//            // According to Apples Documentation you can determine the corresponding encoding values
+//        }
+        
+        if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
+            NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length] - 4)];  //turns @"NSDate" into NSDate
+            Class typeClass = NSClassFromString(typeClassName);
+            if (typeClass != nil) {
+                // Here is the corresponding class even for nil values
+                yn = [typeClass isSubclassOfClass:subClass];
+            }
+        }
+        
+    }
+    free(props);
+    return yn;
 }
 
 - (void)logout {

@@ -14,7 +14,7 @@
 
 @interface PublicSaveTransportTruckVC ()<UITextFieldDelegate>
 
-@property (strong, nonatomic) AppSaveTransportTruckInfo *toSavedata;
+@property (strong, nonatomic) AppSaveTransportTruckInfo *toSaveData;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSSet *defaultKeyBoardTypeSet;
 
@@ -50,23 +50,23 @@
 
 - (void)saveButtonAction {
     [self dismissKeyboard];
-    if (!self.toSavedata.start_station_city_id) {
+    if (!self.toSaveData.start_station_city_id) {
         [self showHint:@"请选择始发站"];
         return;
     }
-    else if (!self.toSavedata.end_station.count) {
+    else if (!self.toSaveData.end_station.count) {
         [self showHint:@"请选择终点站"];
         return;
     }
     else {
         NSMutableDictionary *m_dic = [NSMutableDictionary new];
-        [m_dic setObject:self.toSavedata.start_station_city_id forKey:@"start_station_city_id"];
-        [m_dic setObject:self.toSavedata.saveStringForEndStationServices forKey:@"end_station_service_id"];
+        [m_dic setObject:self.toSaveData.start_station_city_id forKey:@"start_station_city_id"];
+        [m_dic setObject:self.toSaveData.saveStringForEndStationServices forKey:@"end_station_service_id"];
         for (int section = 1; section < self.showArray.count; section++) {
             NSArray *m_array = self.showArray[section];
             for (NSDictionary *dic in m_array) {
                 NSString *key = dic[@"key"];
-                NSString *value = [self.toSavedata valueForKey:key];
+                NSString *value = [self.toSaveData valueForKey:key];
                 if (!value.length) {
                     [self showHint:[NSString stringWithFormat:@"请补全%@", dic[@"title"]]];
                     return;
@@ -120,7 +120,7 @@
         if (indexPath.row < m_array.count) {
             NSDictionary *m_dic = m_array[indexPath.row];
             NSString *key = m_dic[@"key"];
-            [self.toSavedata setValue:content forKey:key];
+            [self.toSaveData setValue:content forKey:key];
         }
     }
 }
@@ -144,8 +144,8 @@
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
                     AppCityInfo *city = dataArray[buttonIndex - 1];
-                    weakself.toSavedata.start_station_city_id = [city.open_city_id copy];
-                    weakself.toSavedata.start_station_city_name = [city.open_city_name copy];
+                    weakself.toSaveData.start_station_city_id = [city.open_city_id copy];
+                    weakself.toSaveData.start_station_city_name = [city.open_city_name copy];
                     [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }
             } otherButtonTitlesArray:m_array];
@@ -160,8 +160,8 @@
         QKWEAKSELF;
         vc.doneBlock = ^(NSObject *object){
             if ([object isKindOfClass:[NSArray class]]) {
-                [weakself.toSavedata.end_station removeAllObjects];
-                [weakself.toSavedata.end_station addObjectsFromArray:(NSArray *)object];
+                [weakself.toSaveData.end_station removeAllObjects];
+                [weakself.toSaveData.end_station addObjectsFromArray:(NSArray *)object];
                 [weakself.tableView reloadData];
             }
         };
@@ -181,11 +181,11 @@
 }
 
 #pragma mark - getter
-- (AppSaveTransportTruckInfo *)toSavedata {
-    if (!_toSavedata) {
-        _toSavedata = [AppSaveTransportTruckInfo new];
+- (AppSaveTransportTruckInfo *)toSaveData {
+    if (!_toSaveData) {
+        _toSaveData = [AppSaveTransportTruckInfo new];
     }
-    return _toSavedata;
+    return _toSaveData;
 }
 
 - (NSArray *)showArray {
@@ -216,7 +216,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1 + MAX(1, self.toSavedata.end_station.count);
+        return 1 + MAX(1, self.toSaveData.end_station.count);
     }
     NSArray *m_array = self.showArray[section];
     return m_array.count;
@@ -293,12 +293,12 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             if (indexPath.row == 0) {
-                cell.baseView.textField.text = self.toSavedata.start_station_city_name;
+                cell.baseView.textField.text = self.toSaveData.start_station_city_name;
             }
             else {
                 NSUInteger index = indexPath.row - 1;
-                if (index < self.toSavedata.end_station.count) {
-                    AppServiceInfo *service = self.toSavedata.end_station[index];
+                if (index < self.toSaveData.end_station.count) {
+                    AppServiceInfo *service = self.toSaveData.end_station[index];
                     cell.baseView.textField.text = [NSString stringWithFormat:@"%@-%@", service.open_city_name, service.service_name];
                 }
                 else {
@@ -311,7 +311,7 @@
         case 1:
         case 2:{
             NSString *key = m_dic[@"key"];
-            cell.baseView.textField.text = [self.toSavedata valueForKey:key];
+            cell.baseView.textField.text = [self.toSaveData valueForKey:key];
             BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
             cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
             cell.baseView.textField.enabled = YES;

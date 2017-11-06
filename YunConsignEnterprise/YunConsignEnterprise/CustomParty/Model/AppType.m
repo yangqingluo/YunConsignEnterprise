@@ -527,6 +527,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppDailyReimbursementApplySaveInfo
+
+
+
+@end
+
 
 
 

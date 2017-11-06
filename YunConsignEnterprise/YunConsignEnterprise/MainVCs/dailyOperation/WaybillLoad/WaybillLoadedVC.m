@@ -116,8 +116,8 @@
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
-                [weakself.dataSource removeAllObjects];
                 [weakself.selectSet removeAllObjects];
+                [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppCanLoadWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];

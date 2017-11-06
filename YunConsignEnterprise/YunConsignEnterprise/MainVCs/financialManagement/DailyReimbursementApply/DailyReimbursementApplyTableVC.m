@@ -7,6 +7,7 @@
 //
 
 #import "DailyReimbursementApplyTableVC.h"
+#import "SaveDailyReimbursementApplyVC.h"
 
 #import "DailyReimbursementApplyCell.h"
 #import "PublicFooterSummaryView.h"
@@ -78,7 +79,8 @@
 }
 
 - (void)applyButtonAction {
-    
+    SaveDailyReimbursementApplyVC *vc = [SaveDailyReimbursementApplyVC new];
+    [self doPushViewController:vc animated:YES];
 }
 
 - (void)updateSubviews {
