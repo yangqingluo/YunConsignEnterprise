@@ -144,7 +144,6 @@
 
 - (void)cellActionBtnAction:(UIButton *)button {
     if (self.indextag == 0) {
-//        AppRouteGoodsQuantityInfo *m_data = self.dataSource[button.tag];
         PublicSaveTransportTruckVC *vc = [PublicSaveTransportTruckVC new];
         [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
     }

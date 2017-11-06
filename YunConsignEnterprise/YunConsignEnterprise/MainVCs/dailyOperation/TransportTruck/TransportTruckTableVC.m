@@ -243,7 +243,7 @@
                     //发放运费
                     TTPayCostVC *vc = [TTPayCostVC new];
                     vc.truckData = item;
-                    [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+                    [self doPushViewController:vc animated:YES];
                 }
             }
                 break;

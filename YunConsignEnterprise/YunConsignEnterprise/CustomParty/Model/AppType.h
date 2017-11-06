@@ -672,8 +672,30 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *bank_name;
 @property (strong, nonatomic) NSString *contact_phone;
 
+@end
+
+@interface AppDailyReimbursementApplyInfo : AppType
+
+@property (strong, nonatomic) NSString *daily_apply_id;//报销申请编号
+@property (strong, nonatomic) NSString *daily_name;//科目名称
+@property (strong, nonatomic) NSString *daily_fee;//申请费用
+@property (strong, nonatomic) NSString *apply_time;//申请时间
+@property (strong, nonatomic) NSString *voucher;//凭证
+@property (strong, nonatomic) NSString *waybill_info;//关联运单
+@property (strong, nonatomic) NSString *note;//申请备注
+@property (strong, nonatomic) NSString *daily_apply_state;//申请状态
+@property (strong, nonatomic) NSString *daily_apply_state_text;//申请状态名称
+@property (strong, nonatomic) NSString *check_name;//审核人
+@property (strong, nonatomic) NSString *check_time;//审核时间
+@property (strong, nonatomic) NSString *check_note;//审核内容
+
+@property (strong, nonatomic) NSString *goods_number;
+@property (strong, nonatomic) NSString *waybill_id;
+@property (strong, nonatomic) NSString *waybill_number;
 
 @end
+
+
 
 
 

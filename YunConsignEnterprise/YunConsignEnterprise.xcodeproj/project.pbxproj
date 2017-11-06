@@ -94,6 +94,7 @@
 		E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */; };
 		E49C4F621F73A181007E7D70 /* DoubleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F611F73A181007E7D70 /* DoubleInputCell.m */; };
 		E49C4F651F73AF03007E7D70 /* FourItemsDoubleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */; };
+		E4A633201FB037E300873BF5 /* DailyReimbursementApplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */; };
 		E4ADAC061F9F128100085185 /* TTPayCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ADAC051F9F128100085185 /* TTPayCostVC.m */; };
 		E4AE0F6E1FAAF652002DBE91 /* CodLoanCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F6D1FAAF652002DBE91 /* CodLoanCheckVC.m */; };
 		E4AE0F711FAAF6A1002DBE91 /* CodLoanCheckTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE0F701FAAF6A1002DBE91 /* CodLoanCheckTableVC.m */; };
@@ -507,6 +508,8 @@
 		E49C4F611F73A181007E7D70 /* DoubleInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleInputCell.m; sourceTree = "<group>"; };
 		E49C4F631F73AF03007E7D70 /* FourItemsDoubleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsDoubleListCell.h; sourceTree = "<group>"; };
 		E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourItemsDoubleListCell.m; sourceTree = "<group>"; };
+		E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementApplyCell.h; sourceTree = "<group>"; };
+		E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementApplyCell.m; sourceTree = "<group>"; };
 		E4ADAC041F9F128100085185 /* TTPayCostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPayCostVC.h; sourceTree = "<group>"; };
 		E4ADAC051F9F128100085185 /* TTPayCostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPayCostVC.m; sourceTree = "<group>"; };
 		E4AE0F6C1FAAF652002DBE91 /* CodLoanCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckVC.h; sourceTree = "<group>"; };
@@ -1433,6 +1436,8 @@
 				E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */,
 				E4D2BB221FAAC239006A2AAC /* CodLoanApplyCell.h */,
 				E4D2BB231FAAC239006A2AAC /* CodLoanApplyCell.m */,
+				E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */,
+				E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2286,6 +2291,7 @@
 				E49533EE1FA87BCD00EA5428 /* CodQueryDetailVC.m in Sources */,
 				E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */,
 				E4AE0F7D1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m in Sources */,
+				E4A633201FB037E300873BF5 /* DailyReimbursementApplyCell.m in Sources */,
 				E4D2BB241FAAC239006A2AAC /* CodLoanApplyCell.m in Sources */,
 				E4AEA0BA1F5EA6D0002EBE41 /* MJRefreshConst.m in Sources */,
 				E4684CB91F98E66A00E1EFE0 /* WaybillChangeDetailCell.m in Sources */,

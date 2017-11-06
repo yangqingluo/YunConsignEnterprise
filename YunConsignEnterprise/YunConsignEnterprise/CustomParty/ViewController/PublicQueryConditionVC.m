@@ -156,16 +156,14 @@
         case QueryConditionType_DailyReimbursementApply:{
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
-                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
-                           @{@"title":@"报销状态",@"subTitle":@"请选择",@"key":@"daily_apply_state"}];
+                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
         }
             break;
             
         case QueryConditionType_DailyReimbursementCheck:{
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
-                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
-                           @{@"title":@"报销状态",@"subTitle":@"请选择",@"key":@"daily_apply_state"}];
+                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
         }
             break;
             

@@ -53,8 +53,6 @@
     _data = data;
     self.titleLabel.text = data.route;
     self.statusLabel.text = dateStringWithTimeString(data.operate_time);
-    [AppPublic adjustLabelWidth:self.statusLabel];
-    self.statusLabel.right = self.headerView.right - kEdgeMiddle;
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"登记车辆：%@", data.truck_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"登记运费：%@", data.cost_register];
