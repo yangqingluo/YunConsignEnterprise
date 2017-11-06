@@ -62,9 +62,6 @@
         if (self.condition.daily_name) {
             [m_dic setObject:self.condition.daily_name.item_val forKey:@"daily_name"];
         }
-        if (self.condition.daily_apply_state) {
-            [m_dic setObject:self.condition.daily_apply_state.item_val forKey:@"daily_apply_state"];
-        }
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_queryNeedCheckDailyReimburseListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){

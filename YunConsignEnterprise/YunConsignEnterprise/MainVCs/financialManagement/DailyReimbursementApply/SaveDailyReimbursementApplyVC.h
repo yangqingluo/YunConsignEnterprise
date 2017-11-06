@@ -6,7 +6,7 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicQueryConditionVC.h"
 
 @interface SaveDailyReimbursementApplyVC : AppBasicTableViewController
 
