@@ -296,8 +296,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     id item = self.dataSource[indexPath.row];
-    cell.data = item;
     cell.indexPath = [indexPath copy];
+    cell.data = item;
     cell.headerSelectBtn.selected = [self.selectSet containsObject:item];
     return cell;
 }

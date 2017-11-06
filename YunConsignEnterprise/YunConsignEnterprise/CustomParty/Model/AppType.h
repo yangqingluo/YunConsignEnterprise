@@ -693,9 +693,15 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *waybill_id;
 @property (strong, nonatomic) NSString *waybill_number;
 
+- (NSString *)showWaybillInfoString;
+
 @end
 
+@interface AppDailyReimbursementCheckInfo : AppDailyReimbursementApplyInfo
 
+@property (strong, nonatomic) NSString *service_name;//申请门店
+
+@end
 
 
 

@@ -78,9 +78,19 @@
     [self.view endEditing:YES];
 }
 
+- (void)doShowHintFunction:(NSString *)hint {
+    if (self.parentVC) {
+        [self.parentVC showHint:hint];
+    }
+    else {
+        [self showHint:hint];
+    }
+}
+
 - (void)doShowHudFunction {
     [self doShowHudFunction:nil];
 }
+
 - (void)doShowHudFunction:(NSString *)hint {
     if (hudCount == 0) {
         if (self.parentVC) {

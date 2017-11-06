@@ -24,6 +24,7 @@
 - (void)createNavWithTitle:(NSString *)szTitle createMenuItem:(UIView *(^)(int nIndex))menuItem;
 - (void)dismissKeyboard;
 - (void)needRefreshNotification:(NSNotification *)notification;
+- (void)doShowHintFunction:(NSString *)hint;
 - (void)doShowHudFunction;
 - (void)doShowHudFunction:(NSString *)hint;
 - (void)doHideHudFunction;

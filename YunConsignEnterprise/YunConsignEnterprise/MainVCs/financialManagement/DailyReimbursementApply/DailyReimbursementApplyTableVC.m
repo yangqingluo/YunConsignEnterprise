@@ -143,9 +143,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"DailyReimbursementApply_cell";
     DailyReimbursementApplyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     if (!cell) {
-        cell = [[DailyReimbursementApplyCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[DailyReimbursementApplyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indextag = self.indextag;
     }
@@ -167,21 +166,21 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
+                //查看凭证
+                
+            }
+                break;
+                
+            case 1:{
                 if (self.indextag == 0) {
                     //取消申请
                     QKWEAKSELF;
                     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
                         if (buttonIndex == 1) {
-//                            [weakself doCancelTransportTruck:item];
+                            //                            [weakself doCancelTransportTruck:item];
                         }
                     } otherButtonTitles:@"确定", nil];
                     [alert show];
-                }
-                else {
-                    //查看凭证
-//                    TTPayCostVC *vc = [TTPayCostVC new];
-//                    vc.truckData = item;
-//                    [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
                 }
             }
                 break;

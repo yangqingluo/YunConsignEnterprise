@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIView *summaryView;
 @property (strong, nonatomic) UDImageLabelButton *selectBtn;//全选按钮
-@property (strong, nonatomic)  UDImageLabelButton *ignoreBtn;//忽略按钮
+@property (strong, nonatomic) UDImageLabelButton *ignoreBtn;//忽略按钮
 @property (strong, nonatomic) UIButton *arriveBtn;//交接按钮
 @property (strong, nonatomic) UIButton *printBtn1;//打印按钮1
 @property (strong, nonatomic) UIButton *printBtn2;//打印按钮2

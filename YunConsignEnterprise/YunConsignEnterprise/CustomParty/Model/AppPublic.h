@@ -104,6 +104,7 @@
 #define kNotification_TransportTruckSaveRefresh    @"kNotification_TransportTruckSaveRefresh"//派车更新
 #define kNotification_WaybillArrivalRefresh    @"kNotification_WaybillArrivalRefresh"//到车更新
 #define kNotification_WaybillReceiveRefresh    @"kNotification_WaybillReceiveRefresh"//自提更新
+#define kNotification_DailyReimbursementCheckRefresh    @"kNotification_DailyReimbursementCheckRefresh"//报销审核更新
 
 typedef enum : NSUInteger {
     PowerType_CustomerManagement = 1,

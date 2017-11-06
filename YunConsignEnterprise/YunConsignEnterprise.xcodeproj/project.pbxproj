@@ -66,6 +66,7 @@
 		E45995391F95EBD3009F35A6 /* ServiceGoodsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995381F95EBD3009F35A6 /* ServiceGoodsDetailVC.m */; };
 		E45B3CAC1F7B4E9B001D9FDB /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */; };
 		E45B3CB21F7B5233001D9FDB /* TransportTruckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CB11F7B5233001D9FDB /* TransportTruckCell.m */; };
+		E4602E8D1FB0448E00C26029 /* DailyReimbursementCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */; };
 		E46826021FA06EF8009C4918 /* PublicHeaderBodyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826011FA06EF8009C4918 /* PublicHeaderBodyCell.m */; };
 		E46826051FA07019009C4918 /* WaybillLoadSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826041FA07019009C4918 /* WaybillLoadSelectCell.m */; };
 		E4684CB61F98DD0800E1EFE0 /* WaybillChangeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4684CB51F98DD0800E1EFE0 /* WaybillChangeListVC.m */; };
@@ -452,6 +453,8 @@
 		E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSlideSwitchView.m; sourceTree = "<group>"; };
 		E45B3CB01F7B5233001D9FDB /* TransportTruckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckCell.h; sourceTree = "<group>"; };
 		E45B3CB11F7B5233001D9FDB /* TransportTruckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckCell.m; sourceTree = "<group>"; };
+		E4602E8B1FB0448E00C26029 /* DailyReimbursementCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementCheckCell.h; sourceTree = "<group>"; };
+		E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementCheckCell.m; sourceTree = "<group>"; };
 		E46826001FA06EF8009C4918 /* PublicHeaderBodyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicHeaderBodyCell.h; sourceTree = "<group>"; };
 		E46826011FA06EF8009C4918 /* PublicHeaderBodyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicHeaderBodyCell.m; sourceTree = "<group>"; };
 		E46826031FA07019009C4918 /* WaybillLoadSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadSelectCell.h; sourceTree = "<group>"; };
@@ -1438,6 +1441,8 @@
 				E4D2BB231FAAC239006A2AAC /* CodLoanApplyCell.m */,
 				E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */,
 				E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */,
+				E4602E8B1FB0448E00C26029 /* DailyReimbursementCheckCell.h */,
+				E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2175,6 +2180,7 @@
 				E48FE5991FA0935200AC21FB /* WaybillLoadedVC.m in Sources */,
 				E40F7CA61F95A71700946C18 /* PublicCustomerPhoneVC.m in Sources */,
 				E4BC30B11F9723CD00CAADAE /* WaybillArrivalVC.m in Sources */,
+				E4602E8D1FB0448E00C26029 /* DailyReimbursementCheckCell.m in Sources */,
 				E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */,
 				E45995391F95EBD3009F35A6 /* ServiceGoodsDetailVC.m in Sources */,
 				E4AEA0C71F5EA6D0002EBE41 /* SDWebImageManager.m in Sources */,

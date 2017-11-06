@@ -15,6 +15,7 @@
 @property (assign, nonatomic) BOOL isResetCondition;
 @property (assign, nonatomic) NSInteger indextag;
 @property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) NSMutableSet *selectSet;
 @property (strong, nonatomic) NSString *dateKey;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index;
@@ -26,6 +27,7 @@
 - (void)pullBaseListData:(BOOL)isReset;
 - (void)updateTableViewHeader;
 - (void)updateTableViewFooter;
+- (void)beginRefreshing;
 - (void)endRefreshing;
 - (void)updateSubviews;
 

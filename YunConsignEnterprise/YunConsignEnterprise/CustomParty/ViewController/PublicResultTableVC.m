@@ -38,9 +38,8 @@
 
 - (void)becomeListed {
     NSDate *lastRefreshTime = [[NSUserDefaults standardUserDefaults] objectForKey:self.dateKey];
-    if (self.isResetCondition || !self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
-        self.isResetCondition = NO;
-        [self.tableView.mj_header beginRefreshing];
+    if (self.isResetCondition || self.needRefresh || !self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
+        [self beginRefreshing];
     }
 }
 
@@ -76,6 +75,12 @@
     }
 }
 
+- (void)beginRefreshing {
+    self.needRefresh = NO;
+    self.isResetCondition = NO;
+    [self.tableView.mj_header beginRefreshing];
+}
+
 - (void)endRefreshing{
     //记录刷新时间
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
@@ -96,6 +101,12 @@
     return _dataSource;
 }
 
+- (NSMutableSet *)selectSet {
+    if (!_selectSet) {
+        _selectSet = [NSMutableSet new];
+    }
+    return _selectSet;
+}
 
 - (NSString *)dateKey{
     if (!_dateKey) {

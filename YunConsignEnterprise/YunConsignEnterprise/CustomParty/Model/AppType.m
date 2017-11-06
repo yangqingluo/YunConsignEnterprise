@@ -509,9 +509,26 @@ BOOL isTrue(NSString *string) {
 
 @implementation AppDailyReimbursementApplyInfo
 
+- (NSString *)showWaybillInfoString {
+    if (self.waybill_info.length > 2) {
+        NSArray *m_array = [self.waybill_info componentsSeparatedByString:@"/"];
+        if (m_array.count == 2) {
+            return self.waybill_info;
+        }
+    }
+    return @"无";
+}
+
+@end
+
+@implementation AppDailyReimbursementCheckInfo
+
 
 
 @end
+
+
+
 
 
 

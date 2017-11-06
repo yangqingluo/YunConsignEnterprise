@@ -22,7 +22,7 @@
 }
 
 - (void)refreshFooter {
-    NSArray *m_array = @[@"取消申请"];
+    NSArray *m_array = @[@"查看凭证", @"取消申请"];
     if (self.indextag == 0) {
         
     }
@@ -39,7 +39,7 @@
     self.statusLabel.text = dateStringWithTimeString(data.daily_fee);
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"关联运单：%@", data.waybill_info];
+    self.bodyLabel2.text = [NSString stringWithFormat:@"关联运单：%@", [data showWaybillInfoString]];
     self.bodyLabel3.text = [NSString stringWithFormat:@"申请备注：%@", data.note];
     if (self.indextag == 1) {
         self.bodyLabel4.text = [NSString stringWithFormat:@"审核人：%@（%@）", data.check_name, data.check_time];
