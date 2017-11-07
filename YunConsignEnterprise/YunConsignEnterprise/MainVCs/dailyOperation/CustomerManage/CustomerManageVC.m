@@ -7,13 +7,12 @@
 //
 
 #import "CustomerManageVC.h"
+#import "PublicQueryConditionVC.h"
 
 #import "CustomerManageCell.h"
-#import "MJRefresh.h"
 
 @interface CustomerManageVC ()
 
-@property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
 
@@ -22,9 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 - (void)setupNav {
@@ -48,18 +48,27 @@
 }
 
 - (void)searchBtnAction {
-    
-}
-- (void)loadFirstPageData{
-    [self queryWaybillListByConditionFunction:YES];
+    PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
+    vc.type = QueryConditionType_CustomerManage;
+    vc.condition = [self.condition copy];
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object){
+        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
+            weakself.condition = (AppQueryConditionInfo *)object;
+            [weakself.tableView.mj_header beginRefreshing];
+        }
+    };
+    [vc showFromVC:self];
 }
 
-- (void)loadMoreData{
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSDictionary *m_dic = @{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]};
+- (void)pullBaseListData:(BOOL)isReset {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.condition.freight_cust_name) {
+        [m_dic setObject:self.condition.freight_cust_name forKey:@"freight_cust_name"];
+    }
+    if (self.condition.phone) {
+        [m_dic setObject:self.condition.phone forKey:@"phone"];
+    }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_cust_queryCustListByCondition" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -76,7 +85,7 @@
             else {
                 [weakself updateTableViewFooter];
             }
-            [weakself.tableView reloadData];
+            [weakself updateSubviews];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -84,34 +93,7 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

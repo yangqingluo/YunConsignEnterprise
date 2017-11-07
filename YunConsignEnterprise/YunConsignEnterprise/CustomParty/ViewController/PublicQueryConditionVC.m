@@ -134,6 +134,13 @@
         }
             break;
             
+        case QueryConditionType_CustomerManage:{
+            _showArray = @[@{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"freight_cust_name"},
+                           @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"phone"}];
+            [self checkDataMapExistedFor:@"query_column"];
+        }
+            break;
+            
         case QueryConditionType_CodLoanApply:{
             _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
@@ -453,14 +460,14 @@
 
 - (NSSet *)inputValidSet {
     if (!_inputValidSet) {
-        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", nil];
+        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", @"freight_cust_name", @"phone", nil];
     }
     return _inputValidSet;
 }
 
 - (NSSet *)numberInputSet {
     if (!_numberInputSet) {
-        _numberInputSet = [NSSet setWithObjects:@"daily_fee", nil];
+        _numberInputSet = [NSSet setWithObjects:@"daily_fee", @"phone", nil];
     }
     return _numberInputSet;
 }

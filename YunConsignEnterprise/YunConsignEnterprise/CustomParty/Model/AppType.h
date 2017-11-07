@@ -747,6 +747,10 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSDate *start_time;//开始时间
 @property (strong, nonatomic) NSDate *end_time;//结束时间
 
+/*客户管理*/
+@property (strong, nonatomic) NSString *freight_cust_name;//客户姓名，至少2个汉字
+@property (strong, nonatomic) NSString *phone;//客户电话，至少4位数字
+
 /*订单相关*/
 @property (strong, nonatomic) AppDataDictionary *query_column;//查询字段
 @property (strong, nonatomic) NSString *query_val;//查询内容
