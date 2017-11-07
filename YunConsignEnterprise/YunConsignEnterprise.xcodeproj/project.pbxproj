@@ -348,6 +348,7 @@
 		E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */; };
 		E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
+		E4EDBFCA1FB1EECB009D2FA4 /* CodWaitPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EDBFC91FB1EECB009D2FA4 /* CodWaitPayCell.m */; };
 		E4F1C43F1F98F42700D5DB3D /* WaybillEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */; };
 		E4F283581FB1B1CD005A0BC1 /* CodRemitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */; };
 		E4F2835B1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2835A1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m */; };
@@ -926,6 +927,8 @@
 		E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
 		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
+		E4EDBFC81FB1EECB009D2FA4 /* CodWaitPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodWaitPayCell.h; sourceTree = "<group>"; };
+		E4EDBFC91FB1EECB009D2FA4 /* CodWaitPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodWaitPayCell.m; sourceTree = "<group>"; };
 		E4F1C43D1F98F42700D5DB3D /* WaybillEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillEditVC.h; sourceTree = "<group>"; };
 		E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillEditVC.m; sourceTree = "<group>"; };
 		E4F283561FB1B1CD005A0BC1 /* CodRemitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitCell.h; sourceTree = "<group>"; };
@@ -1489,6 +1492,8 @@
 				E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */,
 				E43C68AD1FA99EA000464885 /* CodQueryCell.h */,
 				E43C68AE1FA99EA000464885 /* CodQueryCell.m */,
+				E4EDBFC81FB1EECB009D2FA4 /* CodWaitPayCell.h */,
+				E4EDBFC91FB1EECB009D2FA4 /* CodWaitPayCell.m */,
 				E48C72C01FA9BD52007F7FC8 /* CodCheckCell.h */,
 				E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */,
 				E4D2BB221FAAC239006A2AAC /* CodLoanApplyCell.h */,
@@ -2399,6 +2404,7 @@
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,
 				E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */,
 				E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */,
+				E4EDBFCA1FB1EECB009D2FA4 /* CodWaitPayCell.m in Sources */,
 				E4AEA0C11F5EA6D0002EBE41 /* SDImageCache.m in Sources */,
 				E4D2BB211FAAC16E006A2AAC /* CodLoanApplyVC.m in Sources */,
 				E48C72B91FA9B939007F7FC8 /* CodCheckVC.m in Sources */,

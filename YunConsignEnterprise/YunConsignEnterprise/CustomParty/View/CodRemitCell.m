@@ -10,9 +10,9 @@
 
 @implementation CodRemitCell
 
-- (void)refreshFooter {
-    NSArray *m_array = @[@"申请单", @"运单明细"];
-    [self.footerView updateDataSourceWithArray:m_array];
+- (void)setupFooter {
+    [super setupFooter];
+    [self.footerView updateDataSourceWithArray:@[@"申请单", @"运单明细"]];
 }
 
 #pragma mark - setter
@@ -25,7 +25,6 @@
     self.bodyLabel1.text = [NSString stringWithFormat:@"银行名称：%@", data.bank_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"银行账号：%@", data.bank_account];
     self.bodyLabel3.text = [NSString stringWithFormat:@"打款人：%@（%@）", data.operator_name, data.operate_time];
-    [self refreshFooter];
 }
 
 @end

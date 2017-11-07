@@ -8,7 +8,9 @@
 
 #import "CodWaitPayDetailVC.h"
 
-@interface CodWaitPayDetailVC ()
+#import "CodWaitPayCell.h"
+
+@interface CodWaitPayDetailVC ()<UITextFieldDelegate>
 
 
 @end
@@ -87,6 +89,113 @@
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+- (void)doUpdateOrSetCashOnDeliveryNoteByIdFunction:(NSIndexPath *)indexPath cause:(NSString *)cash_on_delivery_note {
+    if (indexPath.row > self.dataSource.count - 1 || !cash_on_delivery_note.length) {
+        return;
+    }
+    [self doShowHudFunction];
+    AppCashOnDeliveryWayBillInfo *m_data = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : m_data.waybill_id}];
+    if (cash_on_delivery_note) {
+        [m_dic setObject:cash_on_delivery_note forKey:@"cash_on_delivery_note"];
+    }
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_updateOrSetCashOnDeliveryNoteByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself doShowHintFunction:@"设置成功"];
+                m_data.cash_on_delivery_note = [cash_on_delivery_note copy];
+                [weakself.tableView reloadData];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppCashOnDeliveryWayBillInfo *item = self.dataSource[indexPath.row];
+    return [CodWaitPayCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:item.cash_on_delivery_note.length ? 3 : 2];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return kEdgeSmall;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return kEdge;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"CodWaitPay_cell";
+    CodWaitPayCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[CodWaitPayCell alloc] initWithHeaderStyle:PublicHeaderCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    id item = self.dataSource[indexPath.row];
+    cell.indexPath = [indexPath copy];
+    cell.data = item;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+}
+
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppCashOnDeliveryWayBillInfo *item = self.dataSource[indexPath.row];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                //收款
+                
+            }
+                break;
+                
+            case 1:{
+                //设置备注
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"设置备注" message:[NSString stringWithFormat:@"货号：%@", item.goods_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        UITextField *textField = [view textFieldAtIndex:0];
+                        [weakself doUpdateOrSetCashOnDeliveryNoteByIdFunction:indexPath cause:textField.text];
+                    }
+                }otherButtonTitles:@"确定", nil];
+                
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                UITextField *alertTextField = [alert textFieldAtIndex:0];
+                alertTextField.clearButtonMode = UITextFieldViewModeAlways;
+                alertTextField.returnKeyType = UIReturnKeyDone;
+                alertTextField.delegate = self;
+                alertTextField.placeholder = @"请输入备注";
+                [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [alert show];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
 
 @end
