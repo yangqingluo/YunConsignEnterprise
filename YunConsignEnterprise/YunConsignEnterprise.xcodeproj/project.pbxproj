@@ -81,6 +81,7 @@
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
 		E488B11C1FA2ADF3001680ED /* FreightCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */; };
+		E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */; };
 		E48C72B61FA9B925007F7FC8 /* CodWaitPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72B51FA9B925007F7FC8 /* CodWaitPayVC.m */; };
 		E48C72B91FA9B939007F7FC8 /* CodCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72B81FA9B939007F7FC8 /* CodCheckVC.m */; };
 		E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72BB1FA9B993007F7FC8 /* CodWaitPayDetailVC.m */; };
@@ -486,6 +487,8 @@
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
 		E488B11A1FA2ADF3001680ED /* FreightCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckVC.h; sourceTree = "<group>"; };
 		E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckVC.m; sourceTree = "<group>"; };
+		E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicFMWaybillQueryCell.h; sourceTree = "<group>"; };
+		E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicFMWaybillQueryCell.m; sourceTree = "<group>"; };
 		E48C72B41FA9B925007F7FC8 /* CodWaitPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodWaitPayVC.h; sourceTree = "<group>"; };
 		E48C72B51FA9B925007F7FC8 /* CodWaitPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodWaitPayVC.m; sourceTree = "<group>"; };
 		E48C72B71FA9B939007F7FC8 /* CodCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodCheckVC.h; sourceTree = "<group>"; };
@@ -1469,6 +1472,8 @@
 				E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */,
 				E49D6C161FB15F04004F82D4 /* PublicInputHeaderView.h */,
 				E49D6C171FB15F04004F82D4 /* PublicInputHeaderView.m */,
+				E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */,
+				E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2263,6 +2268,7 @@
 				E49B06951F9D959600EE4437 /* WaybillLogCell.m in Sources */,
 				E4B05EF81F9F7B9900895591 /* EndServiceCell.m in Sources */,
 				E4AE0F7A1FAC1B82002DBE91 /* DailyReimbursementCheckVC.m in Sources */,
+				E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */,
 				E4AEA09D1F5EA6D0002EBE41 /* MBProgressHUD+Add.m in Sources */,
 				E4AEA0CB1F5EA6D0002EBE41 /* UIImage+MultiFormat.m in Sources */,
 				E4AEA0C61F5EA6D0002EBE41 /* SDWebImageDownloaderOperation.m in Sources */,

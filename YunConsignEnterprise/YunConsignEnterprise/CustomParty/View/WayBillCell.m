@@ -74,14 +74,14 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods];
     self.bodyLabel2.text = [NSString stringWithFormat:@"客户：%@", _data.cust];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"提付：%@", _data.pay_on_delivery_amount];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"提付：%d", [_data.pay_on_delivery_amount intValue]];
     [AppPublic adjustLabelWidth:self.bodyLabel3];
     
-    self.payNowLabel.text = [NSString stringWithFormat:@"现付：%@", _data.pay_now_amount];
+    self.payNowLabel.text = [NSString stringWithFormat:@"现付：%d", [_data.pay_now_amount intValue]];
     [AppPublic adjustLabelWidth:self.payNowLabel];
     self.payNowLabel.left = self.bodyLabel3.right + kEdgeBig;
     
-    self.payOnReceiptLabel.text = [NSString stringWithFormat:@"回单付：%@", _data.pay_on_receipt_amount];
+    self.payOnReceiptLabel.text = [NSString stringWithFormat:@"回单付：%d", [_data.pay_on_receipt_amount intValue]];
     [AppPublic adjustLabelWidth:self.payOnReceiptLabel];
     self.payOnReceiptLabel.left = self.payNowLabel.right +
     kEdgeBig;

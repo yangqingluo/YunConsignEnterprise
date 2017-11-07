@@ -109,6 +109,14 @@
     NSString *key = m_dic[@"key"];
     if ([key isEqualToString:@"bind_waybill_id"]) {
         PublicFMWaybillQueryVC *vc = [PublicFMWaybillQueryVC new];
+        vc.type = FMWaybillQueryType_DailyReimburse;
+        QKWEAKSELF;
+        vc.doneBlock = ^(NSObject *object){
+            if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
+                weakself.condition.bind_waybill_id = [((AppWayBillDetailInfo *)object).waybill_id copy];
+                [weakself.tableView reloadData];
+            }
+        };
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }

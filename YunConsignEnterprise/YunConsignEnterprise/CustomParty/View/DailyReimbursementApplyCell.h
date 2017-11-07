@@ -11,6 +11,7 @@
 @interface DailyReimbursementApplyCell : PublicHeaderBodyFooterCell
 
 @property (assign, nonatomic) NSInteger indextag;
+@property (strong, nonatomic) UILabel *bodyLabelRight2;
 @property (strong, nonatomic) UILabel *bodyLabel4;
 
 @property (copy, nonatomic) AppDailyReimbursementApplyInfo *data;

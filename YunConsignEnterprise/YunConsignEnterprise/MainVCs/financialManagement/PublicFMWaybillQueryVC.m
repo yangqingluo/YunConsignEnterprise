@@ -9,10 +9,13 @@
 #import "PublicFMWaybillQueryVC.h"
 
 #import "PublicInputHeaderView.h"
+#import "PublicFMWaybillQueryCell.h"
 
 @interface PublicFMWaybillQueryVC ()
 
 @property (strong, nonatomic) PublicInputHeaderView *headerView;
+@property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) AppWayBillDetailInfo *selectedData;
 
 @end
 
@@ -43,7 +46,12 @@
 }
 
 - (void)searchButtonAction {
-    [self goBackWithDone:YES];
+    [self dismissKeyboard];
+    if (!self.headerView.baseView.textField.text.length) {
+        [self doShowHintFunction:@"请输入运单号或或号"];
+        return;
+    }
+    [self doQueryWaybillFunction:self.headerView.baseView.textField.text];
 }
 
 - (void)goBackWithDone:(BOOL)done {
@@ -55,8 +63,50 @@
 
 - (void)doDoneAction {
     if (self.doneBlock) {
-//        self.doneBlock(self.condition);
+        self.doneBlock(self.selectedData);
     }
+}
+
+- (void)doQueryWaybillFunction:(NSString *)waybill_info {
+    if (!waybill_info) {
+        return;
+    }
+    
+    NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    NSString *m_code = nil;
+    switch (self.type) {
+        case FMWaybillQueryType_DailyReimburse:{
+            [m_dic setObject:waybill_info forKey:@"waybill_info"];
+            m_code = @"hex_reimburse_queryWaybillInDailyReimburseFunction";
+        }
+            break;
+            
+        default:
+            break;
+    }
+    if (!m_code) {
+        return;
+    }
+    
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:m_code Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself.dataSource removeAllObjects];
+                [weakself.dataSource addObjectsFromArray:[AppWayBillDetailInfo mj_objectArrayWithKeyValuesArray:item.items]];
+                [weakself.tableView reloadData];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
 }
 
 #pragma mark - getter
@@ -66,9 +116,52 @@
         _headerView.baseView.textLabel.text = @"运单号/货号";
         _headerView.baseView.textField.placeholder = @"请输入运单号或货号";
         _headerView.baseView.textField.keyboardType = UIKeyboardTypeURL;
+        [_headerView.searchBtn addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [_headerView.baseView adjustSubviews];
     }
     return _headerView;
+}
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [PublicFMWaybillQueryCell tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return kEdgeSmall;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return kEdge;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"PublicFMWaybillQuery_cell";
+    PublicFMWaybillQueryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[PublicFMWaybillQueryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.indexPath = [indexPath copy];
+    cell.data = self.dataSource[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    self.selectedData = self.dataSource[indexPath.row];
+    [self goBackWithDone:YES];
 }
 
 @end

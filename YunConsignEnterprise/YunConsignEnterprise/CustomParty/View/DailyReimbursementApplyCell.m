@@ -17,6 +17,17 @@
 
 - (void)setupBody {
     [super setupBody];
+    self.bodyLabel2.top = self.bodyLabel1.bottom;
+    self.bodyLabel2.height = self.bodyLabel3.top - self.bodyLabel2.top;
+    
+    _bodyLabelRight2 = NewLabel(self.bodyLabel2.frame, self.bodyLabel2.textColor, self.bodyLabel2.font, NSTextAlignmentLeft);
+    _bodyLabelRight2.numberOfLines = 0;
+    [self.bodyView addSubview:_bodyLabelRight2];
+    
+    self.bodyLabel2.text = @"关联运单：";
+    [AppPublic adjustLabelWidth:self.bodyLabel2];
+    self.bodyLabelRight2.left = self.bodyLabel2.right;
+    self.bodyLabelRight2.width = self.bodyView.width - kEdgeMiddle - self.bodyLabelRight2.left;
     
     _bodyLabel4 = NewLabel(self.bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
 }
@@ -39,7 +50,7 @@
     self.statusLabel.text = dateStringWithTimeString(data.daily_fee);
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"关联运单：%@", [data showWaybillInfoString]];
+    self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];
     self.bodyLabel3.text = [NSString stringWithFormat:@"申请备注：%@", data.note];
     if (self.indextag == 1) {
         self.bodyLabel4.text = [NSString stringWithFormat:@"审核人：%@（%@）", data.check_name, data.check_time];

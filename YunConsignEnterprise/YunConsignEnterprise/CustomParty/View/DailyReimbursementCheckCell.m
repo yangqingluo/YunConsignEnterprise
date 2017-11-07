@@ -10,6 +10,21 @@
 
 @implementation DailyReimbursementCheckCell
 
+- (void)setupBody {
+    [super setupBody];
+    self.bodyLabel2.top = self.bodyLabel1.bottom;
+    self.bodyLabel2.height = self.bodyLabel3.top - self.bodyLabel2.top;
+    
+    _bodyLabelRight2 = NewLabel(self.bodyLabel2.frame, self.bodyLabel2.textColor, self.bodyLabel2.font, NSTextAlignmentLeft);
+    _bodyLabelRight2.numberOfLines = 0;
+    [self.bodyView addSubview:_bodyLabelRight2];
+    
+    self.bodyLabel2.text = @"关联运单：";
+    [AppPublic adjustLabelWidth:self.bodyLabel2];
+    self.bodyLabelRight2.left = self.bodyLabel2.right;
+    self.bodyLabelRight2.width = self.bodyView.width - kEdgeMiddle - self.bodyLabelRight2.left;
+}
+
 - (void)refreshFooter {
     NSArray *m_array = @[@"查看凭证", @"报销历史", @"审核通过", @"驳回"];
     if (self.indextag == 0) {
@@ -28,7 +43,7 @@
     self.statusLabel.text = dateStringWithTimeString(data.daily_fee);
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"关联运单：%@", [data showWaybillInfoString]];
+    self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];
     self.bodyLabel3.text = [NSString stringWithFormat:@"报销备注：%@", data.note];
     if (self.indextag == 2) {
         self.bodyLabel3.text = [NSString stringWithFormat:@"驳回原因：%@", data.check_note];

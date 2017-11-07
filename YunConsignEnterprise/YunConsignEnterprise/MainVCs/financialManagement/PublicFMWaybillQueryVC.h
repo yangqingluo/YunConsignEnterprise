@@ -15,4 +15,6 @@ typedef NS_ENUM(NSInteger, FMWaybillQueryType) {
 
 @interface PublicFMWaybillQueryVC : AppBasicTableViewController
 
+@property (assign, nonatomic) FMWaybillQueryType type;
+
 @end
