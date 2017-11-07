@@ -7,6 +7,7 @@
 //
 
 #import "SaveDailyReimbursementApplyVC.h"
+#import "PublicFMWaybillQueryVC.h"
 
 @interface SaveDailyReimbursementApplyVC ()
 
@@ -100,6 +101,18 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_DailyReimbursementApplyRefresh object:nil];
     [self showHint:@"保存成功"];
     [self goBackWithDone:YES];
+}
+
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"bind_waybill_id"]) {
+        PublicFMWaybillQueryVC *vc = [PublicFMWaybillQueryVC new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    [super selectRowAtIndexPath:indexPath];
 }
 
 @end

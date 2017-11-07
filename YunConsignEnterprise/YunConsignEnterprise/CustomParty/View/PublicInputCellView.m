@@ -46,4 +46,15 @@
     _textField.width = self.rightView.left - cellDetailLeft;
 }
 
+- (void)adjustSubviews {
+    [AppPublic adjustLabelWidth:self.textLabel];
+    self.textField.left = self.textLabel.right + kEdge;
+    if (self.rightView) {
+        self.textField.width = self.rightView.left - kEdgeSmall - self.textField.left;
+    }
+    else {
+        self.textField.width = self.width - kEdgeSmall - self.textField.left;
+    }
+}
+
 @end

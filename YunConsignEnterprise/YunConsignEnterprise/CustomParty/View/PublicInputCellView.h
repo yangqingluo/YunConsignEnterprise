@@ -15,5 +15,6 @@
 @property (strong, nonatomic) UIView *rightView;
 
 - (void)addRightView:(UIView *)view;
+- (void)adjustSubviews;
 
 @end

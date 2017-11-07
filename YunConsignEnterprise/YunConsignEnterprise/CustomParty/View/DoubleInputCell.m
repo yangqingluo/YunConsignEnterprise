@@ -46,17 +46,6 @@
     // Configure the view for the selected state
 }
 
-- (void)adjustBaseView:(PublicInputCellView *)m_view {
-    [AppPublic adjustLabelWidth:m_view.textLabel];
-    m_view.textField.left = m_view.textLabel.right + kEdge;
-    if (m_view.rightView) {
-        m_view.textField.width = m_view.rightView.left - kEdgeSmall - m_view.textField.left;
-    }
-    else {
-        m_view.textField.width = m_view.width - kEdgeSmall - m_view.textField.left;
-    }
-}
-
 #pragma mark - setter
 - (void)setIsShowBottomEdge:(BOOL)isShowBottomEdge {
     _isShowBottomEdge = isShowBottomEdge;
@@ -78,10 +67,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"text"]) {
         if ([object isEqual:self.baseView.textLabel]) {
-            [self adjustBaseView:self.baseView];
+            [self.baseView adjustSubviews];
         }
         else if ([object isEqual:self.anotherBaseView.textLabel]) {
-            [self adjustBaseView:self.anotherBaseView];
+            [self.anotherBaseView adjustSubviews];
         }
     }
 }
