@@ -43,6 +43,7 @@
 		E4266F761FA0C0C800C240C5 /* WaybillArrivalDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F751FA0C0C800C240C5 /* WaybillArrivalDetailVC.m */; };
 		E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */; };
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
+		E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
 		E43C68AF1FA99EA000464885 /* CodQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43C68AE1FA99EA000464885 /* CodQueryCell.m */; };
@@ -421,6 +422,8 @@
 		E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalDetailCell.m; sourceTree = "<group>"; };
 		E4266F7A1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicWaybillArrivalFooterView.h; sourceTree = "<group>"; };
 		E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicWaybillArrivalFooterView.m; sourceTree = "<group>"; };
+		E42E7EBE1FB20CE7007E755B /* CustomerEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerEditVC.h; sourceTree = "<group>"; };
+		E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerEditVC.m; sourceTree = "<group>"; };
 		E43229551F97531C000400B8 /* WaybillReceiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveVC.h; sourceTree = "<group>"; };
 		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
 		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
@@ -966,6 +969,8 @@
 			children = (
 				E41BF7E41F97859300C23CEA /* CustomerManageVC.h */,
 				E41BF7E51F97859300C23CEA /* CustomerManageVC.m */,
+				E42E7EBE1FB20CE7007E755B /* CustomerEditVC.h */,
+				E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */,
 			);
 			name = CustomerManage;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/CustomerManage;
@@ -2309,6 +2314,7 @@
 				E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */,
 				E4A65B6B1FB1A4FB00942525 /* CodLoanCheckDetailVC.m in Sources */,
 				E4AEA0A21F5EA6D0002EBE41 /* MJFoundation.m in Sources */,
+				E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */,
 				E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */,
 				E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */,
 				E40F7CA91F95A71700946C18 /* WayBillQueryVC.m in Sources */,

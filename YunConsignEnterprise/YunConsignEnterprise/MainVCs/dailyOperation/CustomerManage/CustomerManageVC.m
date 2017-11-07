@@ -8,6 +8,7 @@
 
 #import "CustomerManageVC.h"
 #import "PublicQueryConditionVC.h"
+#import "CustomerEditVC.h"
 
 #import "CustomerManageCell.h"
 
@@ -17,6 +18,25 @@
 @end
 
 @implementation CustomerManageVC
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_CustomerManageRefresh object:nil];
+    }
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        [self beginRefreshing];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,6 +113,33 @@
     }];
 }
 
+- (void)doDeleteCustomerFunction:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
+        return;
+    }
+    [self doShowHudFunction];
+    AppCustomerInfo *m_data = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"freight_cust_ids" : m_data.freight_cust_id}];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_cust_deleteCustByIds" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself doShowHintFunction:@"删除成功"];
+                [weakself.dataSource removeObjectAtIndex:indexPath.row];
+                [weakself.tableView reloadData];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 #pragma mark - getter
 
 #pragma mark - UITableView
@@ -135,16 +182,25 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        //        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppCustomerInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                
+                CustomerEditVC *vc = [CustomerEditVC new];
+                vc.customerData = item;
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 
             case 1:{
-                
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定删除吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doDeleteCustomerFunction:indexPath];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
             }
                 break;
                 

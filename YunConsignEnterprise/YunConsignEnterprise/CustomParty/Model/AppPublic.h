@@ -105,6 +105,7 @@
 #define kNotification_TransportTruckSaveRefresh    @"kNotification_TransportTruckSaveRefresh"//派车更新
 #define kNotification_WaybillArrivalRefresh    @"kNotification_WaybillArrivalRefresh"//到车更新
 #define kNotification_WaybillReceiveRefresh    @"kNotification_WaybillReceiveRefresh"//自提更新
+#define kNotification_CustomerManageRefresh    @"kNotification_CustomerManageRefresh"//客户管理更新
 #define kNotification_CodWaitPayRefresh    @"kNotification_CodWaitPayRefresh"//代收款未收款更新
 #define kNotification_CodLoanApplyRefresh    @"kNotification_CodLoanApplyRefresh"//放款申请更新
 #define kNotification_CodLoanCheckRefresh    @"kNotification_CodLoanCheckRefresh"//放款审核更新
