@@ -11,10 +11,7 @@
 @implementation CodLoanCheckCell
 
 - (void)refreshFooter {
-    NSArray *m_array = @[@"运单明细", @"驳回"];
-    if (self.indextag == 1) {
-        m_array = @[@"运单明细"];
-    }
+    NSArray *m_array = @[@"运单明细"];
     [self.footerView updateDataSourceWithArray:m_array];
 }
 

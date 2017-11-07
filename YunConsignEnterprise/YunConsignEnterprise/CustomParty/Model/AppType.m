@@ -347,6 +347,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppLoanApplyCheckWaybillInfo
+
+
+
+@end
+
 @implementation WaybillToCustReceiveInfo
 
 

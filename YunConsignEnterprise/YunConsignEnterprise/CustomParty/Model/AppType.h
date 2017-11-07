@@ -429,7 +429,22 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
 @property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
 @property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额，没有收款，显示未收款
-@property (strong, nonatomic) NSString *cash_on_delivery_causes_note ;//少款原因
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//少款原因
+
+@end
+
+@interface AppLoanApplyCheckWaybillInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *loan_apply_state;//申请状态 LOAN_APPLY_STATE 等待审核、审核通过、驳回、已放款，只有在等待审核状态下，才能进行“驳回”操作
+@property (strong, nonatomic) NSString *cust_info;//客户信息
+@property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
+@property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额，没有收款，显示未收款
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//少款原因
+@property (strong, nonatomic) NSString *system_check;//系统检查结果，除“正常”外，其余都是红色字显示
+@property (strong, nonatomic) NSString *is_reject;//是否驳回 YES_NO 1是2否
+@property (strong, nonatomic) NSString *reject_note;//驳回原因
+@property (strong, nonatomic) NSString *city_info;//城市
 
 @end
 

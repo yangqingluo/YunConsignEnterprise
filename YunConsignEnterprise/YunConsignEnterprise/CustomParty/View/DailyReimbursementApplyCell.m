@@ -72,7 +72,7 @@
             [self.bodyView addSubview:self.bodyLabel4];
         }
         if (indextag == 2) {
-            self.bodyLabel4.textColor = baseRedColor;
+            self.bodyLabel4.textColor = WarningColor;
         }
     }
 }

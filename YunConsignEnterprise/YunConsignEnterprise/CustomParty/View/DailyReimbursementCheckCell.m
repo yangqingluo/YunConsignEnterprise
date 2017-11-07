@@ -58,7 +58,7 @@
     }
     else {
         if (indextag == 2) {
-            self.bodyLabel3.textColor = baseRedColor;
+            self.bodyLabel3.textColor = WarningColor;
         }
     }
 }

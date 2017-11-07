@@ -7,6 +7,7 @@
 //
 
 #import "CodLoanCheckTableVC.h"
+#import "CodLoanCheckDetailVC.h"
 
 #import "CodLoanCheckCell.h"
 #import "PublicFooterSummaryView.h"
@@ -115,29 +116,29 @@
     }];
 }
 
-- (void)doCancelLoanApplyWaybillByIdFunction:(NSString *)waybill_id {
-    if (!waybill_id) {
-        return;
-    }
-    [self doShowHudFunction];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_cancelLoanApplyWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself endRefreshing];
-        if (!error) {
-            ResponseItem *item = responseBody;
-            if (item.flag == 1) {
-                [weakself checkLoanApplyByIdSuccess];
-            }
-            else {
-                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
-            }
-        }
-        else {
-            [weakself doShowHintFunction:error.userInfo[@"message"]];
-        }
-    }];
-}
+//- (void)doCancelLoanApplyWaybillByIdFunction:(NSString *)waybill_id {
+//    if (!waybill_id) {
+//        return;
+//    }
+//    [self doShowHudFunction];
+//    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
+//    QKWEAKSELF;
+//    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_cancelLoanApplyWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+//        [weakself endRefreshing];
+//        if (!error) {
+//            ResponseItem *item = responseBody;
+//            if (item.flag == 1) {
+//                [weakself checkLoanApplyByIdSuccess];
+//            }
+//            else {
+//                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+//            }
+//        }
+//        else {
+//            [weakself doShowHintFunction:error.userInfo[@"message"]];
+//        }
+//    }];
+//}
 
 - (void)footerSelectBtnAction:(UIButton *)button {
     button.selected = !button.selected;
@@ -277,20 +278,22 @@
         switch (tag) {
             case 0:{
                 //运单明细
-                
+                CodLoanCheckDetailVC *vc = [CodLoanCheckDetailVC new];
+                vc.codApplyData = item;
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 
-            case 1:{
-                QKWEAKSELF;
-                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定驳回申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-                    if (buttonIndex == 1) {
-                        [weakself doCancelLoanApplyWaybillByIdFunction:item.loan_apply_id];
-                    }
-                }otherButtonTitles:@"确定", nil];
-                [alert show];
-            }
-                break;
+//            case 1:{
+//                QKWEAKSELF;
+//                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定驳回申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+//                    if (buttonIndex == 1) {
+//                        [weakself doCancelLoanApplyWaybillByIdFunction:item.loan_apply_id];
+//                    }
+//                }otherButtonTitles:@"确定", nil];
+//                [alert show];
+//            }
+//                break;
                 
             default:
                 break;
