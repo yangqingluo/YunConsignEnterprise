@@ -349,6 +349,7 @@
 		E4F1C43F1F98F42700D5DB3D /* WaybillEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */; };
 		E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */; };
 		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
+		E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -921,6 +922,8 @@
 		E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodsDetailCell.m; sourceTree = "<group>"; };
 		E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillSRHeaderView.h; sourceTree = "<group>"; };
 		E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillSRHeaderView.m; sourceTree = "<group>"; };
+		E4F78C341FB199DD0003549A /* CodLoanCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckCell.h; sourceTree = "<group>"; };
+		E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanCheckCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1466,6 +1469,8 @@
 				E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */,
 				E4D2BB221FAAC239006A2AAC /* CodLoanApplyCell.h */,
 				E4D2BB231FAAC239006A2AAC /* CodLoanApplyCell.m */,
+				E4F78C341FB199DD0003549A /* CodLoanCheckCell.h */,
+				E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */,
 				E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */,
 				E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */,
 				E4602E8B1FB0448E00C26029 /* DailyReimbursementCheckCell.h */,
@@ -2350,6 +2355,7 @@
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
 				E48C72BF1FA9B9A0007F7FC8 /* CodCheckDetailVC.m in Sources */,
 				E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */,
+				E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */,
 				E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */,
 				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,

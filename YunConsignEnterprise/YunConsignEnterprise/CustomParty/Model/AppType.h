@@ -672,6 +672,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *bank_name;
 @property (strong, nonatomic) NSString *contact_phone;
 
+@property (strong, nonatomic) NSString *apply_amount_fee;//手续费
+@property (strong, nonatomic) NSString *apply_service_id;
+
 @end
 
 @interface AppDailyReimbursementApplyInfo : AppType

@@ -146,7 +146,7 @@
 
 - (void)footerActionBtnAction {
     if (!self.selectSet.count) {
-        [self doShowHintFunction:@"请选择放款申请"];
+        [self doShowHintFunction:@"请选择报销申请"];
         return;
     }
     QKWEAKSELF;
@@ -256,7 +256,9 @@
     id item = self.dataSource[indexPath.row];
     cell.indexPath = [indexPath copy];
     cell.data = item;
-    cell.headerSelectBtn.selected = [self.selectSet containsObject:item];
+    if (self.indextag == 0) {
+        cell.headerSelectBtn.selected = [self.selectSet containsObject:item];
+    }
     return cell;
 }
 

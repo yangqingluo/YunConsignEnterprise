@@ -125,16 +125,16 @@
     }];
 }
 
-- (void)doStartTransportTruck:(AppCanLoadTransportTruckInfo *)item {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
+- (void)doCancelLoanApplyByIdFunction:(AppCodLoanApplyInfo *)item {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"loan_apply_id" : item.loan_apply_id, @"loan_apply_state" : item.loan_apply_state}];
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_startTransportTruckByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_cancelLoanApplyByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                [weakself showHint:@"发车成功"];
+                [weakself showHint:@"取消代收款放款申请成功"];
                 [weakself.tableView.mj_header beginRefreshing];
             }
             else {
@@ -239,11 +239,18 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppCodLoanApplyInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
                 //取消申请
-                
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doCancelLoanApplyByIdFunction:item];
+                    }
+                }otherButtonTitles:@"确定", nil];
+                [alert show];
             }
                 break;
                 
