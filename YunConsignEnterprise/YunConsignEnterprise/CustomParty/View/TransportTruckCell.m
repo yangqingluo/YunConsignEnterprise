@@ -52,6 +52,7 @@
 - (void)setData:(AppTransportTruckInfo *)data {
     _data = data;
     self.titleLabel.text = data.route;
+    [AppPublic adjustLabelWidth:self.titleLabel];
     self.statusLabel.text = dateStringWithTimeString(data.operate_time);
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"登记车辆：%@", data.truck_info];

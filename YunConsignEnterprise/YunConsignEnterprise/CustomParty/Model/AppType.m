@@ -513,6 +513,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppCodLoanApplyWaitLoanInfo
+
+
+
+@end
+
 @implementation AppDailyReimbursementApplyInfo
 
 - (NSString *)showWaybillInfoString {

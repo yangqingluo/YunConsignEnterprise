@@ -349,6 +349,10 @@
 		E4ECF7E11F727148003F69C0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7E01F727148003F69C0 /* BlockActionSheet.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 		E4F1C43F1F98F42700D5DB3D /* WaybillEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */; };
+		E4F283581FB1B1CD005A0BC1 /* CodRemitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */; };
+		E4F2835B1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2835A1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m */; };
+		E4F2835E1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2835D1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m */; };
+		E4F283611FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F283601FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m */; };
 		E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */; };
 		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
 		E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */; };
@@ -924,6 +928,14 @@
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
 		E4F1C43D1F98F42700D5DB3D /* WaybillEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillEditVC.h; sourceTree = "<group>"; };
 		E4F1C43E1F98F42700D5DB3D /* WaybillEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillEditVC.m; sourceTree = "<group>"; };
+		E4F283561FB1B1CD005A0BC1 /* CodRemitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitCell.h; sourceTree = "<group>"; };
+		E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitCell.m; sourceTree = "<group>"; };
+		E4F283591FB1B927005A0BC1 /* CodRemitWaybillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitWaybillDetailVC.h; sourceTree = "<group>"; };
+		E4F2835A1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitWaybillDetailVC.m; sourceTree = "<group>"; };
+		E4F2835C1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitLoanApplyListVC.h; sourceTree = "<group>"; };
+		E4F2835D1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitLoanApplyListVC.m; sourceTree = "<group>"; };
+		E4F2835F1FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitLoanApplyListCell.h; sourceTree = "<group>"; };
+		E4F283601FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitLoanApplyListCell.m; sourceTree = "<group>"; };
 		E4F45BA31F95F99A002F8AFD /* ServiceGoodsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGoodsDetailCell.h; sourceTree = "<group>"; };
 		E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodsDetailCell.m; sourceTree = "<group>"; };
 		E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillSRHeaderView.h; sourceTree = "<group>"; };
@@ -1230,6 +1242,10 @@
 				E4AE0F731FAC1B63002DBE91 /* CodRemitVC.m */,
 				E4AE0F811FAC1BAE002DBE91 /* CodRemitTableVC.h */,
 				E4AE0F821FAC1BAE002DBE91 /* CodRemitTableVC.m */,
+				E4F283591FB1B927005A0BC1 /* CodRemitWaybillDetailVC.h */,
+				E4F2835A1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m */,
+				E4F2835C1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.h */,
+				E4F2835D1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m */,
 			);
 			name = CodRemit;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodRemit;
@@ -1481,6 +1497,10 @@
 				E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */,
 				E4A65B6C1FB1A51900942525 /* CodLoanCheckDetailCell.h */,
 				E4A65B6D1FB1A51900942525 /* CodLoanCheckDetailCell.m */,
+				E4F283561FB1B1CD005A0BC1 /* CodRemitCell.h */,
+				E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */,
+				E4F2835F1FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.h */,
+				E4F283601FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m */,
 				E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */,
 				E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */,
 				E4602E8B1FB0448E00C26029 /* DailyReimbursementCheckCell.h */,
@@ -2288,6 +2308,7 @@
 				E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */,
 				E4AEA09D1F5EA6D0002EBE41 /* MBProgressHUD+Add.m in Sources */,
 				E4AEA0CB1F5EA6D0002EBE41 /* UIImage+MultiFormat.m in Sources */,
+				E4F283581FB1B1CD005A0BC1 /* CodRemitCell.m in Sources */,
 				E4AEA0C61F5EA6D0002EBE41 /* SDWebImageDownloaderOperation.m in Sources */,
 				E4763CF71FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m in Sources */,
 				E4AEA0A31F5EA6D0002EBE41 /* MJProperty.m in Sources */,
@@ -2331,6 +2352,7 @@
 				E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
 				E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */,
+				E4F2835E1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m in Sources */,
 				E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */,
 				E4AEA0AB1F5EA6D0002EBE41 /* MJRefreshAutoFooter.m in Sources */,
 				E4AEA0B31F5EA6D0002EBE41 /* MJRefreshBackGifFooter.m in Sources */,
@@ -2347,6 +2369,7 @@
 				E4AEA0591F5EA6CF002EBE41 /* NSData+HTTPRequest.m in Sources */,
 				E4AEA09B1F5EA6D0002EBE41 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				E49533EE1FA87BCD00EA5428 /* CodQueryDetailVC.m in Sources */,
+				E4F283611FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m in Sources */,
 				E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */,
 				E4AE0F7D1FAC1B94002DBE91 /* DailyReimbursementCheckTableVC.m in Sources */,
 				E4A633201FB037E300873BF5 /* DailyReimbursementApplyCell.m in Sources */,
@@ -2370,6 +2393,7 @@
 				E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */,
 				E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */,
 				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
+				E4F2835B1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m in Sources */,
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,

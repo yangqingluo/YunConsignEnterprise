@@ -40,7 +40,8 @@
 - (void)setData:(AppDailyReimbursementCheckInfo *)data {
     _data = data;
     self.titleLabel.text = data.daily_name;
-    self.statusLabel.text = dateStringWithTimeString(data.daily_fee);
+    [AppPublic adjustLabelWidth:self.titleLabel];
+    self.statusLabel.text = data.daily_fee;
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
     self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];

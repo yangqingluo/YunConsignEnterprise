@@ -682,13 +682,28 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *apply_note;//申请备注
 @property (strong, nonatomic) NSString *audit_amount;//审核放款金额
 @property (strong, nonatomic) NSString *audit_time;//审核时间
-@property (strong, nonatomic) NSString *bank_card_account;
+@property (strong, nonatomic) NSString *audit_name;//审核人
+@property (strong, nonatomic) NSString *bank_card_account;//银行卡账号
 @property (strong, nonatomic) NSString *bank_card_owner;
 @property (strong, nonatomic) NSString *bank_name;
 @property (strong, nonatomic) NSString *contact_phone;
 
 @property (strong, nonatomic) NSString *apply_amount_fee;//手续费
 @property (strong, nonatomic) NSString *apply_service_id;
+
+@property (strong, nonatomic) NSString *loan_apply_ids;//申请单编号，多个用逗号隔开
+
+@end
+
+@interface AppCodLoanApplyWaitLoanInfo : AppCodLoanApplyInfo
+
+@property (strong, nonatomic) NSString *remittance_id;//放款编号，未打款时不存在，此时使用loan_apply_ids查询申请单列表
+@property (strong, nonatomic) NSString *remittance_state;//放款状态 REMITTANCE_STATE 未打款、已打款
+@property (strong, nonatomic) NSString *operate_time;//放款时间
+@property (strong, nonatomic) NSString *operator_name;//放款人
+@property (strong, nonatomic) NSString *remit_amount;//放款金额
+//@property (strong, nonatomic) NSString *bank_info;//银行名称
+@property (strong, nonatomic) NSString *bank_account;//银行账号
 
 @end
 

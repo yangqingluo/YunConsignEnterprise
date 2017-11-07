@@ -19,7 +19,7 @@
     _bodyLabel4.top = self.bodyLabel3.bottom + kEdge;
     [self.bodyView addSubview:_bodyLabel4];
     
-    _bodyLabelRight4 = NewLabel(CGRectMake(kEdge + 0.5 * self.bodyView.width, self.bodyLabel4.top, 0.5 * self.bodyView.width - 1 * kEdge, self.bodyLabel2.height), nil, nil, NSTextAlignmentLeft);
+    _bodyLabelRight4 = NewLabel(CGRectMake(kEdge + 0.5 * self.bodyView.width, self.bodyLabel4.top, 0.5 * self.bodyView.width - 1 * kEdge, self.bodyLabel4.height), nil, nil, NSTextAlignmentLeft);
     [self.bodyView addSubview:_bodyLabelRight4];
     
     _bodyLabel5 = NewLabel(self.bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);

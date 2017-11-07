@@ -106,6 +106,7 @@
 #define kNotification_WaybillReceiveRefresh    @"kNotification_WaybillReceiveRefresh"//自提更新
 #define kNotification_CodLoanApplyRefresh    @"kNotification_CodLoanApplyRefresh"//放款申请更新
 #define kNotification_CodLoanCheckRefresh    @"kNotification_CodLoanCheckRefresh"//放款审核更新
+#define kNotification_CodRemitRefresh    @"kNotification_CodRemitRefresh"//代收款放款更新
 #define kNotification_DailyReimbursementApplyRefresh    @"kNotification_DailyReimbursementApplyRefresh"//报销申请更新
 #define kNotification_DailyReimbursementCheckRefresh    @"kNotification_DailyReimbursementCheckRefresh"//报销审核更新
 

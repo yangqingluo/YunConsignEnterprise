@@ -20,7 +20,7 @@
     _data = data;
     self.titleLabel.text = data.cust_info;
     [AppPublic adjustLabelWidth:self.titleLabel];
-    self.statusLabel.text = dateStringWithTimeString(data.loan_apply_state_text);
+    self.statusLabel.text = data.loan_apply_state_text;
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"银行信息：%@", data.bank_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"申请金额：%@（%@）", data.apply_amount, data.apply_time];
