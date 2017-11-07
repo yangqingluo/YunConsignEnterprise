@@ -26,7 +26,7 @@
     _data = data;
     self.titleLabel.text = [NSString stringWithFormat:@"货号：%@", data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
-    self.statusLabel.text = data.cash_on_delivery_state_text;
+    self.statusLabel.text = data.waybill_state_text;
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"客户：%@", _data.cust_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"应收：%d", [_data.cash_on_delivery_amount intValue]];

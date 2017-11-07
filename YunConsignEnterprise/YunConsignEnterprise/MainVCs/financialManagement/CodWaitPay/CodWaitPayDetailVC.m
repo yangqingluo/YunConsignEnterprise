@@ -7,6 +7,7 @@
 //
 
 #import "CodWaitPayDetailVC.h"
+#import "CodPayVC.h"
 
 #import "CodWaitPayCell.h"
 
@@ -16,6 +17,18 @@
 @end
 
 @implementation CodWaitPayDetailVC
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)initWithStyle:(UITableViewStyle)style parentVC:(AppBasicViewController *)pVC andIndexTag:(NSInteger)index {
+    self = [super initWithStyle:style parentVC:pVC andIndexTag:index];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_CodWaitPayRefresh object:nil];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -167,7 +180,9 @@
         switch (tag) {
             case 0:{
                 //收款
-                
+                CodPayVC *vc = [CodPayVC new];
+                vc.billData = item;
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 

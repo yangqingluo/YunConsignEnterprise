@@ -1,20 +1,19 @@
 //
-//  WaybillCustReceiveVC.m
+//  CodPayVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/10/25.
+//  Created by 7kers on 2017/11/7.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillCustReceiveVC.h"
+#import "CodPayVC.h"
 
 #import "MJRefresh.h"
 #import "WaybillCustReceiveCell.h"
 #import "SingleInputCell.h"
-#import "DoubleInputCell.h"
 #import "BlockActionSheet.h"
 
-@interface WaybillCustReceiveVC ()<UITextFieldDelegate>
+@interface CodPayVC ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) AppPaymentWaybillInfo *paymentData;
 @property (strong, nonatomic) WaybillToCustReceiveInfo *toSaveData;
@@ -25,7 +24,7 @@
 
 @end
 
-@implementation WaybillCustReceiveVC
+@implementation CodPayVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,7 +36,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:@"自提" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:@"代收款收款" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -61,17 +60,18 @@
     if (!self.toSaveData.waybill_id) {
         self.toSaveData.waybill_id = [self.billData.waybill_id copy];
     }
-    else if (!self.toSaveData.consignee_name) {
-        [self showHint:@"请补全提货人姓名"];
-        return;
-    }
-    else if (!self.toSaveData.consignee_phone) {
-        [self showHint:@"请补全提货人电话"];
+    else if (!self.toSaveData.cash_on_delivery_real_amount) {
+        [self showHint:@"请输入实收代收款"];
         return;
     }
     else if (!self.toSaveData.cash_on_delivery_causes_type) {
         [self showHint:@"请选择代收款少款类型"];
         return;
+    }
+    else if (!self.toSaveData.cash_on_delivery_causes_amount) {
+//        [self showHint:@"请输入代收款少款"];
+//        return;
+        self.toSaveData.cash_on_delivery_causes_amount = @"0";
     }
     
     [self doCustReceiveWaybillByIdFunction];
@@ -96,10 +96,13 @@
 }
 
 - (void)doCustReceiveWaybillByIdFunction {
-    NSDictionary *m_dic = [self.toSaveData mj_keyValues];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : self.toSaveData.waybill_id, @"cash_on_delivery_real_amount" : self.toSaveData.cash_on_delivery_real_amount, @"cash_on_delivery_causes_amount" : self.toSaveData.cash_on_delivery_causes_amount, @"cash_on_delivery_causes_type" : self.toSaveData.cash_on_delivery_causes_type}];
+    if (self.toSaveData.cash_on_delivery_causes_note) {
+        [m_dic setObject:self.toSaveData.cash_on_delivery_causes_note forKey:@"cash_on_delivery_causes_note"];
+    }
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_custReceiveWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_payWaybillCashOnDeliveryByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             ResponseItem *item = responseBody;
@@ -161,8 +164,8 @@
 }
 
 - (void)custReceiveWaybillSuccess {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillReceiveRefresh object:nil];
-    [self showHint:@"自提成功"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_CodWaitPayRefresh object:nil];
+    [self showHint:@"代收款收款成功"];
     [self goBack];
 }
 
@@ -179,14 +182,14 @@
                 [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
             }
         }
-        else if ([object isKindOfClass:[NSArray class]]) {
-            NSArray *m_array = object;
-            if (m_array.count == 2 && tag >= 0 && tag <= 1) {
-                NSDictionary *m_dic = m_array[tag];
-                int value = [content intValue];
-                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", value] forKey:m_dic[@"key"]];
-            }
-        }
+//        else if ([object isKindOfClass:[NSArray class]]) {
+//            NSArray *m_array = object;
+//            if (m_array.count == 2 && tag >= 0 && tag <= 1) {
+//                NSDictionary *m_dic = m_array[tag];
+//                int value = [content intValue];
+//                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", value] forKey:m_dic[@"key"]];
+//            }
+//        }
     }
 }
 
@@ -194,7 +197,7 @@
     [self dismissKeyboard];
     switch (indexPath.section) {
         case 1:{
-            if (indexPath.row == 4) {
+            if (indexPath.row == 1) {
                 NSDictionary *m_dic = self.showArray[indexPath.row];
                 NSString *key = m_dic[@"key"];
                 NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
@@ -242,16 +245,11 @@
 
 - (NSArray *)showArray {
     if (!_showArray) {
-        _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
-                       @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
-                       @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
+        _showArray = @[
                        @{@"title":@"实收代收款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_real_amount"},
                        @{@"title":@"代收款少款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_causes_type"},
-                       @{@"title":@"少款原因",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_note"},
-                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
-                       @[@{@"title":@"赔款",@"subTitle":@"无",@"key":@"payment_indemnity_amount"},
-                         @{@"title":@"包送",@"subTitle":@"无",@"key":@"deliver_indemnity_amount"}],
-                       @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
+                       @{@"title":@"少款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
+                       @{@"title":@"少款原因",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_note"}];
     }
     return _showArray;
 }
@@ -316,52 +314,9 @@
     return cell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView doubleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
-    NSArray *m_array = showObject;
-    DoubleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    
-    if (!cell) {
-        cell = [[DoubleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        cell.baseView.textField.delegate = self;
-        cell.anotherBaseView.textField.delegate = self;
-        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
-        cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
-        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-    }
-    NSDictionary *m_dic1 = m_array[0];
-    NSDictionary *m_dic2 = m_array[1];
-    cell.baseView.textLabel.text = m_dic1[@"title"];
-    cell.baseView.textField.placeholder = m_dic1[@"subTitle"];
-    cell.baseView.textField.text = @"";
-    cell.baseView.textField.indexPath = [indexPath copy];
-    
-    cell.anotherBaseView.textLabel.text = m_dic2[@"title"];
-    cell.anotherBaseView.textField.placeholder = m_dic2[@"subTitle"];
-    cell.anotherBaseView.textField.text = @"";
-    cell.anotherBaseView.textField.indexPath = [indexPath copy];
-    
-    NSString *key1 = m_dic1[@"key"];
-    NSString *key2 = m_dic2[@"key"];
-    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
-    
-    NSString *value1 = [self.toSaveData valueForKey:key1];
-    if (value1) {
-        cell.baseView.textField.text = value1;
-    }
-    NSString *value2 = [self.toSaveData valueForKey:key2];
-    if (value2) {
-        cell.anotherBaseView.textField.text = value2;
-    }
-    
-    return cell;
-}
-
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -420,22 +375,6 @@
             static NSString *CellIdentifier = @"fee_edit_cell";
             return [self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
         }
-        else if ([object isKindOfClass:[NSArray class]]){
-            NSArray *m_array = (NSArray *)object;
-            if (m_array.count == 2) {
-                static NSString *CellIdentifier = @"double_cell";
-                return [self tableView:tableView doubleInputCellForRowAtIndexPath:indexPath showObject:m_array reuseIdentifier:CellIdentifier];
-            }
-        }
-    }
-    else if (indexPath.section == 2) {
-        static NSString *CellIdentifier = @"receipt_form_voucher_cell";
-        SingleInputCell *cell = (SingleInputCell *)[self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:@{@"title":@"签收底单",@"subTitle":@"拍照上传",@"key":@"receipt_form_voucher"} reuseIdentifier:CellIdentifier];
-        cell.baseView.textField.enabled = NO;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.isShowBottomEdge = NO;
-        
-        return cell;
     }
     
     return [UITableViewCell new];
