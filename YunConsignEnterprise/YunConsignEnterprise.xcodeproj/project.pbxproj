@@ -72,6 +72,7 @@
 		E46826051FA07019009C4918 /* WaybillLoadSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826041FA07019009C4918 /* WaybillLoadSelectCell.m */; };
 		E4684CB61F98DD0800E1EFE0 /* WaybillChangeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4684CB51F98DD0800E1EFE0 /* WaybillChangeListVC.m */; };
 		E4684CB91F98E66A00E1EFE0 /* WaybillChangeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4684CB81F98E66A00E1EFE0 /* WaybillChangeDetailCell.m */; };
+		E46A975C1FB2047C009B318F /* PublicWaybillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */; };
 		E46CA9A01FB0599E008F26F4 /* SaveDailyReimbursementApplyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E46CA99F1FB0599E008F26F4 /* SaveDailyReimbursementApplyVC.m */; };
 		E46CA9A31FB06A33008F26F4 /* daily_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = E46CA9A21FB06A33008F26F4 /* daily_name.txt */; };
 		E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */; };
@@ -340,7 +341,6 @@
 		E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */; };
 		E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */; };
 		E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C7FE1F792FCE002053CD /* WayBillCell.m */; };
-		E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E29E171F98923000A24504 /* WayBillDetailVC.m */; };
 		E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */; };
 		E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E5ED831F9EDD3B00ACDD3D /* PublicFooterSummaryView.m */; };
 		E4E744351F96041D00CEC8FA /* WaybillLoadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E744341F96041D00CEC8FA /* WaybillLoadVC.m */; };
@@ -479,6 +479,8 @@
 		E4684CB51F98DD0800E1EFE0 /* WaybillChangeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeListVC.m; sourceTree = "<group>"; };
 		E4684CB71F98E66A00E1EFE0 /* WaybillChangeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillChangeDetailCell.h; sourceTree = "<group>"; };
 		E4684CB81F98E66A00E1EFE0 /* WaybillChangeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeDetailCell.m; sourceTree = "<group>"; };
+		E46A975A1FB2047C009B318F /* PublicWaybillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicWaybillDetailVC.h; sourceTree = "<group>"; };
+		E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicWaybillDetailVC.m; sourceTree = "<group>"; };
 		E46CA99E1FB0599E008F26F4 /* SaveDailyReimbursementApplyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveDailyReimbursementApplyVC.h; sourceTree = "<group>"; };
 		E46CA99F1FB0599E008F26F4 /* SaveDailyReimbursementApplyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveDailyReimbursementApplyVC.m; sourceTree = "<group>"; };
 		E46CA9A21FB06A33008F26F4 /* daily_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = daily_name.txt; sourceTree = "<group>"; };
@@ -912,8 +914,6 @@
 		E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicEndStationSelectVC.m; sourceTree = "<group>"; };
 		E4E0C7FD1F792FCE002053CD /* WayBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillCell.h; sourceTree = "<group>"; };
 		E4E0C7FE1F792FCE002053CD /* WayBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillCell.m; sourceTree = "<group>"; };
-		E4E29E161F98923000A24504 /* WayBillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillDetailVC.h; sourceTree = "<group>"; };
-		E4E29E171F98923000A24504 /* WayBillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillDetailVC.m; sourceTree = "<group>"; };
 		E4E29E191F9899FE00A24504 /* WayBillDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillDetailHeaderView.h; sourceTree = "<group>"; };
 		E4E29E1A1F9899FE00A24504 /* WayBillDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillDetailHeaderView.m; sourceTree = "<group>"; };
 		E4E5ED821F9EDD3B00ACDD3D /* PublicFooterSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicFooterSummaryView.h; sourceTree = "<group>"; };
@@ -1060,8 +1060,6 @@
 			children = (
 				E40F7CA01F95A71700946C18 /* WayBillQueryVC.h */,
 				E40F7CA11F95A71700946C18 /* WayBillQueryVC.m */,
-				E4E29E161F98923000A24504 /* WayBillDetailVC.h */,
-				E4E29E171F98923000A24504 /* WayBillDetailVC.m */,
 				E4684CB41F98DD0800E1EFE0 /* WaybillChangeListVC.h */,
 				E4684CB51F98DD0800E1EFE0 /* WaybillChangeListVC.m */,
 				E4F1C43D1F98F42700D5DB3D /* WaybillEditVC.h */,
@@ -1538,6 +1536,8 @@
 				E4110E5D1FAACD420094F30E /* PublicSlideVC.m */,
 				E4110E5F1FAAE6810094F30E /* PublicResultTableVC.h */,
 				E4110E601FAAE6810094F30E /* PublicResultTableVC.m */,
+				E46A975A1FB2047C009B318F /* PublicWaybillDetailVC.h */,
+				E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2363,6 +2363,7 @@
 				E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
 				E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */,
+				E46A975C1FB2047C009B318F /* PublicWaybillDetailVC.m in Sources */,
 				E4F2835E1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m in Sources */,
 				E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */,
 				E4AEA0AB1F5EA6D0002EBE41 /* MJRefreshAutoFooter.m in Sources */,
@@ -2408,7 +2409,6 @@
 				E4AEA09A1F5EA6D0002EBE41 /* IQToolbar.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,
-				E4E29E181F98923000A24504 /* WayBillDetailVC.m in Sources */,
 				E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */,
 				E4EDBFCA1FB1EECB009D2FA4 /* CodWaitPayCell.m in Sources */,
 				E4AEA0C11F5EA6D0002EBE41 /* SDImageCache.m in Sources */,

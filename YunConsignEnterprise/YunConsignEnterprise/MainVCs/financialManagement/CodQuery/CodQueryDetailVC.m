@@ -7,6 +7,7 @@
 //
 
 #import "CodQueryDetailVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "CodQueryCell.h"
 
@@ -141,6 +142,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+    vc.type = WaybillDetailType_CodQuery;
+    vc.data = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 @end

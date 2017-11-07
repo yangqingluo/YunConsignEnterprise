@@ -6,10 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "PublicDailyOpenWaybillVC.h"
+#import "PublicWaybillDetailVC.h"
 
-@interface WayBillDetailVC : PublicDailyOpenWaybillVC
-
-@property (copy, nonatomic) AppWayBillInfo *data;
+@interface WayBillDetailVC : PublicWaybillDetailVC
 
 @end

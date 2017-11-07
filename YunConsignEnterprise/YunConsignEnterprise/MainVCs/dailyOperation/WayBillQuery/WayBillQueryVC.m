@@ -8,7 +8,7 @@
 
 #import "WayBillQueryVC.h"
 #import "PublicQueryConditionVC.h"
-#import "WayBillDetailVC.h"
+#import "PublicWaybillDetailVC.h"
 #import "WaybillEditVC.h"
 #import "WaybillLogVC.h"
 
@@ -240,7 +240,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    WayBillDetailVC *vc = [WayBillDetailVC new];
+    PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+    vc.type = WaybillDetailType_WayBillQuery;
     vc.data = self.dataSource[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
