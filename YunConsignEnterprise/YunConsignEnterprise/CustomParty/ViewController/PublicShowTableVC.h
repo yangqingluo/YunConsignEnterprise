@@ -20,6 +20,9 @@
 @property (strong, nonatomic) NSString *dateKey;
 @property (assign, nonatomic) NSInteger indextag;
 
+- (void)cancelButtonAction;
+- (void)goBackWithDone:(BOOL)done;
+- (void)doDoneAction;
 - (void)updateTableViewHeader;
 - (void)updateTableViewFooter;
 - (void)beginRefreshing;

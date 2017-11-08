@@ -203,11 +203,10 @@ NSString *httpRespString(NSError *error, NSObject *object){
     }];
 }
 
-- (void)commonSoapPost:(NSString *)funcId Parm:(NSDictionary *)parm completion:(QKNetworkBlock)completion{
+- (void)commonSoapPost:(NSString *)funcId Parm:(NSDictionary *)parm URLFooter:(NSString *)urlFooter completion:(QKNetworkBlock)completion {
     if (!funcId.length || ![UserPublic getInstance].userData.login_token.length) {
         return;
     }
-    NSString *urlFooter = @"/common/data.do";
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlFooter];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
@@ -228,8 +227,8 @@ NSString *httpRespString(NSError *error, NSObject *object){
     [xmlString appendString:@"</requests>"];
     // 设置HTTPBody
     [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
-         return xmlString;
-     }];
+        return xmlString;
+    }];
     
     NSString *urlStr = [urlStringWithService(urlFooter) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     QKWEAKSELF;
@@ -242,10 +241,14 @@ NSString *httpRespString(NSError *error, NSObject *object){
     }];
 }
 
+- (void)commonSoapPost:(NSString *)funcId Parm:(NSDictionary *)parm completion:(QKNetworkBlock)completion {
+    [self commonSoapPost:funcId Parm:parm URLFooter:@"/tms/common/data.do" completion:completion];
+}
+
 //login
 - (void)loginWithID:(NSString *)username Password:(NSString *)password completion:(QKNetworkBlock)completion {
     NSDictionary *m_dic = @{@"login_code" : username, @"login_pass" : password, @"login_type" : @3};//登录方式：1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
-    [self Post:m_dic HeadParm:nil URLFooter:@"/login/login.do" completion:^(id responseBody, NSError *error){
+    [self Post:m_dic HeadParm:nil URLFooter:@"/tms/login/login.do" completion:^(id responseBody, NSError *error){
         if (!error) {
             id object = nil;
             if ([responseBody isKindOfClass:[ResponseItem class]]) {

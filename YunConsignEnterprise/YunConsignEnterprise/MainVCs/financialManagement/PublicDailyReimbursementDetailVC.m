@@ -36,7 +36,7 @@
                              @{@"title":@"报销门店",@"subTitle":@"",@"key":@"service_name"},
                              @{@"title":@"关联运单",@"subTitle":@"",@"key":@"waybill_info"},
                              @{@"title":@"报销备注",@"subTitle":@"无",@"key":@"note"},
-                             @{@"title":@"报销凭证",@"subTitle":@"",@"key":@"voucher"}],
+                             @{@"title":@"报销凭证",@"subTitle":@"无",@"key":@"voucher"}],
                            @[@{@"title":@"审核结果",@"subTitle":@"",@"key":@"daily_apply_state_text"},
                              @{@"title":@"审核人",@"subTitle":@"",@"key":@"check_name"},
                              @{@"title":@"审核时间",@"subTitle":@"无",@"key":@"check_time"},

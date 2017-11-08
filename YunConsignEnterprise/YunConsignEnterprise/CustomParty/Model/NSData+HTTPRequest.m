@@ -106,19 +106,15 @@ static char encodingTable[64] = {
 }
 
 - (NSString *)getImageType {
-    NSString *ret;
+    NSString *ret = @"jpeg";
     if([self isJPG]) {
-        ret=@"jpg";
+        ret = @"jpg";
     }
     else if([self isGIF]) {
-        ret=@"gif";
+        ret = @"gif";
     }
     else if([self isPNG]) {
-        ret=@"png";
-    }
-    else {
-        //默认
-        ret=@"jpeg";
+        ret = @"png";
     }
     return ret;
 }

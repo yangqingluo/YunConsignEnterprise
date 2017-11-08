@@ -45,8 +45,7 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) UIView *footerView;
 
-- (void)cancelButtonAction;
-- (void)goBackWithDone:(BOOL)done;
+
 - (void)searchButtonAction;
 - (void)checkDataMapExistedFor:(NSString *)key;
 

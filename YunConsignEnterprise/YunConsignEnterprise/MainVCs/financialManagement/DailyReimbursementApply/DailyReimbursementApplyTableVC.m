@@ -116,9 +116,7 @@
     SaveDailyReimbursementApplyVC *vc = [SaveDailyReimbursementApplyVC new];
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
-        if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
-            [weakself.tableView.mj_header beginRefreshing];
-        }
+        [weakself.tableView.mj_header beginRefreshing];
     };
     [self doPushViewController:vc animated:YES];
 }

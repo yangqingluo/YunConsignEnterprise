@@ -288,26 +288,13 @@
     }];
 }
 
-- (void)cancelButtonAction {
-    [self goBackWithDone:NO];
-}
+
 
 - (void)searchButtonAction {
     [self goBackWithDone:YES];
 }
 
-- (void)goBackWithDone:(BOOL)done {
-    if (done) {
-        [self doDoneAction];
-    }
-    [self.navigationController popViewControllerAnimated:YES];
-//    QKWEAKSELF;
-//    [self.navigationController dismissViewControllerAnimated:NO completion:^{
-//        if (done) {
-//            [weakself doDoneAction];
-//        }
-//    }];
-}
+
 
 - (void)doDoneAction {
     if (self.doneBlock) {

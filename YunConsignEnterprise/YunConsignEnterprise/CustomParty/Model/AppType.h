@@ -23,6 +23,11 @@ typedef NS_ENUM(NSInteger, USER_ROLE) {
     USER_ROLE_7 = 7,//开单员
 };
 
+typedef NS_ENUM(NSInteger, RESOURCE_TYPE) {
+    RESOURCE_TYPE_Reimburse = 1,//日常报销
+    RESOURCE_TYPE_Waybill,//签收单
+};
+
 //回单签收方式
 typedef enum : NSUInteger {
     RECEIPT_SIGN_TYPE_1 = 1,//签字

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#define appUrlAddress      @"http://tms.yunlaila.com.cn/tms"
+#define appUrlAddress      @"http://tms.yunlaila.com.cn"
 #define APP_HTTP_SUCCESS	             	1	//成功
 
 typedef void(^QKNetworkBlock)(id responseBody, NSError *error);
@@ -41,7 +41,7 @@ NSURL *imageURLWithPath(NSString *path);
 
 //通用SoapPost
 - (void)commonSoapPost:(NSString *)funcId Parm:(NSDictionary *)parm completion:(QKNetworkBlock)completion;
-
+- (void)commonSoapPost:(NSString *)funcId Parm:(NSDictionary *)parm URLFooter:(NSString *)urlFooter completion:(QKNetworkBlock)completion ;
 
 //download
 - (BOOL)downLoadFileWithOperations:(NSDictionary *)operations withSavaPath:(NSString *)savePath withUrlString:(NSString *)urlString completion:(QKNetworkBlock)completion withDownLoadProgress:(Progress)progress;

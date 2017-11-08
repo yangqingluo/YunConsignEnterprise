@@ -48,7 +48,7 @@
 - (void)searchButtonAction {
     [self dismissKeyboard];
     if (!self.headerView.baseView.textField.text.length) {
-        [self doShowHintFunction:@"请输入运单号或或号"];
+        [self doShowHintFunction:@"请输入运单号或货号"];
         return;
     }
     [self doQueryWaybillFunction:self.headerView.baseView.textField.text];
