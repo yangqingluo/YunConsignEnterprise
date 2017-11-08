@@ -7,9 +7,11 @@
 //
 
 #import "PublicDailyReimbursementDetailVC.h"
+#import "LLImagePickerView.h"
 
 @interface PublicDailyReimbursementDetailVC ()
 
+@property (strong, nonatomic) LLImagePickerView *imagePickerView;
 
 @end
 
@@ -80,6 +82,15 @@
 }
 
 #pragma mark - getter
+- (LLImagePickerView *)imagePickerView {
+    if (!_imagePickerView) {
+        _imagePickerView = [LLImagePickerView ImagePickerViewWithFrame:CGRectMake(0, 0, kCellHeightBig * 3, 0) CountOfRow:3];
+        _imagePickerView.backgroundColor = [UIColor clearColor];
+        _imagePickerView.showDelete = NO;
+        _imagePickerView.showAddButton = NO;
+    }
+    return _imagePickerView;
+}
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -90,9 +101,12 @@
     return [self.showArray[section] count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat rowHeight = kCellHeightFilter;
     if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
+        if (indexPath.section == 0) {
+            rowHeight = kCellHeightBig;
+        }
         rowHeight += kEdge;
     }
     return rowHeight;
@@ -111,7 +125,26 @@
     NSDictionary *m_dic = m_array[indexPath.row];
     NSString *key = m_dic[@"key"];
     
-    static NSString *CellIdentifier = @"select_cell";
+    if ([key isEqualToString:@"voucher"]) {
+        NSString *CellIdentifier = @"voucher_cell";
+        SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+            cell.baseView.textField.enabled = NO;
+            self.imagePickerView.right = cell.baseView.width;
+            [cell.baseView addSubview:self.imagePickerView];
+        }
+        cell.baseView.textLabel.text = m_dic[@"title"];
+        cell.baseView.textField.placeholder = m_dic[@"subTitle"];
+        cell.baseView.textField.text = @"";
+        cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+        self.imagePickerView.preShowMedias = [[self.showData valueForKey:key] componentsSeparatedByString:@","];
+        return cell;
+    }
+    
+    NSString *CellIdentifier = @"PublicDailyReimbursementDetail_cell";
     SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
