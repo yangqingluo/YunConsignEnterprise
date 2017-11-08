@@ -724,7 +724,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *voucher;//凭证
 @property (strong, nonatomic) NSString *waybill_info;//关联运单
 @property (strong, nonatomic) NSString *note;//申请备注
-@property (strong, nonatomic) NSString *daily_apply_state;//申请状态
+@property (strong, nonatomic) NSString *daily_apply_state;//申请状态CHECK_STATE 等待审核、审核通过、驳回
 @property (strong, nonatomic) NSString *daily_apply_state_text;//申请状态名称
 @property (strong, nonatomic) NSString *check_name;//审核人
 @property (strong, nonatomic) NSString *check_time;//审核时间
@@ -733,6 +733,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_number;
 @property (strong, nonatomic) NSString *waybill_id;
 @property (strong, nonatomic) NSString *waybill_number;
+@property (strong, nonatomic) NSString *service_id;//申请门店
+@property (strong, nonatomic) NSString *service_name;//申请门店
 
 - (NSString *)showWaybillInfoString;
 
@@ -740,7 +742,7 @@ BOOL isTrue(NSString *string);
 
 @interface AppDailyReimbursementCheckInfo : AppDailyReimbursementApplyInfo
 
-@property (strong, nonatomic) NSString *service_name;//申请门店
+
 
 @end
 

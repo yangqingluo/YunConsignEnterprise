@@ -6,7 +6,7 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicShowTableVC.h"
 
 typedef enum : NSUInteger {
     QueryConditionType_Default = 0,
@@ -33,12 +33,11 @@ typedef enum : NSUInteger {
     QueryConditionType_DailyReimbursementCheck,//日常报销审核
 } QueryConditionType;
 
-@interface PublicQueryConditionVC : AppBasicTableViewController
+@interface PublicQueryConditionVC : PublicShowTableVC
 
 @property (assign, nonatomic) QueryConditionType type;
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 
-@property (strong, nonatomic) NSArray *showArray;
 //@property (strong, nonatomic) NSSet *dataDicSet;
 @property (strong, nonatomic) NSSet *inputValidSet;
 @property (strong, nonatomic) NSSet *numberInputSet;
@@ -49,8 +48,6 @@ typedef enum : NSUInteger {
 - (void)cancelButtonAction;
 - (void)goBackWithDone:(BOOL)done;
 - (void)searchButtonAction;
-- (void)showFromVC:(AppBasicViewController *)fromVC;
 - (void)checkDataMapExistedFor:(NSString *)key;
-- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

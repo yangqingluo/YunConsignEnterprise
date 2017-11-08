@@ -8,23 +8,19 @@
 
 #import "PublicQueryConditionVC.h"
 
-#import "BlockActionSheet.h"
-#import "SingleInputCell.h"
-#import "PublicDatePickerView.h"
-
 @interface PublicQueryConditionVC ()<UITextFieldDelegate>
 
 @end
 
 @implementation PublicQueryConditionVC
 
-- (void)showFromVC:(AppBasicViewController *)fromVC {
-    [fromVC.navigationController pushViewController:self animated:YES];
-    //    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:self];
-    //    [fromVC presentViewController:nav animated:NO completion:^{
-    //
-    //    }];
-}
+//- (void)showFromVC:(AppBasicViewController *)fromVC {
+//    [fromVC.navigationController pushViewController:self animated:YES];
+//    //    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:self];
+//    //    [fromVC presentViewController:nav animated:NO completion:^{
+//    //
+//    //    }];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,7 +46,7 @@
 - (void)initializeData {
     switch (self.type) {
         case QueryConditionType_WaybillQuery:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
@@ -62,7 +58,7 @@
             break;
             
         case QueryConditionType_TransportTruck:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"起点城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
@@ -71,7 +67,7 @@
             break;
             
         case QueryConditionType_WaybillLoad:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
@@ -80,7 +76,7 @@
             break;
             
         case QueryConditionType_WaybillLoadTT:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
@@ -89,7 +85,7 @@
             break;
             
         case QueryConditionType_WaybillLoaded:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
@@ -99,7 +95,7 @@
             break;
             
         case QueryConditionType_WaybillArrival:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"始发城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
                            @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
@@ -108,7 +104,7 @@
             break;
             
         case QueryConditionType_WaybillArrivalDetail:{
-            _showArray = @[@{@"title":@"装车网点",@"subTitle":@"必填，请选择",@"key":@"load_service"},
+            self.showArray = @[@{@"title":@"装车网点",@"subTitle":@"必填，请选择",@"key":@"load_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
             [self checkDataMapExistedFor:@"query_column"];
@@ -116,7 +112,7 @@
             break;
             
         case QueryConditionType_WaybillReceive:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
@@ -126,7 +122,7 @@
             break;
             
         case QueryConditionType_PayOnReceipt:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
@@ -135,14 +131,14 @@
             break;
             
         case QueryConditionType_CustomerManage:{
-            _showArray = @[@{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"freight_cust_name"},
+            self.showArray = @[@{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"freight_cust_name"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"phone"}];
             [self checkDataMapExistedFor:@"query_column"];
         }
             break;
             
         case QueryConditionType_CodLoanApply:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"},
@@ -152,7 +148,7 @@
             
         case QueryConditionType_CodLoanCheck:
         case QueryConditionType_CodRemit:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"}];
@@ -160,14 +156,14 @@
             break;
             
         case QueryConditionType_DailyReimbursementApply:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
         }
             break;
             
         case QueryConditionType_DailyReimbursementCheck:{
-            _showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
         }
@@ -571,26 +567,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self selectRowAtIndexPath:indexPath];
-}
-
-#pragma  mark - TextField
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    return (range.location < kInputLengthMax);
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndex:indexPath.row andContent:textField.text];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
 }
 
 @end

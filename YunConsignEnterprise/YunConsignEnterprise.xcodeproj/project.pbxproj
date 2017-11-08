@@ -68,6 +68,8 @@
 		E45B3CAC1F7B4E9B001D9FDB /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */; };
 		E45B3CB21F7B5233001D9FDB /* TransportTruckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CB11F7B5233001D9FDB /* TransportTruckCell.m */; };
 		E4602E8D1FB0448E00C26029 /* DailyReimbursementCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */; };
+		E460C5DC1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E460C5DB1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m */; };
+		E460C5DF1FB2FC5500B6014F /* PublicShowTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E460C5DE1FB2FC5500B6014F /* PublicShowTableVC.m */; };
 		E46825B21FB1F6F90081C22C /* CodPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E46825B11FB1F6F90081C22C /* CodPayVC.m */; };
 		E46826021FA06EF8009C4918 /* PublicHeaderBodyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826011FA06EF8009C4918 /* PublicHeaderBodyCell.m */; };
 		E46826051FA07019009C4918 /* WaybillLoadSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826041FA07019009C4918 /* WaybillLoadSelectCell.m */; };
@@ -473,6 +475,10 @@
 		E45B3CB11F7B5233001D9FDB /* TransportTruckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckCell.m; sourceTree = "<group>"; };
 		E4602E8B1FB0448E00C26029 /* DailyReimbursementCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementCheckCell.h; sourceTree = "<group>"; };
 		E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementCheckCell.m; sourceTree = "<group>"; };
+		E460C5DA1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicDailyReimbursementDetailVC.h; path = YunConsignEnterprise/MainVCs/FinancialManagement/PublicDailyReimbursementDetailVC.h; sourceTree = SOURCE_ROOT; };
+		E460C5DB1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicDailyReimbursementDetailVC.m; path = YunConsignEnterprise/MainVCs/FinancialManagement/PublicDailyReimbursementDetailVC.m; sourceTree = SOURCE_ROOT; };
+		E460C5DD1FB2FC5500B6014F /* PublicShowTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicShowTableVC.h; sourceTree = "<group>"; };
+		E460C5DE1FB2FC5500B6014F /* PublicShowTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicShowTableVC.m; sourceTree = "<group>"; };
 		E46825B01FB1F6F90081C22C /* CodPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodPayVC.h; sourceTree = "<group>"; };
 		E46825B11FB1F6F90081C22C /* CodPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodPayVC.m; sourceTree = "<group>"; };
 		E46826001FA06EF8009C4918 /* PublicHeaderBodyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicHeaderBodyCell.h; sourceTree = "<group>"; };
@@ -1142,6 +1148,8 @@
 				E49D6C141FB15C62004F82D4 /* PublicFMWaybillQueryVC.m */,
 				E490AC911FB2DC9E00905826 /* PublicWaybillDetailListVC.h */,
 				E490AC921FB2DC9E00905826 /* PublicWaybillDetailListVC.m */,
+				E460C5DA1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.h */,
+				E460C5DB1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m */,
 				E488B1111FA2ADDB001680ED /* CodCheck */,
 				E488B1121FA2ADDB001680ED /* CodLoanApply */,
 				E488B1131FA2ADDB001680ED /* CodLoanCheck */,
@@ -1540,6 +1548,8 @@
 				E4AE9F8E1F5EA6CF002EBE41 /* AppBasicViewController.m */,
 				E47118301F676ACC004D4337 /* PublicTabViewController.h */,
 				E47118311F676ACC004D4337 /* PublicTabViewController.m */,
+				E460C5DD1FB2FC5500B6014F /* PublicShowTableVC.h */,
+				E460C5DE1FB2FC5500B6014F /* PublicShowTableVC.m */,
 				E47042C61F979E9900BA7E22 /* PublicQueryConditionVC.h */,
 				E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */,
 				E4110E5C1FAACD420094F30E /* PublicSlideVC.h */,
@@ -2252,6 +2262,7 @@
 				E4AEA0B81F5EA6D0002EBE41 /* MJRefreshStateHeader.m in Sources */,
 				E4ECF7DB1F7264E5003F69C0 /* JXTAlertController.m in Sources */,
 				E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */,
+				E460C5DC1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m in Sources */,
 				E40E49D61F96083D000C8B0B /* PublicMutableButtonView.m in Sources */,
 				E4AEA0961F5EA6D0002EBE41 /* IQTextView.m in Sources */,
 				E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */,
@@ -2364,6 +2375,7 @@
 				E4AEA0BF1F5EA6D0002EBE41 /* NSData+ImageContentType.m in Sources */,
 				E4AEA0A71F5EA6D0002EBE41 /* NSObject+MJCoding.m in Sources */,
 				E4AEA0AE1F5EA6D0002EBE41 /* MJRefreshFooter.m in Sources */,
+				E460C5DF1FB2FC5500B6014F /* PublicShowTableVC.m in Sources */,
 				E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */,
 				E4AEA05A1F5EA6CF002EBE41 /* QKNetworkSingleton.m in Sources */,
 				E48C72B61FA9B925007F7FC8 /* CodWaitPayVC.m in Sources */,

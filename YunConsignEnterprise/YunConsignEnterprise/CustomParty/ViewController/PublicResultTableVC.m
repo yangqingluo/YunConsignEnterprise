@@ -47,52 +47,6 @@
     
 }
 
-- (void)loadFirstPageData {
-    [self pullBaseListData:YES];
-}
-
-- (void)loadMoreData {
-    [self pullBaseListData:NO];
-}
-
-- (void)pullBaseListData:(BOOL)isReset {
-    
-}
-
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter {
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)beginRefreshing {
-    self.needRefresh = NO;
-    self.isResetCondition = NO;
-    [self.tableView.mj_header beginRefreshing];
-}
-
-- (void)endRefreshing{
-    //记录刷新时间
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
-    [self doHideHudFunction];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
-- (void)updateSubviews {
-    [self.tableView reloadData];
-}
-
 #pragma mark - getter
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
@@ -106,13 +60,6 @@
         _selectSet = [NSMutableSet new];
     }
     return _selectSet;
-}
-
-- (NSString *)dateKey{
-    if (!_dateKey) {
-        _dateKey = [NSString stringWithFormat:@"%@_dateKey_%d", [self class], (int)self.indextag];
-    }
-    return _dateKey;
 }
 
 @end

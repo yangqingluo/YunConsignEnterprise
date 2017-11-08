@@ -8,6 +8,7 @@
 
 #import "DailyReimbursementApplyTableVC.h"
 #import "SaveDailyReimbursementApplyVC.h"
+#import "PublicDailyReimbursementDetailVC.h"
 
 #import "DailyReimbursementApplyCell.h"
 #import "PublicFooterSummaryView.h"
@@ -202,6 +203,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicDailyReimbursementDetailVC *vc = [PublicDailyReimbursementDetailVC new];
+    vc.applyData = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router

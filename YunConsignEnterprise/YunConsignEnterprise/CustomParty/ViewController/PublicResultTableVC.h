@@ -6,29 +6,18 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
-#import "MJRefresh.h"
+#import "PublicShowTableVC.h"
 
-@interface PublicResultTableVC : AppBasicTableViewController
+@interface PublicResultTableVC : PublicShowTableVC
 
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
-@property (assign, nonatomic) BOOL isResetCondition;
-@property (assign, nonatomic) NSInteger indextag;
+
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSMutableSet *selectSet;
-@property (strong, nonatomic) NSString *dateKey;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index;
 - (instancetype)initWithStyle:(UITableViewStyle)style parentVC:(AppBasicViewController *)pVC andIndexTag:(NSInteger)index;
 - (void)becomeListed;
 - (void)becomeUnListed;
-- (void)loadFirstPageData;
-- (void)loadMoreData;
-- (void)pullBaseListData:(BOOL)isReset;
-- (void)updateTableViewHeader;
-- (void)updateTableViewFooter;
-- (void)beginRefreshing;
-- (void)endRefreshing;
-- (void)updateSubviews;
 
 @end
