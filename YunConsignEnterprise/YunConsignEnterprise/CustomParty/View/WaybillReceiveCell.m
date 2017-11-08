@@ -53,7 +53,7 @@
 
     self.payStyleLabel.text = [data payStyleStringForState];
     [AppPublic adjustLabelWidth:self.payStyleLabel];
-    self.payStyleLabel.left = self.bodyLabel3.right + kEdge;
+    self.payStyleLabel.left = self.bodyLabel3.right;
     
     BOOL is_cash_on_delivery = isTrue(data.is_cash_on_delivery);
     self.bodyView.height = [[self class] heightForBodyWithLabelLines: is_cash_on_delivery ? 3 : 2];

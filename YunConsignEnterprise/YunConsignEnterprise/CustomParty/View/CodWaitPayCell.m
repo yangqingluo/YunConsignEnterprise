@@ -34,7 +34,7 @@
     
     self.payStyleLabel.text = [data payStyleStringForState];
     [AppPublic adjustLabelWidth:self.payStyleLabel];
-    self.payStyleLabel.left = self.bodyLabel2.right + kEdge;
+    self.payStyleLabel.left = self.bodyLabel2.right;
     
     NSUInteger lines = 2;
     BOOL is_cash_on_delivery_note = data.cash_on_delivery_note.length > 0;

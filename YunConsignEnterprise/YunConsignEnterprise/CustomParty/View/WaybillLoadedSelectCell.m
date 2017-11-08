@@ -51,7 +51,7 @@
     
     self.payStyleLabel.text = [data payStyleStringForState];
     [AppPublic adjustLabelWidth:self.payStyleLabel];
-    self.payStyleLabel.left = self.bodyLabel3.right + kEdge;
+    self.payStyleLabel.left = self.bodyLabel3.right;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "CodLoanApplyVC.h"
 #import "PublicQueryConditionVC.h"
+#import "CodLoanApplyWaybillDetailVC.h"
 
 #import "MJRefresh.h"
 #import "CodLoanApplyCell.h"
@@ -256,7 +257,9 @@
                 
             case 1:{
                 //运单明细
-                
+                CodLoanApplyWaybillDetailVC *vc = [CodLoanApplyWaybillDetailVC new];
+                vc.codApplyData = item;
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 

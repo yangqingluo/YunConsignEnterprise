@@ -130,12 +130,6 @@
             NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (![self.toSaveData valueForKey:dict_code]) {
-                    if ([dict_code isEqualToString:@"cash_on_delivery_causes_type"]) {
-                        [self.toSaveData setValue:m_array[0] forKey:dict_code];
-                        [weakself.tableView reloadData];
-                    }
-                }
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }
@@ -203,6 +197,11 @@
                 NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
                 if (dicArray.count) {
                     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
+//                    if (![self.toSaveData valueForKey:key]) {
+//                        AppDataDictionary *m_data = dicArray[0];
+//                        [self.toSaveData setValue:m_data.item_val forKey:key];
+//                        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//                    }
                     for (AppDataDictionary *m_data in dicArray) {
                         [m_array addObject:m_data.item_name];
                     }

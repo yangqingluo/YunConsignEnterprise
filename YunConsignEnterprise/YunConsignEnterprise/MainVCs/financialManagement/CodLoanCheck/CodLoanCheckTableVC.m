@@ -7,7 +7,7 @@
 //
 
 #import "CodLoanCheckTableVC.h"
-#import "CodLoanCheckDetailVC.h"
+#import "PublicWaybillDetailListVC.h"
 
 #import "CodLoanCheckCell.h"
 #import "PublicFooterSummaryView.h"
@@ -277,7 +277,7 @@
         switch (tag) {
             case 0:{
                 //运单明细
-                CodLoanCheckDetailVC *vc = [CodLoanCheckDetailVC new];
+                PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
                 vc.codApplyData = item;
                 [self doPushViewController:vc animated:YES];
             }

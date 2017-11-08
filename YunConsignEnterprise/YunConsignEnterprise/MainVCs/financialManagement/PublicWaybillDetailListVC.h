@@ -1,5 +1,5 @@
 //
-//  CodLoanCheckDetailVC.h
+//  PublicWaybillDetailListVC.h
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/11/7.
@@ -8,7 +8,7 @@
 
 #import "PublicResultTableVC.h"
 
-@interface CodLoanCheckDetailVC : PublicResultTableVC
+@interface PublicWaybillDetailListVC : PublicResultTableVC
 
 @property (copy, nonatomic) AppCodLoanApplyInfo *codApplyData;
 

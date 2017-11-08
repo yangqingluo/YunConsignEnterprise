@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) PublicMutableButtonView *footerView;
 
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath bodyLabelLines:(NSUInteger)lines showFooter:(BOOL)isShow;
 - (void)setupFooter;
 
 @end

@@ -266,12 +266,15 @@ BOOL isTrue(NSString *string) {
 
 - (NSString *)payStyleStringForState {
     NSMutableString *m_string = [NSMutableString new];
-    if (isTrue(self.is_cash_on_delivery)) {
-        [m_string appendString:@"[现金代收]"];
+    if (self.cash_on_delivery_type_text) {
+        [m_string appendString:self.cash_on_delivery_type_text];
     }
-    if (isTrue(self.is_deduction_freight)) {
-        [m_string appendString:@"[运费代扣]"];
-    }
+//    if (isTrue(self.is_cash_on_delivery)) {
+//        [m_string appendString:@"[现金代收]"];
+//    }
+//    if (isTrue(self.is_deduction_freight)) {
+//        [m_string appendString:@"[运费代扣]"];
+//    }
     
     return m_string;
 }

@@ -1,20 +1,21 @@
 //
-//  CodLoanCheckDetailVC.m
+//  PublicWaybillDetailListVC.m
 //  YunConsignEnterprise
 //
 //  Created by 7kers on 2017/11/7.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "CodLoanCheckDetailVC.h"
+#import "PublicWaybillDetailListVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "CodLoanCheckDetailCell.h"
 
-@interface CodLoanCheckDetailVC ()
+@interface PublicWaybillDetailListVC ()
 
 @end
 
-@implementation CodLoanCheckDetailVC
+@implementation PublicWaybillDetailListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,7 +104,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [CodLoanCheckDetailCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    AppLoanApplyCheckWaybillInfo *m_data = self.dataSource[indexPath.row];
+    return [CodLoanCheckDetailCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.cash_on_delivery_causes_amount intValue] > 0 ? 4 : 3 showFooter:[m_data.loan_apply_state integerValue] == 1];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -130,6 +132,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+    vc.type = WaybillDetailType_CodQuery;
+    vc.data = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router

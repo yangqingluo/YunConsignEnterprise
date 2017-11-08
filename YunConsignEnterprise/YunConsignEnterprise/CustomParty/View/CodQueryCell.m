@@ -40,9 +40,12 @@
     
     self.payStyleLabel.text = [data payStyleStringForState];
     [AppPublic adjustLabelWidth:self.payStyleLabel];
-    self.payStyleLabel.left = self.bodyLabel2.right + kEdge;
+    self.payStyleLabel.left = self.bodyLabel2.right;
     
-    self.bodyLabel3.text = [NSString stringWithFormat:@"实收：%@（%@）", _data.cash_on_delivery_real_amount, _data.cash_on_delivery_real_time];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"实收：%@", data.cash_on_delivery_real_amount];
+    if (data.cash_on_delivery_real_time.length) {
+        self.bodyLabel3.text = [NSString stringWithFormat:@"%@（ %@）", self.bodyLabel3.text, data.cash_on_delivery_real_time];
+    }
     
     NSUInteger lines = 3;
     BOOL is_cash_on_delivery_causes = [data.cash_on_delivery_causes_amount intValue] > 0;

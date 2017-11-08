@@ -1,13 +1,13 @@
 //
-//  CodRemitWaybillDetailVC.h
+//  CodLoanApplyWaybillDetailVC.h
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/11/7.
+//  Created by 7kers on 2017/11/8.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
 #import "PublicWaybillDetailListVC.h"
 
-@interface CodRemitWaybillDetailVC : PublicWaybillDetailListVC
+@interface CodLoanApplyWaybillDetailVC : PublicWaybillDetailListVC
 
 @end

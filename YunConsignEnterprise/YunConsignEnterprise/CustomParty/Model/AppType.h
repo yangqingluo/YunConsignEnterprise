@@ -443,6 +443,7 @@ BOOL isTrue(NSString *string);
 @interface AppLoanApplyCheckWaybillInfo : AppWayBillInfo
 
 @property (strong, nonatomic) NSString *loan_apply_state;//申请状态 LOAN_APPLY_STATE 等待审核、审核通过、驳回、已放款，只有在等待审核状态下，才能进行“驳回”操作
+@property (strong, nonatomic) NSString *loan_apply_state_text;
 @property (strong, nonatomic) NSString *cust_info;//客户信息
 @property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
 @property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
@@ -461,7 +462,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *waybill_id;//运单内部编号
 @property (strong, nonatomic) NSString *consignee_name;//提货人
 @property (strong, nonatomic) NSString *consignee_phone;//提货电话
-@property (strong, nonatomic) NSString *cash_on_delivery_causes_type;//代收款少款类型，CASH_ON_DELIVERY_CAUSES_TYPE，1不少款、2运费代扣、3其他，默认1不少款
+@property (strong, nonatomic) AppDataDictionary *cash_on_delivery_causes_type;//代收款少款类型，CASH_ON_DELIVERY_CAUSES_TYPE，1不少款、2运费代扣、3其他，默认1不少款
 @property (strong, nonatomic) NSString *consignee_id_card;//提货人身份证
 @property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款，0表示没有收到代收款
 @property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额

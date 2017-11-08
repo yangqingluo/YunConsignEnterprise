@@ -48,6 +48,10 @@
     return [super tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines] + kCellHeightSmall;
 }
 
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath bodyLabelLines:(NSUInteger)lines showFooter:(BOOL)isShow {
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines] + (isShow ? kCellHeightSmall : 0.0);
+}
+
 #pragma mark - setter
 - (void)setIndexPath:(NSIndexPath *)indexPath {
     super.indexPath = indexPath;

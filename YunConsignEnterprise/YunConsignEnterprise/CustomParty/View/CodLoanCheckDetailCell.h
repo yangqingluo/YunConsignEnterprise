@@ -10,7 +10,9 @@
 
 @interface CodLoanCheckDetailCell : PublicHeaderBodyFooterCell
 
-@property (strong, nonatomic) UILabel *bodyLabelRight2;
+@property (strong, nonatomic) UILabel *payStyleLabel;
+@property (strong, nonatomic) UILabel *bodyLabel4;
+@property (strong, nonatomic) UILabel *bodyLabelRight4;
 
 @property (copy, nonatomic) AppLoanApplyCheckWaybillInfo *data;
 
