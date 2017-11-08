@@ -46,7 +46,7 @@
 - (void)doLogoutFunction {
     [self showHudInView:self.view hint:nil];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] Get:@{@"login_token" : [UserPublic getInstance].userData.login_token} HeadParm:nil URLFooter:@"/login/logout.do" completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] Get:@{@"login_token" : [UserPublic getInstance].userData.login_token} HeadParm:nil URLFooter:@"/tms/login/logout.do" completion:^(id responseBody, NSError *error){
         [weakself hideHud];
         if (!error) {
             [[AppPublic getInstance] logout];

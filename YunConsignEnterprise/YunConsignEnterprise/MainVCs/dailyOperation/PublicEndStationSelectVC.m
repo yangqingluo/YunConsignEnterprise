@@ -109,8 +109,8 @@
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
                 [self showCityAction];
             }
         }
@@ -128,8 +128,8 @@
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForCity(open_city_id)];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForCity(open_city_id)];
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }

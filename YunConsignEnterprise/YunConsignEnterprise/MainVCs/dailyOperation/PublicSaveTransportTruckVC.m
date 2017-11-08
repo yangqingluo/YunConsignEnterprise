@@ -58,6 +58,10 @@
         [self showHint:@"请选择终点站"];
         return;
     }
+    else if (self.toSaveData.truck_driver_phone.length != kPhoneNumberLength) {
+        [self showHint:@"请输入正确的电话"];
+        return;
+    }
     else {
         NSMutableDictionary *m_dic = [NSMutableDictionary new];
         [m_dic setObject:self.toSaveData.start_station_city_id forKey:@"start_station_city_id"];
@@ -101,8 +105,8 @@
         [weakself hideHud];
         if (!error) {
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
             if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
                 if (indexPath) {
                     [self selectRowAtIndexPath:indexPath];
                 }
