@@ -10,6 +10,7 @@
 
 @interface TransportTruckCell : PublicHeaderBodyFooterCell
 
+@property (strong, nonatomic) UILabel *bodyLabelRight1;
 @property (strong, nonatomic) UILabel *costCheckLabel;
 
 @property (assign, nonatomic) NSInteger indextag;

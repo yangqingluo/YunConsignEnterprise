@@ -203,8 +203,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indextag = self.indextag;
     }
-    cell.data = self.dataSource[indexPath.row];
     cell.indexPath = [indexPath copy];
+    cell.data = self.dataSource[indexPath.row];
     return cell;
 }
 

@@ -33,6 +33,19 @@
 
 - (void)setupBody {
     [super setupBody];
+    self.bodyLabel1.top = 0;
+    self.bodyLabel1.height = self.bodyLabel2.top;
+    
+    _bodyLabelRight1 = NewLabel(self.bodyLabel1.frame, self.bodyLabel1.textColor, self.bodyLabel1.font, NSTextAlignmentLeft);
+    _bodyLabelRight1.numberOfLines = 0;
+    _bodyLabelRight1.lineBreakMode = NSLineBreakByCharWrapping;
+    [self.bodyView addSubview:_bodyLabelRight1];
+    
+    self.bodyLabel1.text = @"登记车辆：";
+    [AppPublic adjustLabelWidth:self.bodyLabel1];
+    self.bodyLabelRight1.left = self.bodyLabel1.right;
+    self.bodyLabelRight1.width = self.bodyView.width - kEdgeMiddle - self.bodyLabelRight1.left;
+    
     _costCheckLabel = NewLabel(self.bodyLabel2.frame, nil, nil, NSTextAlignmentLeft);
     [self.bodyView addSubview:_costCheckLabel];
 }
@@ -55,7 +68,7 @@
     [AppPublic adjustLabelWidth:self.titleLabel];
     self.statusLabel.text = dateStringWithTimeString(data.operate_time);
     
-    self.bodyLabel1.text = [NSString stringWithFormat:@"登记车辆：%@", data.truck_info];
+    self.bodyLabelRight1.text = [NSString stringWithFormat:@"%@", data.truck_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"登记运费：%@", data.cost_register];
     [AppPublic adjustLabelWidth:self.bodyLabel2];
     if (data.cost_check.length) {
