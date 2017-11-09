@@ -132,7 +132,7 @@
         if (buttonIndex == 1) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
             for (AppCodLoanApplyWaitLoanInfo *item in self.selectSet) {
-                [m_array addObject:item.loan_apply_id];
+                [m_array addObject:item.loan_apply_ids];
             }
             [weakself doRemittanceLoanApplyByIdsFunction:[m_array componentsJoinedByString:@";"]];
         }
@@ -212,7 +212,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [CodRemitCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [CodRemitCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:(self.indextag == 0) ? 2 : 3];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -251,9 +251,21 @@
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppCodLoanApplyWaitLoanInfo *item = self.dataSource[indexPath.row];
-        int tag = [m_dic[@"tag"] intValue];
+        int tag = (self.indextag == 0 ? 2 : 1) - [m_dic[@"tag"] intValue];
         switch (tag) {
-            case 0:{
+            case 2:{
+                //发放完成
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定发放吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doRemittanceLoanApplyByIdsFunction:item.loan_apply_ids];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
+            }
+                break;
+                
+            case 1:{
                 //申请单
                 CodRemitLoanApplyListVC *vc = [CodRemitLoanApplyListVC new];
                 vc.codApplyData = item;
@@ -261,7 +273,7 @@
             }
                 break;
                 
-            case 1:{
+            case 0:{
                 //运单明细
                 CodRemitWaybillDetailVC *vc = [CodRemitWaybillDetailVC new];
                 vc.codApplyData = item;

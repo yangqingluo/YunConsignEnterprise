@@ -274,46 +274,30 @@
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppCodLoanApplyInfo *item = self.dataSource[indexPath.row];
-        int tag = [m_dic[@"tag"] intValue];
-        if (self.indextag == 0) {
-            switch (tag) {
-                case 0:{
-                    //审核通过
-                    QKWEAKSELF;
-                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定通过审核吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
-                        if (buttonIndex == 1) {
-                            [weakself doCheckLoanApplyByIdFunction:item.loan_apply_id];
-                        }
-                    } otherButtonTitles:@"确定", nil];
-                    [alert show];
-                }
-                    break;
-                    
-                case 1:{
-                    //运单明细
-                    PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
-                    vc.codApplyData = item;
-                    [self doPushViewController:vc animated:YES];
-                }
-                    break;
-                    
-                default:
-                    break;
+        int tag = (self.indextag == 0 ? 1 : 0) - [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 1:{
+                //审核通过
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定通过审核吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doCheckLoanApplyByIdFunction:item.loan_apply_id];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
             }
-        }
-        else {
-            switch (tag) {
-                case 0:{
-                    //运单明细
-                    PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
-                    vc.codApplyData = item;
-                    [self doPushViewController:vc animated:YES];
-                }
-                    break;
-                    
-                default:
-                    break;
+                break;
+                
+            case 0:{
+                //运单明细
+                PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
+                vc.codApplyData = item;
+                [self doPushViewController:vc animated:YES];
             }
+                break;
+                
+            default:
+                break;
         }
     }
     else if ([eventName isEqualToString:Event_PublicHeaderCellSelectButtonClicked]) {

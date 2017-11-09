@@ -717,6 +717,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *apply_amount_fee;//手续费
 @property (strong, nonatomic) NSString *apply_service_id;
 
+/*根据条件查询审核通过发放代收款的列表时*/
 @property (strong, nonatomic) NSString *loan_apply_ids;//申请单编号，多个用逗号隔开
 
 @end
