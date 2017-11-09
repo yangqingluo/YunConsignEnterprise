@@ -10,11 +10,6 @@
 
 @implementation PublicFMWaybillQueryCell
 
-- (void)setupHeader {
-    [super setupHeader];
-    self.titleLabel.width = self.headerView.width;
-}
-
 - (void)setupBody {
     [super setupBody];
     self.bodyLabel1.top = 0;
@@ -34,6 +29,8 @@
 - (void)setData:(AppWayBillDetailInfo *)data {
     _data = data;
     self.titleLabel.text = [NSString stringWithFormat:@"货号：%@/%@", data.goods_number, data.waybill_number];
+    [AppPublic adjustLabelWidth:self.titleLabel];
+    
     self.bodyLabelRight1.text = [NSString stringWithFormat:@"%@", data.goods];
     self.bodyLabel2.text = [NSString stringWithFormat:@"客户：%@", data.cust];
     self.bodyLabel3.text = [NSString stringWithFormat:@"运费：%@/%@/%@", data.rebate_fee, data.forklift_fee, data.pay_for_sb_fee];

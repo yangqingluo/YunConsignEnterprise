@@ -46,6 +46,9 @@
 		E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
+		E438D03B1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */; };
+		E438D03E1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D03D1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m */; };
+		E438D0411FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */; };
 		E43C68AF1FA99EA000464885 /* CodQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43C68AE1FA99EA000464885 /* CodQueryCell.m */; };
 		E43FCB561FA8590300AFEE6D /* FreightCheckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */; };
 		E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */; };
@@ -495,6 +498,12 @@
 		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
 		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
 		E43229591F97536A000400B8 /* WaybillReceiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveCell.m; sourceTree = "<group>"; };
+		E438D0391FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplyFirstVC.h; sourceTree = "<group>"; };
+		E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplyFirstVC.m; sourceTree = "<group>"; };
+		E438D03C1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillQueryVC.h; sourceTree = "<group>"; };
+		E438D03D1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyWaybillQueryVC.m; sourceTree = "<group>"; };
+		E438D03F1FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillQueryCell.h; sourceTree = "<group>"; };
+		E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyWaybillQueryCell.m; sourceTree = "<group>"; };
 		E43C68AD1FA99EA000464885 /* CodQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodQueryCell.h; sourceTree = "<group>"; };
 		E43C68AE1FA99EA000464885 /* CodQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodQueryCell.m; sourceTree = "<group>"; };
 		E43FCB541FA8590300AFEE6D /* FreightCheckDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckDetailVC.h; sourceTree = "<group>"; };
@@ -1388,6 +1397,10 @@
 				E4D2BB201FAAC16E006A2AAC /* CodLoanApplyVC.m */,
 				E490AC941FB2E5EE00905826 /* CodLoanApplyWaybillDetailVC.h */,
 				E490AC951FB2E5EE00905826 /* CodLoanApplyWaybillDetailVC.m */,
+				E438D0391FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.h */,
+				E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */,
+				E438D03C1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.h */,
+				E438D03D1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m */,
 			);
 			name = CodLoanApply;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodLoanApply;
@@ -1696,6 +1709,8 @@
 				E49D6C171FB15F04004F82D4 /* PublicInputHeaderView.m */,
 				E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */,
 				E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */,
+				E438D03F1FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.h */,
+				E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2655,6 +2670,7 @@
 				E4E2A3EE1FB311AE00D8EC1C /* MWCaptionView.m in Sources */,
 				E4E2A38C1FB311AE00D8EC1C /* UIWebView+AFNetworking.m in Sources */,
 				E4E2A3A21FB311AE00D8EC1C /* NSString+LLExtension.m in Sources */,
+				E438D0411FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m in Sources */,
 				E4A65B6E1FB1A51900942525 /* CodLoanCheckDetailCell.m in Sources */,
 				E490AC931FB2DC9E00905826 /* PublicWaybillDetailListVC.m in Sources */,
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
@@ -2718,6 +2734,7 @@
 				E4E2A4011FB311AE00D8EC1C /* UIImage+MultiFormat.m in Sources */,
 				E4E2A3831FB311AE00D8EC1C /* AFURLSessionManager.m in Sources */,
 				E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */,
+				E438D03E1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m in Sources */,
 				E4E2A40E1FB311AE00D8EC1C /* TZPhotoPreviewCell.m in Sources */,
 				E4E2A38F1FB311AE00D8EC1C /* BlockAlertView.m in Sources */,
 				E4F283581FB1B1CD005A0BC1 /* CodRemitCell.m in Sources */,
@@ -2883,6 +2900,7 @@
 				E4AF3B0D1F78DFD2009EB766 /* SwitchedInputCell.m in Sources */,
 				E4E2A4031FB311AE00D8EC1C /* UIImageView+WebCache.m in Sources */,
 				E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */,
+				E438D03B1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m in Sources */,
 				E44765051F6129040084F4EB /* UserPublic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,7 @@
 #import "CodLoanApplyVC.h"
 #import "PublicQueryConditionVC.h"
 #import "CodLoanApplyWaybillDetailVC.h"
+#import "SaveCodLoanApplyFirstVC.h"
 
 #import "MJRefresh.h"
 #import "CodLoanApplyCell.h"
@@ -72,7 +73,8 @@
 }
 
 - (void)applyButtonAction {
-    
+    SaveCodLoanApplyFirstVC *vc = [SaveCodLoanApplyFirstVC new];
+    [self doPushViewController:vc animated:YES];
 }
 
 - (void)loadFirstPageData{

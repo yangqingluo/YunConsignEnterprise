@@ -14,7 +14,6 @@
 @interface PublicFMWaybillQueryVC ()
 
 @property (strong, nonatomic) PublicInputHeaderView *headerView;
-@property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) AppWayBillDetailInfo *selectedData;
 
 @end
@@ -28,6 +27,7 @@
     [self.view addSubview:self.headerView];
     self.tableView.top = self.headerView.bottom;
     self.tableView.height = self.view.height - self.headerView.bottom;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)setupNav {
@@ -81,6 +81,12 @@
         }
             break;
             
+        case FMWaybillQueryType_CodLoanApply:{
+            [m_dic setObject:waybill_info forKey:@"number"];
+            m_code = @"hex_loan_queryWaybillListByNumberFunction";
+        }
+            break;
+            
         default:
             break;
     }
@@ -91,7 +97,7 @@
     [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:m_code Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {

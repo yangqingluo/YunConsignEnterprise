@@ -369,6 +369,19 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *return_waybill_number ;//原货返回运单号
 @property (strong, nonatomic) NSString *waybill_change_count;//运单修改次数
 @property (strong, nonatomic) NSArray *waybill_items;//货物信息
+
+
+@property (strong, nonatomic) NSString *cust_info;//客户信息
+@property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
+@property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额，没有收款，显示未收款
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//少款原因
+@property (strong, nonatomic) NSString *agent_money_fee;//手续费
+@property (strong, nonatomic) NSString *is_can_apply;//是否能够申请 YES_NO 1是2否
+@property (strong, nonatomic) NSString *print_check_code;//6位数字验证代码，用于确认运单的真伪，防止重复打印，可以申请时才有
+@property (strong, nonatomic) NSString *not_can_apply_note;//不能申请的原因
+
+
 @end
 
 @interface AppCanReceiveWayBillInfo : AppWayBillInfo

@@ -10,11 +10,14 @@
 
 typedef NS_ENUM(NSInteger, FMWaybillQueryType) {
     FMWaybillQueryType_DEFAULT = 0,
-    FMWaybillQueryType_DailyReimburse,//报销申请运单选择
+    FMWaybillQueryType_DailyReimburse,//报销申请运单
+    FMWaybillQueryType_CodLoanApply,//代收款放款申请
 };
 
 @interface PublicFMWaybillQueryVC : AppBasicTableViewController
 
 @property (assign, nonatomic) FMWaybillQueryType type;
+
+@property (strong, nonatomic) NSMutableArray *dataSource;
 
 @end
