@@ -10,6 +10,9 @@
 
 @interface CodLoanCheckCell : PublicHeaderBodyFooterCell
 
+@property (strong, nonatomic) UILabel *bodyLabelRight3;
+@property (strong, nonatomic) UILabel *bodyLabel4;
+
 @property (assign, nonatomic) NSInteger indextag;
 
 @property (copy, nonatomic) AppCodLoanApplyInfo *data;

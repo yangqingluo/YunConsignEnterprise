@@ -177,18 +177,18 @@
 
 - (void)updateFooterSummary {
     if (self.indextag == 0) {
-        double apply_amount = 0;
+        double audit_amount = 0;
         for (AppCodLoanApplyInfo *item in self.selectSet) {
-            apply_amount += [item.apply_amount doubleValue];
+            audit_amount += [item.audit_amount doubleValue];
         }
-        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", apply_amount];
+        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", audit_amount];
     }
     else if (self.indextag == 1) {
-        double apply_amount = 0;
+        double audit_amount = 0;
         for (AppCodLoanApplyInfo *item in self.dataSource) {
-            apply_amount += [item.apply_amount doubleValue];
+            audit_amount += [item.audit_amount doubleValue];
         }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", apply_amount];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", audit_amount];
     }
 }
 
@@ -234,7 +234,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [CodLoanCheckCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    AppCodLoanApplyInfo *m_data = self.dataSource[indexPath.row];
+    return [CodLoanCheckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:m_data.apply_note.length ? 4 : 3];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -274,28 +275,45 @@
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppCodLoanApplyInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
-        switch (tag) {
-            case 0:{
-                //运单明细
-                PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
-                vc.codApplyData = item;
-                [self doPushViewController:vc animated:YES];
+        if (self.indextag == 0) {
+            switch (tag) {
+                case 0:{
+                    //审核通过
+                    QKWEAKSELF;
+                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定通过审核吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+                        if (buttonIndex == 1) {
+                            [weakself doCheckLoanApplyByIdFunction:item.loan_apply_id];
+                        }
+                    } otherButtonTitles:@"确定", nil];
+                    [alert show];
+                }
+                    break;
+                    
+                case 1:{
+                    //运单明细
+                    PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
+                    vc.codApplyData = item;
+                    [self doPushViewController:vc animated:YES];
+                }
+                    break;
+                    
+                default:
+                    break;
             }
-                break;
-                
-//            case 1:{
-//                QKWEAKSELF;
-//                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定驳回申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-//                    if (buttonIndex == 1) {
-//                        [weakself doCancelLoanApplyWaybillByIdFunction:item.loan_apply_id];
-//                    }
-//                }otherButtonTitles:@"确定", nil];
-//                [alert show];
-//            }
-//                break;
-                
-            default:
-                break;
+        }
+        else {
+            switch (tag) {
+                case 0:{
+                    //运单明细
+                    PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
+                    vc.codApplyData = item;
+                    [self doPushViewController:vc animated:YES];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
         }
     }
     else if ([eventName isEqualToString:Event_PublicHeaderCellSelectButtonClicked]) {
