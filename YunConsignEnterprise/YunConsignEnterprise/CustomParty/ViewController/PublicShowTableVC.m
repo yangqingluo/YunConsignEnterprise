@@ -76,7 +76,7 @@
     [self.tableView.mj_header beginRefreshing];
 }
 
-- (void)endRefreshing{
+- (void)endRefreshing {
     //记录刷新时间
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
     [self doHideHudFunction];
@@ -96,7 +96,7 @@
     //    }];
 }
 
-- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content {
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     
 }
 
@@ -138,10 +138,17 @@
     return (range.location < kInputLengthMax);
 }
 
+- (void)textFieldDidChange:(UITextField *)textField {
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
+    }
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndex:indexPath.row andContent:textField.text];
+        [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
     }
 }
 

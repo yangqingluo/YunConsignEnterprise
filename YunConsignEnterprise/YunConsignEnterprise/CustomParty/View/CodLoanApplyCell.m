@@ -35,8 +35,17 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"打款：%@", _data.bank_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"申请：%d（%@）", [_data.apply_amount intValue], _data.apply_time];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"审核：%d（%@）", [_data.audit_amount intValue], _data.audit_time];
-    self.bodyLabel4.text = [NSString stringWithFormat:@"备注：%@", _data.apply_note];
+    NSUInteger lines = 3;
+    if ([data.loan_apply_state integerValue] == 1) {
+        self.bodyLabel3.text = [NSString stringWithFormat:@"备注：%@", _data.apply_note];
+        self.bodyLabel4.text = @"";
+    }
+    else {
+        lines++;
+        self.bodyLabel3.text = [NSString stringWithFormat:@"审核：%d（%@）", [_data.audit_amount intValue], _data.audit_time];
+        self.bodyLabel4.text = [NSString stringWithFormat:@"备注：%@", _data.apply_note];
+    }
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 @end

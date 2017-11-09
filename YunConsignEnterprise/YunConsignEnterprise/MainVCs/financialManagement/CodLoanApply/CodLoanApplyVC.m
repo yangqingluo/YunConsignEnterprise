@@ -23,6 +23,25 @@
 
 @implementation CodLoanApplyVC
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_CodLoanApplyRefresh object:nil];
+    }
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        [self beginRefreshing];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
@@ -161,8 +180,9 @@
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppCodLoanApplyInfo *m_data = self.dataSource[indexPath.row];
+    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.loan_apply_state integerValue] == 1 ? 3 : 4];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

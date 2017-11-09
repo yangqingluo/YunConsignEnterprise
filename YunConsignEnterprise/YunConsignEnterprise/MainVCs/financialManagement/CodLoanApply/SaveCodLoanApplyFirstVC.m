@@ -8,6 +8,7 @@
 
 #import "SaveCodLoanApplyFirstVC.h"
 #import "CodLoanApplyWaybillQueryVC.h"
+#import "SaveCodLoanApplySecondVC.h"
 
 #import "CodLoanApplyWaybillSaveCell.h"
 
@@ -57,7 +58,14 @@
 }
 
 - (void)nextStepButtonAction {
-    
+    if (self.dataSource.count) {
+        SaveCodLoanApplySecondVC *vc = [SaveCodLoanApplySecondVC new];
+        [vc.dataSource addObjectsFromArray:self.dataSource];
+        [self doPushViewController:vc animated:YES];
+    }
+    else {
+        [self doShowHintFunction:@"请添加运单"];
+    }
 }
 
 - (void)addWaybillData:(AppWayBillDetailInfo *)data {
@@ -113,6 +121,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [tableView beginUpdates];
+        [self.dataSource removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView endUpdates];
+    }
 }
 
 @end

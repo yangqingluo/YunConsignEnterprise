@@ -167,10 +167,10 @@
             NSDictionary *m_dic = object;
             NSString *key = m_dic[@"key"];
             if ([self.defaultKeyBoardTypeSet containsObject:key]) {
-                [self.toSaveData setValue:content forKey:m_dic[@"key"]];
+                [self.toSaveData setValue:content forKey:key];
             }
             else {
-                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
+                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
             }
         }
         else if ([object isKindOfClass:[NSArray class]]) {
@@ -402,6 +402,7 @@
         if (!cell) {
             cell = [[WaybillCustReceiveCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
         }
         
         cell.data = self.paymentData;
@@ -426,8 +427,8 @@
         static NSString *CellIdentifier = @"receipt_form_voucher_cell";
         SingleInputCell *cell = (SingleInputCell *)[self tableView:tableView singleInputCellForRowAtIndexPath:indexPath showObject:@{@"title":@"签收底单",@"subTitle":@"拍照上传",@"key":@"receipt_form_voucher"} reuseIdentifier:CellIdentifier];
         cell.baseView.textField.enabled = NO;
+        cell.baseView.lineView.hidden = YES;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.isShowBottomEdge = NO;
         
         return cell;
     }
@@ -475,6 +476,9 @@
         if (key.length) {
             if ([key isEqualToString:@"consignee_id_card"]) {
                 length = kIDLengthMax;
+            }
+            else if ([key isEqualToString:@"consignee_phone"]) {
+                length = kPhoneNumberLength;
             }
             else if (![self.defaultKeyBoardTypeSet containsObject:key]) {
                 length = kPriceLengthMax;

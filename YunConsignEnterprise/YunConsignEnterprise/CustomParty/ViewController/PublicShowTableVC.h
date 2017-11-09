@@ -29,7 +29,7 @@
 - (void)endRefreshing;
 - (void)updateSubviews;
 - (void)showFromVC:(AppBasicViewController *)fromVC;
-- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content;
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content;
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)loadFirstPageData;
 - (void)loadMoreData;

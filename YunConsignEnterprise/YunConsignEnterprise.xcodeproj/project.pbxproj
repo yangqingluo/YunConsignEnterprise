@@ -43,6 +43,8 @@
 		E4266F761FA0C0C800C240C5 /* WaybillArrivalDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F751FA0C0C800C240C5 /* WaybillArrivalDetailVC.m */; };
 		E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */; };
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
+		E42D18C11FB42A3100649825 /* SaveCodLoanApplySecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C01FB42A3100649825 /* SaveCodLoanApplySecondVC.m */; };
+		E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */; };
 		E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
@@ -493,6 +495,10 @@
 		E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalDetailCell.m; sourceTree = "<group>"; };
 		E4266F7A1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicWaybillArrivalFooterView.h; sourceTree = "<group>"; };
 		E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicWaybillArrivalFooterView.m; sourceTree = "<group>"; };
+		E42D18BF1FB42A3100649825 /* SaveCodLoanApplySecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplySecondVC.h; sourceTree = "<group>"; };
+		E42D18C01FB42A3100649825 /* SaveCodLoanApplySecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplySecondVC.m; sourceTree = "<group>"; };
+		E42D18C21FB42DDF00649825 /* SaveCodLoanApplySecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplySecondCell.h; sourceTree = "<group>"; };
+		E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplySecondCell.m; sourceTree = "<group>"; };
 		E42E7EBE1FB20CE7007E755B /* CustomerEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerEditVC.h; sourceTree = "<group>"; };
 		E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerEditVC.m; sourceTree = "<group>"; };
 		E43229551F97531C000400B8 /* WaybillReceiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveVC.h; sourceTree = "<group>"; };
@@ -1402,6 +1408,8 @@
 				E490AC951FB2E5EE00905826 /* CodLoanApplyWaybillDetailVC.m */,
 				E438D0391FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.h */,
 				E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */,
+				E42D18BF1FB42A3100649825 /* SaveCodLoanApplySecondVC.h */,
+				E42D18C01FB42A3100649825 /* SaveCodLoanApplySecondVC.m */,
 				E438D03C1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.h */,
 				E438D03D1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m */,
 			);
@@ -1716,6 +1724,8 @@
 				E4436E351FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m */,
 				E438D03F1FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.h */,
 				E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */,
+				E42D18C21FB42DDF00649825 /* SaveCodLoanApplySecondCell.h */,
+				E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2681,6 +2691,7 @@
 				E490AC931FB2DC9E00905826 /* PublicWaybillDetailListVC.m in Sources */,
 				E4AEA0781F5EA6D0002EBE41 /* AppBasicTableViewController.m in Sources */,
 				E46825B21FB1F6F90081C22C /* CodPayVC.m in Sources */,
+				E42D18C11FB42A3100649825 /* SaveCodLoanApplySecondVC.m in Sources */,
 				E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */,
 				E4E2A3F71FB311AE00D8EC1C /* NSData+ImageContentType.m in Sources */,
 				E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */,
@@ -2837,6 +2848,7 @@
 				E4E2A3F91FB311AE00D8EC1C /* SDWebImageCompat.m in Sources */,
 				E4E2A3BA1FB311AE00D8EC1C /* MJRefreshAutoFooter.m in Sources */,
 				E4AEA0DB1F5EA8CE002EBE41 /* UIImage+Color.m in Sources */,
+				E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */,
 				E4E2A3BB1FB311AE00D8EC1C /* MJRefreshBackFooter.m in Sources */,
 				E4E2A3881FB311AE00D8EC1C /* UIButton+AFNetworking.m in Sources */,
 				E4E2A3801FB311AE00D8EC1C /* AFSecurityPolicy.m in Sources */,
