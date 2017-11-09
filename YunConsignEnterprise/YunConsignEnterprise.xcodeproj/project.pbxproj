@@ -46,6 +46,7 @@
 		E42D18C11FB42A3100649825 /* SaveCodLoanApplySecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C01FB42A3100649825 /* SaveCodLoanApplySecondVC.m */; };
 		E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */; };
 		E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */; };
+		E430F3AE1FB45CB600AB74E1 /* PublicMessageReadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
 		E43487311FB456B800EE4188 /* QueryWaybillReimburseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43487301FB456B800EE4188 /* QueryWaybillReimburseListVC.m */; };
@@ -503,6 +504,8 @@
 		E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplySecondCell.m; sourceTree = "<group>"; };
 		E42E7EBE1FB20CE7007E755B /* CustomerEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerEditVC.h; sourceTree = "<group>"; };
 		E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerEditVC.m; sourceTree = "<group>"; };
+		E430F3AC1FB45CB600AB74E1 /* PublicMessageReadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMessageReadManager.h; sourceTree = "<group>"; };
+		E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMessageReadManager.m; sourceTree = "<group>"; };
 		E43229551F97531C000400B8 /* WaybillReceiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveVC.h; sourceTree = "<group>"; };
 		E43229561F97531C000400B8 /* WaybillReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReceiveVC.m; sourceTree = "<group>"; };
 		E43229581F97536A000400B8 /* WaybillReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveCell.h; sourceTree = "<group>"; };
@@ -1759,6 +1762,8 @@
 				E4110E601FAAE6810094F30E /* PublicResultTableVC.m */,
 				E46A975A1FB2047C009B318F /* PublicWaybillDetailVC.h */,
 				E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */,
+				E430F3AC1FB45CB600AB74E1 /* PublicMessageReadManager.h */,
+				E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2717,6 +2722,7 @@
 				E4E2A3AC1FB311AE00D8EC1C /* MBProgressHUD+Add.m in Sources */,
 				E4E2A3AA1FB311AE00D8EC1C /* LLImagePickerView.m in Sources */,
 				E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */,
+				E430F3AE1FB45CB600AB74E1 /* PublicMessageReadManager.m in Sources */,
 				E4E2A3931FB311AE00D8EC1C /* IQUIScrollView+Additions.m in Sources */,
 				E4E2A3B51FB311AE00D8EC1C /* NSObject+MJClass.m in Sources */,
 				E45995361F95E61E009F35A6 /* SearchQuantityResultCell.m in Sources */,
