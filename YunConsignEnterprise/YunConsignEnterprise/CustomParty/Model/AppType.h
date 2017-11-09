@@ -752,8 +752,10 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_number;
 @property (strong, nonatomic) NSString *waybill_id;
 @property (strong, nonatomic) NSString *waybill_number;
-@property (strong, nonatomic) NSString *service_id;//申请门店
-@property (strong, nonatomic) NSString *service_name;//申请门店
+@property (strong, nonatomic) NSString *service_id;//申请门店编号
+@property (strong, nonatomic) NSString *service_name;//申请门店名称
+
+@property (strong, nonatomic) NSString *daily_info;//申请内容
 
 - (NSString *)showWaybillInfoString;
 

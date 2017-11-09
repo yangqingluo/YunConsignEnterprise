@@ -7,6 +7,7 @@
 //
 
 #import "DailyReimbursementCheckTableVC.h"
+#import "QueryWaybillReimburseListVC.h"
 
 #import "DailyReimbursementCheckCell.h"
 #import "PublicFooterSummaryView.h"
@@ -283,7 +284,9 @@
                 
             case 1:{
                 //报销历史
-                
+                QueryWaybillReimburseListVC *vc = [QueryWaybillReimburseListVC new];
+                vc.applyData = item;
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 
