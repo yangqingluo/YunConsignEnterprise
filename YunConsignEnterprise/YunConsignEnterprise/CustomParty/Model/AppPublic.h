@@ -14,6 +14,7 @@
 #import "QKNetworkSingleton.h"
 #import "BlockAlertView.h"
 #import "JXTAlertController.h"
+#import "PublicMessageReadManager.h"
 
 #define screen_width [UIScreen mainScreen].bounds.size.width
 #define screen_height [UIScreen mainScreen].bounds.size.height

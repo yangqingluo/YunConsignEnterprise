@@ -9,7 +9,6 @@
 #import "DailyReimbursementApplyTableVC.h"
 #import "SaveDailyReimbursementApplyVC.h"
 #import "PublicDailyReimbursementDetailVC.h"
-#import "PublicMessageReadManager.h"
 
 #import "DailyReimbursementApplyCell.h"
 #import "PublicFooterSummaryView.h"
@@ -217,8 +216,8 @@
         switch (tag) {
             case 0:{
                 //查看凭证
-                NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
-                if (m_array.count) {
+                if (item.voucher.length) {
+                    NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
                     [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
                 }
                 else {

@@ -8,6 +8,7 @@
 
 #import "DailyReimbursementCheckTableVC.h"
 #import "QueryWaybillReimburseListVC.h"
+#import "PublicDailyReimbursementDetailVC.h"
 
 #import "DailyReimbursementCheckCell.h"
 #import "PublicFooterSummaryView.h"
@@ -266,6 +267,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicDailyReimbursementDetailVC *vc = [PublicDailyReimbursementDetailVC new];
+    vc.applyData = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router
@@ -278,7 +282,13 @@
         switch (tag) {
             case 0:{
                 //查看凭证
-                
+                if (item.voucher.length) {
+                    NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
+                    [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
+                }
+                else {
+                    [self doShowHintFunction:@"凭证不存在"];
+                }
             }
                 break;
                 
