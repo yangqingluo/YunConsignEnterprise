@@ -14,7 +14,6 @@
 @interface PublicFMWaybillQueryVC ()
 
 @property (strong, nonatomic) PublicInputHeaderView *headerView;
-@property (strong, nonatomic) AppWayBillDetailInfo *selectedData;
 
 @end
 
@@ -41,10 +40,6 @@
     }];
 }
 
-- (void)cancelButtonAction {
-    [self goBackWithDone:NO];
-}
-
 - (void)searchButtonAction {
     [self dismissKeyboard];
     if (!self.headerView.baseView.textField.text.length) {
@@ -52,13 +47,6 @@
         return;
     }
     [self doQueryWaybillFunction:self.headerView.baseView.textField.text];
-}
-
-- (void)goBackWithDone:(BOOL)done {
-    if (done) {
-        [self doDoneAction];
-    }
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)doDoneAction {
@@ -121,18 +109,13 @@
         _headerView = [[PublicInputHeaderView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom + kEdge, screen_width, kCellHeightFilter)];
         _headerView.baseView.textLabel.text = @"运单号/货号";
         _headerView.baseView.textField.placeholder = @"请输入运单号或货号";
+        _headerView.baseView.textField.textAlignment = NSTextAlignmentLeft;
+        _headerView.baseView.textField.clearButtonMode = UITextFieldViewModeAlways;
         _headerView.baseView.textField.keyboardType = UIKeyboardTypeURL;
         [_headerView.searchBtn addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [_headerView.baseView adjustSubviews];
     }
     return _headerView;
-}
-
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
 }
 
 #pragma mark - UITableView
@@ -142,14 +125,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [PublicFMWaybillQueryCell tableView:tableView heightForRowAtIndexPath:indexPath];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kEdgeSmall;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return kEdge;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

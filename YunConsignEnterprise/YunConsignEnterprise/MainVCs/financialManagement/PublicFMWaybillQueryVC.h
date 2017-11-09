@@ -6,7 +6,7 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
 typedef NS_ENUM(NSInteger, FMWaybillQueryType) {
     FMWaybillQueryType_DEFAULT = 0,
@@ -14,10 +14,9 @@ typedef NS_ENUM(NSInteger, FMWaybillQueryType) {
     FMWaybillQueryType_CodLoanApply,//代收款放款申请
 };
 
-@interface PublicFMWaybillQueryVC : AppBasicTableViewController
+@interface PublicFMWaybillQueryVC : PublicResultTableVC
 
 @property (assign, nonatomic) FMWaybillQueryType type;
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) AppWayBillDetailInfo *selectedData;
 
 @end

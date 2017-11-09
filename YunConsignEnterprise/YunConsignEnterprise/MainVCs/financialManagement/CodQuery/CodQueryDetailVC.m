@@ -118,14 +118,6 @@
     return [CodQueryCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kEdgeSmall;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return kEdgeSmall;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CodQueryCell";
     CodQueryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

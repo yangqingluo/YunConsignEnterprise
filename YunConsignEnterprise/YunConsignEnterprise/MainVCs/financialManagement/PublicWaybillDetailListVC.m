@@ -108,14 +108,6 @@
     return [CodLoanCheckDetailCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.cash_on_delivery_causes_amount intValue] > 0 ? 4 : 3 showFooter:[m_data.loan_apply_state integerValue] == 1];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kEdgeSmall;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return kEdge;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CodLoanCheckDetailCell_cell";
     CodLoanCheckDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

@@ -6,14 +6,10 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "PublicHeaderBodyCell.h"
+#import "CodLoanApplyWaybillSaveCell.h"
 
-@interface CodLoanApplyWaybillQueryCell : PublicHeaderBodyCell
+@interface CodLoanApplyWaybillQueryCell : CodLoanApplyWaybillSaveCell
 
-@property (strong, nonatomic) UILabel *payStyleLabel;
-@property (strong, nonatomic) UILabel *bodyLabel4;
-@property (strong, nonatomic) UILabel *bodyLabelRight4;
-
-@property (copy, nonatomic) AppWayBillDetailInfo *data;
+@property (strong, nonatomic) UILabel *bodyLabel5;
 
 @end

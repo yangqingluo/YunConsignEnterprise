@@ -52,6 +52,7 @@
 		E43C68AF1FA99EA000464885 /* CodQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43C68AE1FA99EA000464885 /* CodQueryCell.m */; };
 		E43FCB561FA8590300AFEE6D /* FreightCheckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */; };
 		E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */; };
+		E4436E361FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4436E351FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m */; };
 		E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F5E1F9ED2E600D2FE18 /* TTLoadListVC.m */; };
 		E4443F621F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */; };
 		E44764941F611AC70084F4EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E447648E1F611AC70084F4EB /* LoginViewController.m */; };
@@ -510,6 +511,8 @@
 		E43FCB551FA8590300AFEE6D /* FreightCheckDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckDetailVC.m; sourceTree = "<group>"; };
 		E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightCheckCell.h; sourceTree = "<group>"; };
 		E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightCheckCell.m; sourceTree = "<group>"; };
+		E4436E341FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillSaveCell.h; sourceTree = "<group>"; };
+		E4436E351FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyWaybillSaveCell.m; sourceTree = "<group>"; };
 		E4443F5D1F9ED2E600D2FE18 /* TTLoadListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTLoadListVC.h; sourceTree = "<group>"; };
 		E4443F5E1F9ED2E600D2FE18 /* TTLoadListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTLoadListVC.m; sourceTree = "<group>"; };
 		E4443F601F9ED3BF00D2FE18 /* TransportTruckLoadListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckLoadListCell.h; sourceTree = "<group>"; };
@@ -1709,6 +1712,8 @@
 				E49D6C171FB15F04004F82D4 /* PublicInputHeaderView.m */,
 				E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */,
 				E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */,
+				E4436E341FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.h */,
+				E4436E351FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m */,
 				E438D03F1FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.h */,
 				E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */,
 			);
@@ -2648,6 +2653,7 @@
 				E4E2A3971FB311AE00D8EC1C /* IQUIWindow+Hierarchy.m in Sources */,
 				E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */,
 				E4E2A3A61FB311AE00D8EC1C /* UIViewController+LLExtension.m in Sources */,
+				E4436E361FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m in Sources */,
 				E4E2A3C21FB311AE00D8EC1C /* MJRefreshBackGifFooter.m in Sources */,
 				E40E49DC1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m in Sources */,
 				E4E2A3BC1FB311AE00D8EC1C /* MJRefreshComponent.m in Sources */,

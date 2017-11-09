@@ -16,8 +16,6 @@
 
 @interface CodLoanApplyVC ()
 
-@property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @property (strong, nonatomic) UIView *footerView;
 
@@ -77,15 +75,7 @@
     [self doPushViewController:vc animated:YES];
 }
 
-- (void)loadFirstPageData{
-    [self queryWaybillListByConditionFunction:YES];
-}
-
-- (void)loadMoreData{
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.start_time) {
@@ -120,7 +110,7 @@
             else {
                 [weakself updateTableViewFooter];
             }
-            [weakself.tableView reloadData];
+            [weakself updateSubviews];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -150,43 +140,7 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self hideHud];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 #pragma mark - getter
-- (AppQueryConditionInfo *)condition {
-    if (!_condition) {
-        _condition = [AppQueryConditionInfo new];
-    }
-    return _condition;
-}
-
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
 - (UIView *)footerView {
     if (!_footerView) {
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightFilter)];
@@ -211,14 +165,6 @@
     return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return kEdgeSmall;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return kEdgeSmall;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CodLoanApplyCell";
     CodLoanApplyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -230,11 +176,6 @@
     cell.indexPath = [indexPath copy];
     cell.data = self.dataSource[indexPath.row];
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
 }
 
 #pragma mark - UIResponder+Router
