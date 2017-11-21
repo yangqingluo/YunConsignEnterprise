@@ -28,7 +28,7 @@
     [self createNavWithTitle:self.title ? self.title : @"编辑" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
-            [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
         else if (nIndex == 1){
@@ -38,10 +38,6 @@
         }
         return nil;
     }];
-}
-
-- (void)goBack {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)saveButtonAction {
@@ -62,7 +58,8 @@
 }
 
 - (void)saveDataSuccess {
-    
+    [self doShowHintFunction:@"保存成功"];
+    [self goBackWithDone:YES];
 }
 
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {

@@ -45,7 +45,7 @@
 
 - (void)addBtnAction {
     SaveOpenCityVC *vc = [SaveOpenCityVC new];
-    [self doPushViewController:vc animated:YES];
+    [self goToSaveVC:vc];
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
@@ -75,6 +75,14 @@
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+- (void)goToSaveVC:(PublicSaveVC *)vc {
+    QKWEAKSELF;
+    vc.doneBlock = ^(NSObject *object) {
+        [weakself.tableView.mj_header beginRefreshing];
+    };
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableView
@@ -115,7 +123,7 @@
     
     SaveOpenCityVC *vc = [SaveOpenCityVC new];
     vc.baseData = self.dataSource[indexPath.row];
-    [self doPushViewController:vc animated:YES];
+    [self goToSaveVC:vc];
 }
 
 @end

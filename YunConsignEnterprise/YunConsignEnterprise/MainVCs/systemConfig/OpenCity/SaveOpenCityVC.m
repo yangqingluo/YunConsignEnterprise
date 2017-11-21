@@ -62,6 +62,9 @@
             [m_dic setObject:value forKey:key];
         }
     }
+    if (self.baseData) {
+//        [m_dic setObject:[self.baseData valueForKey:@"open_city_id"] forKey:@"open_city_id"];
+    }
     
     [self doShowHudFunction];
     QKWEAKSELF;
@@ -80,10 +83,6 @@
             [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
-}
-
-- (void)saveDataSuccess {
-    
 }
 
 @end
