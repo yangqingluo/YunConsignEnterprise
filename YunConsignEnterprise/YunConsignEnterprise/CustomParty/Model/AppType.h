@@ -168,6 +168,13 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppCityDetailInfo : AppCityInfo
+
+@property (strong, nonatomic) NSString *open_city_py;//开通城市名称拼音
+@property (strong, nonatomic) NSString *sort;//开通城市名称排序
+
+@end
+
 @interface APPEndStationInfo : AppType
 
 @property (strong, nonatomic) NSString *arrival_time;

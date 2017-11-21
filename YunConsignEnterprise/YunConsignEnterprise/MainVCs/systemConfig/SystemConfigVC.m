@@ -7,6 +7,8 @@
 //
 
 #import "SystemConfigVC.h"
+#import "OpenCityVC.h"
+
 #import "BlockAlertView.h"
 
 @interface SystemConfigVC ()
@@ -65,11 +67,35 @@
             NSArray *m_array = [UserPublic getInstance].systemConfigAccesses;
             if (index >= 0 && index < m_array.count) {
                 AppAccessInfo *item = m_array[index];
-                switch (item.sort) {
-                    default:{
-                        [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
-                    }
-                        break;
+                AppBasicViewController *vc = nil;
+                if ([item.menu_code isEqualToString:@"OPEN_CITY"]) {
+                    vc = [OpenCityVC new];
+                }
+                else if ([item.menu_code isEqualToString:@"SERVICE"]) {
+                    
+                }
+                else if ([item.menu_code isEqualToString:@"JSON_USER"]) {
+                    
+                }
+                else if ([item.menu_code isEqualToString:@"SERVICE_GOOD"]) {
+                    
+                }
+                else if ([item.menu_code isEqualToString:@"SERVICE_PACKAGE"]) {
+                    
+                }
+                else if ([item.menu_code isEqualToString:@"TRUCK_MANAGE"]) {
+                    
+                }
+                else if ([item.menu_code isEqualToString:@"PRINT_SET"]) {
+                    
+                }
+                
+                if (vc) {
+                    vc.accessInfo = item;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                else {
+                    [self showHint:[NSString stringWithFormat:@"%@ 敬请期待", item.menu_name]];
                 }
             }
         }
