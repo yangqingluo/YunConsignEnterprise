@@ -157,6 +157,13 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *service_name;//所属门店名称
 @property (strong, nonatomic) NSString *service_code;//开单代码
 
+@property (strong, nonatomic) NSString *service_address;//门店地址
+@property (strong, nonatomic) NSString *service_phone;//门店电话
+@property (strong, nonatomic) NSString *responsible_info;//负责人信息
+@property (strong, nonatomic) NSString *responsible_name;//负责人姓名
+@property (strong, nonatomic) NSString *service_state;//门店状态
+@property (strong, nonatomic) NSString *service_state_text;//门店状态文本
+
 - (NSString *)showCityAndServiceName;
 
 @end
@@ -848,6 +855,12 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *bind_waybill_id;//绑定运单
 @property (strong, nonatomic) NSString *note;//报销备注
 @property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
+
+/*系统设置相关*/
+@property (strong, nonatomic) AppCityInfo *open_city;//所属城市
+@property (strong, nonatomic) AppDataDictionary *service_state;//门店状态 SERVICE_STATE 营业中、已停用
+@property (strong, nonatomic) NSString *service_name;//门店名称
+@property (strong, nonatomic) NSString *service_code;//门店代码
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

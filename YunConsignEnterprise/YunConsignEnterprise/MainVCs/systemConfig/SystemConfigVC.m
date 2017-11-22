@@ -8,7 +8,7 @@
 
 #import "SystemConfigVC.h"
 #import "OpenCityVC.h"
-
+#import "ServiceVC.h"
 
 #import "ServiceGoodVC.h"
 #import "ServicePackageVC.h"
@@ -76,7 +76,7 @@
                     vc = [OpenCityVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"SERVICE"]) {
-                    
+                    vc = [ServiceVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"JSON_USER"]) {
                     

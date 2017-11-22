@@ -9,6 +9,7 @@
 #import "CodRemitCell.h"
 
 @implementation CodRemitCell
+
 - (void)refreshFooter {
     NSArray *m_array = @[@"发放完成", @"申请单", @"运单明细"];
     if (self.indextag != 0) {

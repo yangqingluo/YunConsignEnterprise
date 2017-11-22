@@ -169,6 +169,14 @@
         }
             break;
             
+        case QueryConditionType_Service:{
+            self.showArray = @[@{@"title":@"所属城市",@"subTitle":@"请选择",@"key":@"open_city"},
+                               @{@"title":@"门店状态",@"subTitle":@"请选择",@"key":@"service_state"},
+                               @{@"title":@"门店名称",@"subTitle":@"请输入",@"key":@"service_name"},
+                               @{@"title":@"门店代码",@"subTitle":@"请输入",@"key":@"service_code"}];
+        }
+            break;
+            
         default:
             break;
     }
@@ -373,7 +381,7 @@
             [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
-    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
+    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"] || [key isEqualToString:@"open_city"]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
@@ -443,7 +451,7 @@
 
 - (NSSet *)inputValidSet {
     if (!_inputValidSet) {
-        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", @"freight_cust_name", @"phone", nil];
+        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", @"freight_cust_name", @"phone", @"service_name", @"service_code", nil];
     }
     return _inputValidSet;
 }
@@ -528,7 +536,7 @@
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"load_service"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"showCityAndServiceName"];
     }
-    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
+    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"] || [key isEqualToString:@"open_city"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"open_city_name"];
     }
     else {
