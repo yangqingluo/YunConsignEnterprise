@@ -161,6 +161,20 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppGoodInfo : AppType
+
+@property (strong, nonatomic) NSString *good_id;//常用品名编号
+@property (strong, nonatomic) NSString *good_name;//常用品名名称
+
+@end
+
+@interface AppGoodDetailInfo : AppGoodInfo
+
+@property (strong, nonatomic) NSString *good_py;//常用品名拼音
+@property (strong, nonatomic) NSString *sort;//常用品名排序
+
+@end
+
 @interface AppCityInfo : AppType
 
 @property (strong, nonatomic) NSString *open_city_id;//所在城市编号
@@ -175,7 +189,7 @@ BOOL isTrue(NSString *string);
 
 @end
 
-@interface APPEndStationInfo : AppType
+@interface AppEndStationInfo : AppType
 
 @property (strong, nonatomic) NSString *arrival_time;
 @property (strong, nonatomic) NSString *end_station_city_id;

@@ -51,6 +51,10 @@
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
 		E43487311FB456B800EE4188 /* QueryWaybillReimburseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43487301FB456B800EE4188 /* QueryWaybillReimburseListVC.m */; };
 		E43487341FB456D700EE4188 /* QueryWaybillReimburseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */; };
+		E437748A1FC5454F00BB37F6 /* ServiceGoodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */; };
+		E437748D1FC5455C00BB37F6 /* ServicePachageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E437748C1FC5455C00BB37F6 /* ServicePachageVC.m */; };
+		E43774901FC5478800BB37F6 /* SaveServiceGoodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */; };
+		E43774931FC5479700BB37F6 /* SaveServicePachageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43774921FC5479700BB37F6 /* SaveServicePachageVC.m */; };
 		E438D03B1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */; };
 		E438D03E1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D03D1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m */; };
 		E438D0411FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */; };
@@ -517,6 +521,14 @@
 		E43487301FB456B800EE4188 /* QueryWaybillReimburseListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryWaybillReimburseListVC.m; sourceTree = "<group>"; };
 		E43487321FB456D700EE4188 /* QueryWaybillReimburseListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryWaybillReimburseListCell.h; sourceTree = "<group>"; };
 		E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryWaybillReimburseListCell.m; sourceTree = "<group>"; };
+		E43774881FC5454F00BB37F6 /* ServiceGoodVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGoodVC.h; sourceTree = "<group>"; };
+		E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodVC.m; sourceTree = "<group>"; };
+		E437748B1FC5455C00BB37F6 /* ServicePachageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePachageVC.h; sourceTree = "<group>"; };
+		E437748C1FC5455C00BB37F6 /* ServicePachageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePachageVC.m; sourceTree = "<group>"; };
+		E437748E1FC5478800BB37F6 /* SaveServiceGoodVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveServiceGoodVC.h; sourceTree = "<group>"; };
+		E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveServiceGoodVC.m; sourceTree = "<group>"; };
+		E43774911FC5479700BB37F6 /* SaveServicePachageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveServicePachageVC.h; sourceTree = "<group>"; };
+		E43774921FC5479700BB37F6 /* SaveServicePachageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveServicePachageVC.m; sourceTree = "<group>"; };
 		E438D0391FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplyFirstVC.h; sourceTree = "<group>"; };
 		E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplyFirstVC.m; sourceTree = "<group>"; };
 		E438D03C1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillQueryVC.h; sourceTree = "<group>"; };
@@ -1575,6 +1587,10 @@
 		E4941E691FC413EC00707A0D /* ServiceGood */ = {
 			isa = PBXGroup;
 			children = (
+				E43774881FC5454F00BB37F6 /* ServiceGoodVC.h */,
+				E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */,
+				E437748E1FC5478800BB37F6 /* SaveServiceGoodVC.h */,
+				E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */,
 			);
 			name = ServiceGood;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/ServiceGood;
@@ -1583,6 +1599,10 @@
 		E4941E6A1FC413EC00707A0D /* ServicePachage */ = {
 			isa = PBXGroup;
 			children = (
+				E437748B1FC5455C00BB37F6 /* ServicePachageVC.h */,
+				E437748C1FC5455C00BB37F6 /* ServicePachageVC.m */,
+				E43774911FC5479700BB37F6 /* SaveServicePachageVC.h */,
+				E43774921FC5479700BB37F6 /* SaveServicePachageVC.m */,
 			);
 			name = ServicePachage;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/ServicePachage;
@@ -2759,6 +2779,7 @@
 				E4436E361FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m in Sources */,
 				E4E2A3C21FB311AE00D8EC1C /* MJRefreshBackGifFooter.m in Sources */,
 				E40E49DC1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m in Sources */,
+				E43774901FC5478800BB37F6 /* SaveServiceGoodVC.m in Sources */,
 				E4E2A3BC1FB311AE00D8EC1C /* MJRefreshComponent.m in Sources */,
 				E4E2A3841FB311AE00D8EC1C /* AFAutoPurgingImageCache.m in Sources */,
 				E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */,
@@ -2864,6 +2885,7 @@
 				E4E2A3A41FB311AE00D8EC1C /* UIImageView+LLExtension.m in Sources */,
 				E4E2A3BD1FB311AE00D8EC1C /* MJRefreshFooter.m in Sources */,
 				E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */,
+				E437748A1FC5454F00BB37F6 /* ServiceGoodVC.m in Sources */,
 				E4E2A3861FB311AE00D8EC1C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E4AE0F711FAAF6A1002DBE91 /* CodLoanCheckTableVC.m in Sources */,
 				E4E2A3A71FB311AE00D8EC1C /* LLImagePickerCell.m in Sources */,
@@ -2892,6 +2914,7 @@
 				E4AE0F6E1FAAF652002DBE91 /* CodLoanCheckVC.m in Sources */,
 				E4E2A3B41FB311AE00D8EC1C /* MJPropertyType.m in Sources */,
 				E4E2A3F11FB311AE00D8EC1C /* MWPhoto.m in Sources */,
+				E437748D1FC5455C00BB37F6 /* ServicePachageVC.m in Sources */,
 				E4E2A3F61FB311AE00D8EC1C /* UIImage+MWPhotoBrowser.m in Sources */,
 				E460C5DF1FB2FC5500B6014F /* PublicShowTableVC.m in Sources */,
 				E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */,
@@ -2899,6 +2922,7 @@
 				E48C72B61FA9B925007F7FC8 /* CodWaitPayVC.m in Sources */,
 				E4E2A3F81FB311AE00D8EC1C /* SDImageCache.m in Sources */,
 				E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */,
+				E43774931FC5479700BB37F6 /* SaveServicePachageVC.m in Sources */,
 				E46826021FA06EF8009C4918 /* PublicHeaderBodyCell.m in Sources */,
 				E4E2A4071FB311AE00D8EC1C /* TZAssetModel.m in Sources */,
 				E4E2A4101FB311AE00D8EC1C /* TZProgressView.m in Sources */,

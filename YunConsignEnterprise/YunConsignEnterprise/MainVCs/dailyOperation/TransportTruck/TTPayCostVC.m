@@ -225,7 +225,7 @@
             else {
                 NSUInteger index = indexPath.row - 1;
                 if (index < self.detailData.end_station.count) {
-                    APPEndStationInfo *station = self.detailData.end_station[index];
+                    AppEndStationInfo *station = self.detailData.end_station[index];
                     cell.baseView.textField.text = [NSString stringWithFormat:@"%@-%@", station.end_station_city_name, station.end_station_service_name];
                 }
                 else {

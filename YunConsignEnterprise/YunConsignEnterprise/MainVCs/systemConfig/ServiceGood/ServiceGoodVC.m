@@ -1,19 +1,19 @@
 //
-//  OpenCityVC.m
+//  ServiceGoodVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/11/21.
+//  Created by 7kers on 2017/11/22.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "OpenCityVC.h"
-#import "SaveOpenCityVC.h"
+#import "ServiceGoodVC.h"
+#import "SaveServiceGoodVC.h"
 
-@interface OpenCityVC ()
+@interface ServiceGoodVC ()
 
 @end
 
-@implementation OpenCityVC
+@implementation ServiceGoodVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,7 +44,7 @@
 }
 
 - (void)addBtnAction {
-    SaveOpenCityVC *vc = [SaveOpenCityVC new];
+    SaveServiceGoodVC *vc = [SaveServiceGoodVC new];
     [self goToSaveVC:vc];
 }
 
@@ -54,14 +54,14 @@
         
     }
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryOpenCityList" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServiceGoodList" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCityInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppGoodInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -91,11 +91,11 @@
         return;
     }
     
-    AppCityInfo *item = self.dataSource[indexPath.row];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"open_city_id" : item.open_city_id}];
+    AppGoodInfo *item = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"good_id" : item.good_id}];
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_deleteOpenCityById" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_deleteServiceGoodById" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
@@ -135,8 +135,8 @@
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
         cell.baseView.textField.enabled = NO;
     }
-    AppCityInfo *item = self.dataSource[indexPath.row];
-    cell.baseView.textLabel.text = item.open_city_name;
+    AppGoodInfo *item = self.dataSource[indexPath.row];
+    cell.baseView.textLabel.text = item.good_name;
     cell.baseView.textField.placeholder = @"";
     cell.baseView.textField.text = @"";
     cell.baseView.textField.indexPath = [indexPath copy];
@@ -148,7 +148,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    SaveOpenCityVC *vc = [SaveOpenCityVC new];
+    SaveServiceGoodVC *vc = [SaveServiceGoodVC new];
     vc.baseData = self.dataSource[indexPath.row];
     [self goToSaveVC:vc];
 }

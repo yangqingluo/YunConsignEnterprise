@@ -9,6 +9,9 @@
 #import "SystemConfigVC.h"
 #import "OpenCityVC.h"
 
+
+#import "ServiceGoodVC.h"
+
 #import "BlockAlertView.h"
 
 @interface SystemConfigVC ()
@@ -78,7 +81,7 @@
                     
                 }
                 else if ([item.menu_code isEqualToString:@"SERVICE_GOOD"]) {
-                    
+                    vc = [ServiceGoodVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"SERVICE_PACKAGE"]) {
                     

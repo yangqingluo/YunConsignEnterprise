@@ -120,6 +120,19 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+
+@implementation AppGoodInfo
+
+
+
+@end
+
+@implementation AppGoodDetailInfo
+
+
+
+@end
+
 @implementation AppCityInfo
 
 
@@ -134,7 +147,7 @@ BOOL isTrue(NSString *string) {
 
 
 
-@implementation APPEndStationInfo
+@implementation AppEndStationInfo
 
 
 
@@ -394,7 +407,7 @@ BOOL isTrue(NSString *string) {
     if (self) {
         [[self class] mj_setupObjectClassInArray:^NSDictionary *{
             return @{
-                     @"end_station" : [APPEndStationInfo class],
+                     @"end_station" : [AppEndStationInfo class],
                      };
         }];
     }
