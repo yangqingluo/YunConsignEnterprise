@@ -147,7 +147,7 @@
     cell.anotherBaseView.textField.text = @"";
     cell.anotherBaseView.textField.indexPath = [indexPath copy];
     
-    NSString *key1 = m_dic1[@"key"];
+//    NSString *key1 = m_dic1[@"key"];
     NSString *key2 = m_dic2[@"key"];
     cell.anotherBaseView.textField.enabled = ![self.inputInvalidSet containsObject:key2];
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;

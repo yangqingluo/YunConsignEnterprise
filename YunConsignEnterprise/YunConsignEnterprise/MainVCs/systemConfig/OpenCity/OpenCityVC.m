@@ -85,6 +85,33 @@
     [self doPushViewController:vc animated:YES];
 }
 
+- (void)doRemovingDataAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
+        [self doShowHintFunction:@"数据越界"];
+        return;
+    }
+    
+    AppCityInfo *item = self.dataSource[indexPath.row - 1];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"open_city_id" : item.open_city_id}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_deleteOpenCityById" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself removeItemSuccessAtIndexPath:indexPath];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
@@ -124,6 +151,10 @@
     SaveOpenCityVC *vc = [SaveOpenCityVC new];
     vc.baseData = self.dataSource[indexPath.row];
     [self goToSaveVC:vc];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 @end

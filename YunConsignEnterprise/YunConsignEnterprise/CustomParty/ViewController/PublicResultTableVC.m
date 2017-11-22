@@ -47,6 +47,31 @@
     
 }
 
+- (void)confirmRemovingDataAtIndexPath:(NSIndexPath *)indexPath {
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定删除吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [weakself doRemovingDataAtIndexPath:indexPath];
+        }
+    } otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+- (void)doRemovingDataAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
+        [self doShowHintFunction:@"数据越界"];
+        return;
+    }
+    
+}
+
+- (void)removeItemSuccessAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView beginUpdates];
+    [self.dataSource removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+}
+
 #pragma mark - getter
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
@@ -60,6 +85,17 @@
         _selectSet = [NSMutableSet new];
     }
     return _selectSet;
+}
+
+#pragma mark - UITableView
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self confirmRemovingDataAtIndexPath:indexPath];
+    }
 }
 
 @end

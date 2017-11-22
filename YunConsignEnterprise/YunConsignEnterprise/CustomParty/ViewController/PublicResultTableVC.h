@@ -20,4 +20,8 @@
 - (void)becomeListed;
 - (void)becomeUnListed;
 
+- (void)confirmRemovingDataAtIndexPath:(NSIndexPath *)indexPath;
+- (void)doRemovingDataAtIndexPath:(NSIndexPath *)indexPath;
+- (void)removeItemSuccessAtIndexPath:(NSIndexPath *)indexPath;
+
 @end

@@ -17,7 +17,6 @@
 @property (strong, nonatomic) NSSet *selectorSet;
 
 - (void)setupNav;
-- (void)goBack;
 - (void)saveButtonAction;
 - (void)initializeData;
 - (void)pullDetailData;
