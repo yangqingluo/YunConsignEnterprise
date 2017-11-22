@@ -445,6 +445,10 @@
 		E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */; };
 		E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */; };
 		E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */; };
+		E4FB632F1FC5628C005C482E /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FB632E1FC5628C005C482E /* JZLocationConverter.m */; };
+		E4FB63321FC5634F005C482E /* PublicLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FB63311FC5634F005C482E /* PublicLocationViewController.m */; };
+		E4FB63351FC5651E005C482E /* QKGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FB63341FC5651E005C482E /* QKGeocoder.m */; };
+		E4FB63381FC57013005C482E /* ServiceLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FB63371FC57012005C482E /* ServiceLocationVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1177,6 +1181,14 @@
 		E4F686FE1F70F11200D80704 /* WayBillSRHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillSRHeaderView.m; sourceTree = "<group>"; };
 		E4F78C341FB199DD0003549A /* CodLoanCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckCell.h; sourceTree = "<group>"; };
 		E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanCheckCell.m; sourceTree = "<group>"; };
+		E4FB632D1FC5628C005C482E /* JZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZLocationConverter.h; sourceTree = "<group>"; };
+		E4FB632E1FC5628C005C482E /* JZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZLocationConverter.m; sourceTree = "<group>"; };
+		E4FB63301FC5634F005C482E /* PublicLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicLocationViewController.h; sourceTree = "<group>"; };
+		E4FB63311FC5634F005C482E /* PublicLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicLocationViewController.m; sourceTree = "<group>"; };
+		E4FB63331FC5651E005C482E /* QKGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKGeocoder.h; sourceTree = "<group>"; };
+		E4FB63341FC5651E005C482E /* QKGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKGeocoder.m; sourceTree = "<group>"; };
+		E4FB63361FC57012005C482E /* ServiceLocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceLocationVC.h; sourceTree = "<group>"; };
+		E4FB63371FC57012005C482E /* ServiceLocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLocationVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1604,6 +1616,8 @@
 				E43B9DA01FC5543B00D1C57B /* ServiceVC.m */,
 				E43B9DA21FC5552F00D1C57B /* SaveServiceVC.h */,
 				E43B9DA31FC5552F00D1C57B /* SaveServiceVC.m */,
+				E4FB63361FC57012005C482E /* ServiceLocationVC.h */,
+				E4FB63371FC57012005C482E /* ServiceLocationVC.m */,
 			);
 			name = Service;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/Service;
@@ -1700,6 +1714,10 @@
 				E4AE9F4B1F5EA6CF002EBE41 /* NSData+HTTPRequest.m */,
 				E4AE9F571F5EA6CF002EBE41 /* UIResponder+Router.h */,
 				E4AE9F581F5EA6CF002EBE41 /* UIResponder+Router.m */,
+				E4FB632D1FC5628C005C482E /* JZLocationConverter.h */,
+				E4FB632E1FC5628C005C482E /* JZLocationConverter.m */,
+				E4FB63331FC5651E005C482E /* QKGeocoder.h */,
+				E4FB63341FC5651E005C482E /* QKGeocoder.m */,
 				E4AEA0D21F5EA8CE002EBE41 /* UIImage+Categories */,
 			);
 			path = Model;
@@ -1877,6 +1895,8 @@
 				E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */,
 				E430F3AC1FB45CB600AB74E1 /* PublicMessageReadManager.h */,
 				E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */,
+				E4FB63301FC5634F005C482E /* PublicLocationViewController.h */,
+				E4FB63311FC5634F005C482E /* PublicLocationViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2791,6 +2811,7 @@
 				E43B9DA71FC55BF600D1C57B /* ServiceCell.m in Sources */,
 				E4E2A3971FB311AE00D8EC1C /* IQUIWindow+Hierarchy.m in Sources */,
 				E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */,
+				E4FB63321FC5634F005C482E /* PublicLocationViewController.m in Sources */,
 				E4E2A3A61FB311AE00D8EC1C /* UIViewController+LLExtension.m in Sources */,
 				E4436E361FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m in Sources */,
 				E4E2A3C21FB311AE00D8EC1C /* MJRefreshBackGifFooter.m in Sources */,
@@ -2823,6 +2844,7 @@
 				E43487311FB456B800EE4188 /* QueryWaybillReimburseListVC.m in Sources */,
 				E46825B21FB1F6F90081C22C /* CodPayVC.m in Sources */,
 				E4941E741FC4187200707A0D /* SaveOpenCityVC.m in Sources */,
+				E4FB63381FC57013005C482E /* ServiceLocationVC.m in Sources */,
 				E42D18C11FB42A3100649825 /* SaveCodLoanApplySecondVC.m in Sources */,
 				E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */,
 				E4E2A3F71FB311AE00D8EC1C /* NSData+ImageContentType.m in Sources */,
@@ -2850,6 +2872,7 @@
 				E4941E6E1FC414EC00707A0D /* OpenCityVC.m in Sources */,
 				E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */,
 				E49D6C151FB15C62004F82D4 /* PublicFMWaybillQueryVC.m in Sources */,
+				E4FB63351FC5651E005C482E /* QKGeocoder.m in Sources */,
 				E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */,
 				E4E2A3901FB311AE00D8EC1C /* DACircularProgressView.m in Sources */,
 				E40F7CA81F95A71700946C18 /* WayBillOpenVC.m in Sources */,
@@ -3035,6 +3058,7 @@
 				E4E2A3B21FB311AE00D8EC1C /* MJProperty.m in Sources */,
 				E4E2A3981FB311AE00D8EC1C /* IQKeyboardManager.m in Sources */,
 				E4E2A3A31FB311AE00D8EC1C /* UIImage+LLGif.m in Sources */,
+				E4FB632F1FC5628C005C482E /* JZLocationConverter.m in Sources */,
 				E40F7CA71F95A71700946C18 /* PublicSRSelectVC.m in Sources */,
 				E43B9DA11FC5543B00D1C57B /* ServiceVC.m in Sources */,
 				E4AFFF591F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m in Sources */,

@@ -9,6 +9,7 @@
 #import "ServiceVC.h"
 #import "PublicQueryConditionVC.h"
 #import "SaveServiceVC.h"
+#import "ServiceLocationVC.h"
 
 #import "ServiceCell.h"
 
@@ -141,6 +142,36 @@
     }];
 }
 
+- (void)pullDetailDataAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
+        [self doShowHintFunction:@"数据越界"];
+        return;
+    }
+    AppServiceInfo *item = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : item.service_id}];
+    [self doShowHudFunction:@"门店地址信息查询中..."];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServiceById" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            ResponseItem *item = (ResponseItem *)responseBody;
+            if (item.items.count) {
+                AppServiceDetailInfo *detailData = [AppServiceDetailInfo mj_objectWithKeyValues:item.items[0]];
+                CLLocationCoordinate2D coor = CLLocationCoordinate2DMake([detailData.latitude doubleValue], [detailData.longitude doubleValue]);
+                if (CLLocationCoordinate2DIsValid(coor)) {
+                    ServiceLocationVC *vc = [[ServiceLocationVC alloc] initWithLocation:coor andAddress:detailData.service_address];
+                    [weakself doPushViewController:vc animated:YES];
+                    return;
+                }
+            }
+            [weakself doShowHintFunction:@"地址信息有误"];
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
@@ -189,7 +220,7 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                
+                [self pullDetailDataAtIndexPath:indexPath];
             }
                 break;
                 

@@ -26,6 +26,7 @@ NSURL *imageURLWithPath(NSString *path);
 + (QKNetworkSingleton *)sharedManager;
 
 //Get
+- (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLString:(NSString *)urlString completion:(QKNetworkBlock)completion;
 - (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion;
 
 //Post

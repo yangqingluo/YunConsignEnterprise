@@ -168,6 +168,17 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppServiceDetailInfo : AppServiceInfo
+
+@property (strong, nonatomic) NSString *service_number;//门店系统代码，用于生成运单号
+@property (strong, nonatomic) NSString *service_code;//门店代码，用于生成货号
+@property (strong, nonatomic) NSString *service_pinyin;//门店拼音
+@property (strong, nonatomic) NSString *longitude;//经度
+@property (strong, nonatomic) NSString *latitude;//纬度
+@property (strong, nonatomic) NSString *print_count;//标签可打印数量
+
+@end
+
 @interface AppGoodInfo : AppType
 
 @property (strong, nonatomic) NSString *good_id;//常用品名编号

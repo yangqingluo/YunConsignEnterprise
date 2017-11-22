@@ -87,9 +87,22 @@ NSString *httpRespString(NSError *error, NSObject *object){
 }
 
 //Get
-- (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion{
-    AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];
-    NSString *urlStr = [urlStringWithService(urlString) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+- (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLString:(NSString *)urlString completion:(QKNetworkBlock)completion{
+    AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:nil];
+    NSString *urlStr = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [manager GET:urlStr parameters:userInfo progress:^(NSProgress * _Nonnull Progress){
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject){
+        completion(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error){
+        completion(nil, error);
+    }];
+}
+
+- (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlFooter completion:(QKNetworkBlock)completion{
+    [self Get:userInfo HeadParm:parm URLString:urlStringWithService(urlFooter) completion:completion];
+    AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlFooter];
+    NSString *urlStr = [urlStringWithService(urlFooter) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     QKWEAKSELF;
     [manager GET:urlStr parameters:userInfo progress:^(NSProgress * _Nonnull Progress){
         
@@ -99,6 +112,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
         [weakself doResponseCompletion:nil block:completion];
     }];
 }
+
 //Post
 - (void)Post:(id)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlString completion:(QKNetworkBlock)completion{
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlString];

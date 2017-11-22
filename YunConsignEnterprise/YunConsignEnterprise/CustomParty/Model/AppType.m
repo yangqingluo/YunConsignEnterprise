@@ -120,6 +120,10 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppServiceDetailInfo
+
+@end
+
 
 @implementation AppGoodInfo
 
