@@ -13,8 +13,8 @@
 @property (copy, nonatomic) NSObject *baseData;
 @property (strong, nonatomic) NSObject *toSaveData;
 
-@property (strong, nonatomic) NSSet *numberKeyBoardTypeSet;
-@property (strong, nonatomic) NSSet *selectorSet;
+@property (strong, nonatomic) NSMutableSet *numberKeyBoardTypeSet;
+@property (strong, nonatomic) NSMutableSet *selectorSet;
 
 - (void)setupNav;
 - (void)saveButtonAction;
@@ -22,5 +22,7 @@
 - (void)pullDetailData;
 - (void)pushUpdateData;
 - (void)saveDataSuccess;
+- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -100,7 +100,6 @@ NSString *httpRespString(NSError *error, NSObject *object){
 }
 
 - (void)Get:(NSDictionary *)userInfo HeadParm:(NSDictionary *)parm URLFooter:(NSString *)urlFooter completion:(QKNetworkBlock)completion{
-    [self Get:userInfo HeadParm:parm URLString:urlStringWithService(urlFooter) completion:completion];
     AFHTTPSessionManager *manager = [self baseHttpRequestWithParm:parm andSuffix:urlFooter];
     NSString *urlStr = [urlStringWithService(urlFooter) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     QKWEAKSELF;

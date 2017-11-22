@@ -161,6 +161,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *service_phone;//门店电话
 @property (strong, nonatomic) NSString *responsible_info;//负责人信息
 @property (strong, nonatomic) NSString *responsible_name;//负责人姓名
+@property (strong, nonatomic) NSString *responsible_phone;//负责人电话
 @property (strong, nonatomic) NSString *service_state;//门店状态
 @property (strong, nonatomic) NSString *service_state_text;//门店状态文本
 
@@ -171,7 +172,6 @@ BOOL isTrue(NSString *string);
 @interface AppServiceDetailInfo : AppServiceInfo
 
 @property (strong, nonatomic) NSString *service_number;//门店系统代码，用于生成运单号
-@property (strong, nonatomic) NSString *service_code;//门店代码，用于生成货号
 @property (strong, nonatomic) NSString *service_pinyin;//门店拼音
 @property (strong, nonatomic) NSString *longitude;//经度
 @property (strong, nonatomic) NSString *latitude;//纬度

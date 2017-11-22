@@ -94,6 +94,7 @@
 
 #define NumberWithoutPoint           @"0123456789"
 #define NumberWithPoint              @"0123456789."
+#define NumberWithDash               @"0123456789-"
 
 #define kUserName                    @"username_CRM"
 #define kUserData                    @"userdata_CRM"

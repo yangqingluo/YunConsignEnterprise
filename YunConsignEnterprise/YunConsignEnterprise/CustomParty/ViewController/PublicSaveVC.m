@@ -57,6 +57,47 @@
     
 }
 
+- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSString *m_code = [dict_code uppercaseString];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/tms/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)saveDataSuccess {
     [self doShowHintFunction:@"保存成功"];
     [self goBackWithDone:YES];
@@ -94,16 +135,16 @@
 }
 
 #pragma mark - getter
-- (NSSet *)numberKeyBoardTypeSet {
+- (NSMutableSet *)numberKeyBoardTypeSet {
     if (!_numberKeyBoardTypeSet) {
-        _numberKeyBoardTypeSet = [NSSet setWithObjects:@"sort", nil];
+        _numberKeyBoardTypeSet = [NSMutableSet setWithObjects:@"sort", nil];
     }
     return _numberKeyBoardTypeSet;
 }
 
-- (NSSet *)selectorSet {
+- (NSMutableSet *)selectorSet {
     if (!_selectorSet) {
-        _selectorSet = [NSSet setWithObjects:@"", nil];
+        _selectorSet = [NSMutableSet new];
     }
     return _selectorSet;
 }
@@ -123,7 +164,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kEdgeSmall;
+    return kEdge;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -159,11 +200,19 @@
         cell.baseView.textField.enabled = NO;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
-        for (AppDataDictionary *m_data in dicArray) {
-            if ([m_data.item_val isEqualToString:[self.toSaveData valueForKey:key]]) {
-                cell.baseView.textField.text = m_data.item_name;
-                break;
+        if ([key isEqualToString:@"open_city"]) {
+            cell.baseView.textField.text = [self.toSaveData valueForKey:@"open_city_name"];
+        }
+        else if ([key isEqualToString:@"service_state"]) {
+            cell.baseView.textField.text = [self.toSaveData valueForKey:@"service_state_text"];
+        }
+        else {
+            NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+            for (AppDataDictionary *m_data in dicArray) {
+                if ([m_data.item_val isEqualToString:[self.toSaveData valueForKey:key]]) {
+                    cell.baseView.textField.text = m_data.item_name;
+                    break;
+                }
             }
         }
     }
@@ -187,6 +236,7 @@
     if ([string isEqualToString:@""]) {
         return YES;
     }
+    BOOL m_bool = YES;
     NSInteger length = kInputLengthMax;
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
@@ -210,7 +260,7 @@
         }
     }
     
-    return (range.location < length);
+    return m_bool && (range.location < length);
 }
 
 @end

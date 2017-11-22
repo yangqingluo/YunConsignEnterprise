@@ -133,7 +133,6 @@
         case QueryConditionType_CustomerManage:{
             self.showArray = @[@{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"freight_cust_name"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"phone"}];
-            [self checkDataMapExistedFor:@"query_column"];
         }
             break;
             
