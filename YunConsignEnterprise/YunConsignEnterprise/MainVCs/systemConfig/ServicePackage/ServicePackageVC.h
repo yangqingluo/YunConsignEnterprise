@@ -8,6 +8,6 @@
 
 #import "PublicResultTableVC.h"
 
-@interface ServicePachageVC : PublicResultTableVC
+@interface ServicePackageVC : PublicResultTableVC
 
 @end

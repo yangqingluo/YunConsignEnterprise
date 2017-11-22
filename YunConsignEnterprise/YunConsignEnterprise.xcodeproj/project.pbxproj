@@ -19,6 +19,8 @@
 		E40CCAB01F98734D00FD35EE /* daily_icon_WAYBILL_LOAD@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40CCAA41F98734D00FD35EE /* daily_icon_WAYBILL_LOAD@3x.png */; };
 		E40CCAB11F98734D00FD35EE /* daily_icon_WAYBILL_RECEIVE@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40CCAA51F98734D00FD35EE /* daily_icon_WAYBILL_RECEIVE@2x.png */; };
 		E40CCAB21F98734D00FD35EE /* daily_icon_WAYBILL_RECEIVE@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40CCAA61F98734D00FD35EE /* daily_icon_WAYBILL_RECEIVE@3x.png */; };
+		E40E47CD1FC54C4E00FCC247 /* SaveServicePackageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E47CA1FC54C4E00FCC247 /* SaveServicePackageVC.m */; };
+		E40E47CE1FC54C4E00FCC247 /* ServicePackageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E47CC1FC54C4E00FCC247 /* ServicePackageVC.m */; };
 		E40E49D61F96083D000C8B0B /* PublicMutableButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E49D51F96083D000C8B0B /* PublicMutableButtonView.m */; };
 		E40E49D91F9608AC000C8B0B /* PublicMutableContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E49D81F9608AB000C8B0B /* PublicMutableContentView.m */; };
 		E40E49DC1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E40E49DB1F960F44000C8B0B /* PublicHeaderBodyFooterCell.m */; };
@@ -52,9 +54,7 @@
 		E43487311FB456B800EE4188 /* QueryWaybillReimburseListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43487301FB456B800EE4188 /* QueryWaybillReimburseListVC.m */; };
 		E43487341FB456D700EE4188 /* QueryWaybillReimburseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */; };
 		E437748A1FC5454F00BB37F6 /* ServiceGoodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */; };
-		E437748D1FC5455C00BB37F6 /* ServicePachageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E437748C1FC5455C00BB37F6 /* ServicePachageVC.m */; };
 		E43774901FC5478800BB37F6 /* SaveServiceGoodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */; };
-		E43774931FC5479700BB37F6 /* SaveServicePachageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43774921FC5479700BB37F6 /* SaveServicePachageVC.m */; };
 		E438D03B1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */; };
 		E438D03E1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D03D1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.m */; };
 		E438D0411FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */; };
@@ -457,6 +457,10 @@
 		E40CCAA41F98734D00FD35EE /* daily_icon_WAYBILL_LOAD@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_LOAD@3x.png"; sourceTree = "<group>"; };
 		E40CCAA51F98734D00FD35EE /* daily_icon_WAYBILL_RECEIVE@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_RECEIVE@2x.png"; sourceTree = "<group>"; };
 		E40CCAA61F98734D00FD35EE /* daily_icon_WAYBILL_RECEIVE@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_RECEIVE@3x.png"; sourceTree = "<group>"; };
+		E40E47C91FC54C4E00FCC247 /* SaveServicePackageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveServicePackageVC.h; sourceTree = "<group>"; };
+		E40E47CA1FC54C4E00FCC247 /* SaveServicePackageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveServicePackageVC.m; sourceTree = "<group>"; };
+		E40E47CB1FC54C4E00FCC247 /* ServicePackageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePackageVC.h; sourceTree = "<group>"; };
+		E40E47CC1FC54C4E00FCC247 /* ServicePackageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePackageVC.m; sourceTree = "<group>"; };
 		E40E49D41F96083D000C8B0B /* PublicMutableButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMutableButtonView.h; sourceTree = "<group>"; };
 		E40E49D51F96083D000C8B0B /* PublicMutableButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMutableButtonView.m; sourceTree = "<group>"; };
 		E40E49D71F9608AB000C8B0B /* PublicMutableContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMutableContentView.h; sourceTree = "<group>"; };
@@ -523,12 +527,8 @@
 		E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryWaybillReimburseListCell.m; sourceTree = "<group>"; };
 		E43774881FC5454F00BB37F6 /* ServiceGoodVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceGoodVC.h; sourceTree = "<group>"; };
 		E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodVC.m; sourceTree = "<group>"; };
-		E437748B1FC5455C00BB37F6 /* ServicePachageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePachageVC.h; sourceTree = "<group>"; };
-		E437748C1FC5455C00BB37F6 /* ServicePachageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePachageVC.m; sourceTree = "<group>"; };
 		E437748E1FC5478800BB37F6 /* SaveServiceGoodVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveServiceGoodVC.h; sourceTree = "<group>"; };
 		E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveServiceGoodVC.m; sourceTree = "<group>"; };
-		E43774911FC5479700BB37F6 /* SaveServicePachageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveServicePachageVC.h; sourceTree = "<group>"; };
-		E43774921FC5479700BB37F6 /* SaveServicePachageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveServicePachageVC.m; sourceTree = "<group>"; };
 		E438D0391FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplyFirstVC.h; sourceTree = "<group>"; };
 		E438D03A1FB3FC7D0023B8DE /* SaveCodLoanApplyFirstVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplyFirstVC.m; sourceTree = "<group>"; };
 		E438D03C1FB3FDA60023B8DE /* CodLoanApplyWaybillQueryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillQueryVC.h; sourceTree = "<group>"; };
@@ -1181,6 +1181,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E40E47C81FC54C4E00FCC247 /* ServicePackage */ = {
+			isa = PBXGroup;
+			children = (
+				E40E47CB1FC54C4E00FCC247 /* ServicePackageVC.h */,
+				E40E47CC1FC54C4E00FCC247 /* ServicePackageVC.m */,
+				E40E47C91FC54C4E00FCC247 /* SaveServicePackageVC.h */,
+				E40E47CA1FC54C4E00FCC247 /* SaveServicePackageVC.m */,
+			);
+			name = ServicePackage;
+			path = YunConsignEnterprise/MainVCs/SystemConfig/ServicePackage;
+			sourceTree = SOURCE_ROOT;
+		};
 		E40F7C8C1F95A71700946C18 /* CustomerManage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1392,7 +1404,7 @@
 				E4941E671FC413EC00707A0D /* PrintSet */,
 				E4941E681FC413EC00707A0D /* Service */,
 				E4941E691FC413EC00707A0D /* ServiceGood */,
-				E4941E6A1FC413EC00707A0D /* ServicePachage */,
+				E40E47C81FC54C4E00FCC247 /* ServicePackage */,
 				E4941E6B1FC413EC00707A0D /* TruckManage */,
 			);
 			name = SystemConfig;
@@ -1594,18 +1606,6 @@
 			);
 			name = ServiceGood;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/ServiceGood;
-			sourceTree = SOURCE_ROOT;
-		};
-		E4941E6A1FC413EC00707A0D /* ServicePachage */ = {
-			isa = PBXGroup;
-			children = (
-				E437748B1FC5455C00BB37F6 /* ServicePachageVC.h */,
-				E437748C1FC5455C00BB37F6 /* ServicePachageVC.m */,
-				E43774911FC5479700BB37F6 /* SaveServicePachageVC.h */,
-				E43774921FC5479700BB37F6 /* SaveServicePachageVC.m */,
-			);
-			name = ServicePachage;
-			path = YunConsignEnterprise/MainVCs/SystemConfig/ServicePachage;
 			sourceTree = SOURCE_ROOT;
 		};
 		E4941E6B1FC413EC00707A0D /* TruckManage */ = {
@@ -2840,6 +2840,7 @@
 				E4CE602D1FA03EDF007F427C /* UDImageLabelButton.m in Sources */,
 				E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */,
 				E4443F621F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m in Sources */,
+				E40E47CE1FC54C4E00FCC247 /* ServicePackageVC.m in Sources */,
 				E49D6C181FB15F04004F82D4 /* PublicInputHeaderView.m in Sources */,
 				E40F7CA41F95A71700946C18 /* TransportTruckVC.m in Sources */,
 				E48C72C21FA9BD52007F7FC8 /* CodCheckCell.m in Sources */,
@@ -2914,7 +2915,6 @@
 				E4AE0F6E1FAAF652002DBE91 /* CodLoanCheckVC.m in Sources */,
 				E4E2A3B41FB311AE00D8EC1C /* MJPropertyType.m in Sources */,
 				E4E2A3F11FB311AE00D8EC1C /* MWPhoto.m in Sources */,
-				E437748D1FC5455C00BB37F6 /* ServicePachageVC.m in Sources */,
 				E4E2A3F61FB311AE00D8EC1C /* UIImage+MWPhotoBrowser.m in Sources */,
 				E460C5DF1FB2FC5500B6014F /* PublicShowTableVC.m in Sources */,
 				E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */,
@@ -2922,7 +2922,6 @@
 				E48C72B61FA9B925007F7FC8 /* CodWaitPayVC.m in Sources */,
 				E4E2A3F81FB311AE00D8EC1C /* SDImageCache.m in Sources */,
 				E4443F5F1F9ED2E600D2FE18 /* TTLoadListVC.m in Sources */,
-				E43774931FC5479700BB37F6 /* SaveServicePachageVC.m in Sources */,
 				E46826021FA06EF8009C4918 /* PublicHeaderBodyCell.m in Sources */,
 				E4E2A4071FB311AE00D8EC1C /* TZAssetModel.m in Sources */,
 				E4E2A4101FB311AE00D8EC1C /* TZProgressView.m in Sources */,
@@ -2984,6 +2983,7 @@
 				E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */,
 				E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */,
 				E48C72BF1FA9B9A0007F7FC8 /* CodCheckDetailVC.m in Sources */,
+				E40E47CD1FC54C4E00FCC247 /* SaveServicePackageVC.m in Sources */,
 				E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */,
 				E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */,
 				E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */,

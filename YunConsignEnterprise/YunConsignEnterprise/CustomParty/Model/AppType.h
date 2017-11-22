@@ -175,6 +175,20 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppPackageInfo : AppType
+
+@property (strong, nonatomic) NSString *package_id;//常用包装编号
+@property (strong, nonatomic) NSString *package_name;//常用包装名称
+
+@end
+
+@interface AppPackageDetailInfo : AppPackageInfo
+
+@property (strong, nonatomic) NSString *package_py;//常用包装拼音
+@property (strong, nonatomic) NSString *sort;//常用包装排序
+
+@end
+
 @interface AppCityInfo : AppType
 
 @property (strong, nonatomic) NSString *open_city_id;//所在城市编号

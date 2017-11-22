@@ -8,6 +8,6 @@
 
 #import "PublicSaveVC.h"
 
-@interface SaveServicePachageVC : PublicSaveVC
+@interface SaveServicePackageVC : PublicSaveVC
 
 @end

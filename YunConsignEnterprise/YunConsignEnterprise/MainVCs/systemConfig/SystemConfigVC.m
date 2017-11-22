@@ -11,6 +11,7 @@
 
 
 #import "ServiceGoodVC.h"
+#import "ServicePackageVC.h"
 
 #import "BlockAlertView.h"
 
@@ -84,7 +85,7 @@
                     vc = [ServiceGoodVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"SERVICE_PACKAGE"]) {
-                    
+                    vc = [ServicePackageVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"TRUCK_MANAGE"]) {
                     

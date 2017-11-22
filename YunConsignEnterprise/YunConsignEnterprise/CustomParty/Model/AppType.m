@@ -133,6 +133,18 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppPackageInfo
+
+
+
+@end
+
+@implementation AppPackageDetailInfo
+
+
+
+@end
+
 @implementation AppCityInfo
 
 

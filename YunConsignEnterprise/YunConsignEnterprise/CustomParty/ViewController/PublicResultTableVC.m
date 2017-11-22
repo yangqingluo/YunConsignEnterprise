@@ -66,10 +66,11 @@
 }
 
 - (void)removeItemSuccessAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView beginUpdates];
+//    [self.tableView beginUpdates];
     [self.dataSource removeObjectAtIndex:indexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdates];
+    [self.tableView reloadData];
+//    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [self.tableView endUpdates];
 }
 
 #pragma mark - getter
