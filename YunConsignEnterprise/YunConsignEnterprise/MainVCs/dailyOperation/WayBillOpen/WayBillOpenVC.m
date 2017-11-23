@@ -149,10 +149,10 @@
     double weight = 0.0;
     double volume = 0.0;
     for (AppGoodsInfo *item in self.goodsArray) {
-        freight += item.freight;
-        number += item.number;
-        weight += item.weight;
-        volume += item.volume;
+        freight += [item.freight longLongValue];
+        number += [item.number intValue];
+        weight += [item.weight doubleValue];
+        volume += [item.volume doubleValue];
     }
     self.toSaveData.freight = [NSString stringWithFormat:@"%lld", freight];
     self.toSaveData.goods_total_count = [NSString stringWithFormat:@"%d", number];
@@ -532,9 +532,9 @@
                                         @"包装",
                                         notNilString(item.packge),
                                         @"件/吨/方",
-                                        [NSString stringWithFormat:@"%d/%.1f/%.1f", item.number, item.weight, item.volume],
+                                        [NSString stringWithFormat:@"%@/%@/%@", item.number, item.weight, item.volume],
                                         @"运费",
-                                        [NSString stringWithFormat:@"%lld", item.freight]]];
+                                        [NSString stringWithFormat:@"%@", item.freight]]];
                 
                 return cell;
             }

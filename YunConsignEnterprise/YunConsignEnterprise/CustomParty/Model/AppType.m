@@ -215,6 +215,7 @@ BOOL isTrue(NSString *string) {
 - (void)appendSenderInfo:(AppSendReceiveInfo *)info {
     self.shipper_name = [info.customer.freight_cust_name copy];
     self.shipper_phone = [info.customer.phone copy];
+    self.shipper_id_card = [info.customer.id_card copy];
 }
 
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info {

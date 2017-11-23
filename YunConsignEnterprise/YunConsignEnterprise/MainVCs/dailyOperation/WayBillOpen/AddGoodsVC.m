@@ -62,7 +62,20 @@
     else if (!self.headerView.data.packge) {
         [self showHint:@"请输入包装类型"];
     }
+    else if (!self.headerView.data.number) {
+        [self showHint:@"请输入件数"];
+    }
+    else if (!self.headerView.data.freight) {
+        [self showHint:@"请输入运费"];
+    }
     else {
+        if (!self.headerView.data.weight) {
+            self.headerView.data.weight = @"0";
+        }
+        if (!self.headerView.data.volume) {
+            self.headerView.data.volume = @"0";
+        }
+        
         if (self.doneBlock) {
             self.doneBlock(self.headerView.data);
         }

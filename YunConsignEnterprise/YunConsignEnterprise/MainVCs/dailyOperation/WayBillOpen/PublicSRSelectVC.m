@@ -33,15 +33,23 @@
 
 //初始化数据
 - (void)initializeData{
+    _data = [AppSendReceiveInfo new];
+    _data.customer = [AppCustomerInfo new];
     switch (self.type) {
-        case SRSelectType_Sender:
+        case SRSelectType_Sender: {
+            self.title = @"发货人";
+            _showArray = @[@{@"title":@"始发站",@"subTitle":@"请选择"},
+                           @{@"title":@"客户电话",@"subTitle":@"请输入"},
+                           @{@"title":@"客户姓名",@"subTitle":@"请输入"},
+                           @{@"title":@"身份证号",@"subTitle":@"请输入"}];
+        }
+            break;
         case SRSelectType_Receiver:{
-            self.title = self.type == SRSelectType_Sender ? @"发货人" : @"收货人";
-            _showArray = @[@{@"title": (self.type == SRSelectType_Sender ? @"始发站" : @"终点站"),@"subTitle":@"请选择"},
+            self.title = @"收货人";
+            _showArray = @[@{@"title":@"终点站",@"subTitle":@"请选择"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入"}];
-            _data = [AppSendReceiveInfo new];
-            _data.customer = [AppCustomerInfo new];
+            
         }
             break;
             
@@ -121,6 +129,9 @@
     if (indexPath.row == 2) {
         self.data.customer.freight_cust_name = content;
     }
+    else if (indexPath.row == 3) {
+        self.data.customer.id_card = content;
+    }
     else {
 //        NSDictionary *dic = self.showArray[row];
 //        [self.data setValue:content forKey:dic[@"key"]];
@@ -189,6 +200,11 @@
             
         case 2:{
             cell.baseView.textField.text = self.data.customer.freight_cust_name;
+        }
+            break;
+            
+        case 3:{
+            cell.baseView.textField.text = self.data.customer.id_card;
         }
             break;
             

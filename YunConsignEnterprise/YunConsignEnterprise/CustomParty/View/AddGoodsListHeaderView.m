@@ -133,16 +133,16 @@
                 case 2:{
                     cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
                     cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                    cell.baseView.textField.text = [NSString stringWithFormat:@"%d", self.data.number];
-                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%lld", self.data.freight];
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@", self.data.number ? self.data.number : @""];
+                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%@", self.data.freight ? self.data.freight : @""];
                 }
                     break;
                     
                 case 3:{
                     cell.baseView.textField.keyboardType = UIKeyboardTypeDecimalPad;
                     cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeDecimalPad;
-                    cell.baseView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.weight];
-                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%.1f", self.data.volume];
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@", self.data.weight ? self.data.weight : @""];
+                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%@", self.data.volume ? self.data.volume : @""];
                 }
                     break;
                     
@@ -180,20 +180,20 @@
                 
             case 2:{
                 if (textField.tag == 0) {
-                    self.data.number = [textField.text intValue];
+                    self.data.number = textField.text;
                 }
                 else if (textField.tag == 1) {
-                    self.data.freight = [textField.text doubleValue];
+                    self.data.freight = textField.text;
                 }
             }
                 break;
                 
             case 3:{
                 if (textField.tag == 0) {
-                    self.data.weight = [textField.text intValue];
+                    self.data.weight = textField.text;
                 }
                 else if (textField.tag == 1) {
-                    self.data.volume = [textField.text doubleValue];
+                    self.data.volume = textField.text;
                 }
             }
                 break;

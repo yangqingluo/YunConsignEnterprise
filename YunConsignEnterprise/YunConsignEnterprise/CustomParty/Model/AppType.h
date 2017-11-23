@@ -135,6 +135,7 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *freight_cust_id;//客户编号
 @property (strong, nonatomic) NSString *freight_cust_name;//客户姓名
+@property (strong, nonatomic) NSString *id_card;//身份证号
 @property (strong, nonatomic) NSString *phone;//电话
 @property (strong, nonatomic) NSString *last_deliver_time;//最后发货时间
 @property (strong, nonatomic) NSString *last_deliver_goods;//最后发货内容
@@ -259,10 +260,10 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *goods_name;//货名
 @property (strong, nonatomic) NSString *packge;//包装
-@property (assign, nonatomic) int number;//数量，件
-@property (assign, nonatomic) double weight;//重量，吨
-@property (assign, nonatomic) double volume;//体积，方
-@property (assign, nonatomic) long long freight;//运费
+@property (strong, nonatomic) NSString *freight;//运费
+@property (strong, nonatomic) NSString *number;//数量，件
+@property (strong, nonatomic) NSString *volume;//体积，方
+@property (strong, nonatomic) NSString *weight;//重量，吨
 
 @end
 
@@ -271,9 +272,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *waybill_id;
 @property (strong, nonatomic) NSString *waybill_item_id;
 @property (strong, nonatomic) NSString *waybill_item_name;
+@property (strong, nonatomic) NSString *packge;//包装
 @property (strong, nonatomic) NSString *freight;//运费
 @property (strong, nonatomic) NSString *number;//数量，件
-@property (strong, nonatomic) NSString *packge;//包装
 @property (strong, nonatomic) NSString *volume;//体积，方
 @property (strong, nonatomic) NSString *weight;//重量，吨
 
