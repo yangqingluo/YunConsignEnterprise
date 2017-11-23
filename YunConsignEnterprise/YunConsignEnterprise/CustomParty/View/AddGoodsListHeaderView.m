@@ -24,10 +24,10 @@
     if (self) {
         _showArray = @[@{@"title":@"货物名称",@"subTitle":@"请输入"},
                        @{@"title":@"包装类型",@"subTitle":@"请输入"},
-                       @[@{@"title":@"件数",@"subTitle":@"请输入"},
-                         @{@"title":@"运费",@"subTitle":@"请输入"}],
-                       @[@{@"title":@"吨",@"subTitle":@"请输入"},
-                         @{@"title":@"方",@"subTitle":@"请输入"}]];
+                       @[@{@"title":@"件数",@"subTitle":@"0"},
+                         @{@"title":@"运费",@"subTitle":@"0"}],
+                       @[@{@"title":@"吨",@"subTitle":@"0"},
+                         @{@"title":@"方",@"subTitle":@"0"}]];
     }
     return self;
 }

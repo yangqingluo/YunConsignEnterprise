@@ -160,25 +160,26 @@
     if (!_feeShowArray) {
         _feeShowArray = @[@{@"title":@"回单",@"subTitle":@"请选择",@"key":@"receipt_sign_type"},
                           @{@"title":@"代收款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},
-                          @{@"title":@"代收款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_amount"},
+                          @{@"title":@"代收款金额",@"subTitle":@"0",@"key":@"cash_on_delivery_amount"},
                           @{@"title":@"运费代扣",@"subTitle":@"请选择",@"key":@"is_deduction_freight"},
                           @{@"title":@"急货",@"subTitle":@"请选择",@"key":@"is_urgent"},
-                          @{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
-                          @[@{@"title":@"保价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
+                          @[@{@"title":@"叉车费",@"subTitle":@"0",@"key":@"forklift_fee"},
+                            @{@"title":@"回扣费",@"subTitle":@"0",@"key":@"rebate_fee"}],
+                          @[@{@"title":@"保价",@"subTitle":@"0",@"key":@"insurance_amount"},
                             @{@"title":@"保价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
-                          @[@{@"title":@"接货费",@"subTitle":@"请输入",@"key":@"take_goods_fee"},
-                            @{@"title":@"送货费",@"subTitle":@"请输入",@"key":@"deliver_goods_fee"}],
-                          @[@{@"title":@"回扣费",@"subTitle":@"请输入",@"key":@"rebate_fee"},
-                            @{@"title":@"垫付费",@"subTitle":@"请输入",@"key":@"pay_for_sb_fee"}],];
+                          @[@{@"title":@"接货费",@"subTitle":@"0",@"key":@"take_goods_fee"},
+                            @{@"title":@"送货费",@"subTitle":@"0",@"key":@"deliver_goods_fee"}],
+                          @[@{@"title":@"中转费",@"subTitle":@"0",@"key":@"transfer_fee"},
+                            @{@"title":@"垫付费",@"subTitle":@"0",@"key":@"pay_for_sb_fee"}],];
     }
     return _feeShowArray;
 }
 
 - (NSArray *)payStyleShowArray {
     if (!_payStyleShowArray) {
-        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
-                               @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
-                               @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
+        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"0",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
+                               @{@"title":@"提付",@"subTitle":@"0",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
+                               @{@"title":@"回单付",@"subTitle":@"0",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
                                @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
                                @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},];
     }

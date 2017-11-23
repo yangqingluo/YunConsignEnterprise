@@ -285,6 +285,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *end_station_service_id;//到站门店编号
 @property (strong, nonatomic) NSString *shipper_name;//发货人名称
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
+@property (strong, nonatomic) NSString *shipper_id_card;//发货人身份证号
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称
 @property (strong, nonatomic) NSString *consignee_phone;//收货人电话
 @property (strong, nonatomic) NSString *insurance_amount;//保价金额
@@ -293,6 +294,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *deliver_goods_fee;//送货费
 @property (strong, nonatomic) NSString *rebate_fee;//回扣费
 @property (strong, nonatomic) NSString *forklift_fee;//叉车费
+@property (strong, nonatomic) NSString *transfer_fee;//中转费
 @property (strong, nonatomic) NSString *return_fee;//原货返回费
 @property (strong, nonatomic) NSString *pay_for_sb_fee;//垫付费
 @property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
@@ -307,7 +309,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
 @property (strong, nonatomic) NSString *note;//运单内部
 @property (strong, nonatomic) NSString *inner_note;//运单内部备注
-@property (strong, nonatomic) NSString *return_waybill_number;//原货返货运单号
+@property (strong, nonatomic) NSString *return_waybill_number;//原货返回货号
+@property (strong, nonatomic) NSString *return_waybill_id;//原货返回运单编号
 @property (strong, nonatomic) NSString *consignment_time;//托运日期
 @property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式
@@ -407,6 +410,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式 RECEIPT_SIGN_TYPE 无回单、签字、盖章、签字+盖章
 @property (strong, nonatomic) NSString *rebate_fee;//回扣费
 @property (strong, nonatomic) NSString *forklift_fee;//叉车费
+@property (strong, nonatomic) NSString *transfer_fee;//中转费
 @property (strong, nonatomic) NSString *return_fee;//原货返回费
 @property (strong, nonatomic) NSString *pay_for_sb_fee;//垫付款
 @property (strong, nonatomic) NSString *operator_id;//开单人编号

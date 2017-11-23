@@ -158,11 +158,11 @@
     if (m_array.count == 5) {
         self.headerView.data.goods_name = m_array[0];
         self.headerView.data.packge = m_array[1];
-        self.headerView.data.number = [m_array[2] intValue];
-        self.headerView.data.weight = [m_array[3] doubleValue];
-        self.headerView.data.volume = [m_array[4] doubleValue];
+//        self.headerView.data.number = [m_array[2] intValue];
+//        self.headerView.data.weight = [m_array[3] doubleValue];
+//        self.headerView.data.volume = [m_array[4] doubleValue];
     }
-    self.headerView.data.freight = [item.total_amount longLongValue];
+//    self.headerView.data.freight = [item.total_amount longLongValue];
     [self.headerView.tableView reloadData];
 }
 

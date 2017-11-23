@@ -34,12 +34,13 @@
                           @{@"title":@"代收款",@"subTitle":@"未知",@"key":@"cash_on_delivery_type"},
                           @{@"title":@"代收款金额",@"subTitle":@"0",@"key":@"cash_on_delivery_amount"},
                           @{@"title":@"运费代扣",@"subTitle":@"未知",@"key":@"is_deduction_freight"},
-                          @{@"title":@"叉车费",@"subTitle":@"0",@"key":@"forklift_fee"},
+                          @[@{@"title":@"叉车费",@"subTitle":@"0",@"key":@"forklift_fee"},
+                            @{@"title":@"回扣费",@"subTitle":@"0",@"key":@"rebate_fee"}],
                           @[@{@"title":@"保价",@"subTitle":@"0",@"key":@"insurance_amount"},
-                            @{@"title":@"保价费",@"subTitle":@"0",@"key":@"insurance_fee"}],
+                            @{@"title":@"保价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
                           @[@{@"title":@"接货费",@"subTitle":@"0",@"key":@"take_goods_fee"},
                             @{@"title":@"送货费",@"subTitle":@"0",@"key":@"deliver_goods_fee"}],
-                          @[@{@"title":@"回扣费",@"subTitle":@"0",@"key":@"rebate_fee"},
+                          @[@{@"title":@"中转费",@"subTitle":@"0",@"key":@"transfer_fee"},
                             @{@"title":@"垫付费",@"subTitle":@"0",@"key":@"pay_for_sb_fee"}],
                           @{@"title":@"原返费",@"subTitle":@"0",@"key":@"return_fee"},
                           @{@"title":@"原返运单",@"subTitle":@"无",@"key":@"return_waybill_number"},];
@@ -246,12 +247,12 @@
     NSString *key1 = m_dic1[@"key"];
     NSString *value1 = [self.detailData valueForKey:key1];
     if (value1) {
-        cell.baseView.textField.text = value1;
+        cell.baseView.textField.text = [NSString stringWithFormat:@"%d", [value1 intValue]];
     }
     NSString *key2 = m_dic2[@"key"];
     NSString *value2 = [self.detailData valueForKey:key2];
     if (value2) {
-        cell.anotherBaseView.textField.text = value2;
+        cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%d", [value2 intValue]];
     }
     
     return cell;
