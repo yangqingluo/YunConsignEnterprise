@@ -53,7 +53,7 @@
     [AppPublic adjustLabelWidth:self.titleLabel];
     
     self.urgentLabel.hidden = !isTrue(data.is_urgent);
-    self.receiptLabel.hidden = isTrue(data.is_receipt);
+    self.receiptLabel.hidden = !isTrue(data.is_receipt);
     
     if (!self.urgentLabel.hidden) {
         self.urgentLabel.left = self.titleLabel.right + kEdge;

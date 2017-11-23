@@ -117,8 +117,8 @@
     }];
 }
 
-- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content {
-    if (row == 2) {
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
+    if (indexPath.row == 2) {
         self.data.customer.freight_cust_name = content;
     }
     else {
@@ -126,7 +126,7 @@
 //        [self.data setValue:content forKey:dic[@"key"]];
     }
     
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - getter
@@ -273,7 +273,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndex:indexPath.row andContent:textField.text];
+        [self editAtIndexPath:indexPath tag:0 andContent:textField.text];
     }
 }
 

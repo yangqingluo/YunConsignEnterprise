@@ -309,10 +309,10 @@
     }
 }
 
-- (void)editAtIndex:(NSUInteger )row andContent:(NSString *)content {
-    NSDictionary *m_dic = self.showArray[row];
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
+    NSDictionary *m_dic = self.showArray[indexPath.row];
     [self.condition setValue:content forKey:m_dic[@"key"]];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
