@@ -211,7 +211,7 @@
         default:
             break;
     }
-    cell.baseView.textField.enabled = (indexPath.row == 2);
+    cell.baseView.textField.enabled = (indexPath.row == 2 || indexPath.row == 3);
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;

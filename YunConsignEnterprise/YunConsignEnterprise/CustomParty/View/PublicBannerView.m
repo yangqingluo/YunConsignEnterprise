@@ -130,7 +130,7 @@
         }
         [button setImage:m_image forState:UIControlStateNormal];
         if (item.menu_icon.length) {
-            [button sd_setImageWithURL:[NSURL URLWithString:item.menu_icon] forState:UIControlStateNormal];
+            [button sd_setImageWithURL:[NSURL URLWithString:item.menu_icon] forState:UIControlStateNormal placeholderImage:m_image];
         }
         [button setTitle:item.menu_name forState:UIControlStateNormal];
         button.titleLabel.font = [AppPublic appFontOfSize:14];
