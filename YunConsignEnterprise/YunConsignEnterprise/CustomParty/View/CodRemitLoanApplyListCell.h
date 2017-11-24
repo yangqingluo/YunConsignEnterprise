@@ -6,9 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "PublicHeaderBodyCell.h"
+#import "PublicHeaderBodyFooterCell.h"
 
-@interface CodRemitLoanApplyListCell : PublicHeaderBodyCell
+@interface CodRemitLoanApplyListCell : PublicHeaderBodyFooterCell
 
 @property (strong, nonatomic) UILabel *bodyLabelRight3;
 @property (strong, nonatomic) UILabel *bodyLabel4;

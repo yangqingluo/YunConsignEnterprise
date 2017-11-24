@@ -487,14 +487,8 @@ BOOL isTrue(NSString *string) {
 - (NSArray *)showStringListForChangeDetail {
     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:3];
     [m_array addObject:self.field_name];
-    if ([self.field hasPrefix:@"is_"] && ![self.field isEqualToString:@"is_load"]) {
-        [m_array addObject:isTrue(self.prev_value) ? @"是" : @"否"];
-        [m_array addObject:isTrue(self.cur_value) ? @"是" : @"否"];
-    }
-    else {
-        [m_array addObject:self.prev_value];
-        [m_array addObject:self.cur_value];
-    }
+    [m_array addObject:self.prev_value];
+    [m_array addObject:self.cur_value];
     return [NSArray arrayWithArray:m_array];
 }
 

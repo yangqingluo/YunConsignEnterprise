@@ -8,6 +8,7 @@
 
 #import "PayOnReceiptVC.h"
 #import "PublicQueryConditionVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "PayOnReceiptCell.h"
 #import "MJRefresh.h"
@@ -179,6 +180,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+    vc.type = WaybillDetailType_WayBillQuery;
+    vc.data = self.dataSource[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router

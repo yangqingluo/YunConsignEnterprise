@@ -35,6 +35,7 @@
 		E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */; };
 		E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E5D1FAACD420094F30E /* PublicSlideVC.m */; };
 		E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E601FAAE6810094F30E /* PublicResultTableVC.m */; };
+		E418FCA51FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E418FCA41FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.m */; };
 		E41BF7E31F97854E00C23CEA /* PayOnReceiptVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */; };
 		E41BF7E61F97859300C23CEA /* CustomerManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E51F97859300C23CEA /* CustomerManageVC.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
@@ -502,6 +503,8 @@
 		E4110E5D1FAACD420094F30E /* PublicSlideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicSlideVC.m; sourceTree = "<group>"; };
 		E4110E5F1FAAE6810094F30E /* PublicResultTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultTableVC.h; sourceTree = "<group>"; };
 		E4110E601FAAE6810094F30E /* PublicResultTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicResultTableVC.m; sourceTree = "<group>"; };
+		E418FCA31FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitLoanApplyWaybillDetailVC.h; sourceTree = "<group>"; };
+		E418FCA41FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitLoanApplyWaybillDetailVC.m; sourceTree = "<group>"; };
 		E41BF7E11F97854E00C23CEA /* PayOnReceiptVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptVC.h; sourceTree = "<group>"; };
 		E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptVC.m; sourceTree = "<group>"; };
 		E41BF7E41F97859300C23CEA /* CustomerManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerManageVC.h; sourceTree = "<group>"; };
@@ -1534,6 +1537,8 @@
 				E4F2835A1FB1B927005A0BC1 /* CodRemitWaybillDetailVC.m */,
 				E4F2835C1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.h */,
 				E4F2835D1FB1BA23005A0BC1 /* CodRemitLoanApplyListVC.m */,
+				E418FCA31FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.h */,
+				E418FCA41FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.m */,
 			);
 			name = CodRemit;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodRemit;
@@ -3076,6 +3081,7 @@
 				E4E2A39A1FB311AE00D8EC1C /* IQTextView.m in Sources */,
 				E4E2A4051FB311AE00D8EC1C /* NSBundle+TZImagePicker.m in Sources */,
 				E45995301F95D282009F35A6 /* SearchQuantityResultTableVC.m in Sources */,
+				E418FCA51FC7CB3600884A60 /* CodRemitLoanApplyWaybillDetailVC.m in Sources */,
 				E4AEA0791F5EA6D0002EBE41 /* AppBasicViewController.m in Sources */,
 				E4E2A3C51FB311AE00D8EC1C /* MJRefreshGifHeader.m in Sources */,
 				E4E2A3F51FB311AE00D8EC1C /* MWZoomingScrollView.m in Sources */,

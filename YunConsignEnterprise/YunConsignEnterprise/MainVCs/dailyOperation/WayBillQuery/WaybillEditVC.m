@@ -84,16 +84,19 @@
     NSDictionary *toSaveDic = [self.toSaveData mj_keyValues];
     NSDictionary *detailDic = [self.detailData mj_keyValues];
     NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    
+    BOOL hasChanged = NO;
     for (NSString *key in toSaveDic.allKeys) {
         if ([key isEqualToString:@"waybill_items"]) {
             continue;
         }
         if (![toSaveDic[key] isEqual:detailDic[key]]) {
-            [m_dic setObject:toSaveDic[key] forKey:key];
+            hasChanged = YES;
         }
+        [m_dic setObject:toSaveDic[key] forKey:key];
     }
-    if (m_dic.count) {
-        NSLog(@"%@", [AppPublic logDic:m_dic]);
+    if (hasChanged) {
+//        NSLog(@"%@", [AppPublic logDic:m_dic]);
         [m_dic setObject:self.detailData.waybill_id forKey:@"waybill_id"];
         [self pushUpdateWaybillFunction:m_dic];
     }

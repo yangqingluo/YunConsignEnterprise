@@ -21,6 +21,11 @@
     [self.bodyView addSubview:_bodyLabel4];
 }
 
+- (void)setupFooter {
+    [super setupFooter];
+    [self.footerView updateDataSourceWithArray:@[@"运单明细"]];
+}
+
 #pragma mark - setter
 - (void)setData:(AppCodLoanApplyWaitLoanInfo *)data {
     _data = data;

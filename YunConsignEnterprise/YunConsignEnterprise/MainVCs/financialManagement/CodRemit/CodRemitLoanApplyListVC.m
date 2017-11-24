@@ -7,6 +7,7 @@
 //
 
 #import "CodRemitLoanApplyListVC.h"
+#import "PublicWaybillDetailListVC.h"
 
 #import "CodRemitLoanApplyListCell.h"
 
@@ -106,6 +107,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+}
+
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppCodLoanApplyWaitLoanInfo *item = self.dataSource[indexPath.row];
+        int tag = [m_dic[@"tag"] intValue];
+        switch (tag) {
+            case 0:{
+                //运单明细
+                PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
+                vc.codApplyData = item;
+                [self doPushViewController:vc animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+
 }
 
 @end

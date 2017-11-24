@@ -128,7 +128,7 @@
 - (void)switchorButtonAction:(IndexPathSwitch *)button {
     if (button.indexPath.section == 1) {
         NSDictionary *m_dic = self.feeShowArray[button.indexPath.row - 1];
-        [self.toSaveData setValue:!button.isOn ? @"2" : @"1" forKey:m_dic[@"key"]];
+        [self.toSaveData setValue:button.isOn ? @"1" : @"2" forKey:m_dic[@"key"]];
 //        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -136,7 +136,8 @@
 - (void)checkButtonAction:(IndexPathButton *)button {
     if (button.indexPath.section == 2) {
         NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
-        [self.toSaveData setValue:button.selected ? @"2" : @"1" forKey:m_dic[@"subKey"]];
+        button.selected = !button.selected;
+        [self.toSaveData setValue:button.selected ? @"1" : @"2" forKey:m_dic[@"subKey"]];
         [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
