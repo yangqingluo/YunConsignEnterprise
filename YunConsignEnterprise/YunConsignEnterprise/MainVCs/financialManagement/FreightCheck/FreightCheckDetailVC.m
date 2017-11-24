@@ -100,11 +100,13 @@
     }];
 }
 
-- (void)doCancelReceiveWaybillFunction:(NSString *)waybill_id {
-    if (!waybill_id) {
+- (void)doCancelReceiveWaybillFunctionAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
         return;
     }
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
+    
+    AppCheckFreightWayBillInfo *item = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : item.waybill_id}];
     [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_cancelReceiveWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -112,8 +114,8 @@
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                //                [weakself showHint:@"操作完成"];
-                [weakself.tableView.mj_header beginRefreshing];
+                [weakself.dataSource removeObjectAtIndex:indexPath.row];
+                [weakself updateSubviews];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -209,7 +211,7 @@
     QKWEAKSELF;
     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消自提吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"不了" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            [weakself doCancelReceiveWaybillFunction:item.waybill_id];
+            [weakself doCancelReceiveWaybillFunctionAtIndexPath:indexPath];
         }
     } otherButtonTitles:@"确定", nil];
     [alert show];

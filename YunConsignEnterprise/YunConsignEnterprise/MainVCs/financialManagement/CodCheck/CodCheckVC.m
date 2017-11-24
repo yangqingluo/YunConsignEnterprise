@@ -49,7 +49,7 @@
         [self showHint:@"请选择时间类型"];
         return;
     }
-    CodCheckDetailVC *vc = [CodCheckDetailVC new];
+    CodCheckDetailVC *vc = [[CodCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
     vc.condition = [self.condition copy];
     [self.navigationController pushViewController:vc animated:YES];
 }

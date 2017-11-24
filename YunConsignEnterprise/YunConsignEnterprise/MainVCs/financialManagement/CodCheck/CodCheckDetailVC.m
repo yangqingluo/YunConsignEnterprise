@@ -48,11 +48,11 @@
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
-        else if (nIndex == 1){
-            UIButton *btn = NewTextButton(@"对比", [UIColor whiteColor]);
-            [btn addTarget:self action:@selector(compareButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            return btn;
-        }
+//        else if (nIndex == 1){
+//            UIButton *btn = NewTextButton(@"对比", [UIColor whiteColor]);
+//            [btn addTarget:self action:@selector(compareButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//            return btn;
+//        }
         return nil;
     }];
 }
@@ -61,9 +61,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)compareButtonAction {
-    
-}
+//- (void)compareButtonAction {
+//    
+//}
 
 - (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
@@ -105,6 +105,33 @@
                 [weakself updateTableViewFooter];
             }
             [weakself updateSubviews];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doCancelWaybillCashOnDeliveryPaymentByIdFunctionAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
+        return;
+    }
+    
+    AppCheckCodWayBillInfo *item = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : item.waybill_id}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_cancelWaybillCashOnDeliveryPaymentByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself.dataSource removeObjectAtIndex:indexPath.row];
+                [weakself updateSubviews];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -191,6 +218,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    AppCheckCodWayBillInfo *item = self.dataSource[indexPath.row];
+    //取消收款
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消收款吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"不了" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [weakself doCancelWaybillCashOnDeliveryPaymentByIdFunctionAtIndexPath:indexPath];
+        }
+    } otherButtonTitles:@"确定", nil];
+    [alert show];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
