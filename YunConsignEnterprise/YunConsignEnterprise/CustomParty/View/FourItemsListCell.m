@@ -10,8 +10,6 @@
 
 @interface FourItemsListCell ()
 
-@property (strong, nonatomic) UIView *baseView;
-
 @end
 
 @implementation FourItemsListCell

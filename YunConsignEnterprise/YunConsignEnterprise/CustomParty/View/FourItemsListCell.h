@@ -10,6 +10,7 @@
 
 @interface FourItemsListCell : UITableViewCell
 
+@property (strong, nonatomic) UIView *baseView;
 @property (strong, nonatomic) UILabel *firstLeftLabel;
 @property (strong, nonatomic) UILabel *firstRightLabel;
 @property (strong, nonatomic) UILabel *secondLeftLabel;

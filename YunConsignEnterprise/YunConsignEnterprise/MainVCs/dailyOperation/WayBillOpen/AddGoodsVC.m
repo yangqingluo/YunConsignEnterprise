@@ -151,6 +151,14 @@
     if (!cell) {
         cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.firstRightLabel.width = [AppPublic textSizeWithString:@"时间：2017-01-01" font:cell.firstRightLabel.font constantHeight:cell.firstRightLabel.height].width;
+        cell.firstRightLabel.right = cell.baseView.width - kEdge;
+        cell.firstLeftLabel.width = cell.firstRightLabel.left - 2 * kEdge;
+        
+        cell.secondRightLabel.width = [AppPublic textSizeWithString:@"价格：123456" font:cell.secondRightLabel.font constantHeight:cell.secondRightLabel.height].width;
+        cell.secondRightLabel.right = cell.baseView.width - kEdge;
+        cell.secondLeftLabel.width = cell.secondRightLabel.left - 2 * kEdge;
     }
     
     AppHistoryGoodsInfo *item = self.dataSource[indexPath.row];
