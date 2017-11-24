@@ -28,27 +28,12 @@ typedef NS_ENUM(NSInteger, RESOURCE_TYPE) {
     RESOURCE_TYPE_Waybill,//签收单
 };
 
-//回单签收方式
-typedef enum : NSUInteger {
-    RECEIPT_SIGN_TYPE_1 = 1,//签字
-    RECEIPT_SIGN_TYPE_2 = 2,//盖章
-    RECEIPT_SIGN_TYPE_3 = 3,//签字+盖章
-    RECEIPT_SIGN_TYPE_4 = 4//无回单
-} RECEIPT_SIGN_TYPE;
-
 //回单状态
 typedef enum : NSUInteger {
     RECEIPT_STATE_TYPE_1 = 1,//未到站
     RECEIPT_STATE_TYPE_2 = 2,//未付款
     RECEIPT_STATE_TYPE_3 = 3,//已付款
 } RECEIPT_STATE_TYPE;
-
-//代收款类型
-typedef enum : NSUInteger {
-    CASH_ON_DELIVERY_TYPE_1 = 1,//现金代收
-    CASH_ON_DELIVERY_TYPE_2 = 2,//一般代收
-    CASH_ON_DELIVERY_TYPE_3 = 3//没有代收款
-} CASH_ON_DELIVERY_TYPE;
 
 @interface AppType : NSObject
 
@@ -395,7 +380,9 @@ BOOL isTrue(NSString *string);
 @interface AppWayBillDetailInfo : AppWayBillInfo
 
 @property (strong, nonatomic) NSString *receipt_state;//回单状态 RECEIPT_STATE 未到站、未付款、已付款
+@property (strong, nonatomic) NSString *receipt_state_text;
 @property (strong, nonatomic) NSString *cash_on_delivery_state;//代收款状态 CASH_ON_DELIVERY_STATE 未收款、已收款、已申请、已审核、已放款
+@property (strong, nonatomic) NSString *cash_on_delivery_state_text;
 @property (strong, nonatomic) NSString *consignment_time;//托运时间
 @property (strong, nonatomic) NSString *location_type;//当前位置类型 LOCATION_TYPE 固定门店、专线车辆、已送达客户
 @property (strong, nonatomic) NSString *location_id;//当前位置编号
@@ -409,6 +396,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *is_deliver_goods;//是否送货上门 YES_NO
 @property (strong, nonatomic) NSString *deliver_goods_fee;//送货费
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式 RECEIPT_SIGN_TYPE 无回单、签字、盖章、签字+盖章
+@property (strong, nonatomic) NSString *receipt_sign_type_text;
 @property (strong, nonatomic) NSString *rebate_fee;//回扣费
 @property (strong, nonatomic) NSString *forklift_fee;//叉车费
 @property (strong, nonatomic) NSString *transfer_fee;//中转费
@@ -473,10 +461,9 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *shipper;//发货人
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单类型 RECEIPT_SIGN_TYPE 签字、盖章、签字+盖章
+@property (strong, nonatomic) NSString *receipt_sign_type_text;//回单类型文本
 @property (strong, nonatomic) NSString *receipt_state;//回单状态 RECEIPT_STATE 未到站、未付款、已付款
 @property (strong, nonatomic) NSString *receipt_state_text;//回单状态
-
-- (NSString *)showReceiptSignTypeString;
 
 @end
 

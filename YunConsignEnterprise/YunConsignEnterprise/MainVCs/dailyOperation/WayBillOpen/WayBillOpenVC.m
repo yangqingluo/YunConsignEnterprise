@@ -21,6 +21,12 @@
     
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
+    
+    [self.toCheckDataMapSet removeAllObjects];
+    [self.toCheckDataMapSet addObjectsFromArray:@[@"receipt_sign_type", @"cash_on_delivery_type"]];
+    for (NSString *key in self.toCheckDataMapSet) {
+        [self checkDataMapExistedForCode:key];
+    }
 }
 
 - (void)setupNav {
@@ -160,6 +166,28 @@
     self.toSaveData.goods_total_volume = [NSString stringWithFormat:@"%.1f", volume];
 }
 
+- (void)checkDataMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if (![self.toSaveData valueForKey:key]) {
+            AppDataDictionary *item = [key isEqualToString:@"cash_on_delivery_type"] ? dataArray[dataArray.count - 1] : dataArray[0];
+            [self.toSaveData setValue:item.item_val forKey:key];
+            [self.tableView reloadData];
+        }
+    }
+    else {
+        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
+    }
+}
+
+- (void)initialDataDictionaryForCode:(NSString *)dict_code {
+    if (![self.toSaveData valueForKey:dict_code]) {
+        if ([self.toCheckDataMapSet containsObject:dict_code]) {
+            [self checkDataMapExistedForCode:dict_code];
+        }
+    }
+}
+
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     switch (indexPath.section) {
         case 0: {
@@ -203,6 +231,45 @@
                 }
                 else {
                     [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
+                }
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 1:{
+            NSString *key = @"";
+            if (indexPath.row == 1) {
+                key = @"receipt_sign_type";
+            }
+            else if (indexPath.row == 2) {
+                key = @"cash_on_delivery_type";
+            }
+            if (key.length) {
+                NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+                if (dicArray.count) {
+                    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
+                    for (AppDataDictionary *m_data in dicArray) {
+                        [m_array addObject:m_data.item_name];
+                    }
+                    QKWEAKSELF;
+                    BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                        if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
+                            AppDataDictionary *item = dicArray[buttonIndex - 1];
+                            [weakself.toSaveData setValue:item.item_val forKey:key];
+                            [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                        }
+                    } otherButtonTitlesArray:m_array];
+                    [sheet showInView:self.view];
+                }
+                else {
+                    [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
                 }
             }
         }
@@ -284,8 +351,8 @@
 - (AppSaveWayBillInfo *)toSaveData {
     if (!_toSaveData) {
         _toSaveData = [AppSaveWayBillInfo new];
-        _toSaveData.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)RECEIPT_SIGN_TYPE_4];
-        _toSaveData.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)CASH_ON_DELIVERY_TYPE_1];
+//        _toSaveData.receipt_sign_type = @"4";
+//        _toSaveData.cash_on_delivery_type = @"1";
         _toSaveData.freight = @"0";
 //        _toSaveData.pay_now_amount = @"0";
 //        _toSaveData.pay_on_delivery_amount = @"0";
@@ -603,36 +670,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    switch (indexPath.section) {
-        case 1:{
-            if (indexPath.row == 1) {
-                NSArray *m_array = [UserPublic getInstance].receptSignTypeArray;
-                QKWEAKSELF;
-                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                    if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                        weakself.toSaveData.receipt_sign_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
-                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                    }
-                } otherButtonTitlesArray:m_array];
-                [sheet showInView:self.view];
-            }
-            else if (indexPath.row == 2) {
-                NSArray *m_array = [UserPublic getInstance].cashOnDeliveryTypeArray;
-                QKWEAKSELF;
-                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                    if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                        weakself.toSaveData.cash_on_delivery_type = [NSString stringWithFormat:@"%d", (int)buttonIndex];
-                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                    }
-                } otherButtonTitlesArray:m_array];
-                [sheet showInView:self.view];
-            }
-        }
-            break;
-            
-        default:
-            break;
-    }
+    [self selectRowAtIndexPath:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -53,7 +53,7 @@
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
-            [self checkDataMapExistedFor:@"query_column"];
+            [self checkDataMapExistedForCode:@"query_column"];
         }
             break;
             
@@ -80,7 +80,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedFor:@"query_column"];
+            [self checkDataMapExistedForCode:@"query_column"];
         }
             break;
             
@@ -90,7 +90,7 @@
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedFor:@"query_column"];
+            [self checkDataMapExistedForCode:@"query_column"];
         }
             break;
             
@@ -107,7 +107,7 @@
             self.showArray = @[@{@"title":@"装车网点",@"subTitle":@"必填，请选择",@"key":@"load_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedFor:@"query_column"];
+            [self checkDataMapExistedForCode:@"query_column"];
         }
             break;
             
@@ -117,7 +117,7 @@
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedFor:@"query_column"];
+            [self checkDataMapExistedForCode:@"query_column"];
         }
             break;
             
@@ -126,7 +126,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedFor:@"query_column"];
+            [self checkDataMapExistedForCode:@"query_column"];
         }
             break;
             
@@ -181,15 +181,24 @@
     }
 }
 
-- (void)checkDataMapExistedFor:(NSString *)key {
+- (void)checkDataMapExistedForCode:(NSString *)key {
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
         if (![self.condition valueForKey:key]) {
             [self.condition setValue:dataArray[0] forKey:key];
+            [self.tableView reloadData];
         }
     }
     else {
         [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
+    }
+}
+
+- (void)initialDataDictionaryForCode:(NSString *)dict_code {
+    if (![self.condition valueForKey:dict_code]) {
+        if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"]) {
+            [self checkDataMapExistedForCode:dict_code];
+        }
     }
 }
 
@@ -200,17 +209,6 @@
 - (void)doDoneAction {
     if (self.doneBlock) {
         self.doneBlock(self.condition);
-    }
-}
-
-- (void)initialDataDictionary:(NSArray *)m_array forCode:(NSString *)dict_code {
-    if (m_array.count) {
-        if (![self.condition valueForKey:dict_code]) {
-            if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"]) {
-                [self.condition setValue:m_array[0] forKey:dict_code];
-                [self.tableView reloadData];
-            }
-        }
     }
 }
 

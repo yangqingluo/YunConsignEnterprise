@@ -39,8 +39,8 @@
                        @{@"title":@"是否收货",@"subTitle":@"请选择",@"key":@"waybill_receive_state"},
                        @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                        @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-    [self checkDataMapExistedFor:@"search_time_type"];
-    [self checkDataMapExistedFor:@"query_column"];
+    [self checkDataMapExistedForCode:@"search_time_type"];
+    [self checkDataMapExistedForCode:@"query_column"];
 }
 
 - (void)searchButtonAction {

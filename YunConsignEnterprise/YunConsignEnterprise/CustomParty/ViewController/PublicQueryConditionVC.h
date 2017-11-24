@@ -50,6 +50,5 @@ typedef enum : NSUInteger {
 
 
 - (void)searchButtonAction;
-- (void)checkDataMapExistedFor:(NSString *)key;
 
 @end

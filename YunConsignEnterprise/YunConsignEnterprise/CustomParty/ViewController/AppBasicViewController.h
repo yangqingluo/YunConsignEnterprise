@@ -20,6 +20,8 @@
 @property (copy,   nonatomic) DoneBlock doneBlock;
 @property (copy,   nonatomic) AppAccessInfo *accessInfo;
 @property (assign, nonatomic) BOOL needRefresh;
+@property (strong, nonatomic) NSMutableSet *toCheckDataMapSet;
+
 
 - (void)createNavWithTitle:(NSString *)szTitle createMenuItem:(UIView *(^)(int nIndex))menuItem;
 - (void)dismissKeyboard;
@@ -37,11 +39,12 @@
 - (NSArray<__kindof UIViewController *> *)doPopToLastViewControllerSkip:(NSUInteger)skip animated:(BOOL)animated;
 - (void)textFieldDidChange:(UITextField *)textField;
 
+- (void)checkDataMapExistedForCode:(NSString *)key;
+- (void)initialDataDictionaryForCode:(NSString *)dict_code;
 - (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullServiceArrayFunctionForCityID:(NSString *)open_city_id selectionInIndexPath:(NSIndexPath *)indexPath ;
 - (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath;
-- (void)initialDataDictionary:(NSArray *)m_array forCode:(NSString *)dict_code;
 
 @end

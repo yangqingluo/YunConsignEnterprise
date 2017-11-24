@@ -26,9 +26,6 @@
 //系统设置权限
 @property (strong, nonatomic) NSMutableArray *systemConfigAccesses;
 
-@property (strong, nonatomic) NSArray *receptSignTypeArray;
-@property (strong, nonatomic) NSArray *cashOnDeliveryTypeArray;
-
 //数据字典数据
 @property (strong, nonatomic) NSMutableDictionary *dataMapDic;
 NSString *serviceDataMapKeyForCity(NSString *open_city_id);

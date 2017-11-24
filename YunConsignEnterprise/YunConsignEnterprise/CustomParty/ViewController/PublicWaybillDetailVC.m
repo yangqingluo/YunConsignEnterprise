@@ -30,8 +30,8 @@
     [super viewDidLoad];
     [self setupNav];
     
-    self.feeShowArray = @[@{@"title":@"回单",@"subTitle":@"未知",@"key":@"receipt_sign_type"},
-                          @{@"title":@"代收款",@"subTitle":@"未知",@"key":@"cash_on_delivery_type"},
+    self.feeShowArray = @[@{@"title":@"回单",@"subTitle":@"未知",@"key":@"receipt_sign_type_text"},
+                          @{@"title":@"代收款",@"subTitle":@"未知",@"key":@"cash_on_delivery_type_text"},
                           @{@"title":@"代收款金额",@"subTitle":@"0",@"key":@"cash_on_delivery_amount"},
                           @{@"title":@"运费代扣",@"subTitle":@"未知",@"key":@"is_deduction_freight"},
                           @[@{@"title":@"叉车费",@"subTitle":@"0",@"key":@"forklift_fee"},

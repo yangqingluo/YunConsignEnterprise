@@ -28,6 +28,14 @@
     
 }
 
+- (void)switchorButtonAction:(UISwitch *)switchor {
+    
+}
+
+- (void)checkButtonAction:(UIButton *)button {
+    
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
     WayBillTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {

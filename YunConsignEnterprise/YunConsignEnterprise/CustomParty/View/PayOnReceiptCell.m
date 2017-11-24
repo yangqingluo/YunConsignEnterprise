@@ -50,7 +50,7 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods];
     self.bodyLabel2.text = [NSString stringWithFormat:@"发货人：%@", _data.shipper];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"回单：%@", [_data showReceiptSignTypeString]];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"回单：%@", _data.receipt_sign_type_text];
     [AppPublic adjustLabelWidth:self.bodyLabel3];
     
     self.payLabel.text = [NSString stringWithFormat:@"回单付：%@", _data.pay_on_receipt_amount];

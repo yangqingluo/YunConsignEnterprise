@@ -358,15 +358,6 @@ BOOL isTrue(NSString *string) {
 
 @implementation AppNeedReceiptWayBillInfo
 
-- (NSString *)showReceiptSignTypeString {
-    NSString *m_String = @"未知回单类型";
-    NSInteger index = [self.receipt_sign_type integerValue];
-    if (index >= 0 && index < [UserPublic getInstance].receptSignTypeArray.count) {
-        m_String = [UserPublic getInstance].receptSignTypeArray[index];
-    }
-    
-    return m_String;
-}
 
 @end
 

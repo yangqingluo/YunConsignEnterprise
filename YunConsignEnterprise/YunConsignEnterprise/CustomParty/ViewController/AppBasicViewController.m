@@ -167,6 +167,15 @@
     }
 }
 
+
+- (void)checkDataMapExistedForCode:(NSString *)key {
+    
+}
+
+- (void)initialDataDictionaryForCode:(NSString *)dict_code {
+    
+}
+
 - (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
     NSString *m_code = [dict_code uppercaseString];
     [self doShowHudFunction];
@@ -177,7 +186,7 @@
             NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                [weakself initialDataDictionary:m_array forCode:dict_code ];
+                [weakself initialDataDictionaryForCode:dict_code ];
                 if (indexPath) {
                     [weakself selectRowAtIndexPath:indexPath];
                 }
@@ -283,9 +292,6 @@
     }];
 }
 
-- (void)initialDataDictionary:(NSArray *)m_array forCode:(NSString *)dict_code {
-}
-
 #pragma setter
 - (void)setTitle:(NSString *)title{
     [super setTitle:title];
@@ -303,6 +309,13 @@
     }
     
     return _titleLabel;
+}
+
+- (NSMutableSet *)toCheckDataMapSet {
+    if (!_toCheckDataMapSet) {
+        _toCheckDataMapSet = [NSMutableSet new];
+    }
+    return _toCheckDataMapSet;
 }
 
 #pragma mark - TextField

@@ -50,18 +50,14 @@ __strong static UserPublic *_singleManger = nil;
 
 + (NSString *)stringForType:(NSInteger)type key:(NSString *)key {
     NSString *m_string = @"";
-    NSArray *m_array = nil;
-    NSUInteger index = 0;
-    if ([key isEqualToString:@"receipt_sign_type"]) {
-        m_array = [UserPublic getInstance].receptSignTypeArray;
-        index = type - RECEIPT_SIGN_TYPE_1;
-    }
-    else if ([key isEqualToString:@"cash_on_delivery_type"]) {
-        m_array = [UserPublic getInstance].cashOnDeliveryTypeArray;
-        index = type - CASH_ON_DELIVERY_TYPE_1;
+    NSArray *m_array = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    NSInteger index = type - 1;
+    if (index >= 0 && index < m_array.count) {
+        AppDataDictionary *item = m_array[index];
+        m_string = item.item_name;
     }
     
-    if (index < m_array.count) {
+    if (!m_string.length && index < m_array.count) {
         m_string = m_array[index];
     }
     return m_string;
@@ -134,20 +130,6 @@ __strong static UserPublic *_singleManger = nil;
         _systemConfigAccesses = [NSMutableArray new];
     }
     return _systemConfigAccesses;
-}
-
-- (NSArray *)receptSignTypeArray {
-    if (!_receptSignTypeArray) {
-        _receptSignTypeArray = @[@"签字", @"盖章", @"签字+盖章", @"无回单"];
-    }
-    return _receptSignTypeArray;
-}
-
-- (NSArray *)cashOnDeliveryTypeArray {
-    if (!_cashOnDeliveryTypeArray) {
-        _cashOnDeliveryTypeArray = @[@"现金代收", @"一般代收", @"没有代收款"];
-    }
-    return _cashOnDeliveryTypeArray;
 }
 
 - (NSMutableDictionary *)dataMapDic {
