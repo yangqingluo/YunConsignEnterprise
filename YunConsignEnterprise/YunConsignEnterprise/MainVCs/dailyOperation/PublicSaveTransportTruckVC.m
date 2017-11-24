@@ -98,26 +98,6 @@
     }
 }
 
-- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    [self showHudInView:self.view hint:nil];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
-        if (!error) {
-            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
 - (void)editAtIndexPath:(NSIndexPath *)indexPath andContent:(NSString *)content {
     if (indexPath.section == 1 || indexPath.section == 2 ) {
         NSArray *m_array = self.showArray[indexPath.section];

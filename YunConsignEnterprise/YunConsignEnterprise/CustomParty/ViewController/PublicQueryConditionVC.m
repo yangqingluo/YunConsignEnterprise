@@ -193,119 +193,24 @@
     }
 }
 
-- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSString *m_code = [dict_code uppercaseString];
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/tms/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (![self.condition valueForKey:dict_code]) {
-                    if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"]) {
-                        [self.condition setValue:m_array[0] forKey:dict_code];
-                        [weakself.tableView reloadData];
-                    }
-                }
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
-- (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSString *functionCode = nil;
-    if ([dict_code isEqualToString:@"start_service"]) {
-        functionCode = @"hex_waybill_getCurrentService";
-    }
-    else if ([dict_code isEqualToString:@"end_service"]) {
-        functionCode = @"hex_waybill_getEndService";
-    }
-    else if ([dict_code isEqualToString:@"power_service"]) {
-        functionCode = @"hex_waybill_getPowerService";
-    }
-    
-    if (!functionCode) {
-        return;
-    }
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:functionCode Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
-- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
-- (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *m_dic = @{@"transport_truck_id" : transport_truck_id};
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_queryServiceListByTransportTruckId" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForTruck(transport_truck_id)];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
-
-
 - (void)searchButtonAction {
     [self goBackWithDone:YES];
 }
 
-
-
 - (void)doDoneAction {
     if (self.doneBlock) {
         self.doneBlock(self.condition);
+    }
+}
+
+- (void)initialDataDictionary:(NSArray *)m_array forCode:(NSString *)dict_code {
+    if (m_array.count) {
+        if (![self.condition valueForKey:dict_code]) {
+            if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"]) {
+                [self.condition setValue:m_array[0] forKey:dict_code];
+                [self.tableView reloadData];
+            }
+        }
     }
 }
 

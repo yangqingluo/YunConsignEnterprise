@@ -57,47 +57,6 @@
     
 }
 
-- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSString *m_code = [dict_code uppercaseString];
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/tms/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
-- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
 - (void)saveDataSuccess {
     [self doShowHintFunction:@"保存成功"];
     [self goBackWithDone:YES];

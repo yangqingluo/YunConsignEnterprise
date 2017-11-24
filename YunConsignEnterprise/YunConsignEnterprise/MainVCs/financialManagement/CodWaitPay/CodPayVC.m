@@ -119,28 +119,6 @@
     }];
 }
 
-- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSString *m_code = [dict_code uppercaseString];
-    
-    [self showHudInView:self.view hint:nil];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/tms/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
-        if (!error) {
-            NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
 - (void)updateTableViewHeader {
     QKWEAKSELF;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

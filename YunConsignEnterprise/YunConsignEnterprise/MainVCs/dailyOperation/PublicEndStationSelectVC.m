@@ -102,45 +102,6 @@
     }
 }
 
-- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    [self showHudInView:self.view hint:nil];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
-        if (!error) {
-            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                [self showCityAction];
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
-- (void)pullServiceArrayFunctionForCode:(NSString *)open_city_id selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *m_dic = @{@"open_city_id" : open_city_id};
-    [self showHudInView:self.view hint:nil];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryServiceListByCityId" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
-        if (!error) {
-            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForCity(open_city_id)];
-                if (indexPath) {
-                    [self selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
-}
-
 - (void)showCityAction {
     NSString *key = @"end_station_city";
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
@@ -155,14 +116,19 @@
 }
 
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppCityInfo *city = self.cityArray[indexPath.row];
-    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:serviceDataMapKeyForCity(city.open_city_id)];
-    if (dataArray.count) {
-        [self.selectedArray addObject:[dataArray[0] copy]];
-        [self.secondaryTableView reloadData];
+    if (indexPath) {
+        AppCityInfo *city = self.cityArray[indexPath.row];
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:serviceDataMapKeyForCity(city.open_city_id)];
+        if (dataArray.count) {
+            [self.selectedArray addObject:[dataArray[0] copy]];
+            [self.secondaryTableView reloadData];
+        }
+        else {
+            [self pullServiceArrayFunctionForCityID:city.open_city_id selectionInIndexPath:indexPath];
+        }
     }
     else {
-        [self pullServiceArrayFunctionForCode:city.open_city_id selectionInIndexPath:indexPath];
+        [self showCityAction];
     }
 }
 

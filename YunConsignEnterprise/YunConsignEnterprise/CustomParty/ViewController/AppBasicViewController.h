@@ -29,8 +29,19 @@
 - (void)doShowHudFunction:(NSString *)hint;
 - (void)doHideHudFunction;
 - (void)doPushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)showFromVC:(AppBasicViewController *)fromVC;
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content;
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
+
 - (NSArray<__kindof UIViewController *> *)doPopToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (NSArray<__kindof UIViewController *> *)doPopToLastViewControllerSkip:(NSUInteger)skip animated:(BOOL)animated;
 - (void)textFieldDidChange:(UITextField *)textField;
+
+- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)pullServiceArrayFunctionForCityID:(NSString *)open_city_id selectionInIndexPath:(NSIndexPath *)indexPath ;
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)initialDataDictionary:(NSArray *)m_array forCode:(NSString *)dict_code;
 
 @end

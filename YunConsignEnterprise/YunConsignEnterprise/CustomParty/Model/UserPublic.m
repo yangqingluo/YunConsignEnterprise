@@ -172,4 +172,5 @@ NSString *serviceDataMapKeyForCity(NSString *open_city_id) {
 NSString *serviceDataMapKeyForTruck(NSString *transport_truck_id) {
     return [NSString stringWithFormat:@"key_service_for_truck_%@", transport_truck_id];
 }
+
 @end

@@ -88,22 +88,6 @@
     [self.tableView reloadData];
 }
 
-- (void)showFromVC:(AppBasicViewController *)fromVC {
-    [fromVC.navigationController pushViewController:self animated:YES];
-    //    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:self];
-    //    [fromVC presentViewController:nav animated:NO completion:^{
-    //
-    //    }];
-}
-
-- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
-    
-}
-
-- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 #pragma mark - getter
 - (NSString *)dateKey{
     if (!_dateKey) {

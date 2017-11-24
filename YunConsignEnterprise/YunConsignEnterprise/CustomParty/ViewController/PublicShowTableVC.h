@@ -28,9 +28,6 @@
 - (void)beginRefreshing;
 - (void)endRefreshing;
 - (void)updateSubviews;
-- (void)showFromVC:(AppBasicViewController *)fromVC;
-- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content;
-- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)loadFirstPageData;
 - (void)loadMoreData;
 - (void)pullBaseListData:(BOOL)isReset;

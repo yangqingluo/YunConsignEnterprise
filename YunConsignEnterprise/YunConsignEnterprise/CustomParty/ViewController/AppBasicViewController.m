@@ -126,6 +126,22 @@
     }
 }
 
+- (void)showFromVC:(AppBasicViewController *)fromVC {
+    [fromVC doPushViewController:self animated:YES];
+    //    MainTabNavController *nav = [[MainTabNavController alloc] initWithRootViewController:self];
+    //    [fromVC presentViewController:nav animated:NO completion:^{
+    //
+    //    }];
+}
+
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
+    
+}
+
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 - (NSArray<__kindof UIViewController *> *)doPopToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.parentVC) {
         return [self.parentVC.navigationController popToViewController:viewController animated:animated];
@@ -149,6 +165,125 @@
     else {
         return nil;
     }
+}
+
+- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSString *m_code = [dict_code uppercaseString];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] Get:@{@"dict_code" : m_code} HeadParm:nil URLFooter:@"/tms/common/get_dict_by_code.do" completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                [weakself initialDataDictionary:m_array forCode:dict_code ];
+                if (indexPath) {
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSString *functionCode = nil;
+    if ([dict_code isEqualToString:@"start_service"]) {
+        functionCode = @"hex_waybill_getCurrentService";
+    }
+    else if ([dict_code isEqualToString:@"end_service"]) {
+        functionCode = @"hex_waybill_getEndService";
+    }
+    else if ([dict_code isEqualToString:@"power_service"]) {
+        functionCode = @"hex_waybill_getPowerService";
+    }
+    
+    if (!functionCode) {
+        return;
+    }
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:functionCode Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                if (indexPath) {
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullServiceArrayFunctionForCityID:(NSString *)open_city_id selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = @{@"open_city_id" : open_city_id};
+    [self showHudInView:self.view hint:nil];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryServiceListByCityId" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForCity(open_city_id)];
+                if (indexPath) {
+                    [self selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityList" Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                [weakself selectRowAtIndexPath:indexPath];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = @{@"transport_truck_id" : transport_truck_id};
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_queryServiceListByTransportTruckId" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:serviceDataMapKeyForTruck(transport_truck_id)];
+                if (indexPath) {
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)initialDataDictionary:(NSArray *)m_array forCode:(NSString *)dict_code {
 }
 
 #pragma setter
