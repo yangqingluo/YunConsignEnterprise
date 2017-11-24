@@ -97,7 +97,7 @@
 
 - (void)doCustReceiveWaybillByIdFunction {
     NSDictionary *m_dic = [self.toSaveData mj_keyValues];
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_custReceiveWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -124,7 +124,7 @@
 }
 
 - (void)endRefreshing {
-    [self hideHud];
+    [self doHideHudFunction];
     [self.tableView.mj_header endRefreshing];
 }
 

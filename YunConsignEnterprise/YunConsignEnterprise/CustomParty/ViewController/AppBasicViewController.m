@@ -234,10 +234,10 @@
 
 - (void)pullServiceArrayFunctionForCityID:(NSString *)open_city_id selectionInIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *m_dic = @{@"open_city_id" : open_city_id};
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryServiceListByCityId" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {

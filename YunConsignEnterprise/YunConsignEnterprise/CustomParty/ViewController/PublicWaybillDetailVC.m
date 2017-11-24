@@ -121,7 +121,7 @@
     if (change_cause) {
         [m_dic setObject:change_cause forKey:@"change_cause"];
     }
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_cancelWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -148,7 +148,7 @@
 }
 
 - (void)endRefreshing {
-    [self hideHud];
+    [self doHideHudFunction];
     [self.tableView.mj_header endRefreshing];
 }
 

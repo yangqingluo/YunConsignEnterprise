@@ -107,10 +107,10 @@
 }
 
 - (void)pullServiceArrayFunction {
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:self.type == SRSelectType_Sender ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             [weakself.serviceArray removeAllObjects];
             [weakself.serviceArray addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];

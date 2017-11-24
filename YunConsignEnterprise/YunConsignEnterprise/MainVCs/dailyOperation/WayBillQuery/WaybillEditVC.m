@@ -103,10 +103,10 @@
 }
 
 - (void)pushUpdateWaybillFunction:(NSDictionary *)parm {
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_updateWaybillByIdFunction" Parm:parm completion:^(id responseBody, NSError *error){
-        [weakself hideHud];
+        [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
@@ -143,7 +143,7 @@
 }
 
 - (void)pullWaybillDetailData {
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     NSDictionary *m_dic = @{@"waybill_id" : self.detailData.waybill_id};
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -162,7 +162,7 @@
 }
 
 - (void)endRefreshing {
-    [self hideHud];
+    [self doHideHudFunction];
 }
 
 - (void)updateSubviews {

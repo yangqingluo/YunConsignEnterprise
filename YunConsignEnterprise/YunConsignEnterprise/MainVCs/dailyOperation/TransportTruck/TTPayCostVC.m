@@ -61,7 +61,7 @@
         }
         [m_dic setObject:value forKey:key];
     }
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_payTransportTruckCostByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -82,7 +82,7 @@
 
 - (void)pullTransportTruckDetailData {
     NSDictionary *m_dic = @{@"transport_truck_id" : self.truckData.transport_truck_id};
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryTransportTruckDetailByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -100,7 +100,7 @@
 }
 
 - (void)endRefreshing {
-    [self hideHud];
+    [self doHideHudFunction];
 }
 
 - (void)updateSubviews {

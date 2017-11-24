@@ -141,7 +141,7 @@
         return;
     }
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id, @"waybill_ids" : waybill_ids}];
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_load_cancelLoadWaybillInTransportTruckFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -177,7 +177,7 @@
 }
 
 - (void)endRefreshing{
-    [self hideHud];
+    [self doHideHudFunction];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }

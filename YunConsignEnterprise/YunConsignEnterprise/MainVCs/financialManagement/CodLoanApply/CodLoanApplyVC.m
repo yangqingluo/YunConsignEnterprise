@@ -139,7 +139,7 @@
 
 - (void)doCancelLoanApplyByIdFunction:(AppCodLoanApplyInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"loan_apply_id" : item.loan_apply_id, @"loan_apply_state" : item.loan_apply_state}];
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_cancelLoanApplyByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];

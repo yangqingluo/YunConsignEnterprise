@@ -136,7 +136,7 @@
 
 - (void)doTransportTruckArrivaledFunction:(AppCanArrivalTransportTruckInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : item.transport_truck_id}];
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_arrival_setTransportTruckArrivaledFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -173,7 +173,7 @@
 }
 
 - (void)endRefreshing {
-    [self hideHud];
+    [self doHideHudFunction];
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }

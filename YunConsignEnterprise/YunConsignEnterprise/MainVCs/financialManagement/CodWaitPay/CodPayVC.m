@@ -100,7 +100,7 @@
     if (self.toSaveData.cash_on_delivery_causes_note) {
         [m_dic setObject:self.toSaveData.cash_on_delivery_causes_note forKey:@"cash_on_delivery_causes_note"];
     }
-    [self showHudInView:self.view hint:nil];
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_payWaybillCashOnDeliveryByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -127,7 +127,7 @@
 }
 
 - (void)endRefreshing {
-    [self hideHud];
+    [self doHideHudFunction];
     [self.tableView.mj_header endRefreshing];
 }
 

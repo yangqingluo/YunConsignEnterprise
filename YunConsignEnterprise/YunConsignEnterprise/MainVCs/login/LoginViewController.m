@@ -121,11 +121,11 @@
         [self showHint:@"请输入正确的密码"];
     }
     else {
-        [self showHudInView:self.view hint:nil];
+        [self doShowHudFunction];
         
         QKWEAKSELF;
         [[QKNetworkSingleton sharedManager] loginWithID:self.usernameTextField.text Password:self.passwordTextField.text completion:^(id responseBody, NSError *error){
-            [weakself hideHud];
+            [weakself doHideHudFunction];
             if (error) {
                 [weakself showHint:error.userInfo[@"message"]];
             }
