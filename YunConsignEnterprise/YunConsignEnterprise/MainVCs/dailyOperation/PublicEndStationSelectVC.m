@@ -195,7 +195,7 @@
             [cell.removeBtn addTarget:self action:@selector(removeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         AppServiceInfo *service = self.selectedArray[indexPath.row];
-        cell.indexLabel.text = [NSString stringWithFormat:@"%d", (int)indexPath.row];
+        cell.indexLabel.text = [NSString stringWithFormat:@"%d", (int)indexPath.row + 1];
         cell.detailLabel.text = [NSString stringWithFormat:@"%@-%@", service.open_city_name, service.service_name];
         cell.removeBtn.tag = indexPath.row;
         return cell;
