@@ -160,10 +160,20 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open
 }
 
 - (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData {
+    [self updateDataForWaybillDetailInfo:detailData isReturn:NO];
+}
+
+- (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData isReturn:(BOOL)isReturn {
     self.titleView.textLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", detailData.waybill_number, detailData.goods_number];
     self.date = dateFromString(detailData.consignment_time, defaultDateFormat);
-    self.senderInfo = NewAppSendReceiveInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone);
-    self.receiverInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
+    if (isReturn) {
+        self.receiverInfo = NewAppSendReceiveInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone);
+        self.senderInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
+    }
+    else {
+        self.senderInfo = NewAppSendReceiveInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone);
+        self.receiverInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
+    }
 }
 
 #pragma mark - setter

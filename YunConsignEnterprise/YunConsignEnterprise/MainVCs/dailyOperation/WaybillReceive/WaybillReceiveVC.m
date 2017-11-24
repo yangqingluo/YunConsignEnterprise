@@ -9,6 +9,7 @@
 #import "WaybillReceiveVC.h"
 #import "PublicQueryConditionVC.h"
 #import "WaybillCustReceiveVC.h"
+#import "WaybillReturnVC.h"
 
 #import "WaybillReceiveCell.h"
 #import "MJRefresh.h"
@@ -37,8 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.needRefresh) {
-        self.needRefresh = NO;
-        [self.tableView.mj_header beginRefreshing];
+        [self beginRefreshing];
     }
 }
 
@@ -83,15 +83,8 @@
     };
     [vc showFromVC:self];
 }
-- (void)loadFirstPageData{
-    [self queryWaybillListByConditionFunction:YES];
-}
 
-- (void)loadMoreData{
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.start_time) {
@@ -237,14 +230,17 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                //取消自提
-                QKWEAKSELF;
-                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定原货返回吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-                    if (buttonIndex == 1) {
-                        [weakself doCancelReceiveWaybillFunction:weakself.dataSource[indexPath.row]];
-                    }
-                } otherButtonTitles:@"确定", nil];
-                [alert show];
+                //原货返回
+                WaybillReturnVC *vc = [WaybillReturnVC new];
+                vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[self.dataSource[indexPath.row] mj_keyValues]];
+                [self doPushViewController:vc animated:YES];
+//                QKWEAKSELF;
+//                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定原货返回吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+//                    if (buttonIndex == 1) {
+//                        [weakself doCancelReceiveWaybillFunction:weakself.dataSource[indexPath.row]];
+//                    }
+//                } otherButtonTitles:@"确定", nil];
+//                [alert show];
             }
                 break;
                 

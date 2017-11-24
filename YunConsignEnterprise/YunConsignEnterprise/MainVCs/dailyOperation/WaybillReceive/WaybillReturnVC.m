@@ -1,33 +1,33 @@
 //
-//  WaybillEditVC.m
+//  WaybillReturnVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/10/19.
+//  Created by 7kers on 2017/11/24.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "WaybillEditVC.h"
+#import "WaybillReturnVC.h"
 #import "PublicSRSelectVC.h"
 
-@interface WaybillEditVC ()
+@interface WaybillReturnVC ()
 
 @end
 
-@implementation WaybillEditVC
+@implementation WaybillReturnVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"0",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
-      @{@"title":@"提付",@"subTitle":@"0",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
-      @{@"title":@"回单付",@"subTitle":@"0",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
-      @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
-      @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},
-      @{@"title":@"修改原因",@"subTitle":@"无",@"key":@"change_cause"},];
+                               @{@"title":@"提付",@"subTitle":@"0",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
+                               @{@"title":@"回单付",@"subTitle":@"0",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
+                               @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
+                               @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},
+                               @{@"title":@"修改原因",@"subTitle":@"无",@"key":@"change_cause"},];
     
     [self.headerView setupTitle];
     self.tableView.tableHeaderView = self.headerView;
-    self.title = @"运单修改";
+    self.title = @"原货返回";
     [self pullWaybillDetailData];
 }
 
@@ -63,22 +63,22 @@
         [self.toSaveData appendReceiverInfo:self.headerView.receiverInfo];
     }
     
-//    if (!self.goodsArray.count) {
-//        [self showHint:@"请添加货物信息"];
-//        return;
-//    }
-//    else {
-//        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
-//    }
+    //    if (!self.goodsArray.count) {
+    //        [self showHint:@"请添加货物信息"];
+    //        return;
+    //    }
+    //    else {
+    //        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
+    //    }
     
-//    long long amount = [self.toSavedata.total_amount longLongValue];
-//    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-//    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-//    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
-//    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
-//        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
-//        return;
-//    }
+    //    long long amount = [self.toSavedata.total_amount longLongValue];
+    //    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
+    //    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
+    //    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
+    //    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
+    //        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
+    //        return;
+    //    }
     
     self.toSaveData.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
     NSDictionary *toSaveDic = [self.toSaveData mj_keyValues];
@@ -96,7 +96,7 @@
         [m_dic setObject:toSaveDic[key] forKey:key];
     }
     if (hasChanged) {
-//        NSLog(@"%@", [AppPublic logDic:m_dic]);
+        //        NSLog(@"%@", [AppPublic logDic:m_dic]);
         [m_dic setObject:self.detailData.waybill_id forKey:@"waybill_id"];
         [self pushUpdateWaybillFunction:m_dic];
     }
@@ -127,7 +127,7 @@
 
 - (void)updateWayBillSuccessWithChange:(NSDictionary *)changedDic {
     if (changedDic) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillListRefresh object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillReceiveRefresh object:nil];
         for (NSString *key in changedDic.allKeys) {
             if ([key isEqualToString:@"change_cause"]) {
                 continue;
@@ -175,7 +175,7 @@
         goods.goods_name = [item.waybill_item_name copy];
         [self.goodsArray addObject:goods];
     }
-    [self.headerView updateDataForWaybillDetailInfo:self.detailData];
+    [self.headerView updateDataForWaybillDetailInfo:self.detailData isReturn:YES];
     self.toSaveData = [AppSaveWayBillInfo mj_objectWithKeyValues:[self.detailData mj_keyValues]];
     
     [self.tableView reloadData];

@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicShowTableVC.h"
 
-@interface WaybillReceiveVC : AppBasicTableViewController
+@interface WaybillReceiveVC : PublicShowTableVC
 
 @end

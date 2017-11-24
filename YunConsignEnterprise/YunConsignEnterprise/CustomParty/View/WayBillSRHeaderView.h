@@ -34,5 +34,6 @@
 - (void)setupHeader;
 - (void)setupContent;
 - (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData;
+- (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData isReturn:(BOOL)isReturn;
 
 @end

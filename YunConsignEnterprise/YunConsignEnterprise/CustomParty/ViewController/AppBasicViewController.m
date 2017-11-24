@@ -319,6 +319,19 @@
 }
 
 #pragma mark - TextField
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+//    
+//}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    if ([textField.text isEqualToString:@"0"]) {
+//        textField.text = @"";
+//    }
+//}
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    
+//}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if ([string isEqualToString:@""]) {
         return YES;
@@ -332,7 +345,7 @@
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }

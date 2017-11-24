@@ -111,6 +111,7 @@
 		E48C72C21FA9BD52007F7FC8 /* CodCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */; };
 		E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */; };
 		E48FE5991FA0935200AC21FB /* WaybillLoadedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */; };
+		E4903B6C1FC8080B0037E56D /* WaybillReturnVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4903B6B1FC8080B0037E56D /* WaybillReturnVC.m */; };
 		E490AC931FB2DC9E00905826 /* PublicWaybillDetailListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E490AC921FB2DC9E00905826 /* PublicWaybillDetailListVC.m */; };
 		E490AC961FB2E5EE00905826 /* CodLoanApplyWaybillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E490AC951FB2E5EE00905826 /* CodLoanApplyWaybillDetailVC.m */; };
 		E4941E6E1FC414EC00707A0D /* OpenCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4941E6D1FC414EC00707A0D /* OpenCityVC.m */; };
@@ -654,6 +655,8 @@
 		E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMutableLabelCell.m; sourceTree = "<group>"; };
 		E48FE5971FA0935200AC21FB /* WaybillLoadedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadedVC.h; sourceTree = "<group>"; };
 		E48FE5981FA0935200AC21FB /* WaybillLoadedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadedVC.m; sourceTree = "<group>"; };
+		E4903B6A1FC8080B0037E56D /* WaybillReturnVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReturnVC.h; sourceTree = "<group>"; };
+		E4903B6B1FC8080B0037E56D /* WaybillReturnVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillReturnVC.m; sourceTree = "<group>"; };
 		E490AC911FB2DC9E00905826 /* PublicWaybillDetailListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicWaybillDetailListVC.h; path = YunConsignEnterprise/MainVCs/FinancialManagement/PublicWaybillDetailListVC.h; sourceTree = SOURCE_ROOT; };
 		E490AC921FB2DC9E00905826 /* PublicWaybillDetailListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicWaybillDetailListVC.m; path = YunConsignEnterprise/MainVCs/FinancialManagement/PublicWaybillDetailListVC.m; sourceTree = SOURCE_ROOT; };
 		E490AC941FB2E5EE00905826 /* CodLoanApplyWaybillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillDetailVC.h; sourceTree = "<group>"; };
@@ -1350,6 +1353,8 @@
 				E43229561F97531C000400B8 /* WaybillReceiveVC.m */,
 				E4763CF21FA0D94F00EC36F9 /* WaybillCustReceiveVC.h */,
 				E4763CF31FA0D94F00EC36F9 /* WaybillCustReceiveVC.m */,
+				E4903B6A1FC8080B0037E56D /* WaybillReturnVC.h */,
+				E4903B6B1FC8080B0037E56D /* WaybillReturnVC.m */,
 			);
 			name = WaybillReceive;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillReceive;
@@ -2892,6 +2897,7 @@
 				E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */,
 				E430F3AE1FB45CB600AB74E1 /* PublicMessageReadManager.m in Sources */,
 				E4E2A3931FB311AE00D8EC1C /* IQUIScrollView+Additions.m in Sources */,
+				E4903B6C1FC8080B0037E56D /* WaybillReturnVC.m in Sources */,
 				E4E2A3B51FB311AE00D8EC1C /* NSObject+MJClass.m in Sources */,
 				E45995361F95E61E009F35A6 /* SearchQuantityResultCell.m in Sources */,
 				E4AF3B071F78CC8B009EB766 /* PublicSwitchorCellView.m in Sources */,
