@@ -58,10 +58,7 @@
 
 - (void)saveButtonAction {
     [self dismissKeyboard];
-    if (!self.toSaveData.waybill_id) {
-        self.toSaveData.waybill_id = [self.billData.waybill_id copy];
-    }
-    else if (!self.toSaveData.consignee_name) {
+    if (!self.toSaveData.consignee_name) {
         [self showHint:@"请补全提货人姓名"];
         return;
     }
@@ -69,11 +66,22 @@
         [self showHint:@"请补全提货人电话"];
         return;
     }
-    else if (!self.toSaveData.cash_on_delivery_causes_type) {
-        [self showHint:@"请选择代收款少款类型"];
-        return;
+    else {
+        if ([self.billData.cash_on_delivery_type isEqualToString: @"3"]) {
+            //没有代收款
+            
+        }
+        else {
+            if (!self.toSaveData.cash_on_delivery_causes_type) {
+                [self showHint:@"请选择代收款少款类型"];
+                return;
+            }
+        }
     }
     
+    if (!self.toSaveData.waybill_id) {
+        self.toSaveData.waybill_id = [self.billData.waybill_id copy];
+    }
     [self doCustReceiveWaybillByIdFunction];
 }
 
@@ -180,7 +188,17 @@
                         if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
                             AppDataDictionary *m_data = dicArray[buttonIndex - 1];
                             [weakself.toSaveData setValue:m_data.item_val forKey:key];
-                            [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                            if ([m_data.item_val isEqualToString:@"2"]) {
+                                weakself.toSaveData.cash_on_delivery_causes_note = m_data.item_name;
+                                weakself.toSaveData.cash_on_delivery_real_amount = [NSString stringWithFormat:@"%d", [self.paymentData.cash_on_delivery_amount intValue] - [self.paymentData.pay_on_delivery_amount intValue]];
+                                weakself.toSaveData.cash_on_delivery_causes_amount = [NSString stringWithFormat:@"%d", [self.paymentData.pay_on_delivery_amount intValue]];
+                            }
+                            else {
+                                weakself.toSaveData.cash_on_delivery_causes_note = nil;
+                                weakself.toSaveData.cash_on_delivery_real_amount = nil;
+                                weakself.toSaveData.cash_on_delivery_causes_amount = nil;
+                            }
+                            [weakself.tableView reloadData];
                         }
                     } otherButtonTitlesArray:m_array];
                     [sheet showInView:self.view];
@@ -204,10 +222,10 @@
         _toSaveData.waybill_id = [self.billData.waybill_id copy];
         _toSaveData.consignee_name = [self.billData.consignee_name copy];
         _toSaveData.consignee_phone = [self.billData.consignee_phone copy];
-        _toSaveData.cash_on_delivery_real_amount = @"0";
-        _toSaveData.cash_on_delivery_causes_amount = @"0";
-        _toSaveData.payment_indemnity_amount = @"0";
-        _toSaveData.deliver_indemnity_amount = @"0";
+//        _toSaveData.cash_on_delivery_real_amount = @"0";
+//        _toSaveData.cash_on_delivery_causes_amount = @"0";
+//        _toSaveData.payment_indemnity_amount = @"0";
+//        _toSaveData.deliver_indemnity_amount = @"0";
     }
     return _toSaveData;
 }
@@ -217,13 +235,23 @@
         _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                        @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
                        @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
-                       @{@"title":@"实收代收款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_real_amount"},
+                       @{@"title":@"实收代收款",@"subTitle":@"0",@"key":@"cash_on_delivery_real_amount"},
                        @{@"title":@"代收款少款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_causes_type"},
                        @{@"title":@"少款原因",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_note"},
-                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
-                       @[@{@"title":@"赔款",@"subTitle":@"无",@"key":@"payment_indemnity_amount"},
-                         @{@"title":@"包送",@"subTitle":@"无",@"key":@"deliver_indemnity_amount"}],
+                       @{@"title":@"少款",@"subTitle":@"0",@"key":@"cash_on_delivery_causes_amount"},
+                       @[@{@"title":@"赔款",@"subTitle":@"0",@"key":@"payment_indemnity_amount"},
+                         @{@"title":@"包送",@"subTitle":@"0",@"key":@"deliver_indemnity_amount"}],
                        @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
+        if ([self.billData.cash_on_delivery_type isEqualToString: @"3"]) {
+            //没有代收款
+            _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
+                           @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
+                           @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
+                           @{@"title":@"少款",@"subTitle":@"0",@"key":@"cash_on_delivery_causes_amount"},
+                           @[@{@"title":@"赔款",@"subTitle":@"0",@"key":@"payment_indemnity_amount"},
+                             @{@"title":@"包送",@"subTitle":@"0",@"key":@"deliver_indemnity_amount"}],
+                           @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
+        }
     }
     return _showArray;
 }

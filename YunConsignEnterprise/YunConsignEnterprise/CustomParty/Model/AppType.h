@@ -526,7 +526,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *consignee_id_card;//提货人身份证
 @property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款，0表示没有收到代收款
 @property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额
-@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//代收款减少原因备注
+@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//代收款少款原因备注
 @property (strong, nonatomic) NSString *waybill_receive_note;//自提备注
 @property (strong, nonatomic) NSString *less_indemnity_amount;//少款
 @property (strong, nonatomic) NSString *payment_indemnity_amount;//赔款
