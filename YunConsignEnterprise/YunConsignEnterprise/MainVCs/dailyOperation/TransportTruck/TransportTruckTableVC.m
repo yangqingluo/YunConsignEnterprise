@@ -53,8 +53,8 @@
         if (self.condition.start_station_city) {
             [m_dic setObject:self.condition.start_station_city.open_city_id forKey:@"start_station_city_id"];
         }
-        if (self.condition.end_station_city) {
-            [m_dic setObject:self.condition.end_station_city.open_city_id forKey:@"end_station_city_id"];
+        if (self.condition.end_service) {
+            [m_dic setObject:self.condition.end_service.open_city_id forKey:@"end_station_city_id"];
         }
         if (self.condition.truck_number_plate) {
             [m_dic setObject:self.condition.truck_number_plate forKey:@"truck_number_plate"];

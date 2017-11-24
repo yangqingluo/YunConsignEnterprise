@@ -118,6 +118,11 @@
     if (!daily_apply_id) {
         return;
     }
+    if (!causeString.length) {
+        [self doShowHintFunction:@"请输入驳回原因"];
+        return;
+    }
+    
     [self doShowHudFunction];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"daily_apply_id" : daily_apply_id}];
     if (causeString) {

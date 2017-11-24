@@ -117,6 +117,11 @@
     if (!waybill_id) {
         return;
     }
+    if (!change_cause.length) {
+        [self doShowHintFunction:@"请输入作废原因"];
+        return;
+    }
+    
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
     if (change_cause) {
         [m_dic setObject:change_cause forKey:@"change_cause"];

@@ -48,8 +48,8 @@
     }
     self.statusLabel.text = _data.receipt_state_text;
     
-    self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"发货人：%@", _data.shipper];
+    self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods_info];
+    self.bodyLabel2.text = [NSString stringWithFormat:@"发货人：%@", _data.cust_info];
     self.bodyLabel3.text = [NSString stringWithFormat:@"回单：%@", _data.receipt_sign_type_text];
     [AppPublic adjustLabelWidth:self.bodyLabel3];
     
