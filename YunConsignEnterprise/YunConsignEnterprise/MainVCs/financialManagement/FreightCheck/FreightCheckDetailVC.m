@@ -48,21 +48,12 @@
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
-        else if (nIndex == 1){
-            UIButton *btn = NewTextButton(@"对比", [UIColor whiteColor]);
-            [btn addTarget:self action:@selector(compareButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            return btn;
-        }
         return nil;
     }];
 }
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)compareButtonAction {
-    
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
@@ -102,6 +93,31 @@
                 [weakself updateTableViewFooter];
             }
             [weakself updateSubviews];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doCancelReceiveWaybillFunction:(NSString *)waybill_id {
+    if (!waybill_id) {
+        return;
+    }
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_cancelReceiveWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                //                [weakself showHint:@"操作完成"];
+                [weakself.tableView.mj_header beginRefreshing];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -188,6 +204,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    AppCheckFreightWayBillInfo *item = self.dataSource[indexPath.row];
+    //取消自提
+    QKWEAKSELF;
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消自提吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"不了" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [weakself doCancelReceiveWaybillFunction:item.waybill_id];
+        }
+    } otherButtonTitles:@"确定", nil];
+    [alert show];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
