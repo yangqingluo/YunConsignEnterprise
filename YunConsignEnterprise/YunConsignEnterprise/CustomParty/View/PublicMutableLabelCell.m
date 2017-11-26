@@ -10,17 +10,20 @@
 
 @implementation PublicMutableLabelCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    return [self initWithStyle:style reuseIdentifier:reuseIdentifier showWidth:screen_width];
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showWidth:(CGFloat)width {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        _baseView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeight)];
+        _baseView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, width, kCellHeight)];
         _baseView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_baseView];
         
         [self.baseView updateEdgeSourceWithArray:[[self class] edgeSourceArray]];
     }
-    
     return self;
 }
 

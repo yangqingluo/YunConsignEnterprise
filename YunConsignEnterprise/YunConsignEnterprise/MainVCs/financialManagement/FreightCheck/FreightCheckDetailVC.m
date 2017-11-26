@@ -18,23 +18,20 @@
 
 @implementation FreightCheckDetailVC
 
-- (void)viewDidLayoutSubviews {
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
     
+    [self.scrollView addSubview:self.tableView];
+    
     self.footerView.bottom = self.view.height;
-    [self.view addSubview:self.footerView];
+    [self.scrollView addSubview:self.footerView];
     self.tableView.height = self.footerView.top - self.tableView.top;
+    
+    CGFloat contentWidth = screen_width + 20;
+    self.footerView.width = contentWidth;
+    self.tableView.width = contentWidth;
+    self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.height);
     
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
@@ -176,7 +173,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (self.dataSource.count) {
         CGFloat m_height = [FreightCheckCell tableView:tableView heightForRowAtIndexPath:nil];
-        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, m_height)];
+        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, m_height)];
         m_view.backgroundColor = CellHeaderLightBlueColor;
         [m_view updateEdgeSourceWithArray:[FreightCheckCell edgeSourceArray]];
         [m_view updateDataSourceWithArray:@[@"序号", @"货号", @"现付", @"提付", @"回单付"]];
@@ -195,7 +192,7 @@
     FreightCheckCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[FreightCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[FreightCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier showWidth:tableView.width];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.indexPath = [indexPath copy];
@@ -209,7 +206,7 @@
     AppCheckFreightWayBillInfo *item = self.dataSource[indexPath.row];
     //取消自提
     QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消自提吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"不了" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消自提吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [weakself doCancelReceiveWaybillFunctionAtIndexPath:indexPath];
         }

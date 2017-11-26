@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showWidth:(CGFloat)width;
+
 + (NSArray *)edgeSourceArray;
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 

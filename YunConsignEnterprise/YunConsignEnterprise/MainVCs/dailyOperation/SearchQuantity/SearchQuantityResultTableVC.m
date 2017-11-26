@@ -27,16 +27,6 @@
 
 @implementation SearchQuantityResultTableVC
 
-- (void)viewDidLayoutSubviews {
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index{
     self = [super initWithStyle:style];
     if (self) {

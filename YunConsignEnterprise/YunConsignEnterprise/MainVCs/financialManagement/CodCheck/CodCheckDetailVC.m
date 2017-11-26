@@ -18,16 +18,6 @@
 
 @implementation CodCheckDetailVC
 
-- (void)viewDidLayoutSubviews {
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
@@ -221,7 +211,7 @@
     AppCheckCodWayBillInfo *item = self.dataSource[indexPath.row];
     //取消收款
     QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消收款吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"不了" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消收款吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [weakself doCancelWaybillCashOnDeliveryPaymentByIdFunctionAtIndexPath:indexPath];
         }

@@ -39,6 +39,7 @@
 		E41BF7E31F97854E00C23CEA /* PayOnReceiptVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E21F97854E00C23CEA /* PayOnReceiptVC.m */; };
 		E41BF7E61F97859300C23CEA /* CustomerManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E51F97859300C23CEA /* CustomerManageVC.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
+		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
 		E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8081F738963009794A2 /* FourItemsListCell.m */; };
 		E421754A1F9D833A00F40F60 /* WaybillLogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42175491F9D833A00F40F60 /* WaybillLogVC.m */; };
@@ -512,6 +513,8 @@
 		E41BF7E51F97859300C23CEA /* CustomerManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerManageVC.m; sourceTree = "<group>"; };
 		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
 		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
+		E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultWithScrollTableVC.h; sourceTree = "<group>"; };
+		E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicResultWithScrollTableVC.m; sourceTree = "<group>"; };
 		E420B8041F737B34009794A2 /* PublicInputCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicInputCellView.h; sourceTree = "<group>"; };
 		E420B8051F737B34009794A2 /* PublicInputCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicInputCellView.m; sourceTree = "<group>"; };
 		E420B8071F738963009794A2 /* FourItemsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsListCell.h; sourceTree = "<group>"; };
@@ -1919,6 +1922,8 @@
 				E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */,
 				E4FB63301FC5634F005C482E /* PublicLocationViewController.h */,
 				E4FB63311FC5634F005C482E /* PublicLocationViewController.m */,
+				E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */,
+				E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2842,6 +2847,7 @@
 				E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */,
 				E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */,
 				E4E2A3A51FB311AE00D8EC1C /* UIView+LLExtension.m in Sources */,
+				E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */,
 				E43B9DA71FC55BF600D1C57B /* ServiceCell.m in Sources */,
 				E4E2A3971FB311AE00D8EC1C /* IQUIWindow+Hierarchy.m in Sources */,
 				E459952D1F95D26A009F35A6 /* SearchQuantityResultVC.m in Sources */,
