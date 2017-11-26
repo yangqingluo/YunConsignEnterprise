@@ -86,7 +86,7 @@
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCheckCodWayBillInfo  mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppWayBillDetailInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -107,7 +107,7 @@
         return;
     }
     
-    AppCheckCodWayBillInfo *item = self.dataSource[indexPath.row];
+    AppWayBillDetailInfo *item = self.dataSource[indexPath.row];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : item.waybill_id}];
     [self doShowHudFunction];
     QKWEAKSELF;
@@ -134,7 +134,7 @@
     int cash_on_delivery_amount = 0;
     int cash_on_delivery_real_amount = 0;
     int cash_on_delivery_causes_amount = 0;
-    for (AppCheckCodWayBillInfo *item in self.dataSource) {
+    for (AppWayBillDetailInfo *item in self.dataSource) {
         count++;
         cash_on_delivery_amount += [item.cash_on_delivery_amount intValue];
         cash_on_delivery_real_amount += [item.cash_on_delivery_real_amount intValue];
@@ -148,6 +148,24 @@
     [m_array addObject:[NSString stringWithFormat:@"%d", cash_on_delivery_causes_amount]];
     [self.footerView updateDataSourceWithArray:m_array];
     [self.tableView reloadData];
+}
+
+#pragma mark - 长按手势事件
+- (void)cellLongPress:(UIGestureRecognizer *)recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint location = [recognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+        
+        AppWayBillDetailInfo *item = self.dataSource[indexPath.row];
+        //取消收款
+        QKWEAKSELF;
+        BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消收款吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [weakself doCancelWaybillCashOnDeliveryPaymentByIdFunctionAtIndexPath:indexPath];
+            }
+        } otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
 }
 
 #pragma mark - getter
@@ -199,6 +217,10 @@
     if (!cell) {
         cell = [[CodCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        //添加长按手势
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
+        [cell addGestureRecognizer:longPressGesture];
     }
     cell.indexPath = [indexPath copy];
     cell.data = self.dataSource[indexPath.row];
@@ -208,15 +230,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    AppCheckCodWayBillInfo *item = self.dataSource[indexPath.row];
-    //取消收款
-    QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消收款吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            [weakself doCancelWaybillCashOnDeliveryPaymentByIdFunctionAtIndexPath:indexPath];
-        }
-    } otherButtonTitles:@"确定", nil];
-    [alert show];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

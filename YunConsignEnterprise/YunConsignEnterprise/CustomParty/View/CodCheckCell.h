@@ -10,6 +10,6 @@
 
 @interface CodCheckCell : PublicMutableLabelCell
 
-@property (copy, nonatomic) AppCheckCodWayBillInfo *data;
+@property (copy, nonatomic) AppWayBillDetailInfo *data;
 
 @end

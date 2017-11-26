@@ -11,7 +11,7 @@
 @implementation CodCheckCell
 
 #pragma mark - setter
-- (void)setData:(AppCheckCodWayBillInfo *)data {
+- (void)setData:(AppWayBillDetailInfo *)data {
     _data = data;
     
     NSMutableArray *m_array = [NSMutableArray new];

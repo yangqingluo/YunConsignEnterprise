@@ -216,7 +216,7 @@
         functionCode = @"hex_waybill_getEndService";
     }
     else if ([dict_code isEqualToString:@"power_service"]) {
-        functionCode = @"hex_waybill_getPowerService";
+        functionCode = @"hex_waybill_getAllService";
     }
     
     if (!functionCode) {

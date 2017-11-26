@@ -428,6 +428,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *print_check_code;//6位数字验证代码，用于确认运单的真伪，防止重复打印，可以申请时才有
 @property (strong, nonatomic) NSString *not_can_apply_note;//不能申请的原因
 
+@property (strong, nonatomic) NSString *less_indemnity_amount ;//少款
+@property (strong, nonatomic) NSString *payment_indemnity_amount;//赔款
+@property (strong, nonatomic) NSString *deliver_indemnity_amount;//包送
 
 @end
 
@@ -464,13 +467,6 @@ BOOL isTrue(NSString *string);
 
 @end
 
-//运输款对账运单信息
-@interface AppCheckFreightWayBillInfo : AppWayBillInfo
-
-@property (strong, nonatomic) NSString *goods_info;//货物
-
-@end
-
 //代收款综合信息
 @interface AppCashOnDeliveryWayBillInfo : AppWayBillInfo
 
@@ -486,17 +482,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *is_get_cash_on_delivery;
 @property (strong, nonatomic) NSString *loan_apply_state;
 @property (strong, nonatomic) NSString *cash_on_delivery_note;//应收代收款备注
-
-@end
-
-//代收款对账运单信息
-@interface AppCheckCodWayBillInfo : AppWayBillInfo
-
-@property (strong, nonatomic) NSString *goods_info;//货物
-@property (strong, nonatomic) NSString *cash_on_delivery_real_amount;//实收代收款
-@property (strong, nonatomic) NSString *cash_on_delivery_real_time;//收款时间
-@property (strong, nonatomic) NSString *cash_on_delivery_causes_amount;//少款金额，没有收款，显示未收款
-@property (strong, nonatomic) NSString *cash_on_delivery_causes_note;//少款原因
 
 @end
 

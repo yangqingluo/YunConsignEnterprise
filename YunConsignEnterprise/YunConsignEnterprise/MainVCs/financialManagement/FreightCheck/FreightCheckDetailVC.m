@@ -13,6 +13,9 @@
 @interface FreightCheckDetailVC ()
 
 @property (strong, nonatomic) PublicMutableLabelView *footerView;
+@property (strong, nonatomic) NSMutableArray *valArray;
+@property (strong, nonatomic) NSMutableArray *nameArray;
+@property (strong, nonatomic) NSMutableArray *edgeArray;
 
 @end
 
@@ -22,15 +25,28 @@
     [super viewDidLoad];
     [self setupNav];
     
+    _valArray = [NSMutableArray new];
+    _nameArray = [NSMutableArray new];
+    _edgeArray = [NSMutableArray new];
+    CGFloat scale = 4.0f + 2.0 * self.condition.show_column.count;
+    [_edgeArray addObject:@(1.0 / scale)];
+    [_edgeArray addObject:@(3.0 / scale)];
+    for (AppDataDictionary *item in self.condition.show_column) {
+        [_valArray addObject:item.item_val];
+        [_nameArray addObject:item.item_name];
+        [_edgeArray addObject:@(2.0 / scale)];
+    }
+    
     [self.scrollView addSubview:self.tableView];
     
     self.footerView.bottom = self.view.height;
     [self.scrollView addSubview:self.footerView];
     self.tableView.height = self.footerView.top - self.tableView.top;
     
-    CGFloat contentWidth = screen_width + 20;
+    CGFloat contentWidth = MAX(screen_width, 37.5 * scale);
     self.footerView.width = contentWidth;
     self.tableView.width = contentWidth;
+//        self.tableView.clipsToBounds = NO;
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.height);
     
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -76,6 +92,7 @@
             [m_dic setObject:[self.condition showArrayValStringWithKey:@"show_column"] forKey:@"show_column"];
         }
     }
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_queryCheckFreightListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -84,7 +101,7 @@
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppCheckFreightWayBillInfo  mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppWayBillDetailInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -105,7 +122,7 @@
         return;
     }
     
-    AppCheckFreightWayBillInfo *item = self.dataSource[indexPath.row];
+    AppWayBillDetailInfo *item = self.dataSource[indexPath.row];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : item.waybill_id}];
     [self doShowHudFunction];
     QKWEAKSELF;
@@ -128,24 +145,38 @@
 }
 
 - (void)updateSubviews {
-    int count = 0;
-    int pay_now_amount = 0;
-    int pay_on_delivery_amount = 0;
-    int pay_on_receipt_amount = 0;
-    for (AppCheckFreightWayBillInfo *item in self.dataSource) {
-        count++;
-        pay_now_amount += [item.pay_now_amount intValue];
-        pay_on_delivery_amount += [item.pay_on_delivery_amount intValue];
-        pay_on_receipt_amount += [item.pay_on_receipt_amount intValue];
-    }
     NSMutableArray *m_array = [NSMutableArray new];
     [m_array addObject:@"总"];
-    [m_array addObject:[NSString stringWithFormat:@"%d", count]];
-    [m_array addObject:[NSString stringWithFormat:@"%d", pay_now_amount]];
-    [m_array addObject:[NSString stringWithFormat:@"%d", pay_on_delivery_amount]];
-    [m_array addObject:[NSString stringWithFormat:@"%d", pay_on_receipt_amount]];
+    [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.dataSource.count]];
+    for (AppDataDictionary *map_item in self.condition.show_column) {
+        int amount = 0;
+        for (AppWayBillDetailInfo *item in self.dataSource) {
+            if ([AppPublic getVariableWithClass:item.class varName:map_item.item_val] || [AppPublic getVariableWithClass:item.superclass varName:map_item.item_val]) {
+                amount += [[item valueForKey:map_item.item_val] intValue];
+            }
+        }
+        [m_array addObject:[NSString stringWithFormat:@"%d", amount]];
+    }
     [self.footerView updateDataSourceWithArray:m_array];
     [self.tableView reloadData];
+}
+
+#pragma mark - 长按手势事件
+- (void)cellLongPress:(UIGestureRecognizer *)recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint location = [recognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+        
+        AppWayBillDetailInfo *item = self.dataSource[indexPath.row];
+        //取消自提
+        QKWEAKSELF;
+        BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消自提吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [weakself doCancelReceiveWaybillFunctionAtIndexPath:indexPath];
+            }
+        } otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
 }
 
 #pragma mark - getter
@@ -153,7 +184,7 @@
     if (!_footerView) {
         _footerView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
         _footerView.backgroundColor = baseFooterBarColor;
-        [_footerView updateEdgeSourceWithArray:[FreightCheckCell edgeSourceArray]];
+        [_footerView updateEdgeSourceWithArray:self.edgeArray];
         
         [_footerView addSubview:NewSeparatorLine(CGRectMake(0, 0, _footerView.width, appSeparaterLineSize))];
     }
@@ -176,10 +207,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (self.dataSource.count) {
         CGFloat m_height = [FreightCheckCell tableView:tableView heightForRowAtIndexPath:nil];
-        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, m_height)];
+        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, m_height)];
         m_view.backgroundColor = CellHeaderLightBlueColor;
-        [m_view updateEdgeSourceWithArray:[FreightCheckCell edgeSourceArray]];
-        [m_view updateDataSourceWithArray:@[@"序号", @"货号", @"现付", @"提付", @"回单付"]];
+        [m_view updateEdgeSourceWithArray:self.edgeArray];
+        NSMutableArray *m_array = [NSMutableArray arrayWithObjects:@"序号", @"货号", nil];
+        [m_array addObjectsFromArray:self.nameArray];
+        [m_view updateDataSourceWithArray:m_array];
         [m_view addSubview:NewSeparatorLine(CGRectMake(0, 0, m_view.width, appSeparaterLineSize))];
         return m_view;
     }
@@ -195,8 +228,13 @@
     FreightCheckCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[FreightCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier showWidth:tableView.width];
+        cell = [[FreightCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier showWidth:self.scrollView.contentSize.width showValueArray:self.valArray];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.baseView updateEdgeSourceWithArray:self.edgeArray];
+        
+        //添加长按手势
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
+        [cell addGestureRecognizer:longPressGesture];
     }
     cell.indexPath = [indexPath copy];
     cell.data = self.dataSource[indexPath.row];
@@ -206,15 +244,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    AppCheckFreightWayBillInfo *item = self.dataSource[indexPath.row];
-    //取消自提
-    QKWEAKSELF;
-    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消自提吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            [weakself doCancelReceiveWaybillFunctionAtIndexPath:indexPath];
-        }
-    } otherButtonTitles:@"确定", nil];
-    [alert show];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -10,6 +10,6 @@
 
 @interface FreightCheckCell : PublicMutableLabelCell
 
-@property (copy, nonatomic) AppCheckFreightWayBillInfo *data;
+@property (copy, nonatomic) AppWayBillDetailInfo *data;
 
 @end

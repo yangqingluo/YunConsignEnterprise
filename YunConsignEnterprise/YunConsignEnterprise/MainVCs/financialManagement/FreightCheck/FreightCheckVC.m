@@ -40,6 +40,8 @@
                        @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                        @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                        @{@"title":@"显示字段",@"subTitle":@"现付、提付、回单付",@"key":@"show_column"}];
+    AppServiceInfo *serviceInfo = [AppServiceInfo mj_objectWithKeyValues:[[UserPublic getInstance].userData mj_keyValues]];
+    self.condition.power_service = serviceInfo;
     [self checkDataMapExistedForCode:@"search_time_type"];
     [self checkDataMapExistedForCode:@"query_column"];
 }
@@ -49,12 +51,22 @@
         [self showHint:@"请选择时间类型"];
         return;
     }
-//    if (!self.condition.show_column) {
-//        self.condition.show_column = @"pay_now_amount,pay_on_delivery_amount,pay_on_receipt_amount";
-//    }
     
     FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
     vc.condition = [self.condition copy];
+    if (!vc.condition.show_column) {
+        NSUInteger count = 3;
+        NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:count];
+        for (AppDataDictionary *item in [[UserPublic getInstance].dataMapDic objectForKey:@"show_column"]) {
+            if (count-- > 0) {
+                [m_array addObject:item];
+            }
+            else {
+                break;
+            }
+        }
+        vc.condition.show_column = [NSArray arrayWithArray:m_array];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

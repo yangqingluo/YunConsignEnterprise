@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "PublicResultTableVC.h"
+#import "PublicResultWithScrollTableVC.h"
 
-@interface CodCheckDetailVC : PublicResultTableVC
+@interface CodCheckDetailVC : PublicResultWithScrollTableVC
 
 @end

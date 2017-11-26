@@ -13,8 +13,10 @@
 @property (strong, nonatomic) PublicMutableLabelView *baseView;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
+@property (strong, nonatomic) NSArray *valArray;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showWidth:(CGFloat)width;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showWidth:(CGFloat)width showValueArray:(NSArray *)valArray;
+
 
 + (NSArray *)edgeSourceArray;
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;

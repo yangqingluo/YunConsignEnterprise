@@ -375,13 +375,6 @@
     return _condition;
 }
 
-//- (NSSet *)dataDicSet {
-//    if (!_dataDicSet) {
-//        _dataDicSet = [NSSet setWithObjects:@"query_column", @"transport_truck_state", @"search_time_type", @"show_column", @"cash_on_delivery_type", @"cod_payment_state", @"cod_loan_state", @"waybill_receive_state", @"loan_apply_state", @"daily_name", @"daily_apply_state", nil];
-//    }
-//    return _dataDicSet;
-//}
-
 - (NSSet *)inputValidSet {
     if (!_inputValidSet) {
         _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", @"freight_cust_name", @"phone", @"service_name", @"service_code", nil];
