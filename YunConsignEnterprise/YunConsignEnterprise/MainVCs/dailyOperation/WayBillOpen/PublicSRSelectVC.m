@@ -278,24 +278,4 @@
     }
 }
 
-#pragma  mark - TextField
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    return (range.location < kInputLengthMax);
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndexPath:indexPath tag:0 andContent:textField.text];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
 @end

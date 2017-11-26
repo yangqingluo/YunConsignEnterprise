@@ -314,30 +314,5 @@
     [self selectRowAtIndexPath:indexPath];
 }
 
-#pragma mark - TextField
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    return (range.location < kInputLengthMax);
-}
-
-- (void)textFieldDidChange:(UITextField *)textField {
-    if (textField.text.length > kInputLengthMax) {
-        textField.text = [textField.text substringToIndex:kInputLengthMax];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndexPath:indexPath andContent:textField.text];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
 
 @end

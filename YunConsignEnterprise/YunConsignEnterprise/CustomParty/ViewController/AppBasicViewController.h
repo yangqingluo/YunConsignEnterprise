@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView+KGViewExtend.h"
+#import "AppResponder.h"
 
 #define iosVersion      ([[[UIDevice currentDevice] systemVersion] floatValue])
 

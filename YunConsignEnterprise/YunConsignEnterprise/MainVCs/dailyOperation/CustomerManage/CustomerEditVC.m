@@ -258,20 +258,6 @@
 }
 
 #pragma  mark - TextField
-- (void)textFieldDidChange:(UITextField *)textField {
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
-    }
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if ([string isEqualToString:@""]) {
         return YES;
