@@ -101,6 +101,7 @@
     NSString *key = showObject[@"key"];
     BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
     cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
+    cell.baseView.textField.adjustZeroShow = !isKeybordDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;
@@ -115,6 +116,7 @@
         //        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.baseView.textField.delegate = self;
         cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.baseView.textField.adjustZeroShow = YES;
         [cell.baseView.checkBtn addTarget:self action:@selector(checkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.baseView.textLabel.text = showObject[@"title"];
@@ -141,6 +143,8 @@
         cell.anotherBaseView.textField.delegate = self;
         cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.baseView.textField.adjustZeroShow = YES;
+        cell.anotherBaseView.textField.adjustZeroShow = YES;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
     NSDictionary *m_dic1 = m_array[0];
@@ -171,14 +175,14 @@
                           @{@"title":@"代收款金额",@"subTitle":@"0",@"key":@"cash_on_delivery_amount"},
                           @{@"title":@"运费代扣",@"subTitle":@"请选择",@"key":@"is_deduction_freight"},
                           @{@"title":@"急货",@"subTitle":@"请选择",@"key":@"is_urgent"},
-                          @[@{@"title":@"叉车费",@"subTitle":@"0",@"key":@"forklift_fee"},
-                            @{@"title":@"回扣费",@"subTitle":@"0",@"key":@"rebate_fee"}],
-                          @[@{@"title":@"保价",@"subTitle":@"0",@"key":@"insurance_amount"},
-                            @{@"title":@"保价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
-                          @[@{@"title":@"接货费",@"subTitle":@"0",@"key":@"take_goods_fee"},
-                            @{@"title":@"送货费",@"subTitle":@"0",@"key":@"deliver_goods_fee"}],
-                          @[@{@"title":@"中转费",@"subTitle":@"0",@"key":@"transfer_fee"},
-                            @{@"title":@"垫付费",@"subTitle":@"0",@"key":@"pay_for_sb_fee"}],];
+                          @[@{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
+                            @{@"title":@"回扣费",@"subTitle":@"请输入",@"key":@"rebate_fee"}],
+                          @[@{@"title":@"保价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
+                            @{@"title":@"保价费",@"subTitle":@"根据报价数目生成",@"key":@"insurance_fee"}],
+                          @[@{@"title":@"接货费",@"subTitle":@"请输入",@"key":@"take_goods_fee"},
+                            @{@"title":@"送货费",@"subTitle":@"请输入",@"key":@"deliver_goods_fee"}],
+                          @[@{@"title":@"中转费",@"subTitle":@"请输入",@"key":@"transfer_fee"},
+                            @{@"title":@"垫付费",@"subTitle":@"请输入",@"key":@"pay_for_sb_fee"}],];
     }
     return _feeShowArray;
 }

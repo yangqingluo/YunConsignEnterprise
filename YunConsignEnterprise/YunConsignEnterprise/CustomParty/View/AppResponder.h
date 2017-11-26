@@ -15,6 +15,7 @@
 @interface IndexPathTextField : UITextField
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
+@property (assign, nonatomic) BOOL adjustZeroShow;
 
 @end
 

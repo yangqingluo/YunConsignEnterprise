@@ -24,10 +24,10 @@
     if (self) {
         _showArray = @[@{@"title":@"货物名称",@"subTitle":@"请输入"},
                        @{@"title":@"包装类型",@"subTitle":@"请输入"},
-                       @[@{@"title":@"件数",@"subTitle":@"0"},
-                         @{@"title":@"运费",@"subTitle":@"0"}],
-                       @[@{@"title":@"吨",@"subTitle":@"0"},
-                         @{@"title":@"方",@"subTitle":@"0"}]];
+                       @[@{@"title":@"件数",@"subTitle":@"请输入"},
+                         @{@"title":@"运费",@"subTitle":@"请输入"}],
+                       @[@{@"title":@"吨",@"subTitle":@"请输入"},
+                         @{@"title":@"方",@"subTitle":@"请输入"}]];
     }
     return self;
 }
@@ -116,6 +116,10 @@
                 [cell.anotherBaseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
                 cell.baseView.textField.delegate = self;
                 cell.anotherBaseView.textField.delegate = self;
+                cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.baseView.textField.adjustZeroShow = YES;
+                cell.anotherBaseView.textField.adjustZeroShow = YES;
             }
             NSDictionary *m_dic1 = m_array[0];
             NSDictionary *m_dic2 = m_array[1];
@@ -131,18 +135,14 @@
             
             switch (indexPath.row) {
                 case 2:{
-                    cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                    cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
-                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@", self.data.number ? self.data.number : @""];
-                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%@", self.data.freight ? self.data.freight : @""];
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@", self.data.number ? self.data.number : @"0"];
+                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%@", self.data.freight ? self.data.freight : @"0"];
                 }
                     break;
                     
                 case 3:{
-                    cell.baseView.textField.keyboardType = UIKeyboardTypeDecimalPad;
-                    cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeDecimalPad;
-                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@", self.data.weight ? self.data.weight : @""];
-                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%@", self.data.volume ? self.data.volume : @""];
+                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@", self.data.weight ? self.data.weight : @"0"];
+                    cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%@", self.data.volume ? self.data.volume : @"0"];
                 }
                     break;
                     
@@ -164,6 +164,28 @@
 }
 
 #pragma  mark - TextField
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textFiled = (IndexPathTextField *)textField;
+        if (m_textFiled.adjustZeroShow) {
+            if ([textField.text intValue] == 0) {
+                textField.text = @"";
+            }
+        }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textFiled = (IndexPathTextField *)textField;
+        if (m_textFiled.adjustZeroShow) {
+            if (textField.text.length == 0) {
+                textField.text = @"0";
+            }
+        }
+    }
+}
+
 - (void)textFieldDidChange:(UITextField *)textField {
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         IndexPathTextField *m_textField = (IndexPathTextField *)textField;
@@ -252,7 +274,6 @@
                 break;
         }
     }
-    
     return m_bool && (range.location < length);
 }
 

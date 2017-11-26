@@ -322,16 +322,28 @@
 //- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 //    
 //}
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    if ([textField.text isEqualToString:@"0"]) {
-//        textField.text = @"";
-//    }
-//}
-//
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        IndexPathTextField *m_textFiled = (IndexPathTextField *)textField;
+        if (m_textFiled.adjustZeroShow) {
+            if ([textField.text intValue] == 0) {
+                textField.text = @"";
+            }
+        }
+    }
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        IndexPathTextField *m_textFiled = (IndexPathTextField *)textField;
+        NSIndexPath *indexPath = m_textFiled.indexPath;
         [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];
+        if (m_textFiled.adjustZeroShow) {
+            if (textField.text.length == 0) {
+                textField.text = @"0";
+            }
+        }
     }
 }
 
