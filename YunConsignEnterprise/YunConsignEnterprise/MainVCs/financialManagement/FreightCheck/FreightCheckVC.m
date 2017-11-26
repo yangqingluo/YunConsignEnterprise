@@ -49,6 +49,10 @@
         [self showHint:@"请选择时间类型"];
         return;
     }
+//    if (!self.condition.show_column) {
+//        self.condition.show_column = @"pay_now_amount,pay_on_delivery_amount,pay_on_receipt_amount";
+//    }
+    
     FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
     vc.condition = [self.condition copy];
     [self.navigationController pushViewController:vc animated:YES];

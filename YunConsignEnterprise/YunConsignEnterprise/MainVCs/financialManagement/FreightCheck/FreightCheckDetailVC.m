@@ -72,6 +72,9 @@
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
             [m_dic setObject:self.condition.query_val forKey:@"query_val"];
         }
+        if (self.condition.show_column.count) {
+            [m_dic setObject:[self.condition showArrayValStringWithKey:@"show_column"] forKey:@"show_column"];
+        }
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_queryCheckFreightListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){

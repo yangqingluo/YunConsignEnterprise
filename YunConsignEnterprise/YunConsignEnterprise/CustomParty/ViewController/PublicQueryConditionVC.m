@@ -7,6 +7,7 @@
 //
 
 #import "PublicQueryConditionVC.h"
+#import "PublicSelectionVC.h"
 
 @interface PublicQueryConditionVC ()<UITextFieldDelegate>
 
@@ -263,6 +264,36 @@
             [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
+    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[NSArray class] varName:key]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *source_array = [NSMutableArray new];
+            NSMutableArray *selected_array = [NSMutableArray new];
+            for (NSUInteger i = 0; i < dataArray.count; i++) {
+                AppDataDictionary *item = dataArray[i];
+                [source_array addObject:item.item_name];
+                if ([[self.condition valueForKey:key] containsObject:item]) {
+                    [selected_array addObject:@(i)];
+                }
+            }
+            QKWEAKSELF;
+            PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
+                if ([object isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *m_array = [NSMutableArray new];
+                    for (NSNumber *number in (NSArray *)object) {
+                        NSInteger index = [number integerValue];
+                        if (index < dataArray.count && index >= 0) {
+                            [m_array addObject:dataArray[index]];
+                        }
+                    }
+                    [weakself.condition setValue:[NSArray arrayWithArray:m_array] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }];
+            vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
+            [self doPushViewController:vc animated:YES];
+        }
+    }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
@@ -434,6 +465,9 @@
     cell.baseView.textField.keyboardType = [self.numberInputSet containsObject:key] ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
     if ([[self.condition valueForKey:key] isKindOfClass:[AppDataDictionary class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"item_name"];
+    }
+    else if ([[self.condition valueForKey:key] isKindOfClass:[NSArray class]]) {
+        cell.baseView.textField.text = [self.condition showArrayNameStringWithKey:key];
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"load_service"]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"showCityAndServiceName"];

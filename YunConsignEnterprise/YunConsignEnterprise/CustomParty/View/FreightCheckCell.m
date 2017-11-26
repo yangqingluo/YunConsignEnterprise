@@ -18,10 +18,10 @@
     
     NSMutableArray *m_array = [NSMutableArray new];
     [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.indexPath.row + 1]];
-    [m_array addObject:data.goods_number];
-    [m_array addObject:data.pay_now_amount];
-    [m_array addObject:data.pay_on_delivery_amount];
-    [m_array addObject:data.pay_on_receipt_amount];
+    [m_array addObject:notNilString(data.goods_number, nil)];
+    [m_array addObject:notNilString(data.pay_now_amount, nil)];
+    [m_array addObject:notNilString(data.pay_on_delivery_amount, nil)];
+    [m_array addObject:notNilString(data.pay_on_receipt_amount, nil)];
     [self.baseView updateDataSourceWithArray:m_array];
 }
 

@@ -142,6 +142,15 @@
     
 }
 
+- (UIViewController *)doPopViewControllerAnimated:(BOOL)animated {
+    if (self.parentVC) {
+        return [self.parentVC.navigationController popViewControllerAnimated:animated];
+    }
+    else {
+        return [self.navigationController popViewControllerAnimated:animated];
+    }
+}
+
 - (NSArray<__kindof UIViewController *> *)doPopToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.parentVC) {
         return [self.parentVC.navigationController popToViewController:viewController animated:animated];

@@ -589,6 +589,11 @@ BOOL isTrue(NSString *string) {
         NSDate *date_now = [NSDate date];
         self.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
         self.end_time = date_now;
+        [[self class] mj_setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"show_column" : [AppDataDictionary class],
+                     };
+        }];
     }
     return self;
 }
@@ -604,6 +609,30 @@ BOOL isTrue(NSString *string) {
 }
 - (NSString *)showEndStationString {
     return self.end_station_city ? self.end_station_city.open_city_name : @"全部";
+}
+
+- (NSString *)showShowColumnString {
+    NSMutableString *m_string = [NSMutableString new];
+    for (AppDataDictionary *item in self.show_column) {
+        [m_string appendString:item.item_val];
+    }
+    return m_string;
+}
+
+- (NSString *)showArrayValStringWithKey:(NSString *)key {
+    NSMutableArray *m_array = [NSMutableArray new];
+    for (AppDataDictionary *item in [self valueForKey:key]) {
+        [m_array addObject:item.item_val];
+    }
+    return [m_array componentsJoinedByString:@","];
+}
+
+- (NSString *)showArrayNameStringWithKey:(NSString *)key {
+    NSMutableArray *m_array = [NSMutableArray new];
+    for (AppDataDictionary *item in [self valueForKey:key]) {
+        [m_array addObject:item.item_name];
+    }
+    return [m_array componentsJoinedByString:@","];
 }
 
 @end

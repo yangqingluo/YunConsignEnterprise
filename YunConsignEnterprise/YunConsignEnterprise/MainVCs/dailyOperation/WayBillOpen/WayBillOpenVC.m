@@ -596,9 +596,9 @@
                 
                 AppGoodsInfo *item = self.goodsArray[indexPath.row - 1];
                 [cell addShowContents:@[[NSString stringWithFormat:@"品名%@", indexChineseString(indexPath.row)],
-                                        notNilString(item.goods_name),
+                                        notNilString(item.goods_name, nil),
                                         @"包装",
-                                        notNilString(item.packge),
+                                        notNilString(item.packge, nil),
                                         @"件/吨/方",
                                         [NSString stringWithFormat:@"%@/%@/%@", item.number, item.weight, item.volume],
                                         @"运费",

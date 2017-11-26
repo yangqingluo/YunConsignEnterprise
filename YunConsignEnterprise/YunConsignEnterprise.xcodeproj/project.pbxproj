@@ -49,6 +49,9 @@
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
 		E42D18C11FB42A3100649825 /* SaveCodLoanApplySecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C01FB42A3100649825 /* SaveCodLoanApplySecondVC.m */; };
 		E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */; };
+		E42DACD21FCB0B81004FCDD1 /* show_column.txt in Resources */ = {isa = PBXBuildFile; fileRef = E42DACD11FCB0B81004FCDD1 /* show_column.txt */; };
+		E42DACD51FCB0C39004FCDD1 /* PublicSelectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42DACD41FCB0C39004FCDD1 /* PublicSelectionVC.m */; };
+		E42DACD81FCB0CC2004FCDD1 /* TitleTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */; };
 		E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */; };
 		E430F3AE1FB45CB600AB74E1 /* PublicMessageReadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
@@ -533,6 +536,11 @@
 		E42D18C01FB42A3100649825 /* SaveCodLoanApplySecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplySecondVC.m; sourceTree = "<group>"; };
 		E42D18C21FB42DDF00649825 /* SaveCodLoanApplySecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplySecondCell.h; sourceTree = "<group>"; };
 		E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplySecondCell.m; sourceTree = "<group>"; };
+		E42DACD11FCB0B81004FCDD1 /* show_column.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column.txt; sourceTree = "<group>"; };
+		E42DACD31FCB0C39004FCDD1 /* PublicSelectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicSelectionVC.h; sourceTree = "<group>"; };
+		E42DACD41FCB0C39004FCDD1 /* PublicSelectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicSelectionVC.m; sourceTree = "<group>"; };
+		E42DACD61FCB0CC2004FCDD1 /* TitleTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTextCell.h; sourceTree = "<group>"; };
+		E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTextCell.m; sourceTree = "<group>"; };
 		E42E7EBE1FB20CE7007E755B /* CustomerEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerEditVC.h; sourceTree = "<group>"; };
 		E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerEditVC.m; sourceTree = "<group>"; };
 		E430F3AC1FB45CB600AB74E1 /* PublicMessageReadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMessageReadManager.h; sourceTree = "<group>"; };
@@ -1476,6 +1484,7 @@
 			isa = PBXGroup;
 			children = (
 				E46CA9A21FB06A33008F26F4 /* daily_name.txt */,
+				E42DACD11FCB0B81004FCDD1 /* show_column.txt */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -1893,6 +1902,8 @@
 				E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */,
 				E43B9DA51FC55BF600D1C57B /* ServiceCell.h */,
 				E43B9DA61FC55BF600D1C57B /* ServiceCell.m */,
+				E42DACD61FCB0CC2004FCDD1 /* TitleTextCell.h */,
+				E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1924,6 +1935,8 @@
 				E4FB63311FC5634F005C482E /* PublicLocationViewController.m */,
 				E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */,
 				E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */,
+				E42DACD31FCB0C39004FCDD1 /* PublicSelectionVC.h */,
+				E42DACD41FCB0C39004FCDD1 /* PublicSelectionVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2716,6 +2729,7 @@
 				E4AF3BA01F78E4E9009EB766 /* list_icon_common@2x.png in Resources */,
 				E40CCAAE1F98734D00FD35EE /* daily_icon_WAYBILL_ARRIVAL@3x.png in Resources */,
 				E4AF3B821F78E4E9009EB766 /* content_serration@2x.png in Resources */,
+				E42DACD21FCB0B81004FCDD1 /* show_column.txt in Resources */,
 				E4AF3BC01F78E4E9009EB766 /* money_icon_4@2x.png in Resources */,
 				E4AF3B811F78E4E9009EB766 /* content_icon_urgent@3x.png in Resources */,
 				E4E2A3C81FB311AE00D8EC1C /* MJRefresh.bundle in Resources */,
@@ -2997,6 +3011,7 @@
 				E4E2A3B41FB311AE00D8EC1C /* MJPropertyType.m in Sources */,
 				E4E2A3F11FB311AE00D8EC1C /* MWPhoto.m in Sources */,
 				E4E2A3F61FB311AE00D8EC1C /* UIImage+MWPhotoBrowser.m in Sources */,
+				E42DACD51FCB0C39004FCDD1 /* PublicSelectionVC.m in Sources */,
 				E460C5DF1FB2FC5500B6014F /* PublicShowTableVC.m in Sources */,
 				E48C72BC1FA9B993007F7FC8 /* CodWaitPayDetailVC.m in Sources */,
 				E4AEA05A1F5EA6CF002EBE41 /* QKNetworkSingleton.m in Sources */,
@@ -3099,6 +3114,7 @@
 				E4E2A3F51FB311AE00D8EC1C /* MWZoomingScrollView.m in Sources */,
 				E4E2A3B21FB311AE00D8EC1C /* MJProperty.m in Sources */,
 				E4E2A3981FB311AE00D8EC1C /* IQKeyboardManager.m in Sources */,
+				E42DACD81FCB0CC2004FCDD1 /* TitleTextCell.m in Sources */,
 				E4E2A3A31FB311AE00D8EC1C /* UIImage+LLGif.m in Sources */,
 				E4FB632F1FC5628C005C482E /* JZLocationConverter.m in Sources */,
 				E40F7CA71F95A71700946C18 /* PublicSRSelectVC.m in Sources */,

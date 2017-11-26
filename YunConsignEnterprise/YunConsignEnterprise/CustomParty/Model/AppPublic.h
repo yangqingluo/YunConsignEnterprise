@@ -153,7 +153,7 @@ NSString *sha1(NSString *string);
 /*!
  @brief 替换空字符串
  */
-NSString *notNilString(NSString *string);
+NSString *notNilString(NSString *string, NSString *placeString);
 
 /*!
  @brief 字典转中文字符串

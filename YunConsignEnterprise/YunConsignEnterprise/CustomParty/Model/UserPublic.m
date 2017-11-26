@@ -135,12 +135,15 @@ __strong static UserPublic *_singleManger = nil;
 - (NSMutableDictionary *)dataMapDic {
     if (!_dataMapDic) {
         _dataMapDic = [NSMutableDictionary new];
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"daily_name" ofType:@"txt"];
-        if (path) {
-            NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
-            NSArray *objectArray = [AppDataDictionary mj_objectArrayWithKeyValuesArray:keyValuesArray];
-            if (objectArray) {
-                [_dataMapDic setObject:objectArray forKey:@"daily_name"];
+        NSArray *m_array = @[@"daily_name", @"show_column"];
+        for (NSString *key in m_array) {
+            NSString *path = [[NSBundle mainBundle] pathForResource:key ofType:@"txt"];
+            if (path) {
+                NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
+                NSArray *objectArray = [AppDataDictionary mj_objectArrayWithKeyValuesArray:keyValuesArray];
+                if (objectArray) {
+                    [_dataMapDic setObject:objectArray forKey:key];
+                }
             }
         }
     }

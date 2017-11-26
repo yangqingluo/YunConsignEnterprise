@@ -122,8 +122,8 @@ NSString *sha1(NSString *string) {
 /*!
  @brief 替换空字符串
  */
-NSString *notNilString(NSString *string) {
-    return string.length ? string : @"";
+NSString *notNilString(NSString *string, NSString *placeString) {
+    return string.length ? string : (placeString ? placeString : @"");
 }
 
 // log NSSet with UTF8

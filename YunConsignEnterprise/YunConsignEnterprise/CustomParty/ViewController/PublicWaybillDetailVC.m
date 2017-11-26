@@ -395,9 +395,9 @@
                 
                 AppWaybillItemInfo *item = self.detailData.waybill_items[indexPath.row - 1];
                 [cell addShowContents:@[[NSString stringWithFormat:@"品名%@", indexChineseString(indexPath.row)],
-                                        notNilString(item.waybill_item_name),
+                                        notNilString(item.waybill_item_name, nil),
                                         @"包装",
-                                        notNilString(item.packge),
+                                        notNilString(item.packge, nil),
                                         @"件/吨/方",
                                         [NSString stringWithFormat:@"%@/%@/%@", item.number, item.weight, item.volume],
                                         @"运费",

@@ -36,6 +36,7 @@
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content;
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (UIViewController *)doPopViewControllerAnimated:(BOOL)animated;
 - (NSArray<__kindof UIViewController *> *)doPopToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (NSArray<__kindof UIViewController *> *)doPopToLastViewControllerSkip:(NSUInteger)skip animated:(BOOL)animated;
 - (void)textFieldDidChange:(UITextField *)textField;

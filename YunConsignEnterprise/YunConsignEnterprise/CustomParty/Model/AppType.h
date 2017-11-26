@@ -826,7 +826,7 @@ BOOL isTrue(NSString *string);
 /*订单相关*/
 @property (strong, nonatomic) AppDataDictionary *query_column;//查询字段
 @property (strong, nonatomic) NSString *query_val;//查询内容
-@property (strong, nonatomic) AppDataDictionary *show_column;//显示字段
+@property (strong, nonatomic) NSArray *show_column;//显示字段
 @property (strong, nonatomic) AppServiceInfo *start_service;
 @property (strong, nonatomic) AppServiceInfo *end_service;
 @property (strong, nonatomic) NSString *is_cancel;//是否作废
@@ -866,5 +866,7 @@ BOOL isTrue(NSString *string);
 - (NSString *)showEndTimeString;
 - (NSString *)showStartStationString;
 - (NSString *)showEndStationString;
+- (NSString *)showArrayValStringWithKey:(NSString *)key;
+- (NSString *)showArrayNameStringWithKey:(NSString *)key;
 
 @end
