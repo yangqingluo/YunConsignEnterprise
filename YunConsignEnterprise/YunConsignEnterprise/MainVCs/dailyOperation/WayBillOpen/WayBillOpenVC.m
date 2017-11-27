@@ -22,11 +22,7 @@
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
     
-    [self.toCheckDataMapSet removeAllObjects];
-    [self.toCheckDataMapSet addObjectsFromArray:@[@"receipt_sign_type", @"cash_on_delivery_type"]];
-    for (NSString *key in self.toCheckDataMapSet) {
-        [self checkDataMapExistedForCode:key];
-    }
+    [self initialDataDictionaryForCodeArray:@[@"receipt_sign_type", @"cash_on_delivery_type"]];
 }
 
 - (void)setupNav {
@@ -170,7 +166,7 @@
 - (void)checkDataMapExistedForCode:(NSString *)key {
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
-        if (![self.toSaveData valueForKey:key]) {
+        if (![self.toSaveData valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
             AppDataDictionary *item = [key isEqualToString:@"cash_on_delivery_type"] ? dataArray[dataArray.count - 1] : dataArray[0];
             [self.toSaveData setValue:item.item_val forKey:key];
             [self.tableView reloadData];
@@ -178,14 +174,6 @@
     }
     else {
         [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
-    }
-}
-
-- (void)initialDataDictionaryForCode:(NSString *)dict_code {
-    if (![self.toSaveData valueForKey:dict_code]) {
-        if ([self.toCheckDataMapSet containsObject:dict_code]) {
-            [self checkDataMapExistedForCode:dict_code];
-        }
     }
 }
 

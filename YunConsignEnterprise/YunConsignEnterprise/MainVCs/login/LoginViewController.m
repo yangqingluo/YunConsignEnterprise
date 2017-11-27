@@ -136,10 +136,7 @@
 #pragma textfield
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSUInteger length = kInputLengthMax;
-    if ([textField isEqual:self.usernameTextField]) {
-        length = kPhoneNumberLength;
-    }
-    else if ([textField isEqual:self.passwordTextField]) {
+    if ([textField isEqual:self.passwordTextField]) {
         length = kPasswordLengthMax;
     }
     return range.location < length;

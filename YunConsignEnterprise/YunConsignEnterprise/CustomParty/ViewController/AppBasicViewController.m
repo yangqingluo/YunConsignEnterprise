@@ -181,8 +181,18 @@
     
 }
 
-- (void)initialDataDictionaryForCode:(NSString *)dict_code {
-    
+- (void)additionalDataDictionaryForCode:(NSString *)dict_code {
+    [self.toCheckDataMapSet addObject:dict_code];
+    [self checkDataMapExistedForCode:dict_code];
+}
+
+- (void)initialDataDictionaryForCodeArray:(NSArray *)array {
+    [self.toCheckDataMapSet removeAllObjects];
+    for (NSObject *key in array) {
+        if ([key isKindOfClass:[NSString class]]) {
+            [self additionalDataDictionaryForCode:(NSString *)key];
+        }
+    }
 }
 
 - (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
@@ -195,7 +205,7 @@
             NSArray *m_array = [AppDataDictionary mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                [weakself initialDataDictionaryForCode:dict_code ];
+                [weakself checkDataMapExistedForCode:dict_code ];
                 if (indexPath) {
                     [weakself selectRowAtIndexPath:indexPath];
                 }

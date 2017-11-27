@@ -209,11 +209,7 @@
             key = m_dic[@"key"];
         }
         
-        if (key.length) {
-            if ([key isEqualToString:@"phone"]) {
-                length = kPhoneNumberLength;
-            }
-            else if ([self.numberKeyBoardTypeSet containsObject:key]) {
+        if (key.length) {if ([self.numberKeyBoardTypeSet containsObject:key]) {
                 length = kPriceLengthMax;
             }
         }

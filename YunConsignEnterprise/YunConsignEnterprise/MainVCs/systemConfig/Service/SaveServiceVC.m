@@ -174,16 +174,17 @@
         }
         
         if (key.length) {
-            if ([key isEqualToString:@"responsible_phone"]) {
-                length = kPhoneNumberLength;
-            }
-            else if ([key isEqualToString:@"service_phone"]) {
-                length = kIDLengthMax;//固话长度
+//            if ([key isEqualToString:@"responsible_phone"]) {
+//                length = kPhoneNumberLength;
+//            }
+//            else if ([key isEqualToString:@"service_phone"]) {
+//                length = kIDLengthMax;//固话长度
 //                NSCharacterSet *notNumber=[[NSCharacterSet characterSetWithCharactersInString:NumberWithDash] invertedSet];
 //                NSString *string1 = [[string componentsSeparatedByCharactersInSet:notNumber] componentsJoinedByString:@""];
 //                m_bool = [string isEqualToString:string1];
-            }
-            else if ([self.numberKeyBoardTypeSet containsObject:key]) {
+//            }
+//            else
+                if ([self.numberKeyBoardTypeSet containsObject:key]) {
                 length = kPriceLengthMax;
             }
         }

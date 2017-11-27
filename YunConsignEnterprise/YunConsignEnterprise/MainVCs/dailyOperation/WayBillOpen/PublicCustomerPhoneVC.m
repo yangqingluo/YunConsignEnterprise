@@ -206,11 +206,4 @@
     [self pulldataSource:self.data.customer.phone];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    return (range.location < kPhoneNumberLength);
-}
-
 @end

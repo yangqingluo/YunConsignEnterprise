@@ -39,8 +39,7 @@
                        @{@"title":@"是否提货",@"subTitle":@"请选择",@"key":@"waybill_receive_state"},
                        @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                        @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-    [self checkDataMapExistedForCode:@"cod_search_time_type"];
-    [self checkDataMapExistedForCode:@"query_column"];
+    [self initialDataDictionaryForCodeArray:@[@"cod_search_time_type", @"query_column"]];
 }
 
 - (void)searchButtonAction {
@@ -84,7 +83,7 @@
 - (void)checkDataMapExistedForCode:(NSString *)key {
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
-        if (![self.condition valueForKey:key]) {
+        if (![self.condition valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
             [self.condition setValue:[key isEqualToString:@"cod_search_time_type"] ? dataArray[dataArray.count - 1] : dataArray[0] forKey:key];
             [self.tableView reloadData];
         }

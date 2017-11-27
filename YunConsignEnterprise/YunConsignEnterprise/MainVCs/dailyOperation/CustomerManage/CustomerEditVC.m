@@ -276,10 +276,7 @@
         }
         
         if (key.length) {
-            if ([key isEqualToString:@"phone"]) {
-                length = kPhoneNumberLength;
-            }
-            else if (![self.defaultKeyBoardTypeSet containsObject:key]) {
+            if (![self.defaultKeyBoardTypeSet containsObject:key]) {
                 length = kPriceLengthMax;
             }
         }

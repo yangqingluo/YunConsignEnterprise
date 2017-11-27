@@ -204,9 +204,9 @@
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppCodLoanApplyInfo *item = self.dataSource[indexPath.row];
-        int tag = [m_dic[@"tag"] intValue];
+        int tag = ([item.loan_apply_state intValue] == 1 ? 1 : 0) - [m_dic[@"tag"] intValue];
         switch (tag) {
-            case 0:{
+            case 1:{
                 //取消申请
                 QKWEAKSELF;
                 BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
@@ -218,7 +218,7 @@
             }
                 break;
                 
-            case 1:{
+            case 0:{
                 //运单明细
                 CodLoanApplyWaybillDetailVC *vc = [CodLoanApplyWaybillDetailVC new];
                 vc.codApplyData = item;

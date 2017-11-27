@@ -18,9 +18,12 @@
     [self.bodyView addSubview:_bodyLabel4];
 }
 
-- (void)setupFooter {
-    [super setupFooter];
-    [self.footerView updateDataSourceWithArray:@[@"取消申请", @"运单明细"]];
+- (void)refreshFooter {
+    NSArray *m_array = @[@"运单明细"];
+    if ([self.data.loan_apply_state intValue] == 1) {
+        m_array = @[@"取消申请", @"运单明细"];
+    }
+    [self.footerView updateDataSourceWithArray:m_array];
 }
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -46,6 +49,7 @@
         self.bodyLabel4.text = [NSString stringWithFormat:@"备注：%@", _data.apply_note];
     }
     self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
+    [self refreshFooter];
 }
 
 @end

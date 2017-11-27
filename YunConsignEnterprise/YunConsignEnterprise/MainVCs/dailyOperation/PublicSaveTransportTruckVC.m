@@ -58,8 +58,8 @@
         [self showHint:@"请选择终点站"];
         return;
     }
-    else if (self.toSaveData.truck_driver_phone.length != kPhoneNumberLength) {
-        [self showHint:@"请输入正确的电话"];
+    else if (!self.toSaveData.truck_driver_phone.length) {
+        [self showHint:@"请输入电话"];
         return;
     }
     else {

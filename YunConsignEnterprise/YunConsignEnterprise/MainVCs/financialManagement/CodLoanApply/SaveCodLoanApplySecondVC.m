@@ -52,12 +52,7 @@
         }
         else {
             BOOL valid = YES;
-            if ([key isEqualToString:@"contact_phone"]) {
-                valid = (value.length == kPhoneNumberLength);
-            }
-            else {
-                valid = value.length > 0;
-            }
+            valid = value.length > 0;
             if (!valid) {
                 [self showHint:[NSString stringWithFormat:@"请补全%@", dic[@"title"]]];
                 return;
@@ -196,11 +191,11 @@
             agent_money_fee += [m_data.agent_money_fee doubleValue];
         }
         
-        cell.titleLabel.text = [NSString stringWithFormat:@"运单信息（%d单）", count];
-        cell.bodyLabel1.text = [NSString stringWithFormat:@"开单金额：%.1f", cash_on_delivery_amount];
-        cell.bodyLabelRight1.text = [NSString stringWithFormat:@"实收金额：%.1f", cash_on_delivery_real_amount];
-        cell.bodyLabel2.text = [NSString stringWithFormat:@"手续费：%.1f", agent_money_fee];
-        cell.bodyLabelRight2.text = [NSString stringWithFormat:@"应放款：%.1f", cash_on_delivery_real_amount - agent_money_fee];
+        cell.titleLabel.text = [NSString stringWithFormat:@"运单数量（%d单）", count];
+        cell.bodyLabel1.text = [NSString stringWithFormat:@"开单金额：%.0f", cash_on_delivery_amount];
+        cell.bodyLabelRight1.text = [NSString stringWithFormat:@"实收金额：%.0f", cash_on_delivery_real_amount];
+        cell.bodyLabel2.text = [NSString stringWithFormat:@"手续费：%.0f", agent_money_fee];
+        cell.bodyLabelRight2.text = [NSString stringWithFormat:@"应放款：%.0f", cash_on_delivery_real_amount - agent_money_fee];
         
         return cell;
     }
@@ -228,33 +223,6 @@
     }
     
     return cell;
-}
-
-#pragma  mark - TextField
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    NSInteger length = kInputLengthMax;
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        id item = self.showArray[indexPath.row];
-        NSString *key = @"";
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            key = item[@"key"];
-        }
-        else if ([item isKindOfClass:[NSArray class]]) {
-            NSDictionary *m_dic = item[textField.tag];
-            key = m_dic[@"key"];
-        }
-        
-        if (key.length) {
-            if ([key isEqualToString:@"contact_phone"]) {
-                length = kPhoneNumberLength;
-            }
-        }
-    }
-    return (range.location < length);
 }
 
 @end

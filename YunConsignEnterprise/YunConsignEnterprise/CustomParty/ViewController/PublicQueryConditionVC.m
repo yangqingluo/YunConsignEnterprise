@@ -54,7 +54,7 @@
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
-            [self checkDataMapExistedForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
             
@@ -81,7 +81,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
             
@@ -91,7 +91,7 @@
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
             
@@ -108,7 +108,7 @@
             self.showArray = @[@{@"title":@"装车网点",@"subTitle":@"必填，请选择",@"key":@"load_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
             
@@ -118,7 +118,7 @@
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
             
@@ -127,7 +127,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
-            [self checkDataMapExistedForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
             
@@ -143,6 +143,7 @@
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"},
                            @{@"title":@"审核状态",@"subTitle":@"请选择",@"key":@"loan_apply_state"}];
+            [self additionalDataDictionaryForCode:@"loan_apply_state"];
         }
             break;
             
@@ -185,21 +186,13 @@
 - (void)checkDataMapExistedForCode:(NSString *)key {
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
-        if (![self.condition valueForKey:key]) {
+        if (![self.condition valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
             [self.condition setValue:dataArray[0] forKey:key];
             [self.tableView reloadData];
         }
     }
     else {
         [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
-    }
-}
-
-- (void)initialDataDictionaryForCode:(NSString *)dict_code {
-    if (![self.condition valueForKey:dict_code]) {
-        if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"] || [dict_code isEqualToString:@"cod_search_time_type"]) {
-            [self checkDataMapExistedForCode:dict_code];
-        }
     }
 }
 

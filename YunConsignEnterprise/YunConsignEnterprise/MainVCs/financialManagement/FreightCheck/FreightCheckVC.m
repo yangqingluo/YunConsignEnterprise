@@ -42,8 +42,7 @@
                        @{@"title":@"显示字段",@"subTitle":@"现付、提付、回单付",@"key":@"show_column"}];
     AppServiceInfo *serviceInfo = [AppServiceInfo mj_objectWithKeyValues:[[UserPublic getInstance].userData mj_keyValues]];
     self.condition.power_service = serviceInfo;
-    [self checkDataMapExistedForCode:@"search_time_type"];
-    [self checkDataMapExistedForCode:@"query_column"];
+    [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column"]];
 }
 
 - (void)searchButtonAction {
