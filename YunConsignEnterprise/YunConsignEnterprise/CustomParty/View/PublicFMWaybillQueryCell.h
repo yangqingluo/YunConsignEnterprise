@@ -14,4 +14,7 @@
 
 @property (strong, nonatomic) UILabel *bodyLabelRight1;
 
+@property (strong, nonatomic) UILabel *bodyLabelMiddle3;
+@property (strong, nonatomic) UILabel *bodyLabelRight3;
+
 @end

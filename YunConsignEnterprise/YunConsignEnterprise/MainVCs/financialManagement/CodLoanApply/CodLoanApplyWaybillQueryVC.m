@@ -34,8 +34,8 @@
     AppWayBillDetailInfo *m_data = self.dataSource[indexPath.row];
     BOOL is_cash_on_delivery_causes = [m_data.cash_on_delivery_causes_amount intValue] > 0;
     BOOL is_cash_on_delivery_real = m_data.cash_on_delivery_real_time.length > 0;
-    BOOL is_can_apply = isTrue(m_data.is_can_apply);
-    return [CodLoanApplyWaybillQueryCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines: 2 + is_cash_on_delivery_causes + is_cash_on_delivery_real + !is_can_apply];
+//    BOOL is_can_apply = isTrue(m_data.is_can_apply);
+    return [CodLoanApplyWaybillQueryCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines: 3 + is_cash_on_delivery_causes + is_cash_on_delivery_real];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

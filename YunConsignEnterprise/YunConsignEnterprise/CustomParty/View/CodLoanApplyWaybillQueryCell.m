@@ -35,15 +35,22 @@
         lines++;
     }
     
+//    if (isTrue(data.is_can_apply)) {
+//        self.statusLabel.textColor = MainColor;
+//        self.statusLabel.text = [NSString stringWithFormat:@"(%@)", data.print_check_code];
+//        self.bodyLabel5.text = @"";
+//    }
+//    else {
+        lines++;
     if (isTrue(data.is_can_apply)) {
-        self.statusLabel.textColor = MainColor;
-        self.statusLabel.text = [NSString stringWithFormat:@"(%@)", data.print_check_code];
-        self.bodyLabel5.text = @"";
+        self.bodyLabel5.textColor = MainColor;
+        self.bodyLabel5.text = [NSString stringWithFormat:@"验证码：%@", data.print_check_code];
     }
     else {
-        lines++;
-        self.statusLabel.text = @"";
+        self.bodyLabel5.textColor = WarningColor;
         self.bodyLabel5.text = [NSString stringWithFormat:@"%@", data.not_can_apply_note];
+    }
+    
         if (lines == 3) {
             self.bodyLabel5.top = self.bodyLabel2.bottom;
         }
@@ -53,7 +60,7 @@
         else if (lines == 5) {
             self.bodyLabel5.top = self.bodyLabel4.bottom;
         }
-    }
+//    }
     
     self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }

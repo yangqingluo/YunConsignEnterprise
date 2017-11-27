@@ -30,7 +30,7 @@
     if (self) {
         self.headerStyle = style;
         self.backgroundColor = [UIColor clearColor];
-        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeMiddle, kEdgeSmall, screen_width - 2 * kEdgeMiddle, self.contentView.height - 2 * kEdgeSmall)];
+        _baseView = [[UIView alloc] initWithFrame:CGRectMake(kEdgeSmall, kEdgeSmall, screen_width - 2 * kEdgeSmall, self.contentView.height - 2 * kEdgeSmall)];
         _baseView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_baseView];
         
