@@ -181,14 +181,14 @@
         for (AppCodLoanApplyInfo *item in self.selectSet) {
             audit_amount += [item.audit_amount doubleValue];
         }
-        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", audit_amount];
+        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"放款总金额：%.0f元", audit_amount];
     }
     else if (self.indextag == 1) {
         double audit_amount = 0;
         for (AppCodLoanApplyInfo *item in self.dataSource) {
             audit_amount += [item.audit_amount doubleValue];
         }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", audit_amount];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.0f元", audit_amount];
     }
 }
 

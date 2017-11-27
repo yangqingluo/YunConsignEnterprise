@@ -22,7 +22,7 @@
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportTruckSaveNotification:) name:kNotification_TransportTruckSaveRefresh object:nil];
         self.viewArray = [NSMutableArray new];
         [self.viewArray addObject:@{@"title":@"等待审核",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
-        [self.viewArray addObject:@{@"title":@"其他",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
+        [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
     }
     return self;
 }
@@ -33,7 +33,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:self.accessInfo.menu_name createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:@"放款审核" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
