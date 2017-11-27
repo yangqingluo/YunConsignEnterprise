@@ -158,14 +158,14 @@
         for (AppCodLoanApplyWaitLoanInfo *item in self.selectSet) {
             remit_amount += [item.remit_amount doubleValue];
         }
-        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", remit_amount];
+        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"选择%d票 金额%.0f元", (int)self.selectSet.count, remit_amount];
     }
     else if (self.indextag == 1) {
         double remit_amount = 0;
         for (AppCodLoanApplyWaitLoanInfo *item in self.dataSource) {
             remit_amount += [item.remit_amount doubleValue];
         }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.2f元", remit_amount];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.0f元", remit_amount];
     }
 }
 
@@ -212,7 +212,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [CodRemitCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:(self.indextag == 0) ? 2 : 3];
+    AppCodLoanApplyWaitLoanInfo *item = self.dataSource[indexPath.row];
+    return [CodRemitCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:(self.indextag == 0) ? (2 + (item.apply_time.length > 0)) : 3];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

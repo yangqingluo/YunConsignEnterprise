@@ -11,7 +11,7 @@
 
 #import "CodLoanCheckDetailCell.h"
 
-@interface PublicWaybillDetailListVC ()
+@interface PublicWaybillDetailListVC ()<UITextFieldDelegate>
 
 @end
 
@@ -68,12 +68,19 @@
     }];
 }
 
-- (void)doCancelLoanApplyWaybillByIdFunction:(NSString *)waybill_id {
+- (void)doCancelLoanApplyWaybillByIdFunction:(NSString *)waybill_id cause:(NSString *)causeString {
     if (!waybill_id) {
+        return;
+    }
+    if (!causeString.length) {
+        [self doShowHintFunction:@"请输入驳回原因"];
         return;
     }
     [self doShowHudFunction];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : waybill_id}];
+    if (causeString) {
+        [m_dic setObject:causeString forKey:@"loan_waybill_note"];
+    }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_cancelLoanApplyWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -143,9 +150,17 @@
                 QKWEAKSELF;
                 BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定驳回吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
-                        [weakself doCancelLoanApplyWaybillByIdFunction:item.waybill_id];
+                        UITextField *textField = [view textFieldAtIndex:0];
+                        [weakself doCancelLoanApplyWaybillByIdFunction:item.waybill_id cause:textField.text];
                     }
                 }otherButtonTitles:@"确定", nil];
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                UITextField *alertTextField = [alert textFieldAtIndex:0];
+                alertTextField.clearButtonMode = UITextFieldViewModeAlways;
+                alertTextField.returnKeyType = UIReturnKeyDone;
+                alertTextField.delegate = self;
+                alertTextField.placeholder = @"驳回原因";
+                [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
                 [alert show];
 
             }

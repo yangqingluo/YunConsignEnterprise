@@ -29,7 +29,10 @@
     self.bodyLabel2.text = [NSString stringWithFormat:@"银行账号：%@", data.bank_account];
     NSUInteger lines = 2;
     if (self.indextag == 0) {
-        
+        if (data.apply_time.length) {
+            lines++;
+            self.bodyLabel3.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
+        }
     }
     else {
         lines++;
