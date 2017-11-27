@@ -174,7 +174,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [DailyReimbursementApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:self.indextag == 0 ? 3 : 4];
+    AppDailyReimbursementApplyInfo *item = self.dataSource[indexPath.row];
+    return [DailyReimbursementApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:(self.indextag == 0 ? 2 : 3) + (item.note.length > 0)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -215,18 +216,6 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                //查看凭证
-                if (item.voucher.length) {
-                    NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
-                    [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
-                }
-                else {
-                    [self doShowHintFunction:@"凭证不存在"];
-                }
-            }
-                break;
-                
-            case 1:{
                 if (self.indextag == 0) {
                     //取消申请
                     QKWEAKSELF;
@@ -236,6 +225,16 @@
                         }
                     } otherButtonTitles:@"确定", nil];
                     [alert show];
+                }
+                else {
+                    //查看凭证
+                    if (item.voucher.length) {
+                        NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
+                        [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
+                    }
+                    else {
+                        [self doShowHintFunction:@"凭证不存在"];
+                    }
                 }
             }
                 break;

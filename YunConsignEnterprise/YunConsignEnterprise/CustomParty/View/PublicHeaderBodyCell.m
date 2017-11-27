@@ -88,6 +88,11 @@
     [_bodyView addSubview:_bodyLabel3];
 }
 
+- (void)showLabel:(UILabel *)label conten:(NSString *)content {
+    label.hidden = NO;
+    label.text = content;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

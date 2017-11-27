@@ -33,7 +33,7 @@
 }
 
 - (void)refreshFooter {
-    NSArray *m_array = @[@"查看凭证", @"取消申请"];
+    NSArray *m_array = @[@"取消申请"];
     if (self.indextag == 0) {
         
     }
@@ -52,14 +52,32 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
     self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"申请备注：%@", data.note];
-    if (self.indextag == 1) {
-        self.bodyLabel4.text = [NSString stringWithFormat:@"审核人：%@（%@）", data.check_name, data.check_time];
+    NSUInteger lines = 2;
+    
+    self.bodyLabel3.hidden = YES;
+    self.bodyLabel3.textColor = baseTextColor;
+    BOOL isShowNote = data.note.length > 0;
+    if (isShowNote) {
+        lines++;
+        [self showLabel:self.bodyLabel3 conten:[NSString stringWithFormat:@"申请备注：%@", data.note]];
     }
-    else if (self.indextag == 2) {
-        self.bodyLabel4.text = [NSString stringWithFormat:@"驳回原因：%@", data.check_note];
+    
+    self.bodyLabel4.hidden = YES;
+    if (self.indextag != 0) {
+        lines++;
+        if (self.indextag == 1) {
+            [self showLabel:isShowNote ? self.bodyLabel4 : self.bodyLabel3 conten:[NSString stringWithFormat:@"审核人：　%@（%@）", data.check_name, data.check_time]];
+        }
+        else if (self.indextag == 2) {
+            if (!isShowNote) {
+                self.bodyLabel3.textColor = WarningColor;
+            }
+            [self showLabel:isShowNote ? self.bodyLabel4 : self.bodyLabel3 conten:[NSString stringWithFormat:@"驳回原因：%@", data.check_note]];
+        }
     }
+    
     [self refreshFooter];
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 - (void)setIndextag:(NSInteger)indextag {

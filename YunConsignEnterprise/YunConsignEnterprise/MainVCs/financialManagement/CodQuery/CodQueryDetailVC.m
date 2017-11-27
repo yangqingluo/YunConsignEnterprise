@@ -28,7 +28,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:@"代收款查询" createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:@"代收款综合查询" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

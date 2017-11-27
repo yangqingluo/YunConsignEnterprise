@@ -38,5 +38,6 @@ typedef NS_ENUM(NSInteger, PublicHeaderCellStyle) {
 - (instancetype)initWithHeaderStyle:(PublicHeaderCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setupHeader;
 - (void)setupBody;
+- (void)showLabel:(UILabel *)label conten:(NSString *)content;
 
 @end

@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = self.accessInfo.menu_name;
+    self.title = @"代收款综合查询";
 }
 
 //初始化数据

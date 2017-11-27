@@ -56,7 +56,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:self.accessInfo.menu_name createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:@"放款申请" createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
