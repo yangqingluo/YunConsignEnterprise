@@ -34,8 +34,6 @@
     self.showArray = @[@{@"title":@"时间类型",@"subTitle":@"请选择",@"key":@"search_time_type"},
                        @{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                        @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
-                       @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
-                       @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
                        @{@"title":@"代收方式",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},
                        @{@"title":@"收款状态",@"subTitle":@"请选择",@"key":@"cod_payment_state"},
                        @{@"title":@"放款状态",@"subTitle":@"请选择",@"key":@"cod_loan_state"},
@@ -53,6 +51,36 @@
     CodQueryDetailVC *vc = [CodQueryDetailVC new];
     vc.condition = [self.condition copy];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"cash_on_delivery_type"]) {
+        NSString *m_key = @"cash_on_delivery_state_show";
+        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
+        if (dicArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
+            for (AppDataDictionary *m_data in dicArray) {
+                [m_array addObject:m_data.item_name];
+            }
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
+                    [weakself.condition setValue:dicArray[buttonIndex - 1] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullDataDictionaryFunctionForCode:m_key selectionInIndexPath:indexPath];
+        }
+        return;
+    }
+    
+    [super selectRowAtIndexPath:indexPath];
 }
 
 @end

@@ -373,6 +373,8 @@
                     
                     self.summaryFreightTextField = (IndexPathTextField *)cell.showArray[1];
                     self.summaryFreightTextField.enabled = NO;
+                    self.summaryFreightTextField.backgroundColor = [UIColor clearColor];
+                    self.summaryFreightTextField.layer.borderColor = [UIColor clearColor].CGColor;
                 }
                 
                 [cell addShowContents:@[@"运费：",

@@ -30,7 +30,7 @@
 #pragma mark - setter
 - (void)setData:(AppCashOnDeliveryWayBillInfo *)data {
     _data = data;
-    self.titleLabel.text = [NSString stringWithFormat:@"货号：%@", data.goods_number];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", data.goods_number, data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
     self.statusLabel.text = data.cash_on_delivery_state_text;
     
@@ -57,16 +57,16 @@
         self.bodyLabelRight4.text = [NSString stringWithFormat:@"少款原因：%@", data.cash_on_delivery_causes_note];
     }
     
-    BOOL is_remitter_name = data.remitter_name.length > 0;
+    BOOL is_cash_on_delivery = [data.cash_on_delivery_state intValue] == 6;
     self.bodyLabel5.hidden = YES;
-    if (is_remitter_name) {
+    if (is_cash_on_delivery) {
         lines++;
         if (is_cash_on_delivery_causes) {
-            self.bodyLabel5.text = [NSString stringWithFormat:@"放款：%@", data.remitter_name];
+            self.bodyLabel5.text = [NSString stringWithFormat:@"放款：%@（ %@）", data.remitter_name, data.remittance_time];
             self.bodyLabel5.hidden = NO;
         }
         else {
-            self.bodyLabel4.text = [NSString stringWithFormat:@"放款：%@", data.remitter_name];
+            self.bodyLabel4.text = [NSString stringWithFormat:@"放款：%@（ %@）", data.remitter_name, data.remittance_time];
             self.bodyLabel4.hidden = NO;
         }
     }

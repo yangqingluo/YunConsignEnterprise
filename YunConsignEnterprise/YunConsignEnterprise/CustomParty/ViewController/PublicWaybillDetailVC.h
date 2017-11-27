@@ -8,11 +8,6 @@
 
 #import "PublicDailyOpenWaybillVC.h"
 
-typedef NS_ENUM(NSInteger, WaybillDetailType) {
-    WaybillDetailType_WayBillQuery = 0,
-    WaybillDetailType_CodQuery,
-};
-
 @interface PublicWaybillDetailVC : PublicDailyOpenWaybillVC
 
 @property (assign, nonatomic) WaybillDetailType type;

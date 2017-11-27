@@ -112,7 +112,7 @@
     if ([item.cash_on_delivery_causes_amount intValue] > 0) {
         lines++;
     }
-    if (item.remitter_name.length) {
+    if ([item.cash_on_delivery_state intValue] == 6) {
         lines++;
     }
     return [CodQueryCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines];

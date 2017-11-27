@@ -12,6 +12,11 @@
 #define PID_FINANCIAL_MANAGE      @"1002321897106275329"
 #define PID_SYSTEM_SET            @"1002321897253223425"
 
+typedef NS_ENUM(NSInteger, WaybillDetailType) {
+    WaybillDetailType_WayBillQuery = 0,
+    WaybillDetailType_CodQuery,
+};
+
 typedef NS_ENUM(NSInteger, USER_ROLE) {
     USER_ROLE_DEFAULT = 0,
     USER_ROLE_1 = 1,//网点操作员
@@ -828,6 +833,7 @@ BOOL isTrue(NSString *string);
 /*财务管理相关*/
 @property (strong, nonatomic) AppDataDictionary *search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_type;//代收方式
+@property (strong, nonatomic) AppDataDictionary *cash_on_delivery_state_show;//代收方式
 @property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
 @property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
 @property (strong, nonatomic) AppDataDictionary *waybill_receive_state;//收货状态
