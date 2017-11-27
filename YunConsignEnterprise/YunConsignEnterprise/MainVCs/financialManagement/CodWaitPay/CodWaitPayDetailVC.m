@@ -63,8 +63,8 @@
         if (self.condition.end_time) {
             [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
         }
-        if (self.condition.search_time_type) {
-            [m_dic setObject:self.condition.search_time_type.item_val forKey:@"time_type"];
+        if (self.condition.cod_search_time_type) {
+            [m_dic setObject:self.condition.cod_search_time_type.item_val forKey:@"time_type"];
         }
         if (self.condition.query_column && self.condition.query_val) {
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
@@ -77,7 +77,7 @@
             [m_dic setObject:self.condition.cash_on_delivery_type.item_val forKey:@"cash_on_delivery_type"];
         }
         if (self.condition.waybill_receive_state) {
-            [m_dic setObject:self.condition.waybill_receive_state.item_val forKey:@"waybill_receive_state"];
+            [m_dic setObject:self.condition.waybill_receive_state forKey:@"waybill_receive_state"];
         }
     }
     QKWEAKSELF;

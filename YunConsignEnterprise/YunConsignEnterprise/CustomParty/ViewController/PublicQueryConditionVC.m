@@ -197,7 +197,7 @@
 
 - (void)initialDataDictionaryForCode:(NSString *)dict_code {
     if (![self.condition valueForKey:dict_code]) {
-        if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"]) {
+        if ([dict_code isEqualToString:@"query_column"] || [dict_code isEqualToString:@"search_time_type"] || [dict_code isEqualToString:@"cod_search_time_type"]) {
             [self checkDataMapExistedForCode:dict_code];
         }
     }
@@ -245,7 +245,11 @@
         [view show];
     }
     else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppDataDictionary class] varName:key]) {
-        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        NSString *m_key = nil;
+        if ([key isEqualToString:@"cash_on_delivery_type"]) {
+            m_key = @"cash_on_delivery_state_show";
+        }
+        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key.length ? m_key : key];
         if (dicArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
             for (AppDataDictionary *m_data in dicArray) {
@@ -261,7 +265,7 @@
             [sheet showInView:self.view];
         }
         else {
-            [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
+            [self pullDataDictionaryFunctionForCode:m_key.length ? m_key : key selectionInIndexPath:indexPath];
         }
     }
     else if ([AppPublic getVariableWithClass:self.condition.class subClass:[NSArray class] varName:key]) {
@@ -391,7 +395,7 @@
 
 - (NSSet *)boolValidSet {
     if (!_boolValidSet) {
-        _boolValidSet = [NSSet setWithObjects:@"is_cancel", nil];
+        _boolValidSet = [NSSet setWithObjects:@"is_cancel", @"waybill_receive_state", nil];
     }
     return _boolValidSet;
 }

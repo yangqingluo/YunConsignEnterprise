@@ -53,34 +53,4 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self dismissKeyboard];
-    NSDictionary *m_dic = self.showArray[indexPath.row];
-    NSString *key = m_dic[@"key"];
-    if ([key isEqualToString:@"cash_on_delivery_type"]) {
-        NSString *m_key = @"cash_on_delivery_state_show";
-        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
-        if (dicArray.count) {
-            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
-            for (AppDataDictionary *m_data in dicArray) {
-                [m_array addObject:m_data.item_name];
-            }
-            QKWEAKSELF;
-            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
-                    [weakself.condition setValue:dicArray[buttonIndex - 1] forKey:key];
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
-            } otherButtonTitlesArray:m_array];
-            [sheet showInView:self.view];
-        }
-        else {
-            [self pullDataDictionaryFunctionForCode:m_key selectionInIndexPath:indexPath];
-        }
-        return;
-    }
-    
-    [super selectRowAtIndexPath:indexPath];
-}
-
 @end

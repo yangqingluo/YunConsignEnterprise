@@ -832,11 +832,12 @@ BOOL isTrue(NSString *string);
 
 /*财务管理相关*/
 @property (strong, nonatomic) AppDataDictionary *search_time_type;//时间类型
+@property (strong, nonatomic) AppDataDictionary *cod_search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_type;//代收方式
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_state_show;//代收方式
 @property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
 @property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
-@property (strong, nonatomic) AppDataDictionary *waybill_receive_state;//收货状态
+@property (strong, nonatomic) NSString *waybill_receive_state;//是否提货
 @property (strong, nonatomic) NSString *bank_card_owner;//客户姓名
 @property (strong, nonatomic) NSString *contact_phone;//联系电话
 @property (strong, nonatomic) AppDataDictionary *loan_apply_state;//放款申请审核状态
