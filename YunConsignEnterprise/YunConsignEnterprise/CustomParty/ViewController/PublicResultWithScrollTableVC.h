@@ -8,7 +8,7 @@
 
 #import "PublicResultTableVC.h"
 
-@interface PublicResultWithScrollTableVC : PublicResultTableVC
+@interface PublicResultWithScrollTableVC : PublicResultTableVC<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 

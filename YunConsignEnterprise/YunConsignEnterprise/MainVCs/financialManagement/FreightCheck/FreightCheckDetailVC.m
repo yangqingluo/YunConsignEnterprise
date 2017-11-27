@@ -37,13 +37,12 @@
         [_edgeArray addObject:@(2.0 / scale)];
     }
     
-    [self.scrollView addSubview:self.tableView];
-    
-    self.footerView.bottom = self.view.height;
+    self.footerView.bottom = self.scrollView.height;
     [self.scrollView addSubview:self.footerView];
     self.tableView.height = self.footerView.top - self.tableView.top;
+    [self.scrollView addSubview:self.tableView];
     
-    CGFloat contentWidth = MAX(screen_width, 37.5 * scale);
+    CGFloat contentWidth = MAX(screen_width, 40 * scale);
     self.footerView.width = contentWidth;
     self.tableView.width = contentWidth;
 //        self.tableView.clipsToBounds = NO;
@@ -161,6 +160,18 @@
     [self.tableView reloadData];
 }
 
+//- (void)updateTableViewHeader {
+//    [super updateTableViewHeader];
+//    self.tableView.mj_header.autoresizingMask = UIViewAutoresizingNone;
+//    self.tableView.mj_header.width = screen_width;
+//}
+//
+//- (void)updateTableViewFooter {
+//    [super updateTableViewFooter];
+//    self.tableView.mj_footer.autoresizingMask = UIViewAutoresizingNone;
+//    self.tableView.mj_footer.width = screen_width;
+//}
+
 #pragma mark - 长按手势事件
 - (void)cellLongPress:(UIGestureRecognizer *)recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan) {
@@ -255,5 +266,17 @@
         [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
 }
+
+//#pragma mark - UIScrollViewDelegate
+///*滚动停止时，触发该函数*/
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    
+//}
+///* 触摸屏幕来滚动画面还是其他的方法使得画面滚动，皆触发该函数*/
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    self.tableView.mj_header.left = scrollView.contentOffset.x;
+//    UIView *m_view = self.tableView.mj_header;
+//    self.tableView.mj_footer.left = scrollView.contentOffset.x;
+//}
 
 @end
