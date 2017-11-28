@@ -1,25 +1,24 @@
 //
-//  ServiceVC.m
+//  JsonUserVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/11/22.
+//  Created by 7kers on 2017/11/28.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "ServiceVC.h"
+#import "JsonUserVC.h"
 #import "PublicQueryConditionVC.h"
-#import "SaveServiceVC.h"
-#import "ServiceLocationVC.h"
+#import "SaveJsonUserVC.h"
 
-#import "ServiceCell.h"
+#import "JsonUserCell.h"
 
-@interface ServiceVC ()
+@interface JsonUserVC ()
 
 @property (strong, nonatomic) UIView *footerView;
 
 @end
 
-@implementation ServiceVC
+@implementation JsonUserVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,7 +51,7 @@
 
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
-    vc.type = QueryConditionType_Service;
+    vc.type = QueryConditionType_JsonUser;
     vc.condition = [self.condition copy];
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
@@ -65,7 +64,7 @@
 }
 
 - (void)addButtonAction {
-    SaveServiceVC *vc = [SaveServiceVC new];
+    SaveJsonUserVC *vc = [SaveJsonUserVC new];
     [self goToSaveVC:vc];
 }
 
@@ -86,14 +85,14 @@
         }
     }
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServiceListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryJoinUserListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
                 [weakself.dataSource removeAllObjects];
             }
             ResponseItem *item = responseBody;
-            [weakself.dataSource addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself.dataSource addObjectsFromArray:[AppUserInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
             if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -123,11 +122,11 @@
         return;
     }
     
-    AppServiceInfo *item = self.dataSource[indexPath.row];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : item.service_id}];
+    AppUserInfo *item = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"user_id" : item.user_id}];
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_deleteServiceById" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_deleteJoinUserFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
@@ -144,36 +143,6 @@
     }];
 }
 
-- (void)pullDetailDataAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > self.dataSource.count - 1) {
-        [self doShowHintFunction:@"数据越界"];
-        return;
-    }
-    AppServiceInfo *item = self.dataSource[indexPath.row];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : item.service_id}];
-    [self doShowHudFunction:@"门店地址信息查询中..."];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServiceById" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            ResponseItem *item = (ResponseItem *)responseBody;
-            if (item.items.count) {
-                AppServiceDetailInfo *detailData = [AppServiceDetailInfo mj_objectWithKeyValues:item.items[0]];
-                CLLocationCoordinate2D coor = CLLocationCoordinate2DMake([detailData.latitude doubleValue], [detailData.longitude doubleValue]);
-                if (CLLocationCoordinate2DIsValid(coor)) {
-                    ServiceLocationVC *vc = [[ServiceLocationVC alloc] initWithLocation:coor andAddress:detailData.service_address];
-                    [weakself doPushViewController:vc animated:YES];
-                    return;
-                }
-            }
-            [weakself doShowHintFunction:@"地址信息有误"];
-        }
-        else {
-            [weakself doShowHintFunction:error.userInfo[@"message"]];
-        }
-    }];
-}
-
 #pragma mark - getter
 - (UIView *)footerView {
     if (!_footerView) {
@@ -182,7 +151,7 @@
         UIButton *btn = [[UIButton alloc] initWithFrame:_footerView.bounds];
         btn.backgroundColor = MainColor;
         btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
-        [btn setTitle:@"添加门店" forState:UIControlStateNormal];
+        [btn setTitle:@"添加员工" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(addButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [_footerView addSubview:btn];
@@ -200,15 +169,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [ServiceCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [JsonUserCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:2];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"show_cell";
-    ServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    JsonUserCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[ServiceCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[JsonUserCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
@@ -219,7 +188,7 @@
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//    
+//
 //    SaveServiceVC *vc = [SaveServiceVC new];
 //    vc.baseData = self.dataSource[indexPath.row];
 //    [self goToSaveVC:vc];
@@ -234,23 +203,17 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
-        AppServiceInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                [self pullDetailDataAtIndexPath:indexPath];
+                [self confirmRemovingDataAtIndexPath:indexPath];
             }
                 break;
                 
             case 1:{
-                SaveServiceVC *vc = [SaveServiceVC new];
+                SaveJsonUserVC *vc = [SaveJsonUserVC new];
                 vc.baseData = self.dataSource[indexPath.row];
                 [self goToSaveVC:vc];
-            }
-                break;
-                
-            case 2:{
-                [self confirmRemovingDataAtIndexPath:indexPath];
             }
                 break;
                 
@@ -259,5 +222,6 @@
         }
     }
 }
+
 
 @end

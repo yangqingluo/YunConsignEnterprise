@@ -296,6 +296,9 @@
             vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
             [self doPushViewController:vc animated:YES];
         }
+        else {
+            [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
+        }
     }
     else if ([varClass isSubclassOfClass:[AppServiceInfo class]]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:[key isEqualToString:@"load_service"] ? serviceDataMapKeyForTruck(self.condition.transport_truck_id) : key];

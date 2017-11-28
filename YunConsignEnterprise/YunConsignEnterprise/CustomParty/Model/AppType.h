@@ -110,7 +110,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *open_city_id;// 	所属城市
 @property (strong, nonatomic) NSString *open_city_name;
 @property (strong, nonatomic) NSString *role_id;//岗位编号，多个用逗号隔开
-@property (strong, nonatomic) NSString *role_name;
+@property (strong, nonatomic) NSString *role_name;//岗位名称，多个采用逗号隔开
 @property (strong, nonatomic) NSString *service_id;//所属门店
 @property (strong, nonatomic) NSString *service_name;
 @property (strong, nonatomic) NSString *telphone;
@@ -118,6 +118,15 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *user_name;
 @property (strong, nonatomic) NSString *user_state;//用户状态，USER_STATE，1正常、2禁用、3删除
 @property (strong, nonatomic) NSString *user_state_text;
+
+@end
+
+@interface AppUserDetailInfo : AppUserInfo
+
+@property (strong, nonatomic) NSString *login_code;//登录名
+@property (strong, nonatomic) NSString *login_pass;//密码
+@property (strong, nonatomic) NSString *power_service_id;//财务权限门店，不是财务只能看自己门店，财务可看全部
+@property (strong, nonatomic) NSString *power_service_name;//财务权限门店，不是财务只能看自己门店，财务可看全部
 
 @end
 
@@ -846,7 +855,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *cod_search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_type;//代收方式
-@property (strong, nonatomic) AppDataDictionary *cash_on_delivery_state_show;//代收方式
+@property (strong, nonatomic) AppDataDictionary *cash_on_delivery_state_show;//代收方式(为了在某些情况下和cash_on_delivery_type同时存在)
 @property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
 @property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
 @property (strong, nonatomic) NSString *waybill_receive_state;//是否提货
@@ -866,6 +875,10 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *service_state;//门店状态 SERVICE_STATE 营业中、已停用
 @property (strong, nonatomic) NSString *service_name;//门店名称
 @property (strong, nonatomic) NSString *service_code;//门店代码
+@property (strong, nonatomic) NSString *user_name;//姓名
+@property (strong, nonatomic) NSString *telphone;//电话
+@property (strong, nonatomic) NSArray *role_id;//岗位编号
+
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

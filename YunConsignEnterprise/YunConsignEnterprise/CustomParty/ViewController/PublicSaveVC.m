@@ -151,6 +151,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     NSString *key = m_dic[@"key"];
+    NSString *showKey = m_dic[@"showKey"];
     BOOL isKeybordDefault = ![self.numberKeyBoardTypeSet containsObject:key];
     cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
@@ -169,11 +170,16 @@
             cell.baseView.textField.text = [self.toSaveData valueForKey:@"location"];
         }
         else {
-            NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
-            for (AppDataDictionary *m_data in dicArray) {
-                if ([m_data.item_val isEqualToString:[self.toSaveData valueForKey:key]]) {
-                    cell.baseView.textField.text = m_data.item_name;
-                    break;
+            if (showKey) {
+                cell.baseView.textField.text = [self.toSaveData valueForKey:showKey];
+            }
+            else {
+                NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+                for (AppDataDictionary *m_data in dicArray) {
+                    if ([m_data.item_val isEqualToString:[self.toSaveData valueForKey:key]]) {
+                        cell.baseView.textField.text = m_data.item_name;
+                        break;
+                    }
                 }
             }
         }

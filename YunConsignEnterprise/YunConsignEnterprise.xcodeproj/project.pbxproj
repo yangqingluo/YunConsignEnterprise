@@ -104,6 +104,9 @@
 		E475B0281FA0B6B00076D918 /* WaybillLoadedSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E475B0271FA0B6B00076D918 /* WaybillLoadedSelectCell.m */; };
 		E4763CF41FA0D94F00EC36F9 /* WaybillCustReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4763CF31FA0D94F00EC36F9 /* WaybillCustReceiveVC.m */; };
 		E4763CF71FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4763CF61FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m */; };
+		E4789A671FCD5A0000F1BD88 /* JsonUserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4789A661FCD5A0000F1BD88 /* JsonUserVC.m */; };
+		E4789A6A1FCD5AF400F1BD88 /* JsonUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4789A691FCD5AF400F1BD88 /* JsonUserCell.m */; };
+		E4789A6D1FCD5B4700F1BD88 /* SaveJsonUserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4789A6C1FCD5B4700F1BD88 /* SaveJsonUserVC.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
 		E488B11C1FA2ADF3001680ED /* FreightCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E488B11B1FA2ADF3001680ED /* FreightCheckVC.m */; };
@@ -644,6 +647,12 @@
 		E4763CF31FA0D94F00EC36F9 /* WaybillCustReceiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillCustReceiveVC.m; sourceTree = "<group>"; };
 		E4763CF51FA0DCBC00EC36F9 /* WaybillCustReceiveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillCustReceiveCell.h; sourceTree = "<group>"; };
 		E4763CF61FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillCustReceiveCell.m; sourceTree = "<group>"; };
+		E4789A651FCD5A0000F1BD88 /* JsonUserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonUserVC.h; sourceTree = "<group>"; };
+		E4789A661FCD5A0000F1BD88 /* JsonUserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonUserVC.m; sourceTree = "<group>"; };
+		E4789A681FCD5AF400F1BD88 /* JsonUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonUserCell.h; sourceTree = "<group>"; };
+		E4789A691FCD5AF400F1BD88 /* JsonUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonUserCell.m; sourceTree = "<group>"; };
+		E4789A6B1FCD5B4700F1BD88 /* SaveJsonUserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveJsonUserVC.h; sourceTree = "<group>"; };
+		E4789A6C1FCD5B4700F1BD88 /* SaveJsonUserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveJsonUserVC.m; sourceTree = "<group>"; };
 		E47AABCC1F66796D00D7C450 /* UIButton+ImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageAndText.h"; sourceTree = "<group>"; };
 		E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageAndText.m"; sourceTree = "<group>"; };
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
@@ -1618,6 +1627,10 @@
 		E4941E651FC413EC00707A0D /* JsonUser */ = {
 			isa = PBXGroup;
 			children = (
+				E4789A651FCD5A0000F1BD88 /* JsonUserVC.h */,
+				E4789A661FCD5A0000F1BD88 /* JsonUserVC.m */,
+				E4789A6B1FCD5B4700F1BD88 /* SaveJsonUserVC.h */,
+				E4789A6C1FCD5B4700F1BD88 /* SaveJsonUserVC.m */,
 			);
 			name = JsonUser;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/JsonUser;
@@ -1902,6 +1915,8 @@
 				E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */,
 				E43B9DA51FC55BF600D1C57B /* ServiceCell.h */,
 				E43B9DA61FC55BF600D1C57B /* ServiceCell.m */,
+				E4789A681FCD5AF400F1BD88 /* JsonUserCell.h */,
+				E4789A691FCD5AF400F1BD88 /* JsonUserCell.m */,
 				E42DACD61FCB0CC2004FCDD1 /* TitleTextCell.h */,
 				E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */,
 			);
@@ -2859,6 +2874,7 @@
 			files = (
 				E4763CF41FA0D94F00EC36F9 /* WaybillCustReceiveVC.m in Sources */,
 				E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */,
+				E4789A6A1FCD5AF400F1BD88 /* JsonUserCell.m in Sources */,
 				E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */,
 				E4E2A3A51FB311AE00D8EC1C /* UIView+LLExtension.m in Sources */,
 				E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */,
@@ -3022,6 +3038,7 @@
 				E4E2A4071FB311AE00D8EC1C /* TZAssetModel.m in Sources */,
 				E4E2A4101FB311AE00D8EC1C /* TZProgressView.m in Sources */,
 				E4E2A3BE1FB311AE00D8EC1C /* MJRefreshHeader.m in Sources */,
+				E4789A671FCD5A0000F1BD88 /* JsonUserVC.m in Sources */,
 				E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
 				E4941E771FC4193500707A0D /* PublicSaveVC.m in Sources */,
@@ -3084,6 +3101,7 @@
 				E4F78C361FB199DD0003549A /* CodLoanCheckCell.m in Sources */,
 				E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */,
 				E4E2A3B01FB311AE00D8EC1C /* MJExtensionConst.m in Sources */,
+				E4789A6D1FCD5B4700F1BD88 /* SaveJsonUserVC.m in Sources */,
 				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
 				E4E2A3B61FB311AE00D8EC1C /* NSObject+MJCoding.m in Sources */,
 				E4E2A38E1FB311AE00D8EC1C /* BlockActionSheet.m in Sources */,

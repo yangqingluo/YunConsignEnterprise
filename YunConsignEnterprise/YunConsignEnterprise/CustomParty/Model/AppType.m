@@ -90,6 +90,12 @@ BOOL isTrue(NSString *string) {
 @end
 
 
+@implementation AppUserDetailInfo
+
+
+
+@end
+
 @implementation AppCustomerInfo
 
 
