@@ -9,18 +9,28 @@
 #import "FreightCheckVC.h"
 #import "FreightCheckDetailVC.h"
 
-@interface FreightCheckVC ()
+static NSString *searchTimeTypeKey = @"search_time_type";
+
+@interface FreightCheckVC () {
+    BOOL canSelectShowColumns;
+}
 
 @property (strong, nonatomic) AppCheckUserFinanceInfo *financeData;
+@property (strong, nonatomic) NSArray *showColumnBuffer;
 
 @end
 
 @implementation FreightCheckVC
 
+- (void)dealloc {
+    [self.condition removeObserver:self forKeyPath:searchTimeTypeKey];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.type = QueryConditionType_FreightCheck;
+        [self.condition addObserver:self forKeyPath:searchTimeTypeKey options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -77,16 +87,20 @@
         if (self.financeData) {
             if (!isTrue(self.financeData.is_finance)) {
                 [self showHint:@"只有财务才能选择收款网点"];
-                return;
             }
         }
         else {
             [self doCheckUserIsOrNotFinanceFunction:indexPath];
-            return;
         }
     }
-    
-    [super selectRowAtIndexPath:indexPath];
+    else {
+        if ([key isEqualToString:@"show_column"]) {
+            if (!canSelectShowColumns) {
+                return;
+            }
+        }
+        [super selectRowAtIndexPath:indexPath];
+    }
 }
 
 - (void)doCheckUserIsOrNotFinanceFunction:(NSIndexPath *)indexPath {
@@ -107,6 +121,23 @@
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:searchTimeTypeKey]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:@"search_time_type"];
+        if (dataArray.count && [dataArray indexOfObject:self.condition.search_time_type] == dataArray.count - 1) {
+            canSelectShowColumns = YES;
+            self.condition.show_column = self.showColumnBuffer;
+        }
+        else {
+            canSelectShowColumns = NO;
+            self.showColumnBuffer = self.condition.show_column;
+            self.condition.show_column = nil;
+        }
+        [self.tableView reloadData];
+    }
 }
 
 @end

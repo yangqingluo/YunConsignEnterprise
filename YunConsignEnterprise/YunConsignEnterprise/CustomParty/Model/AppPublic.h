@@ -202,6 +202,7 @@ NSString *dateStringWithTimeString(NSString *string);
 
 //判断类是否有某属性
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name;
++ (Class)getVariableClassWithClass:(Class)myClass varName:(NSString *)name;
 + (BOOL)getVariableWithClass:(Class)myClass subClass:(Class)subClass varName:(NSString *)name;
 
 - (void)logout;

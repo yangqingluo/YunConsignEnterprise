@@ -221,7 +221,8 @@
     [self dismissKeyboard];
     NSDictionary *m_dic = self.showArray[indexPath.row];
     NSString *key = m_dic[@"key"];
-    if ([key isEqualToString:@"start_time"] || [key isEqualToString:@"end_time"]) {
+    Class varClass = [AppPublic getVariableClassWithClass:self.condition.class varName:key];
+    if ([varClass isSubclassOfClass:[NSDate class]]) {
         QKWEAKSELF;
         PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
@@ -242,7 +243,7 @@
         }
         [view show];
     }
-    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppDataDictionary class] varName:key]) {
+    else if ([varClass isSubclassOfClass:[AppDataDictionary class]]) {
         NSString *m_key = nil;
         if ([key isEqualToString:@"cash_on_delivery_type"]) {
             m_key = @"cash_on_delivery_state_show";
@@ -266,7 +267,7 @@
             [self pullDataDictionaryFunctionForCode:m_key.length ? m_key : key selectionInIndexPath:indexPath];
         }
     }
-    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[NSArray class] varName:key]) {
+    else if ([varClass isSubclassOfClass:[NSArray class]]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *source_array = [NSMutableArray new];
@@ -296,7 +297,7 @@
             [self doPushViewController:vc animated:YES];
         }
     }
-    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppServiceInfo class] varName:key]) {
+    else if ([varClass isSubclassOfClass:[AppServiceInfo class]]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:[key isEqualToString:@"load_service"] ? serviceDataMapKeyForTruck(self.condition.transport_truck_id) : key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
@@ -321,7 +322,7 @@
             }
         }
     }
-    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppCityInfo class] varName:key]) {
+    else if ([varClass isSubclassOfClass:[AppCityInfo class]]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];

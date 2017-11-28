@@ -376,7 +376,8 @@ NSString *dateStringWithTimeString(NSString *string){
     return NO;
 }
 
-+ (BOOL)getVariableWithClass:(Class)myClass subClass:(Class)subClass varName:(NSString *)varName {
++ (Class)getVariableClassWithClass:(Class)myClass varName:(NSString *)varName {
+    Class varClass = nil;
     BOOL yn = NO;
     unsigned int count;
     objc_property_t* props = class_copyPropertyList(myClass, &count);
@@ -387,35 +388,35 @@ NSString *dateStringWithTimeString(NSString *string){
             continue;
         }
         const char *type = property_getAttributes(property);
-//        NSString *attr = [NSString stringWithCString:type encoding:NSUTF8StringEncoding];
+        //        NSString *attr = [NSString stringWithCString:type encoding:NSUTF8StringEncoding];
         NSString * typeString = [NSString stringWithUTF8String:type];
         NSArray * attributes = [typeString componentsSeparatedByString:@","];
         NSString * typeAttribute = [attributes objectAtIndex:0];
-//        NSString * propertyType = [typeAttribute substringFromIndex:1];
-//        const char * rawPropertyType = [propertyType UTF8String];
+        //        NSString * propertyType = [typeAttribute substringFromIndex:1];
+        //        const char * rawPropertyType = [propertyType UTF8String];
         
-//        if (strcmp(rawPropertyType, @encode(float)) == 0) {
-//            //it's a float
-//        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
-//            //it's an int
-//        } else if (strcmp(rawPropertyType, @encode(id)) == 0) {
-//            //it's some sort of object
-//        } else {
-//            // According to Apples Documentation you can determine the corresponding encoding values
-//        }
+        //        if (strcmp(rawPropertyType, @encode(float)) == 0) {
+        //            //it's a float
+        //        } else if (strcmp(rawPropertyType, @encode(int)) == 0) {
+        //            //it's an int
+        //        } else if (strcmp(rawPropertyType, @encode(id)) == 0) {
+        //            //it's some sort of object
+        //        } else {
+        //            // According to Apples Documentation you can determine the corresponding encoding values
+        //        }
         
         if ([typeAttribute hasPrefix:@"T@"] && [typeAttribute length] > 1) {
             NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length] - 4)];  //turns @"NSDate" into NSDate
-            Class typeClass = NSClassFromString(typeClassName);
-            if (typeClass != nil) {
-                // Here is the corresponding class even for nil values
-                yn = [typeClass isSubclassOfClass:subClass];
-            }
+            varClass = NSClassFromString(typeClassName);
         }
         
     }
     free(props);
-    return yn;
+    return varClass;
+}
+
++ (BOOL)getVariableWithClass:(Class)myClass subClass:(Class)subClass varName:(NSString *)varName {
+    return [[self getVariableClassWithClass:myClass varName:varName] isSubclassOfClass:subClass];
 }
 
 - (void)logout {
