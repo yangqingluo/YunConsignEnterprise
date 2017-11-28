@@ -165,6 +165,9 @@
         else if ([key isEqualToString:@"service_state"]) {
             cell.baseView.textField.text = [self.toSaveData valueForKey:@"service_state_text"];
         }
+        else if ([key isEqualToString:@"location"]) {
+            cell.baseView.textField.text = [self.toSaveData valueForKey:@"location"];
+        }
         else {
             NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
             for (AppDataDictionary *m_data in dicArray) {

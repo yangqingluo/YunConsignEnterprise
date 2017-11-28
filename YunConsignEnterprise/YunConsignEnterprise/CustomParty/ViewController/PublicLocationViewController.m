@@ -164,15 +164,25 @@
 }
 
 - (void)sendLocation {
-    if (!self.addressString) {
-        [self showHint:@"无法获取位置信息"];
-        return;
-    }
+//    if (!self.addressString) {
+//        [self showHint:@"无法获取位置信息"];
+//        return;
+//    }
 //    if (_delegate && [_delegate respondsToSelector:@selector(sendLocationLatitude:longitude:andAddress:)]) {
 //        [_delegate sendLocationLatitude:_currentLocationCoordinate.latitude longitude:_currentLocationCoordinate.longitude andAddress:_addressString];
 //    }
-    
+    [self doDoneAction];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)doDoneAction {
+    if (self.doneBlock) {
+        AppLocationInfo *data = [AppLocationInfo new];
+        data.longitude = [NSString stringWithFormat:@"%.6f", _currentLocationCoordinate.longitude];
+        data.latitude = [NSString stringWithFormat:@"%.6f", _currentLocationCoordinate.latitude];
+        data.addressString = [_addressString copy];
+        self.doneBlock(data);
+    }
 }
 
 

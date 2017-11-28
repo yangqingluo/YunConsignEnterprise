@@ -7,6 +7,7 @@
 //
 
 #import "SaveServiceVC.h"
+#import "ServiceLocationVC.h"
 
 @interface SaveServiceVC ()
 
@@ -33,8 +34,9 @@
                        @{@"title":@"门店状态",@"subTitle":@"请选择",@"key":@"service_state", @"need" : @YES},
                        @{@"title":@"打印标签",@"subTitle":@"请输入",@"key":@"print_count", @"need" : @YES},
                        @{@"title":@"负责人",@"subTitle":@"请输入",@"key":@"responsible_name", @"need" : @YES},
-                       @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"responsible_phone", @"need" : @YES},];
-    [self.selectorSet addObjectsFromArray:@[@"open_city", @"service_state"]];
+                       @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"responsible_phone", @"need" : @YES},
+                       @{@"title":@"定位",@"subTitle":@"请定位",@"key":@"location", @"need" : @YES},];
+    [self.selectorSet addObjectsFromArray:@[@"open_city", @"service_state", @"location"]];
     [self.numberKeyBoardTypeSet addObjectsFromArray:@[@"print_count"]];
 }
 
@@ -47,7 +49,11 @@
         if (!error) {
             ResponseItem *item = (ResponseItem *)responseBody;
             if (item.items.count) {
-                weakself.toSaveData = [AppServiceDetailInfo mj_objectWithKeyValues:item.items[0]];
+                AppServiceDetailInfo *detailData = [AppServiceDetailInfo mj_objectWithKeyValues:item.items[0]];
+                if (detailData.longitude && detailData.latitude) {
+                    detailData.location = @"已定位";
+                }
+                weakself.toSaveData = detailData;
             }
             [weakself updateSubviews];
         }
@@ -68,6 +74,17 @@
             }
             [m_dic setObject:[self.toSaveData valueForKey:@"open_city_id"] forKey:@"open_city_id"];
             [m_dic setObject:[self.toSaveData valueForKey:@"open_city_name"] forKey:@"open_city_name"];
+        }
+        else if ([key isEqualToString:@"location"]) {
+            NSString *latitude = [self.toSaveData valueForKey:@"latitude"];
+            NSString *longitude = [self.toSaveData valueForKey:@"longitude"];
+            if (!latitude || !longitude) {
+                [self doShowHintFunction:[NSString stringWithFormat:@"%@%@", [self.selectorSet containsObject:key] ? @"请选择" : @"请补全", dic[@"title"]]];
+            }
+            else {
+                [m_dic setObject:latitude forKey:@"latitude"];
+                [m_dic setObject:longitude forKey:@"longitude"];
+            }
         }
         else {
             NSObject *value = [self.toSaveData valueForKey:key];
@@ -151,6 +168,20 @@
         else {
             [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
+    }
+    else if ([key isEqualToString:@"location"]) {
+        ServiceLocationVC *vc = [ServiceLocationVC new];
+        QKWEAKSELF;
+        vc.doneBlock = ^(NSObject *object){
+            if ([object isKindOfClass:[AppLocationInfo class]]) {
+                AppLocationInfo *location = (AppLocationInfo *)object;
+                [weakself.toSaveData setValue:location.latitude forKey:@"latitude"];
+                [weakself.toSaveData setValue:location.longitude forKey:@"longitude"];
+                [weakself.toSaveData setValue:@"已定位" forKey:@"location"];
+                [weakself.tableView reloadData];
+            }
+        };
+        [vc showFromVC:self];
     }
 }
 

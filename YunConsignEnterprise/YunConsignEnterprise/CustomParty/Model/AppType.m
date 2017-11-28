@@ -161,6 +161,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppLocationInfo
+
+
+
+@end
+
 
 
 @implementation AppEndStationInfo

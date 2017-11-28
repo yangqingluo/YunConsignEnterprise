@@ -168,6 +168,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *latitude;//纬度
 @property (strong, nonatomic) NSString *print_count;//标签可打印数量
 
+//编辑保存时自定义使用
+@property (strong, nonatomic) NSString *location;
+
 @end
 
 @interface AppGoodInfo : AppType
@@ -209,6 +212,14 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *open_city_py;//开通城市名称拼音
 @property (strong, nonatomic) NSString *sort;//开通城市名称排序
+
+@end
+
+@interface AppLocationInfo : AppType
+
+@property (strong, nonatomic) NSString *longitude;//经度
+@property (strong, nonatomic) NSString *latitude;//纬度
+@property (strong, nonatomic) NSString *addressString;
 
 @end
 
