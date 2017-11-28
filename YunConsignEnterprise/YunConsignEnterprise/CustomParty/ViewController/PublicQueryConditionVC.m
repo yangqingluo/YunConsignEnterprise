@@ -450,7 +450,7 @@
         cell.baseView.textField.text = [self.condition showArrayNameStringWithKey:key];
     }
     else if ([[self.condition valueForKey:key] isKindOfClass:[AppServiceInfo class]]) {
-        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"showCityAndServiceName"];
+        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"service_name"];
     }
     else if ([[self.condition valueForKey:key] isKindOfClass:[AppCityInfo class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"open_city_name"];

@@ -162,7 +162,7 @@
         cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"item_name"];
     }
     else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"load_service"]) {
-        cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"showCityAndServiceName"];
+        cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"service_name"];
     }
     else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
         cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"open_city_name"];
