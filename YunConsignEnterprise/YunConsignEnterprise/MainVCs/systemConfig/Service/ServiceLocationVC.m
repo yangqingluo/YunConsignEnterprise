@@ -17,7 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"门店定位";
+    
+    if (self.isSendLocation) {
+        NSString *title = [self.addressString copy];
+        if (title) {
+            [self moveToCoords:_currentLocationCoordinate animated:NO];
+            [self createAnnotationWithCoords:_currentLocationCoordinate title:title withSelected:YES];
+        }
+    }
 }
-
 
 @end

@@ -11,6 +11,7 @@
 @interface PublicSaveVC : PublicShowTableVC
 
 @property (copy, nonatomic) NSObject *baseData;
+@property (strong, nonatomic) NSObject *detailData;
 @property (strong, nonatomic) NSObject *toSaveData;
 
 @property (strong, nonatomic) NSMutableSet *numberKeyBoardTypeSet;

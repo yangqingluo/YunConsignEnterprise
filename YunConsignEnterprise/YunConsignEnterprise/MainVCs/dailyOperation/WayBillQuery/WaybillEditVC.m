@@ -101,7 +101,8 @@
         [self pushUpdateWaybillFunction:m_dic];
     }
     else {
-        [self updateWayBillSuccessWithChange:nil];
+        [self doShowHintFunction:@"未做修改"];
+//        [self updateWayBillSuccessWithChange:nil];
     }
 }
 

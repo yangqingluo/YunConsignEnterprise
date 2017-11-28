@@ -17,8 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"修改门店";
-    if (!self.baseData) {
+    
+    if (self.baseData) {
+        self.title = @"修改门店";
+        self.toSaveData = [AppServiceDetailInfo mj_objectWithKeyValues:[self.baseData mj_keyValues]];
+    }
+    else {
+        self.title = @"添加门店";
         self.toSaveData = [AppServiceDetailInfo new];
     }
 }
@@ -41,6 +46,9 @@
 }
 
 - (void)pullDetailData {
+    if (!self.baseData) {
+        return;
+    }
     [self doShowHudFunction];
     NSDictionary *m_dic = @{@"service_id" : [self.baseData valueForKey:@"service_id"]};
     QKWEAKSELF;
@@ -53,7 +61,8 @@
                 if (detailData.longitude && detailData.latitude) {
                     detailData.location = @"已定位";
                 }
-                weakself.toSaveData = detailData;
+                weakself.detailData = detailData;
+                weakself.toSaveData = [detailData copy];
             }
             [weakself updateSubviews];
         }
@@ -80,6 +89,7 @@
             NSString *longitude = [self.toSaveData valueForKey:@"longitude"];
             if (!latitude || !longitude) {
                 [self doShowHintFunction:[NSString stringWithFormat:@"%@%@", [self.selectorSet containsObject:key] ? @"请选择" : @"请补全", dic[@"title"]]];
+                return;
             }
             else {
                 [m_dic setObject:latitude forKey:@"latitude"];
@@ -99,7 +109,21 @@
         }
     }
     if (self.baseData) {
-        [m_dic setObject:[self.baseData valueForKey:@"service_id"] forKey:@"service_id"];
+        NSDictionary *baseDic = [self.detailData mj_keyValues];
+        BOOL hasChange = NO;
+        for (NSString *key in m_dic) {
+            if (![m_dic[key] isEqualToString:baseDic[key]]) {
+                hasChange = YES;
+                break;
+            }
+        }
+        if (hasChange) {
+            [m_dic setObject:[self.baseData valueForKey:@"service_id"] forKey:@"service_id"];
+        }
+        else {
+            [self doShowHintFunction:@"未做修改"];
+            return;
+        }
     }
     
     [self doShowHudFunction];
@@ -171,6 +195,11 @@
     }
     else if ([key isEqualToString:@"location"]) {
         ServiceLocationVC *vc = [ServiceLocationVC new];
+        NSString *latitude = [self.toSaveData valueForKey:@"latitude"];
+        NSString *longitude = [self.toSaveData valueForKey:@"longitude"];
+        if (latitude && longitude) {
+            vc = [[ServiceLocationVC alloc] initWithLocation:CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]) andAddress:[self.toSaveData valueForKey:@"service_address"] isSend:YES];
+        }
         QKWEAKSELF;
         vc.doneBlock = ^(NSObject *object){
             if ([object isKindOfClass:[AppLocationInfo class]]) {

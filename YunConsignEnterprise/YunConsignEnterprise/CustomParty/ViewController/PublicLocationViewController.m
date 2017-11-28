@@ -8,19 +8,10 @@
 
 #import "PublicLocationViewController.h"
 
-#import <MapKit/MapKit.h>
 #import "JZLocationConverter.h"
-#import "QKGeocoder.h"
 
-@interface PublicLocationViewController ()<MKMapViewDelegate> {
-    MKMapView *_mapView;
-    MKPointAnnotation *_annotation;
-    CLLocationCoordinate2D _currentLocationCoordinate;
-    BOOL _isSendLocation;
-    BOOL hasShowLocation;
-}
+@interface PublicLocationViewController ()
 
-@property (strong, nonatomic) NSString *addressString;
 @property (strong, nonatomic) UIButton *sendButton;
 
 @end
@@ -28,26 +19,21 @@
 @implementation PublicLocationViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _isSendLocation = YES;
-    }
-    return self;
+    return [self initWithLocation:CLLocationCoordinate2DMake(0, 0) andAddress:nil isSend:YES];
 }
 
 - (instancetype)initWithLocation:(CLLocationCoordinate2D)locationCoordinate {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
-        _isSendLocation = NO;
-        _currentLocationCoordinate = locationCoordinate;
-    }
-    return self;
+    return [self initWithLocation:locationCoordinate andAddress:nil isSend:NO];
 }
 
 - (instancetype)initWithLocation:(CLLocationCoordinate2D)locationCoordinate andAddress:(NSString *)address {
+    return [self initWithLocation:locationCoordinate andAddress:address isSend:NO];
+}
+
+- (instancetype)initWithLocation:(CLLocationCoordinate2D)locationCoordinate andAddress:(NSString *)address isSend:(BOOL)isSend {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _isSendLocation = NO;
+        _isSendLocation = isSend;
         _currentLocationCoordinate = locationCoordinate;
         _addressString = [address copy];
     }
@@ -76,7 +62,7 @@
         }
     }
     else {
-        [self removeToLocation:_currentLocationCoordinate];
+        [self moveToCoords:_currentLocationCoordinate animated:NO];
         [self createAnnotationWithCoords:_currentLocationCoordinate withSelected:YES];
     }
 }
@@ -131,7 +117,7 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     if (!hasShowLocation) {
-        [self removeToLocation:userLocation.coordinate];
+        [self moveToCoords:userLocation.coordinate];
         hasShowLocation = YES;
     }
 }
@@ -148,13 +134,17 @@
     [_mapView addAnnotation:_annotation];
 }
 
-- (void)removeToLocation:(CLLocationCoordinate2D)locationCoordinate {
+- (void)moveToCoords:(CLLocationCoordinate2D)coords {
+    [self moveToCoords:coords animated:YES];
+}
+
+- (void)moveToCoords:(CLLocationCoordinate2D)coords animated:(BOOL)animated {
     [self doHideHudFunction];
     
-    _currentLocationCoordinate = locationCoordinate;
+    _currentLocationCoordinate = coords;
     float zoomLevel = 0.05;
     MKCoordinateRegion region = MKCoordinateRegionMake(_currentLocationCoordinate, MKCoordinateSpanMake(zoomLevel, zoomLevel));
-    [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
+    [_mapView setRegion:[_mapView regionThatFits:region] animated:animated];
     
     if (_isSendLocation) {
         _sendButton.enabled = YES;
@@ -185,9 +175,11 @@
     }
 }
 
+-(void)createAnnotationWithCoords:(CLLocationCoordinate2D)coords withSelected:(BOOL)selected {
+    [self createAnnotationWithCoords:coords title:self.addressString withSelected:selected];
+}
 
--(void)createAnnotationWithCoords:(CLLocationCoordinate2D)coords withSelected:(BOOL)selected
-{
+- (void)createAnnotationWithCoords:(CLLocationCoordinate2D)coords title:(NSString *)title withSelected:(BOOL)selected {
     if (_annotation == nil) {
         _annotation = [[MKPointAnnotation alloc] init];
     }
@@ -195,13 +187,14 @@
         [_mapView removeAnnotation:_annotation];
     }
     _annotation.coordinate = coords;
-    _annotation.title = self.addressString;
+    _annotation.title = [title copy];
     [_mapView addAnnotation:_annotation];
     
     if (selected) {
         [_mapView setSelectedAnnotations:@[_annotation]];
     }
 }
+
 - (void)getAddressInfo:(CLLocationCoordinate2D )coordinate{
 //    if (!_sendButton.enabled) {
 //        //获取位置信息尚未完成，return

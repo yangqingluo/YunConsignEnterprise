@@ -119,7 +119,7 @@
     }
     [self doShowHudFunction];
     AppCustomerInfo *m_data = self.dataSource[indexPath.row];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"freight_cust_ids" : m_data.freight_cust_id}];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"freight_cust_id" : m_data.freight_cust_id}];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_cust_deleteCustByIds" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];

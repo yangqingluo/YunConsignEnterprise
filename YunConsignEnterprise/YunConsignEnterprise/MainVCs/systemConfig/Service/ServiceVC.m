@@ -15,6 +15,8 @@
 
 @interface ServiceVC ()
 
+@property (strong, nonatomic) UIView *footerView;
+
 @end
 
 @implementation ServiceVC
@@ -22,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
+    
+    self.footerView.bottom = self.view.height;
+    [self.view addSubview:self.footerView];
+    self.tableView.height = self.footerView.top - self.tableView.top;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
@@ -62,7 +68,7 @@
     [vc showFromVC:self];
 }
 
-- (void)addBtnAction {
+- (void)addButtonAction {
     SaveServiceVC *vc = [SaveServiceVC new];
     [self goToSaveVC:vc];
 }
@@ -170,6 +176,22 @@
             [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
+}
+
+#pragma mark - getter
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightFilter)];
+        
+        UIButton *btn = [[UIButton alloc] initWithFrame:_footerView.bounds];
+        btn.backgroundColor = MainColor;
+        btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+        [btn setTitle:@"添加门店" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(addButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:btn];
+    }
+    return _footerView;
 }
 
 #pragma mark - UITableView
