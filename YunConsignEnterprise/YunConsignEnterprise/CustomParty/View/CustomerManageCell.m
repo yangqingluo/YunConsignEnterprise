@@ -29,7 +29,12 @@
     self.statusLabel.text = data.belong_city_name;
     self.bodyLabel1.text = [NSString stringWithFormat:@"电话：%@", data.phone];
     self.bodyLabel2.text = [NSString stringWithFormat:@"发货：%@", data.last_deliver_goods];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"备注：%@",data.note];
+    
+    NSUInteger lines = 2;
+    if (data.note.length) {
+        self.bodyLabel3.text = [NSString stringWithFormat:@"备注：%@",data.note];
+    }
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 @end

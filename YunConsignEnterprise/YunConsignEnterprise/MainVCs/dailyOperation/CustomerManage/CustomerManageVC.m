@@ -147,8 +147,9 @@
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [CustomerManageCell tableView:tableView heightForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppCustomerInfo *item = self.dataSource[indexPath.row];
+    return [CustomerManageCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:2 + (item.note.length > 0)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

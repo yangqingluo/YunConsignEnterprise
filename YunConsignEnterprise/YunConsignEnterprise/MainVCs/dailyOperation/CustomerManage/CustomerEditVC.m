@@ -28,6 +28,7 @@
     [super viewDidLoad];
     [self setupNav];
     
+    [self pullDetailData];
 }
 
 - (void)setupNav {
@@ -55,7 +56,7 @@
     [self doUpdateCustByIdFunction];
 }
 
-- (void)pullWaybillPaymentInfo {
+- (void)pullDetailData {
     [self doShowHudFunction];
     NSDictionary *m_dic = @{@"freight_cust_id" : self.customerData.freight_cust_id};
     QKWEAKSELF;
@@ -196,6 +197,7 @@
     cell.baseView.textField.enabled = YES;
     cell.baseView.textField.indexPath = [indexPath copy];
     cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.baseView.textField.textColor = baseTextColor;
     
     NSString *key = showObject[@"key"];
     BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
@@ -205,12 +207,20 @@
     if ([self.selectorSet containsObject:key]) {
         cell.baseView.textField.enabled = NO;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
-        for (AppDataDictionary *m_data in dicArray) {
-            if ([m_data.item_val isEqualToString:[self.toSaveData valueForKey:key]]) {
-                cell.baseView.textField.text = m_data.item_name;
-                break;
+        if ([key isEqualToString:@"belong_city_name"]) {
+            cell.baseView.textField.textColor = secondaryTextColor;
+            NSString *value = [self.toSaveData valueForKey:key];
+            if (value) {
+                cell.baseView.textField.text = value;
+            }
+        }
+        else {
+            NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+            for (AppDataDictionary *m_data in dicArray) {
+                if ([m_data.item_val isEqualToString:[self.toSaveData valueForKey:key]]) {
+                    cell.baseView.textField.text = m_data.item_name;
+                    break;
+                }
             }
         }
     }
