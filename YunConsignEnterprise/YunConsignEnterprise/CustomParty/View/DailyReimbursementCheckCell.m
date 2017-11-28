@@ -39,17 +39,27 @@
 #pragma mark - setter
 - (void)setData:(AppDailyReimbursementCheckInfo *)data {
     _data = data;
-    self.titleLabel.text = data.daily_name;
+    self.titleLabel.text = [NSString stringWithFormat:@"%@/%@", data.daily_name, data.service_name];
     [AppPublic adjustLabelWidth:self.titleLabel];
     self.statusLabel.text = data.daily_fee;
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
     self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"报销备注：%@", data.note];
+    
+    NSUInteger lines = 2;
     if (self.indextag == 2) {
+        lines++;
         self.bodyLabel3.text = [NSString stringWithFormat:@"驳回原因：%@", data.check_note];
     }
+    else {
+        BOOL isNote = data.note.length;
+        if (isNote) {
+            lines++;
+            self.bodyLabel3.text = [NSString stringWithFormat:@"报销备注：%@", data.note];
+        }
+    }
     [self refreshFooter];
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 - (void)setIndextag:(NSInteger)indextag {

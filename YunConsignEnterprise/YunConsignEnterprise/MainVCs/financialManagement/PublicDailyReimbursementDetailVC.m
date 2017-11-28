@@ -167,6 +167,9 @@
     else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) {
         cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"open_city_name"];
     }
+    else if ([key isEqualToString:@"waybill_info"]) {
+        cell.baseView.textField.text = [self.showData showWaybillInfoString];
+    }
     else {
         id value = [self.showData valueForKey:key];
         cell.baseView.textField.text = value;

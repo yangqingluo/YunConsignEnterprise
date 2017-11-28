@@ -64,6 +64,9 @@
         if (self.condition.daily_name) {
             [m_dic setObject:self.condition.daily_name.item_val forKey:@"daily_name"];
         }
+        if (self.condition.reimbursement_service) {
+            [m_dic setObject:self.condition.reimbursement_service.service_id forKey:@"service_id"];
+        }
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_queryNeedCheckDailyReimburseListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -241,7 +244,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [DailyReimbursementCheckCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    AppDailyReimbursementCheckInfo *item = self.dataSource[indexPath.row];
+    return [DailyReimbursementCheckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:(self.indextag == 2) ? 3 : (2 + (item.note.length > 0))];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -299,9 +303,14 @@
                 
             case 1:{
                 //报销历史
-                QueryWaybillReimburseListVC *vc = [QueryWaybillReimburseListVC new];
-                vc.applyData = item;
-                [self doPushViewController:vc animated:YES];
+                if (item.judgeWaybillInfoValidity) {
+                    QueryWaybillReimburseListVC *vc = [QueryWaybillReimburseListVC new];
+                    vc.applyData = item;
+                    [self doPushViewController:vc animated:YES];
+                }
+                else {
+                    [self doShowHintFunction:@"无关联运单"];
+                }
             }
                 break;
                 

@@ -225,7 +225,7 @@
     else if ([dict_code isEqualToString:@"end_service"]) {
         functionCode = @"hex_waybill_getEndService";
     }
-    else if ([dict_code isEqualToString:@"power_service"]) {
+    else {
         functionCode = @"hex_waybill_getAllService";
     }
     

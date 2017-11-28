@@ -138,6 +138,7 @@
             break;
             
         case QueryConditionType_CodLoanApply:{
+            self.title = @"放款申请查询";
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
@@ -149,6 +150,7 @@
             
         case QueryConditionType_CodLoanCheck:
         case QueryConditionType_CodRemit:{
+            self.title = (self.type == QueryConditionType_CodLoanCheck) ? @"放款审核查询" : @"放款查询";
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
@@ -157,6 +159,7 @@
             break;
             
         case QueryConditionType_DailyReimbursementApply:{
+            self.title = @"报销查询";
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
@@ -164,9 +167,11 @@
             break;
             
         case QueryConditionType_DailyReimbursementCheck:{
+            self.title = @"报销查询";
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
-                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
+                           @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
+                           @{@"title":@"报销网点",@"subTitle":@"请选择",@"key":@"reimbursement_service"}];
         }
             break;
             
@@ -291,8 +296,8 @@
             [self doPushViewController:vc animated:YES];
         }
     }
-    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"]) {
-        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppServiceInfo class] varName:key]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:[key isEqualToString:@"load_service"] ? serviceDataMapKeyForTruck(self.condition.transport_truck_id) : key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
             for (AppServiceInfo *m_data in dataArray) {
@@ -308,10 +313,15 @@
             [sheet showInView:self.view];
         }
         else {
-            [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            if ([key isEqualToString:@"load_service"]) {
+                [self pullLoadServiceArrayFunctionForTransportTruckID:self.condition.transport_truck_id selectionInIndexPath:indexPath];
+            }
+            else {
+                [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            }
         }
     }
-    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"] || [key isEqualToString:@"open_city"]) {
+    else if ([AppPublic getVariableWithClass:self.condition.class subClass:[AppCityInfo class] varName:key]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
@@ -329,26 +339,6 @@
         }
         else {
             [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
-        }
-    }
-    else if ([key isEqualToString:@"load_service"]) {
-        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:serviceDataMapKeyForTruck(self.condition.transport_truck_id)];
-        if (dataArray.count) {
-            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
-            for (AppServiceInfo *m_data in dataArray) {
-                [m_array addObject:m_data.showCityAndServiceName];
-            }
-            QKWEAKSELF;
-            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
-                    [weakself.condition setValue:dataArray[buttonIndex - 1] forKey:key];
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                }
-            } otherButtonTitlesArray:m_array];
-            [sheet showInView:self.view];
-        }
-        else {
-            [self pullLoadServiceArrayFunctionForTransportTruckID:self.condition.transport_truck_id selectionInIndexPath:indexPath];
         }
     }
     else if ([self.boolValidSet containsObject:key]) {
@@ -459,10 +449,10 @@
     else if ([[self.condition valueForKey:key] isKindOfClass:[NSArray class]]) {
         cell.baseView.textField.text = [self.condition showArrayNameStringWithKey:key];
     }
-    else if ([key isEqualToString:@"start_service"] || [key isEqualToString:@"end_service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"load_service"]) {
+    else if ([[self.condition valueForKey:key] isKindOfClass:[AppServiceInfo class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"showCityAndServiceName"];
     }
-    else if ([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"] || [key isEqualToString:@"open_city"]) {
+    else if ([[self.condition valueForKey:key] isKindOfClass:[AppCityInfo class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"open_city_name"];
     }
     else {

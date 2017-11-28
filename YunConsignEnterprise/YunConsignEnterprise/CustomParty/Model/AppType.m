@@ -537,14 +537,12 @@ BOOL isTrue(NSString *string) {
 
 @implementation AppDailyReimbursementApplyInfo
 
+- (BOOL)judgeWaybillInfoValidity {
+    return (self.waybill_info.length && ![self.waybill_info isEqualToString:@"/"]);
+}
+
 - (NSString *)showWaybillInfoString {
-    if (self.waybill_info.length > 2) {
-        NSArray *m_array = [self.waybill_info componentsSeparatedByString:@"/"];
-        if (m_array.count == 2) {
-            return self.waybill_info;
-        }
-    }
-    return @"无";
+    return self.judgeWaybillInfoValidity ? self.waybill_info : @"无";
 }
 
 @end

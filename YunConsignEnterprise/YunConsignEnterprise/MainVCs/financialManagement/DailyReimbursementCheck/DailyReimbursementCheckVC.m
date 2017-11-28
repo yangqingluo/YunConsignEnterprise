@@ -20,7 +20,7 @@
     self = [super init];
     if (self) {
         self.viewArray = [NSMutableArray new];
-        [self.viewArray addObject:@{@"title":@"申请中",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
+        [self.viewArray addObject:@{@"title":@"等待审核",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
         [self.viewArray addObject:@{@"title":@"驳回",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
     }

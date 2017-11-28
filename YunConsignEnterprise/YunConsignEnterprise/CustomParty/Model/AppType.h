@@ -789,6 +789,7 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) NSString *daily_info;//申请内容
 
+- (BOOL)judgeWaybillInfoValidity;
 - (NSString *)showWaybillInfoString;
 
 @end
@@ -847,6 +848,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *bind_waybill_id;//绑定运单
 @property (strong, nonatomic) NSString *note;//报销备注
 @property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
+@property (strong, nonatomic) AppServiceInfo *reimbursement_service;//报销网点
 
 /*系统设置相关*/
 @property (strong, nonatomic) AppCityInfo *open_city;//所属城市
