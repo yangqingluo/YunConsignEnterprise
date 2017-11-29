@@ -167,7 +167,7 @@
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
         if (![self.toSaveData valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
-            AppDataDictionary *item = [key isEqualToString:@"cash_on_delivery_type"] ? dataArray[dataArray.count - 1] : dataArray[0];
+            AppDataDictionary *item = [key isEqualToString:@"receipt_sign_type"] ? dataArray[dataArray.count - 1] : dataArray[0];
             [self.toSaveData setValue:item.item_val forKey:key];
             [self.tableView reloadData];
         }

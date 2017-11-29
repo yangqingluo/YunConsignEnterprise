@@ -110,7 +110,7 @@
     [self.tableView reloadData];
 }
 
-- (void)editAtIndexPath:(NSIndexPath *)indexPath andContent:(NSString *)content {
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     if (indexPath.section == 3) {
         NSArray *m_array = self.showArray[indexPath.section];
         if (indexPath.row < m_array.count) {

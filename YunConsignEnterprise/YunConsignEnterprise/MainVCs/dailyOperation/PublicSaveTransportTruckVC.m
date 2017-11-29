@@ -58,10 +58,10 @@
         [self showHint:@"请选择终点站"];
         return;
     }
-    else if (!self.toSaveData.truck_driver_phone.length) {
-        [self showHint:@"请输入电话"];
-        return;
-    }
+//    else if (!self.toSaveData.truck_driver_phone.length) {
+//        [self showHint:@"请输入电话"];
+//        return;
+//    }
     else {
         NSMutableDictionary *m_dic = [NSMutableDictionary new];
         [m_dic setObject:self.toSaveData.start_station_city_id forKey:@"start_station_city_id"];
@@ -98,7 +98,7 @@
     }
 }
 
-- (void)editAtIndexPath:(NSIndexPath *)indexPath andContent:(NSString *)content {
+- (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     if (indexPath.section == 1 || indexPath.section == 2 ) {
         NSArray *m_array = self.showArray[indexPath.section];
         if (indexPath.row < m_array.count) {

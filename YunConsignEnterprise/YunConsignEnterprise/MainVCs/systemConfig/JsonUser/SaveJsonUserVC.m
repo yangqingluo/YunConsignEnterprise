@@ -31,14 +31,14 @@
 
 //初始化数据
 - (void)initializeData {
-    self.showArray = @[@{@"title":@"账号",@"subTitle":@"请输入",@"key":@"login_code", @"need" : @YES},
-                       @{@"title":@"密码",@"subTitle":@"请输入",@"key":@"login_pass", @"need" : @YES},
-                       @{@"title":@"姓名",@"subTitle":@"请输入",@"key":@"user_name", @"need" : @YES},
-                       @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"telphone", @"need" : @YES},
-                       @{@"title":@"所属网点",@"subTitle":@"请选择",@"key":@"service", @"showKey":@"service_name", @"need" : @YES},
-                       @{@"title":@"所属岗位",@"subTitle":@"请选择",@"key":@"user_role", @"showKey":@"role_name", @"need" : @YES},
-                       @{@"title":@"账目查看",@"subTitle":@"请选择",@"key":@"power_service", @"showKey":@"power_service_name", @"need" : @YES},
-                       @{@"title":@"性别",@"subTitle":@"请选择",@"key":@"gender", @"showKey":@"gender_text", @"need" : @YES},];
+    self.showArray = @[@{@"title":@"账号",@"subTitle":@"请输入",@"key":@"login_code", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"密码",@"subTitle":@"请输入密码",@"key":@"login_pass", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"姓名",@"subTitle":@"请输入",@"key":@"user_name", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"telphone", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"所属网点",@"subTitle":@"请选择",@"key":@"service", @"showKey":@"service_name", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"所属岗位",@"subTitle":@"请选择",@"key":@"user_role", @"showKey":@"role_name", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"账目查看",@"subTitle":@"请选择",@"key":@"power_service", @"showKey":@"power_service_name", @"need" : @NO},
+                       @{@"title":@"性别",@"subTitle":@"请选择",@"key":@"gender", @"showKey":@"gender_text", @"need" : self.baseData ? @NO : @YES},];
     [self.selectorSet addObjectsFromArray:@[@"service", @"user_role", @"power_service", @"gender"]];
 //    [self.numberKeyBoardTypeSet addObjectsFromArray:@[@"telphone"]];
 }
@@ -55,7 +55,9 @@
         if (!error) {
             ResponseItem *item = (ResponseItem *)responseBody;
             if (item.items.count) {
-                weakself.toSaveData = [AppUserDetailInfo mj_objectWithKeyValues:item.items[0]];
+                AppUserDetailInfo *detailData = [AppUserDetailInfo mj_objectWithKeyValues:item.items[0]];
+                weakself.detailData = detailData;
+                weakself.toSaveData = [detailData copy];
                 [weakself.toSaveData setValue:nil forKey:@"login_pass"];
             }
             [weakself updateSubviews];
@@ -70,29 +72,28 @@
     NSMutableDictionary *m_dic = [NSMutableDictionary new];
     for (NSDictionary *dic in self.showArray) {
         NSString *key = dic[@"key"];
-        if ([key isEqualToString:@"open_city"]) {
-            if (![self.toSaveData valueForKey:@"open_city_id"] || ![self.toSaveData valueForKey:@"open_city_name"]) {
+        BOOL need = [dic[@"need"] boolValue];
+        if ([key isEqualToString:@"service"] || [key isEqualToString:@"power_service"] || [key isEqualToString:@"user_role"]) {
+            NSString *key_id = [NSString stringWithFormat:@"%@_id", key];
+            NSString *key_name = [NSString stringWithFormat:@"%@_name", key];
+            if ([key isEqualToString:@"user_role"]) {
+                key_id = [NSString stringWithFormat:@"%@_id", @"role"];
+                key_name = [NSString stringWithFormat:@"%@_name", @"role"];
+            }
+            if (need && (![self.toSaveData valueForKey:key_id] || ![self.toSaveData valueForKey:key_name])) {
                 [self doShowHintFunction:[NSString stringWithFormat:@"请选择%@", dic[@"title"]]];
                 return;
             }
-            [m_dic setObject:[self.toSaveData valueForKey:@"open_city_id"] forKey:@"open_city_id"];
-            [m_dic setObject:[self.toSaveData valueForKey:@"open_city_name"] forKey:@"open_city_name"];
-        }
-        else if ([key isEqualToString:@"location"]) {
-            NSString *latitude = [self.toSaveData valueForKey:@"latitude"];
-            NSString *longitude = [self.toSaveData valueForKey:@"longitude"];
-            if (!latitude || !longitude) {
-                [self doShowHintFunction:[NSString stringWithFormat:@"%@%@", [self.selectorSet containsObject:key] ? @"请选择" : @"请补全", dic[@"title"]]];
-                return;
+            if ([self.toSaveData valueForKey:key_id]) {
+                [m_dic setObject:[self.toSaveData valueForKey:key_id] forKey:key_id];
             }
-            else {
-                [m_dic setObject:latitude forKey:@"latitude"];
-                [m_dic setObject:longitude forKey:@"longitude"];
+            if ([self.toSaveData valueForKey:key_name]) {
+                [m_dic setObject:[self.toSaveData valueForKey:key_name] forKey:key_name];
             }
         }
         else {
             NSObject *value = [self.toSaveData valueForKey:key];
-            if ([dic[@"need"] boolValue] && !value) {
+            if (need && !value) {
                 [self doShowHintFunction:[NSString stringWithFormat:@"%@%@", [self.selectorSet containsObject:key] ? @"请选择" : @"请补全", dic[@"title"]]];
                 return;
             }
@@ -112,7 +113,7 @@
             }
         }
         if (hasChange) {
-            [m_dic setObject:[self.baseData valueForKey:@"service_id"] forKey:@"service_id"];
+            [m_dic setObject:[self.baseData valueForKey:@"user_id"] forKey:@"user_id"];
         }
         else {
             [self doShowHintFunction:@"未做修改"];
@@ -122,7 +123,7 @@
     
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:self.baseData ? @"hex_base_updateServiceById" : @"hex_base_saveServiceFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:self.baseData ? @"hex_base_updateJoinUserByIdFunction" : @"hex_base_saveJoinUserFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
