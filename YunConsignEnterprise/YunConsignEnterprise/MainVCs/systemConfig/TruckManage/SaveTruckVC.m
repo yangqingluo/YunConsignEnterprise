@@ -1,49 +1,53 @@
 //
-//  SaveOpenCityVC.m
+//  SaveTruckVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/11/21.
+//  Created by 7kers on 2017/11/29.
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "SaveOpenCityVC.h"
+#import "SaveTruckVC.h"
 
-@interface SaveOpenCityVC ()
+@interface SaveTruckVC ()
 
 @end
 
-@implementation SaveOpenCityVC
+@implementation SaveTruckVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     if (self.baseData) {
-        self.title = @"城市详情";
-        self.toSaveData = [AppCityDetailInfo mj_objectWithKeyValues:[self.baseData mj_keyValues]];
+        self.title = @"车辆详情";
+        self.toSaveData = [AppTruckDetailInfo mj_objectWithKeyValues:[self.baseData mj_keyValues]];
     }
     else {
-        self.title = @"添加城市";
-        self.toSaveData = [AppCityDetailInfo new];
+        self.title = @"添加车辆";
+        self.toSaveData = [AppTruckDetailInfo new];
     }
 }
 
 //初始化数据
 - (void)initializeData {
-    self.showArray = @[@{@"title":@"城市",@"subTitle":@"请输入",@"key":@"open_city_name", @"need" : @YES},
-                       @{@"title":@"拼音",@"subTitle":@"请输入",@"key":@"open_city_py", @"need" : @YES},
-                       @{@"title":@"排序",@"subTitle":@"请输入",@"key":@"sort"}];
+    self.showArray = @[@{@"title":@"车牌号",@"subTitle":@"请输入",@"key":@"truck_number_plate", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"司机",@"subTitle":@"请输入",@"key":@"truck_driver_name", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"开户行",@"subTitle":@"请输入",@"key":@"driver_account_bank", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"银行卡号",@"subTitle":@"请输入",@"key":@"driver_account", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"户主",@"subTitle":@"请输入",@"key":@"driver_account_name", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"备注",@"subTitle":@"请输入",@"key":@"note", @"need":@NO},];
 }
 
 - (void)pullDetailData {
     [self doShowHudFunction];
-    NSDictionary *m_dic = @{@"open_city_id" : [self.baseData valueForKey:@"open_city_id"]};
+    NSDictionary *m_dic = @{@"truck_id" : [self.baseData valueForKey:@"truck_id"]};
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryOpenCityById" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryTruckDetailById" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = (ResponseItem *)responseBody;
             if (item.items.count) {
-                AppCityDetailInfo *detailData = [AppCityDetailInfo mj_objectWithKeyValues:item.items[0]];
+                AppTruckDetailInfo *detailData = [AppTruckDetailInfo mj_objectWithKeyValues:item.items[0]];
                 self.detailData = [detailData copy];
                 weakself.toSaveData = detailData;
             }
@@ -79,7 +83,7 @@
             }
         }
         if (hasChange) {
-            [m_dic setObject:[self.baseData valueForKey:@"open_city_id"] forKey:@"open_city_id"];
+            [m_dic setObject:[self.baseData valueForKey:@"truck_id"] forKey:@"truck_id"];
         }
         else {
             [self doShowHintFunction:@"未做修改"];
@@ -89,7 +93,7 @@
     
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:self.baseData ? @"hex_base_updateOpenCityById" : @"hex_base_saveOpenCityFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:self.baseData ? @"hex_base_updateTruckById" : @"hex_base_saveTruck" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;

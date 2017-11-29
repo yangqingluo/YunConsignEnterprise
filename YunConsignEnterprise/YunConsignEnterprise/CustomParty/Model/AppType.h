@@ -561,9 +561,19 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *operate_time;
 @property (strong, nonatomic) NSString *operator_id;
 @property (strong, nonatomic) NSString *operator_name;
-@property (strong, nonatomic) NSString *truck_driver_name;//
-@property (strong, nonatomic) NSString *truck_driver_phone;//
-@property (strong, nonatomic) NSString *truck_number_plate;//
+@property (strong, nonatomic) NSString *truck_id;//车辆编号
+@property (strong, nonatomic) NSString *truck_number_plate;//车辆牌照
+@property (strong, nonatomic) NSString *truck_driver_name;//司机姓名
+@property (strong, nonatomic) NSString *truck_driver_phone;//司机电话
+@property (strong, nonatomic) NSString *note;//备注
+
+@end
+
+@interface AppTruckDetailInfo : AppTruckInfo
+
+@property (strong, nonatomic) NSString *driver_account;//银行卡号
+@property (strong, nonatomic) NSString *driver_account_name;//户主
+@property (strong, nonatomic) NSString *driver_account_bank;//开户行
 
 @end
 
@@ -878,7 +888,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *user_name;//姓名
 @property (strong, nonatomic) NSString *telphone;//电话
 @property (strong, nonatomic) NSArray *user_role;//岗位编号
-
+@property (strong, nonatomic) NSString *truck_driver_name;//司机姓名
+@property (strong, nonatomic) NSString *truck_driver_phone;//司机电话
 
 - (NSString *)showStartTimeString;
 - (NSString *)showEndTimeString;

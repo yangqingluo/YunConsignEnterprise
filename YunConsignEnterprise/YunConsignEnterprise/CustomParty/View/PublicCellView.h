@@ -13,4 +13,8 @@
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) UIView *lineView;
 
+//使用时实现，备用
+@property (strong, nonatomic) UILabel *subTextLabel;
+- (void)showSubTextLabel;
+
 @end

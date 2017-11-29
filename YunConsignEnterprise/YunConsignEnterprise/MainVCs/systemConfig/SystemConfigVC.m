@@ -12,6 +12,7 @@
 #import "JsonUserVC.h"
 #import "ServiceGoodVC.h"
 #import "ServicePackageVC.h"
+#import "TruckManageVC.h"
 
 #import "BlockAlertView.h"
 
@@ -88,7 +89,7 @@
                     vc = [ServicePackageVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"TRUCK_MANAGE"]) {
-                    
+                    vc = [TruckManageVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"PRINT_SET"]) {
                     

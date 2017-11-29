@@ -191,6 +191,14 @@
         }
             break;
             
+        case QueryConditionType_TruckManage:{
+            self.showArray = @[@{@"title":@"车牌号",@"subTitle":@"请输入",@"key":@"truck_number_plate"},
+                               @{@"title":@"司机姓名",@"subTitle":@"请输入",@"key":@"truck_driver_name"},
+                               @{@"title":@"司机电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone"}];
+            [self.inputValidSet addObjectsFromArray:@[@"truck_number_plate", @"truck_driver_name", @"truck_driver_phone"]];
+        }
+            break;
+            
         default:
             break;
     }

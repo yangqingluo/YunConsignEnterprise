@@ -135,6 +135,8 @@
 		E49C4F651F73AF03007E7D70 /* FourItemsDoubleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F641F73AF03007E7D70 /* FourItemsDoubleListCell.m */; };
 		E49D6C151FB15C62004F82D4 /* PublicFMWaybillQueryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D6C141FB15C62004F82D4 /* PublicFMWaybillQueryVC.m */; };
 		E49D6C181FB15F04004F82D4 /* PublicInputHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D6C171FB15F04004F82D4 /* PublicInputHeaderView.m */; };
+		E4A2CD371FCE6D3D0047A9BC /* TruckManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A2CD361FCE6D3D0047A9BC /* TruckManageVC.m */; };
+		E4A2CD3A1FCE6D760047A9BC /* SaveTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A2CD391FCE6D760047A9BC /* SaveTruckVC.m */; };
 		E4A633201FB037E300873BF5 /* DailyReimbursementApplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */; };
 		E4A65B6E1FB1A51900942525 /* CodLoanCheckDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A65B6D1FB1A51900942525 /* CodLoanCheckDetailCell.m */; };
 		E4AD68111FC72C36004AB240 /* money_icon_5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AD680B1FC72C36004AB240 /* money_icon_5@3x.png */; };
@@ -709,6 +711,10 @@
 		E49D6C141FB15C62004F82D4 /* PublicFMWaybillQueryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicFMWaybillQueryVC.m; path = YunConsignEnterprise/MainVCs/FinancialManagement/PublicFMWaybillQueryVC.m; sourceTree = SOURCE_ROOT; };
 		E49D6C161FB15F04004F82D4 /* PublicInputHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicInputHeaderView.h; sourceTree = "<group>"; };
 		E49D6C171FB15F04004F82D4 /* PublicInputHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicInputHeaderView.m; sourceTree = "<group>"; };
+		E4A2CD351FCE6D3D0047A9BC /* TruckManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TruckManageVC.h; sourceTree = "<group>"; };
+		E4A2CD361FCE6D3D0047A9BC /* TruckManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruckManageVC.m; sourceTree = "<group>"; };
+		E4A2CD381FCE6D760047A9BC /* SaveTruckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveTruckVC.h; sourceTree = "<group>"; };
+		E4A2CD391FCE6D760047A9BC /* SaveTruckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveTruckVC.m; sourceTree = "<group>"; };
 		E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementApplyCell.h; sourceTree = "<group>"; };
 		E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementApplyCell.m; sourceTree = "<group>"; };
 		E4A65B6C1FB1A51900942525 /* CodLoanCheckDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckDetailCell.h; sourceTree = "<group>"; };
@@ -1685,6 +1691,10 @@
 		E4941E6B1FC413EC00707A0D /* TruckManage */ = {
 			isa = PBXGroup;
 			children = (
+				E4A2CD351FCE6D3D0047A9BC /* TruckManageVC.h */,
+				E4A2CD361FCE6D3D0047A9BC /* TruckManageVC.m */,
+				E4A2CD381FCE6D760047A9BC /* SaveTruckVC.h */,
+				E4A2CD391FCE6D760047A9BC /* SaveTruckVC.m */,
 			);
 			name = TruckManage;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/TruckManage;
@@ -2971,6 +2981,7 @@
 				E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */,
 				E4E2A3961FB311AE00D8EC1C /* IQUIViewController+Additions.m in Sources */,
 				E4E2A3CC1FB311AE00D8EC1C /* UIView+MJExtension.m in Sources */,
+				E4A2CD3A1FCE6D760047A9BC /* SaveTruckVC.m in Sources */,
 				E4E2A3FE1FB311AE00D8EC1C /* SDWebImagePrefetcher.m in Sources */,
 				E4AEA0DE1F5EA8CE002EBE41 /* UIImage+SubImage.m in Sources */,
 				E40F7CA91F95A71700946C18 /* WayBillQueryVC.m in Sources */,
@@ -3113,6 +3124,7 @@
 				E4EDBFCA1FB1EECB009D2FA4 /* CodWaitPayCell.m in Sources */,
 				E4D2BB211FAAC16E006A2AAC /* CodLoanApplyVC.m in Sources */,
 				E4E2A40D1FB311AE00D8EC1C /* TZPhotoPickerController.m in Sources */,
+				E4A2CD371FCE6D3D0047A9BC /* TruckManageVC.m in Sources */,
 				E4E2A3F21FB311AE00D8EC1C /* MWPhotoBrowser.m in Sources */,
 				E48C72B91FA9B939007F7FC8 /* CodCheckVC.m in Sources */,
 				E4E2A40A1FB311AE00D8EC1C /* TZImageManager.m in Sources */,

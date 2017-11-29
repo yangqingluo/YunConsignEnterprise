@@ -25,4 +25,13 @@
     return self;
 }
 
+- (void)showSubTextLabel {
+    _textLabel.frame = CGRectMake(0, 0, self.width, 0.5 * self.height);
+    _subTextLabel = NewLabel(CGRectMake(0, self.textLabel.bottom, self.width, 0.5 * self.height), nil, nil, NSTextAlignmentLeft);
+    [self addSubview:_subTextLabel];
+    
+    self.textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight;
+    self.subTextLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
 @end

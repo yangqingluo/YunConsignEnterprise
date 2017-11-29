@@ -399,6 +399,13 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppTruckDetailInfo
+
+
+
+@end
+
+
 @implementation AppTransportTruckInfo
 
 
