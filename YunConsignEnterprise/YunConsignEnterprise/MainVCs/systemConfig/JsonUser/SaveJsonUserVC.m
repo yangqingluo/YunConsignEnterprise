@@ -35,11 +35,11 @@
                        @{@"title":@"密码",@"subTitle":@"请输入",@"key":@"login_pass", @"need" : @YES},
                        @{@"title":@"姓名",@"subTitle":@"请输入",@"key":@"user_name", @"need" : @YES},
                        @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"telphone", @"need" : @YES},
-                       @{@"title":@"所属网点",@"subTitle":@"请选择",@"key":@"service_name", @"need" : @YES},
+                       @{@"title":@"所属网点",@"subTitle":@"请选择",@"key":@"service", @"showKey":@"service_name", @"need" : @YES},
                        @{@"title":@"所属岗位",@"subTitle":@"请选择",@"key":@"user_role", @"showKey":@"role_name", @"need" : @YES},
-                       @{@"title":@"账目查看",@"subTitle":@"请选择",@"key":@"power_service_name", @"need" : @YES},
+                       @{@"title":@"账目查看",@"subTitle":@"请选择",@"key":@"power_service", @"showKey":@"power_service_name", @"need" : @YES},
                        @{@"title":@"性别",@"subTitle":@"请选择",@"key":@"gender", @"showKey":@"gender_text", @"need" : @YES},];
-    [self.selectorSet addObjectsFromArray:@[@"service_name", @"user_role", @"power_service_name", @"gender"]];
+    [self.selectorSet addObjectsFromArray:@[@"service", @"user_role", @"power_service", @"gender"]];
 //    [self.numberKeyBoardTypeSet addObjectsFromArray:@[@"telphone"]];
 }
 
@@ -173,18 +173,22 @@
             for (NSUInteger i = 0; i < dataArray.count; i++) {
                 AppDataDictionary *item = dataArray[i];
                 [source_array addObject:item.item_name];
-//                if ([[self.condition valueForKey:key] containsObject:item]) {
-//                    [selected_array addObject:@(i)];
-//                }
+                if ([[[self.toSaveData valueForKey:@"role_id"] componentsSeparatedByString:@","] containsObject:item.item_val]) {
+                    [selected_array addObject:@(i)];
+                }
             }
             QKWEAKSELF;
             PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
                 if ([object isKindOfClass:[NSArray class]]) {
                     NSMutableArray *name_array = [NSMutableArray new];
                     NSMutableArray *id_array = [NSMutableArray new];
-                    for (AppDataDictionary *item in (NSArray *)object) {
-                        [name_array addObject:item.item_name];
-                        [id_array addObject:item.item_val];
+                    for (NSNumber *number in (NSArray *)object) {
+                        NSInteger index = [number integerValue];
+                        if (index < dataArray.count && index >= 0) {
+                            AppDataDictionary *item = dataArray[index];
+                            [name_array addObject:item.item_name];
+                            [id_array addObject:item.item_val];
+                        }
                     }
                     [weakself.toSaveData setValue:[name_array componentsJoinedByString:@","] forKey:@"role_name"];
                     [weakself.toSaveData setValue:[id_array componentsJoinedByString:@","] forKey:@"role_id"];
@@ -198,26 +202,80 @@
             [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
-    else if ([key isEqualToString:@"open_city"]) {
+    else if ([key isEqualToString:@"service"]) {
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
-            for (AppCityInfo *m_data in dataArray) {
-                [m_array addObject:m_data.open_city_name];
+            for (AppServiceInfo *m_data in dataArray) {
+                [m_array addObject:m_data.showCityAndServiceName];
             }
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
-                    AppCityInfo *city = dataArray[buttonIndex - 1];
-                    [weakself.toSaveData setValue:city.open_city_id forKey:@"open_city_id"];
-                    [weakself.toSaveData setValue:city.open_city_name forKey:@"open_city_name"];
+                    AppServiceInfo *service = dataArray[buttonIndex - 1];
+                    [weakself.toSaveData setValue:service.service_name forKey:@"service_name"];
+                    [weakself.toSaveData setValue:service.service_id forKey:@"service_id"];
                     [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }
             } otherButtonTitlesArray:m_array];
             [sheet showInView:self.view];
         }
         else {
-            [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
+    else if ([key isEqualToString:@"power_service"]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *source_array = [NSMutableArray new];
+            NSMutableArray *selected_array = [NSMutableArray new];
+            for (NSUInteger i = 0; i < dataArray.count; i++) {
+                AppServiceInfo *item = dataArray[i];
+                [source_array addObject:item.showCityAndServiceName];
+                if ([[[self.toSaveData valueForKey:@"power_service_id"] componentsSeparatedByString:@","] containsObject:item.service_id]) {
+                    [selected_array addObject:@(i)];
+                }
+            }
+            QKWEAKSELF;
+            PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
+                if ([object isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *name_array = [NSMutableArray new];
+                    NSMutableArray *id_array = [NSMutableArray new];
+                    for (NSNumber *number in (NSArray *)object) {
+                        NSInteger index = [number integerValue];
+                        if (index < dataArray.count && index >= 0) {
+                            AppServiceInfo *item = dataArray[index];
+                            [name_array addObject:item.service_name];
+                            [id_array addObject:item.service_id];
+                        }
+                    }
+                    [weakself.toSaveData setValue:[name_array componentsJoinedByString:@","] forKey:@"power_service_name"];
+                    [weakself.toSaveData setValue:[id_array componentsJoinedByString:@","] forKey:@"power_service_id"];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }];
+            vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
+            [self doPushViewController:vc animated:YES];
+            
+            
+            
+//            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+//            for (AppServiceInfo *m_data in dataArray) {
+//                [m_array addObject:m_data.showCityAndServiceName];
+//            }
+//            QKWEAKSELF;
+//            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+//                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+//                    AppServiceInfo *service = dataArray[buttonIndex - 1];
+//                    [weakself.toSaveData setValue:service.service_name forKey:@"power_service_name"];
+//                    [weakself.toSaveData setValue:service.service_id forKey:@"power_service_id"];
+//                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//                }
+//            } otherButtonTitlesArray:m_array];
+//            [sheet showInView:self.view];
+        }
+        else {
+            [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
 }
