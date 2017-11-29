@@ -591,6 +591,7 @@ BOOL isTrue(NSString *string) {
         [[self class] mj_setupObjectClassInArray:^NSDictionary *{
             return @{
                      @"show_column" : [AppDataDictionary class],
+                     @"user_role" : [AppDataDictionary class],
                      };
         }];
     }

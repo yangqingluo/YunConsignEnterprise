@@ -9,7 +9,14 @@
 #import "SaveJsonUserVC.h"
 #import "PublicSelectionVC.h"
 
-@interface SaveJsonUserVC ()
+static NSString *userRoleKey = @"role_id";
+
+@interface SaveJsonUserVC (){
+    BOOL canSelectPowerServices;
+}
+
+@property (strong, nonatomic) NSArray *powerServiceNameBuffer;
+@property (strong, nonatomic) NSArray *powerServiceIDBuffer;
 
 @end
 
@@ -22,6 +29,7 @@
         self.title = [NSString stringWithFormat:@"%@的详细信息", [self.baseData valueForKey:@"user_name"]];
         self.toSaveData = [AppUserDetailInfo mj_objectWithKeyValues:[self.baseData mj_keyValues]];
         [self.toSaveData setValue:nil forKey:@"login_pass"];
+        [self judgeUserRoleFunction];
     }
     else {
         self.title = @"添加员工";
@@ -32,7 +40,7 @@
 //初始化数据
 - (void)initializeData {
     self.showArray = @[@{@"title":@"账号",@"subTitle":@"请输入",@"key":@"login_code", @"need" : self.baseData ? @NO : @YES},
-                       @{@"title":@"密码",@"subTitle":@"请输入密码",@"key":@"login_pass", @"need" : self.baseData ? @NO : @YES},
+                       @{@"title":@"密码",@"subTitle":@"请输入密码",@"key":@"login_pass", @"need" : self.baseData ? @NO : @YES, @"secureTextEntry" : @YES},
                        @{@"title":@"姓名",@"subTitle":@"请输入",@"key":@"user_name", @"need" : self.baseData ? @NO : @YES},
                        @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"telphone", @"need" : self.baseData ? @NO : @YES},
                        @{@"title":@"所属网点",@"subTitle":@"请选择",@"key":@"service", @"showKey":@"service_name", @"need" : self.baseData ? @NO : @YES},
@@ -59,6 +67,7 @@
                 weakself.detailData = detailData;
                 weakself.toSaveData = [detailData copy];
                 [weakself.toSaveData setValue:nil forKey:@"login_pass"];
+                [self judgeUserRoleFunction];
             }
             [weakself updateSubviews];
         }
@@ -193,7 +202,8 @@
                     }
                     [weakself.toSaveData setValue:[name_array componentsJoinedByString:@","] forKey:@"role_name"];
                     [weakself.toSaveData setValue:[id_array componentsJoinedByString:@","] forKey:@"role_id"];
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    [weakself judgeUserRoleFunction];
+//                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }
             }];
             vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
@@ -226,6 +236,11 @@
         }
     }
     else if ([key isEqualToString:@"power_service"]) {
+        if (!canSelectPowerServices) {
+//            [self doShowHintFunction:@"只有财务才能选择"];
+            return;
+        }
+        
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
         if (dataArray.count) {
             NSMutableArray *source_array = [NSMutableArray new];
@@ -257,28 +272,34 @@
             }];
             vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
             [self doPushViewController:vc animated:YES];
-            
-            
-            
-//            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
-//            for (AppServiceInfo *m_data in dataArray) {
-//                [m_array addObject:m_data.showCityAndServiceName];
-//            }
-//            QKWEAKSELF;
-//            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-//                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
-//                    AppServiceInfo *service = dataArray[buttonIndex - 1];
-//                    [weakself.toSaveData setValue:service.service_name forKey:@"power_service_name"];
-//                    [weakself.toSaveData setValue:service.service_id forKey:@"power_service_id"];
-//                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//                }
-//            } otherButtonTitlesArray:m_array];
-//            [sheet showInView:self.view];
         }
         else {
             [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
+}
+
+- (void)judgeUserRoleFunction {
+    NSArray *roleArray = [[self.toSaveData valueForKey:userRoleKey] componentsSeparatedByString:@","];
+    NSString *key_id = @"power_service_id";
+    NSString *key_name = @"power_service_name";
+    if ([roleArray containsObject:[NSString stringWithFormat:@"%d", (int)USER_ROLE_3]]) {
+        canSelectPowerServices = YES;
+        if (![self.toSaveData valueForKey:key_id]) {
+            [self.toSaveData setValue:self.powerServiceIDBuffer forKey:key_id];
+        }
+        if (![self.toSaveData valueForKey:key_name]) {
+            [self.toSaveData setValue:self.powerServiceNameBuffer forKey:key_name];
+        }
+    }
+    else {
+        canSelectPowerServices = NO;
+        self.powerServiceIDBuffer = [[self.toSaveData valueForKey:key_id] copy];
+        self.powerServiceNameBuffer = [[self.toSaveData valueForKey:key_name] copy];
+        [self.toSaveData setValue:nil forKey:key_id];
+        [self.toSaveData setValue:nil forKey:key_name];
+    }
+    [self.tableView reloadData];
 }
 
 @end

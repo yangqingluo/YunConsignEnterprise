@@ -52,7 +52,7 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_JsonUser;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
@@ -71,17 +71,14 @@
 - (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
-        if (self.condition.open_city) {
-            [m_dic setObject:self.condition.open_city.open_city_id forKey:@"open_city_id"];
+        if (self.condition.user_name) {
+            [m_dic setObject:self.condition.user_name forKey:@"user_name"];
         }
-        if (self.condition.service_state) {
-            [m_dic setObject:self.condition.service_state.item_val forKey:@"service_state"];
+        if (self.condition.telphone) {
+            [m_dic setObject:self.condition.telphone forKey:@"telphone"];
         }
-        if (self.condition.service_name) {
-            [m_dic setObject:self.condition.service_name forKey:@"service_name"];
-        }
-        if (self.condition.service_code) {
-            [m_dic setObject:self.condition.service_code forKey:@"service_code"];
+        if (self.condition.user_role.count) {
+            [m_dic setObject:[self.condition showArrayValStringWithKey:@"user_role"] forKey:@"role_id"];
         }
     }
     QKWEAKSELF;

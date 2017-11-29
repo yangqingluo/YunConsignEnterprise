@@ -183,6 +183,14 @@
         }
             break;
             
+        case QueryConditionType_JsonUser:{
+            self.showArray = @[@{@"title":@"姓名",@"subTitle":@"请输入",@"key":@"user_name"},
+                               @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"telphone"},
+                               @{@"title":@"岗位编号",@"subTitle":@"请选择",@"key":@"user_role"}];
+            [self.inputValidSet addObjectsFromArray:@[@"user_name", @"telphone"]];
+        }
+            break;
+            
         default:
             break;
     }
@@ -246,7 +254,7 @@
     else if ([varClass isSubclassOfClass:[AppDataDictionary class]]) {
         NSString *m_key = nil;
         if ([key isEqualToString:@"cash_on_delivery_type"]) {
-            m_key = @"cash_on_delivery_state_show";
+            NSString *m_key = @"cash_on_delivery_state_show";
         }
         NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key.length ? m_key : key];
         if (dicArray.count) {
@@ -366,9 +374,9 @@
     return _condition;
 }
 
-- (NSSet *)inputValidSet {
+- (NSMutableSet *)inputValidSet {
     if (!_inputValidSet) {
-        _inputValidSet = [NSSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", @"freight_cust_name", @"phone", @"service_name", @"service_code", nil];
+        _inputValidSet = [NSMutableSet setWithObjects:@"query_val", @"truck_number_plate", @"bank_card_owner", @"contact_phone", @"daily_fee", @"note", @"freight_cust_name", @"phone", @"service_name", @"service_code", nil];
     }
     return _inputValidSet;
 }

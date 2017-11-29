@@ -149,6 +149,7 @@
     cell.baseView.textField.enabled = YES;
     cell.baseView.textField.indexPath = [indexPath copy];
     cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.baseView.textField.secureTextEntry = [m_dic[@"secureTextEntry"] boolValue];
     
     NSString *key = m_dic[@"key"];
     NSString *showKey = m_dic[@"showKey"];

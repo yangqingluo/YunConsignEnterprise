@@ -62,7 +62,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     }
     
     FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     if (!vc.condition.show_column) {
         NSUInteger count = 3;
         NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:count];
@@ -126,7 +126,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:searchTimeTypeKey]) {
-        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:@"search_time_type"];
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:searchTimeTypeKey];
         if (dataArray.count && [dataArray indexOfObject:self.condition.search_time_type] == dataArray.count - 1) {
             canSelectShowColumns = YES;
             self.condition.show_column = self.showColumnBuffer;

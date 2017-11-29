@@ -877,7 +877,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *service_code;//门店代码
 @property (strong, nonatomic) NSString *user_name;//姓名
 @property (strong, nonatomic) NSString *telphone;//电话
-@property (strong, nonatomic) NSArray *role_id;//岗位编号
+@property (strong, nonatomic) NSArray *user_role;//岗位编号
 
 
 - (NSString *)showStartTimeString;

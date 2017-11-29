@@ -42,7 +42,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 //@property (strong, nonatomic) NSSet *dataDicSet;
-@property (strong, nonatomic) NSSet *inputValidSet;
+@property (strong, nonatomic) NSMutableSet *inputValidSet;
 @property (strong, nonatomic) NSSet *numberInputSet;
 @property (strong, nonatomic) NSSet *boolValidSet;
 
