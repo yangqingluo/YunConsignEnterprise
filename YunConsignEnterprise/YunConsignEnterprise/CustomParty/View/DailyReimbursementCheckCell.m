@@ -47,14 +47,17 @@
     self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];
     
     NSUInteger lines = 2;
+    self.bodyLabel3.hidden = YES;
     if (self.indextag == 2) {
         lines++;
+        self.bodyLabel3.hidden = NO;
         self.bodyLabel3.text = [NSString stringWithFormat:@"驳回原因：%@", data.check_note];
     }
     else {
         BOOL isNote = data.note.length;
         if (isNote) {
             lines++;
+            self.bodyLabel3.hidden = NO;
             self.bodyLabel3.text = [NSString stringWithFormat:@"报销备注：%@", data.note];
         }
     }
