@@ -31,7 +31,7 @@ __strong static QKGeocoder  *_singleGeocoder = nil;
         completionHandler(placemark, nil);
     }
     else{
-        [[QKNetworkSingleton sharedManager] Get:nil HeadParm:nil URLString:[NSString stringWithFormat:@"http://restapi.amap.com/v3/geocode/regeo?output=json&location=%f,%f&key=8e5487e24434df96caf2fcf1b916e6d3",location.longitude,location.latitude] completion:^(id responseBody, NSError *error) {
+        [[QKNetworkSingleton sharedManager] Get:nil HeadParm:nil URLString:[NSString stringWithFormat:@"http://restapi.amap.com/v3/geocode/regeo?output=json&location=%f,%f&key=40a660143178916a573e5e9bff3cb2a3",location.longitude,location.latitude] completion:^(id responseBody, NSError *error) {
             if (!error) {
                 NSString *string = [[NSString alloc] initWithData:responseBody encoding:NSUTF8StringEncoding];
                 NSDictionary *dicReceive = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
