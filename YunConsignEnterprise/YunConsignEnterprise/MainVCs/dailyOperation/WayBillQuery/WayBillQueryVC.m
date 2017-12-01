@@ -315,6 +315,11 @@
             }
                 break;
                 
+            case 2:{
+                [self doShowHintFunction:defaultNoticeNotComplete];
+            }
+                break;
+                
             case 3:{
                 WaybillLogVC *vc = [WaybillLogVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];

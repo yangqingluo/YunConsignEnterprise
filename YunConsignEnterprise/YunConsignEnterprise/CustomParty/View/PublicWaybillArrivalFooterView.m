@@ -34,6 +34,9 @@
         [_ignoreBtn addSubview:_ignoreBtn.downLabel];
         [self.summaryView addSubview:_ignoreBtn];
         
+        _subTextLabel = NewLabel(CGRectMake(kEdgeMiddle, 0, self.summaryView.width - 2 * kEdgeMiddle, self.summaryView.height), secondaryTextColor, nil, NSTextAlignmentRight);
+        [self.summaryView addSubview:_subTextLabel];
+        
         _baseView = [[UIView alloc] initWithFrame:CGRectMake(0, self.summaryView.bottom, self.width, self.height - self.summaryView.bottom)];
         _baseView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_baseView];

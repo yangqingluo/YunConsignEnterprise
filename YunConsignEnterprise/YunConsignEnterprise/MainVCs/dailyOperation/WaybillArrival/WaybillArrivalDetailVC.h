@@ -6,9 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
-@interface WaybillArrivalDetailVC : AppBasicTableViewController
+@interface WaybillArrivalDetailVC : PublicResultTableVC
 
 @property (copy, nonatomic) AppCanArrivalTransportTruckInfo *truckData;
 

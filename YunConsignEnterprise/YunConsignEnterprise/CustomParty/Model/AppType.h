@@ -483,7 +483,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_info;//货物
 @property (strong, nonatomic) NSString *cust_info;//客户
 @property (strong, nonatomic) NSString *handover_state;//交接状态，YES_NO，1是，2否
+@property (strong, nonatomic) NSString *handover_state_text;
 @property (strong, nonatomic) NSString *print_state;//打印状态，YES_NO，1是，2否
+@property (strong, nonatomic) NSString *print_state_text;
 
 @end
 

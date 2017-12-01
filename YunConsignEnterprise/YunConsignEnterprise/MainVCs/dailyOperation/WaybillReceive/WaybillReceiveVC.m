@@ -244,6 +244,12 @@
             }
                 break;
                 
+            case 1:{
+                //打印
+                [self doShowHintFunction:defaultNoticeNotComplete];
+            }
+                break;
+                
             case 2:{
                 WaybillCustReceiveVC *vc = [WaybillCustReceiveVC new];
                 vc.billData = self.dataSource[indexPath.row];

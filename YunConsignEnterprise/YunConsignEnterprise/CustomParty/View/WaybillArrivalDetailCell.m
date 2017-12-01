@@ -35,7 +35,7 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物信息：%@", _data.goods_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"收货客户：%@", _data.cust_info];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"交接情况：%@/%@", _data.handover_state, _data.print_state];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"交接情况：%@/%@", _data.handover_state_text, _data.print_state_text];
 }
 
 

@@ -15,10 +15,7 @@
 
 @interface WaybillArrivalDetailVC ()
 
-@property (strong, nonatomic) NSMutableSet *selectSet;
-@property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSMutableArray *originalDataSource;
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @property (strong, nonatomic) PublicWaybillArrivalFooterView *footerView;
 
@@ -29,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
+    
+    self.condition.transport_truck_id = [self.truckData.transport_truck_id copy];
     
     self.footerView.bottom = self.view.height;
     [self.view addSubview:self.footerView];
@@ -98,22 +97,14 @@
 }
 
 - (void)footerPrintBtn1Action {
-    
+    [self doShowHintFunction:defaultNoticeNotComplete];
 }
 
 - (void)footerPrintBtn2Action {
-    
+    [self doShowHintFunction:defaultNoticeNotComplete];
 }
 
-- (void)loadFirstPageData {
-    [self queryWaybillListByConditionFunction:YES];
-}
-
-- (void)loadMoreData {
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.load_service) {
@@ -148,7 +139,7 @@
     }];
 }
 
-- (void)arrivalWaybillToTransportTruckFunction{
+- (void)arrivalWaybillToTransportTruckFunction {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id}];
     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
     for (AppCanLoadWayBillInfo *item in self.selectSet) {
@@ -174,28 +165,6 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter {
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing{
-    [self doHideHudFunction];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 - (void)updateSubviewsWithDataReset:(BOOL)isReset {
     [self.dataSource removeAllObjects];
     [self.selectSet removeAllObjects];
@@ -219,7 +188,13 @@
 }
 
 - (void)updateFooterSummary {
-    
+    int goods_total_count = 0;
+    int total_amount = 0;
+    for (AppCanArrivalWayBillInfo *item in self.selectSet) {
+        goods_total_count += [item.goods_total_count intValue];
+        total_amount += [item.total_amount intValue];
+    }
+    self.footerView.subTextLabel.text = [NSString stringWithFormat:@"总计：%d票/%d件/货量%d", (int)self.selectSet.count, goods_total_count, total_amount];
 }
 
 - (void)arrivalWayBillSuccess {
@@ -241,33 +216,11 @@
     return _footerView;
 }
 
-- (AppQueryConditionInfo *)condition {
-    if (!_condition) {
-        _condition = [AppQueryConditionInfo new];
-        _condition.transport_truck_id = self.truckData.transport_truck_id;
-    }
-    return _condition;
-}
-
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
 - (NSMutableArray *)originalDataSource {
     if (!_originalDataSource) {
         _originalDataSource = [NSMutableArray new];
     }
     return _originalDataSource;
-}
-
-- (NSMutableSet *)selectSet {
-    if (!_selectSet) {
-        _selectSet = [NSMutableSet new];
-    }
-    return _selectSet;
 }
 
 #pragma mark - UITableView

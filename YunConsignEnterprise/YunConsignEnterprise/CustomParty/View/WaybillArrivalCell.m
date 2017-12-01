@@ -26,9 +26,9 @@
 }
 
 - (void)updateFooter {
-    NSArray *m_array = @[@"运单明细", @"已到车"];
+    NSArray *m_array = @[@"运单列表", @"已到车"];
     if (self.data.arrival_time) {
-        m_array = @[@"运单明细"];
+        m_array = @[@"运单列表"];
     }
     [self.footerView updateDataSourceWithArray:m_array];
 }

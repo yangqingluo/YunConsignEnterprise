@@ -101,6 +101,7 @@
 
 #define defaultDateFormat            @"yyyy-MM-dd"
 #define defaultHeadImageName         @"默认头像"
+#define defaultNoticeNotComplete     @"精彩功能，敬请期待"
 #define kNotification_WaybillListRefresh    @"kNotification_WaybillListRefresh"
 #define kNotification_WaybillLogRefresh    @"kNotification_WaybillLogRefresh"
 #define kNotification_WaybillLoadRefresh    @"kNotification_WaybillLoadRefresh"//配载装车更新

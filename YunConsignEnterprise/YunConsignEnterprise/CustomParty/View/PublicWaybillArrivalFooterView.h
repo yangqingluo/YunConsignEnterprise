@@ -18,4 +18,6 @@
 @property (strong, nonatomic) UIButton *printBtn1;//打印按钮1
 @property (strong, nonatomic) UIButton *printBtn2;//打印按钮2
 
+@property (strong, nonatomic) UILabel *subTextLabel;
+
 @end

@@ -88,6 +88,13 @@
     return _selectSet;
 }
 
+- (AppQueryConditionInfo *)condition {
+    if (!_condition) {
+        _condition = [AppQueryConditionInfo new];
+    }
+    return _condition;
+}
+
 #pragma mark - UITableView
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
