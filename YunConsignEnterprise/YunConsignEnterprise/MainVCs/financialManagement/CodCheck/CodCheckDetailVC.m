@@ -22,8 +22,9 @@
     [super viewDidLoad];
     [self setupNav];
     
-    self.footerView.bottom = self.view.height;
-    [self.view addSubview:self.footerView];
+    self.footerView.width = self.scrollView.contentSize.width;
+    self.footerView.bottom = self.scrollView.height;
+    [self.scrollView addSubview:self.footerView];
     self.tableView.height = self.footerView.top - self.tableView.top;
     
     //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -130,22 +131,18 @@
 }
 
 - (void)updateSubviews {
-    int count = 0;
-    int cash_on_delivery_amount = 0;
-    int cash_on_delivery_real_amount = 0;
-    int cash_on_delivery_causes_amount = 0;
-    for (AppWayBillDetailInfo *item in self.dataSource) {
-        count++;
-        cash_on_delivery_amount += [item.cash_on_delivery_amount intValue];
-        cash_on_delivery_real_amount += [item.cash_on_delivery_real_amount intValue];
-        cash_on_delivery_causes_amount += [item.cash_on_delivery_causes_amount intValue];
-    }
     NSMutableArray *m_array = [NSMutableArray new];
     [m_array addObject:@"总"];
-    [m_array addObject:[NSString stringWithFormat:@"%d", count]];
-    [m_array addObject:[NSString stringWithFormat:@"%d", cash_on_delivery_amount]];
-    [m_array addObject:[NSString stringWithFormat:@"%d", cash_on_delivery_real_amount]];
-    [m_array addObject:[NSString stringWithFormat:@"%d", cash_on_delivery_causes_amount]];
+    [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.dataSource.count]];
+    for (AppDataDictionary *map_item in self.condition.show_column) {
+        int amount = 0;
+        for (AppWayBillDetailInfo *item in self.dataSource) {
+            if ([AppPublic getVariableWithClass:item.class varName:map_item.item_val] || [AppPublic getVariableWithClass:item.superclass varName:map_item.item_val]) {
+                amount += [[item valueForKey:map_item.item_val] intValue];
+            }
+        }
+        [m_array addObject:[NSString stringWithFormat:@"%d", amount]];
+    }
     [self.footerView updateDataSourceWithArray:m_array];
     [self.tableView reloadData];
 }
@@ -173,7 +170,7 @@
     if (!_footerView) {
         _footerView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
         _footerView.backgroundColor = baseFooterBarColor;
-        [_footerView updateEdgeSourceWithArray:[CodCheckCell edgeSourceArray]];
+        [_footerView updateEdgeSourceWithArray:self.edgeArray];
         
         [_footerView addSubview:NewSeparatorLine(CGRectMake(0, 0, _footerView.width, appSeparaterLineSize))];
     }
@@ -196,10 +193,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (self.dataSource.count) {
         CGFloat m_height = [CodCheckCell tableView:tableView heightForRowAtIndexPath:nil];
-        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, m_height)];
+        PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, m_height)];
         m_view.backgroundColor = CellHeaderLightBlueColor;
-        [m_view updateEdgeSourceWithArray:[CodCheckCell edgeSourceArray]];
-        [m_view updateDataSourceWithArray:@[@"序号", @"货号", @"应收", @"实收", @"少款"]];
+        [m_view updateEdgeSourceWithArray:self.edgeArray];
+        NSMutableArray *m_array = [NSMutableArray arrayWithObjects:@"序号", @"货号", nil];
+        [m_array addObjectsFromArray:self.nameArray];
+        [m_view updateDataSourceWithArray:m_array];
         [m_view addSubview:NewSeparatorLine(CGRectMake(0, 0, m_view.width, appSeparaterLineSize))];
         return m_view;
     }
@@ -215,9 +214,9 @@
     CodCheckCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[CodCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[CodCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier showWidth:self.scrollView.contentSize.width showValueArray:self.valArray];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        [cell.baseView updateEdgeSourceWithArray:self.edgeArray];
         //添加长按手势
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
         [cell addGestureRecognizer:longPressGesture];

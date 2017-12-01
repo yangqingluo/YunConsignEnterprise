@@ -190,14 +190,14 @@
         for (AppDailyReimbursementApplyInfo *item in self.selectSet) {
             daily_fee += [item.daily_fee intValue];
         }
-        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"总金额：%d", daily_fee];
+        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"总金额：%d元", daily_fee];
     }
     else if (self.indextag == 1) {
         int daily_fee = 0;
         for (AppDailyReimbursementApplyInfo *item in self.dataSource) {
             daily_fee += [item.daily_fee intValue];
         }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%d", daily_fee];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%d元", daily_fee];
     }
 }
 

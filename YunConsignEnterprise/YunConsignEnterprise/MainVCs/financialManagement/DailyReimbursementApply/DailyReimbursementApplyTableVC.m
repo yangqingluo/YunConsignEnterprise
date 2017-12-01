@@ -127,7 +127,7 @@
         for (AppDailyReimbursementApplyInfo *item in self.dataSource) {
             daily_fee += [item.daily_fee intValue];
         }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"已打款总金额：%d", daily_fee];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"已打款总金额：%d元", daily_fee];
     }
     [self.tableView reloadData];
 }

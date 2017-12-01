@@ -13,9 +13,6 @@
 @interface FreightCheckDetailVC ()
 
 @property (strong, nonatomic) PublicMutableLabelView *footerView;
-@property (strong, nonatomic) NSMutableArray *valArray;
-@property (strong, nonatomic) NSMutableArray *nameArray;
-@property (strong, nonatomic) NSMutableArray *edgeArray;
 
 @end
 
@@ -25,28 +22,10 @@
     [super viewDidLoad];
     [self setupNav];
     
-    _valArray = [NSMutableArray new];
-    _nameArray = [NSMutableArray new];
-    _edgeArray = [NSMutableArray new];
-    CGFloat scale = 4.0f + 2.0 * self.condition.show_column.count;
-    [_edgeArray addObject:@(1.0 / scale)];
-    [_edgeArray addObject:@(3.0 / scale)];
-    for (AppDataDictionary *item in self.condition.show_column) {
-        [_valArray addObject:item.item_val];
-        [_nameArray addObject:item.item_name];
-        [_edgeArray addObject:@(2.0 / scale)];
-    }
-    
+    self.footerView.width = self.scrollView.contentSize.width;
     self.footerView.bottom = self.scrollView.height;
     [self.scrollView addSubview:self.footerView];
     self.tableView.height = self.footerView.top - self.tableView.top;
-    [self.scrollView addSubview:self.tableView];
-    
-    CGFloat contentWidth = MAX(screen_width, 40 * scale);
-    self.footerView.width = contentWidth;
-    self.tableView.width = contentWidth;
-//        self.tableView.clipsToBounds = NO;
-    self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.height);
     
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
@@ -242,7 +221,6 @@
         cell = [[FreightCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier showWidth:self.scrollView.contentSize.width showValueArray:self.valArray];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.baseView updateEdgeSourceWithArray:self.edgeArray];
-        
         //添加长按手势
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
         [cell addGestureRecognizer:longPressGesture];

@@ -50,6 +50,7 @@
     }
     CodCheckDetailVC *vc = [[CodCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
     vc.condition = [self.condition copy];
+    vc.condition.show_column = [[UserPublic getInstance].dataMapDic objectForKey:@"show_column_cod_check"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

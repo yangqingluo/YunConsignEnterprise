@@ -1,0 +1,26 @@
+[
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "应收",
+    "item_note" : "",
+    "item_sort" : 1,
+    "item_val" : "cash_on_delivery_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "实收",
+    "item_note" : "",
+    "item_sort" : 2,
+    "item_val" : "cash_on_delivery_real_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "少款",
+    "item_note" : "",
+    "item_sort" : 3,
+    "item_val" : "cash_on_delivery_causes_amount"
+}
+]

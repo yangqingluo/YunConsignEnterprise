@@ -53,6 +53,7 @@
 		E42DACD51FCB0C39004FCDD1 /* PublicSelectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42DACD41FCB0C39004FCDD1 /* PublicSelectionVC.m */; };
 		E42DACD81FCB0CC2004FCDD1 /* TitleTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */; };
 		E42E7EC01FB20CE7007E755B /* CustomerEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */; };
+		E430C0831FD157E400A94A23 /* show_column_cod_check.txt in Resources */ = {isa = PBXBuildFile; fileRef = E430C0821FD157E400A94A23 /* show_column_cod_check.txt */; };
 		E430F3AE1FB45CB600AB74E1 /* PublicMessageReadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */; };
 		E43229571F97531C000400B8 /* WaybillReceiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229561F97531C000400B8 /* WaybillReceiveVC.m */; };
 		E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43229591F97536A000400B8 /* WaybillReceiveCell.m */; };
@@ -548,6 +549,7 @@
 		E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTextCell.m; sourceTree = "<group>"; };
 		E42E7EBE1FB20CE7007E755B /* CustomerEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerEditVC.h; sourceTree = "<group>"; };
 		E42E7EBF1FB20CE7007E755B /* CustomerEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerEditVC.m; sourceTree = "<group>"; };
+		E430C0821FD157E400A94A23 /* show_column_cod_check.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column_cod_check.txt; sourceTree = "<group>"; };
 		E430F3AC1FB45CB600AB74E1 /* PublicMessageReadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMessageReadManager.h; sourceTree = "<group>"; };
 		E430F3AD1FB45CB600AB74E1 /* PublicMessageReadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMessageReadManager.m; sourceTree = "<group>"; };
 		E43229551F97531C000400B8 /* WaybillReceiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillReceiveVC.h; sourceTree = "<group>"; };
@@ -1500,6 +1502,7 @@
 			children = (
 				E46CA9A21FB06A33008F26F4 /* daily_name.txt */,
 				E42DACD11FCB0B81004FCDD1 /* show_column.txt */,
+				E430C0821FD157E400A94A23 /* show_column_cod_check.txt */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -2781,6 +2784,7 @@
 				E4AF3B981F78E4E9009EB766 /* list_icon_checkbox_normal@2x.png in Resources */,
 				E4AF3B9C1F78E4E9009EB766 /* list_icon_checkbox_w_normal@2x.png in Resources */,
 				E40CCAAC1F98734D00FD35EE /* daily_icon_SEARCH_QUANTITY@3x.png in Resources */,
+				E430C0831FD157E400A94A23 /* show_column_cod_check.txt in Resources */,
 				E4AF3BA11F78E4E9009EB766 /* list_icon_common@3x.png in Resources */,
 				E4E2A3E71FB311AE00D8EC1C /* UIBarButtonItemArrowRight@3x.png in Resources */,
 				E4AF3BC11F78E4E9009EB766 /* money_icon_4@3x.png in Resources */,

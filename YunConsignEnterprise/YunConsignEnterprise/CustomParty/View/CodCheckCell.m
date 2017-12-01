@@ -16,10 +16,10 @@
     
     NSMutableArray *m_array = [NSMutableArray new];
     [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.indexPath.row + 1]];
-    [m_array addObject:data.goods_number];
-    [m_array addObject:data.cash_on_delivery_amount];
-    [m_array addObject:data.cash_on_delivery_real_amount];
-    [m_array addObject:data.cash_on_delivery_causes_amount];
+    [m_array addObject:notNilString(@"AB1127-999-999", nil)];
+    for (NSString *val in self.valArray) {
+        [m_array addObject:notNilString([data valueForKey:val], @"0")];
+    }
     [self.baseView updateDataSourceWithArray:m_array];
 }
 
