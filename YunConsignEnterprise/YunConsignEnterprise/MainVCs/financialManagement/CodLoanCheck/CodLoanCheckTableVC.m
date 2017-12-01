@@ -292,6 +292,7 @@
                 //运单明细
                 PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
                 vc.codApplyData = item;
+                vc.isChecker = YES;
                 [self doPushViewController:vc animated:YES];
             }
                 break;

@@ -182,7 +182,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     AppCodLoanApplyInfo *m_data = self.dataSource[indexPath.row];
-    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.loan_apply_state integerValue] == 1 ? 3 : 4];
+    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.loan_apply_state integerValue] == LOAN_APPLY_STATE_1 ? 3 : 4];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -204,7 +204,7 @@
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppCodLoanApplyInfo *item = self.dataSource[indexPath.row];
-        int tag = ([item.loan_apply_state intValue] == 1 ? 1 : 0) - [m_dic[@"tag"] intValue];
+        int tag = ([item.loan_apply_state intValue] == LOAN_APPLY_STATE_1 ? 1 : 0) - [m_dic[@"tag"] intValue];
         switch (tag) {
             case 1:{
                 //取消申请

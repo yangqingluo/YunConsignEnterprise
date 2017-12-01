@@ -40,6 +40,13 @@ typedef enum : NSUInteger {
     RECEIPT_STATE_TYPE_3 = 3,//已付款
 } RECEIPT_STATE_TYPE;
 
+typedef NS_ENUM(NSInteger, LOAN_APPLY_STATE) {
+    LOAN_APPLY_STATE_1 = 1,//等待审核
+    LOAN_APPLY_STATE_2,//审核通过
+    LOAN_APPLY_STATE_3,//驳回
+    LOAN_APPLY_STATE_4,//已放款
+};
+
 @interface AppType : NSObject
 
 /*!

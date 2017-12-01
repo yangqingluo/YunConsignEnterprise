@@ -24,8 +24,13 @@
 }
 
 - (void)refreshFooter {
+    if (!self.isChecker) {
+        self.footerView.hidden = YES;
+        return;
+    }
+    
     NSArray *m_array = nil;
-    if ([self.data.loan_apply_state integerValue] == 1) {
+    if ([self.data.loan_apply_state integerValue] == LOAN_APPLY_STATE_1) {
         m_array = @[@"驳回"];
         self.footerView.hidden = NO;
         [self.footerView updateDataSourceWithArray:m_array];
@@ -42,7 +47,7 @@
     [AppPublic adjustLabelWidth:self.titleLabel];
     if (data.loan_apply_state_text) {
         self.statusLabel.text = data.loan_apply_state_text;
-        self.statusLabel.textColor = secondaryTextColor;
+        self.statusLabel.textColor = ([data.loan_apply_state integerValue] == LOAN_APPLY_STATE_3) ? WarningColor : secondaryTextColor;
     }
     else {
         self.statusLabel.text = data.system_check;

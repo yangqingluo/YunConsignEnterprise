@@ -112,7 +112,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     AppLoanApplyCheckWaybillInfo *m_data = self.dataSource[indexPath.row];
-    return [CodLoanCheckDetailCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.cash_on_delivery_causes_amount intValue] > 0 ? 4 : 3 showFooter:[m_data.loan_apply_state integerValue] == 1];
+    return [CodLoanCheckDetailCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.cash_on_delivery_causes_amount intValue] > 0 ? 4 : 3 showFooter:(self.isChecker && [m_data.loan_apply_state integerValue] == LOAN_APPLY_STATE_1)];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,6 +121,7 @@
     if (!cell) {
         cell = [[CodLoanCheckDetailCell alloc] initWithHeaderStyle: PublicHeaderCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.isChecker = self.isChecker;
     }
     id item = self.dataSource[indexPath.row];
     cell.indexPath = [indexPath copy];

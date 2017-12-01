@@ -22,7 +22,7 @@
     [self setupNav];
     
     self.showData = [AppDailyReimbursementApplyInfo mj_objectWithKeyValues:self.applyData.mj_keyValues];
-    if ([self.applyData.daily_apply_state integerValue] == 1) {
+    if ([self.applyData.daily_apply_state integerValue] == LOAN_APPLY_STATE_1) {
         self.showArray = @[@[@{@"title":@"报销科目",@"subTitle":@"无",@"key":@"daily_name"},
                              @{@"title":@"报销金额",@"subTitle":@"0",@"key":@"daily_fee"},
                              @{@"title":@"报销门店",@"subTitle":@"无",@"key":@"service_name"},

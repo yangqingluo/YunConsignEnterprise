@@ -20,7 +20,7 @@
 
 - (void)refreshFooter {
     NSArray *m_array = @[@"运单明细"];
-    if ([self.data.loan_apply_state intValue] == 1) {
+    if ([self.data.loan_apply_state intValue] == LOAN_APPLY_STATE_1) {
         m_array = @[@"取消申请", @"运单明细"];
     }
     [self.footerView updateDataSourceWithArray:m_array];
@@ -39,7 +39,7 @@
     self.bodyLabel1.text = [NSString stringWithFormat:@"打款：%@", _data.bank_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"申请：%d（%@）", [_data.apply_amount intValue], _data.apply_time];
     NSUInteger lines = 3;
-    if ([data.loan_apply_state integerValue] == 1) {
+    if ([data.loan_apply_state integerValue] == LOAN_APPLY_STATE_1) {
         self.bodyLabel3.text = [NSString stringWithFormat:@"备注：%@", _data.apply_note];
         self.bodyLabel4.text = @"";
     }

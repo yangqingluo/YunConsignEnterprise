@@ -278,6 +278,7 @@
                 //运单明细
                 CodRemitWaybillDetailVC *vc = [CodRemitWaybillDetailVC new];
                 vc.codApplyData = item;
+                vc.isChecker = YES;
                 [self doPushViewController:vc animated:YES];
             }
                 break;
