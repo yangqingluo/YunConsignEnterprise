@@ -9,7 +9,7 @@
 #import "CodPayVC.h"
 
 #import "MJRefresh.h"
-#import "WaybillCustReceiveCell.h"
+#import "CodPayCell.h"
 #import "SingleInputCell.h"
 #import "BlockActionSheet.h"
 
@@ -86,6 +86,7 @@
             ResponseItem *item = (ResponseItem *)responseBody;
             if (item.items.count) {
                 weakself.paymentData = [AppPaymentWaybillInfo mj_objectWithKeyValues:item.items[0]];
+                weakself.paymentData.cash_on_delivery_type_text = [weakself.billData.cash_on_delivery_type_text copy];
             }
             [weakself updateSubviews];
         }
@@ -175,11 +176,6 @@
                 NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
                 if (dicArray.count) {
                     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
-//                    if (![self.toSaveData valueForKey:key]) {
-//                        AppDataDictionary *m_data = dicArray[0];
-//                        [self.toSaveData setValue:m_data.item_val forKey:key];
-//                        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//                    }
                     for (AppDataDictionary *m_data in dicArray) {
                         [m_array addObject:m_data.item_name];
                     }
@@ -188,7 +184,17 @@
                         if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
                             AppDataDictionary *m_data = dicArray[buttonIndex - 1];
                             [weakself.toSaveData setValue:m_data.item_val forKey:key];
-                            [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                            if ([m_data.item_val isEqualToString:@"2"]) {
+                                weakself.toSaveData.cash_on_delivery_causes_note = m_data.item_name;
+                                weakself.toSaveData.cash_on_delivery_real_amount = [NSString stringWithFormat:@"%d", [self.paymentData.cash_on_delivery_amount intValue] - [self.paymentData.pay_on_delivery_amount intValue]];
+                                weakself.toSaveData.cash_on_delivery_causes_amount = [NSString stringWithFormat:@"%d", [self.paymentData.pay_on_delivery_amount intValue]];
+                            }
+                            else {
+                                weakself.toSaveData.cash_on_delivery_causes_note = nil;
+                                weakself.toSaveData.cash_on_delivery_real_amount = nil;
+                                weakself.toSaveData.cash_on_delivery_causes_amount = nil;
+                            }
+                            [weakself.tableView reloadData];
                         }
                     } otherButtonTitlesArray:m_array];
                     [sheet showInView:self.view];
@@ -307,7 +313,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat rowHeight = kCellHeightFilter;
     if (indexPath.section == 0) {
-        rowHeight = [WaybillCustReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath];
+        rowHeight = [CodPayCell tableView:tableView heightForRowAtIndexPath:indexPath];
     }
     else if (indexPath.section == 1) {
         if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
@@ -334,11 +340,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        static NSString *CellIdentifier = @"way_bill_receive_cell";
-        WaybillCustReceiveCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSString *CellIdentifier = @"cod_pay_cell";
+        CodPayCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (!cell) {
-            cell = [[WaybillCustReceiveCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell = [[CodPayCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
