@@ -646,7 +646,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *end_station_service_id;
 @property (strong, nonatomic) NSString *end_station_service_name;
 @property (strong, nonatomic) NSString *join_id;
-@property (strong, nonatomic) NSString *note;
 @property (strong, nonatomic) NSString *start_car_time;
 
 @end
@@ -829,6 +828,9 @@ BOOL isTrue(NSString *string);
 
 
 @end
+
+
+
 
 
 

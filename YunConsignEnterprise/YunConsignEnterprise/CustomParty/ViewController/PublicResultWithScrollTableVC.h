@@ -14,5 +14,7 @@
 @property (strong, nonatomic) NSMutableArray *valArray;
 @property (strong, nonatomic) NSMutableArray *nameArray;
 @property (strong, nonatomic) NSMutableArray *edgeArray;
+@property (nonatomic, strong) NSDictionary *totalData;
+
 
 @end

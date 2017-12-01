@@ -70,6 +70,7 @@
             [m_dic setObject:[self.condition showArrayValStringWithKey:@"show_column"] forKey:@"show_column"];
         }
     }
+    [self pullBaseTotalData:isReset parm:m_dic];
     [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_queryCheckFreightListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -88,6 +89,24 @@
                 [weakself updateTableViewFooter];
             }
             [weakself updateSubviews];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_queryCheckFreightTotalByConditionFunction" Parm:parm completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                weakself.totalData = [NSDictionary dictionaryWithDictionary:item.items[0]];
+                [weakself updateSubviews];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -123,20 +142,21 @@
 }
 
 - (void)updateSubviews {
-    NSMutableArray *m_array = [NSMutableArray new];
-    [m_array addObject:@"总"];
-    [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.dataSource.count]];
-    for (AppDataDictionary *map_item in self.condition.show_column) {
-        int amount = 0;
-        for (AppWayBillDetailInfo *item in self.dataSource) {
-            if ([AppPublic getVariableWithClass:item.class varName:map_item.item_val] || [AppPublic getVariableWithClass:item.superclass varName:map_item.item_val]) {
-                amount += [[item valueForKey:map_item.item_val] intValue];
-            }
+    if (self.dataSource.count) {
+        self.footerView.hidden = NO;
+        
+        NSMutableArray *m_array = [NSMutableArray new];
+        [m_array addObject:@"总"];
+        [m_array addObject:notNilString([self.totalData valueForKey:@"waybill_count"], @"0")];
+        for (AppDataDictionary *map_item in self.condition.show_column) {
+            [m_array addObject:notNilString([self.totalData valueForKey:map_item.item_val], @"0")];
         }
-        [m_array addObject:[NSString stringWithFormat:@"%d", amount]];
+        [self.footerView updateDataSourceWithArray:m_array];
+        [self.tableView reloadData];
     }
-    [self.footerView updateDataSourceWithArray:m_array];
-    [self.tableView reloadData];
+    else {
+        self.footerView.hidden = YES;
+    }
 }
 
 //- (void)updateTableViewHeader {
