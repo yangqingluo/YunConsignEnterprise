@@ -71,6 +71,10 @@
     self.bodyLabelRight3.text = [NSString stringWithFormat:@"运费代扣：%@", isTrue(_data.is_deduction_freight) ? @"是" : @"否"];
     self.bodyLabelRight4.text = [NSString stringWithFormat:@"金额：%d", [_data.cash_on_delivery_amount intValue]];
     
+    if (!_data) {
+        self.titleLabel.text = @"货号：";
+        self.bodyLabel1.text = @"货物：";
+    }
 }
 
 @end

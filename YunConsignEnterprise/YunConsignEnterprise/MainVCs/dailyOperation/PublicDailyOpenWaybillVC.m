@@ -172,7 +172,7 @@
     if (!_feeShowArray) {
         _feeShowArray = @[@{@"title":@"回单",@"subTitle":@"请选择",@"key":@"receipt_sign_type"},
                           @{@"title":@"代收款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},
-                          @{@"title":@"代收款金额",@"subTitle":@"0",@"key":@"cash_on_delivery_amount"},
+                          @{@"title":@"代收款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_amount"},
                           @{@"title":@"运费代扣",@"subTitle":@"请选择",@"key":@"is_deduction_freight"},
                           @{@"title":@"急货",@"subTitle":@"请选择",@"key":@"is_urgent"},
                           @[@{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
@@ -189,9 +189,9 @@
 
 - (NSArray *)payStyleShowArray {
     if (!_payStyleShowArray) {
-        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"0",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
-                               @{@"title":@"提付",@"subTitle":@"0",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
-                               @{@"title":@"回单付",@"subTitle":@"0",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
+        _payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
+                               @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
+                               @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
                                @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
                                @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},];
     }

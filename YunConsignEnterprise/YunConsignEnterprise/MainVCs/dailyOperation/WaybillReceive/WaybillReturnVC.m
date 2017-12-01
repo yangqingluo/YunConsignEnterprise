@@ -18,9 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"0",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
-                               @{@"title":@"提付",@"subTitle":@"0",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
-                               @{@"title":@"回单付",@"subTitle":@"0",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
+    self.payStyleShowArray = @[@{@"title":@"现付",@"subTitle":@"请输入",@"key":@"pay_now_amount",@"subKey":@"is_pay_now"},
+                               @{@"title":@"提付",@"subTitle":@"请输入",@"key":@"pay_on_delivery_amount",@"subKey":@"is_pay_on_delivery"},
+                               @{@"title":@"回单付",@"subTitle":@"请输入",@"key":@"pay_on_receipt_amount",@"subKey":@"is_pay_on_receipt"},
                                @{@"title":@"运单备注",@"subTitle":@"无",@"key":@"note"},
                                @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},
                                @{@"title":@"修改原因",@"subTitle":@"无",@"key":@"change_cause"},];

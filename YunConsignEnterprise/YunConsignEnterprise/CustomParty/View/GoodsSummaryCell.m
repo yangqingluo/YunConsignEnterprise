@@ -47,7 +47,7 @@
                 textField.rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kEdge, 0)];
                 textField.rightViewMode = UITextFieldViewModeAlways;
                 textField.keyboardType = UIKeyboardTypeNumberPad;
-                
+                textField.adjustZeroShow = YES;
                 [_baseView addSubview:textField];
                 [self.showArray addObject:textField];
             }

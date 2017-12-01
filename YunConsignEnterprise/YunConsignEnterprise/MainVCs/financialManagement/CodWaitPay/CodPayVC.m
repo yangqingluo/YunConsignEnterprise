@@ -191,8 +191,8 @@
                             }
                             else {
                                 weakself.toSaveData.cash_on_delivery_causes_note = nil;
-                                weakself.toSaveData.cash_on_delivery_real_amount = nil;
-                                weakself.toSaveData.cash_on_delivery_causes_amount = nil;
+                                weakself.toSaveData.cash_on_delivery_real_amount = @"0";
+                                weakself.toSaveData.cash_on_delivery_causes_amount = @"0";
                             }
                             [weakself.tableView reloadData];
                         }
@@ -273,6 +273,7 @@
     NSString *key = showObject[@"key"];
     BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
     cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
+    cell.baseView.textField.adjustZeroShow = !isKeybordDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     if ([self.selectorSet containsObject:key]) {

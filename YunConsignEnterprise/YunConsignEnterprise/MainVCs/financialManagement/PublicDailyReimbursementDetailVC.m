@@ -24,7 +24,7 @@
     self.showData = [AppDailyReimbursementApplyInfo mj_objectWithKeyValues:self.applyData.mj_keyValues];
     if ([self.applyData.daily_apply_state integerValue] == LOAN_APPLY_STATE_1) {
         self.showArray = @[@[@{@"title":@"报销科目",@"subTitle":@"无",@"key":@"daily_name"},
-                             @{@"title":@"报销金额",@"subTitle":@"0",@"key":@"daily_fee"},
+                             @{@"title":@"报销金额",@"subTitle":@"请输入",@"key":@"daily_fee"},
                              @{@"title":@"报销门店",@"subTitle":@"无",@"key":@"service_name"},
                              @{@"title":@"关联运单",@"subTitle":@"无",@"key":@"waybill_info"},
                              @{@"title":@"报销备注",@"subTitle":@"无",@"key":@"note"},
@@ -32,7 +32,7 @@
     }
     else {
         self.showArray = @[@[@{@"title":@"报销科目",@"subTitle":@"",@"key":@"daily_name"},
-                             @{@"title":@"报销金额",@"subTitle":@"0",@"key":@"daily_fee"},
+                             @{@"title":@"报销金额",@"subTitle":@"请输入",@"key":@"daily_fee"},
                              @{@"title":@"报销门店",@"subTitle":@"",@"key":@"service_name"},
                              @{@"title":@"关联运单",@"subTitle":@"",@"key":@"waybill_info"},
                              @{@"title":@"报销备注",@"subTitle":@"无",@"key":@"note"},

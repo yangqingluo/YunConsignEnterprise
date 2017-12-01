@@ -195,8 +195,8 @@
                             }
                             else {
                                 weakself.toSaveData.cash_on_delivery_causes_note = nil;
-                                weakself.toSaveData.cash_on_delivery_real_amount = nil;
-                                weakself.toSaveData.cash_on_delivery_causes_amount = nil;
+                                weakself.toSaveData.cash_on_delivery_real_amount = @"0";
+                                weakself.toSaveData.cash_on_delivery_causes_amount = @"0";
                             }
                             [weakself.tableView reloadData];
                         }
@@ -222,10 +222,10 @@
         _toSaveData.waybill_id = [self.billData.waybill_id copy];
         _toSaveData.consignee_name = [self.billData.consignee_name copy];
         _toSaveData.consignee_phone = [self.billData.consignee_phone copy];
-//        _toSaveData.cash_on_delivery_real_amount = @"0";
-//        _toSaveData.cash_on_delivery_causes_amount = @"0";
-//        _toSaveData.payment_indemnity_amount = @"0";
-//        _toSaveData.deliver_indemnity_amount = @"0";
+        _toSaveData.cash_on_delivery_real_amount = @"0";
+        _toSaveData.cash_on_delivery_causes_amount = @"0";
+        _toSaveData.payment_indemnity_amount = @"0";
+        _toSaveData.deliver_indemnity_amount = @"0";
     }
     return _toSaveData;
 }
@@ -235,21 +235,21 @@
         _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                        @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
                        @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
-                       @{@"title":@"实收代收款",@"subTitle":@"0",@"key":@"cash_on_delivery_real_amount"},
+                       @{@"title":@"实收代收款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_real_amount"},
                        @{@"title":@"代收款少款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_causes_type"},
                        @{@"title":@"少款原因",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_note"},
-                       @{@"title":@"少款",@"subTitle":@"0",@"key":@"cash_on_delivery_causes_amount"},
-                       @[@{@"title":@"赔款",@"subTitle":@"0",@"key":@"payment_indemnity_amount"},
-                         @{@"title":@"包送",@"subTitle":@"0",@"key":@"deliver_indemnity_amount"}],
+                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
+                       @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount"},
+                         @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount"}],
                        @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
         if ([self.billData.cash_on_delivery_type isEqualToString: @"3"]) {
             //没有代收款
             _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                            @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
                            @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
-                           @{@"title":@"少款",@"subTitle":@"0",@"key":@"cash_on_delivery_causes_amount"},
-                           @[@{@"title":@"赔款",@"subTitle":@"0",@"key":@"payment_indemnity_amount"},
-                             @{@"title":@"包送",@"subTitle":@"0",@"key":@"deliver_indemnity_amount"}],
+                           @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
+                           @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount"},
+                             @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount"}],
                            @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
         }
     }
@@ -292,6 +292,7 @@
     NSString *key = showObject[@"key"];
     BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
     cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
+    cell.baseView.textField.adjustZeroShow = !isKeybordDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     if ([self.selectorSet containsObject:key]) {
@@ -329,6 +330,8 @@
         cell.anotherBaseView.textField.delegate = self;
         cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
         cell.anotherBaseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.baseView.textField.adjustZeroShow = YES;
+        cell.anotherBaseView.textField.adjustZeroShow = YES;
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
     NSDictionary *m_dic1 = m_array[0];
