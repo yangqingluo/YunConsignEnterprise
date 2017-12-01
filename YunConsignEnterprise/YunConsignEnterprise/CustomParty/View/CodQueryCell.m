@@ -54,7 +54,9 @@
     if (is_cash_on_delivery_causes) {
         lines++;
         self.bodyLabel4.text = [NSString stringWithFormat:@"少款：%@", data.cash_on_delivery_causes_amount];
-        self.bodyLabelRight4.text = [NSString stringWithFormat:@"少款原因：%@", data.cash_on_delivery_causes_note];
+        if (data.cash_on_delivery_causes_note.length) {
+            self.bodyLabelRight4.text = [NSString stringWithFormat:@"少款原因：%@", data.cash_on_delivery_causes_note];
+        }
     }
     
     BOOL is_cash_on_delivery = [data.cash_on_delivery_state intValue] == 6;

@@ -48,7 +48,7 @@
     
     BOOL is_cash_on_delivery_causes = [data.cash_on_delivery_causes_amount intValue] > 0;
     self.bodyLabel4.hidden = !is_cash_on_delivery_causes;
-    self.bodyLabelRight4.text = @"";
+    self.bodyLabelRight4.hidden = !is_cash_on_delivery_causes;
     if (is_cash_on_delivery_causes) {
         lines++;
         self.bodyLabel4.text = [NSString stringWithFormat:@"少款：%@", data.cash_on_delivery_causes_amount];
