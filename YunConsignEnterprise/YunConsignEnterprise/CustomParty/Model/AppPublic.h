@@ -62,7 +62,7 @@
 #define kCellHeightBig               80.0
 #define kCellHeightHuge              100.0
 
-#define imageDataMax                 1 * 1024 * 1024//图像大小上限
+#define imageDataMax                 100 * 1024//图像大小上限
 #define headImageSizeMax             96//头像图像 宽/高 大小上限
 
 #define appButtonTitleFontSizeSmall  14.0

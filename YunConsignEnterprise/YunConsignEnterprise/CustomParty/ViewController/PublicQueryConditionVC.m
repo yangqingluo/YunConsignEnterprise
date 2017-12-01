@@ -51,9 +51,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
-                           @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
-                           @{@"title":@"目的网点",@"subTitle":@"请选择",@"key":@"end_service"},
-                           @{@"title":@"作废状态",@"subTitle":@"请选择",@"key":@"is_cancel"}];
+                           @{@"title":@"显示作废",@"subTitle":@"请选择",@"key":@"is_cancel"}];
             [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
@@ -262,7 +260,7 @@
     else if ([varClass isSubclassOfClass:[AppDataDictionary class]]) {
         NSString *m_key = nil;
         if ([key isEqualToString:@"cash_on_delivery_type"]) {
-            NSString *m_key = @"cash_on_delivery_state_show";
+            m_key = @"cash_on_delivery_state_show";
         }
         NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key.length ? m_key : key];
         if (dicArray.count) {

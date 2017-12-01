@@ -141,6 +141,9 @@
         cell.baseView.textField.text = @"";
         cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
         self.imagePickerView.preShowMedias = [[self.showData valueForKey:key] componentsSeparatedByString:@","];
+        if (self.imagePickerView.preShowMedias) {
+            cell.baseView.textField.placeholder = @"";
+        }
         return cell;
     }
     

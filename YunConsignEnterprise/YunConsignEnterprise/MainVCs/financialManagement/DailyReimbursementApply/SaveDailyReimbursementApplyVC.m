@@ -131,7 +131,9 @@
 - (void)doUploadBase64ImageFunction:(LLImagePickerModel *)imageModel {
     NSData *imageData = dataOfImageCompression(imageModel.image, NO);
     [self doShowHudFunction];
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"resource_type" : [NSString stringWithFormat:@"%d", (int)RESOURCE_TYPE_Reimburse], @"resource_suffix" : [imageData getImageType], @"base64_content" : [imageData base64EncodedStringWithOptions:0]}];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"resource_type" : [NSString stringWithFormat:@"%@", @"reimburse"], @"resource_suffix" : [imageData getImageType]}];
+    [m_dic setObject:[NSString stringWithFormat:@"%@", [imageData base64EncodedDataWithOptions:0]] forKey:@"base64_content"];
+    [m_dic setObject:[NSString stringWithFormat:@"%@%@", (self.condition.bind_waybill_id.length ? self.condition.bind_waybill_id : [UserPublic getInstance].userData.service_name), self.condition.daily_name.item_name] forKey:@"resource_note"];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_resource_uploadBase64ImageFunction" Parm:m_dic URLFooter:@"/resource/common/data.do" completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
@@ -166,7 +168,7 @@
         QKWEAKSELF;
         vc.doneBlock = ^(NSObject *object){
             if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
-                weakself.condition.bind_waybill_id = [((AppWayBillDetailInfo *)object).waybill_id copy];
+                weakself.condition.bind_waybill_id = [((AppWayBillDetailInfo *)object).goods_number copy];
                 [weakself.tableView reloadData];
             }
         };
