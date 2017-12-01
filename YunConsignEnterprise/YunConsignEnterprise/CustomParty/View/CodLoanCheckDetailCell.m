@@ -49,15 +49,15 @@
         self.statusLabel.textColor = [data.system_check isEqualToString:@"正常"] ? secondaryTextColor : WarningColor;
     }
     
-    self.bodyLabel1.text = [NSString stringWithFormat:@"客户：%@", data.cust_info];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"应收：%@", data.cash_on_delivery_amount];
+    self.bodyLabel1.text = [NSString stringWithFormat:@"客户：%@", notNilString(data.cust_info, nil)];
+    self.bodyLabel2.text = [NSString stringWithFormat:@"应收：%@", notNilString(data.cash_on_delivery_amount, nil)];
     [AppPublic adjustLabelWidth:self.bodyLabel2];
     
     self.payStyleLabel.text = [data payStyleStringForState];
     [AppPublic adjustLabelWidth:self.payStyleLabel];
     self.payStyleLabel.left = self.bodyLabel2.right;
     
-    self.bodyLabel3.text = [NSString stringWithFormat:@"实收：%@", data.cash_on_delivery_real_amount];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"实收：%@", notNilString(data.cash_on_delivery_real_amount, nil)];
     if (data.cash_on_delivery_real_time.length) {
         self.bodyLabel3.text = [NSString stringWithFormat:@"%@（ %@）", self.bodyLabel3.text, data.cash_on_delivery_real_time];
     }

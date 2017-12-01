@@ -181,7 +181,7 @@
         for (AppCodLoanApplyInfo *item in self.selectSet) {
             audit_amount += [item.audit_amount doubleValue];
         }
-        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"放款总金额：%.0f元", audit_amount];
+        ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"选择%d票 金额%.0f元", (int)self.selectSet.count, audit_amount];
     }
     else if (self.indextag == 1) {
         double audit_amount = 0;

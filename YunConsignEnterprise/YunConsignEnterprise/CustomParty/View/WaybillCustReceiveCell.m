@@ -49,7 +49,7 @@
 #pragma mark - setter
 - (void)setData:(AppPaymentWaybillInfo *)data {
     _data = data;
-    self.titleLabel.text = [NSString stringWithFormat:@"运单号：%@/%@", data.waybill_number, data.goods_number];
+    self.titleLabel.text = [NSString stringWithFormat:@"货号：%@/%@", notNilString(data.goods_number, nil), notNilString(data.waybill_number, nil)];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
     self.urgentLabel.hidden = !isTrue(data.is_urgent);
@@ -63,13 +63,13 @@
         self.receiptLabel.left = self.titleLabel.right + kEdge;
     }
     
-    self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods_name];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"已收：%@", _data.pay_now_amount];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"回单付：%@", _data.pay_on_receipt_amount];
-    self.bodyLabel4.text = [NSString stringWithFormat:@"代收款：%@", _data.cash_on_delivery_type_text];
-    self.bodyLabelRight2.text = [NSString stringWithFormat:@"提付：%@", _data.pay_on_delivery_amount];
+    self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", notNilString(_data.goods_name, nil)];
+    self.bodyLabel2.text = [NSString stringWithFormat:@"已收：%@", notNilString(_data.pay_now_amount, nil)];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"回单付：%@", notNilString(_data.pay_on_receipt_amount, nil)];
+    self.bodyLabel4.text = [NSString stringWithFormat:@"代收款：%@", notNilString(_data.cash_on_delivery_type_text, nil)];
+    self.bodyLabelRight2.text = [NSString stringWithFormat:@"提付：%@", notNilString(_data.pay_on_delivery_amount, nil)];
     self.bodyLabelRight3.text = [NSString stringWithFormat:@"运费代扣：%@", isTrue(_data.is_deduction_freight) ? @"是" : @"否"];
-    self.bodyLabelRight4.text = [NSString stringWithFormat:@"金额：%@", _data.cash_on_delivery_amount];
+    self.bodyLabelRight4.text = [NSString stringWithFormat:@"金额：%@", notNilString(_data.cash_on_delivery_amount, nil)];
     
 }
 
