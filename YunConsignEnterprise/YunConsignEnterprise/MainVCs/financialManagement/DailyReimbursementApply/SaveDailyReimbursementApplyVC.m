@@ -132,7 +132,7 @@
     NSData *imageData = dataOfImageCompression(imageModel.image, NO);
     [self doShowHudFunction];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"resource_type" : [NSString stringWithFormat:@"%@", @"reimburse"], @"resource_suffix" : [imageData getImageType]}];
-    [m_dic setObject:[NSString stringWithFormat:@"%@", [imageData base64EncodedDataWithOptions:0]] forKey:@"base64_content"];
+    [m_dic setObject:[NSString stringWithFormat:@"%@", [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]] forKey:@"base64_content"];
     [m_dic setObject:[NSString stringWithFormat:@"%@%@", (self.condition.bind_waybill_id.length ? self.condition.bind_waybill_id : [UserPublic getInstance].userData.service_name), self.condition.daily_name.item_name] forKey:@"resource_note"];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_resource_uploadBase64ImageFunction" Parm:m_dic URLFooter:@"/resource/common/data.do" completion:^(id responseBody, NSError *error){
