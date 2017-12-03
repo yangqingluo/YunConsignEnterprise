@@ -98,6 +98,10 @@
     }
 }
 
+- (void)commonButtonAction:(IndexPathButton *)button {
+    [self touchRowButtonAtIndexPath:button.indexPath];
+}
+
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
     if (indexPath.section == 1 || indexPath.section == 2 ) {
         NSArray *m_array = self.showArray[indexPath.section];
@@ -150,6 +154,40 @@
             }
         };
         [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)touchRowButtonAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    NSArray *m_array = self.showArray[indexPath.section];
+    if (indexPath.row > m_array.count - 1) {
+        return;
+    }
+    NSDictionary *m_dic = m_array[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"truck_number_plate"]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppTruckInfo *m_data in dataArray) {
+                [m_array addObject:m_data.truck_number_plate];
+            }
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    AppTruckInfo *truck = dataArray[buttonIndex - 1];
+                    weakself.toSaveData.truck_id = [truck.transport_truck_id copy];
+                    weakself.toSaveData.truck_number_plate = [truck.truck_number_plate copy];
+                    weakself.toSaveData.truck_driver_name = [truck.truck_driver_name copy];
+                    weakself.toSaveData.truck_driver_phone = [truck.truck_driver_phone copy];
+                    [weakself.tableView reloadData];
+                }
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullTruckArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
     }
 }
 
@@ -238,9 +276,11 @@
             cell.baseView.textField.delegate = self;
             cell.baseView.lineView.hidden = YES;
             
-            UIButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
+            IndexPathButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
             [btn setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(commonButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            btn.indexPath = [indexPath copy];
             [cell.baseView addRightView:btn];
         }
     }

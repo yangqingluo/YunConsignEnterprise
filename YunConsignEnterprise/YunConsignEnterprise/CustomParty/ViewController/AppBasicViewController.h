@@ -35,6 +35,7 @@
 - (void)showFromVC:(AppBasicViewController *)fromVC;
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content;
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)touchRowButtonAtIndexPath:(NSIndexPath *)indexPath;
 
 - (UIViewController *)doPopViewControllerAnimated:(BOOL)animated;
 - (NSArray<__kindof UIViewController *> *)doPopToViewController:(UIViewController *)viewController animated:(BOOL)animated;
@@ -49,5 +50,6 @@
 - (void)pullServiceArrayFunctionForCityID:(NSString *)open_city_id selectionInIndexPath:(NSIndexPath *)indexPath ;
 - (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)pullTruckArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 
 @end
