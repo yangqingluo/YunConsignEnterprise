@@ -66,20 +66,20 @@
     [self dismissKeyboard];
     if (!self.condition.daily_name) {
         [self showHint:@"请选择报销科目"];
-        return;
     }
-    if ([self.condition.daily_fee intValue] < 1) {
+    else if ([self.condition.daily_fee intValue] < 1) {
         [self showHint:@"请输入正确的报销金额"];
-        return;
     }
-    [self doSaveDailyReimburseFunction:YES];
+    else {
+        [self doSaveDailyReimburseFunction:YES];
+    }
 }
 
 //初始化数据
 - (void)initializeData {
     self.showArray = @[@{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
                        @{@"title":@"报销金额",@"subTitle":@"请输入",@"key":@"daily_fee"},
-                       @{@"title":@"关联运单",@"subTitle":@"请选择",@"key":@"bind_waybill_id"},
+                       @{@"title":@"关联运单",@"subTitle":@"请选择",@"key":@"bind_waybill"},
                        @{@"title":@"报销备注",@"subTitle":@"请输入",@"key":@"note"},];
     NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:@"daily_name"];
     if (dicArray.count) {
@@ -104,11 +104,14 @@
 - (void)doReimburseSaveDailyReimburseFunction {
     [self doShowHudFunction];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"daily_name" : self.condition.daily_name.item_val, @"daily_fee" : [NSString stringWithFormat:@"%d", [self.condition.daily_fee intValue]]}];
-    if (self.condition.bind_waybill_id) {
-        [m_dic setObject:self.condition.bind_waybill_id forKey:@"bind_waybill_id"];
+    if (self.condition.bind_waybill) {
+        [m_dic setObject:self.condition.bind_waybill.waybill_id forKey:@"bind_waybill_id"];
     }
-    if (self.condition.note) {
+    if (self.condition.note.length) {
         [m_dic setObject:self.condition.note forKey:@"note"];
+    }
+    if (self.condition.voucher.length) {
+        [m_dic setObject:self.condition.voucher forKey:@"voucher"];
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_saveDailyReimburseFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -133,14 +136,16 @@
     [self doShowHudFunction];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"resource_type" : [NSString stringWithFormat:@"%@", @"reimburse"], @"resource_suffix" : [imageData getImageType]}];
     [m_dic setObject:[NSString stringWithFormat:@"%@", [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]] forKey:@"base64_content"];
-    [m_dic setObject:[NSString stringWithFormat:@"%@%@", (self.condition.bind_waybill_id.length ? self.condition.bind_waybill_id : [UserPublic getInstance].userData.service_name), self.condition.daily_name.item_name] forKey:@"resource_note"];
+    [m_dic setObject:[NSString stringWithFormat:@"%@%@", (self.condition.bind_waybill ? self.condition.bind_waybill.goods_number : [UserPublic getInstance].userData.service_name), self.condition.daily_name.item_name] forKey:@"resource_note"];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_resource_uploadBase64ImageFunction" Parm:m_dic URLFooter:@"/resource/common/data.do" completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                
+                uploadImageIndex++;
+                self.condition.voucher = [NSString stringWithFormat:@"%@%@%@", notNilString(self.condition.voucher, @""), self.condition.voucher.length ? @"," : @"", item.message];
+                [self doSaveDailyReimburseFunction:NO];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -162,13 +167,13 @@
     [self dismissKeyboard];
     NSDictionary *m_dic = self.showArray[indexPath.row];
     NSString *key = m_dic[@"key"];
-    if ([key isEqualToString:@"bind_waybill_id"]) {
+    if ([key isEqualToString:@"bind_waybill"]) {
         PublicFMWaybillQueryVC *vc = [PublicFMWaybillQueryVC new];
         vc.type = FMWaybillQueryType_DailyReimburse;
         QKWEAKSELF;
         vc.doneBlock = ^(NSObject *object){
             if ([object isKindOfClass:[AppWayBillDetailInfo class]]) {
-                weakself.condition.bind_waybill_id = [((AppWayBillDetailInfo *)object).goods_number copy];
+                weakself.condition.bind_waybill = [object copy];
                 [weakself.tableView reloadData];
             }
         };

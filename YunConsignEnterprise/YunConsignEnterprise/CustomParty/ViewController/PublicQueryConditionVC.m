@@ -473,6 +473,9 @@
     else if ([[self.condition valueForKey:key] isKindOfClass:[AppCityInfo class]]) {
         cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"open_city_name"];
     }
+    else if ([[self.condition valueForKey:key] isKindOfClass:[AppWayBillDetailInfo class]]) {
+        cell.baseView.textField.text = [[self.condition valueForKey:key] valueForKey:@"goods_number"];
+    }
     else {
         if ([AppPublic getVariableWithClass:self.condition.class varName:key]) {
             id value = [self.condition valueForKey:key];

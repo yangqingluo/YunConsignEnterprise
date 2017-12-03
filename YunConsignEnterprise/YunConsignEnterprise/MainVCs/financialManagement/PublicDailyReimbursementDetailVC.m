@@ -140,10 +140,17 @@
         cell.baseView.textField.placeholder = m_dic[@"subTitle"];
         cell.baseView.textField.text = @"";
         cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
-        self.imagePickerView.preShowMedias = [[self.showData valueForKey:key] componentsSeparatedByString:@","];
-        if (self.imagePickerView.preShowMedias) {
+        NSString *voucher = [self.showData valueForKey:key];
+        if (voucher.length) {
+            self.imagePickerView.preShowMedias = [[self.showData valueForKey:key] componentsSeparatedByString:@","];
+        }
+        else {
+            self.imagePickerView.preShowMedias = nil;
+        }
+        if (self.imagePickerView.preShowMedias.count) {
             cell.baseView.textField.placeholder = @"";
         }
+        
         return cell;
     }
     
