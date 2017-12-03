@@ -10,58 +10,36 @@
 #import "ServiceGoodsDetailVC.h"
 #import "PublicSaveTransportTruckVC.h"
 
-#import "MJRefresh.h"
 #import "PublicMutableLabelView.h"
 #import "SearchQuantityResultCell.h"
+#import "PublicFooterSummaryView.h"
 
 @interface SearchQuantityResultTableVC ()
 
-@property (assign, nonatomic) NSInteger indextag;
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) NSString *dateKey;
-
 @property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) UIView *footerView;
 
 @end
 
 @implementation SearchQuantityResultTableVC
 
-- (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.indextag = index;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.footerView.bottom = self.view.height;
+    [self.view addSubview:self.footerView];
+    self.footerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    
+    self.tableView.top = 0;
+    self.tableView.height = self.footerView.top - self.tableView.top;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableHeaderView = self.headerView;
     [self updateTableViewHeader];
 }
 
-- (void)becomeListed {
-    NSDate *lastRefreshTime = [[NSUserDefaults standardUserDefaults] objectForKey:self.dateKey];
-    if (!self.dataSource.count || !lastRefreshTime || [lastRefreshTime timeIntervalSinceNow] < -appRefreshTime) {
-        [self.tableView.mj_header beginRefreshing];
-    }
-}
-
-- (void)becomeUnListed {
-    
-}
-
-- (void)loadFirstPageData {
-    [self pullDataFunction:YES];
-}
-
-- (void)loadMoreData {
-    [self pullDataFunction:NO];
-}
-
-- (void)pullDataFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_state" : [NSString stringWithFormat:@"%d", (int)self.indextag + 1], @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.start_time) {
@@ -94,42 +72,18 @@
                 [weakself.dataSource addObjectsFromArray:[AppServiceGoodsQuantityInfo mj_objectArrayWithKeyValuesArray:item.items]];
             }
             
-            
             if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             else {
                 [weakself updateTableViewFooter];
             }
-            [weakself.tableView reloadData];
+            [weakself updateSubviews];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
-}
-
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter {
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing{
-    //记录刷新时间
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:self.dateKey];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)cellActionBtnAction:(UIButton *)button {
@@ -145,21 +99,17 @@
     }
 }
 
+- (void)updateSubviews {
+    int quantity = 0;
+    for (AppGoodsQuantityInfo *item in self.dataSource) {
+        quantity += [item.quantity intValue];
+    }
+    ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总计：%d", quantity];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
-- (NSString *)dateKey{
-    if (!_dateKey) {
-        _dateKey = [NSString stringWithFormat:@"SearchQuantityResult_dateKey_%d",(int)self.indextag];
-    }
-    return _dateKey;
-}
-
 - (UIView *)headerView {
     if (!_headerView) {
         CGFloat m_edge = kEdge;
@@ -181,6 +131,15 @@
         [baseView addSubview:NewSeparatorLine(CGRectMake(0, baseView.height - appSeparaterLineSize, baseView.width, appSeparaterLineSize))];
     }
     return _headerView;
+}
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[PublicFooterSummaryView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
+        _footerView.backgroundColor = [UIColor clearColor];
+
+    }
+    return _footerView;
 }
 
 #pragma mark - UITableView

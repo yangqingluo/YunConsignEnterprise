@@ -60,6 +60,7 @@
             [m_dic setObject:self.condition.truck_number_plate forKey:@"truck_number_plate"];
         }
     }
+    [self pullBaseTotalData:isReset parm:m_dic];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryTransportTruckByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -77,6 +78,27 @@
                 [weakself updateTableViewFooter];
             }
             [weakself updateSubviews];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    if (!isReset) {
+        return;
+    }
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryTransportTruckCostTotalByCondition" Parm:parm completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                weakself.totalData = [NSDictionary dictionaryWithDictionary:item.items[0]];
+                [weakself updateSubviews];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -135,12 +157,8 @@
 
 - (void)updateSubviews {
     if (self.indextag == 2) {
-        int cost_register = 0;
-        int cost_check = 0;
-        for (AppTransportTruckInfo *item in self.dataSource) {
-            cost_register += [item.cost_register intValue];
-            cost_check += [item.cost_check intValue];
-        }
+        int cost_register = [self.totalData[@"cost_register"] intValue];
+        int cost_check = [self.totalData[@"cost_check"] intValue];
         ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总登记费用：%d", cost_register];
         ((PublicFooterSummaryView *)self.footerView).subTextLabel.text = [NSString stringWithFormat:@"总发放运费：%d", cost_check];
     }

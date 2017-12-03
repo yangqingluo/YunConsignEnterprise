@@ -6,14 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PublicResultTableVC.h"
 
-@interface SearchQuantityResultTableVC : UITableViewController
-
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
-
-- (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index;
-- (void)becomeListed;
-- (void)becomeUnListed;
+@interface SearchQuantityResultTableVC : PublicResultTableVC
 
 @end

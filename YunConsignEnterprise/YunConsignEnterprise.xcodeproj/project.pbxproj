@@ -1421,10 +1421,10 @@
 		E49D7DF21FD38CAA009B59B7 /* RegisterTruck */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7DF31FD38CAA009B59B7 /* TransportTruckTableVC.h */,
-				E49D7DF41FD38CAA009B59B7 /* TransportTruckTableVC.m */,
 				E49D7DF51FD38CAA009B59B7 /* TransportTruckVC.h */,
 				E49D7DF61FD38CAA009B59B7 /* TransportTruckVC.m */,
+				E49D7DF31FD38CAA009B59B7 /* TransportTruckTableVC.h */,
+				E49D7DF41FD38CAA009B59B7 /* TransportTruckTableVC.m */,
 				E49D7DF71FD38CAA009B59B7 /* TTLoadListVC.h */,
 				E49D7DF81FD38CAA009B59B7 /* TTLoadListVC.m */,
 				E49D7DF91FD38CAA009B59B7 /* TTPayCostVC.h */,
@@ -1437,10 +1437,10 @@
 		E49D7DFB1FD38CAA009B59B7 /* SearchQuantity */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7DFC1FD38CAA009B59B7 /* SearchQuantityResultTableVC.h */,
-				E49D7DFD1FD38CAA009B59B7 /* SearchQuantityResultTableVC.m */,
 				E49D7DFE1FD38CAA009B59B7 /* SearchQuantityResultVC.h */,
 				E49D7DFF1FD38CAA009B59B7 /* SearchQuantityResultVC.m */,
+				E49D7DFC1FD38CAA009B59B7 /* SearchQuantityResultTableVC.h */,
+				E49D7DFD1FD38CAA009B59B7 /* SearchQuantityResultTableVC.m */,
 				E49D7E001FD38CAA009B59B7 /* SearchQuantityVC.h */,
 				E49D7E011FD38CAA009B59B7 /* SearchQuantityVC.m */,
 				E49D7E021FD38CAA009B59B7 /* ServiceGoodsDetailVC.h */,
