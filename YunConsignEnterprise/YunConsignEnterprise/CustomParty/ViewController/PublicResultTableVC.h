@@ -14,12 +14,14 @@
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSMutableSet *selectSet;
+@property (nonatomic, strong) NSDictionary *totalData;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style andIndexTag:(NSInteger)index;
 - (instancetype)initWithStyle:(UITableViewStyle)style parentVC:(AppBasicViewController *)pVC andIndexTag:(NSInteger)index;
 - (void)becomeListed;
 - (void)becomeUnListed;
 
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm;
 - (void)confirmRemovingDataAtIndexPath:(NSIndexPath *)indexPath;
 - (void)doRemovingDataAtIndexPath:(NSIndexPath *)indexPath;
 - (void)removeItemSuccessAtIndexPath:(NSIndexPath *)indexPath;

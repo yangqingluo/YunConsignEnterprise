@@ -97,6 +97,9 @@
 }
 
 - (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    if (!isReset) {
+        return;
+    }
     [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_queryCheckFreightTotalByConditionFunction" Parm:parm completion:^(id responseBody, NSError *error){

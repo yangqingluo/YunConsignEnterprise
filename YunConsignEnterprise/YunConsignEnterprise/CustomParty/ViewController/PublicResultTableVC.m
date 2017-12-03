@@ -47,6 +47,10 @@
     
 }
 
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    
+}
+
 - (void)confirmRemovingDataAtIndexPath:(NSIndexPath *)indexPath {
     QKWEAKSELF;
     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定删除吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {

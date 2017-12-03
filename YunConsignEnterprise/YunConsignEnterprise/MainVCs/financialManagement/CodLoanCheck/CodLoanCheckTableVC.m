@@ -67,6 +67,7 @@
             [m_dic setObject:self.condition.contact_phone forKey:@"contact_phone"];
         }
     }
+    [self pullBaseTotalData:isReset parm:m_dic];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_queryLoanApplyCheckListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -88,6 +89,27 @@
         }
         else {
             [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    if (!isReset) {
+        return;
+    }
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_queryLoanApplyCheckListCountByConditionFunction" Parm:parm completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                weakself.totalData = [NSDictionary dictionaryWithDictionary:item.items[0]];
+                [weakself updateSubviews];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
         }
     }];
 }
@@ -184,10 +206,7 @@
         ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"选择%d票 金额%.0f元", (int)self.selectSet.count, audit_amount];
     }
     else if (self.indextag == 1) {
-        double audit_amount = 0;
-        for (AppCodLoanApplyInfo *item in self.dataSource) {
-            audit_amount += [item.audit_amount doubleValue];
-        }
+        double audit_amount = [self.totalData[@"audit_amount"] doubleValue];
         ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%.0f元", audit_amount];
     }
 }

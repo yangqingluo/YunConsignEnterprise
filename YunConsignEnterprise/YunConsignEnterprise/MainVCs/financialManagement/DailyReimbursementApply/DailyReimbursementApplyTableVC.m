@@ -64,6 +64,7 @@
             [m_dic setObject:self.condition.daily_name.item_val forKey:@"daily_name"];
         }
     }
+    [self pullBaseTotalData:isReset parm:m_dic];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_queryDailyReimburseListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -84,6 +85,27 @@
         }
         else {
             [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    if (!isReset) {
+        return;
+    }
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_queryDailyReimburseCountByConditionFunction" Parm:parm completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                weakself.totalData = [NSDictionary dictionaryWithDictionary:item.items[0]];
+                [weakself updateSubviews];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
         }
     }];
 }
@@ -123,11 +145,8 @@
 
 - (void)updateSubviews {
     if (self.indextag == 1) {
-        int daily_fee = 0;
-        for (AppDailyReimbursementApplyInfo *item in self.dataSource) {
-            daily_fee += [item.daily_fee intValue];
-        }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"已打款总金额：%d元", daily_fee];
+        int daily_fee = [self.totalData[@"daily_fee"] intValue];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%d元", daily_fee];
     }
     [self.tableView reloadData];
 }
@@ -232,7 +251,7 @@
                         [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
                     }
                     else {
-                        [self doShowHintFunction:@"凭证不存在"];
+                        [self doShowHintFunction:@"暂无凭证"];
                     }
                 }
             }

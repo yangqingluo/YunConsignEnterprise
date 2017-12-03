@@ -1559,10 +1559,10 @@
 		E49D7E5A1FD38D4E009B59B7 /* CodLoanCheck */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E5B1FD38D4E009B59B7 /* CodLoanCheckTableVC.h */,
-				E49D7E5C1FD38D4E009B59B7 /* CodLoanCheckTableVC.m */,
 				E49D7E5D1FD38D4E009B59B7 /* CodLoanCheckVC.h */,
 				E49D7E5E1FD38D4E009B59B7 /* CodLoanCheckVC.m */,
+				E49D7E5B1FD38D4E009B59B7 /* CodLoanCheckTableVC.h */,
+				E49D7E5C1FD38D4E009B59B7 /* CodLoanCheckTableVC.m */,
 			);
 			name = CodLoanCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodLoanCheck;
@@ -1583,14 +1583,14 @@
 		E49D7E641FD38D4E009B59B7 /* CodRemit */ = {
 			isa = PBXGroup;
 			children = (
+				E49D7E6B1FD38D4E009B59B7 /* CodRemitVC.h */,
+				E49D7E6C1FD38D4E009B59B7 /* CodRemitVC.m */,
+				E49D7E691FD38D4E009B59B7 /* CodRemitTableVC.h */,
+				E49D7E6A1FD38D4E009B59B7 /* CodRemitTableVC.m */,
 				E49D7E651FD38D4E009B59B7 /* CodRemitLoanApplyListVC.h */,
 				E49D7E661FD38D4E009B59B7 /* CodRemitLoanApplyListVC.m */,
 				E49D7E671FD38D4E009B59B7 /* CodRemitLoanApplyWaybillDetailVC.h */,
 				E49D7E681FD38D4E009B59B7 /* CodRemitLoanApplyWaybillDetailVC.m */,
-				E49D7E691FD38D4E009B59B7 /* CodRemitTableVC.h */,
-				E49D7E6A1FD38D4E009B59B7 /* CodRemitTableVC.m */,
-				E49D7E6B1FD38D4E009B59B7 /* CodRemitVC.h */,
-				E49D7E6C1FD38D4E009B59B7 /* CodRemitVC.m */,
 				E49D7E6D1FD38D4E009B59B7 /* CodRemitWaybillDetailVC.h */,
 				E49D7E6E1FD38D4E009B59B7 /* CodRemitWaybillDetailVC.m */,
 			);
@@ -1615,10 +1615,10 @@
 		E49D7E761FD38D4E009B59B7 /* DailyReimbursementApply */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E771FD38D4E009B59B7 /* DailyReimbursementApplyTableVC.h */,
-				E49D7E781FD38D4E009B59B7 /* DailyReimbursementApplyTableVC.m */,
 				E49D7E791FD38D4E009B59B7 /* DailyReimbursementApplyVC.h */,
 				E49D7E7A1FD38D4E009B59B7 /* DailyReimbursementApplyVC.m */,
+				E49D7E771FD38D4E009B59B7 /* DailyReimbursementApplyTableVC.h */,
+				E49D7E781FD38D4E009B59B7 /* DailyReimbursementApplyTableVC.m */,
 				E49D7E7B1FD38D4E009B59B7 /* SaveDailyReimbursementApplyVC.h */,
 				E49D7E7C1FD38D4E009B59B7 /* SaveDailyReimbursementApplyVC.m */,
 			);
@@ -1629,10 +1629,10 @@
 		E49D7E7D1FD38D4E009B59B7 /* DailyReimbursementCheck */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E7E1FD38D4E009B59B7 /* DailyReimbursementCheckTableVC.h */,
-				E49D7E7F1FD38D4E009B59B7 /* DailyReimbursementCheckTableVC.m */,
 				E49D7E801FD38D4E009B59B7 /* DailyReimbursementCheckVC.h */,
 				E49D7E811FD38D4E009B59B7 /* DailyReimbursementCheckVC.m */,
+				E49D7E7E1FD38D4E009B59B7 /* DailyReimbursementCheckTableVC.h */,
+				E49D7E7F1FD38D4E009B59B7 /* DailyReimbursementCheckTableVC.m */,
 				E49D7E821FD38D4E009B59B7 /* QueryWaybillReimburseListVC.h */,
 				E49D7E831FD38D4E009B59B7 /* QueryWaybillReimburseListVC.m */,
 			);
@@ -1643,10 +1643,10 @@
 		E49D7E841FD38D4E009B59B7 /* FreightCheck */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E851FD38D4E009B59B7 /* FreightCheckDetailVC.h */,
-				E49D7E861FD38D4E009B59B7 /* FreightCheckDetailVC.m */,
 				E49D7E871FD38D4E009B59B7 /* FreightCheckVC.h */,
 				E49D7E881FD38D4E009B59B7 /* FreightCheckVC.m */,
+				E49D7E851FD38D4E009B59B7 /* FreightCheckDetailVC.h */,
+				E49D7E861FD38D4E009B59B7 /* FreightCheckDetailVC.m */,
 			);
 			name = FreightCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/FreightCheck;
