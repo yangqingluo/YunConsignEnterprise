@@ -73,6 +73,7 @@
     if (!_pageControl) {
         _pageControl = [UIPageControl new];
         _pageControl.userInteractionEnabled = NO;
+        _pageControl.hidesForSinglePage = YES;
         [_pageControl setCurrentPageIndicatorTintColor:MainColor];
         [_pageControl setPageIndicatorTintColor:[UIColor whiteColor]];
     }

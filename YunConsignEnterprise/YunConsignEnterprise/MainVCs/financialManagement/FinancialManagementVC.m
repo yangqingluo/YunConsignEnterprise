@@ -53,6 +53,9 @@
             if ([item.menu_code isEqualToString:@"FREIGHT_CHECK"]) {
                 vc = [FreightCheckVC new];
             }
+            else if ([item.menu_code isEqualToString:@"FREIGHT_NOT_PAY"]) {
+                
+            }
             else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
                 vc = [CodQueryVC new];
             }
