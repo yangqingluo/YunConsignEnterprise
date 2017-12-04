@@ -56,16 +56,16 @@
     self.titleLabel.text = [NSString stringWithFormat:@"货号：%@/%@", notNilString(data.goods_number, nil), notNilString(data.waybill_number, nil)];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
-    self.urgentLabel.hidden = !isTrue(data.is_urgent);
-    self.receiptLabel.hidden = !isTrue(data.is_receipt);
-    
-    if (!self.urgentLabel.hidden) {
-        self.urgentLabel.left = self.titleLabel.right + kEdge;
-        self.receiptLabel.left = self.urgentLabel.right + kEdge;
-    }
-    else if (!self.receiptLabel.hidden) {
-        self.receiptLabel.left = self.titleLabel.right + kEdge;
-    }
+//    self.urgentLabel.hidden = !isTrue(data.is_urgent);
+//    self.receiptLabel.hidden = !isTrue(data.is_receipt);
+//    
+//    if (!self.urgentLabel.hidden) {
+//        self.urgentLabel.left = self.titleLabel.right + kEdge;
+//        self.receiptLabel.left = self.urgentLabel.right + kEdge;
+//    }
+//    else if (!self.receiptLabel.hidden) {
+//        self.receiptLabel.left = self.titleLabel.right + kEdge;
+//    }
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@/%@/%@", notNilString(_data.goods_name, nil), notNilString(_data.goods_packge, nil), notNilString(_data.goods_total, nil)];
     self.bodyLabel2.text = [NSString stringWithFormat:@"已收：%d", [_data.pay_now_amount intValue]];

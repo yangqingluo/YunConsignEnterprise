@@ -1604,12 +1604,12 @@
 		E49D7E6F1FD38D4E009B59B7 /* CodWaitPay */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E701FD38D4E009B59B7 /* CodPayVC.h */,
-				E49D7E711FD38D4E009B59B7 /* CodPayVC.m */,
-				E49D7E721FD38D4E009B59B7 /* CodWaitPayDetailVC.h */,
-				E49D7E731FD38D4E009B59B7 /* CodWaitPayDetailVC.m */,
 				E49D7E741FD38D4E009B59B7 /* CodWaitPayVC.h */,
 				E49D7E751FD38D4E009B59B7 /* CodWaitPayVC.m */,
+				E49D7E721FD38D4E009B59B7 /* CodWaitPayDetailVC.h */,
+				E49D7E731FD38D4E009B59B7 /* CodWaitPayDetailVC.m */,
+				E49D7E701FD38D4E009B59B7 /* CodPayVC.h */,
+				E49D7E711FD38D4E009B59B7 /* CodPayVC.m */,
 			);
 			name = CodWaitPay;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodWaitPay;
