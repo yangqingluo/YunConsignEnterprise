@@ -68,11 +68,11 @@
 //初始化数据
 - (void)initializeData {
     self.showData = [AppCodLoanApplyInfo new];
-    self.showArray = @[@{@"title":@"银行账户",@"subTitle":@"请输入",@"key":@"bank_card_account"},
-                       @{@"title":@"银行名称",@"subTitle":@"请输入",@"key":@"bank_name"},
-                       @{@"title":@"户主",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
-                       @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"contact_phone"},
-                       @{@"title":@"申请备注",@"subTitle":@"请输入",@"key":@"apply_note"}];
+    self.showArray = @[@{@"title":@"银行账户",@"subTitle":@"请输入银行账户",@"key":@"bank_card_account"},
+                       @{@"title":@"银行名称",@"subTitle":@"请输入银行名称",@"key":@"bank_name"},
+                       @{@"title":@"户主",@"subTitle":@"请输入户主姓名",@"key":@"bank_card_owner"},
+                       @{@"title":@"联系电话",@"subTitle":@"请输入户主电话",@"key":@"contact_phone"},
+                       @{@"title":@"申请备注",@"subTitle":@"请输入申请备注",@"key":@"apply_note"}];
 }
 
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {

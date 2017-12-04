@@ -70,7 +70,7 @@
         [_viewArray addObject:@{@"title":@"物流详情",@"VC":[[WaybillLogTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:0]}];
         [_viewArray addObject:@{@"title":@"代收款",@"VC":[[WaybillLogTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:1]}];
         [_viewArray addObject:@{@"title":@"回单",@"VC":[[WaybillLogTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:2]}];
-        [_viewArray addObject:@{@"title":@"签收单",@"VC":[[WaybillLogTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:2]}];
+        [_viewArray addObject:@{@"title":@"签收单",@"VC":[[WaybillLogTableVC alloc] initWithStyle:UITableViewStyleGrouped andIndexTag:3]}];
     }
     
     return _viewArray;

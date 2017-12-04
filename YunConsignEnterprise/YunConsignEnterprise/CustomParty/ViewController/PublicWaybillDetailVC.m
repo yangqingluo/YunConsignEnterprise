@@ -521,7 +521,7 @@
                     break;
             }
         }
-        else if (self.type == WaybillDetailType_CodQuery) {
+        else {
             switch (tag) {
                 case 0:{
                     [self goToWaybillChangeListVC];

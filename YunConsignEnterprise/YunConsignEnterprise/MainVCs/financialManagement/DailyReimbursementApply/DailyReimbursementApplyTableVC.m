@@ -234,26 +234,26 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                if (self.indextag == 0) {
-                    //取消申请
-                    QKWEAKSELF;
-                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-                        if (buttonIndex == 1) {
-                            [weakself doReimburseDeleteDailyReimburseFunction:item.daily_apply_id];
-                        }
-                    } otherButtonTitles:@"确定", nil];
-                    [alert show];
+                //查看凭证
+                if (item.voucher.length) {
+                    NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
+                    [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
                 }
                 else {
-                    //查看凭证
-                    if (item.voucher.length) {
-                        NSArray *m_array = [item.voucher componentsSeparatedByString:@","];
-                        [[PublicMessageReadManager defaultManager] showBrowserWithImages:m_array currentPhotoIndex:0];
-                    }
-                    else {
-                        [self doShowHintFunction:@"暂无凭证"];
-                    }
+                    [self doShowHintFunction:@"暂无凭证"];
                 }
+            }
+                break;
+                
+            case 1: {
+                //取消申请
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消申请吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doReimburseDeleteDailyReimburseFunction:item.daily_apply_id];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
             }
                 break;
                 

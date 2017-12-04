@@ -8,6 +8,7 @@
 
 #import "CodWaitPayDetailVC.h"
 #import "CodPayVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "CodWaitPayCell.h"
 
@@ -168,6 +169,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+    vc.type = WaybillDetailType_CodWaitPay;
+    vc.data = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router

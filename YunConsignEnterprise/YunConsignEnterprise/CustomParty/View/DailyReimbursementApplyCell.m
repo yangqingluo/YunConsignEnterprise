@@ -33,7 +33,7 @@
 }
 
 - (void)refreshFooter {
-    NSArray *m_array = @[@"取消申请"];
+    NSArray *m_array = @[@"查看凭证", @"取消申请"];
     if (self.indextag == 0) {
         
     }
