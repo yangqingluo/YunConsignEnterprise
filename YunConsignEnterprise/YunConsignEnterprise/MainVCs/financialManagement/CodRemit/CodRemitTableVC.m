@@ -205,7 +205,7 @@
         switch (self.indextag) {
             case 0:{
                 _footerView = [PublicTTLoadFooterView new];
-                [[(PublicTTLoadFooterView *)_footerView actionBtn] setTitle:@"批量放款" forState:UIControlStateNormal];
+                [[(PublicTTLoadFooterView *)_footerView actionBtn] setTitle:@"批量发放" forState:UIControlStateNormal];
                 [[(PublicTTLoadFooterView *)_footerView selectBtn] addTarget:self action:@selector(footerSelectBtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [[(PublicTTLoadFooterView *)_footerView actionBtn] addTarget:self action:@selector(footerActionBtnAction) forControlEvents:UIControlEventTouchUpInside];
             }

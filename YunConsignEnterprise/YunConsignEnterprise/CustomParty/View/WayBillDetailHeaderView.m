@@ -33,10 +33,10 @@
 
 - (void)setupHeader {
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, kEdge, self.width, 40)];
-    _headerView.backgroundColor = AuxiliaryColor;
+    _headerView.backgroundColor = MainColor;
     [self addSubview:_headerView];
     
-    _numberLabel = NewLabel(CGRectMake(kEdge, 0, _headerView.width - 2 * kEdge, _headerView.height), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
+    _numberLabel = NewLabel(CGRectMake(kEdge, 0, _headerView.width - 2 * kEdge, _headerView.height), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSize], NSTextAlignmentLeft);
     [_headerView addSubview:_numberLabel];
     
     self.footerView.bottom = self.height;
@@ -48,8 +48,9 @@
     _contentView.backgroundColor = MainColor;
     [self addSubview:_contentView];
     
-    _dateLabel = NewLabel(CGRectMake(kEdge, 0, _contentView.width - 2 * kEdge, DEFAULT_BAR_HEIGHT), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
+    _dateLabel = NewLabel(CGRectMake(kEdge, 0, _contentView.width - 2 * kEdge, DEFAULT_BAR_HEIGHT), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSize], NSTextAlignmentLeft);
     [_contentView addSubview:_dateLabel];
+    [_contentView addSubview:NewSeparatorLine(CGRectMake(0, 0, _contentView.width, appSeparaterLineSize))];
     [_contentView addSubview:NewSeparatorLine(CGRectMake(0, _dateLabel.bottom, _contentView.width, appSeparaterLineSize))];
     
     _urgentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"content_icon_urgent"]];
