@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
-    
+
     self.showData = [AppDailyReimbursementApplyInfo mj_objectWithKeyValues:self.applyData.mj_keyValues];
     if ([self.applyData.daily_apply_state integerValue] == LOAN_APPLY_STATE_1) {
         self.showArray = @[@[@{@"title":@"报销科目",@"subTitle":@"无",@"key":@"daily_name"},
@@ -135,6 +135,10 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
             cell.baseView.textField.enabled = NO;
+            CGFloat width  = cell.baseView.width - cell.baseView.textLabel.left - [AppPublic textSizeWithString:m_dic[@"title"] font:cell.baseView.textLabel.font constantHeight:cell.baseView.textLabel.height].width - 2 * kEdgeSmall;
+            if (self.imagePickerView.width > width) {
+                self.imagePickerView.width = width;
+            }
             self.imagePickerView.right = cell.baseView.width;
             [cell.baseView addSubview:self.imagePickerView];
         }
