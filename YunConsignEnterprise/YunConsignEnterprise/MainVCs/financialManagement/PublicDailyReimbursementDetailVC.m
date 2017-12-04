@@ -7,6 +7,8 @@
 //
 
 #import "PublicDailyReimbursementDetailVC.h"
+#import "QueryWaybillReimburseListVC.h"
+
 #import "LLImagePickerView.h"
 
 @interface PublicDailyReimbursementDetailVC ()
@@ -168,6 +170,7 @@
     cell.baseView.textField.text = @"";
     cell.baseView.textField.indexPath = [indexPath copy];
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     if ([[self.showData valueForKey:key] isKindOfClass:[AppDataDictionary class]]) {
         cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"item_name"];
     }
@@ -178,6 +181,7 @@
         cell.baseView.textField.text = [[self.showData valueForKey:key] valueForKey:@"open_city_name"];
     }
     else if ([key isEqualToString:@"waybill_info"]) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.baseView.textField.text = [self.showData showWaybillInfoString];
     }
     else {
@@ -186,6 +190,24 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    NSArray *m_array = self.showArray[indexPath.section];
+    NSDictionary *m_dic = m_array[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"waybill_info"]) {
+        if (self.applyData.judgeWaybillInfoValidity) {
+            QueryWaybillReimburseListVC *vc = [QueryWaybillReimburseListVC new];
+            vc.applyData = self.applyData;
+            [self doPushViewController:vc animated:YES];
+        }
+        else {
+            [self doShowHintFunction:@"无关联运单"];
+        }
+    }
 }
 
 @end
