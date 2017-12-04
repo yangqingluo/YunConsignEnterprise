@@ -253,8 +253,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppCodLoanApplyInfo *m_data = self.dataSource[indexPath.row];
-    return [CodLoanCheckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:m_data.apply_note.length ? 4 : 3];
+    if (self.indextag == 0) {
+        AppCodLoanApplyInfo *m_data = self.dataSource[indexPath.row];
+        return [CodLoanCheckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:m_data.apply_note.length ? 4 : 3];
+    }
+    return [CodLoanCheckCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

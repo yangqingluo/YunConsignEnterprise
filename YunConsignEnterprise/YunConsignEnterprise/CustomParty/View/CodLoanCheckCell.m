@@ -46,12 +46,15 @@
         self.bodyLabel3.text = [NSString stringWithFormat:@"审核金额：%@（%@）", data.audit_amount, data.audit_time];
     }
     
-    self.bodyLabel4.text = @"";
-    if (data.apply_note.length) {
-        lines++;
-        self.bodyLabel4.text = [NSString stringWithFormat:@"申请备注：%@", data.apply_note];
+    if (self.indextag == 0) {
+        self.bodyLabel4.text = @"";
+        if (data.apply_note.length) {
+            lines++;
+            self.bodyLabel4.text = [NSString stringWithFormat:@"申请备注：%@", data.apply_note];
+        }
+        self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
     }
-    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
+    
     [self refreshFooter];
 }
 
