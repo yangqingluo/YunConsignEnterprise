@@ -14,15 +14,15 @@
     [super setupHeader];
     self.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
     
-    _urgentLabel = NewLabel(CGRectMake(self.titleLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), WarningColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-    _urgentLabel.text = @"[急]";
-    [AppPublic adjustLabelWidth:_urgentLabel];
-    [self.headerView addSubview:_urgentLabel];
-    
-    _receiptLabel = NewLabel(CGRectMake(self.urgentLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), RGBA(0xc5, 0x2c, 0x2c, 1.0), [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-    _receiptLabel.text = @"[回]";
-    [AppPublic adjustLabelWidth:_receiptLabel];
-    [self.headerView addSubview:_receiptLabel];
+//    _urgentLabel = NewLabel(CGRectMake(self.titleLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), WarningColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
+//    _urgentLabel.text = @"[急]";
+//    [AppPublic adjustLabelWidth:_urgentLabel];
+//    [self.headerView addSubview:_urgentLabel];
+//    
+//    _receiptLabel = NewLabel(CGRectMake(self.urgentLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), RGBA(0xc5, 0x2c, 0x2c, 1.0), [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
+//    _receiptLabel.text = @"[回]";
+//    [AppPublic adjustLabelWidth:_receiptLabel];
+//    [self.headerView addSubview:_receiptLabel];
 }
 
 - (void)setupBody {

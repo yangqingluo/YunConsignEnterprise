@@ -33,6 +33,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
     [self.tableView.mj_header beginRefreshing];
+    
+    [self additionalDataDictionaryForCode:@"cash_on_delivery_causes_type"];
 }
 
 - (void)setupNav {
@@ -208,6 +210,23 @@
             
         default:
             break;
+    }
+}
+
+- (void)checkDataMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if (![self.toSaveData valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
+            AppDataDictionary *m_data = dataArray[0];
+            [self.toSaveData setValue:m_data.item_val forKey:key];
+            self.toSaveData.cash_on_delivery_causes_note = nil;
+            self.toSaveData.cash_on_delivery_real_amount = @"0";
+            self.toSaveData.cash_on_delivery_causes_amount = @"0";
+            [self.tableView reloadData];
+        }
+    }
+    else {
+        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
     }
 }
 
