@@ -17,7 +17,6 @@
 }
 
 @property (strong, nonatomic) LLImagePickerView *imagePickerView;
-@property (strong, nonatomic) UIView *pickerFooter;
 @property (strong, nonatomic) NSMutableArray *selectedImageArray;
 
 @end
@@ -34,12 +33,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tableFooterView = self.pickerFooter;
-    [self.imagePickerView observeViewHeight:^(CGFloat height) {
-        self.pickerFooter.height = height;
-        self.tableView.tableFooterView = nil;
-        self.tableView.tableFooterView = self.pickerFooter;
-    }];
+//    self.tableView.tableFooterView = self.pickerFooter;
+//    [self.imagePickerView observeViewHeight:^(CGFloat height) {
+//        self.pickerFooter.height = height;
+//        self.tableView.tableFooterView = nil;
+//        self.tableView.tableFooterView = self.pickerFooter;
+//    }];
+    self.tableView.tableFooterView = nil;
     [self.imagePickerView observeSelectedMediaArray:^(NSArray<LLImagePickerModel *> *list) {
         [self.selectedImageArray removeAllObjects];
         [self.selectedImageArray addObjectsFromArray:list];
@@ -80,7 +80,8 @@
     self.showArray = @[@{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
                        @{@"title":@"报销金额",@"subTitle":@"请输入",@"key":@"daily_fee"},
                        @{@"title":@"关联运单",@"subTitle":@"请选择",@"key":@"bind_waybill"},
-                       @{@"title":@"报销备注",@"subTitle":@"请输入",@"key":@"note"},];
+                       @{@"title":@"报销备注",@"subTitle":@"请输入",@"key":@"note"},
+                       @{@"title":@"报销凭证",@"subTitle":@"",@"key":@"voucher"},];
     NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:@"daily_name"];
     if (dicArray.count) {
         self.condition.daily_name = dicArray[0];
@@ -184,17 +185,9 @@
 }
 
 #pragma mark - getter
-- (UIView *)pickerFooter {
-    if (!_pickerFooter) {
-        _pickerFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, self.imagePickerView.height)];
-        [_pickerFooter addSubview:self.imagePickerView];
-    }
-    return _pickerFooter;
-}
-
 - (LLImagePickerView *)imagePickerView {
     if (!_imagePickerView) {
-        _imagePickerView = [LLImagePickerView ImagePickerViewWithFrame:CGRectMake(kEdgeMiddle, 0, screen_width - 2 * kEdgeMiddle, 0) CountOfRow:4];
+        _imagePickerView = [LLImagePickerView ImagePickerViewWithFrame:CGRectMake(0, 0, kCellHeightBig * 3, 0) CountOfRow:3];
         _imagePickerView.backgroundColor = [UIColor clearColor];
         _imagePickerView.allowMultipleSelection = NO;
         _imagePickerView.maxImageSelected = 3;
@@ -207,6 +200,64 @@
         _selectedImageArray = [NSMutableArray new];
     }
     return _selectedImageArray;
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.showArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat rowHeight = kCellHeightFilter;
+    NSDictionary *dic = self.showArray[indexPath.row];
+    NSString *key = dic[@"key"];
+    if ([key isEqualToString:@"voucher"]) {
+        rowHeight = kCellHeightBig;
+    }
+    if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
+        rowHeight += kEdge;
+    }
+    return rowHeight;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"voucher"]) {
+        NSString *CellIdentifier = @"voucher_cell";
+        SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+            cell.baseView.textField.enabled = NO;
+            CGFloat width  = cell.baseView.width - cell.baseView.textLabel.left - [AppPublic textSizeWithString:m_dic[@"title"] font:cell.baseView.textLabel.font constantHeight:cell.baseView.textLabel.height].width - 2 * kEdgeSmall;
+            if (self.imagePickerView.width > width) {
+                self.imagePickerView.width = width;
+            }
+            self.imagePickerView.right = cell.baseView.width;
+            [cell.baseView addSubview:self.imagePickerView];
+        }
+        cell.baseView.textLabel.text = m_dic[@"title"];
+        cell.baseView.textField.placeholder = m_dic[@"subTitle"];
+        cell.baseView.textField.text = @"";
+        cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+        self.imagePickerView.preShowMedias = self.selectedImageArray;
+//        NSString *voucher = [self.showData valueForKey:key];
+//        if (voucher.length) {
+//            self.imagePickerView.preShowMedias = [[self.showData valueForKey:key] componentsSeparatedByString:@","];
+//        }
+//        else {
+//            self.imagePickerView.preShowMedias = nil;
+//        }
+//        if (self.imagePickerView.preShowMedias.count) {
+//            cell.baseView.textField.placeholder = @"";
+//        }
+        
+        return cell;
+    }
+    
+    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 @end

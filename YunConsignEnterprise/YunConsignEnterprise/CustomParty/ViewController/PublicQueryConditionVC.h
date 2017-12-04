@@ -51,4 +51,6 @@ typedef enum : NSUInteger {
 
 - (void)searchButtonAction;
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
