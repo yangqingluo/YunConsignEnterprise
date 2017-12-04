@@ -272,6 +272,7 @@
 		E4CE602A1FA037B3007F427C /* PublicTTLoadFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CE60291FA037B3007F427C /* PublicTTLoadFooterView.m */; };
 		E4CE602D1FA03EDF007F427C /* UDImageLabelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CE602C1FA03EDF007F427C /* UDImageLabelButton.m */; };
 		E4D2BB241FAAC239006A2AAC /* CodLoanApplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D2BB231FAAC239006A2AAC /* CodLoanApplyCell.m */; };
+		E4DE91811FD5B04C00249730 /* NormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DE91801FD5B04C00249730 /* NormalTableViewCell.m */; };
 		E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */; };
 		E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E050DD1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m */; };
 		E4E0C7FF1F792FCE002053CD /* WayBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C7FE1F792FCE002053CD /* WayBillCell.m */; };
@@ -873,6 +874,8 @@
 		E4CE602C1FA03EDF007F427C /* UDImageLabelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDImageLabelButton.m; sourceTree = "<group>"; };
 		E4D2BB221FAAC239006A2AAC /* CodLoanApplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyCell.h; sourceTree = "<group>"; };
 		E4D2BB231FAAC239006A2AAC /* CodLoanApplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyCell.m; sourceTree = "<group>"; };
+		E4DE917F1FD5B04C00249730 /* NormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalTableViewCell.h; sourceTree = "<group>"; };
+		E4DE91801FD5B04C00249730 /* NormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalTableViewCell.m; sourceTree = "<group>"; };
 		E4E050D91F9F62510068FD04 /* PublicSaveTransportTruckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicSaveTransportTruckVC.h; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSaveTransportTruckVC.h; sourceTree = SOURCE_ROOT; };
 		E4E050DA1F9F62510068FD04 /* PublicSaveTransportTruckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicSaveTransportTruckVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicSaveTransportTruckVC.m; sourceTree = SOURCE_ROOT; };
 		E4E050DC1F9F6E5D0068FD04 /* PublicEndStationSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicEndStationSelectVC.h; sourceTree = "<group>"; };
@@ -1895,6 +1898,8 @@
 				E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */,
 				E49C4F601F73A181007E7D70 /* DoubleInputCell.h */,
 				E49C4F611F73A181007E7D70 /* DoubleInputCell.m */,
+				E4DE917F1FD5B04C00249730 /* NormalTableViewCell.h */,
+				E4DE91801FD5B04C00249730 /* NormalTableViewCell.m */,
 				E4AF3B081F78CD87009EB766 /* SwitchorCell.h */,
 				E4AF3B091F78CD87009EB766 /* SwitchorCell.m */,
 				E4AF3B0B1F78DFD2009EB766 /* SwitchedInputCell.h */,
@@ -3029,6 +3034,7 @@
 				E4E2A3B61FB311AE00D8EC1C /* NSObject+MJCoding.m in Sources */,
 				E4E2A38E1FB311AE00D8EC1C /* BlockActionSheet.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
+				E4DE91811FD5B04C00249730 /* NormalTableViewCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,
 				E4E2A3B91FB311AE00D8EC1C /* NSString+MJExtension.m in Sources */,
 				E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */,

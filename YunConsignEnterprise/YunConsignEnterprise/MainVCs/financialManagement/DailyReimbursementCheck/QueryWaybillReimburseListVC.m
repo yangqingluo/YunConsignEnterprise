@@ -9,6 +9,7 @@
 #import "QueryWaybillReimburseListVC.h"
 
 #import "QueryWaybillReimburseListCell.h"
+#import "NormalTableViewCell.h"
 
 @interface QueryWaybillReimburseListVC ()
 
@@ -20,7 +21,7 @@
     [super viewDidLoad];
     [self setupNav];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
     [self beginRefreshing];
 }
@@ -70,26 +71,54 @@
 
 
 #pragma mark - UITableView
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return kEdge;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == [self numberOfSectionsInTableView:tableView] - 1) {
+        return kEdge;
+    }
+    return 0.01;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppDailyReimbursementApplyInfo *m_data = self.dataSource[indexPath.row];
-    return [QueryWaybillReimburseListCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:m_data.note.length ? 3 : 2];
+//    AppDailyReimbursementApplyInfo *m_data = self.dataSource[indexPath.row];
+//    return [QueryWaybillReimburseListCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:m_data.note.length ? 2 : 1];
+    return kCellHeightMiddle;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"QueryWaybillReimburseListCell";
-    QueryWaybillReimburseListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[QueryWaybillReimburseListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[NormalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.indexPath = [indexPath copy];
-    cell.data = self.dataSource[indexPath.row];
+    AppDailyReimbursementApplyInfo *item = self.dataSource[indexPath.section];
+    cell.titleLabel.text = notNilString(item.daily_info, nil);
+    cell.subTitleLabel.text = notNilString(item.apply_time, nil);
+    cell.rightTitleLabel.text = notNilString(item.daily_apply_state_text, nil);
     return cell;
+    
+//    QueryWaybillReimburseListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    
+//    if (!cell) {
+//        cell = [[QueryWaybillReimburseListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
+//    cell.indexPath = [indexPath copy];
+//    cell.data = self.dataSource[indexPath.row];
+//    return cell;
 }
 
 @end

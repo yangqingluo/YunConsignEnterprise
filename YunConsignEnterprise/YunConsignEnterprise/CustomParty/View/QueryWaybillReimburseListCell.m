@@ -18,12 +18,13 @@
     self.statusLabel.text = data.daily_apply_state_text;
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
-    self.bodyLabel2.text = [NSString stringWithFormat:@"申请编号：%@", data.daily_apply_id];
     
-    NSUInteger lines = 2;
+    NSUInteger lines = 1;
+    self.bodyLabel2.text = @"";
+    self.bodyLabel3.text = @"";
     if (data.note.length) {
         lines ++;
-        self.bodyLabel3.text = [NSString stringWithFormat:@"申请备注：%@", data.note];
+        self.bodyLabel2.text = [NSString stringWithFormat:@"申请备注：%@", data.note];
     }
     self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }

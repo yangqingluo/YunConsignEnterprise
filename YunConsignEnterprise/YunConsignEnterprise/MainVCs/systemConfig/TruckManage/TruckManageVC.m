@@ -10,6 +10,8 @@
 #import "SaveTruckVC.h"
 #import "PublicQueryConditionVC.h"
 
+#import "NormalTableViewCell.h"
+
 @interface TruckManageVC ()
 
 @property (strong, nonatomic) UIView *footerView;
@@ -159,43 +161,49 @@
 }
 
 #pragma mark - UITableView
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return kEdge;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat rowHeight = kCellHeightFilter;
-    if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
-        rowHeight += kEdge;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == [self numberOfSectionsInTableView:tableView] - 1) {
+        return kEdge;
     }
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat rowHeight = kCellHeightMiddle;
     return rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"show_cell";
-    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[NormalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
-        cell.baseView.textField.enabled = NO;
-        
-        [cell.baseView showSubTextLabel];
-        cell.baseView.subTextLabel.textColor = secondaryTextColor;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     AppTruckInfo *item = self.dataSource[indexPath.row];
-    cell.baseView.textLabel.text = item.truck_number_plate;
-    cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"%@ %@ %@", item.truck_driver_name, item.truck_driver_phone, notNilString(item.note, @"")];
-    cell.baseView.textField.placeholder = @"";
-    cell.baseView.textField.text = @"";
-    cell.baseView.textField.indexPath = [indexPath copy];
-    
-    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+    cell.titleLabel.text = notNilString(item.truck_number_plate, nil);
+    cell.subTitleLabel.text = [NSString stringWithFormat:@"%@ %@ %@", item.truck_driver_name, item.truck_driver_phone, notNilString(item.note, @"")];
+//    cell.baseView.textLabel.text = item.truck_number_plate;
+//    cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"%@ %@ %@", item.truck_driver_name, item.truck_driver_phone, notNilString(item.note, @"")];
+//    cell.baseView.textField.placeholder = @"";
+//    cell.baseView.textField.text = @"";
+//    cell.baseView.textField.indexPath = [indexPath copy];
+//    
+//    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     return cell;
 }
 
