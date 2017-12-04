@@ -52,6 +52,7 @@
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                            @{@"title":@"显示作废",@"subTitle":@"请选择",@"key":@"is_cancel"}];
+            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
             [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
@@ -116,6 +117,7 @@
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
             [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
@@ -125,6 +127,7 @@
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
             [self additionalDataDictionaryForCode:@"query_column"];
         }
             break;
@@ -142,17 +145,27 @@
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"},
                            @{@"title":@"审核状态",@"subTitle":@"请选择",@"key":@"loan_apply_state"}];
+            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-3 * defaultDayTimeInterval];
             [self additionalDataDictionaryForCode:@"loan_apply_state"];
         }
             break;
             
-        case QueryConditionType_CodLoanCheck:
-        case QueryConditionType_CodRemit:{
-            self.title = (self.type == QueryConditionType_CodLoanCheck) ? @"放款审核查询" : @"放款查询";
+        case QueryConditionType_CodLoanCheck:{
+            self.title = @"放款审核查询";
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"}];
+        }
+            break;
+            
+        case QueryConditionType_CodRemit:{
+            self.title = @"放款查询";
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                               @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                               @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
+                               @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"}];
+            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
         }
             break;
             

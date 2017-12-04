@@ -593,7 +593,7 @@ BOOL isTrue(NSString *string) {
     self = [super init];
     if (self) {
         NSDate *date_now = [NSDate date];
-        self.start_time = [date_now dateByAddingTimeInterval:defaultAddingTimeInterval];
+        self.start_time = [date_now dateByAddingTimeInterval:0];
         self.end_time = date_now;
         [[self class] mj_setupObjectClassInArray:^NSDictionary *{
             return @{
