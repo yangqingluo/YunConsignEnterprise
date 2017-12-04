@@ -168,6 +168,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     
+    _showLabel = NewLabel(CGRectMake(0, self.view.height - 30, _pagingScrollView.width, 30), [UIColor whiteColor], nil, NSTextAlignmentCenter);
+    _showLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_showLabel];
+    
     // Toolbar Items
     if (self.displayNavArrows) {
         NSString *arrowPathFormat = @"MWPhotoBrowser.bundle/UIBarButtonItemArrow%@";
@@ -302,6 +306,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     _visiblePages = nil;
     _recycledPages = nil;
     _toolbar = nil;
+    _showLabel = nil;
     _previousButton = nil;
     _nextButton = nil;
     _progressHUD = nil;
@@ -440,15 +445,16 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 #pragma mark - Nav Bar Appearance
 
 - (void)setNavBarAppearance:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    navBar.tintColor = [UIColor whiteColor];
-    navBar.barTintColor = nil;
-    navBar.shadowImage = nil;
-    navBar.translucent = YES;
-    navBar.barStyle = UIBarStyleBlackTranslucent;
-    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
+    self.navigationController.navigationBarHidden = YES;
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//    UINavigationBar *navBar = self.navigationController.navigationBar;
+//    navBar.tintColor = [UIColor whiteColor];
+//    navBar.barTintColor = nil;
+//    navBar.shadowImage = nil;
+//    navBar.translucent = YES;
+//    navBar.barStyle = UIBarStyleBlackTranslucent;
+//    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
 }
 
 - (void)storePreviousNavBarAppearance {
@@ -1097,11 +1103,13 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         if ([_delegate respondsToSelector:@selector(photoBrowser:titleForPhotoAtIndex:)]) {
             self.title = [_delegate photoBrowser:self titleForPhotoAtIndex:_currentPageIndex];
         } else {
-            self.title = [NSString stringWithFormat:@"%lu %@ %lu", (unsigned long)(_currentPageIndex+1), NSLocalizedString(@"of", @"Used in the context: 'Showing 1 of 3 items'"), (unsigned long)numberOfPhotos];
+            self.title = [NSString stringWithFormat:@"%lu %@ %lu", (unsigned long)(_currentPageIndex+1), NSLocalizedString(@"/", @"Used in the context: 'Showing 1 of 3 items'"), (unsigned long)numberOfPhotos];
         }
 	} else {
 		self.title = nil;
 	}
+    
+    _showLabel.text = [NSString stringWithFormat:@"%lu / %lu", (unsigned long)(_currentPageIndex + 1), (unsigned long)numberOfPhotos];
 	
 	// Buttons
 	_previousButton.enabled = (_currentPageIndex > 0);
@@ -1530,7 +1538,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (BOOL)areControlsHidden { return (_toolbar.alpha == 0); }
 - (void)hideControls { [self setControlsHidden:YES animated:YES permanent:NO]; }
 - (void)showControls { [self setControlsHidden:NO animated:YES permanent:NO]; }
-- (void)toggleControls { [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO]; }
+- (void)toggleControls {
+//    [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO];
+    [self doneButtonPressed:nil];
+}
 
 #pragma mark - Properties
 
@@ -1566,13 +1577,14 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
                 return;
             }
         }
-        // Dismiss view controller
-        if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
-            // Call delegate method and let them dismiss us
-            [_delegate photoBrowserDidFinishModalPresentation:self];
-        } else  {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+    }
+    
+    // Dismiss view controller
+    if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
+        // Call delegate method and let them dismiss us
+        [_delegate photoBrowserDidFinishModalPresentation:self];
+    } else  {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

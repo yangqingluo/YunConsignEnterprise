@@ -284,14 +284,14 @@ static NSInteger countOfRow;
     }else{
         // 展示媒体
         _photos = [NSMutableArray array];
-        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-        browser.displayActionButton = NO;
-        browser.alwaysShowControls = NO;
-        browser.displaySelectionButtons = NO;
-        browser.zoomPhotosToFill = YES;
-        browser.displayNavArrows = NO;
-        browser.startOnGrid = NO;
-        browser.enableGrid = YES;
+//        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+//        browser.displayActionButton = NO;
+//        browser.alwaysShowControls = NO;
+//        browser.displaySelectionButtons = NO;
+//        browser.zoomPhotosToFill = YES;
+//        browser.displayNavArrows = NO;
+//        browser.startOnGrid = NO;
+//        browser.enableGrid = YES;
         for (LLImagePickerModel *model in _mediaArray) {
             MWPhoto *photo = [MWPhoto photoWithImage:model.image];
             photo.caption = model.name;
@@ -306,8 +306,9 @@ static NSInteger countOfRow;
             }
             [_photos addObject:photo];
         }
-        [browser setCurrentPhotoIndex:indexPath.row];
-        [[self viewController].navigationController pushViewController:browser animated:YES];
+//        [browser setCurrentPhotoIndex:indexPath.row];
+//        [[self viewController].navigationController pushViewController:browser animated:YES];
+        [[PublicMessageReadManager defaultManager] showBrowserWithImages:_photos currentPhotoIndex:indexPath.row];
     }
 }
 

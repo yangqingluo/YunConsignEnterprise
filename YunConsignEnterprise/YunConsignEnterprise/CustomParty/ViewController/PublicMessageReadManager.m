@@ -138,6 +138,10 @@ static PublicMessageReadManager *detailInstance = nil;
             {
                 photo = [MWPhoto photoWithURL:[NSURL URLWithString:object]];
             }
+            else if ([object isKindOfClass:[MWPhoto class]]) {
+                photo = object;
+            }
+            
             if (photo) {
                 [photoArray addObject:photo];
             }

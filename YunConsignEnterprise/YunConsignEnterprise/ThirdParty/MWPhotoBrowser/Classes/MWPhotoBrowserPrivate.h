@@ -33,6 +33,7 @@
 	
 	// Navigation & controls
 	UIToolbar *_toolbar;
+    UILabel *_showLabel;
 	NSTimer *_controlVisibilityTimer;
 	UIBarButtonItem *_previousButton, *_nextButton, *_actionButton, *_doneButton;
     MBProgressHUD *_progressHUD;
