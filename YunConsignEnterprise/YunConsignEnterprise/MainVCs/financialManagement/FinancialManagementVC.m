@@ -8,6 +8,7 @@
 
 #import "FinancialManagementVC.h"
 #import "FreightCheckVC.h"
+#import "FreightNotPayVC.h"
 #import "CodQueryVC.h"
 #import "CodWaitPayVC.h"
 #import "CodCheckVC.h"
@@ -54,7 +55,7 @@
                 vc = [FreightCheckVC new];
             }
             else if ([item.menu_code isEqualToString:@"FREIGHT_NOT_PAY"]) {
-                
+                vc = [FreightNotPayVC new];
             }
             else if ([item.menu_code isEqualToString:@"COD_QUERY"]) {
                 vc = [CodQueryVC new];

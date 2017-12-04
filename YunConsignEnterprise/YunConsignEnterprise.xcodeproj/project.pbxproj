@@ -20,6 +20,9 @@
 		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
 		E420B8091F738963009794A2 /* FourItemsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8081F738963009794A2 /* FourItemsListCell.m */; };
+		E42109021FD5C9B600F89075 /* FreightNotPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42109011FD5C9B600F89075 /* FreightNotPayVC.m */; };
+		E42109051FD5CA8D00F89075 /* FreightNotPayDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42109041FD5CA8D00F89075 /* FreightNotPayDetailVC.m */; };
+		E42109081FD5CC0A00F89075 /* FreightNotPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42109071FD5CC0A00F89075 /* FreightNotPayCell.m */; };
 		E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */; };
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
 		E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */; };
@@ -469,6 +472,12 @@
 		E420B8051F737B34009794A2 /* PublicInputCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicInputCellView.m; sourceTree = "<group>"; };
 		E420B8071F738963009794A2 /* FourItemsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourItemsListCell.h; sourceTree = "<group>"; };
 		E420B8081F738963009794A2 /* FourItemsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourItemsListCell.m; sourceTree = "<group>"; };
+		E42109001FD5C9B600F89075 /* FreightNotPayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightNotPayVC.h; sourceTree = "<group>"; };
+		E42109011FD5C9B600F89075 /* FreightNotPayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightNotPayVC.m; sourceTree = "<group>"; };
+		E42109031FD5CA8D00F89075 /* FreightNotPayDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightNotPayDetailVC.h; sourceTree = "<group>"; };
+		E42109041FD5CA8D00F89075 /* FreightNotPayDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightNotPayDetailVC.m; sourceTree = "<group>"; };
+		E42109061FD5CC0A00F89075 /* FreightNotPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreightNotPayCell.h; sourceTree = "<group>"; };
+		E42109071FD5CC0A00F89075 /* FreightNotPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreightNotPayCell.m; sourceTree = "<group>"; };
 		E4266F771FA0C11B00C240C5 /* WaybillArrivalDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillArrivalDetailCell.h; sourceTree = "<group>"; };
 		E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalDetailCell.m; sourceTree = "<group>"; };
 		E4266F7A1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicWaybillArrivalFooterView.h; sourceTree = "<group>"; };
@@ -1658,6 +1667,10 @@
 		E49D7E891FD38D4E009B59B7 /* FreightNotPay */ = {
 			isa = PBXGroup;
 			children = (
+				E42109001FD5C9B600F89075 /* FreightNotPayVC.h */,
+				E42109011FD5C9B600F89075 /* FreightNotPayVC.m */,
+				E42109031FD5CA8D00F89075 /* FreightNotPayDetailVC.h */,
+				E42109041FD5CA8D00F89075 /* FreightNotPayDetailVC.m */,
 			);
 			name = FreightNotPay;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/FreightNotPay;
@@ -1958,6 +1971,8 @@
 				E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */,
 				E43FCB571FA85FC300AFEE6D /* FreightCheckCell.h */,
 				E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */,
+				E42109061FD5CC0A00F89075 /* FreightNotPayCell.h */,
+				E42109071FD5CC0A00F89075 /* FreightNotPayCell.m */,
 				E43C68AD1FA99EA000464885 /* CodQueryCell.h */,
 				E43C68AE1FA99EA000464885 /* CodQueryCell.m */,
 				E4EDBFC81FB1EECB009D2FA4 /* CodWaitPayCell.h */,
@@ -2791,6 +2806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */,
+				E42109021FD5C9B600F89075 /* FreightNotPayVC.m in Sources */,
 				E4789A6A1FCD5AF400F1BD88 /* JsonUserCell.m in Sources */,
 				E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */,
 				E49D7E8E1FD38D4E009B59B7 /* CodLoanApplyWaybillQueryVC.m in Sources */,
@@ -2823,6 +2839,7 @@
 				E4E2A3EF1FB311AE00D8EC1C /* MWGridCell.m in Sources */,
 				E49D7E9C1FD38D4E009B59B7 /* CodWaitPayVC.m in Sources */,
 				E4E2A3EE1FB311AE00D8EC1C /* MWCaptionView.m in Sources */,
+				E42109051FD5CA8D00F89075 /* FreightNotPayDetailVC.m in Sources */,
 				E4E2A38C1FB311AE00D8EC1C /* UIWebView+AFNetworking.m in Sources */,
 				E4E2A3A21FB311AE00D8EC1C /* NSString+LLExtension.m in Sources */,
 				E438D0411FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m in Sources */,
@@ -3003,6 +3020,7 @@
 				E49D7E451FD38CAA009B59B7 /* WaybillLogVC.m in Sources */,
 				E4E2A38D1FB311AE00D8EC1C /* JXTAlertController.m in Sources */,
 				E44764991F611BF70084F4EB /* SystemConfigVC.m in Sources */,
+				E42109081FD5CC0A00F89075 /* FreightNotPayCell.m in Sources */,
 				E4E2A3F91FB311AE00D8EC1C /* SDWebImageCompat.m in Sources */,
 				E49D7E971FD38D4E009B59B7 /* CodRemitTableVC.m in Sources */,
 				E4E2A3BA1FB311AE00D8EC1C /* MJRefreshAutoFooter.m in Sources */,

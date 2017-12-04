@@ -8,7 +8,14 @@
 
 #import "PublicResultTableVC.h"
 
+typedef NS_ENUM(NSInteger, PublicResultWithScrollTableType) {
+    PublicResultWithScrollTableType_DEFAULT = 0,
+    PublicResultWithScrollTableType_FreightNotPay,//未收运输款
+};
+
 @interface PublicResultWithScrollTableVC : PublicResultTableVC<UIScrollViewDelegate>
+
+@property (assign, nonatomic) PublicResultWithScrollTableType type;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *valArray;
