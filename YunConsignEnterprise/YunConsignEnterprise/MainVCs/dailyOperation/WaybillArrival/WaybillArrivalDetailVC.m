@@ -35,7 +35,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 - (void)setupNav {
@@ -200,7 +200,7 @@
 - (void)arrivalWayBillSuccess {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillArrivalRefresh object:nil];
     [self showHint:@"到货交接完成"];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 #pragma mark - getter

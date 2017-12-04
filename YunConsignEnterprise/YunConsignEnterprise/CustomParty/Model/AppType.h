@@ -899,6 +899,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_state_show;//代收方式(为了在某些情况下和cash_on_delivery_type同时存在)
 @property (strong, nonatomic) AppDataDictionary *cod_payment_state;//收款状态
 @property (strong, nonatomic) AppDataDictionary *cod_loan_state;//放款状态
+@property (strong, nonatomic) NSString *order_by;//排序方式，比如：pay_now_amount desc
 @property (strong, nonatomic) NSString *waybill_receive_state;//是否提货
 @property (strong, nonatomic) NSString *bank_card_owner;//客户姓名
 @property (strong, nonatomic) NSString *contact_phone;//联系电话

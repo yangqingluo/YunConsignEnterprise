@@ -52,7 +52,7 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 - (void)setupNav {

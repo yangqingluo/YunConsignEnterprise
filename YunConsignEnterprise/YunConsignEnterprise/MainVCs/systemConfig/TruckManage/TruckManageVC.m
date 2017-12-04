@@ -29,7 +29,7 @@
     self.tableView.height = self.footerView.top - self.tableView.top;
     
     [self updateTableViewHeader];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 - (void)setupNav {
