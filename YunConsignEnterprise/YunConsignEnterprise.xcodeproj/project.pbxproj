@@ -1529,10 +1529,10 @@
 		E49D7E4A1FD38D4E009B59B7 /* CodCheck */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E4B1FD38D4E009B59B7 /* CodCheckDetailVC.h */,
-				E49D7E4C1FD38D4E009B59B7 /* CodCheckDetailVC.m */,
 				E49D7E4D1FD38D4E009B59B7 /* CodCheckVC.h */,
 				E49D7E4E1FD38D4E009B59B7 /* CodCheckVC.m */,
+				E49D7E4B1FD38D4E009B59B7 /* CodCheckDetailVC.h */,
+				E49D7E4C1FD38D4E009B59B7 /* CodCheckDetailVC.m */,
 			);
 			name = CodCheck;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodCheck;

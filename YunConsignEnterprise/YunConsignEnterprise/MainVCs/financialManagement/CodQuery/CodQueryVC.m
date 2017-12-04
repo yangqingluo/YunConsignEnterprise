@@ -9,16 +9,27 @@
 #import "CodQueryVC.h"
 #import "CodQueryDetailVC.h"
 
-@interface CodQueryVC ()
+static NSString *searchTimeTypeKey = @"search_time_type";
+
+@interface CodQueryVC () {
+    BOOL canSelectPaymentState;
+}
+
+@property (strong, nonatomic) AppDataDictionary *m_cod_payment_state;
 
 @end
 
 @implementation CodQueryVC
 
+- (void)dealloc {
+    [self.condition removeObserver:self forKeyPath:searchTimeTypeKey];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.type = QueryConditionType_CodQuery;
+        [self.condition addObserver:self forKeyPath:searchTimeTypeKey options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -50,6 +61,37 @@
     CodQueryDetailVC *vc = [CodQueryDetailVC new];
     vc.condition = [self.condition copy];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([key isEqualToString:@"cod_payment_state"]) {
+        if (!canSelectPaymentState) {
+            return;
+        }
+    }
+    [super selectRowAtIndexPath:indexPath];
+}
+
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:searchTimeTypeKey]) {
+        NSString *key = @"cod_payment_state";
+        if ([self.condition.search_time_type.item_val integerValue] == 1) {
+            canSelectPaymentState = NO;
+            self.m_cod_payment_state = [self.condition valueForKey:key];
+            [self.condition setValue:nil forKey:key];
+        }
+        else {
+            canSelectPaymentState = YES;
+            if (![self.condition valueForKey:key]) {
+                [self.condition setValue:self.m_cod_payment_state forKey:key];
+            }
+        }
+        [self.tableView reloadData];
+    }
 }
 
 @end

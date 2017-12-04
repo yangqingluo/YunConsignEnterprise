@@ -126,15 +126,16 @@ static NSString *searchTimeTypeKey = @"search_time_type";
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:searchTimeTypeKey]) {
-        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:searchTimeTypeKey];
-        if (dataArray.count && [dataArray indexOfObject:self.condition.search_time_type] == dataArray.count - 1) {
-            canSelectShowColumns = YES;
-            self.condition.show_column = self.showColumnBuffer;
-        }
-        else {
+        if ([self.condition.search_time_type.item_val integerValue] == 1) {
             canSelectShowColumns = NO;
             self.showColumnBuffer = self.condition.show_column;
             self.condition.show_column = nil;
+        }
+        else {
+            canSelectShowColumns = YES;
+            if (!self.condition.show_column) {
+                self.condition.show_column = self.showColumnBuffer;
+            }
         }
         [self.tableView reloadData];
     }
