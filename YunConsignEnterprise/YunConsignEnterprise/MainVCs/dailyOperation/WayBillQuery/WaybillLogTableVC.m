@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "SingleInputCell.h"
 #import "WaybillLogCell.h"
+#import "LLImagePickerView.h"
 
 @interface WaybillLogTableVC (){
     BOOL hasPulledData;
@@ -20,6 +21,8 @@
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) NSString *dateKey;
+@property (strong, nonatomic) UIView *pickerFooter;
+@property (strong, nonatomic) LLImagePickerView *imagePickerView;
 
 @end
 
@@ -137,6 +140,21 @@
         }
             break;
             
+        case 3:{
+//            [self.dataSource addObjectsFromArray:[self sortArrayByTime:[AppVoucherInfo mj_objectArrayWithKeyValuesArray:dic[@"voucher"]]]];
+            self.tableView.tableFooterView = nil;
+            [self.dataSource addObjectsFromArray:[AppVoucherInfo mj_objectArrayWithKeyValuesArray:dic[@"voucher"]]];
+            if (self.dataSource.count) {
+                NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.dataSource.count];
+                for (AppVoucherInfo *item in self.dataSource) {
+                    [m_array addObject:item.voucher];
+                }
+                self.imagePickerView.preShowMedias = [NSArray arrayWithArray:m_array];
+                self.tableView.tableFooterView = self.pickerFooter;
+            }
+        }
+            break;
+            
         default:
             break;
     }
@@ -169,9 +187,28 @@
     return _dateKey;
 }
 
+- (UIView *)pickerFooter {
+    if (!_pickerFooter) {
+        _pickerFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, self.imagePickerView.height + 2 * kEdgeMiddle)];
+        [_pickerFooter addSubview:self.imagePickerView];
+    }
+    return _pickerFooter;
+}
+
+- (LLImagePickerView *)imagePickerView {
+    if (!_imagePickerView) {
+        _imagePickerView = [LLImagePickerView ImagePickerViewWithFrame:CGRectMake(kEdgeMiddle, kEdgeMiddle, screen_width - 2 * kEdgeMiddle, 0) CountOfRow:3];
+        _imagePickerView.backgroundColor = [UIColor clearColor];
+        _imagePickerView.showDelete = NO;
+        _imagePickerView.showAddButton = NO;
+        _imagePickerView.maxImageSelected = 3;
+    }
+    return _imagePickerView;
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.indextag == 3 ? 1 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -167,6 +167,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppVoucherInfo
+
+
+
+@end
+
 @implementation AppLocationInfo
 
 

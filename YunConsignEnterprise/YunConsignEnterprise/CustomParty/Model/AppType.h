@@ -14,6 +14,7 @@
 
 typedef NS_ENUM(NSInteger, WaybillDetailType) {
     WaybillDetailType_WayBillQuery = 0,
+    WaybillDetailType_WaybillReceive,
     WaybillDetailType_CodQuery,
     WaybillDetailType_CodWaitPay,
 };
@@ -231,6 +232,14 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *sort;//开通城市名称排序
 
 @end
+
+@interface AppVoucherInfo : AppType
+
+@property (strong, nonatomic) NSString *upload_date;
+@property (strong, nonatomic) NSString *voucher;
+@property (strong, nonatomic) NSString *waybill_id;
+@end
+
 
 @interface AppLocationInfo : AppType
 

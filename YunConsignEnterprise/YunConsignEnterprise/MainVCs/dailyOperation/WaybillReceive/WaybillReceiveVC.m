@@ -10,6 +10,7 @@
 #import "PublicQueryConditionVC.h"
 #import "WaybillCustReceiveVC.h"
 #import "WaybillReturnVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "WaybillReceiveCell.h"
 #import "MJRefresh.h"
@@ -220,6 +221,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+    vc.type = WaybillDetailType_WaybillReceive;
+    vc.data = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router
