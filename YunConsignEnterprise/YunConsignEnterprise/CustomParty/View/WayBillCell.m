@@ -25,9 +25,17 @@
 //    [self.headerView addSubview:_statusImageView];
 }
 
-- (void)setupFooter {
-    [super setupFooter];
+//- (void)setupFooter {
+//    [super setupFooter];
+//    NSArray *m_array = @[@"作废", @"修改", @"打印", @"物流"];
+//    [self.footerView updateDataSourceWithArray:m_array];
+//}
+
+- (void)refreshFooter {
     NSArray *m_array = @[@"作废", @"修改", @"打印", @"物流"];
+    if ([self.data.waybill_state intValue] == WAYBILL_STATE_5) {
+        m_array = @[@"打印", @"物流"];
+    }
     [self.footerView updateDataSourceWithArray:m_array];
 }
 
@@ -85,6 +93,8 @@
     [AppPublic adjustLabelWidth:self.payOnReceiptLabel];
     self.payOnReceiptLabel.left = self.payNowLabel.right +
     kEdgeBig;
+    
+    [self refreshFooter];
 }
 
 @end

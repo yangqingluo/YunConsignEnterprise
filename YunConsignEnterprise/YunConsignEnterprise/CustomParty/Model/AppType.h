@@ -49,6 +49,15 @@ typedef NS_ENUM(NSInteger, LOAN_APPLY_STATE) {
     LOAN_APPLY_STATE_4,//已放款
 };
 
+//运单状态
+typedef NS_ENUM(NSInteger, WAYBILL_STATE) {
+    WAYBILL_STATE_1 = 1,//等待装车
+    WAYBILL_STATE_2,//
+    WAYBILL_STATE_3,//运输中
+    WAYBILL_STATE_4,//已到站
+    WAYBILL_STATE_5,//已完成
+};
+
 @interface AppType : NSObject
 
 /*!
