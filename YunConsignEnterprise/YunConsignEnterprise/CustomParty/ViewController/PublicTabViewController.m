@@ -17,9 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGFloat height_banner = screen_width + 32;
-    if (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner <  148) {
-        height_banner += (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner -  148);
+    CGFloat height_banner = (screen_width / 0.75) + height_pageControll;
+    if (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner <  120) {
+        height_banner += (screen_height - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT - height_banner -  120);
     }
     _bannerView = [[PublicBannerView alloc] initWithFrame:CGRectMake(0, self.view.height - height_banner, screen_width, height_banner)];
     _bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

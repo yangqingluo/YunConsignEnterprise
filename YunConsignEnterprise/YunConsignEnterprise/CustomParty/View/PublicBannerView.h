@@ -10,7 +10,8 @@
 
 #define Event_BannerButtonClicked @"Event_BannerButtonClicked"
 #define count_Banner_H  3
-#define count_Banner_V  3
+#define count_Banner_V  4
+#define height_pageControll 16.0
 
 @interface PublicBannerView : UIView
 

@@ -25,7 +25,7 @@
         [AppPublic adjustLabelHeight:_logoLabel];
         [self addSubview:_logoLabel];
         
-        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _logoLabel.bottom + 28, self.width, 24)];
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _logoLabel.bottom + kEdgeMiddle, self.width, 24)];
         _textLabel.font = [AppPublic appFontOfSize:14];
         _textLabel.textColor = [UIColor whiteColor];
         _textLabel.textAlignment = NSTextAlignmentCenter;

@@ -25,7 +25,7 @@
         [self addSubview:self.baseView];
         [self.baseView addSubview:self.scrollView];
         
-        self.pageControl.center = CGPointMake(0.5 * self.width, self.height - 16);
+        self.pageControl.center = CGPointMake(0.5 * self.width, self.height - 0.5 * height_pageControll);
         [self addSubview:self.pageControl];
         self.pageControl.autoresizingMask = UIViewAutoresizingNone;
     }
@@ -51,7 +51,7 @@
 #pragma mark - getter
 - (UIView *)baseView {
     if (!_baseView) {
-        _baseView = [[UIScrollView alloc]initWithFrame:CGRectMake(kEdge, 0, self.width - kEdge * 2, self.height - 32)];
+        _baseView = [[UIScrollView alloc]initWithFrame:CGRectMake(kEdge, 0, self.width - kEdge * 2, self.height - height_pageControll)];
         _baseView.backgroundColor = [UIColor whiteColor];
     }
     return _baseView;
