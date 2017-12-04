@@ -43,7 +43,7 @@
 #pragma mark - setter
 - (void)setData:(AppLoanApplyCheckWaybillInfo *)data {
     _data = data;
-    self.titleLabel.text = [NSString stringWithFormat:@"货号：%@", data.goods_number];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", data.city_info, data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
     if (data.loan_apply_state_text) {
         self.statusLabel.text = data.loan_apply_state_text;
