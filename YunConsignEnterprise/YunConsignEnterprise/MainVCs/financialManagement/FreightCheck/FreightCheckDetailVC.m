@@ -149,7 +149,7 @@
         self.footerView.hidden = NO;
         
         NSMutableArray *m_array = [NSMutableArray new];
-        [m_array addObject:@"总"];
+        [m_array addObject:@"总计"];
         [m_array addObject:notNilString([self.totalData valueForKey:@"waybill_count"], @"0")];
         for (AppDataDictionary *map_item in self.condition.show_column) {
             [m_array addObject:notNilString([self.totalData valueForKey:map_item.item_val], @"0")];

@@ -1571,10 +1571,10 @@
 		E49D7E5F1FD38D4E009B59B7 /* CodQuery */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E601FD38D4E009B59B7 /* CodQueryDetailVC.h */,
-				E49D7E611FD38D4E009B59B7 /* CodQueryDetailVC.m */,
 				E49D7E621FD38D4E009B59B7 /* CodQueryVC.h */,
 				E49D7E631FD38D4E009B59B7 /* CodQueryVC.m */,
+				E49D7E601FD38D4E009B59B7 /* CodQueryDetailVC.h */,
+				E49D7E611FD38D4E009B59B7 /* CodQueryDetailVC.m */,
 			);
 			name = CodQuery;
 			path = YunConsignEnterprise/MainVCs/FinancialManagement/CodQuery;

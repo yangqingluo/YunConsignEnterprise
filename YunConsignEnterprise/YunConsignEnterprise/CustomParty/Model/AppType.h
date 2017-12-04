@@ -513,6 +513,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *cash_on_delivery_state;
 @property (strong, nonatomic) NSString *cash_on_delivery_state_text;
 @property (strong, nonatomic) NSString *cust_info;
+@property (strong, nonatomic) NSString *city_info;
 @property (strong, nonatomic) NSString *is_get_cash_on_delivery;
 @property (strong, nonatomic) NSString *loan_apply_state;
 @property (strong, nonatomic) NSString *cash_on_delivery_note;//应收代收款备注

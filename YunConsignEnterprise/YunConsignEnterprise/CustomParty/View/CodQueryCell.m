@@ -30,7 +30,7 @@
 #pragma mark - setter
 - (void)setData:(AppCashOnDeliveryWayBillInfo *)data {
     _data = data;
-    self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", data.goods_number, data.goods_number];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", data.city_info, data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
     self.statusLabel.text = data.cash_on_delivery_state_text;
     

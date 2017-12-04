@@ -217,8 +217,7 @@
         }
         
         if (indexPath.row == 0) {
-            cell.baseView.textLabel.text = [NSString stringWithFormat:@"运单号：%@", self.detailData.waybill_number];
-            cell.baseView.textField.text = [NSString stringWithFormat:@"货号：%@", self.detailData.goods_number];
+            cell.baseView.textLabel.text = [NSString stringWithFormat:@"运单号/货号：%@/%@", self.detailData.waybill_number, self.detailData.goods_number];
         }
         else {
             cell.baseView.textLabel.text = [NSString stringWithFormat:@"%@ %@->%@ %@", self.detailData.start_station_city_name, self.detailData.shipper_name, self.detailData.end_station_city_name, self.detailData.consignee_name];

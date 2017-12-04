@@ -35,7 +35,7 @@
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableHeaderView = self.headerView;
+//    self.tableView.tableHeaderView = self.headerView;
     [self updateTableViewHeader];
 }
 
@@ -105,7 +105,7 @@
         quantity += [item.quantity intValue];
     }
     ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总计：%d", quantity];
-    
+    self.tableView.tableHeaderView = self.dataSource.count ? self.headerView : nil;
     [self.tableView reloadData];
 }
 
