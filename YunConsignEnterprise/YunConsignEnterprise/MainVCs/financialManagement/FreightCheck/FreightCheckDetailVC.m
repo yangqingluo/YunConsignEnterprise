@@ -297,7 +297,7 @@
             else {
                 self.condition.order_by = [NSString stringWithFormat:@"%@ desc", val];
             }
-            [self beginRefreshing];
+            [self loadFirstPageData];
         }
     }
 }
