@@ -37,6 +37,10 @@
                        @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                        @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                        @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
+    NSArray *m_array = [[UserPublic getInstance].dataMapDic objectForKey:@"show_column"];
+    if (m_array.count > 1) {
+        self.condition.show_column = @[m_array[1]];
+    }
     [self initialDataDictionaryForCodeArray:@[@"query_column"]];
 }
 
