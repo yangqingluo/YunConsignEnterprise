@@ -100,12 +100,6 @@
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
-        if (self.condition.start_time) {
-            [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
-        }
-        if (self.condition.end_time) {
-            [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
-        }
         if (self.condition.query_column && self.condition.query_val) {
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
             [m_dic setObject:self.condition.query_val forKey:@"query_val"];

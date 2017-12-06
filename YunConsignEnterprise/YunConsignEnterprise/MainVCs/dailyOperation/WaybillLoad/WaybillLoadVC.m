@@ -239,6 +239,7 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
+                //配载
                 WaybillLoadTTVC *vc = [WaybillLoadTTVC new];
                 vc.truckData = self.dataSource[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
@@ -246,9 +247,16 @@
                 break;
                 
             case 1:{
+                //装车详情
                 WaybillLoadedVC *vc = [WaybillLoadedVC new];
                 vc.truckData = self.dataSource[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 2:{
+                //打印清单
+                [self doShowHintFunction:defaultNoticeNotComplete];
             }
                 break;
                 

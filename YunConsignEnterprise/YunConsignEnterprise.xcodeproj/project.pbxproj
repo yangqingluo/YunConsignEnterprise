@@ -1477,12 +1477,12 @@
 		E49D7E091FD38CAA009B59B7 /* WaybillLoad */ = {
 			isa = PBXGroup;
 			children = (
+				E49D7E0E1FD38CAA009B59B7 /* WaybillLoadVC.h */,
+				E49D7E0F1FD38CAA009B59B7 /* WaybillLoadVC.m */,
 				E49D7E0A1FD38CAA009B59B7 /* WaybillLoadedVC.h */,
 				E49D7E0B1FD38CAA009B59B7 /* WaybillLoadedVC.m */,
 				E49D7E0C1FD38CAA009B59B7 /* WaybillLoadTTVC.h */,
 				E49D7E0D1FD38CAA009B59B7 /* WaybillLoadTTVC.m */,
-				E49D7E0E1FD38CAA009B59B7 /* WaybillLoadVC.h */,
-				E49D7E0F1FD38CAA009B59B7 /* WaybillLoadVC.m */,
 			);
 			name = WaybillLoad;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillLoad;
