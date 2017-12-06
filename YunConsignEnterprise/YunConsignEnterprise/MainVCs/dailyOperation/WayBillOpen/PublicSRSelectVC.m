@@ -88,7 +88,12 @@
         dic = self.showArray[1];
     }
     else if (!self.data.customer.freight_cust_name.length) {
-        dic = self.showArray[2];
+        if (self.type == SRSelectType_Sender) {
+            self.data.customer.freight_cust_name = @"无";
+        }
+        else {
+            dic = self.showArray[2];
+        }
     }
     
     if (dic) {

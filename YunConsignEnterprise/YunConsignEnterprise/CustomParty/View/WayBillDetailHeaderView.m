@@ -107,7 +107,7 @@
     
     self.numberLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", data.waybill_number, data.goods_number];
     self.dateLabel.text = [NSString stringWithFormat:@"时间：%@", dateStringWithTimeString(data.operate_time)];
-    self.urgentImageView.hidden = !isTrue(data.is_urgent);
+    self.urgentImageView.hidden = !isTrue(data.is_deliver_goods);
     
     [self refreshDetailLabel:self.senderDetailLabel text:[NSString stringWithFormat:@"%@-%@\n",data.start_station_city_name, data.start_station_service_name] subText:[NSString stringWithFormat:@"%@-%@", data.shipper_name, data.shipper_phone]];
     [self refreshDetailLabel:self.receiverDetailLabel text:[NSString stringWithFormat:@"%@-%@\n",data.end_station_city_name, data.end_station_service_name] subText:[NSString stringWithFormat:@"%@-%@", data.consignee_name, data.consignee_phone]];

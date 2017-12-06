@@ -13,7 +13,7 @@
 - (void)setupHeader {
     [super setupHeader];
     _urgentLabel = NewLabel(CGRectMake(self.titleLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), WarningColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-    _urgentLabel.text = @"[急]";
+    _urgentLabel.text = @"[送]";
     [AppPublic adjustLabelWidth:_urgentLabel];
     [self.headerView addSubview:_urgentLabel];
 }
@@ -39,7 +39,7 @@
     self.titleLabel.text = [NSString stringWithFormat:@"%@：%@", _data.route, _data.goods_number];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
-    if (isTrue(_data.is_urgent)) {
+    if (isTrue(_data.is_deliver_goods)) {
         self.urgentLabel.hidden = NO;
         self.urgentLabel.left = self.titleLabel.right + kEdgeMiddle;
     }

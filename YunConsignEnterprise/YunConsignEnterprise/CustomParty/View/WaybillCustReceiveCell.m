@@ -15,7 +15,7 @@
     self.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
     
     _urgentLabel = NewLabel(CGRectMake(self.titleLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), WarningColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-    _urgentLabel.text = @"[急]";
+    _urgentLabel.text = @"[送]";
     [AppPublic adjustLabelWidth:_urgentLabel];
     [self.headerView addSubview:_urgentLabel];
     
@@ -52,7 +52,7 @@
     self.titleLabel.text = [NSString stringWithFormat:@"货号：%@/%@", notNilString(data.goods_number, nil), notNilString(data.waybill_number, nil)];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
-    self.urgentLabel.hidden = !isTrue(data.is_urgent);
+    self.urgentLabel.hidden = !isTrue(data.is_deliver_goods);
     self.receiptLabel.hidden = !isTrue(data.is_receipt);
     
     if (!self.urgentLabel.hidden) {

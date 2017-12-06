@@ -246,7 +246,7 @@ BOOL isTrue(NSString *string) {
     NSMutableDictionary *m_dic = [self mj_keyValues];
     NSMutableDictionary *edit_dic = [NSMutableDictionary new];
     
-    NSSet *set_bool = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", @"is_pay_now", @"is_pay_on_delivery", @"is_pay_on_receipt", nil];
+    NSSet *set_bool = [NSSet setWithObjects:@"is_deduction_freight", @"is_deliver_goods", @"is_pay_now", @"is_pay_on_delivery", @"is_pay_on_receipt", nil];
     for (NSString *key in m_dic.allKeys) {
         NSString *value = m_dic[key];
         if ([set_bool containsObject:key]) {

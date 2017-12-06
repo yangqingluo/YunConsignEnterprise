@@ -174,7 +174,7 @@
                           @{@"title":@"代收款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},
                           @{@"title":@"代收款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_amount"},
                           @{@"title":@"运费代扣",@"subTitle":@"请选择",@"key":@"is_deduction_freight"},
-                          @{@"title":@"急货",@"subTitle":@"请选择",@"key":@"is_urgent"},
+                          @{@"title":@"是否送货",@"subTitle":@"请选择",@"key":@"is_deliver_goods"},
                           @[@{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
                             @{@"title":@"回扣费",@"subTitle":@"请输入",@"key":@"rebate_fee"}],
                           @[@{@"title":@"保价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
@@ -215,7 +215,7 @@
 
 - (NSSet *)switchorSet {
     if (!_switchorSet) {
-        _switchorSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_urgent", nil];
+        _switchorSet = [NSSet setWithObjects:@"is_deduction_freight", @"is_deliver_goods", nil];
     }
     
     return _switchorSet;

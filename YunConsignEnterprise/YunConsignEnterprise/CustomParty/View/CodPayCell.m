@@ -13,16 +13,6 @@
 - (void)setupHeader {
     [super setupHeader];
     self.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
-    
-//    _urgentLabel = NewLabel(CGRectMake(self.titleLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), WarningColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-//    _urgentLabel.text = @"[急]";
-//    [AppPublic adjustLabelWidth:_urgentLabel];
-//    [self.headerView addSubview:_urgentLabel];
-//    
-//    _receiptLabel = NewLabel(CGRectMake(self.urgentLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), RGBA(0xc5, 0x2c, 0x2c, 1.0), [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
-//    _receiptLabel.text = @"[回]";
-//    [AppPublic adjustLabelWidth:_receiptLabel];
-//    [self.headerView addSubview:_receiptLabel];
 }
 
 - (void)setupBody {
@@ -55,17 +45,6 @@
     
     self.titleLabel.text = [NSString stringWithFormat:@"货号：%@/%@", notNilString(data.goods_number, nil), notNilString(data.waybill_number, nil)];
     [AppPublic adjustLabelWidth:self.titleLabel];
-    
-//    self.urgentLabel.hidden = !isTrue(data.is_urgent);
-//    self.receiptLabel.hidden = !isTrue(data.is_receipt);
-//    
-//    if (!self.urgentLabel.hidden) {
-//        self.urgentLabel.left = self.titleLabel.right + kEdge;
-//        self.receiptLabel.left = self.urgentLabel.right + kEdge;
-//    }
-//    else if (!self.receiptLabel.hidden) {
-//        self.receiptLabel.left = self.titleLabel.right + kEdge;
-//    }
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@/%@/%@", notNilString(_data.goods_name, nil), notNilString(_data.goods_packge, nil), notNilString(_data.goods_total, nil)];
     self.bodyLabel2.text = [NSString stringWithFormat:@"已收：%d", [_data.pay_now_amount intValue]];

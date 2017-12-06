@@ -134,7 +134,7 @@
         NSMutableAttributedString *m_string = [NSMutableAttributedString new];
         [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@-%@\n", info.service.open_city_name, info.service.service_name] attributes:dic1]];
         [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:dic3]];
-        [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", info.customer.freight_cust_name, info.customer.phone] attributes:dic2]];
+        [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", notNilString(info.customer.freight_cust_name, @"无"), notNilString(info.customer.phone, @"无")] attributes:dic2]];
         label.attributedText = m_string;
     }
     else {

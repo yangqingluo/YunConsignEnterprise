@@ -336,7 +336,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *pay_for_sb_fee;//垫付费
 @property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
 @property (assign, nonatomic) NSString *is_deduction_freight;//是否运费代扣
-@property (assign, nonatomic) NSString *is_urgent;//是否急货
+//@property (assign, nonatomic) NSString *is_urgent;//是否急货
+@property (strong, nonatomic) NSString *is_deliver_goods;//是否送货
 @property (strong, nonatomic) NSString *total_amount;//总费用
 @property (assign, nonatomic) NSString *is_pay_now;//是否现付
 @property (strong, nonatomic) NSString *pay_now_amount;//现付金额
@@ -400,7 +401,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *pay_on_receipt_amount;
 
 @property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
-@property (strong, nonatomic) NSString *is_urgent;//是否急货
+//@property (strong, nonatomic) NSString *is_urgent;//是否急货
+@property (strong, nonatomic) NSString *is_deliver_goods;//是否送货
 @property (strong, nonatomic) NSString *is_receipt;//是否有回单
 @property (strong, nonatomic) NSString *start_station_city_id;//发站城市编号
 @property (strong, nonatomic) NSString *start_station_city_name;//发站城市名称
