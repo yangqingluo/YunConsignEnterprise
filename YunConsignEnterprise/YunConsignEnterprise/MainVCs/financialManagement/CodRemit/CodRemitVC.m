@@ -20,6 +20,8 @@
     self = [super init];
     if (self) {
         //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportTruckSaveNotification:) name:kNotification_TransportTruckSaveRefresh object:nil];
+        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+        
         self.viewArray = [NSMutableArray new];
         [self.viewArray addObject:@{@"title":@"等待打款",@"VC":[[CodRemitTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"已打款",@"VC":[[CodRemitTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];

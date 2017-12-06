@@ -237,7 +237,7 @@ static NSString *userRoleKey = @"role_id";
     }
     else if ([key isEqualToString:@"power_service"]) {
         if (!canSelectPowerServices) {
-//            [self doShowHintFunction:@"只有财务才能选择"];
+            [self doShowHintFunction:@"只有财务才能选择"];
             return;
         }
         

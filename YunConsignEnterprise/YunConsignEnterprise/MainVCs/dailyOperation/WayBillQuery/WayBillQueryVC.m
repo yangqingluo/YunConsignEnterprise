@@ -206,6 +206,7 @@
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
         _condition.is_cancel = @"2";
+        _condition.start_time = [_condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
     }
     return _condition;
 }
