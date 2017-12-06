@@ -19,12 +19,12 @@
     
     [self.view insertSubview:self.scrollView atIndex:0];
     CGFloat scale = 4.5f + 2.0 * self.condition.show_column.count;
-    if (self.type == PublicResultWithScrollTableType_FreightNotPay) {
+    if (self.type != PublicResultWithScrollTableType_DEFAULT) {
         scale = 6.5f + 2.0 * self.condition.show_column.count;
     }
     [self.edgeArray addObject:@(1.0 / scale)];
     [self.edgeArray addObject:@(3.5 / scale)];
-    if (self.type == PublicResultWithScrollTableType_FreightNotPay) {
+    if (self.type != PublicResultWithScrollTableType_DEFAULT) {
         [self.edgeArray addObject:@(2.0 / scale)];
     }
     

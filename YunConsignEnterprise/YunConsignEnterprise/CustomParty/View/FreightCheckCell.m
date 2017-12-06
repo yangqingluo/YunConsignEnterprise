@@ -19,6 +19,7 @@
     NSMutableArray *m_array = [NSMutableArray new];
     [m_array addObject:[NSString stringWithFormat:@"%d", (int)self.indexPath.row + 1]];
     [m_array addObject:notNilString(data.goods_number, nil)];
+    [m_array addObject:notNilString(data.consignee_name, nil)];
     for (NSString *val in self.valArray) {
         [m_array addObject:notNilString([data valueForKey:val], @"0")];
     }

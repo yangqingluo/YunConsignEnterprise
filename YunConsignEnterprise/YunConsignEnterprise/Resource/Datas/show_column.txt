@@ -82,9 +82,17 @@
 {
     "dict_id" : 0,
     "item_id" : 0,
-    "item_name" : "少款",
+    "item_name" : "中转费",
     "item_note" : "",
     "item_sort" : 11,
+    "item_val" : "transfer_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "少款",
+    "item_note" : "",
+    "item_sort" : 12,
     "item_val" : "less_indemnity_amount"
 },
 {
@@ -92,7 +100,7 @@
     "item_id" : 0,
     "item_name" : "赔款",
     "item_note" : "",
-    "item_sort" : 12,
+    "item_sort" : 13,
     "item_val" : "payment_indemnity_amount"
 },
 {
@@ -100,7 +108,7 @@
     "item_id" : 0,
     "item_name" : "包送",
     "item_note" : "",
-    "item_sort" : 13,
+    "item_sort" : 14,
     "item_val" : "deliver_indemnity_amount"
 }
 ]

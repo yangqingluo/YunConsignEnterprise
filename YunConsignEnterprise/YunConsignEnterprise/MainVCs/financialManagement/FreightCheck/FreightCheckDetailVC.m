@@ -155,6 +155,7 @@
         NSMutableArray *m_array = [NSMutableArray new];
         [m_array addObject:@"总计"];
         [m_array addObject:notNilString([self.totalData valueForKey:@"waybill_count"], @"0")];
+        [m_array addObject:notNilString([self.totalData valueForKey:@"consignee_name"], @"")];
         for (AppDataDictionary *map_item in self.condition.show_column) {
             [m_array addObject:notNilString([self.totalData valueForKey:map_item.item_val], @"0")];
         }
@@ -227,7 +228,7 @@
         PublicMutableButtonView *m_view = [[PublicMutableButtonView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.contentSize.width, m_height)];
         m_view.backgroundColor = CellHeaderLightBlueColor;
         [m_view updateEdgeSourceWithArray:self.edgeArray];
-        NSMutableArray *m_array = [NSMutableArray arrayWithObjects:@"序号", @"货号", nil];
+        NSMutableArray *m_array = [NSMutableArray arrayWithObjects:@"序号", @"货号", @"姓名", nil];
         [m_array addObjectsFromArray:self.nameArray];
         [m_view updateDataSourceWithArray:m_array];
         [m_view addSubview:NewSeparatorLine(CGRectMake(0, 0, m_view.width, appSeparaterLineSize))];

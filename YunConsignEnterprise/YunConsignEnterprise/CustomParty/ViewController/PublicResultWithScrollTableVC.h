@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSInteger, PublicResultWithScrollTableType) {
     PublicResultWithScrollTableType_DEFAULT = 0,
+    PublicResultWithScrollTableType_FreightCheck,//运输款对账
     PublicResultWithScrollTableType_FreightNotPay,//未收运输款
 };
 

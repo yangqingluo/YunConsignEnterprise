@@ -61,6 +61,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     }
     
     FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
+    vc.type = PublicResultWithScrollTableType_FreightCheck;
     vc.condition = self.condition;
     if (!vc.condition.show_column) {
         NSUInteger count = 3;
