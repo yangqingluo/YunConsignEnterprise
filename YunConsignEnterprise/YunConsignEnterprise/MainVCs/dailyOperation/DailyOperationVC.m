@@ -32,14 +32,14 @@
 
 - (void)setupNav{
     [self createNavWithTitle:nil createMenuItem:^UIView *(int nIndex){
-        if (nIndex == 0){
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            UIImage *i = [UIImage imageNamed:@"navbar_icon_menus"];
-            [btn setImage:i forState:UIControlStateNormal];
-            [btn setFrame:CGRectMake(0, 0, 64, 44)];
-            [btn addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            return btn;
-        }
+//        if (nIndex == 0){
+//            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            UIImage *i = [UIImage imageNamed:@"navbar_icon_menus"];
+//            [btn setImage:i forState:UIControlStateNormal];
+//            [btn setFrame:CGRectMake(0, 0, 64, 44)];
+//            [btn addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
+//            return btn;
+//        }
         
         return nil;
     }];
