@@ -116,6 +116,9 @@
 #define kNotification_DailyReimbursementApplyRefresh    @"kNotification_DailyReimbursementApplyRefresh"//报销申请更新
 #define kNotification_DailyReimbursementCheckRefresh    @"kNotification_DailyReimbursementCheckRefresh"//报销审核更新
 
+#define key_ServicePackage  @"ServicePackage"
+#define key_ServiceGood     @"ServiceGood"
+
 typedef enum : NSUInteger {
     PowerType_CustomerManagement = 1,
     PowerType_OrderManagement    = 4,

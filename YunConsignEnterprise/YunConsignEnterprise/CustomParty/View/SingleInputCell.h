@@ -12,5 +12,7 @@
 
 @property (strong, nonatomic) PublicInputCellView *baseView;
 @property (assign, nonatomic) BOOL isShowBottomEdge;
+//备用，使用时实现
+@property (strong, nonatomic) IndexPathButton *actionButton;
 
 @end

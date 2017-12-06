@@ -169,7 +169,7 @@
         cell.firstRightLabel.right = cell.baseView.width - kEdge;
         cell.firstLeftLabel.width = cell.firstRightLabel.left - 2 * kEdge;
         
-        cell.secondRightLabel.width = [AppPublic textSizeWithString:@"时间：2017-01-01" font:cell.secondRightLabel.font constantHeight:cell.secondRightLabel.height].width;
+        cell.secondRightLabel.width = [AppPublic textSizeWithString:@"时间：2017-01-01 " font:cell.secondRightLabel.font constantHeight:cell.secondRightLabel.height].width;
         cell.secondRightLabel.right = cell.baseView.width - kEdge;
         cell.secondLeftLabel.width = cell.secondRightLabel.left - 2 * kEdge;
     }

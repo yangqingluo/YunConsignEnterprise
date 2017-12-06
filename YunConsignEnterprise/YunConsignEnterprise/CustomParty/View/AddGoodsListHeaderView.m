@@ -10,6 +10,7 @@
 
 #import "SingleInputCell.h"
 #import "DoubleInputCell.h"
+#import "UIResponder+Router.h"
 
 @interface AddGoodsListHeaderView ()<UITextFieldDelegate>
 
@@ -30,6 +31,14 @@
                          @{@"title":@"方",@"subTitle":@"请输入"}]];
     }
     return self;
+}
+
+- (void)commonButtonAction:(IndexPathButton *)button {
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"tag" : @(button.tag)}];
+    if (button.indexPath) {
+        [m_dic setObject:button.indexPath forKey:@"indexPath"];
+    }
+    [self routerEventWithName:Event_AddGoodsListHeaderViewButtonClicked userInfo:[NSDictionary dictionaryWithDictionary:m_dic]];
 }
 
 #pragma mark - getter
@@ -73,15 +82,17 @@
             [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             cell.baseView.textField.delegate = self;
             
-            UIButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+            IndexPathButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
             [btn setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(commonButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell.baseView addRightView:btn];
+            cell.actionButton = btn;
         }
         cell.baseView.textLabel.text = item[@"title"];
         cell.baseView.textField.placeholder = item[@"subTitle"];
         cell.baseView.textField.text = @"";
         cell.baseView.textField.indexPath = [indexPath copy];
-        
+        cell.actionButton.indexPath = [indexPath copy];
         switch (indexPath.row) {
             case 0:{
                 if (self.data.goods_name.length) {

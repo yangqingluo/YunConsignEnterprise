@@ -336,6 +336,47 @@
     }];
 }
 
+- (void)pullServicePackageArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = @{};
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServicePackageList" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppPackageInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                if (indexPath) {
+                    [weakself touchRowButtonAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+- (void)pullServiceGoodArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = @{};
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServiceGoodList" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppGoodInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                if (indexPath) {
+                    [weakself touchRowButtonAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)doCheckUserIsOrNotFinanceFunction:(NSIndexPath *)indexPath {
     [self doShowHudFunction];
     QKWEAKSELF;

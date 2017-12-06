@@ -10,6 +10,7 @@
 
 #import "FourItemsListCell.h"
 #import "AddGoodsListHeaderView.h"
+#import "BlockActionSheet.h"
 
 @interface AddGoodsVC ()
 
@@ -63,12 +64,12 @@
         [self showHint:@"请输入包装类型"];
     }
     else if (!self.headerView.data.number) {
-        [self showHint:@"请输入件数"];
-    }
-    else if (!self.headerView.data.freight) {
-        [self showHint:@"请输入运费"];
+        [self showHint:@"请输入货物件数"];
     }
     else {
+        if (!self.headerView.data.freight) {
+            self.headerView.data.freight = @"0";
+        }
         if (!self.headerView.data.weight) {
             self.headerView.data.weight = @"0";
         }
@@ -93,6 +94,56 @@
             [weakself.tableView reloadData];
         }
     }];
+}
+
+- (void)touchRowButtonAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissKeyboard];
+    if (indexPath.row == 0) {
+        NSString *key = key_ServiceGood;
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppGoodInfo *m_data in dataArray) {
+                [m_array addObject:m_data.good_name];
+            }
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    AppGoodInfo *good = dataArray[buttonIndex - 1];
+                    weakself.headerView.data.goods_name = good.good_name;
+                    [weakself.headerView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+                [[UserPublic getInstance].dataMapDic removeObjectForKey:key];
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullServiceGoodArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
+    else if (indexPath.row == 1) {
+        NSString *key = key_ServicePackage;
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (AppPackageInfo *m_data in dataArray) {
+                [m_array addObject:m_data.package_name];
+            }
+            QKWEAKSELF;
+            BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                    AppPackageInfo *package = dataArray[buttonIndex - 1];
+                    weakself.headerView.data.packge = package.package_name;
+                    [weakself.headerView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+                [[UserPublic getInstance].dataMapDic removeObjectForKey:key];
+            } otherButtonTitlesArray:m_array];
+            [sheet showInView:self.view];
+        }
+        else {
+            [self pullServicePackageArrayFunctionForCode:key selectionInIndexPath:indexPath];
+        }
+    }
 }
 
 #pragma mark - getter
@@ -152,7 +203,7 @@
         cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.firstRightLabel.width = [AppPublic textSizeWithString:@"时间：2017-01-01" font:cell.firstRightLabel.font constantHeight:cell.firstRightLabel.height].width;
+        cell.firstRightLabel.width = [AppPublic textSizeWithString:@"时间：2017-01-01 " font:cell.firstRightLabel.font constantHeight:cell.firstRightLabel.height].width;
         cell.firstRightLabel.right = cell.baseView.width - kEdge;
         cell.firstLeftLabel.width = cell.firstRightLabel.left - 2 * kEdge;
         
@@ -185,6 +236,17 @@
     }
 //    self.headerView.data.freight = [item.total_amount longLongValue];
     [self.headerView.tableView reloadData];
+}
+
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_AddGoodsListHeaderViewButtonClicked]) {
+        NSDictionary *m_dic = (NSDictionary *)userInfo;
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        if (indexPath) {
+            [self touchRowButtonAtIndexPath:indexPath];
+        }
+    }
 }
 
 @end

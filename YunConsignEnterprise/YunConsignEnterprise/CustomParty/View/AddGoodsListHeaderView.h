@@ -8,6 +8,8 @@
 
 #import "PublicListHeaderView.h"
 
+#define Event_AddGoodsListHeaderViewButtonClicked @"Event_AddGoodsListHeaderViewButtonClicked"
+
 @interface AddGoodsListHeaderView : PublicListHeaderView
 
 @property (strong, nonatomic) AppGoodsInfo *data;
