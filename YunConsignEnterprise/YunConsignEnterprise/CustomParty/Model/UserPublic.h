@@ -31,6 +31,9 @@
 NSString *serviceDataMapKeyForCity(NSString *open_city_id);
 NSString *serviceDataMapKeyForTruck(NSString *transport_truck_id);
 
+//检查是否是财务数据
+@property (strong, nonatomic) AppCheckUserFinanceInfo *financeData;
+
 //保存用户数据
 - (void)saveUserData:(AppUserInfo *)data;
 //清除

@@ -336,6 +336,26 @@
     }];
 }
 
+- (void)doCheckUserIsOrNotFinanceFunction:(NSIndexPath *)indexPath {
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_checkUserIsOrNotFinanceFunction" Parm:nil completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            if ([responseBody isKindOfClass:[ResponseItem class]]) {
+                ResponseItem *item = (ResponseItem *)responseBody;
+                if (item.items.count) {
+                    [UserPublic getInstance].financeData = [AppCheckUserFinanceInfo mj_objectWithKeyValues:item.items[0]];
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 #pragma setter
 - (void)setTitle:(NSString *)title{
     [super setTitle:title];

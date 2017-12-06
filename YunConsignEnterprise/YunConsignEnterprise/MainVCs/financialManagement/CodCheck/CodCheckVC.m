@@ -11,8 +11,6 @@
 
 @interface CodCheckVC ()
 
-@property (strong, nonatomic) AppCheckUserFinanceInfo *financeData;
-
 @end
 
 @implementation CodCheckVC
@@ -61,8 +59,8 @@
     NSDictionary *m_dic = self.showArray[indexPath.row];
     NSString *key = m_dic[@"key"];
     if ([key isEqualToString:@"power_service"]) {
-        if (self.financeData) {
-            if (!isTrue(self.financeData.is_finance)) {
+        if ([UserPublic getInstance].financeData) {
+            if (!isTrue([UserPublic getInstance].financeData.is_finance)) {
                 [self showHint:@"只有财务才能选择收款网点"];
                 return;
             }
@@ -74,26 +72,6 @@
     }
     
     [super selectRowAtIndexPath:indexPath];
-}
-
-- (void)doCheckUserIsOrNotFinanceFunction:(NSIndexPath *)indexPath {
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_finance_checkUserIsOrNotFinanceFunction" Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            if ([responseBody isKindOfClass:[ResponseItem class]]) {
-                ResponseItem *item = (ResponseItem *)responseBody;
-                if (item.items.count) {
-                    weakself.financeData = [AppCheckUserFinanceInfo mj_objectWithKeyValues:item.items[0]];
-                    [weakself selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself showHint:error.userInfo[@"message"]];
-        }
-    }];
 }
 
 @end
