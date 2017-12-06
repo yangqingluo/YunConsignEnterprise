@@ -165,7 +165,7 @@
         cell = [[FourItemsListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.firstRightLabel.width = [AppPublic textSizeWithString:@"电话：01234567890" font:cell.firstRightLabel.font constantHeight:cell.firstRightLabel.height].width;
+        cell.firstRightLabel.width = [AppPublic textSizeWithString:@"电话：01234567890 " font:cell.firstRightLabel.font constantHeight:cell.firstRightLabel.height].width;
         cell.firstRightLabel.right = cell.baseView.width - kEdge;
         cell.firstLeftLabel.width = cell.firstRightLabel.left - 2 * kEdge;
         

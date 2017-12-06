@@ -19,10 +19,7 @@
     [super viewDidLoad];
     [self setupNav];
     
-    self.tableView.tableHeaderView = self.headerView;
-    self.tableView.tableFooterView = self.footerView;
-    
-    [self initialDataDictionaryForCodeArray:@[@"receipt_sign_type", @"cash_on_delivery_type"]];
+    [self clearData];
 }
 
 - (void)setupNav {
@@ -293,9 +290,20 @@
 - (void)saveWayBillSuccess:(AppSaveBackWayBillInfo *)info {
     QKWEAKSELF;
     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已保存" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
-        [weakself goBack];
+        [weakself clearData];
     } otherButtonTitles:nil];
     [alert show];
+}
+
+- (void)clearData {
+    _toSaveData = nil;
+    _headerView = nil;
+    [self.goodsArray removeAllObjects];
+    self.tableView.tableHeaderView = self.headerView;
+    self.tableView.tableFooterView = self.footerView;
+    [self initialDataDictionaryForCodeArray:@[@"receipt_sign_type", @"cash_on_delivery_type"]];
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 #pragma mark - getter
