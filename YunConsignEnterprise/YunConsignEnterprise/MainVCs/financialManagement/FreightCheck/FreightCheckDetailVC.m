@@ -289,7 +289,7 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        int tag = [m_dic[@"tag"] intValue] - 2;
+        int tag = [m_dic[@"tag"] intValue] - 3;
         if (tag >= 0 && tag < self.valArray.count) {
             NSString *val = self.valArray[tag];
             if ([self.condition.order_by hasSuffix:@"desc"]) {
