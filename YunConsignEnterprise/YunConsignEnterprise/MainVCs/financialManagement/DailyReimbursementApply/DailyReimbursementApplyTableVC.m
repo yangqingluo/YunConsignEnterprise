@@ -145,8 +145,7 @@
 
 - (void)updateSubviews {
     if (self.indextag == 1) {
-        int daily_fee = [self.totalData[@"daily_fee"] intValue];
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%d元", daily_fee];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%@元", notShowFooterZeroString(self.totalData[@"daily_fee"], @"0")];
     }
     [self.tableView reloadData];
 }

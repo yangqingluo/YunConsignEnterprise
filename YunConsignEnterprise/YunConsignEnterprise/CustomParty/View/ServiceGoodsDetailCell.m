@@ -47,7 +47,7 @@
 #pragma mark - setter
 - (void)setData:(AppServiceGoodsDetailInfo *)data {
     _data = data;
-    [self.baseView updateDataSourceWithArray:@[data.goods_number, data.goods_name, data.total_amount, [data.is_load intValue] > 0 ? @"√" : @""]];
+    [self.baseView updateDataSourceWithArray:@[data.goods_number, data.goods_name, notShowFooterZeroString(data.total_amount, @"0"), [data.is_load intValue] > 0 ? @"√" : @""]];
     if (self.baseView.showViews.count == 4) {
         UILabel *label = self.baseView.showViews[3];
         label.textColor = MainColor;

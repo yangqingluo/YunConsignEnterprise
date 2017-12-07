@@ -126,6 +126,18 @@ NSString *notNilString(NSString *string, NSString *placeString) {
     return string.length ? string : (placeString ? placeString : @"");
 }
 
+NSString *notShowFooterZeroString(NSString *string, NSString *placeString) {
+    NSArray *m_array = [string componentsSeparatedByString:@"."];
+    if (m_array.count == 2) {
+        NSString *m_string = m_array[1];
+        m_string = [m_string stringByReplacingOccurrencesOfString:@"0" withString:@""];
+        if (m_string.length == 0) {
+            return m_array[0];
+        }
+    }
+    return string.length ? string : (placeString ? placeString : @"");
+}
+
 // log NSSet with UTF8
 // if not ,log will be \Uxxx
 + (NSString *)logDic:(NSDictionary *)dic {

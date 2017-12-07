@@ -39,7 +39,7 @@
                 label.left = x;
                 x += width;
                 label.text = m_array[i];
-//                label.numberOfLines = 0;
+                label.numberOfLines = 0;
                 label.autoresizingMask = YES;
                 [self addSubview:label];
                 [self.showViews addObject:label];
