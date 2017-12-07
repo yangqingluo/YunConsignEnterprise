@@ -23,7 +23,5 @@
 - (void)pullDetailData;
 - (void)pushUpdateData;
 - (void)saveDataSuccess;
-- (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
-- (void)pullCityArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 
 @end

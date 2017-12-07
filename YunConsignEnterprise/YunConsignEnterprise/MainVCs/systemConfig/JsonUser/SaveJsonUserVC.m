@@ -24,17 +24,18 @@ static NSString *userRoleKey = @"role_id";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     if (self.baseData) {
         self.title = [NSString stringWithFormat:@"%@的详细信息", [self.baseData valueForKey:@"user_name"]];
         self.toSaveData = [AppUserDetailInfo mj_objectWithKeyValues:[self.baseData mj_keyValues]];
         [self.toSaveData setValue:nil forKey:@"login_pass"];
-        [self judgeUserRoleFunction];
+//        [self judgeUserRoleFunction];
     }
     else {
         self.title = @"添加员工";
         self.toSaveData = [AppUserDetailInfo new];
     }
+    
+    [self additionalDataDictionaryForCode:@"gender"];
 }
 
 //初始化数据
@@ -67,7 +68,7 @@ static NSString *userRoleKey = @"role_id";
                 weakself.detailData = detailData;
                 weakself.toSaveData = [detailData copy];
                 [weakself.toSaveData setValue:nil forKey:@"login_pass"];
-                [self judgeUserRoleFunction];
+//                [self judgeUserRoleFunction];
             }
             [weakself updateSubviews];
         }
@@ -300,6 +301,23 @@ static NSString *userRoleKey = @"role_id";
         [self.toSaveData setValue:nil forKey:key_name];
     }
     [self.tableView reloadData];
+}
+
+- (void)checkDataMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if ([self.toCheckDataMapSet containsObject:key] && ![self.toSaveData valueForKey:key]) {
+//            if () {
+                AppDataDictionary *dataDic = dataArray[dataArray.count - 1] ;
+                [self.toSaveData setValue:dataDic.item_val forKey:key];
+                [self.toSaveData setValue:dataDic.item_name forKey:[NSString stringWithFormat:@"%@_text", key]];
+                [self.tableView reloadData];
+//            }
+        }
+    }
+    else {
+        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
+    }
 }
 
 @end
