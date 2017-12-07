@@ -30,7 +30,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-3 * defaultDayTimeInterval];
+        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_CodLoanApplyRefresh object:nil];
     }
     return self;
