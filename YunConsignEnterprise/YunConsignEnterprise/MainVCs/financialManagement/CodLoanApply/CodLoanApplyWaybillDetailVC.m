@@ -8,6 +8,8 @@
 
 #import "CodLoanApplyWaybillDetailVC.h"
 
+#import "CodLoanApplyDetailCell.h"
+
 @interface CodLoanApplyWaybillDetailVC ()
 
 @end
@@ -44,6 +46,21 @@
             [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
+}
+
+#pragma mark - UITableView
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"CodLoanApplyDetailCell_cell";
+    CodLoanApplyDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[CodLoanApplyDetailCell alloc] initWithHeaderStyle: PublicHeaderCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.isChecker = self.isChecker;
+    }
+    id item = self.dataSource[indexPath.row];
+    cell.indexPath = [indexPath copy];
+    cell.data = item;
+    return cell;
 }
 
 @end

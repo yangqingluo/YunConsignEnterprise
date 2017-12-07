@@ -82,6 +82,7 @@
 		E4941E771FC4193500707A0D /* PublicSaveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4941E761FC4193500707A0D /* PublicSaveVC.m */; };
 		E49B06951F9D959600EE4437 /* WaybillLogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49B06941F9D959600EE4437 /* WaybillLogCell.m */; };
 		E49B06981F9D98A100EE4437 /* PublicRoundPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49B06971F9D98A100EE4437 /* PublicRoundPointView.m */; };
+		E49C02321FD9758A00235D3B /* CodLoanApplyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C02311FD9758A00235D3B /* CodLoanApplyDetailCell.m */; };
 		E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */; };
 		E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5B1F738FC3007E7D70 /* AddGoodsListHeaderView.m */; };
 		E49C4F5F1F7395AB007E7D70 /* SingleInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */; };
@@ -593,6 +594,8 @@
 		E49B06941F9D959600EE4437 /* WaybillLogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLogCell.m; sourceTree = "<group>"; };
 		E49B06961F9D98A100EE4437 /* PublicRoundPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicRoundPointView.h; sourceTree = "<group>"; };
 		E49B06971F9D98A100EE4437 /* PublicRoundPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicRoundPointView.m; sourceTree = "<group>"; };
+		E49C02301FD9758A00235D3B /* CodLoanApplyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyDetailCell.h; sourceTree = "<group>"; };
+		E49C02311FD9758A00235D3B /* CodLoanApplyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyDetailCell.m; sourceTree = "<group>"; };
 		E49C4F571F738EA3007E7D70 /* PublicListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicListHeaderView.h; sourceTree = "<group>"; };
 		E49C4F581F738EA3007E7D70 /* PublicListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicListHeaderView.m; sourceTree = "<group>"; };
 		E49C4F5A1F738FC3007E7D70 /* AddGoodsListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGoodsListHeaderView.h; sourceTree = "<group>"; };
@@ -1987,6 +1990,8 @@
 				E4F78C351FB199DD0003549A /* CodLoanCheckCell.m */,
 				E4A65B6C1FB1A51900942525 /* CodLoanCheckDetailCell.h */,
 				E4A65B6D1FB1A51900942525 /* CodLoanCheckDetailCell.m */,
+				E49C02301FD9758A00235D3B /* CodLoanApplyDetailCell.h */,
+				E49C02311FD9758A00235D3B /* CodLoanApplyDetailCell.m */,
 				E4F283561FB1B1CD005A0BC1 /* CodRemitCell.h */,
 				E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */,
 				E4F2835F1FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.h */,
@@ -3051,6 +3056,7 @@
 				E49D7E2D1FD38CAA009B59B7 /* CustomerEditVC.m in Sources */,
 				E4E2A3B61FB311AE00D8EC1C /* NSObject+MJCoding.m in Sources */,
 				E4E2A38E1FB311AE00D8EC1C /* BlockActionSheet.m in Sources */,
+				E49C02321FD9758A00235D3B /* CodLoanApplyDetailCell.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
 				E4DE91811FD5B04C00249730 /* NormalTableViewCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,

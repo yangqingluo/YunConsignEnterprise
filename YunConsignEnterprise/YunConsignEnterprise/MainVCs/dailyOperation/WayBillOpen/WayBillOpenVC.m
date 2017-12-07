@@ -230,32 +230,29 @@
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 1:{
-            NSString *key = @"";
-            if (indexPath.row == 1) {
-                key = @"receipt_sign_type";
-            }
-            else if (indexPath.row == 2) {
-                key = @"cash_on_delivery_type";
-            }
-            if (key.length) {
-                NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
-                if (dicArray.count) {
-                    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
-                    for (AppDataDictionary *m_data in dicArray) {
-                        [m_array addObject:m_data.item_name];
-                    }
-                    QKWEAKSELF;
-                    BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-                        if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
-                            AppDataDictionary *item = dicArray[buttonIndex - 1];
-                            [weakself.toSaveData setValue:item.item_val forKey:key];
-                            [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            if (indexPath.row == 1 || indexPath.row == 2) {
+                NSDictionary *m_dic = self.feeShowArray[indexPath.row - 1];
+                NSString *key = m_dic[@"key"];
+                if (key.length) {
+                    NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+                    if (dicArray.count) {
+                        NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
+                        for (AppDataDictionary *m_data in dicArray) {
+                            [m_array addObject:m_data.item_name];
                         }
-                    } otherButtonTitlesArray:m_array];
-                    [sheet showInView:self.view];
-                }
-                else {
-                    [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
+                        QKWEAKSELF;
+                        BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                            if (buttonIndex > 0 && (buttonIndex - 1) < m_array.count) {
+                                AppDataDictionary *item = dicArray[buttonIndex - 1];
+                                [weakself.toSaveData setValue:item.item_val forKey:key];
+                                [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                            }
+                        } otherButtonTitlesArray:m_array];
+                        [sheet showInView:self.view];
+                    }
+                    else {
+                        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:indexPath];
+                    }
                 }
             }
         }
