@@ -18,12 +18,12 @@
     [super viewDidLoad];
     
     [self.view insertSubview:self.scrollView atIndex:0];
-    CGFloat scale = 4.5f + 2.0 * self.condition.show_column.count;
+    CGFloat scale = 5.0f + 2.0 * self.condition.show_column.count;
     if (self.type != PublicResultWithScrollTableType_DEFAULT) {
-        scale = 6.5f + 2.0 * self.condition.show_column.count;
+        scale = 7.0f + 2.0 * self.condition.show_column.count;
     }
     [self.edgeArray addObject:@(1.0 / scale)];
-    [self.edgeArray addObject:@(3.5 / scale)];
+    [self.edgeArray addObject:@(4.0 / scale)];
     if (self.type != PublicResultWithScrollTableType_DEFAULT) {
         [self.edgeArray addObject:@(2.0 / scale)];
     }
@@ -39,6 +39,8 @@
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.scrollView.height);
     
     [self.scrollView addSubview:self.tableView];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didReceiveMemoryWarning {

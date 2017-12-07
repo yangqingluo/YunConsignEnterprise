@@ -27,8 +27,6 @@
     self.footerView.bottom = self.scrollView.height;
     [self.scrollView addSubview:self.footerView];
     self.tableView.height = self.footerView.top - self.tableView.top;
-    
-    //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
     [self beginRefreshing];
 }
@@ -243,6 +241,7 @@
         cell = [[FreightNotPayCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier showWidth:self.scrollView.contentSize.width showValueArray:self.valArray];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.baseView updateEdgeSourceWithArray:self.edgeArray];
+        [cell.contentView addSubview:NewSeparatorLine(CGRectMake(0, [self tableView:tableView heightForRowAtIndexPath:indexPath] - appSeparaterLineSize, self.scrollView.contentSize.width, appSeparaterLineSize))];
         //添加长按手势
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
         [cell addGestureRecognizer:longPressGesture];
@@ -255,16 +254,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
 }
 
 //#pragma mark - UIScrollViewDelegate
