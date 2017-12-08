@@ -58,8 +58,9 @@
         if (self.condition.search_time_type) {
             [m_dic setObject:self.condition.search_time_type.item_val forKey:@"time_type"];
         }
-        if (self.condition.power_service) {
-            [m_dic setObject:self.condition.power_service.service_id forKey:@"power_service_id"];
+        if (self.condition.power_service_array.count) {
+            NSArray *power_array = self.condition.IDArrayForPowerServiceArray;
+            [m_dic setObject:[power_array componentsJoinedByString:@","] forKey:@"power_service_id"];
         }
         if (self.condition.query_column && self.condition.query_val) {
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];

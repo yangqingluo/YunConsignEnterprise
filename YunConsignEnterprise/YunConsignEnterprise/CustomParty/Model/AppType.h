@@ -895,6 +895,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *transport_truck_id;//车辆id
 
 /*财务管理相关*/
+@property (strong, nonatomic) NSArray *power_service_array;//收款网点
 @property (strong, nonatomic) AppDataDictionary *search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *cod_search_time_type;//时间类型
 @property (strong, nonatomic) AppDataDictionary *cash_on_delivery_type;//代收方式
@@ -931,5 +932,6 @@ BOOL isTrue(NSString *string);
 - (NSString *)showEndStationString;
 - (NSString *)showArrayValStringWithKey:(NSString *)key;
 - (NSString *)showArrayNameStringWithKey:(NSString *)key;
+- (NSArray *)IDArrayForPowerServiceArray;
 
 @end

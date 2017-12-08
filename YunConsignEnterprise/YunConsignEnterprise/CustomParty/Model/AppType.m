@@ -605,6 +605,7 @@ BOOL isTrue(NSString *string) {
             return @{
                      @"show_column" : [AppDataDictionary class],
                      @"user_role" : [AppDataDictionary class],
+                     @"power_service_array" : [AppServiceInfo class],
                      };
         }];
     }
@@ -642,10 +643,23 @@ BOOL isTrue(NSString *string) {
 
 - (NSString *)showArrayNameStringWithKey:(NSString *)key {
     NSMutableArray *m_array = [NSMutableArray new];
-    for (AppDataDictionary *item in [self valueForKey:key]) {
-        [m_array addObject:item.item_name];
+    for (NSObject *item in [self valueForKey:key]) {
+        if ([item isKindOfClass:[AppDataDictionary class]]) {
+            [m_array addObject:[item valueForKey:@"item_name"]];
+        }
+        else if ([item isKindOfClass:[AppServiceInfo class]]) {
+            [m_array addObject:[item valueForKey:@"service_name"]];
+        }
     }
     return [m_array componentsJoinedByString:@","];
+}
+
+- (NSArray *)IDArrayForPowerServiceArray {
+    NSMutableArray *m_power_array = [NSMutableArray arrayWithCapacity:self.power_service_array.count];
+    for (AppServiceInfo *item in self.power_service_array) {
+        [m_power_array addObject:item.service_id];
+    }
+    return [NSArray arrayWithArray:m_power_array];
 }
 
 @end

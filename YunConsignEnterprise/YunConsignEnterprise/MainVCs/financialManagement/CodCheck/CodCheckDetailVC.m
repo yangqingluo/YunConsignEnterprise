@@ -73,8 +73,9 @@
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
             [m_dic setObject:self.condition.query_val forKey:@"query_val"];
         }
-        if (self.condition.power_service) {
-            [m_dic setObject:self.condition.power_service.service_id forKey:@"power_service_id"];
+        if (self.condition.power_service_array.count) {
+            NSArray *power_array = self.condition.IDArrayForPowerServiceArray;
+            [m_dic setObject:[power_array componentsJoinedByString:@","] forKey:@"power_service_id"];
         }
         if (self.condition.cash_on_delivery_type) {
             [m_dic setObject:self.condition.cash_on_delivery_type.item_val forKey:@"cash_on_delivery_type"];
