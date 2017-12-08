@@ -42,7 +42,7 @@
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : self.applyData.waybill_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : self.applyData.waybill_id, @"daily_apply_id" : self.applyData.daily_apply_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_reimburse_queryWaybillReimburseListByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
