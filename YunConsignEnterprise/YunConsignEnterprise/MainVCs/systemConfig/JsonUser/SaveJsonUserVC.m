@@ -28,7 +28,7 @@ static NSString *userRoleKey = @"role_id";
         self.title = [NSString stringWithFormat:@"%@的详细信息", [self.baseData valueForKey:@"user_name"]];
         self.toSaveData = [AppUserDetailInfo mj_objectWithKeyValues:[self.baseData mj_keyValues]];
         [self.toSaveData setValue:nil forKey:@"login_pass"];
-//        [self judgeUserRoleFunction];
+        [self judgeUserRoleFunction];
     }
     else {
         self.title = @"添加员工";
@@ -68,7 +68,7 @@ static NSString *userRoleKey = @"role_id";
                 weakself.detailData = detailData;
                 weakself.toSaveData = [detailData copy];
                 [weakself.toSaveData setValue:nil forKey:@"login_pass"];
-//                [self judgeUserRoleFunction];
+                [self judgeUserRoleFunction];
             }
             [weakself updateSubviews];
         }
@@ -297,8 +297,13 @@ static NSString *userRoleKey = @"role_id";
         canSelectPowerServices = NO;
         self.powerServiceIDBuffer = [[self.toSaveData valueForKey:key_id] copy];
         self.powerServiceNameBuffer = [[self.toSaveData valueForKey:key_name] copy];
-        [self.toSaveData setValue:nil forKey:key_id];
-        [self.toSaveData setValue:nil forKey:key_name];
+        if ([[self.toSaveData valueForKey:key_id] isEqualToString:[self.toSaveData valueForKey:@"service_id"]]) {
+            
+        }
+        else {
+            [self.toSaveData setValue:nil forKey:key_id];
+            [self.toSaveData setValue:nil forKey:key_name];
+        }
     }
     [self.tableView reloadData];
 }
