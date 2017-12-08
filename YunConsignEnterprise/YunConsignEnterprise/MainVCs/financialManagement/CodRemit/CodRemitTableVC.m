@@ -193,7 +193,7 @@
 }
 
 - (void)remittanceLoanApplySuccess {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_DailyReimbursementCheckRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_CodRemitRefresh object:nil];
     [self doShowHintFunction:@"操作成功"];
     [self beginRefreshing];
 }

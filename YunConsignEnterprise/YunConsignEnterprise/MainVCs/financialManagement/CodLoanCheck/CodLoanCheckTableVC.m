@@ -33,6 +33,13 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        [self beginRefreshing];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.top = 0;

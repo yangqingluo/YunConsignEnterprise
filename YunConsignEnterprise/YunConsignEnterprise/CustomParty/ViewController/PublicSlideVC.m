@@ -17,6 +17,20 @@
 
 @implementation PublicSlideVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    for (NSDictionary *m_dic in self.viewArray) {
+        PublicResultTableVC *vc = m_dic[@"VC"];
+        if (vc) {
+            if (self.slidePageView.superview) {
+                if ([self.viewArray indexOfObject:m_dic] == self.slidePageView.selectedIndex) {
+                    [vc viewWillAppear:animated];
+                }
+            }
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
