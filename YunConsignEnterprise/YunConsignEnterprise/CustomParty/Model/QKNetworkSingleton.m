@@ -8,6 +8,12 @@
 #import "QKNetworkSingleton.h"
 #import "NSData+HTTPRequest.h"
 
+@interface QKNetworkSingleton ()
+
+@property (strong, nonatomic) UIAlertView *loginErrorAlert;
+
+@end
+
 @implementation QKNetworkSingleton
 
 + (QKNetworkSingleton *)sharedManager{
@@ -283,10 +289,13 @@ NSString *httpRespString(NSError *error, NSObject *object){
         switch ([(AppResponse *)object global].flag) {
             case -20100002:{
                 [[AFHTTPSessionManager manager] invalidateSessionCancelingTasks:NO];
-                
-                [[AppPublic getInstance] logout];
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"登录信息无效，请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+                if (!_loginErrorAlert) {
+                    [[AppPublic getInstance] logout];
+                    _loginErrorAlert = [[BlockAlertView alloc] initWithTitle:nil message:@"登录信息无效，请重新登录" cancelButtonTitle:@"确定" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                        _loginErrorAlert = nil;
+                    } otherButtonTitles:nil];
+                    [_loginErrorAlert show];
+                }
                 return YES;
             }
                 break;

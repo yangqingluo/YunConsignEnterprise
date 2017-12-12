@@ -9,6 +9,7 @@
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
+@property (nonatomic, strong) UIButton *zoneButton;
 @property (nonatomic, strong) UITextField *usernameTextField;
 @property (nonatomic, strong) UITextField *passwordTextField;
 
@@ -52,8 +53,25 @@
         noteLabel.bottom = headerView.height - kEdgeSmall;
     }
     
+    BOOL is_4s_or_earlier = screen_height < 568.0;
+    CGFloat m_edge = is_4s_or_earlier ? kEdgeSmall : kEdgeHuge;
+    
+    _zoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _zoneButton.frame = CGRectMake(0, headerView.bottom + m_edge, screen_width * 560.0 / 720.0, 40);
+    _zoneButton.centerX = 0.5 * screen_width;
+    _zoneButton.backgroundColor =[UIColor clearColor];
+    [_zoneButton setTitle:@"四川1区" forState:UIControlStateNormal];
+    [_zoneButton setTitleColor:baseTextColor forState:UIControlStateNormal];
+    [_zoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [AppPublic roundCornerRadius:_zoneButton cornerRadius:kButtonCornerRadius];
+    _zoneButton.layer.borderColor = baseSeparatorColor.CGColor;
+    _zoneButton.layer.borderWidth = 1.0;
+    
+    [_zoneButton addTarget:self action:@selector(zoneButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_zoneButton];
+    
     float inputHeight = 56;
-    UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.bottom + kEdgeBig, screen_width * 560.0 / 720.0, inputHeight * 2 + kEdgeBig)];
+    UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, self.zoneButton.bottom + (is_4s_or_earlier ? 0 : kEdge), self.zoneButton.width, inputHeight * 2 + kEdge)];
     inputView.centerX = 0.5 * screen_width;
     [self.view addSubview:inputView];
     
@@ -65,7 +83,8 @@
     [inputView addSubview:self.usernameTextField];
     [self addTextField:self.usernameTextField imageName:@"login_icon_phone"];
     
-    self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(kEdge, inputHeight + kEdgeBig, inputView.width - 2 * kEdge, inputHeight)];
+    self.passwordTextField = [[UITextField alloc] initWithFrame:self.usernameTextField.frame];
+    self.passwordTextField.bottom = inputView.height;
     self.passwordTextField.placeholder = @"请输入密码";
     self.passwordTextField.font = [UIFont systemFontOfSize:14.0];
     self.passwordTextField.secureTextEntry = YES;
@@ -77,7 +96,7 @@
     [inputView addSubview:NewSeparatorLine(CGRectMake(0, self.passwordTextField.bottom - appSeparaterLineSize, inputView.width, appSeparaterLineSize))];
     
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    loginButton.frame = CGRectMake(inputView.left, inputView.bottom + 40, inputView.width, 40);
+    loginButton.frame = CGRectMake(inputView.left, inputView.bottom + m_edge, inputView.width, 40);
     loginButton.backgroundColor =[UIColor clearColor];
     [loginButton setTitle:@"立即登录" forState:UIControlStateNormal];
     [loginButton setTitleColor:baseTextColor forState:UIControlStateNormal];
@@ -93,11 +112,11 @@
     self.usernameTextField.text = [ud objectForKey:kUserName];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
-- (void)addTextField:(UITextField *)textField imageName:(NSString *)imageName{
+- (void)addTextField:(UITextField *)textField imageName:(NSString *)imageName {
     textField.delegate = self;
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, textField.height)];
     leftView.backgroundColor = [UIColor clearColor];
@@ -111,7 +130,7 @@
     textField.leftViewMode = UITextFieldViewModeAlways;
 }
 
-- (void)loginAction{
+- (void)loginAction {
     [self.view endEditing:YES];
     
     if (self.usernameTextField.text.length == 0) {
@@ -133,13 +152,8 @@
     }
 }
 
-#pragma textfield
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSUInteger length = kInputLengthMax;
-    if ([textField isEqual:self.passwordTextField]) {
-        length = kPasswordLengthMax;
-    }
-    return range.location < length;
+- (void)zoneButtonAction {
+    
 }
 
 @end
