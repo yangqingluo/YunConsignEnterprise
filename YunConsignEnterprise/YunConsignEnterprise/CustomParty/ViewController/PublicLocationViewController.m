@@ -97,7 +97,7 @@
 
 /*!
  @brief 地图区域即将改变时会调用此接口
- @param mapview 地图View
+ @param mapView 地图View
  @param animated 是否动画
  */
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
@@ -106,7 +106,7 @@
 
 /*!
  @brief 地图区域改变完成后会调用此接口
- @param mapview 地图View
+ @param mapView 地图View
  @param animated 是否动画
  */
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{

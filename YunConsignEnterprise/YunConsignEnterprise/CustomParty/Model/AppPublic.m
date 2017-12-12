@@ -390,7 +390,7 @@ NSString *dateStringWithTimeString(NSString *string){
 
 + (Class)getVariableClassWithClass:(Class)myClass varName:(NSString *)varName {
     Class varClass = nil;
-    BOOL yn = NO;
+//    BOOL yn = NO;
     unsigned int count;
     objc_property_t* props = class_copyPropertyList(myClass, &count);
     for (int i = 0; i < count; i++) {
@@ -421,7 +421,6 @@ NSString *dateStringWithTimeString(NSString *string){
             NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length] - 4)];  //turns @"NSDate" into NSDate
             varClass = NSClassFromString(typeClassName);
         }
-        
     }
     free(props);
     return varClass;
