@@ -25,11 +25,11 @@
     [super viewDidLoad];
     [self setupNav];
     
-    //查询条件所属城市默认为当前城市
-    AppCityInfo *city = [AppCityInfo new];
-    city.open_city_id = [[UserPublic getInstance].userData.open_city_id copy];
-    city.open_city_name = [[UserPublic getInstance].userData.open_city_name copy];
-    self.condition.open_city = city;
+//    //查询条件所属城市默认为当前城市 2017.12.12取消该默认条件
+//    AppCityInfo *city = [AppCityInfo new];
+//    city.open_city_id = [[UserPublic getInstance].userData.open_city_id copy];
+//    city.open_city_name = [[UserPublic getInstance].userData.open_city_name copy];
+//    self.condition.open_city = city;
     
     self.footerView.bottom = self.view.height;
     [self.view addSubview:self.footerView];
