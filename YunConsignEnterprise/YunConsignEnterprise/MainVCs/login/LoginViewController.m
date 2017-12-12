@@ -7,6 +7,8 @@
 
 #import "LoginViewController.h"
 
+#import "BlockActionSheet.h"
+
 @interface LoginViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton *zoneButton;
@@ -60,7 +62,6 @@
     _zoneButton.frame = CGRectMake(0, headerView.bottom + m_edge, screen_width * 560.0 / 720.0, 40);
     _zoneButton.centerX = 0.5 * screen_width;
     _zoneButton.backgroundColor =[UIColor clearColor];
-    [_zoneButton setTitle:@"四川1区" forState:UIControlStateNormal];
     [_zoneButton setTitleColor:baseTextColor forState:UIControlStateNormal];
     [_zoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [AppPublic roundCornerRadius:_zoneButton cornerRadius:kButtonCornerRadius];
@@ -110,6 +111,8 @@
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     self.usernameTextField.text = [ud objectForKey:kUserName];
+    
+    [self updateZoneButtonTitle];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -153,7 +156,23 @@
 }
 
 - (void)zoneButtonAction {
-    
+    NSArray *dataArray = [AppPublic getInstance].urlZoneArray;
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+    for (AppDataDictionary *m_data in dataArray) {
+        [m_array addObject:m_data.item_name];
+    }
+    QKWEAKSELF;
+    BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+        if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+            [[AppPublic getInstance] saveURLZoneWithData:dataArray[buttonIndex - 1]];
+            [weakself updateZoneButtonTitle];
+        }
+    } otherButtonTitlesArray:m_array];
+    [sheet showInView:self.view];
+}
+
+- (void)updateZoneButtonTitle {
+    [self.zoneButton setTitle:[AppPublic getInstance].selectedURLZone.item_name forState:UIControlStateNormal];
 }
 
 @end

@@ -73,6 +73,7 @@
 		E4789A6D1FCD5B4700F1BD88 /* SaveJsonUserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4789A6C1FCD5B4700F1BD88 /* SaveJsonUserVC.m */; };
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
+		E48002D81FDFC57B00E7D943 /* url_zone.txt in Resources */ = {isa = PBXBuildFile; fileRef = E48002D71FDFC57B00E7D943 /* url_zone.txt */; };
 		E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */; };
 		E48C72C21FA9BD52007F7FC8 /* CodCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */; };
 		E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C72C41FA9BD83007F7FC8 /* PublicMutableLabelCell.m */; };
@@ -576,6 +577,7 @@
 		E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageAndText.m"; sourceTree = "<group>"; };
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
+		E48002D71FDFC57B00E7D943 /* url_zone.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = url_zone.txt; sourceTree = "<group>"; };
 		E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicFMWaybillQueryCell.h; sourceTree = "<group>"; };
 		E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicFMWaybillQueryCell.m; sourceTree = "<group>"; };
 		E48C72C01FA9BD52007F7FC8 /* CodCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodCheckCell.h; sourceTree = "<group>"; };
@@ -1337,6 +1339,7 @@
 				E46CA9A21FB06A33008F26F4 /* daily_name.txt */,
 				E42DACD11FCB0B81004FCDD1 /* show_column.txt */,
 				E430C0821FD157E400A94A23 /* show_column_cod_check.txt */,
+				E48002D71FDFC57B00E7D943 /* url_zone.txt */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -2773,6 +2776,7 @@
 				E4E2A3EA1FB311AE00D8EC1C /* UIBarButtonItemGrid@3x.png in Resources */,
 				E49D7F1D1FD38F16009B59B7 /* list_icon_checkbox_w_normal@2x.png in Resources */,
 				E49D7F5A1FD38F16009B59B7 /* tabbar_icon_money_selected@2x.png in Resources */,
+				E48002D81FDFC57B00E7D943 /* url_zone.txt in Resources */,
 				E49D7F2F1FD38F16009B59B7 /* list_icon_radio_normal@2x.png in Resources */,
 				E49D7F3A1FD38F16009B59B7 /* login_icon_phone@3x.png in Resources */,
 				E49D7F571FD38F16009B59B7 /* tabbar_icon_daily_selected@3x.png in Resources */,

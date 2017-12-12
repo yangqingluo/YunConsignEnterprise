@@ -96,8 +96,9 @@
 #define NumberWithPoint              @"0123456789."
 #define NumberWithDash               @"0123456789-"
 
-#define kUserName                    @"username_CRM"
-#define kUserData                    @"userdata_CRM"
+#define kUserName                    @"username_YunConsignEnterprise"
+#define kUserData                    @"userdata_YunConsignEnterprise"
+#define kUserZone                    @"userzone_YunConsignEnterprise"
 
 #define defaultDateFormat            @"yyyy-MM-dd"
 #define defaultHeadImageName         @"默认头像"
@@ -131,6 +132,10 @@ typedef void(^DoneBlock)(id object);
 
 //应用名称
 @property (strong, nonatomic) NSString *appName;
+
+//分区选择
+@property (strong, nonatomic) NSArray *urlZoneArray;
+@property (strong, nonatomic) AppDataDictionary *selectedURLZone;
 
 + (AppPublic *)getInstance;
 
@@ -218,5 +223,7 @@ NSString *dateStringWithTimeString(NSString *string);
 
 - (void)goToMainVC;
 - (void)goToLoginCompletion:(void (^)(void))completion;
+
+- (void)saveURLZoneWithData:(AppDataDictionary *)data;
 
 @end

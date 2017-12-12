@@ -53,6 +53,30 @@ __strong static AppPublic  *_singleManger = nil;
     return _appName;
 }
 
+- (NSArray *)urlZoneArray {
+    if (!_urlZoneArray) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"url_zone" ofType:@"txt"];
+        if (path) {
+            NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
+            _urlZoneArray = [AppDataDictionary mj_objectArrayWithKeyValuesArray:keyValuesArray];
+        }
+    }
+    return _urlZoneArray;
+}
+
+- (AppDataDictionary *)selectedURLZone {
+    if (!_selectedURLZone) {
+        NSDictionary *m_dic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserZone];
+        if (m_dic) {
+            _selectedURLZone = [AppDataDictionary mj_objectWithKeyValues:m_dic];
+        }
+        else {
+            _selectedURLZone = self.urlZoneArray[0];
+        }
+    }
+    return _selectedURLZone;
+}
+
 #pragma mark - public
 //检查该版本是否第一次使用
 BOOL isFirstUsing() {
@@ -458,6 +482,14 @@ NSString *dateStringWithTimeString(NSString *string){
     if (completion) {
         completion();
     }
+}
+
+- (void)saveURLZoneWithData:(AppDataDictionary *)data {
+    if (!data) {
+        return;
+    }
+    _selectedURLZone = [data copy];
+    [[NSUserDefaults standardUserDefaults] setObject:[_selectedURLZone mj_keyValues] forKey:kUserZone];
 }
 
 @end
