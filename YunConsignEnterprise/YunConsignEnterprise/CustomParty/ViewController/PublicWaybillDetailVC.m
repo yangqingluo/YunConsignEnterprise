@@ -172,6 +172,13 @@
 }
 
 #pragma mark - getter
+- (AppWayBillDetailInfo *)detailData {
+    if (!_detailData) {
+        _detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[self.data mj_keyValues]];
+    }
+    return _detailData;
+}
+
 - (WayBillDetailHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [WayBillDetailHeaderView new];
