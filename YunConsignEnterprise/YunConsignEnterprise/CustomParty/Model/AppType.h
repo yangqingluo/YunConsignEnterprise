@@ -914,6 +914,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *note;//报销备注
 @property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
 @property (strong, nonatomic) AppServiceInfo *reimbursement_service;//报销网点
+@property (strong, nonatomic) NSString *is_match_waybill;//是否关联运单
 
 /*系统设置相关*/
 @property (strong, nonatomic) AppCityInfo *open_city;//所属城市

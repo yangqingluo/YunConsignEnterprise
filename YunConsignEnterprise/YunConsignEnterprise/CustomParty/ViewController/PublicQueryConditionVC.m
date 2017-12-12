@@ -180,7 +180,8 @@
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                            @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
-                           @{@"title":@"报销网点",@"subTitle":@"请选择",@"key":@"reimbursement_service"}];
+                           @{@"title":@"报销门店",@"subTitle":@"请选择",@"key":@"reimbursement_service"},
+                           @{@"title":@"关联运单",@"subTitle":@"请选择",@"key":@"is_match_waybill"}];
         }
             break;
             
@@ -407,7 +408,7 @@
 
 - (NSSet *)boolValidSet {
     if (!_boolValidSet) {
-        _boolValidSet = [NSSet setWithObjects:@"is_cancel", @"waybill_receive_state", nil];
+        _boolValidSet = [NSSet setWithObjects:@"is_cancel", @"waybill_receive_state", @"is_match_waybill", nil];
     }
     return _boolValidSet;
 }

@@ -67,6 +67,9 @@
         if (self.condition.reimbursement_service) {
             [m_dic setObject:self.condition.reimbursement_service.service_id forKey:@"service_id"];
         }
+        if (self.condition.is_match_waybill) {
+            [m_dic setObject:self.condition.is_match_waybill forKey:@"is_match_waybill"];
+        }
     }
     [self pullBaseTotalData:isReset parm:m_dic];
     QKWEAKSELF;
