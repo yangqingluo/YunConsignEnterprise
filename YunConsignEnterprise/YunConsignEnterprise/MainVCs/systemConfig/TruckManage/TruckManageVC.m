@@ -118,12 +118,12 @@
 }
 
 - (void)doRemovingDataAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row > self.dataSource.count - 1) {
+    if (indexPath.section > self.dataSource.count - 1) {
         [self doShowHintFunction:@"数据越界"];
         return;
     }
     
-    AppTruckInfo *item = self.dataSource[indexPath.row];
+    AppTruckInfo *item = self.dataSource[indexPath.section];
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"truck_id" : item.truck_id}];
     [self doShowHudFunction];
     QKWEAKSELF;
@@ -194,16 +194,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    AppTruckInfo *item = self.dataSource[indexPath.row];
+    AppTruckInfo *item = self.dataSource[indexPath.section];
     cell.titleLabel.text = notNilString(item.truck_number_plate, nil);
     cell.subTitleLabel.text = [NSString stringWithFormat:@"%@ %@ %@", item.truck_driver_name, item.truck_driver_phone, notNilString(item.note, @"")];
-//    cell.baseView.textLabel.text = item.truck_number_plate;
-//    cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"%@ %@ %@", item.truck_driver_name, item.truck_driver_phone, notNilString(item.note, @"")];
-//    cell.baseView.textField.placeholder = @"";
-//    cell.baseView.textField.text = @"";
-//    cell.baseView.textField.indexPath = [indexPath copy];
-//    
-//    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     return cell;
 }
 
@@ -211,7 +204,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     SaveTruckVC *vc = [SaveTruckVC new];
-    vc.baseData = self.dataSource[indexPath.row];
+    vc.baseData = self.dataSource[indexPath.section];
     [self goToSaveVC:vc];
 }
 
