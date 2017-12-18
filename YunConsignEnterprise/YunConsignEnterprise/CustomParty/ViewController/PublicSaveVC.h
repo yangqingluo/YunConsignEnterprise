@@ -24,4 +24,5 @@
 - (void)pushUpdateData;
 - (void)saveDataSuccess;
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end

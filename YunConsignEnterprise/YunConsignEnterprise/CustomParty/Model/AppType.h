@@ -148,6 +148,14 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppPasswordInfo : AppType
+
+@property (strong, nonatomic) NSString *pass_old;//旧密码
+@property (strong, nonatomic) NSString *pass_new;//新密码
+@property (strong, nonatomic) NSString *pass_again;//确认新密码
+
+@end
+
 @interface AppCustomerInfo : AppType
 
 @property (strong, nonatomic) NSString *freight_cust_id;//客户编号
