@@ -13,6 +13,7 @@
 #import "ServiceGoodVC.h"
 #import "ServicePackageVC.h"
 #import "TruckManageVC.h"
+#import "PasswordChangeVC.h"
 
 #import "BlockAlertView.h"
 
@@ -90,6 +91,9 @@
                 }
                 else if ([item.menu_code isEqualToString:@"TRUCK_MANAGE"]) {
                     vc = [TruckManageVC new];
+                }
+                else if ([item.menu_code isEqualToString:@"PASSWORD_CHANGE"]) {
+                    vc = [PasswordChangeVC new];
                 }
                 else if ([item.menu_code isEqualToString:@"PRINT_SET"]) {
                     

@@ -446,7 +446,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *insurance_fee;//保价费
 @property (strong, nonatomic) NSString *is_take_goods;//是否上门接货 YES_NO
 @property (strong, nonatomic) NSString *take_goods_fee;//接货费
-@property (strong, nonatomic) NSString *is_deliver_goods;//是否送货上门 YES_NO
 @property (strong, nonatomic) NSString *deliver_goods_fee;//送货费
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式 RECEIPT_SIGN_TYPE 无回单、签字、盖章、签字+盖章
 @property (strong, nonatomic) NSString *receipt_sign_type_text;

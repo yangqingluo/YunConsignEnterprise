@@ -25,6 +25,8 @@
 		E42109081FD5CC0A00F89075 /* FreightNotPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42109071FD5CC0A00F89075 /* FreightNotPayCell.m */; };
 		E4266F791FA0C11B00C240C5 /* WaybillArrivalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */; };
 		E4266F7C1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */; };
+		E429AEB91FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E429AEB81FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png */; };
+		E429AEBD1FE7FC41004D4D98 /* PasswordChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E429AEBC1FE7FC41004D4D98 /* PasswordChangeVC.m */; };
 		E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */; };
 		E42DACD21FCB0B81004FCDD1 /* show_column.txt in Resources */ = {isa = PBXBuildFile; fileRef = E42DACD11FCB0B81004FCDD1 /* show_column.txt */; };
 		E42DACD51FCB0C39004FCDD1 /* PublicSelectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E42DACD41FCB0C39004FCDD1 /* PublicSelectionVC.m */; };
@@ -484,6 +486,9 @@
 		E4266F781FA0C11B00C240C5 /* WaybillArrivalDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillArrivalDetailCell.m; sourceTree = "<group>"; };
 		E4266F7A1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicWaybillArrivalFooterView.h; sourceTree = "<group>"; };
 		E4266F7B1FA0CD0400C240C5 /* PublicWaybillArrivalFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicWaybillArrivalFooterView.m; sourceTree = "<group>"; };
+		E429AEB81FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_icon_PASSWORD_CHANGE@3x.png"; sourceTree = "<group>"; };
+		E429AEBB1FE7FC41004D4D98 /* PasswordChangeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeVC.h; sourceTree = "<group>"; };
+		E429AEBC1FE7FC41004D4D98 /* PasswordChangeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeVC.m; sourceTree = "<group>"; };
 		E42D18C21FB42DDF00649825 /* SaveCodLoanApplySecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCodLoanApplySecondCell.h; sourceTree = "<group>"; };
 		E42D18C31FB42DDF00649825 /* SaveCodLoanApplySecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCodLoanApplySecondCell.m; sourceTree = "<group>"; };
 		E42DACD11FCB0B81004FCDD1 /* show_column.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column.txt; sourceTree = "<group>"; };
@@ -1223,6 +1228,16 @@
 			path = YunConsignEnterprise/MainVCs/SystemConfig/ServicePackage;
 			sourceTree = SOURCE_ROOT;
 		};
+		E429AEBA1FE7FC2B004D4D98 /* PasswordChange */ = {
+			isa = PBXGroup;
+			children = (
+				E429AEBB1FE7FC41004D4D98 /* PasswordChangeVC.h */,
+				E429AEBC1FE7FC41004D4D98 /* PasswordChangeVC.m */,
+			);
+			name = PasswordChange;
+			path = YunConsignEnterprise/MainVCs/SystemConfig/PasswordChange;
+			sourceTree = SOURCE_ROOT;
+		};
 		E44764891F611AC70084F4EB /* MainVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,6 +1319,7 @@
 			children = (
 				E44764971F611BF70084F4EB /* SystemConfigVC.h */,
 				E44764981F611BF70084F4EB /* SystemConfigVC.m */,
+				E429AEBA1FE7FC2B004D4D98 /* PasswordChange */,
 				E4941E651FC413EC00707A0D /* JsonUser */,
 				E4941E661FC413EC00707A0D /* OpenCity */,
 				E4941E671FC413EC00707A0D /* PrintSet */,
@@ -1685,6 +1701,7 @@
 		E49D7EA51FD38F16009B59B7 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				E429AEB81FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png */,
 				E49D7EA61FD38F16009B59B7 /* content_icon_direction@2x.png */,
 				E49D7EA71FD38F16009B59B7 /* content_icon_direction@3x.png */,
 				E49D7EA81FD38F16009B59B7 /* content_icon_direction_w@2x.png */,
@@ -2703,6 +2720,7 @@
 				E49D7F0D1FD38F16009B59B7 /* daily_icon_CUST_MANAGE@3x.png in Resources */,
 				E4E2A3C81FB311AE00D8EC1C /* MJRefresh.bundle in Resources */,
 				E49D7F551FD38F16009B59B7 /* tabbar_icon_daily_normal@3x.png in Resources */,
+				E429AEB91FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png in Resources */,
 				E49D7F4C1FD38F16009B59B7 /* navbar_icon_search@3x.png in Resources */,
 				E49D7F4D1FD38F16009B59B7 /* setting_icon_JSON_USER@3x.png in Resources */,
 				E49D7F631FD38F16009B59B7 /* TYBANG_s@3x.png in Resources */,
@@ -2924,6 +2942,7 @@
 				E4B05EF81F9F7B9900895591 /* EndServiceCell.m in Sources */,
 				E4E2A4011FB311AE00D8EC1C /* UIImage+MultiFormat.m in Sources */,
 				E49D7E3E1FD38CAA009B59B7 /* PublicCustomerPhoneVC.m in Sources */,
+				E429AEBD1FE7FC41004D4D98 /* PasswordChangeVC.m in Sources */,
 				E4E2A3831FB311AE00D8EC1C /* AFURLSessionManager.m in Sources */,
 				E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */,
 				E4E2A40E1FB311AE00D8EC1C /* TZPhotoPreviewCell.m in Sources */,
