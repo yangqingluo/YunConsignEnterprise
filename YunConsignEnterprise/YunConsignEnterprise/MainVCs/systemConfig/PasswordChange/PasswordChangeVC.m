@@ -39,9 +39,9 @@
 
 //初始化数据
 - (void)initializeData {
-    self.showArray = @[@{@"title":@"旧密码",@"subTitle":@"请输入旧密码",@"key":@"pass_old", @"need" : @YES},
-                       @{@"title":@"新密码",@"subTitle":@"请输入新密码",@"key":@"pass_new", @"need" : @YES},
-                       @{@"title":@"请确认密码",@"subTitle":@"请确认新密码",@"key":@"pass_again", @"need" : @YES}];
+    self.showArray = @[@{@"title":@"旧密码",@"subTitle":@"请输入旧密码",@"key":@"pass_old", @"need" : @YES, @"secureTextEntry" : @YES},
+                       @{@"title":@"新密码",@"subTitle":@"请输入新密码",@"key":@"pass_new", @"need" : @YES, @"secureTextEntry" : @YES},
+                       @{@"title":@"请确认密码",@"subTitle":@"请确认新密码",@"key":@"pass_again", @"need" : @YES, @"secureTextEntry" : @YES}];
 }
 
 - (void)pushUpdateData {
@@ -91,10 +91,4 @@
     [self goBackWithDone:YES];
 }
 
-#pragma mark - UITableView
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SingleInputCell *cell = (SingleInputCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-    cell.baseView.textField.secureTextEntry = YES;
-    return cell;
-}
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "WayBillSRHeaderView.h"
+#import "SingleInputCell.h"
+#import "PublicDatePickerView.h"
 
-@interface WayBillSRHeaderView ()
+@interface WayBillSRHeaderView ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIImageView *contentImageView;
 
@@ -17,11 +19,12 @@
 @implementation WayBillSRHeaderView
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, screen_width, 160 + kEdge)];
+    self = [super initWithFrame:CGRectMake(0, 0, screen_width, 160 + kCellHeightFilter + kEdge)];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.date = [NSDate date];
         [self setupHeader];
+        [self setupFooter];
         [self setupContent];
     }
     return self;
@@ -35,6 +38,7 @@
         [self addSubview:_titleView];
         self.headerView.top = self.titleView.bottom;
         self.contentView.top = self.headerView.bottom;
+        self.footerView.top = self.contentView.bottom;
     }
 }
 
@@ -60,15 +64,32 @@
     _receiverLabel = NewLabel(CGRectMake(rightSX, 0, _headerView.width - rightSX, _headerView.height), secondaryTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
     [_headerView addSubview:_receiverLabel];
     
-    self.dateLabel.text = stringFromDate(self.date, @"yyyy年MM月dd日");
+    self.dateLabel.text = stringFromDate(self.date, nil);
     self.senderLabel.text = @"发货人";
     self.senderLabel.hidden = YES;
     self.receiverLabel.text = @"收货人";
     self.receiverLabel.hidden = YES;
 }
 
+- (void)setupFooter {
+    _footerView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.width, kCellHeightFilter)];
+    _footerView.bottom = self.height;
+    _footerView.backgroundColor = [UIColor whiteColor];
+    _footerView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _footerView.delegate = self;
+    _footerView.dataSource = self;
+    [self addSubview:_footerView];
+    
+//    _dateCell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//    _dateCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    _dateCell.baseView.lineView.hidden = YES;
+//    [_footerView addSubview:_dateCell];
+    
+    [_footerView addSubview:NewSeparatorLine(CGRectMake(0, _footerView.height - appSeparaterLineSize, _contentView.width, appSeparaterLineSize))];
+}
+
 - (void)setupContent {
-    _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.width, self.height - self.headerView.bottom)];
+    _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.width, self.footerView.top - self.headerView.bottom)];
     _contentView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_contentView];
     
@@ -176,6 +197,64 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open
     }
 }
 
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return tableView.height;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"date_cell";
+    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+        cell.baseView.textField.enabled = NO;
+        cell.baseView.lineView.hidden = YES;
+    }
+    cell.baseView.textLabel.text = @"托运时间";
+    cell.baseView.textField.text = stringFromDate(self.date, nil);
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    QKWEAKSELF;
+    PublicDatePickerView *view = [[PublicDatePickerView alloc] initWithStyle:PublicDatePicker_Date andTitle:[NSString stringWithFormat:@"选择%@", @"托运时间"] callBlock:^(PublicDatePickerView *pickerView, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            weakself.date = pickerView.datePicker.date;
+        }
+    }];
+    view.datePicker.maximumDate = [NSDate date];
+    id value = self.date;
+    if (value) {
+        view.datePicker.date = value;
+    }
+    [view show];
+}
+
 #pragma mark - setter
 - (void)setSenderInfo:(AppSendReceiveInfo *)senderInfo {
     _senderInfo = senderInfo;
@@ -189,6 +268,8 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open
 
 - (void)setDate:(NSDate *)date {
     _date = date;
-    self.dateLabel.text = stringFromDate(self.date, @"yyyy年MM月dd日");
+    self.dateLabel.text = stringFromDate(self.date, nil);
+    [self.footerView reloadData];
 }
+
 @end
