@@ -30,7 +30,8 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+        self.condition.start_time = nil;
+        self.condition.end_time = nil;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_CodLoanApplyRefresh object:nil];
     }
     return self;
@@ -79,7 +80,7 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_CodLoanApply;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {

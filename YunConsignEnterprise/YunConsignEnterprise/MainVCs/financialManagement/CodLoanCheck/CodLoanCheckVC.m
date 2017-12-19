@@ -23,6 +23,8 @@
         self.viewArray = [NSMutableArray new];
         [self.viewArray addObject:@{@"title":@"等待审核",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
+        self.condition.start_time = nil;
+        self.condition.end_time = nil;
     }
     return self;
 }
@@ -55,7 +57,7 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_CodLoanCheck;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
