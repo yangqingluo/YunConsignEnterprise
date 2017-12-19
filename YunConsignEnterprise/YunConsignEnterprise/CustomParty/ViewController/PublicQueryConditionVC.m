@@ -376,7 +376,7 @@
         QKWEAKSELF;
         BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
             if (buttonIndex > 0) {
-                [weakself.condition setValue:buttonIndex == 1 ? @"1" : @"2" forKey:key];
+                [weakself.condition setValue:boolString(buttonIndex == 1) forKey:key];
                 [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
         } otherButtonTitlesArray:m_array];

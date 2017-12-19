@@ -358,7 +358,6 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *return_waybill_number;//原货返回货号
 @property (strong, nonatomic) NSString *return_waybill_id;//原货返回运单编号
 @property (strong, nonatomic) NSString *consignment_time;//托运日期
-@property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
 @property (strong, nonatomic) NSString *receipt_sign_type;//回单签收方式
 @property (strong, nonatomic) NSString *cash_on_delivery_type;//代收款类型
 @property (strong, nonatomic) NSString *freight;//运费
@@ -367,6 +366,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_total_weight;//物品总重量
 @property (strong, nonatomic) NSString *goods_total_volume;//物品总体积
 @property (strong, nonatomic) NSString *change_cause;//修改原因
+@property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
+@property (strong, nonatomic) NSString *is_update_waybill_item;//是否更新货物明细
 
 - (void)appendSenderInfo:(AppSendReceiveInfo *)info;
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info;

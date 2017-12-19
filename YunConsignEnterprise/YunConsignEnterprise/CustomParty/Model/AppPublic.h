@@ -178,6 +178,11 @@ NSString *notShowFooterZeroString(NSString *string, NSString *placeString);
  */
 NSString *indexChineseString(NSUInteger index);
 
+/*!
+ @brief 布尔值转服务器需要的字符
+ */
+NSString *boolString(BOOL yn);
+
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead);
 

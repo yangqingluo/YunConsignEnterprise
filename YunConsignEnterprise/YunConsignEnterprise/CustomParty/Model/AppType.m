@@ -260,7 +260,7 @@ BOOL isTrue(NSString *string) {
         NSString *value = m_dic[key];
         if ([set_bool containsObject:key]) {
             BOOL yn = isTrue(value);
-            [edit_dic setValue:yn ? @"1" : @"2" forKey:key];
+            [edit_dic setValue:boolString(yn) forKey:key];
         }
         else {
             [edit_dic setValue:value forKey:key];

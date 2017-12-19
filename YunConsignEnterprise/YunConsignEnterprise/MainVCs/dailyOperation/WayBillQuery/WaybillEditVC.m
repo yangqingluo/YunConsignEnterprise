@@ -63,24 +63,15 @@
         [self.toSaveData appendReceiverInfo:self.headerView.receiverInfo];
     }
     
-//    if (!self.goodsArray.count) {
-//        [self showHint:@"请添加货物信息"];
-//        return;
-//    }
-//    else {
-//        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
-//    }
+    if (!self.goodsArray.count) {
+        [self showHint:@"请添加货物信息"];
+        return;
+    }
+    else {
+        self.toSaveData.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
+    }
     
-//    long long amount = [self.toSavedata.total_amount longLongValue];
-//    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-//    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-//    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
-//    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
-//        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
-//        return;
-//    }
-    
-    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
+    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, nil);
     NSDictionary *toSaveDic = [self.toSaveData mj_keyValues];
     NSDictionary *detailDic = [self.detailData mj_keyValues];
     NSMutableDictionary *m_dic = [NSMutableDictionary new];
@@ -88,9 +79,15 @@
     BOOL hasChanged = NO;
     for (NSString *key in toSaveDic.allKeys) {
         if ([key isEqualToString:@"waybill_items"]) {
-            continue;
+            if (is_update_waybill_item) {
+                hasChanged = YES;
+                [m_dic setObject:boolString(is_update_waybill_item) forKey:@"is_update_waybill_item"];
+            }
+            else {
+                continue;
+            }
         }
-        if (![toSaveDic[key] isEqual:detailDic[key]]) {
+        else if (![toSaveDic[key] isEqual:detailDic[key]]) {
             hasChanged = YES;
         }
         [m_dic setObject:toSaveDic[key] forKey:key];
@@ -130,7 +127,7 @@
     if (changedDic) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillListRefresh object:nil];
         for (NSString *key in changedDic.allKeys) {
-            if ([key isEqualToString:@"change_cause"]) {
+            if ([key isEqualToString:@"change_cause"] || [key isEqualToString:@"is_update_waybill_item"] || [key isEqualToString:@"waybill_items"]) {
                 continue;
             }
             [self.detailData setValue:changedDic[key] forKey:key];
@@ -183,9 +180,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
-    if (indexPath.section == 0) {
-        reuseIdentifier = @"goods_title_cell";
-    }
+//    if (indexPath.section == 0) {
+//        reuseIdentifier = @"goods_title_cell";
+//    }
     WayBillTitleCell *cell = (WayBillTitleCell *)[super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     if (indexPath.section == 2) {
         cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"总运费：%@", self.toSaveData.total_amount];
@@ -193,8 +190,8 @@
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
-}
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return NO;
+//}
 
 @end

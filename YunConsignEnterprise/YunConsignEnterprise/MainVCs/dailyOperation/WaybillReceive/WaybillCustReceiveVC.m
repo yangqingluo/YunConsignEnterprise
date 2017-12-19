@@ -188,7 +188,7 @@
                         if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
                             AppDataDictionary *m_data = dicArray[buttonIndex - 1];
                             [weakself.toSaveData setValue:m_data.item_val forKey:key];
-                            if ([m_data.item_val isEqualToString:@"2"]) {
+                            if ([m_data.item_val isEqualToString:boolString(NO)]) {
                                 weakself.toSaveData.cash_on_delivery_causes_note = m_data.item_name;
                                 weakself.toSaveData.cash_on_delivery_real_amount = [NSString stringWithFormat:@"%d", [self.paymentData.cash_on_delivery_amount intValue] - [self.paymentData.pay_on_delivery_amount intValue]];
                                 weakself.toSaveData.cash_on_delivery_causes_amount = [NSString stringWithFormat:@"%d", [self.paymentData.pay_on_delivery_amount intValue]];

@@ -200,6 +200,13 @@ NSString *indexChineseString(NSUInteger index) {
     return @"";
 }
 
+/*!
+ @brief 布尔值转服务器需要的字符
+ */
+NSString *boolString(BOOL yn) {
+    return yn ? @"1" : @"2";
+}
+
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead) {
     //头像图片

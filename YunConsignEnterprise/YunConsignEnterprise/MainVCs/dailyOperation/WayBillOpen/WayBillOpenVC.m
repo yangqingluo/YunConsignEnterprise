@@ -111,7 +111,7 @@
         if ([object isKindOfClass:[AppGoodsInfo class]]) {
             AppGoodsInfo *item = (AppGoodsInfo *)object;
             [weakself.goodsArray addObject:item];
-            [weakself caclateGoodsSummary];
+            [weakself caclateGoodsSummary:YES];
             [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         }
     };
@@ -121,7 +121,7 @@
 - (void)switchorButtonAction:(IndexPathSwitch *)button {
     if (button.indexPath.section == 1) {
         NSDictionary *m_dic = self.feeShowArray[button.indexPath.row - 1];
-        [self.toSaveData setValue:button.isOn ? @"1" : @"2" forKey:m_dic[@"key"]];
+        [self.toSaveData setValue:boolString(button.isOn) forKey:m_dic[@"key"]];
 //        [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -130,7 +130,7 @@
     if (button.indexPath.section == 2) {
         NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
         button.selected = !button.selected;
-        [self.toSaveData setValue:button.selected ? @"1" : @"2" forKey:m_dic[@"subKey"]];
+        [self.toSaveData setValue:boolString(button.selected) forKey:m_dic[@"subKey"]];
         [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -138,12 +138,15 @@
 - (void)removeGoodsAtIndex:(NSUInteger)index {
     if (index < self.goodsArray.count) {
         [self.goodsArray removeObjectAtIndex:index];
-        [self caclateGoodsSummary];
+        [self caclateGoodsSummary:YES];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 
-- (void)caclateGoodsSummary {
+- (void)caclateGoodsSummary:(BOOL)isUpdateWaybillItem {
+    if (isUpdateWaybillItem) {
+        is_update_waybill_item = YES;
+    }
     long long freight = 0;
     int number = 0;
     double weight = 0.0;
@@ -295,6 +298,7 @@
 - (void)clearData {
     _toSaveData = nil;
     _headerView = nil;
+    is_update_waybill_item = NO;
     [self.goodsArray removeAllObjects];
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
@@ -360,9 +364,9 @@
         _toSaveData.forklift_fee = @"0";//叉车费
         _toSaveData.transfer_fee = @"0";//中转费
         _toSaveData.pay_for_sb_fee = @"0";//垫付费
-        _toSaveData.is_pay_on_delivery = @"1";//默认提付
-        _toSaveData.is_pay_now = @"2";
-        _toSaveData.is_pay_on_receipt = @"2";
+        _toSaveData.is_pay_on_delivery = boolString(YES);//默认提付
+        _toSaveData.is_pay_now = boolString(NO);
+        _toSaveData.is_pay_on_receipt = boolString(NO);
     }
     return _toSaveData;
 }
@@ -573,7 +577,7 @@
                 [cell addShowContents:@[@"运费：",
                                         self.toSaveData.freight,
                                         @"总数：",
-                                        [NSString stringWithFormat:@"%@/%@/%@", self.toSaveData.goods_total_count, self.toSaveData.goods_total_weight, self.toSaveData.goods_total_volume]]];
+                                        [NSString stringWithFormat:@"%@/%@/%@", self.toSaveData.goods_total_count, notShowFooterZeroString(self.toSaveData.goods_total_weight, nil), notShowFooterZeroString(self.toSaveData.goods_total_volume, nil)]]];
                 return cell;
             }
             else {

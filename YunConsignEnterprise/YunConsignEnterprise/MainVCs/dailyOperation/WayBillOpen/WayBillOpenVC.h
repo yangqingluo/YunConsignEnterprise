@@ -14,7 +14,9 @@
 #import "BlockActionSheet.h"
 #import "WayBillSRHeaderView.h"
 
-@interface WayBillOpenVC : PublicDailyOpenWaybillVC
+@interface WayBillOpenVC : PublicDailyOpenWaybillVC {
+    BOOL is_update_waybill_item;
+}
 
 @property (strong, nonatomic) WayBillSRHeaderView *headerView;
 @property (strong, nonatomic) UIView *footerView;
