@@ -207,6 +207,13 @@ NSString *boolString(BOOL yn) {
     return yn ? @"1" : @"2";
 }
 
+//判断是否是全数字
+BOOL stringIsNumberString(NSString *string, BOOL withPoint) {
+    NSCharacterSet *notNumber=[[NSCharacterSet characterSetWithCharactersInString:withPoint ? NumberWithPoint : NumberWithoutPoint] invertedSet];
+    NSString *string1 = [[string componentsSeparatedByCharactersInSet:notNumber] componentsJoinedByString:@""];
+    return [string isEqualToString:string1];
+}
+
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead) {
     //头像图片

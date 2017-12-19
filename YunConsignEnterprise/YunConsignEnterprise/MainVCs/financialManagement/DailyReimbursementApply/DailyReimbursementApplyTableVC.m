@@ -145,7 +145,15 @@
 
 - (void)updateSubviews {
     if (self.indextag == 1) {
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%@元", notShowFooterZeroString(self.totalData[@"daily_fee"], @"0")];
+        NSString *m_string = @"";
+        NSString *m_key = @"daily_fee";
+        if (stringIsNumberString(self.totalData[m_key], YES)) {
+            m_string = [NSString stringWithFormat:@"%@元", notShowFooterZeroString(self.totalData[m_key], @"0")];
+        }
+        else {
+            m_string = notNilString(self.totalData[m_key], nil);
+        }
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总金额：%@", m_string];
     }
     [self.tableView reloadData];
 }

@@ -255,9 +255,7 @@
                 break;
                 
             case 2:{
-                NSCharacterSet *notNumber=[[NSCharacterSet characterSetWithCharactersInString:NumberWithoutPoint] invertedSet];
-                NSString *string1 = [[string componentsSeparatedByCharactersInSet:notNumber] componentsJoinedByString:@""];
-                m_bool = [string isEqualToString:string1];
+                m_bool = stringIsNumberString(string, NO);
                 
                 if (m_textField.tag == 0) {
                     length = kNumberLengthMax;
@@ -274,9 +272,7 @@
                         return NO;
                     }
                 }
-                NSCharacterSet *notNumber=[[NSCharacterSet characterSetWithCharactersInString:NumberWithPoint] invertedSet];
-                NSString *string1 = [[string componentsSeparatedByCharactersInSet:notNumber] componentsJoinedByString:@""];
-                m_bool = [string isEqualToString:string1];
+                m_bool = stringIsNumberString(string, YES);
                 
                 length = kNumberLengthMax;
             }

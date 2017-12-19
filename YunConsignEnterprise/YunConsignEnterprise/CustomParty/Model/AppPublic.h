@@ -183,6 +183,9 @@ NSString *indexChineseString(NSUInteger index);
  */
 NSString *boolString(BOOL yn);
 
+//判断是否是全数字
+BOOL stringIsNumberString(NSString *string, BOOL withPoint);
+
 //图像压缩
 NSData *dataOfImageCompression(UIImage *image, BOOL isHead);
 
@@ -196,7 +199,6 @@ UIView *NewSeparatorLine(CGRect frame);
 //日期-文本转换
 NSDate *dateFromString(NSString *dateString, NSString *format);
 NSString *stringFromDate(NSDate *date, NSString *format);
-
 NSString *dateStringWithTimeString(NSString *string);
 
 //文本尺寸

@@ -183,7 +183,15 @@
         ((PublicTTLoadFooterView *)self.footerView).summaryView.textLabel.text = [NSString stringWithFormat:@"选择%d票 金额%.0f元", (int)self.selectSet.count, remit_amount];
     }
     else if (self.indextag == 1) {
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%@元", notShowFooterZeroString(self.totalData[@"remit_amount"], @"0")];
+        NSString *m_string = @"";
+        NSString *m_key = @"remit_amount";
+        if (stringIsNumberString(self.totalData[m_key], YES)) {
+            m_string = [NSString stringWithFormat:@"%@元", notShowFooterZeroString(self.totalData[m_key], @"0")];
+        }
+        else {
+            m_string = notNilString(self.totalData[m_key], nil);
+        }
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%@元", m_string];
     }
 }
 
