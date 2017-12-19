@@ -33,7 +33,7 @@
 
 - (void)refreshFooter {
     NSArray *m_array = @[@"作废", @"修改", @"打印", @"物流"];
-    if ([self.data.waybill_state intValue] == WAYBILL_STATE_5) {
+    if ([self.data.waybill_state intValue] >= WAYBILL_STATE_5) {
         m_array = @[@"打印", @"物流"];
     }
     [self.footerView updateDataSourceWithArray:m_array];
@@ -41,6 +41,11 @@
 
 - (void)setupBody {
     [super setupBody];
+    
+    _bodyLabel4 = NewLabel(self.bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
+    _bodyLabel4.top = self.bodyLabel3.bottom + kEdge;
+    [self.bodyView addSubview:_bodyLabel4];
+    
     _payNowLabel = NewLabel(self.bodyLabel3.frame, nil, nil, NSTextAlignmentLeft);
     [self.bodyView addSubview:_payNowLabel];
     
@@ -57,6 +62,22 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)updatePayLabel:(UILabel *)m_label {
+    m_label.text = [NSString stringWithFormat:@"提付：%d", [_data.pay_on_delivery_amount intValue]];
+    [AppPublic adjustLabelWidth:m_label];
+    
+    self.payNowLabel.text = [NSString stringWithFormat:@"现付：%d", [_data.pay_now_amount intValue]];
+    [AppPublic adjustLabelWidth:self.payNowLabel];
+    self.payNowLabel.left = m_label.right + kEdgeBig;
+    self.payNowLabel.top = m_label.top;
+    
+    self.payOnReceiptLabel.text = [NSString stringWithFormat:@"回单付：%d", [_data.pay_on_receipt_amount intValue]];
+    [AppPublic adjustLabelWidth:self.payOnReceiptLabel];
+    self.payOnReceiptLabel.left = self.payNowLabel.right +
+    kEdgeBig;
+    self.payOnReceiptLabel.top = m_label.top;
 }
 
 #pragma mark - setter
@@ -82,19 +103,22 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods];
     self.bodyLabel2.text = [NSString stringWithFormat:@"客户：%@", _data.cust];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"提付：%d", [_data.pay_on_delivery_amount intValue]];
-    [AppPublic adjustLabelWidth:self.bodyLabel3];
     
-    self.payNowLabel.text = [NSString stringWithFormat:@"现付：%d", [_data.pay_now_amount intValue]];
-    [AppPublic adjustLabelWidth:self.payNowLabel];
-    self.payNowLabel.left = self.bodyLabel3.right + kEdgeBig;
-    
-    self.payOnReceiptLabel.text = [NSString stringWithFormat:@"回单付：%d", [_data.pay_on_receipt_amount intValue]];
-    [AppPublic adjustLabelWidth:self.payOnReceiptLabel];
-    self.payOnReceiptLabel.left = self.payNowLabel.right +
-    kEdgeBig;
+    NSUInteger lines = 3;
+    self.bodyLabel3.text = @"";
+    self.bodyLabel4.text = @"";
+    if ([_data.cash_on_delivery_amount intValue] > 0) {
+        lines++;
+        self.bodyLabel3.text = [NSString stringWithFormat:@"代收款：%@%@", notShowFooterZeroString(_data.cash_on_delivery_amount, nil), _data.payStyleStringForStateOld];
+        [AppPublic adjustLabelWidth:self.bodyLabel3];
+        [self updatePayLabel:self.bodyLabel4];
+    }
+    else {
+        [self updatePayLabel:self.bodyLabel3];
+    }
     
     [self refreshFooter];
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 @end

@@ -56,6 +56,7 @@ typedef NS_ENUM(NSInteger, WAYBILL_STATE) {
     WAYBILL_STATE_3,//运输中
     WAYBILL_STATE_4,//已到站
     WAYBILL_STATE_5,//已完成
+    WAYBILL_STATE_6,//已作废
 };
 
 @interface AppType : NSObject
@@ -436,6 +437,7 @@ BOOL isTrue(NSString *string);
 - (NSString *)statusStringForState;
 - (UIColor *)statusColorForState;
 - (NSString *)payStyleStringForState;
+- (NSString *)payStyleStringForStateOld;
 
 @end
 

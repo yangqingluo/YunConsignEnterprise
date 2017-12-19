@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
-@interface WayBillQueryVC : AppBasicTableViewController
+@interface WayBillQueryVC : PublicResultTableVC
 
 @end

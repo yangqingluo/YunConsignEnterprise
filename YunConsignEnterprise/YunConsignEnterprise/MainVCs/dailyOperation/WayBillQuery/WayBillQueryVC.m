@@ -13,12 +13,8 @@
 #import "WaybillLogVC.h"
 
 #import "WayBillCell.h"
-#import "MJRefresh.h"
 
 @interface WayBillQueryVC ()<UITextFieldDelegate>
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end
 
@@ -31,9 +27,18 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waybillListNotification:) name:kNotification_WaybillListRefresh object:nil];
+        self.condition.is_cancel = boolString(NO);
+        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_WaybillListRefresh object:nil];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        [self beginRefreshing];
+    }
 }
 
 - (void)viewDidLoad {
@@ -60,14 +65,10 @@
     }];
 }
 
-- (void)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_WaybillQuery;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
@@ -78,15 +79,7 @@
     [vc showFromVC:self];
 }
 
-- (void)loadFirstPageData{
-    [self queryWaybillListByConditionFunction:YES];
-}
-
-- (void)loadMoreData{
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.start_time) {
@@ -164,51 +157,12 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing {
-    [self doHideHudFunction];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 - (void)cancelWayBillSuccess {
     QKWEAKSELF;
     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已作废" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
-        [weakself.tableView.mj_header beginRefreshing];
+        [weakself beginRefreshing];
     } otherButtonTitles:nil];
     [alert show];
-}
-
-#pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
-- (AppQueryConditionInfo *)condition {
-    if (!_condition) {
-        _condition = [AppQueryConditionInfo new];
-        _condition.is_cancel = boolString(NO);
-        _condition.start_time = [_condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
-    }
-    return _condition;
 }
 
 #pragma mark - UITableView
@@ -216,8 +170,9 @@
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WayBillCell tableView:tableView heightForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppWayBillInfo *item = self.dataSource[indexPath.row];
+    return [WayBillCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[item.cash_on_delivery_amount intValue] > 0 ? 4 : 3];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -251,37 +206,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - TextField
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    return (range.location < kInputLengthMax);
-}
-
-- (void)textFieldDidChange:(UITextField *)textField {
-    if (textField.text.length > kInputLengthMax) {
-        textField.text = [textField.text substringToIndex:kInputLengthMax];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-#pragma mark - notification
-- (void)waybillListNotification:(NSNotification *)notification {
-    [self.tableView.mj_header beginRefreshing];
-}
-
 #pragma mark - UIResponder+Router
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppWayBillInfo *item = self.dataSource[indexPath.row];
-        int tag = ([item.waybill_state integerValue] == WAYBILL_STATE_5 ? 1 : 3) - [m_dic[@"tag"] intValue];
+        int tag = ([item.waybill_state integerValue] >= WAYBILL_STATE_5 ? 1 : 3) - [m_dic[@"tag"] intValue];
         switch (tag) {
             case 3:{
                 QKWEAKSELF;

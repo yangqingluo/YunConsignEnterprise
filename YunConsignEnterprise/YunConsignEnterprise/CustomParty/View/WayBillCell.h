@@ -16,6 +16,8 @@
 @property (strong, nonatomic) UILabel *payNowLabel;
 @property (strong, nonatomic) UILabel *payOnReceiptLabel;
 
+@property (strong, nonatomic) UILabel *bodyLabel4;
+
 @property (copy, nonatomic) AppWayBillInfo *data;
 
 @end

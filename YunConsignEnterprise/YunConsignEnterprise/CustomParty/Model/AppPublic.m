@@ -344,6 +344,9 @@ NSString *dateStringWithTimeString(NSString *string){
 
 + (void)adjustLabelWidth:(UILabel *)label {
     label.width = ceil([AppPublic textSizeWithString:label.text font:label.font constantHeight:label.height].width);//根据苹果官方文档介绍，计算出来的值比实际需要的值略小，故需要对其向上取整，这样子获取的高度才是我们所需要的。
+    if (label.width > label.superview.width) {
+        label.width = label.superview.width;
+    }
 }
 
 + (void)adjustLabelHeight:(UILabel *)label {

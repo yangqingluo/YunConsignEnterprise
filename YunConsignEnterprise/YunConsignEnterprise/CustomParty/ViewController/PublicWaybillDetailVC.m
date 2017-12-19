@@ -63,7 +63,7 @@
             return btn;
         }
         else if (nIndex == 1){
-            if (self.type == WaybillDetailType_WayBillQuery && [self.data.waybill_state integerValue] != WAYBILL_STATE_5) {
+            if (self.type == WaybillDetailType_WayBillQuery && [self.data.waybill_state integerValue] < WAYBILL_STATE_5) {
                 UIButton *btn = NewRightButton([UIImage imageNamed:@"navbar_icon_edit"], nil);
                 [btn addTarget:self action:@selector(editBtnAction) forControlEvents:UIControlEventTouchUpInside];
                 return btn;
@@ -491,7 +491,7 @@
         if (self.type == WaybillDetailType_WayBillQuery) {
             switch (tag) {
                 case 0:{
-                    if ([self.data.waybill_state integerValue] == WAYBILL_STATE_5) {
+                    if ([self.data.waybill_state integerValue] >= WAYBILL_STATE_5) {
                         [self doShowHintFunction:@"该运单不能进行作废操作"];
                         return;
                     }
