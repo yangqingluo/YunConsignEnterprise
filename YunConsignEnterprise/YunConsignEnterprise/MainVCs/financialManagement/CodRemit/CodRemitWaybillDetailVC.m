@@ -7,6 +7,7 @@
 //
 
 #import "CodRemitWaybillDetailVC.h"
+#import "CodLoanCheckDetailCell.h"
 
 @interface CodRemitWaybillDetailVC ()
 
@@ -20,9 +21,21 @@
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"loan_apply_id" : self.codApplyData.loan_apply_ids, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    if (self.codApplyData.remittance_id.length) {
+        [m_dic setObject:self.codApplyData.remittance_id forKey:@"remittance_id"];
+    }
+    else {
+        [m_dic setObject:@"" forKey:@"remittance_id"];
+        if (self.codApplyData.loan_apply_ids.length) {
+            [m_dic setObject:self.codApplyData.loan_apply_ids forKey:@"loan_apply_ids"];
+        }
+        else if (self.codApplyData.loan_apply_id.length) {
+            [m_dic setObject:self.codApplyData.loan_apply_id forKey:@"loan_apply_id"];
+        }
+    }
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_queryLoanApplyCheckWaybillListByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_queryWaitLoanOrLoanedWaybillListByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
@@ -44,6 +57,25 @@
             [weakself doShowHintFunction:error.userInfo[@"message"]];
         }
     }];
+}
+
+#pragma mark - UITableView
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"CodLoanCheckDetailCell_cell";
+    CodLoanCheckDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[CodLoanCheckDetailCell alloc] initWithHeaderStyle: PublicHeaderCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.isChecker = self.isChecker;
+    }
+    id item = self.dataSource[indexPath.row];
+    cell.indexPath = [indexPath copy];
+    cell.data = item;
+    
+    //为了将文本颜色统一改为普通色
+    cell.statusLabel.textColor = secondaryTextColor;
+    
+    return cell;
 }
 
 @end

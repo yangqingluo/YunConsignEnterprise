@@ -296,7 +296,6 @@
                 //申请单
                 CodRemitLoanApplyListVC *vc = [CodRemitLoanApplyListVC new];
                 vc.codApplyData = item;
-                vc.indextag = self.indextag;
                 [self doPushViewController:vc animated:YES];
             }
                 break;

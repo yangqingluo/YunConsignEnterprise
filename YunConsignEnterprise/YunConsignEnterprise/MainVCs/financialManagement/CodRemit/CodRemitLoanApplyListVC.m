@@ -7,7 +7,7 @@
 //
 
 #import "CodRemitLoanApplyListVC.h"
-#import "PublicWaybillDetailListVC.h"
+#import "CodRemitWaybillDetailVC.h"
 
 #import "CodRemitLoanApplyListCell.h"
 
@@ -43,12 +43,12 @@
 
 - (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
-    if (self.indextag == 0) {
-        [m_dic setObject:@"" forKey:@"remittance_id"];
-        [m_dic setObject:self.codApplyData.loan_apply_ids forKey:@"loan_apply_ids"];
+    if (self.codApplyData.remittance_id.length) {
+        [m_dic setObject:self.codApplyData.remittance_id forKey:@"remittance_id"];
     }
     else {
-        [m_dic setObject:self.codApplyData.remittance_id forKey:@"remittance_id"];
+        [m_dic setObject:@"" forKey:@"remittance_id"];
+        [m_dic setObject:self.codApplyData.loan_apply_ids forKey:@"loan_apply_ids"];
     }
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_queryLoanApplyListByIdsFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -120,7 +120,7 @@
         switch (tag) {
             case 0:{
                 //运单明细
-                PublicWaybillDetailListVC *vc = [PublicWaybillDetailListVC new];
+                CodRemitWaybillDetailVC *vc = [CodRemitWaybillDetailVC new];
                 vc.codApplyData = item;
                 vc.isChecker = YES;
                 [self doPushViewController:vc animated:YES];

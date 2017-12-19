@@ -10,7 +10,7 @@
 
 @interface PublicWaybillDetailListVC : PublicResultTableVC
 
-@property (copy, nonatomic) AppCodLoanApplyInfo *codApplyData;
+@property (copy, nonatomic) AppCodLoanApplyWaitLoanInfo *codApplyData;
 @property (assign, nonatomic) BOOL isChecker;//只有在审核者视角才显示驳回
 
 @end
