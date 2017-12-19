@@ -21,6 +21,11 @@
     
     _bodyLabelRight4 = NewLabel(CGRectMake(kEdge + 0.5 * self.bodyView.width, self.bodyLabel4.top, 0.5 * self.bodyView.width - 1 * kEdge, self.bodyLabel4.height), nil, nil, NSTextAlignmentLeft);
     [self.bodyView addSubview:_bodyLabelRight4];
+    
+    _rejectNoteLabel = NewLabel(self.bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
+    _rejectNoteLabel.top = self.bodyLabel4.bottom + kEdge;
+    _rejectNoteLabel.textColor = WarningColor;
+    [self.bodyView addSubview:_rejectNoteLabel];
 }
 
 - (void)refreshFooter {
@@ -70,13 +75,22 @@
     BOOL is_cash_on_delivery_causes = [data.cash_on_delivery_causes_amount intValue] > 0;
     self.bodyLabel4.hidden = !is_cash_on_delivery_causes;
     self.bodyLabelRight4.hidden = !is_cash_on_delivery_causes;
+    self.rejectNoteLabel.top = self.bodyLabel3.bottom + kEdge;
     if (is_cash_on_delivery_causes) {
         lines++;
+        self.rejectNoteLabel.top = self.bodyLabel4.bottom + kEdge;
         self.bodyLabel4.text = [NSString stringWithFormat:@"少款：%@", data.cash_on_delivery_causes_amount];
         if (data.cash_on_delivery_causes_note.length) {
             self.bodyLabelRight4.text = [NSString stringWithFormat:@"少款原因：%@", data.cash_on_delivery_causes_note];
         }
     }
+    
+    self.rejectNoteLabel.hidden = YES;
+    if (_data.reject_note.length > 0) {
+        lines++;
+        [self showLabel:self.rejectNoteLabel conten:[NSString stringWithFormat:@"驳回原因：%@", _data.reject_note]];
+    }
+    
     self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
     [self refreshFooter];
 }

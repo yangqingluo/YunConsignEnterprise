@@ -11,7 +11,6 @@
 #import "CodLoanApplyWaybillDetailVC.h"
 #import "SaveCodLoanApplyFirstVC.h"
 
-#import "MJRefresh.h"
 #import "CodLoanApplyCell.h"
 
 @interface CodLoanApplyVC ()
@@ -184,7 +183,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     AppCodLoanApplyInfo *m_data = self.dataSource[indexPath.row];
-    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[m_data.loan_apply_state integerValue] == LOAN_APPLY_STATE_1 ? 3 : 4];
+    return [CodLoanApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:2 + ([m_data.loan_apply_state integerValue] != LOAN_APPLY_STATE_1) + (m_data.apply_note.length > 0)];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
