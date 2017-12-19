@@ -16,8 +16,6 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     BOOL canSelectShowColumns;
 }
 
-@property (strong, nonatomic) NSArray *showColumnBuffer;
-
 @end
 
 @implementation FreightCheckVC
@@ -49,7 +47,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
                        @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
                        @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                        @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
-                       @{@"title":@"显示字段",@"subTitle":@"现付、提付、回单付",@"key":@"show_column"}];
+                       @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
     AppServiceInfo *serviceInfo = [AppServiceInfo mj_objectWithKeyValues:[[UserPublic getInstance].userData mj_keyValues]];
     self.condition.power_service_array = @[serviceInfo];
     [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column"]];
@@ -64,19 +62,6 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
     vc.type = PublicResultWithScrollTableType_FreightCheck;
     vc.condition = self.condition;
-    if (!vc.condition.show_column) {
-        NSUInteger count = 3;
-        NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:count];
-        for (AppDataDictionary *item in [[UserPublic getInstance].dataMapDic objectForKey:@"show_column"]) {
-            if (count-- > 0) {
-                [m_array addObject:item];
-            }
-            else {
-                break;
-            }
-        }
-        vc.condition.show_column = [NSArray arrayWithArray:m_array];
-    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -130,10 +115,43 @@ static NSString *searchTimeTypeKey = @"search_time_type";
         }
         return;
     }
-    if ([key isEqualToString:@"show_column"]) {
+    else if ([key isEqualToString:@"show_column"]) {
+        NSString *m_key = @"show_column_FreightCheck2";
         if (!canSelectShowColumns) {
-            return;
+            m_key = @"show_column_FreightCheck1";
         }
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
+        if (dataArray.count) {
+            NSMutableArray *source_array = [NSMutableArray new];
+            NSMutableArray *selected_array = [NSMutableArray new];
+            for (NSUInteger i = 0; i < dataArray.count; i++) {
+                AppDataDictionary *item = dataArray[i];
+                [source_array addObject:item.item_name];
+                if ([[self.condition valueForKey:key] containsObject:item]) {
+                    [selected_array addObject:@(i)];
+                }
+            }
+            QKWEAKSELF;
+            PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
+                if ([object isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *m_array = [NSMutableArray new];
+                    for (NSNumber *number in (NSArray *)object) {
+                        NSInteger index = [number integerValue];
+                        if (index < dataArray.count && index >= 0) {
+                            [m_array addObject:dataArray[index]];
+                        }
+                    }
+                    [weakself.condition setValue:[NSArray arrayWithArray:m_array] forKey:key];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }];
+            vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
+            [self doPushViewController:vc animated:YES];
+        }
+        else {
+            //本地数据，不存在else的情况
+        }
+        return;
     }
     [super selectRowAtIndexPath:indexPath];
 }
@@ -141,17 +159,16 @@ static NSString *searchTimeTypeKey = @"search_time_type";
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:searchTimeTypeKey]) {
+        NSString *m_key = @"show_column_FreightCheck2";
         if ([self.condition.search_time_type.item_val integerValue] == 1) {
             canSelectShowColumns = NO;
-            self.showColumnBuffer = self.condition.show_column;
-            self.condition.show_column = nil;
+            m_key = @"show_column_FreightCheck1";
         }
         else {
             canSelectShowColumns = YES;
-            if (!self.condition.show_column) {
-                self.condition.show_column = self.showColumnBuffer;
-            }
         }
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
+        self.condition.show_column = dataArray;
         [self.tableView reloadData];
     }
 }

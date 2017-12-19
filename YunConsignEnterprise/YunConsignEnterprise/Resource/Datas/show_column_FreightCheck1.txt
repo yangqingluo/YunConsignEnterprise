@@ -1,0 +1,50 @@
+[
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "现付",
+    "item_note" : "",
+    "item_sort" : 1,
+    "item_val" : "pay_now_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "提付",
+    "item_note" : "",
+    "item_sort" : 2,
+    "item_val" : "pay_on_delivery_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "回单付",
+    "item_note" : "",
+    "item_sort" : 3,
+    "item_val" : "pay_on_receipt_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "少款",
+    "item_note" : "",
+    "item_sort" : 4,
+    "item_val" : "less_indemnity_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "赔款",
+    "item_note" : "",
+    "item_sort" : 5,
+    "item_val" : "payment_indemnity_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "包送",
+    "item_note" : "",
+    "item_sort" : 6,
+    "item_val" : "deliver_indemnity_amount"
+}
+]

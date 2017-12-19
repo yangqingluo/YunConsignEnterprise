@@ -1,0 +1,90 @@
+[
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "现付",
+    "item_note" : "",
+    "item_sort" : 1,
+    "item_val" : "pay_now_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "提付",
+    "item_note" : "",
+    "item_sort" : 2,
+    "item_val" : "pay_on_delivery_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "回单付",
+    "item_note" : "",
+    "item_sort" : 3,
+    "item_val" : "pay_on_receipt_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "接货费",
+    "item_note" : "",
+    "item_sort" : 4,
+    "item_val" : "take_goods_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "送货费",
+    "item_note" : "",
+    "item_sort" : 5,
+    "item_val" : "deliver_goods_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "保价费",
+    "item_note" : "",
+    "item_sort" : 6,
+    "item_val" : "insurance_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "回扣费",
+    "item_note" : "",
+    "item_sort" : 7,
+    "item_val" : "rebate_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "叉车费",
+    "item_note" : "",
+    "item_sort" : 8,
+    "item_val" : "forklift_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "原返费",
+    "item_note" : "",
+    "item_sort" : 9,
+    "item_val" : "return_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "垫付费",
+    "item_note" : "",
+    "item_sort" : 10,
+    "item_val" : "pay_for_sb_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "中转费",
+    "item_note" : "",
+    "item_sort" : 11,
+    "item_val" : "transfer_fee"
+}
+]

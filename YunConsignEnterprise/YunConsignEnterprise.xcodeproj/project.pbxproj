@@ -45,6 +45,8 @@
 		E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43FCB581FA85FC300AFEE6D /* FreightCheckCell.m */; };
 		E4436E361FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4436E351FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m */; };
 		E4443F621F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */; };
+		E44455D71FE904A400441A90 /* show_column_FreightCheck2.txt in Resources */ = {isa = PBXBuildFile; fileRef = E44455D51FE904A300441A90 /* show_column_FreightCheck2.txt */; };
+		E44455D81FE904A400441A90 /* show_column_FreightCheck1.txt in Resources */ = {isa = PBXBuildFile; fileRef = E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */; };
 		E44764941F611AC70084F4EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E447648E1F611AC70084F4EB /* LoginViewController.m */; };
 		E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44764901F611AC70084F4EB /* MainTabBarController.m */; };
 		E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44764921F611AC70084F4EB /* MainTabNavController.m */; };
@@ -522,6 +524,8 @@
 		E4436E351FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyWaybillSaveCell.m; sourceTree = "<group>"; };
 		E4443F601F9ED3BF00D2FE18 /* TransportTruckLoadListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckLoadListCell.h; sourceTree = "<group>"; };
 		E4443F611F9ED3BF00D2FE18 /* TransportTruckLoadListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckLoadListCell.m; sourceTree = "<group>"; };
+		E44455D51FE904A300441A90 /* show_column_FreightCheck2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column_FreightCheck2.txt; sourceTree = "<group>"; };
+		E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column_FreightCheck1.txt; sourceTree = "<group>"; };
 		E447648D1F611AC70084F4EB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		E447648E1F611AC70084F4EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E447648F1F611AC70084F4EB /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -1352,6 +1356,8 @@
 				E46CA9A21FB06A33008F26F4 /* daily_name.txt */,
 				E42DACD11FCB0B81004FCDD1 /* show_column.txt */,
 				E430C0821FD157E400A94A23 /* show_column_cod_check.txt */,
+				E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */,
+				E44455D51FE904A300441A90 /* show_column_FreightCheck2.txt */,
 				E48002D71FDFC57B00E7D943 /* url_zone.txt */,
 			);
 			path = Datas;
@@ -2777,7 +2783,9 @@
 				E49D7F0B1FD38F16009B59B7 /* content_serration@2x.png in Resources */,
 				E49D7F291FD38F16009B59B7 /* list_icon_details_open@2x.png in Resources */,
 				E49D7F1C1FD38F16009B59B7 /* list_icon_checkbox_selcted@3x.png in Resources */,
+				E44455D71FE904A400441A90 /* show_column_FreightCheck2.txt in Resources */,
 				E49D7F3D1FD38F16009B59B7 /* money_icon_COD_LOAN_CHECK@3x.png in Resources */,
+				E44455D81FE904A400441A90 /* show_column_FreightCheck1.txt in Resources */,
 				E49D7F111FD38F16009B59B7 /* daily_icon_WAYBILL_ARRIVAL@3x.png in Resources */,
 				E4E2A3D11FB311AE00D8EC1C /* ImageSelectedOff@2x.png in Resources */,
 				E4E2A3D71FB311AE00D8EC1C /* ImageSelectedSmallOff@2x.png in Resources */,
