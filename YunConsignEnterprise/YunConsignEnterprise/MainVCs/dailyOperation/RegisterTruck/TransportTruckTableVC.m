@@ -201,7 +201,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [TransportTruckCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    AppTransportTruckInfo *item = self.dataSource[indexPath.row];
+    return [TransportTruckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:3 + (self.indextag == 2 && item.cost_check.length)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

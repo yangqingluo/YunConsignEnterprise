@@ -206,18 +206,21 @@
 - (AppSaveTransportTruckInfo *)toSaveData {
     if (!_toSaveData) {
         _toSaveData = [AppSaveTransportTruckInfo new];
+        _toSaveData.cost_register = @"0";
+        _toSaveData.cost_load = @"0";
     }
     return _toSaveData;
 }
 
 - (NSArray *)showArray {
     if (!_showArray) {
-        _showArray = @[@[@{@"title":@"始发站",@"subTitle":@"请选择",@"key":@"start_station_city"},
-                         @{@"title":@"终点站",@"subTitle":@"请选择",@"key":@"end_station"}],
+        _showArray = @[@[@{@"title":@"始发站",@"subTitle":@"请选择始发站",@"key":@"start_station_city"},
+                         @{@"title":@"终点站",@"subTitle":@"请选择终点站",@"key":@"end_station"}],
                        @[@{@"title":@"车辆",@"subTitle":@"请输入",@"key":@"truck_number_plate"},
                          @{@"title":@"司机",@"subTitle":@"请输入",@"key":@"truck_driver_name"},
                          @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone"}],
-                       @[@{@"title":@"运费",@"subTitle":@"请输入",@"key":@"cost_register"}]
+                       @[@{@"title":@"运费",@"subTitle":@"请输入",@"key":@"cost_register"},
+                         @{@"title":@"装车费",@"subTitle":@"请输入",@"key":@"cost_load"}]
                        ];
     }
     return _showArray;
@@ -311,6 +314,7 @@
     }
     cell.baseView.textField.enabled = NO;
     cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.baseView.textField.adjustZeroShow = (indexPath.section == 2);
     switch (indexPath.section) {
         case 0:{
             if (indexPath.row < 2) {

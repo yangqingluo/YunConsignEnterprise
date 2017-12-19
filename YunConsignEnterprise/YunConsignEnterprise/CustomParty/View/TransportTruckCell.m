@@ -47,6 +47,7 @@
     self.bodyLabelRight1.width = self.bodyView.width - kEdgeMiddle - self.bodyLabelRight1.left;
     
     _costCheckLabel = NewLabel(self.bodyLabel2.frame, nil, nil, NSTextAlignmentLeft);
+    _costCheckLabel.top = self.bodyLabel3.bottom + kEdge;
     [self.bodyView addSubview:_costCheckLabel];
 }
 
@@ -70,19 +71,15 @@
     
     self.bodyLabelRight1.text = [NSString stringWithFormat:@"%@", data.truck_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"登记运费：%@", data.cost_register];
-    [AppPublic adjustLabelWidth:self.bodyLabel2];
-    if (data.cost_check.length) {
-        self.costCheckLabel.hidden = NO;
-        self.costCheckLabel.text = [NSString stringWithFormat:@"发放运费：%@", data.cost_check];
-        [AppPublic adjustLabelWidth:self.costCheckLabel];
-        self.costCheckLabel.left = self.bodyLabel2.right + kEdgeBig;
-    }
-    else {
-        self.costCheckLabel.hidden = YES;
-    }
-    
     self.bodyLabel3.text = [NSString stringWithFormat:@"装车货量：%@", data.load_quantity];
+    NSUInteger lines = 3;
+    self.costCheckLabel.hidden = YES;
+    if (self.indextag == 2 && data.cost_check.length) {
+        lines++;
+        [self showLabel:self.costCheckLabel conten:[NSString stringWithFormat:@"发放运费：%@", data.cost_check]];
+    }
     [self refreshFooter];
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 @end
