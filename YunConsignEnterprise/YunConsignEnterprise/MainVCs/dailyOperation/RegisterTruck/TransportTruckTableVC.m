@@ -157,10 +157,10 @@
 
 - (void)updateSubviews {
     if (self.indextag == 2) {
-        int cost_register = [self.totalData[@"cost_register"] intValue];
-        int cost_check = [self.totalData[@"cost_check"] intValue];
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总登记费用：%d", cost_register];
-        ((PublicFooterSummaryView *)self.footerView).subTextLabel.text = [NSString stringWithFormat:@"总发放运费：%d", cost_check];
+//        int cost_register = [self.totalData[@"cost_register"] intValue];
+//        int cost_check = [self.totalData[@"cost_check"] intValue];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总登记：%@/%@", notShowFooterZeroString(self.totalData[@"cost_register"], @"0"), notShowFooterZeroString(self.totalData[@"cost_load"], @"0")];
+        ((PublicFooterSummaryView *)self.footerView).subTextLabel.text = [NSString stringWithFormat:@"总发放：%@", notShowFooterZeroString(self.totalData[@"cost_check"], @"0")];
     }
     [self.tableView reloadData];
 }

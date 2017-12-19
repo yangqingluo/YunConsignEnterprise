@@ -599,6 +599,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *truck_info;//车辆信息
 @property (strong, nonatomic) NSString *load_quantity;//装车货量
 @property (strong, nonatomic) NSString *cost_register;//登记运费
+@property (strong, nonatomic) NSString *cost_load;//装车费
 @property (strong, nonatomic) NSString *cost_check;//结算运费
 @property (strong, nonatomic) NSString *operate_time;
 @property (strong, nonatomic) NSString *operator_id;
