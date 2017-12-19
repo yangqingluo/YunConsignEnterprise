@@ -10,6 +10,7 @@
 #import "TTLoadListVC.h"
 #import "TTPayCostVC.h"
 #import "PublicSaveTransportTruckVC.h"
+#import "TransportTruckDetailVC.h"
 
 #import "TransportTruckCell.h"
 #import "PublicFooterSummaryView.h"
@@ -229,7 +230,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
+    TransportTruckDetailVC *vc = [TransportTruckDetailVC new];
+    vc.truckData = self.dataSource[indexPath.row];
+    [self doPushViewController:vc animated:YES];
 }
 
 #pragma mark - UIResponder+Router

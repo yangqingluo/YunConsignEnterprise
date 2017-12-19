@@ -251,6 +251,7 @@
 		E4A2CD3A1FCE6D760047A9BC /* SaveTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A2CD391FCE6D760047A9BC /* SaveTruckVC.m */; };
 		E4A633201FB037E300873BF5 /* DailyReimbursementApplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */; };
 		E4A65B6E1FB1A51900942525 /* CodLoanCheckDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A65B6D1FB1A51900942525 /* CodLoanCheckDetailCell.m */; };
+		E4AC27191FE98D770026504C /* TransportTruckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AC27181FE98D770026504C /* TransportTruckDetailVC.m */; };
 		E4AE9F2B1F5EA605002EBE41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2A1F5EA605002EBE41 /* main.m */; };
 		E4AE9F2E1F5EA605002EBE41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F2D1F5EA605002EBE41 /* AppDelegate.m */; };
 		E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AE9F301F5EA605002EBE41 /* ViewController.m */; };
@@ -838,6 +839,8 @@
 		E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementApplyCell.m; sourceTree = "<group>"; };
 		E4A65B6C1FB1A51900942525 /* CodLoanCheckDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckDetailCell.h; sourceTree = "<group>"; };
 		E4A65B6D1FB1A51900942525 /* CodLoanCheckDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanCheckDetailCell.m; sourceTree = "<group>"; };
+		E4AC27171FE98D770026504C /* TransportTruckDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransportTruckDetailVC.h; sourceTree = "<group>"; };
+		E4AC27181FE98D770026504C /* TransportTruckDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransportTruckDetailVC.m; sourceTree = "<group>"; };
 		E4AE9F261F5EA605002EBE41 /* YunConsignEnterprise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YunConsignEnterprise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AE9F2A1F5EA605002EBE41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4AE9F2C1F5EA605002EBE41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1472,6 +1475,8 @@
 				E49D7DF81FD38CAA009B59B7 /* TTLoadListVC.m */,
 				E49D7DF91FD38CAA009B59B7 /* TTPayCostVC.h */,
 				E49D7DFA1FD38CAA009B59B7 /* TTPayCostVC.m */,
+				E4AC27171FE98D770026504C /* TransportTruckDetailVC.h */,
+				E4AC27181FE98D770026504C /* TransportTruckDetailVC.m */,
 			);
 			name = RegisterTruck;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/RegisterTruck;
@@ -3089,6 +3094,7 @@
 				E49D7E3B1FD38CAA009B59B7 /* WaybillLoadTTVC.m in Sources */,
 				E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */,
 				E49D7E2D1FD38CAA009B59B7 /* CustomerEditVC.m in Sources */,
+				E4AC27191FE98D770026504C /* TransportTruckDetailVC.m in Sources */,
 				E4E2A3B61FB311AE00D8EC1C /* NSObject+MJCoding.m in Sources */,
 				E4E2A38E1FB311AE00D8EC1C /* BlockActionSheet.m in Sources */,
 				E49C02321FD9758A00235D3B /* CodLoanApplyDetailCell.m in Sources */,

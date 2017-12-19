@@ -652,9 +652,10 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *note;
 @property (strong, nonatomic) NSString *operate_time;
 @property (strong, nonatomic) NSString *operator_id;
-@property (strong, nonatomic) NSString *operator_name;
+@property (strong, nonatomic) NSString *operator_name;//登记人
 @property (strong, nonatomic) NSString *start_car_time;
 @property (strong, nonatomic) NSString *transport_truck_state;
+@property (strong, nonatomic) NSString *cost_load;//装车费
 
 @end
 
