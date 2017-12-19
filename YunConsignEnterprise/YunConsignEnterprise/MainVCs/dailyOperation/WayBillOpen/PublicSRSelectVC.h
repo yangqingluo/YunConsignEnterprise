@@ -17,5 +17,7 @@ typedef enum : NSUInteger {
 @interface PublicSRSelectVC : AppBasicTableViewController
 
 @property (assign, nonatomic) SRSelectType type;
+@property (assign, nonatomic) BOOL isEditOnly;//运单编辑时只做编辑
+@property (strong, nonatomic) AppSendReceiveInfo *data;
 
 @end

@@ -44,6 +44,32 @@
     }
 }
 
+- (void)senderButtonAction {
+    PublicSRSelectVC *vc = [PublicSRSelectVC new];
+    vc.type = SRSelectType_Sender;
+    vc.data = self.headerView.senderInfo;
+    vc.isEditOnly = YES;
+    vc.doneBlock = ^(id object){
+        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
+            self.headerView.senderInfo = [object copy];
+        }
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)receiverButtonAction {
+    PublicSRSelectVC *vc = [PublicSRSelectVC new];
+    vc.type = SRSelectType_Receiver;
+    vc.data = self.headerView.receiverInfo;
+    vc.isEditOnly = YES;
+    vc.doneBlock = ^(id object){
+        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
+            self.headerView.receiverInfo = [object copy];
+        }
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)saveButtonAction {
     [self dismissKeyboard];
     

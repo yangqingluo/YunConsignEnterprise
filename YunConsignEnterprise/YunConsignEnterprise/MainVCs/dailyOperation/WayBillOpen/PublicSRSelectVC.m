@@ -15,7 +15,6 @@
 
 @interface PublicSRSelectVC ()<UITextFieldDelegate>
 
-@property (strong, nonatomic) AppSendReceiveInfo *data;
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSMutableArray *serviceArray;
 
@@ -28,20 +27,25 @@
     [self setupNav];
     
     [self initializeData];
-    [self pullServiceArrayFunction];
+    if (!_isEditOnly) {
+        [self pullServiceArrayFunction];
+    }
 }
 
 //初始化数据
 - (void)initializeData{
-    _data = [AppSendReceiveInfo new];
-    _data.customer = [AppCustomerInfo new];
     switch (self.type) {
         case SRSelectType_Sender: {
             self.title = @"发货人";
-            _showArray = @[@{@"title":@"始发站",@"subTitle":@"请选择"},
-                           @{@"title":@"客户电话",@"subTitle":@"请输入"},
-                           @{@"title":@"客户姓名",@"subTitle":@"请输入"},
-                           @{@"title":@"身份证号",@"subTitle":@"请输入"}];
+            _showArray = _isEditOnly ?
+            @[@{@"title":@"始发站",@"subTitle":@"请选择"},
+              @{@"title":@"客户电话",@"subTitle":@"请输入"},
+              @{@"title":@"客户姓名",@"subTitle":@"请输入"}]
+            :
+            @[@{@"title":@"始发站",@"subTitle":@"请选择"},
+              @{@"title":@"客户电话",@"subTitle":@"请输入"},
+              @{@"title":@"客户姓名",@"subTitle":@"请输入"},
+              @{@"title":@"身份证号",@"subTitle":@"请输入"}];
         }
             break;
         case SRSelectType_Receiver:{
@@ -131,14 +135,17 @@
 }
 
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
+        self.data.customer.phone = content;
+    }
+    else if (indexPath.row == 2) {
         self.data.customer.freight_cust_name = content;
     }
     else if (indexPath.row == 3) {
         self.data.customer.id_card = content;
     }
     else {
-//        NSDictionary *dic = self.showArray[row];
+//        NSDictionary *dic = self.showArray[indexPath.row];
 //        [self.data setValue:content forKey:dic[@"key"]];
     }
     
@@ -151,6 +158,14 @@
         _serviceArray = [NSMutableArray new];
     }
     return _serviceArray;
+}
+
+- (AppSendReceiveInfo *)data {
+    if (!_data) {
+        _data = [AppSendReceiveInfo new];
+        _data.customer = [AppCustomerInfo new];
+    }
+    return _data;
 }
 
 #pragma mark - UITableView
@@ -216,7 +231,13 @@
         default:
             break;
     }
-    cell.baseView.textField.enabled = (indexPath.row == 2 || indexPath.row == 3);
+    if (_isEditOnly) {
+        cell.baseView.textField.enabled = (indexPath.row != 0);
+    }
+    else {
+        cell.baseView.textField.enabled = (indexPath.row == 2 || indexPath.row == 3);
+    }
+    cell.baseView.textField.keyboardType = (indexPath.row == 1) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;
@@ -225,7 +246,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.row) {
-        case 0:
+        case 0:{
+            if (_isEditOnly) {
+                return;
+            }
             if (self.serviceArray.count) {
                 if (self.type == SRSelectType_Sender) {
                     //始发站默认为当前所属站点
@@ -261,20 +285,23 @@
             else {
                 [self pullServiceArrayFunction];
             }
+        }
             break;
             
         case 1:{
-            PublicCustomerPhoneVC *vc = [PublicCustomerPhoneVC new];
-            vc.data = [self.data copy];
-            vc.title = self.title;
-            QKWEAKSELF;
-            vc.doneBlock = ^(id object){
-                if ([object isKindOfClass:self.data.class]) {
-                    self.data.customer = [[object valueForKey:@"customer"] copy];
-                }
-                [weakself.tableView reloadData];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
+            if (!_isEditOnly) {
+                PublicCustomerPhoneVC *vc = [PublicCustomerPhoneVC new];
+                vc.data = [self.data copy];
+                vc.title = self.title;
+                QKWEAKSELF;
+                vc.doneBlock = ^(id object){
+                    if ([object isKindOfClass:self.data.class]) {
+                        self.data.customer = [[object valueForKey:@"customer"] copy];
+                    }
+                    [weakself.tableView reloadData];
+                };
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
             break;
             
