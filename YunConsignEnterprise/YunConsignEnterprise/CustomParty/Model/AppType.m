@@ -21,7 +21,8 @@ BOOL isTrue(NSString *string) {
     return NO;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone{
+- (instancetype)copyWithZone:(NSZone *)zone {
+    //to fix 此种方式copy后，NSDate类型如果为nil，copy后会new为当前时间
     return [[self class] mj_objectWithKeyValues:[self mj_keyValues]];
 }
 

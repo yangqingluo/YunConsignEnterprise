@@ -47,8 +47,8 @@
 - (void)initializeData {
     switch (self.type) {
         case QueryConditionType_WaybillQuery:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                            @{@"title":@"显示作废",@"subTitle":@"请选择",@"key":@"is_cancel"}];
@@ -58,8 +58,8 @@
             break;
             
         case QueryConditionType_TransportTruck:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"起点城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
                            @{@"title":@"终点网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
@@ -67,8 +67,8 @@
             break;
             
         case QueryConditionType_WaybillLoad:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
                            @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
@@ -76,8 +76,8 @@
             break;
             
         case QueryConditionType_WaybillLoadTT:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
             [self additionalDataDictionaryForCode:@"query_column"];
@@ -93,8 +93,8 @@
             break;
             
         case QueryConditionType_WaybillArrival:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"始发城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
                            @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
                            @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
@@ -110,8 +110,8 @@
             break;
             
         case QueryConditionType_WaybillReceive:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"开单网点",@"subTitle":@"请选择",@"key":@"start_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
@@ -121,8 +121,8 @@
             break;
             
         case QueryConditionType_PayOnReceipt:{
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
 //            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
@@ -138,8 +138,8 @@
             
         case QueryConditionType_CodLoanApply:{
             self.title = @"放款申请查询";
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"},
                            @{@"title":@"审核状态",@"subTitle":@"请选择",@"key":@"loan_apply_state"}];
@@ -150,8 +150,8 @@
             
         case QueryConditionType_CodLoanCheck:{
             self.title = @"放款审核查询";
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                            @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"}];
         }
@@ -159,8 +159,8 @@
             
         case QueryConditionType_CodRemit:{
             self.title = @"放款查询";
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                               @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                               @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                                @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"bank_card_owner"},
                                @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"contact_phone"}];
 //            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
@@ -169,16 +169,16 @@
             
         case QueryConditionType_DailyReimbursementApply:{
             self.title = @"报销查询";
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"}];
         }
             break;
             
         case QueryConditionType_DailyReimbursementCheck:{
             self.title = @"报销查询";
-            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                           @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                           @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"报销科目",@"subTitle":@"请选择",@"key":@"daily_name"},
                            @{@"title":@"报销门店",@"subTitle":@"请选择",@"key":@"reimbursement_service"},
                            @{@"title":@"关联运单",@"subTitle":@"请选择",@"key":@"is_match_waybill"}];

@@ -48,7 +48,7 @@
     for (NSDictionary *m_dic in self.viewArray) {
         PublicResultTableVC *vc = m_dic[@"VC"];
         if (vc) {
-            vc.condition = [self.condition copy];
+            vc.condition = self.condition;
             vc.isResetCondition = YES;
             if (self.slidePageView.superview) {
                 if ([self.viewArray indexOfObject:m_dic] == self.slidePageView.selectedIndex) {

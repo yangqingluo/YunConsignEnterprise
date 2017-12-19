@@ -23,6 +23,8 @@
         [self.viewArray addObject:@{@"title":@"申请中",@"VC":[[DailyReimbursementApplyTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[DailyReimbursementApplyTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
         [self.viewArray addObject:@{@"title":@"驳回",@"VC":[[DailyReimbursementApplyTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
+        self.condition.start_time = nil;
+        self.condition.end_time = nil;
     }
     return self;
 }
@@ -55,7 +57,7 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_DailyReimbursementApply;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {

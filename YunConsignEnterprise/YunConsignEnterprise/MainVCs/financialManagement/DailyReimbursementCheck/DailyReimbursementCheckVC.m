@@ -24,6 +24,8 @@
         [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
         [self.viewArray addObject:@{@"title":@"驳回",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
         self.condition.is_match_waybill = @"1";
+        self.condition.start_time = nil;
+        self.condition.end_time = nil;
     }
     return self;
 }
@@ -56,7 +58,7 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_DailyReimbursementCheck;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
