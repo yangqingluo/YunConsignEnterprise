@@ -1,0 +1,50 @@
+[
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "货物编号",
+    "item_note" : "",
+    "item_sort" : 1,
+    "item_val" : "goods_number"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "发货单号",
+    "item_note" : "",
+    "item_sort" : 2,
+    "item_val" : "waybill_number"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "收货人电话",
+    "item_note" : "",
+    "item_sort" : 3,
+    "item_val" : "consignee_phone"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "收货人姓名",
+    "item_note" : "",
+    "item_sort" : 4,
+    "item_val" : "consignee_name"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "发货人电话",
+    "item_note" : "",
+    "item_sort" : 5,
+    "item_val" : "shipper_phone"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "发货人姓名",
+    "item_note" : "",
+    "item_sort" : 6,
+    "item_val" : "shipper_name"
+}
+]

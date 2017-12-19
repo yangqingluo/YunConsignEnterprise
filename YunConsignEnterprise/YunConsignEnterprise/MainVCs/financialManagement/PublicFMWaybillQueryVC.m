@@ -8,12 +8,12 @@
 
 #import "PublicFMWaybillQueryVC.h"
 
-#import "PublicInputHeaderView.h"
+#import "PublicChangeableInputHeaderView.h"
 #import "PublicFMWaybillQueryCell.h"
 
 @interface PublicFMWaybillQueryVC ()
 
-@property (strong, nonatomic) PublicInputHeaderView *headerView;
+@property (strong, nonatomic) PublicChangeableInputHeaderView *headerView;
 
 @end
 
@@ -61,16 +61,19 @@
     }
     
     NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    [m_dic setObject:waybill_info forKey:@"query_val"];
+    [m_dic setObject:self.headerView.changeableData.item_val forKey:@"query_column"];
+    
     NSString *m_code = nil;
     switch (self.type) {
         case FMWaybillQueryType_DailyReimburse:{
-            [m_dic setObject:waybill_info forKey:@"waybill_info"];
+//            [m_dic setObject:waybill_info forKey:@"waybill_info"];
             m_code = @"hex_reimburse_queryWaybillInDailyReimburseFunction";
         }
             break;
             
         case FMWaybillQueryType_CodLoanApply:{
-            [m_dic setObject:waybill_info forKey:@"number"];
+//            [m_dic setObject:waybill_info forKey:@"number"];
             m_code = @"hex_loan_queryWaybillListByNumberFunction";
         }
             break;
@@ -103,17 +106,46 @@
     }];
 }
 
+- (void)tappedChangeableLabel:(UITapGestureRecognizer *)gesture {
+    NSString *m_key = @"query_column_waybill";
+    NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
+    if (dicArray.count) {
+        NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dicArray.count];
+        for (AppDataDictionary *m_data in dicArray) {
+            [m_array addObject:m_data.item_name];
+        }
+        QKWEAKSELF;
+        BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", @"查询字段"] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+            if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
+                weakself.headerView.changeableData = dicArray[buttonIndex - 1];
+            }
+        } otherButtonTitlesArray:m_array];
+        [sheet showInView:self.view];
+    }
+}
+
 #pragma mark - getter
-- (PublicInputHeaderView *)headerView {
+- (PublicChangeableInputHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[PublicInputHeaderView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom + kEdge, screen_width, kCellHeightFilter)];
-        _headerView.baseView.textLabel.text = @"运单号/货号";
-        _headerView.baseView.textField.placeholder = @"请输入运单号或货号";
+        _headerView = [[PublicChangeableInputHeaderView alloc] initWithFrame:CGRectMake(0, self.navigationBarView.bottom + kEdge, screen_width, kCellHeightFilter)];
+        _headerView.baseView.textLabel.text = @"请选择查询字段";
+        _headerView.baseView.textLabel.textAlignment = NSTextAlignmentCenter;
+        _headerView.baseView.textField.placeholder = @"请输入查询内容";
         _headerView.baseView.textField.textAlignment = NSTextAlignmentLeft;
         _headerView.baseView.textField.clearButtonMode = UITextFieldViewModeAlways;
         _headerView.baseView.textField.keyboardType = UIKeyboardTypeURL;
         [_headerView.searchBtn addTarget:self action:@selector(searchButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [_headerView.baseView adjustSubviews];
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedChangeableLabel:)];
+        _headerView.baseView.textLabel.userInteractionEnabled = YES;
+        [_headerView.baseView.textLabel addGestureRecognizer:tapGesture];
+        
+        NSString *m_key = @"query_column_waybill";
+        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
+        if (dicArray.count) {
+            _headerView.changeableData = dicArray[0];
+        }
     }
     return _headerView;
 }

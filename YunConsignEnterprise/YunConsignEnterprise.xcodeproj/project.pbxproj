@@ -37,6 +37,8 @@
 		E43487341FB456D700EE4188 /* QueryWaybillReimburseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43487331FB456D700EE4188 /* QueryWaybillReimburseListCell.m */; };
 		E437748A1FC5454F00BB37F6 /* ServiceGoodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */; };
 		E43774901FC5478800BB37F6 /* SaveServiceGoodVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */; };
+		E438C1111FE91B2A00A438E4 /* PublicChangeableInputHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E438C1101FE91B2A00A438E4 /* PublicChangeableInputHeaderView.m */; };
+		E438C1131FE9204C00A438E4 /* query_column_waybill.txt in Resources */ = {isa = PBXBuildFile; fileRef = E438C1121FE9204C00A438E4 /* query_column_waybill.txt */; };
 		E438D0411FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */; };
 		E43B9DA11FC5543B00D1C57B /* ServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B9DA01FC5543B00D1C57B /* ServiceVC.m */; };
 		E43B9DA41FC5552F00D1C57B /* SaveServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43B9DA31FC5552F00D1C57B /* SaveServiceVC.m */; };
@@ -508,6 +510,9 @@
 		E43774891FC5454F00BB37F6 /* ServiceGoodVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceGoodVC.m; sourceTree = "<group>"; };
 		E437748E1FC5478800BB37F6 /* SaveServiceGoodVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveServiceGoodVC.h; sourceTree = "<group>"; };
 		E437748F1FC5478800BB37F6 /* SaveServiceGoodVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveServiceGoodVC.m; sourceTree = "<group>"; };
+		E438C10F1FE91B2A00A438E4 /* PublicChangeableInputHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicChangeableInputHeaderView.h; sourceTree = "<group>"; };
+		E438C1101FE91B2A00A438E4 /* PublicChangeableInputHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicChangeableInputHeaderView.m; sourceTree = "<group>"; };
+		E438C1121FE9204C00A438E4 /* query_column_waybill.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = query_column_waybill.txt; sourceTree = "<group>"; };
 		E438D03F1FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanApplyWaybillQueryCell.h; sourceTree = "<group>"; };
 		E438D0401FB402B20023B8DE /* CodLoanApplyWaybillQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodLoanApplyWaybillQueryCell.m; sourceTree = "<group>"; };
 		E43B9D9F1FC5543B00D1C57B /* ServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceVC.h; sourceTree = "<group>"; };
@@ -1354,6 +1359,7 @@
 			isa = PBXGroup;
 			children = (
 				E46CA9A21FB06A33008F26F4 /* daily_name.txt */,
+				E438C1121FE9204C00A438E4 /* query_column_waybill.txt */,
 				E42DACD11FCB0B81004FCDD1 /* show_column.txt */,
 				E430C0821FD157E400A94A23 /* show_column_cod_check.txt */,
 				E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */,
@@ -2023,6 +2029,8 @@
 				E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */,
 				E49D6C161FB15F04004F82D4 /* PublicInputHeaderView.h */,
 				E49D6C171FB15F04004F82D4 /* PublicInputHeaderView.m */,
+				E438C10F1FE91B2A00A438E4 /* PublicChangeableInputHeaderView.h */,
+				E438C1101FE91B2A00A438E4 /* PublicChangeableInputHeaderView.m */,
 				E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */,
 				E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */,
 				E4436E341FB422DD007B54C8 /* CodLoanApplyWaybillSaveCell.h */,
@@ -2710,6 +2718,7 @@
 				E4E2A3D81FB311AE00D8EC1C /* ImageSelectedSmallOff@3x.png in Resources */,
 				E4E2A3ED1FB311AE00D8EC1C /* VideoOverlay@3x.png in Resources */,
 				E46CA9A31FB06A33008F26F4 /* daily_name.txt in Resources */,
+				E438C1131FE9204C00A438E4 /* query_column_waybill.txt in Resources */,
 				E49D7F511FD38F16009B59B7 /* setting_icon_SERVICE_GOOD@3x.png in Resources */,
 				E49D7F5D1FD38F16009B59B7 /* tabbar_icon_setting_normal@3x.png in Resources */,
 				E49D7F401FD38F16009B59B7 /* money_icon_COD_WAIT_PAY@3x.png in Resources */,
@@ -2865,6 +2874,7 @@
 				E49D7EA11FD38D4E009B59B7 /* DailyReimbursementCheckVC.m in Sources */,
 				E4E2A3C11FB311AE00D8EC1C /* MJRefreshAutoStateFooter.m in Sources */,
 				E4E2A3B31FB311AE00D8EC1C /* MJPropertyKey.m in Sources */,
+				E438C1111FE91B2A00A438E4 /* PublicChangeableInputHeaderView.m in Sources */,
 				E4E2A4081FB311AE00D8EC1C /* TZGifPhotoPreviewController.m in Sources */,
 				E4E2A3EF1FB311AE00D8EC1C /* MWGridCell.m in Sources */,
 				E49D7E9C1FD38D4E009B59B7 /* CodWaitPayVC.m in Sources */,
