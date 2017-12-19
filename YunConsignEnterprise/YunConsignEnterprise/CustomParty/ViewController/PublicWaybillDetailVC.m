@@ -91,6 +91,7 @@
             weakself.detailData = (AppWayBillDetailInfo *)object;
             [weakself updateSubviews];
         }
+        [weakself.tableView.mj_header beginRefreshing];
     };
     [self.navigationController pushViewController:vc animated:YES];
 }
