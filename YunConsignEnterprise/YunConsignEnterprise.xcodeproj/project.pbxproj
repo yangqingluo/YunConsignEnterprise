@@ -114,7 +114,6 @@
 		E49D7E3F1FD38CAA009B59B7 /* PublicSRSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E161FD38CAA009B59B7 /* PublicSRSelectVC.m */; };
 		E49D7E401FD38CAA009B59B7 /* WayBillOpenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E181FD38CAA009B59B7 /* WayBillOpenVC.m */; };
 		E49D7E411FD38CAA009B59B7 /* WaybillChangeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E1B1FD38CAA009B59B7 /* WaybillChangeListVC.m */; };
-		E49D7E421FD38CAA009B59B7 /* WayBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E1D1FD38CAA009B59B7 /* WayBillDetailVC.m */; };
 		E49D7E431FD38CAA009B59B7 /* WaybillEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E1F1FD38CAA009B59B7 /* WaybillEditVC.m */; };
 		E49D7E441FD38CAA009B59B7 /* WaybillLogTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E211FD38CAA009B59B7 /* WaybillLogTableVC.m */; };
 		E49D7E451FD38CAA009B59B7 /* WaybillLogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E49D7E231FD38CAA009B59B7 /* WaybillLogVC.m */; };
@@ -659,8 +658,6 @@
 		E49D7E181FD38CAA009B59B7 /* WayBillOpenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillOpenVC.m; sourceTree = "<group>"; };
 		E49D7E1A1FD38CAA009B59B7 /* WaybillChangeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillChangeListVC.h; sourceTree = "<group>"; };
 		E49D7E1B1FD38CAA009B59B7 /* WaybillChangeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeListVC.m; sourceTree = "<group>"; };
-		E49D7E1C1FD38CAA009B59B7 /* WayBillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayBillDetailVC.h; sourceTree = "<group>"; };
-		E49D7E1D1FD38CAA009B59B7 /* WayBillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayBillDetailVC.m; sourceTree = "<group>"; };
 		E49D7E1E1FD38CAA009B59B7 /* WaybillEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillEditVC.h; sourceTree = "<group>"; };
 		E49D7E1F1FD38CAA009B59B7 /* WaybillEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillEditVC.m; sourceTree = "<group>"; };
 		E49D7E201FD38CAA009B59B7 /* WaybillLogTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLogTableVC.h; sourceTree = "<group>"; };
@@ -1531,8 +1528,6 @@
 			children = (
 				E49D7E1A1FD38CAA009B59B7 /* WaybillChangeListVC.h */,
 				E49D7E1B1FD38CAA009B59B7 /* WaybillChangeListVC.m */,
-				E49D7E1C1FD38CAA009B59B7 /* WayBillDetailVC.h */,
-				E49D7E1D1FD38CAA009B59B7 /* WayBillDetailVC.m */,
 				E49D7E1E1FD38CAA009B59B7 /* WaybillEditVC.h */,
 				E49D7E1F1FD38CAA009B59B7 /* WaybillEditVC.m */,
 				E49D7E221FD38CAA009B59B7 /* WaybillLogVC.h */,
@@ -3001,7 +2996,6 @@
 				E49D7E491FD38CAA009B59B7 /* WaybillReturnVC.m in Sources */,
 				E4E2A4071FB311AE00D8EC1C /* TZAssetModel.m in Sources */,
 				E49D7E321FD38CAA009B59B7 /* TTLoadListVC.m in Sources */,
-				E49D7E421FD38CAA009B59B7 /* WayBillDetailVC.m in Sources */,
 				E4E2A4101FB311AE00D8EC1C /* TZProgressView.m in Sources */,
 				E4E2A3BE1FB311AE00D8EC1C /* MJRefreshHeader.m in Sources */,
 				E4789A671FCD5A0000F1BD88 /* JsonUserVC.m in Sources */,

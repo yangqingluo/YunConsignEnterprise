@@ -374,7 +374,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView wayBillTitleCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
     WayBillTitleCell *cell = (WayBillTitleCell *)[super tableView:tableView wayBillTitleCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
     if (indexPath.section == 2) {
-        cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"总运费：%@", self.toSaveData.total_amount];
+        cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"总运费：%@", notNilString(self.toSaveData.total_amount, @"0")];
     }
     return cell;
 }

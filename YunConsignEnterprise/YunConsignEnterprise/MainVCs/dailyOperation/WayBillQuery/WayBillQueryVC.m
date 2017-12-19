@@ -53,7 +53,7 @@
     [self createNavWithTitle:self.accessInfo.menu_name createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
-            [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
         else if (nIndex == 1){

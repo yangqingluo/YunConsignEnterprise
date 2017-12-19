@@ -7,7 +7,7 @@
 //
 
 #import "PublicDailyReimbursementDetailVC.h"
-#import "QueryWaybillReimburseListVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "LLImagePickerView.h"
 
@@ -203,9 +203,21 @@
     NSDictionary *m_dic = m_array[indexPath.row];
     NSString *key = m_dic[@"key"];
     if ([key isEqualToString:@"waybill_info"]) {
+        
         if (self.applyData.judgeWaybillInfoValidity) {
-            QueryWaybillReimburseListVC *vc = [QueryWaybillReimburseListVC new];
-            vc.applyData = self.applyData;
+//            QueryWaybillReimburseListVC *vc = [QueryWaybillReimburseListVC new];
+//            vc.applyData = self.applyData;
+            PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+            vc.type = WaybillDetailType_DailyReimbursementApply;
+            
+            AppWayBillInfo *m_data = [AppWayBillInfo new];
+            m_data.waybill_id = [self.applyData.waybill_id copy];
+//            NSArray *m_array = [self.applyData.waybill_info componentsSeparatedByString:@"/"];
+//            if (m_array.count == 2) {
+//                m_data.goods_number = m_array[0];
+//                m_data.waybill_number = m_array[1];
+//            }
+            vc.data = m_data;
             [self doPushViewController:vc animated:YES];
         }
         else {

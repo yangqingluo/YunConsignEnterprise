@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, WaybillDetailType) {
     WaybillDetailType_WaybillReceive,
     WaybillDetailType_CodQuery,
     WaybillDetailType_CodWaitPay,
+    WaybillDetailType_DailyReimbursementApply,
 };
 
 typedef NS_ENUM(NSInteger, USER_ROLE) {
