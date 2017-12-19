@@ -72,20 +72,19 @@
 }
 
 - (void)setupFooter {
-    _footerView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.width, kCellHeightFilter)];
+    _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, kCellHeightFilter)];
     _footerView.bottom = self.height;
     _footerView.backgroundColor = [UIColor whiteColor];
-    _footerView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _footerView.delegate = self;
-    _footerView.dataSource = self;
     [self addSubview:_footerView];
     
-//    _dateCell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-//    _dateCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//    _dateCell.baseView.lineView.hidden = YES;
-//    [_footerView addSubview:_dateCell];
+    _footerTableView = [[UITableView alloc] initWithFrame:self.footerView.bounds];
+    _footerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _footerTableView.delegate = self;
+    _footerTableView.dataSource = self;
+    _footerTableView.scrollEnabled = NO;
+    [self.footerView addSubview:_footerTableView];
     
-    [_footerView addSubview:NewSeparatorLine(CGRectMake(0, _footerView.height - appSeparaterLineSize, _contentView.width, appSeparaterLineSize))];
+    [self.footerView addSubview:NewSeparatorLine(CGRectMake(0, self.footerView.height - appSeparaterLineSize, _footerView.width, appSeparaterLineSize))];
 }
 
 - (void)setupContent {
@@ -269,7 +268,7 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open
 - (void)setDate:(NSDate *)date {
     _date = date;
     self.dateLabel.text = stringFromDate(self.date, nil);
-    [self.footerView reloadData];
+    [self.footerTableView reloadData];
 }
 
 @end

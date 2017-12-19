@@ -15,7 +15,8 @@
 @property (strong, nonatomic) WaybillTitleView *titleView;
 @property (strong, nonatomic) UIView *headerView;
 @property (strong, nonatomic) UIView *contentView;
-@property (strong, nonatomic) UITableView *footerView;
+@property (strong, nonatomic) UIView *footerView;
+@property (strong, nonatomic) UITableView *footerTableView;
 
 @property (strong, nonatomic) UILabel *senderLabel;
 @property (strong, nonatomic) UILabel *receiverLabel;
