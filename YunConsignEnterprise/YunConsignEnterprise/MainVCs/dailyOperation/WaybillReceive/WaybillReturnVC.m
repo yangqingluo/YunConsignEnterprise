@@ -41,7 +41,6 @@
                                @{@"title":@"内部备注",@"subTitle":@"无",@"key":@"inner_note"},
                                @{@"title":@"修改原因",@"subTitle":@"无",@"key":@"change_cause"},];
     
-    [self.headerView setupTitle];
     self.tableView.tableHeaderView = self.headerView;
     self.title = @"原货返回";
     [self pullWaybillDetailData];
@@ -54,82 +53,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)doDoneAction{
+- (void)doDoneAction {
     if (self.doneBlock) {
         self.doneBlock(self.detailData);
     }
 }
 
-- (void)saveButtonAction {
-    [self dismissKeyboard];
-    
-    if (!self.headerView.senderInfo) {
-        [self showHint:@"请补全发货人信息"];
-        return;
-    }
-    else {
-        [self.toSaveData appendSenderInfo:self.headerView.senderInfo];
-    }
-    
-    if (!self.headerView.receiverInfo) {
-        [self showHint:@"请补全收货人信息"];
-        return;
-    }
-    else {
-        [self.toSaveData appendReceiverInfo:self.headerView.receiverInfo];
-    }
-    
-    //    if (!self.goodsArray.count) {
-    //        [self showHint:@"请添加货物信息"];
-    //        return;
-    //    }
-    //    else {
-    //        self.toSavedata.waybill_items = [[AppGoodsInfo mj_keyValuesArrayWithObjectArray:self.goodsArray] mj_JSONString];
-    //    }
-    
-    //    long long amount = [self.toSavedata.total_amount longLongValue];
-    //    long long payNowAmount = self.toSavedata.is_pay_now ? [self.toSavedata.pay_now_amount longLongValue] : 0LL;
-    //    long long payOnReceiptAmount = self.toSavedata.is_pay_on_receipt ? [self.toSavedata.pay_on_receipt_amount longLongValue] : 0LL;
-    //    long long payOnDeliveryAmount = self.toSavedata.is_pay_on_delivery ? [self.toSavedata.pay_on_delivery_amount longLongValue] : 0LL;
-    //    if (amount != payNowAmount + payOnReceiptAmount + payOnDeliveryAmount) {
-    //        [self showHint:@"总费用不等于现付提付回单付的和，请检查"];
-    //        return;
-    //    }
-    
-    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
-    NSDictionary *toSaveDic = [self.toSaveData mj_keyValues];
-    NSDictionary *detailDic = [self.detailData mj_keyValues];
-    NSMutableDictionary *m_dic = [NSMutableDictionary new];
-    
-    BOOL hasChanged = NO;
-    for (NSString *key in toSaveDic.allKeys) {
-        if ([key isEqualToString:@"waybill_items"]) {
-            continue;
-        }
-        if (![toSaveDic[key] isEqual:detailDic[key]]) {
-            hasChanged = YES;
-        }
-        [m_dic setObject:toSaveDic[key] forKey:key];
-    }
-    if (hasChanged) {
-        //        NSLog(@"%@", [AppPublic logDic:m_dic]);
-        [m_dic setObject:self.detailData.waybill_id forKey:@"waybill_id"];
-        [self pushUpdateWaybillFunction:m_dic];
-    }
-    else {
-        [self updateWayBillSuccessWithChange:nil];
-    }
-}
-
-- (void)pushUpdateWaybillFunction:(NSDictionary *)parm {
+- (void)pushSaveWaybillFunction:(NSDictionary *)parm {
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_updateWaybillByIdFunction" Parm:parm completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_saveWaybillFunction" Parm:parm completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
-            if (item.flag == 1) {
-                [weakself updateWayBillSuccessWithChange:parm];
+            if (item.flag == 1 && item.items.count) {
+                AppSaveBackWayBillInfo *info = [AppSaveBackWayBillInfo mj_objectWithKeyValues:item.items[0]];
+                [weakself saveWayBillSuccess:info];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -141,24 +80,15 @@
     }];
 }
 
-- (void)updateWayBillSuccessWithChange:(NSDictionary *)changedDic {
-    if (changedDic) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillReceiveRefresh object:nil];
-        for (NSString *key in changedDic.allKeys) {
-            if ([key isEqualToString:@"change_cause"]) {
-                continue;
-            }
-            [self.detailData setValue:changedDic[key] forKey:key];
-        }
-        QKWEAKSELF;
-        BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已更新" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
-            [weakself goBackWithDone:YES];
-        } otherButtonTitles:nil];
-        [alert show];
-    }
-    else {
-        [self goBackWithDone:NO];
-    }
+- (void)saveWayBillSuccess:(AppSaveBackWayBillInfo *)info {
+//    QKWEAKSELF;
+//    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已保存" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+//        [weakself goBackWithDone:YES];
+//    } otherButtonTitles:nil];
+//    [alert show];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillReceiveRefresh object:nil];
+    [self showHint:@"原货返回成功"];
+    [self goBackWithDone:YES];
 }
 
 - (void)pullWaybillDetailData {

@@ -34,6 +34,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
     [self.tableView.mj_header beginRefreshing];
+    [self additionalDataDictionaryForCode:@"cash_on_delivery_causes_type"];
 }
 
 - (void)setupNav {
@@ -87,6 +88,7 @@
 
 - (void)pullWaybillPaymentInfo {
     NSDictionary *m_dic = @{@"waybill_id" : self.billData.waybill_id};
+    [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_queryWaybillPaymentInfoByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -215,6 +217,23 @@
     }
 }
 
+- (void)checkDataMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if (![self.toSaveData valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
+            AppDataDictionary *m_data = dataArray[0];
+            [self.toSaveData setValue:m_data.item_val forKey:key];
+            self.toSaveData.cash_on_delivery_causes_note = nil;
+            self.toSaveData.cash_on_delivery_real_amount = @"0";
+            self.toSaveData.cash_on_delivery_causes_amount = @"0";
+            [self.tableView reloadData];
+        }
+    }
+    else {
+        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
+    }
+}
+
 #pragma mark - getter
 - (WaybillToCustReceiveInfo *)toSaveData {
     if (!_toSaveData) {
@@ -226,6 +245,7 @@
         _toSaveData.cash_on_delivery_causes_amount = @"0";
         _toSaveData.payment_indemnity_amount = @"0";
         _toSaveData.deliver_indemnity_amount = @"0";
+        _toSaveData.less_indemnity_amount = @"0";
     }
     return _toSaveData;
 }
@@ -237,8 +257,9 @@
                        @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
                        @{@"title":@"实收代收款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_real_amount"},
                        @{@"title":@"代收款少款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_causes_type"},
+                       @{@"title":@"代收款少款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
                        @{@"title":@"少款原因",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_note"},
-                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
+                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"less_indemnity_amount"},
                        @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount"},
                          @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount"}],
                        @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];

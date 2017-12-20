@@ -240,13 +240,6 @@
                 WaybillReturnVC *vc = [WaybillReturnVC new];
                 vc.baseData = [AppWayBillInfo mj_objectWithKeyValues:[self.dataSource[indexPath.row] mj_keyValues]];
                 [self doPushViewController:vc animated:YES];
-//                QKWEAKSELF;
-//                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定原货返回吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-//                    if (buttonIndex == 1) {
-//                        [weakself doCancelReceiveWaybillFunction:weakself.dataSource[indexPath.row]];
-//                    }
-//                } otherButtonTitles:@"确定", nil];
-//                [alert show];
             }
                 break;
                 

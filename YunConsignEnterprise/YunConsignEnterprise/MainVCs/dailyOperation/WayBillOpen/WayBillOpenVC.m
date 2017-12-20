@@ -95,7 +95,7 @@
 //        return;
 //    }
     
-    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, @"yyyy-MM-dd");
+    self.toSaveData.consignment_time = stringFromDate(self.headerView.date, nil);
     [self pushSaveWaybillFunction:[self.toSaveData app_keyValues]];
 }
 
