@@ -195,6 +195,7 @@
         [self.goodsArray addObject:goods];
     }
     [self.headerView updateDataForWaybillDetailInfo:self.detailData isReturn:YES];
+    self.headerView.date = [NSDate date];
     self.toSaveData = [AppSaveWayBillInfo mj_objectWithKeyValues:[self.detailData mj_keyValues]];
     
     [self.tableView reloadData];
