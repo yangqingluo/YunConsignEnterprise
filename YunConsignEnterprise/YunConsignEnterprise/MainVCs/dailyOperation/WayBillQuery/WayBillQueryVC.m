@@ -29,6 +29,10 @@
     if (self) {
         self.condition.is_cancel = boolString(NO);
         self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:@"waybill_type"];
+        if (dicArray.count) {
+            self.condition.waybill_type = dicArray[0];
+        }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_WaybillListRefresh object:nil];
     }
     return self;
@@ -87,6 +91,9 @@
         }
         if (self.condition.end_time) {
             [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
+        }
+        if (self.condition.waybill_type) {
+            [m_dic setObject:self.condition.waybill_type.item_val forKey:@"waybill_type"];
         }
         if (self.condition.query_column && self.condition.query_val) {
             [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];

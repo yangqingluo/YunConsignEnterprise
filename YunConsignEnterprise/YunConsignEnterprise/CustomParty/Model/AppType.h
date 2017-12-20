@@ -900,6 +900,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *is_cancel;//是否作废
 @property (strong, nonatomic) AppServiceInfo *power_service;//收款网点
 @property (strong, nonatomic) AppServiceInfo *load_service;//装车网点
+@property (strong, nonatomic) AppDataDictionary *waybill_type;//运单类型 全部、发货、收货
 
 /*车辆相关*/
 @property (strong, nonatomic) AppCityInfo *start_station_city;

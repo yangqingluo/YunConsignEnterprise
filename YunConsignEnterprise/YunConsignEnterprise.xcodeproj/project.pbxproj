@@ -56,6 +56,7 @@
 		E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649B1F611C370084F4EB /* FinancialManagementVC.m */; };
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
+		E449C78E1FEA070B001B1077 /* waybill_type.txt in Resources */ = {isa = PBXBuildFile; fileRef = E449C78D1FEA070B001B1077 /* waybill_type.txt */; };
 		E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */; };
 		E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E456501C1F978D2200F7694B /* CustomerManageCell.m */; };
 		E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995321F95E012009F35A6 /* PublicMutableLabelView.m */; };
@@ -547,6 +548,7 @@
 		E447649E1F611C460084F4EB /* DailyOperationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyOperationVC.m; sourceTree = "<group>"; };
 		E44765031F6129040084F4EB /* UserPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPublic.h; sourceTree = "<group>"; };
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
+		E449C78D1FEA070B001B1077 /* waybill_type.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waybill_type.txt; sourceTree = "<group>"; };
 		E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSummaryCell.h; sourceTree = "<group>"; };
 		E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSummaryCell.m; sourceTree = "<group>"; };
 		E456501B1F978D2200F7694B /* CustomerManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerManageCell.h; sourceTree = "<group>"; };
@@ -1371,6 +1373,7 @@
 				E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */,
 				E44455D51FE904A300441A90 /* show_column_FreightCheck2.txt */,
 				E48002D71FDFC57B00E7D943 /* url_zone.txt */,
+				E449C78D1FEA070B001B1077 /* waybill_type.txt */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -2843,6 +2846,7 @@
 				E49D7F5F1FD38F16009B59B7 /* tabbar_icon_setting_selected@3x.png in Resources */,
 				E49D7F121FD38F16009B59B7 /* daily_icon_WAYBILL_LOAD@3x.png in Resources */,
 				E49D7F3C1FD38F16009B59B7 /* money_icon_COD_LOAN_APPLY@3x.png in Resources */,
+				E449C78E1FEA070B001B1077 /* waybill_type.txt in Resources */,
 				E49D7F351FD38F16009B59B7 /* login_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,26 @@
+[
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "全部",
+    "item_note" : "",
+    "item_sort" : 1,
+    "item_val" : "1"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "发货",
+    "item_note" : "",
+    "item_sort" : 2,
+    "item_val" : "2"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "收货",
+    "item_note" : "",
+    "item_sort" : 3,
+    "item_val" : "3"
+}
+]
