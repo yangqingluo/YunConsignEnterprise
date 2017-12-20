@@ -68,6 +68,7 @@
 		E46826021FA06EF8009C4918 /* PublicHeaderBodyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826011FA06EF8009C4918 /* PublicHeaderBodyCell.m */; };
 		E46826051FA07019009C4918 /* WaybillLoadSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E46826041FA07019009C4918 /* WaybillLoadSelectCell.m */; };
 		E4684CB91F98E66A00E1EFE0 /* WaybillChangeDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4684CB81F98E66A00E1EFE0 /* WaybillChangeDetailCell.m */; };
+		E46900951FE9F2E800EFB294 /* TransportTruckEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E46900941FE9F2E800EFB294 /* TransportTruckEditVC.m */; };
 		E46A975C1FB2047C009B318F /* PublicWaybillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */; };
 		E46CA9A31FB06A33008F26F4 /* daily_name.txt in Resources */ = {isa = PBXBuildFile; fileRef = E46CA9A21FB06A33008F26F4 /* daily_name.txt */; };
 		E47042C81F979E9900BA7E22 /* PublicQueryConditionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E47042C71F979E9900BA7E22 /* PublicQueryConditionVC.m */; };
@@ -570,6 +571,8 @@
 		E46826041FA07019009C4918 /* WaybillLoadSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadSelectCell.m; sourceTree = "<group>"; };
 		E4684CB71F98E66A00E1EFE0 /* WaybillChangeDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillChangeDetailCell.h; sourceTree = "<group>"; };
 		E4684CB81F98E66A00E1EFE0 /* WaybillChangeDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeDetailCell.m; sourceTree = "<group>"; };
+		E46900931FE9F2E800EFB294 /* TransportTruckEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransportTruckEditVC.h; sourceTree = "<group>"; };
+		E46900941FE9F2E800EFB294 /* TransportTruckEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransportTruckEditVC.m; sourceTree = "<group>"; };
 		E46A975A1FB2047C009B318F /* PublicWaybillDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicWaybillDetailVC.h; sourceTree = "<group>"; };
 		E46A975B1FB2047C009B318F /* PublicWaybillDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicWaybillDetailVC.m; sourceTree = "<group>"; };
 		E46CA9A21FB06A33008F26F4 /* daily_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = daily_name.txt; sourceTree = "<group>"; };
@@ -1477,6 +1480,8 @@
 				E49D7DFA1FD38CAA009B59B7 /* TTPayCostVC.m */,
 				E4AC27171FE98D770026504C /* TransportTruckDetailVC.h */,
 				E4AC27181FE98D770026504C /* TransportTruckDetailVC.m */,
+				E46900931FE9F2E800EFB294 /* TransportTruckEditVC.h */,
+				E46900941FE9F2E800EFB294 /* TransportTruckEditVC.m */,
 			);
 			name = RegisterTruck;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/RegisterTruck;
@@ -3001,6 +3006,7 @@
 				E4E2A4121FB311AE00D8EC1C /* UIView+Layout.m in Sources */,
 				E4E2A3C01FB311AE00D8EC1C /* MJRefreshAutoNormalFooter.m in Sources */,
 				E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */,
+				E46900951FE9F2E800EFB294 /* TransportTruckEditVC.m in Sources */,
 				E4E2A3F31FB311AE00D8EC1C /* MWTapDetectingImageView.m in Sources */,
 				E4E2A37E1FB311AE00D8EC1C /* AFHTTPSessionManager.m in Sources */,
 				E49D7E3C1FD38CAA009B59B7 /* WaybillLoadVC.m in Sources */,

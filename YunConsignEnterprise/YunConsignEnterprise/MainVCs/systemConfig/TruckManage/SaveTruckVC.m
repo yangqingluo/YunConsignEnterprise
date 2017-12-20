@@ -65,7 +65,7 @@
         NSString *key = dic[@"key"];
         NSObject *value = [self.toSaveData valueForKey:key];
         if ([dic[@"need"] boolValue] && !value) {
-            [self showHint:[NSString stringWithFormat:@"%@%@", [self.selectorSet containsObject:key] ? @"请选择" : @"请补全", dic[@"title"]]];
+            [self doShowHintFunction:[NSString stringWithFormat:@"%@%@", [self.selectorSet containsObject:key] ? @"请选择" : @"请补全", dic[@"title"]]];
             return;
         }
         

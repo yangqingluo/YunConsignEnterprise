@@ -16,7 +16,7 @@
 }
 
 - (void)refreshFooter {
-    NSArray *m_array = @[@"装车详情", @"取消派车", @"发车"];
+    NSArray *m_array = @[@"修改", @"装车详情", @"取消派车", @"发车"];
     if (self.indextag == 1) {
         m_array = @[@"装车详情"];
     }

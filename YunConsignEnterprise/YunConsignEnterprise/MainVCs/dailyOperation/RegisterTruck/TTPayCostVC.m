@@ -122,7 +122,7 @@
 }
 
 - (void)payTransportTruckCostSuccess {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillListRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_TransportTruckSaveRefresh object:nil];
     QKWEAKSELF;
     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运费发放完成" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
         [weakself goBack];
@@ -151,7 +151,7 @@
 
 - (NSSet *)defaultKeyBoardTypeSet {
     if (!_defaultKeyBoardTypeSet) {
-        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"note", @"driver_account_name", @"driver_account_bank", nil];
+        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"note", @"truck_driver_name", @"truck_number_plate", @"driver_account_name", @"driver_account_bank", nil];
     }
     
     return _defaultKeyBoardTypeSet;
@@ -199,9 +199,6 @@
         [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.baseView.textField.delegate = self;
         cell.baseView.lineView.hidden = YES;
-//        UIButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-//        [btn setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
-//        [cell.baseView addRightView:btn];
     }
     NSArray *m_array = self.showArray[indexPath.section];
     NSDictionary *m_dic = nil;

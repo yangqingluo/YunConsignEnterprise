@@ -11,6 +11,7 @@
 #import "TTPayCostVC.h"
 #import "PublicSaveTransportTruckVC.h"
 #import "TransportTruckDetailVC.h"
+#import "TransportTruckEditVC.h"
 
 #import "TransportTruckCell.h"
 #import "PublicFooterSummaryView.h"
@@ -244,22 +245,27 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                TTLoadListVC *vc = [TTLoadListVC new];
-                vc.data = item;
-                [self doPushViewController:vc animated:YES];
+                if (self.indextag == 0) {
+                    //修改
+                    TransportTruckEditVC *vc = [TransportTruckEditVC new];
+                    vc.truckData = item;
+                    [self doPushViewController:vc animated:YES];
+                }
+                else {
+                    //装车详情
+                    TTLoadListVC *vc = [TTLoadListVC new];
+                    vc.data = item;
+                    [self doPushViewController:vc animated:YES];
+                }
             }
                 break;
                 
             case 1:{
                 if (self.indextag == 0) {
-                    //取消派车
-                    QKWEAKSELF;
-                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消派车吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-                        if (buttonIndex == 1) {
-                            [weakself doCancelTransportTruck:item];
-                        }
-                    } otherButtonTitles:@"确定", nil];
-                    [alert show];
+                    //装车详情
+                    TTLoadListVC *vc = [TTLoadListVC new];
+                    vc.data = item;
+                    [self doPushViewController:vc animated:YES];
                 }
                 else if (self.indextag == 2) {
                     //发放运费
@@ -271,6 +277,18 @@
                 break;
                 
             case 2:{
+                //取消派车
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消派车吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doCancelTransportTruck:item];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
+            }
+                break;
+                
+            case 3:{
                 if (self.indextag == 0) {
                     //发车
                     QKWEAKSELF;

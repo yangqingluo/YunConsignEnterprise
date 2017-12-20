@@ -130,9 +130,6 @@
         [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.baseView.textField.enabled = NO;
         cell.baseView.lineView.hidden = YES;
-        //        UIButton *btn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        //        [btn setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
-        //        [cell.baseView addRightView:btn];
     }
     NSArray *m_array = self.showArray[indexPath.section];
     NSDictionary *m_dic = nil;
