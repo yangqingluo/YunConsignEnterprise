@@ -326,6 +326,16 @@ NSString *dateStringWithTimeString(NSString *string){
     return string.length ? string : @"--";
 }
 
+NSDate *dateWithPriousorLaterDate(NSDate *date, int month) {
+    //正数是以后n个月，负数是前n个月；
+    NSDateComponents *comps = [NSDateComponents new];
+    [comps setMonth:month];
+    NSCalendar *calender = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *mDate = [calender dateByAddingComponents:comps toDate:date options:0];
+    return mDate;
+}
+
+
 //文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width {
     NSMutableParagraphStyle *paragraphStyle= [[NSMutableParagraphStyle alloc] init];

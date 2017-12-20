@@ -200,6 +200,7 @@ UIView *NewSeparatorLine(CGRect frame);
 NSDate *dateFromString(NSString *dateString, NSString *format);
 NSString *stringFromDate(NSDate *date, NSString *format);
 NSString *dateStringWithTimeString(NSString *string);
+NSDate *dateWithPriousorLaterDate(NSDate *date, int month);
 
 //文本尺寸
 + (CGSize)textSizeWithString:(NSString *)text font:(UIFont *)font constantWidth:(CGFloat)width;

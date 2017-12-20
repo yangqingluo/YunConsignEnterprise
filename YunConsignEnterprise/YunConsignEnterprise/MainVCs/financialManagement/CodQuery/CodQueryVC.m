@@ -29,6 +29,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     self = [super init];
     if (self) {
         self.type = QueryConditionType_CodQuery;
+        self.condition.start_time = dateWithPriousorLaterDate(self.condition.end_time, -1);
         [self.condition addObserver:self forKeyPath:searchTimeTypeKey options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
