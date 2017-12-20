@@ -20,7 +20,7 @@
 
 - (void)setupFooter {
     [super setupFooter];
-    NSArray *m_array = @[@"原货返回", @"打印", @"自提"];
+    NSArray *m_array = @[@"凭证", @"原货返回", @"打印", @"自提"];
     [self.footerView updateDataSourceWithArray:m_array];
 }
 

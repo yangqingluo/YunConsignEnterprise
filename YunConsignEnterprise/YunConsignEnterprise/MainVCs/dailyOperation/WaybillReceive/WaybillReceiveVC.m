@@ -13,12 +13,19 @@
 #import "PublicWaybillDetailVC.h"
 
 #import "WaybillReceiveCell.h"
-#import "MJRefresh.h"
+#import "LLImagePickerView.h"
+#import "PublicAlertView.h"
+#import "NSData+HTTPRequest.h"
 
-@interface WaybillReceiveVC ()
+@interface WaybillReceiveVC () {
+    NSUInteger uploadImageIndex;
+}
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (strong, nonatomic) AppQueryConditionInfo *condition;
+
+@property (strong, nonatomic) NSMutableArray *selectedImageArray;
+@property (strong, nonatomic) NSString *selectedVoucher;
 
 @end
 
@@ -126,7 +133,6 @@
     }];
 }
 
-
 - (void)doCancelReceiveWaybillFunction:(AppCanReceiveWayBillInfo *)item {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : item.waybill_id}];
     [self doShowHudFunction];
@@ -142,6 +148,27 @@
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
             }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doQueryWaybillVoucherByIdFunction:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.dataSource.count) {
+        return;
+    }
+    AppCanReceiveWayBillInfo *data = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : data.waybill_id}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_queryWaybillVoucherByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            NSArray *m_array = [AppVoucherInfo mj_objectArrayWithKeyValuesArray:item.items];
+            [weakself showImagePickerAlert:m_array indexPath:indexPath];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -171,6 +198,119 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+- (void)showImagePickerAlert:(NSArray *)array indexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.dataSource.count) {
+        return;
+    }
+    AppCanReceiveWayBillInfo *item = self.dataSource[indexPath.row];
+    LLImagePickerView *_imagePickerView = [LLImagePickerView ImagePickerViewWithFrame:CGRectMake(0, 0, screen_width - 2 * kEdgeHuge, 80) CountOfRow:3];
+    _imagePickerView.backgroundColor = [UIColor clearColor];
+    _imagePickerView.allowMultipleSelection = NO;
+    _imagePickerView.maxImageSelected = 3;
+    
+    QKWEAKSELF;
+    [_imagePickerView observeSelectedMediaArray:^(NSArray<LLImagePickerModel *> *list) {
+        [weakself.selectedImageArray removeAllObjects];
+        weakself.selectedVoucher = [NSString new];
+        for (LLImagePickerModel *model in list) {
+            if (model.imageUrlString.length) {
+                weakself.selectedVoucher = [NSString stringWithFormat:@"%@%@%@", notNilString(weakself.selectedVoucher, @""), weakself.selectedVoucher.length ? @"," : @"", model.imageUrlString];
+            }
+            else {
+                [weakself.selectedImageArray addObject:model];
+            }
+        }
+    }];
+    
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:array.count];
+    for (AppVoucherInfo *item in array) {
+        [m_array addObject:item.voucher];
+    }
+    _imagePickerView.preShowMedias = [NSArray arrayWithArray:m_array];
+    
+    PublicAlertView *alert = [[PublicAlertView alloc] initWithContentView:_imagePickerView andTitle:item.goods_number callBlock:^(PublicAlertView *m_view, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            if (weakself.selectedImageArray.count) {
+                [weakself doSaveDailyReimburseFunction:YES indexPath:indexPath];
+            }
+        }
+    }];
+    [alert show];
+}
+
+- (void)doSaveDailyReimburseFunction:(BOOL)isReset indexPath:(NSIndexPath *)indexPath {
+    if (isReset) {
+        uploadImageIndex = 0;
+    }
+    if (uploadImageIndex < self.selectedImageArray.count) {
+        [self doUploadBase64ImageFunction:self.selectedImageArray[uploadImageIndex] indexPath:indexPath];
+    }
+    else {
+        [self doReimburseSaveDailyReimburseFunction:indexPath];
+    }
+}
+
+- (void)doReimburseSaveDailyReimburseFunction:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.dataSource.count) {
+        return;
+    }
+    AppCanReceiveWayBillInfo *data = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_id" : data.waybill_id, @"voucher" : self.selectedVoucher}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receive_updateWaybillVoucherByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself dailyReimbursementSaveSuccess];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)doUploadBase64ImageFunction:(LLImagePickerModel *)imageModel  indexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.dataSource.count) {
+        return;
+    }
+    AppCanReceiveWayBillInfo *data = self.dataSource[indexPath.row];
+    
+    NSData *imageData = dataOfImageCompression(imageModel.image, NO);
+    [self doShowHudFunction];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"resource_type" : [NSString stringWithFormat:@"%@", @"waybill"], @"resource_suffix" : [imageData getImageType]}];
+    [m_dic setObject:[NSString stringWithFormat:@"%@", [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]] forKey:@"base64_content"];
+    [m_dic setObject:[NSString stringWithFormat:@"%@%@", (data.goods_number ? data.goods_number : [UserPublic getInstance].userData.service_name), @"waybill"] forKey:@"resource_note"];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_resource_uploadBase64ImageFunction" Parm:m_dic URLFooter:@"/resource/common/data.do" completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                uploadImageIndex++;
+                self.selectedVoucher = [NSString stringWithFormat:@"%@%@%@", notNilString(self.selectedVoucher, @""), self.selectedVoucher.length ? @"," : @"", item.message];
+                [self doSaveDailyReimburseFunction:NO indexPath:(NSIndexPath *)indexPath];
+            }
+            else {
+                [weakself showHint:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)dailyReimbursementSaveSuccess {
+    [self showHint:@"保存成功"];
+    
+}
+
 #pragma mark - getter
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
@@ -185,6 +325,13 @@
         _dataSource = [NSMutableArray new];
     }
     return _dataSource;
+}
+
+- (NSMutableArray *)selectedImageArray {
+    if (!_selectedImageArray) {
+        _selectedImageArray = [NSMutableArray new];
+    }
+    return _selectedImageArray;
 }
 
 #pragma mark - UITableView
@@ -233,9 +380,16 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppCanReceiveWayBillInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
+                //凭证
+                [self doQueryWaybillVoucherByIdFunction:indexPath];
+            }
+                break;
+                
+            case 1:{
                 //原货返回
                 WaybillReturnVC *vc = [WaybillReturnVC new];
                 vc.baseData = [AppWayBillInfo mj_objectWithKeyValues:[self.dataSource[indexPath.row] mj_keyValues]];
@@ -243,13 +397,14 @@
             }
                 break;
                 
-            case 1:{
+            case 2:{
                 //打印
                 [self doShowHintFunction:defaultNoticeNotComplete];
             }
                 break;
                 
-            case 2:{
+            case 3:{
+                //自提
                 WaybillCustReceiveVC *vc = [WaybillCustReceiveVC new];
                 vc.billData = self.dataSource[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];

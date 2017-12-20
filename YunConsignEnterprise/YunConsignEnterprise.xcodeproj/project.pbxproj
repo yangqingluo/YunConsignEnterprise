@@ -444,6 +444,7 @@
 		E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 		E4EDBFCA1FB1EECB009D2FA4 /* CodWaitPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EDBFC91FB1EECB009D2FA4 /* CodWaitPayCell.m */; };
+		E4EE24AB1FEAAA9300A2E19E /* PublicAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EE24AA1FEAAA9300A2E19E /* PublicAlertView.m */; };
 		E4F283581FB1B1CD005A0BC1 /* CodRemitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */; };
 		E4F283611FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F283601FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.m */; };
 		E4F45BA51F95F99A002F8AFD /* ServiceGoodsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F45BA41F95F99A002F8AFD /* ServiceGoodsDetailCell.m */; };
@@ -1199,6 +1200,8 @@
 		E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicBannerView.m; sourceTree = "<group>"; };
 		E4EDBFC81FB1EECB009D2FA4 /* CodWaitPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodWaitPayCell.h; sourceTree = "<group>"; };
 		E4EDBFC91FB1EECB009D2FA4 /* CodWaitPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodWaitPayCell.m; sourceTree = "<group>"; };
+		E4EE24A91FEAAA9200A2E19E /* PublicAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicAlertView.h; sourceTree = "<group>"; };
+		E4EE24AA1FEAAA9300A2E19E /* PublicAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicAlertView.m; sourceTree = "<group>"; };
 		E4F283561FB1B1CD005A0BC1 /* CodRemitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitCell.h; sourceTree = "<group>"; };
 		E4F283571FB1B1CD005A0BC1 /* CodRemitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodRemitCell.m; sourceTree = "<group>"; };
 		E4F2835F1FB1BA60005A0BC1 /* CodRemitLoanApplyListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodRemitLoanApplyListCell.h; sourceTree = "<group>"; };
@@ -1914,6 +1917,8 @@
 				E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */,
 				E40F7CAD1F95B36700946C18 /* PublicDatePickerView.h */,
 				E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */,
+				E4EE24A91FEAAA9200A2E19E /* PublicAlertView.h */,
+				E4EE24AA1FEAAA9300A2E19E /* PublicAlertView.m */,
 				E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */,
 				E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */,
 				E4F686FD1F70F11200D80704 /* WayBillSRHeaderView.h */,
@@ -3070,6 +3075,7 @@
 				E4E2A39E1FB311AE00D8EC1C /* IQToolbar.m in Sources */,
 				E4E2A3951FB311AE00D8EC1C /* IQUIView+Hierarchy.m in Sources */,
 				E43487341FB456D700EE4188 /* QueryWaybillReimburseListCell.m in Sources */,
+				E4EE24AB1FEAAA9300A2E19E /* PublicAlertView.m in Sources */,
 				E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */,
 				E4E2A3921FB311AE00D8EC1C /* IQNSArray+Sort.m in Sources */,
 				E49D7E451FD38CAA009B59B7 /* WaybillLogVC.m in Sources */,

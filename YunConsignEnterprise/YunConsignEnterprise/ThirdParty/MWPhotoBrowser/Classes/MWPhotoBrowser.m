@@ -167,6 +167,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     [_toolbar setBackgroundImage:nil forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    _toolbar.hidden = YES;//to fix
     
     _showLabel = NewLabel(CGRectMake(0, self.view.height - 30, _pagingScrollView.width, 30), [UIColor whiteColor], nil, NSTextAlignmentCenter);
     _showLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
