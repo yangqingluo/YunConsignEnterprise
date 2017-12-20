@@ -10,6 +10,7 @@
 
 @interface WaybillReturnVC : WayBillOpenVC
 
+@property (strong, nonatomic) AppWayBillInfo *baseData;
 @property (strong, nonatomic) AppWayBillDetailInfo *detailData;
 
 @end

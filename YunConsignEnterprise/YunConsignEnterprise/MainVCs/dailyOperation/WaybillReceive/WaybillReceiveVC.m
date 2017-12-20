@@ -238,7 +238,7 @@
             case 0:{
                 //原货返回
                 WaybillReturnVC *vc = [WaybillReturnVC new];
-                vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[self.dataSource[indexPath.row] mj_keyValues]];
+                vc.baseData = [AppWayBillInfo mj_objectWithKeyValues:[self.dataSource[indexPath.row] mj_keyValues]];
                 [self doPushViewController:vc animated:YES];
 //                QKWEAKSELF;
 //                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定原货返回吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {

@@ -82,9 +82,6 @@
 //}
 
 - (void)updateSubviews {
-    if (!self.detailData.check_time.length) {
-        self.detailData.check_time = stringFromDate([NSDate date], defaultDateFormat);
-    }
     [self.tableView reloadData];
 }
 

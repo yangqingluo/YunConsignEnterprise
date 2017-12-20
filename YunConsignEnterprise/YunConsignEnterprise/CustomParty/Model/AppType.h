@@ -370,6 +370,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *change_cause;//修改原因
 @property (strong, nonatomic) NSString *waybill_items;//运单货物明细（JSON格式）
 @property (strong, nonatomic) NSString *is_update_waybill_item;//是否更新货物明细
+@property (strong, nonatomic) NSString *goods_number;//货物编号
 
 - (void)appendSenderInfo:(AppSendReceiveInfo *)info;
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info;
@@ -477,6 +478,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *inner_note;//内部备注
 @property (strong, nonatomic) NSString *is_return_waybill;//是否原货返货 YES_NO
 @property (strong, nonatomic) NSString *return_waybill_number ;//原货返回运单号
+@property (strong, nonatomic) NSString *return_waybill_id;//原货返回运单编号
 @property (strong, nonatomic) NSString *waybill_change_count;//运单修改次数
 @property (strong, nonatomic) NSArray *waybill_items;//货物信息
 
