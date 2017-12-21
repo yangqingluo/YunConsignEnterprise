@@ -211,12 +211,12 @@
     QKWEAKSELF;
     [_imagePickerView observeSelectedMediaArray:^(NSArray<LLImagePickerModel *> *list) {
         [weakself.selectedImageArray removeAllObjects];
-        weakself.selectedVoucher = [NSString new];
+        weakself.selectedVoucher = @"";
         for (LLImagePickerModel *model in list) {
             if (model.imageUrlString.length) {
                 weakself.selectedVoucher = [NSString stringWithFormat:@"%@%@%@", notNilString(weakself.selectedVoucher, @""), weakself.selectedVoucher.length ? @"," : @"", model.imageUrlString];
             }
-            else {
+            else if (model.image) {
                 [weakself.selectedImageArray addObject:model];
             }
         }
@@ -230,12 +230,21 @@
     
     PublicAlertView *alert = [[PublicAlertView alloc] initWithContentView:_imagePickerView andTitle:item.goods_number callBlock:^(PublicAlertView *m_view, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            if (weakself.selectedImageArray.count) {
-                [weakself doSaveDailyReimburseFunction:YES indexPath:indexPath];
-            }
+            [weakself alertToSaveVoucher:indexPath];
         }
     }];
     [alert show];
+}
+
+- (void)alertToSaveVoucher:(NSIndexPath *)indexPath {
+//    QKWEAKSELF;
+//    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定保存吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+//        if (buttonIndex == 1) {
+//            [weakself doSaveDailyReimburseFunction:YES indexPath:indexPath];
+//        }
+//    } otherButtonTitles:@"确定", nil];
+//    [alert show];
+    [self doSaveDailyReimburseFunction:YES indexPath:indexPath];
 }
 
 - (void)doSaveDailyReimburseFunction:(BOOL)isReset indexPath:(NSIndexPath *)indexPath {
@@ -380,7 +389,6 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
-        AppCanReceiveWayBillInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
