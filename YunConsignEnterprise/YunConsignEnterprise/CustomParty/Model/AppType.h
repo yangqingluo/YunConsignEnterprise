@@ -376,7 +376,17 @@ BOOL isTrue(NSString *string);
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info;
 - (NSDictionary *)app_keyValues;
 
+- (NSArray *)defaultKVOArray;
+
 @end
+
+//原货返回下单数据
+@interface AppSaveReturnWayBillInfo : AppSaveWayBillInfo
+
+
+
+@end
+
 
 //下单返回
 @interface AppSaveBackWayBillInfo : AppType

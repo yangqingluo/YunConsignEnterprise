@@ -74,7 +74,7 @@ __strong static AppPublic  *_singleManger = nil;
             _selectedURLZone = self.urlZoneArray[0];
         }
     }
-    NSLog(@"%@", _selectedURLZone.item_val);
+//    NSLog(@"%@", _selectedURLZone.item_val);
     return _selectedURLZone;
 }
 

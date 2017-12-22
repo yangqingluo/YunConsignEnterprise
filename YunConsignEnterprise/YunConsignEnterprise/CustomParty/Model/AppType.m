@@ -287,9 +287,8 @@ BOOL isTrue(NSString *string) {
     self.total_amount = [NSString stringWithFormat:@"%lld", amount];
 }
 
-#pragma mark - getter
 - (NSArray *)defaultKVOArray {
-    return @[@"freight", @"insurance_fee", @"take_goods_fee", @"deliver_goods_fee", @"rebate_fee", @"forklift_fee", @"transfer_fee", @"pay_for_sb_fee", @"return_fee"];
+    return @[@"freight", @"insurance_fee", @"take_goods_fee", @"deliver_goods_fee", @"rebate_fee", @"forklift_fee", @"transfer_fee", @"pay_for_sb_fee"];
 }
 
 #pragma mark - kvo
@@ -298,6 +297,15 @@ BOOL isTrue(NSString *string) {
     if([m_array containsObject:keyPath]){
         [self calculateTotalAmount];
     }
+}
+
+@end
+
+@implementation AppSaveReturnWayBillInfo
+
+//比父类多了原返费
+- (NSArray *)defaultKVOArray {
+    return @[@"freight", @"insurance_fee", @"take_goods_fee", @"deliver_goods_fee", @"rebate_fee", @"forklift_fee", @"transfer_fee", @"pay_for_sb_fee", @"return_fee"];
 }
 
 @end
