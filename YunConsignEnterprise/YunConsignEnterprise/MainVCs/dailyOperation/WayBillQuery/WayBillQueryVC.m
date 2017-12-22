@@ -119,7 +119,7 @@
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppWayBillInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
-            if (item.total <= weakself.dataSource.count) {
+            if (item.total < 10) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             else {
