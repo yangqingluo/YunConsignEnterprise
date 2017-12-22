@@ -20,6 +20,15 @@ static void uncaughtExceptionHandler(NSException *exception) {
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    AppDataDictionary *m_url = [AppPublic getInstance].selectedURLZone;
+    if (m_url) {
+        if ((m_url.item_sort == 1 && [m_url.item_val isEqualToString:@"http://demo.tms.yunlaila.com.cn"]) || (m_url.item_sort == 2 && [m_url.item_val isEqualToString:@"http://tms.yunlaila.com.cn"])) {
+            [[AppPublic getInstance] clearURLZone];
+            [[UserPublic getInstance] clear];
+        }
+    }
+    
     if ([UserPublic getInstance].userData) {
         [[AppPublic getInstance] goToMainVC];
     }

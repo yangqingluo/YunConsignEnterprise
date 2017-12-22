@@ -74,6 +74,7 @@ __strong static AppPublic  *_singleManger = nil;
             _selectedURLZone = self.urlZoneArray[0];
         }
     }
+    NSLog(@"%@", _selectedURLZone.item_val);
     return _selectedURLZone;
 }
 
@@ -518,6 +519,11 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month) {
     }
     _selectedURLZone = [data copy];
     [[NSUserDefaults standardUserDefaults] setObject:[_selectedURLZone mj_keyValues] forKey:kUserZone];
+}
+
+- (void)clearURLZone {
+    _selectedURLZone = nil;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserZone];
 }
 
 @end

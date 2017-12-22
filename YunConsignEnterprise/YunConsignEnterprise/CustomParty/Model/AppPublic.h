@@ -233,5 +233,6 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month);
 - (void)goToLoginCompletion:(void (^)(void))completion;
 
 - (void)saveURLZoneWithData:(AppDataDictionary *)data;
+- (void)clearURLZone;
 
 @end
