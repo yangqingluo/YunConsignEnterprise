@@ -35,7 +35,7 @@
         for (NSUInteger i = 0; i < count; i++) {
             if (i < count) {
                 CGFloat width = self.width * [self.edgeSource[i] floatValue];
-                UILabel *label = NewLabel(CGRectMake(0, 0, width, self.height), baseTextColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
+                UILabel *label = NewLabel(CGRectMake(0, 0, width, self.height), baseTextColor, self.mutableLabelFont, NSTextAlignmentCenter);
                 label.left = x;
                 x += width;
                 label.text = m_array[i];
@@ -57,6 +57,14 @@
             m_label.text = self.dataSource[i];
         }
     }
+}
+
+#pragma mark -- getter
+- (UIFont *)mutableLabelFont {
+    if (!_mutableLabelFont) {
+        _mutableLabelFont = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+    }
+    return _mutableLabelFont;
 }
 
 @end

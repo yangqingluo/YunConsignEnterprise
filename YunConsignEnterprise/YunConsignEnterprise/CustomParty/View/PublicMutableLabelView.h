@@ -10,5 +10,6 @@
 
 @interface PublicMutableLabelView : PublicMutableContentView
 
+@property (strong, nonatomic) UIFont *mutableLabelFont;
 
 @end

@@ -12,6 +12,6 @@
 
 @property (copy, nonatomic) AppServiceGoodsDetailInfo *data;
 
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath data:(AppServiceGoodsDetailInfo *)data;
 
 @end

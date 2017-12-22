@@ -155,7 +155,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row > 0) {
-        return [ServiceGoodsDetailCell tableView:tableView heightForRowAtIndexPath:indexPath];
+        return [ServiceGoodsDetailCell tableView:tableView heightForRowAtIndexPath:indexPath data:self.dataSource[indexPath.row - 1]];
     }
     return kCellHeight;
 }

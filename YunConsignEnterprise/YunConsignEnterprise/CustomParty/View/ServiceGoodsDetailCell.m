@@ -20,7 +20,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _baseView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeightMiddle)];
+        _baseView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, kCellHeight)];
         _baseView.showVerticalSeparator = NO;
         [_baseView updateEdgeSourceWithArray:@[@0.4, @0.2, @0.2, @0.2]];
         [self.contentView addSubview:_baseView];
@@ -40,13 +40,14 @@
     // Configure the view for the selected state
 }
 
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kCellHeightMiddle;
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath data:(AppServiceGoodsDetailInfo *)data {
+    return MAX(kCellHeight, [AppPublic textSizeWithString:data.goods_name font:[PublicMutableLabelView new].mutableLabelFont constantWidth:0.2 * screen_width].height + kEdgeMiddle);
 }
 
 #pragma mark - setter
 - (void)setData:(AppServiceGoodsDetailInfo *)data {
     _data = data;
+    self.baseView.height = [[self class] tableView:nil heightForRowAtIndexPath:nil data:data];
     [self.baseView updateDataSourceWithArray:@[data.goods_number, data.goods_name, notShowFooterZeroString(data.total_amount, @"0"), [data.is_load intValue] > 0 ? @"√" : @""]];
     if (self.baseView.showViews.count == 4) {
         UILabel *label = self.baseView.showViews[3];
