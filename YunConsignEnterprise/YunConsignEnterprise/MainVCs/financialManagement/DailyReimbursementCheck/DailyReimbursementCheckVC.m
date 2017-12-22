@@ -23,7 +23,7 @@
         [self.viewArray addObject:@{@"title":@"等待审核",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
         [self.viewArray addObject:@{@"title":@"驳回",@"VC":[[DailyReimbursementCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
-        self.condition.is_match_waybill = @"1";
+//        self.condition.is_match_waybill = @"1";
         self.condition.start_time = nil;
         self.condition.end_time = nil;
     }

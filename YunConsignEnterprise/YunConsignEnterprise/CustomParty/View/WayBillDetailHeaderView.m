@@ -24,7 +24,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.width = screen_width;
-        self.height = 160 + kEdge + self.footerView.height;
+        self.height = 200 + kEdge + self.footerView.height;
         [self setupHeader];
         [self setupContent];
     }
@@ -32,12 +32,17 @@
 }
 
 - (void)setupHeader {
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, kEdge, self.width, 40)];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, kEdge, self.width, 80)];
     _headerView.backgroundColor = MainColor;
     [self addSubview:_headerView];
     
-    _numberLabel = NewLabel(CGRectMake(kEdge, 0, _headerView.width - 2 * kEdge, _headerView.height), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSize], NSTextAlignmentLeft);
+    _numberLabel = NewLabel(CGRectMake(kEdge, 0, _headerView.width - 2 * kEdge, 0.5 * _headerView.height), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSize], NSTextAlignmentLeft);
     [_headerView addSubview:_numberLabel];
+    
+    _numberLabel1 = NewLabel(CGRectMake(kEdge, _numberLabel.bottom, _headerView.width - 2 * kEdge, 0.5 * _headerView.height), [UIColor whiteColor], [AppPublic appFontOfSize:appLabelFontSize], NSTextAlignmentLeft);
+    [_headerView addSubview:_numberLabel1];
+    
+    [_headerView addSubview:NewSeparatorLine(CGRectMake(0, 0.5 * _headerView.height, _headerView.width, appSeparaterLineSize))];
     
     self.footerView.bottom = self.height;
     [self addSubview:self.footerView];
@@ -105,7 +110,8 @@
 - (void)setData:(AppWayBillDetailInfo *)data {
     _data = data;
     
-    self.numberLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", data.waybill_number, data.goods_number];
+    self.numberLabel.text = [NSString stringWithFormat:@"运单号： %@", data.waybill_number];
+    self.numberLabel1.text = [NSString stringWithFormat:@"货号： %@",  data.goods_number];
     self.dateLabel.text = [NSString stringWithFormat:@"托运时间：%@", dateStringWithTimeString(data.consignment_time)];
     self.urgentImageView.hidden = !isTrue(data.is_deliver_goods);
     

@@ -56,7 +56,8 @@
 }
 
 - (void)pullDataFunction:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : self.serviceQuantityData.service_id, @"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    //20171222取消分页，接口采用新接口
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : self.serviceQuantityData.service_id}];
     if (self.condition) {
         if (self.condition.start_time) {
             [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
@@ -73,7 +74,7 @@
     }
     
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryServiceGoodsDetailByCondition" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryServiceGoodsDetailByConditionFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
         if (!error) {
             if (isReset) {
@@ -81,12 +82,12 @@
             }
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppServiceGoodsDetailInfo mj_objectArrayWithKeyValuesArray:item.items]];
-            if (item.total <= weakself.dataSource.count) {
-                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else {
-                [weakself updateTableViewFooter];
-            }
+//            if (item.total <= weakself.dataSource.count) {
+//                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
+//            }
+//            else {
+//                [weakself updateTableViewFooter];
+//            }
             [weakself.tableView reloadData];
         }
         else {

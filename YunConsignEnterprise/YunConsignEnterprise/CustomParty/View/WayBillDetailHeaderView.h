@@ -11,6 +11,7 @@
 @interface WayBillDetailHeaderView : UIView
 
 @property (strong, nonatomic) UILabel *numberLabel;
+@property (strong, nonatomic) UILabel *numberLabel1;
 @property (strong, nonatomic) UILabel *dateLabel;
 @property (strong, nonatomic) UIImageView *urgentImageView;
 
