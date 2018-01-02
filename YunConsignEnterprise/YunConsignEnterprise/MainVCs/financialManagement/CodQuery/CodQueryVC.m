@@ -76,6 +76,19 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     [super selectRowAtIndexPath:indexPath];
 }
 
+- (void)checkDataMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if (![self.condition valueForKey:key] && [self.toCheckDataMapSet containsObject:key]) {
+            [self.condition setValue:[key isEqualToString:@"search_time_type"] ? dataArray[dataArray.count - 1] : dataArray[0] forKey:key];
+            [self.tableView reloadData];
+        }
+    }
+    else {
+        [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
+    }
+}
+
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:searchTimeTypeKey]) {
