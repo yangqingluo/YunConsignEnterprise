@@ -79,7 +79,7 @@
                         }
                     }
                     QKWEAKSELF;
-                    PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
+                    PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:1 back:^(NSObject *object){
                         if ([object isKindOfClass:[NSArray class]]) {
                             NSMutableArray *m_array = [NSMutableArray new];
                             for (NSNumber *number in (NSArray *)object) {
