@@ -266,7 +266,7 @@ NSString *httpRespString(NSError *error, NSObject *object){
 
 //login
 - (void)loginWithID:(NSString *)username Password:(NSString *)password completion:(QKNetworkBlock)completion {
-    NSDictionary *m_dic = @{@"login_code" : username, @"login_pass" : password, @"login_type" : @3};//登录方式：1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
+    NSDictionary *m_dic = @{@"login_code" : username, @"login_pass" : password, @"login_note" : [NSString stringWithFormat:@"%@-%@", [UserPublic getIPAddress:YES] , [[[UIDevice currentDevice] identifierForVendor] UUIDString]],   @"login_type" : @3};//登录方式：1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
     [self Post:m_dic HeadParm:nil URLFooter:@"/tms/login/login.do" completion:^(id responseBody, NSError *error){
         if (!error) {
             id object = nil;

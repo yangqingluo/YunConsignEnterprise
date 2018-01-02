@@ -40,5 +40,6 @@ NSString *serviceDataMapKeyForTruck(NSString *transport_truck_id);
 - (void)clear;
 
 + (NSString *)stringForType:(NSInteger)type key:(NSString *)key;
++ (NSString *)getIPAddress:(BOOL)preferIPv4;
 
 @end
