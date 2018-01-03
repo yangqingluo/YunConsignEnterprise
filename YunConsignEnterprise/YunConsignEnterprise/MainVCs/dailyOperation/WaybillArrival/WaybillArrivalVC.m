@@ -100,8 +100,8 @@
         if (self.condition.end_time) {
             [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
         }
-        if (self.condition.start_station_city) {
-            [m_dic setObject:self.condition.start_station_city.open_city_id forKey:@"start_station_city_id"];
+        if (self.condition.start_station_city_exception) {
+            [m_dic setObject:self.condition.start_station_city_exception.open_city_id forKey:@"start_station_city_id"];
         }
         if (self.condition.truck_number_plate) {
             [m_dic setObject:self.condition.truck_number_plate forKey:@"truck_number_plate"];

@@ -916,7 +916,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) AppDataDictionary *waybill_type;//运单类型 全部、发货、收货
 
 /*车辆相关*/
-@property (strong, nonatomic) AppCityInfo *start_station_city;
+@property (strong, nonatomic) AppCityInfo *start_station_city;//起点城市
+@property (strong, nonatomic) AppCityInfo *start_station_city_exception;//排除当前城市的起点城市
 @property (strong, nonatomic) AppCityInfo *end_station_city;
 @property (strong, nonatomic) NSString *truck_number_plate;//车辆牌照
 @property (strong, nonatomic) AppDataDictionary *transport_truck_state;//车辆状态

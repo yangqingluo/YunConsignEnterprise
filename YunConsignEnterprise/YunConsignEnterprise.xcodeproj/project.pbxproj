@@ -1512,10 +1512,10 @@
 		E49D7E041FD38CAA009B59B7 /* WaybillArrival */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7E051FD38CAA009B59B7 /* WaybillArrivalDetailVC.h */,
-				E49D7E061FD38CAA009B59B7 /* WaybillArrivalDetailVC.m */,
 				E49D7E071FD38CAA009B59B7 /* WaybillArrivalVC.h */,
 				E49D7E081FD38CAA009B59B7 /* WaybillArrivalVC.m */,
+				E49D7E051FD38CAA009B59B7 /* WaybillArrivalDetailVC.h */,
+				E49D7E061FD38CAA009B59B7 /* WaybillArrivalDetailVC.m */,
 			);
 			name = WaybillArrival;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillArrival;
