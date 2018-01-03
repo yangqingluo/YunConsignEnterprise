@@ -242,9 +242,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.baseView updateEdgeSourceWithArray:self.edgeArray];
         [cell.contentView addSubview:NewSeparatorLine(CGRectMake(0, [self tableView:tableView heightForRowAtIndexPath:indexPath] - appSeparaterLineSize, self.scrollView.contentSize.width, appSeparaterLineSize))];
-        //添加长按手势
-        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
-        [cell addGestureRecognizer:longPressGesture];
+//        //添加长按手势
+//        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
+//        [cell addGestureRecognizer:longPressGesture];
     }
     cell.indexPath = [indexPath copy];
     cell.data = self.dataSource[indexPath.row];
