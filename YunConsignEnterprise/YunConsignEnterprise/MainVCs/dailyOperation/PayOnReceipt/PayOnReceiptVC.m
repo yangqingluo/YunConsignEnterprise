@@ -11,23 +11,27 @@
 #import "PublicWaybillDetailVC.h"
 
 #import "PayOnReceiptCell.h"
-#import "MJRefresh.h"
 
 @interface PayOnReceiptVC ()
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
-@property (strong, nonatomic) AppQueryConditionInfo *condition;
 
 @end
 
 @implementation PayOnReceiptVC
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 - (void)setupNav {
@@ -64,15 +68,7 @@
     [vc showFromVC:self];
 }
 
-- (void)loadFirstPageData{
-    [self queryWaybillListByConditionFunction:YES];
-}
-
-- (void)loadMoreData{
-    [self queryWaybillListByConditionFunction:NO];
-}
-
-- (void)queryWaybillListByConditionFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     if (self.condition) {
         if (self.condition.start_time) {
@@ -110,42 +106,65 @@
     }];
 }
 
-- (void)updateTableViewHeader {
+- (void)doPayReceiptWaybillByIdFunction:(NSString *)waybill_id {
+    if (!waybill_id) {
+        return;
+    }
+    [self doShowHudFunction];
+    NSDictionary *m_dic = @{@"waybill_id" : waybill_id};
     QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receipt_payReceiptWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself payReceiptWaybillSuccess];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
     }];
 }
 
-- (void)updateTableViewFooter{
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
+- (void)doCancelPayReceiptWaybillByIdFunction:(NSString *)waybill_id {
+    if (!waybill_id) {
+        return;
     }
+    [self doShowHudFunction];
+    NSDictionary *m_dic = @{@"waybill_id" : waybill_id};
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_receipt_cancelPayReceiptWaybillByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself cancelPayReceiptWaybillSuccess];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
 }
 
-- (void)endRefreshing {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
+- (void)payReceiptWaybillSuccess {
+    [self doShowHintFunction:@"付款成功"];
+    [self beginRefreshing];
+}
+
+- (void)cancelPayReceiptWaybillSuccess {
+    [self doShowHintFunction:@"取消付款成功"];
+    [self beginRefreshing];
 }
 
 #pragma mark - getter
-- (AppQueryConditionInfo *)condition {
-    if (!_condition) {
-        _condition = [AppQueryConditionInfo new];
-        _condition.start_time = [_condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
-    }
-    return _condition;
-}
-
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -191,16 +210,29 @@
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
-        //        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        NSIndexPath *indexPath = m_dic[@"indexPath"];
+        AppNeedReceiptWayBillInfo *item = self.dataSource[indexPath.row];
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                
-            }
-                break;
-                
-            case 1:{
-                
+                //付款/取消付款
+                QKWEAKSELF;
+                if ([item.receipt_state integerValue] == RECEIPT_STATE_TYPE_4) {
+                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定取消付款吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+                        if (buttonIndex == 1) {
+                            [weakself doCancelPayReceiptWaybillByIdFunction:item.waybill_id];
+                        }
+                    } otherButtonTitles:@"确定", nil];
+                    [alert show];
+                }
+                else {
+                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定付款吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
+                        if (buttonIndex == 1) {
+                            [weakself doPayReceiptWaybillByIdFunction:item.waybill_id];
+                        }
+                    } otherButtonTitles:@"确定", nil];
+                    [alert show];
+                }
             }
                 break;
                 
