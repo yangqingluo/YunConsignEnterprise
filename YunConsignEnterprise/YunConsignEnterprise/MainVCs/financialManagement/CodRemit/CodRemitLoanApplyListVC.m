@@ -81,7 +81,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [CodRemitLoanApplyListCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:4];
+    AppCodLoanApplyWaitLoanInfo *item = self.dataSource[indexPath.row];
+    return [CodRemitLoanApplyListCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:3 + (item.apply_note.length > 0)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

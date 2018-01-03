@@ -37,8 +37,12 @@
     self.bodyLabel2.text = [NSString stringWithFormat:@"审核金额：%@（%@）", data.audit_amount, data.audit_time];
     self.bodyLabel3.text = [NSString stringWithFormat:@"审核人：%@", data.audit_name];
     self.bodyLabelRight3.text = [NSString stringWithFormat:@"手续费：%@", data.apply_amount_fee];
-    self.bodyLabel4.text = [NSString stringWithFormat:@"申请备注：%@", data.apply_note];
-    NSUInteger lines = 4;
+    NSUInteger lines = 3;
+    self.bodyLabel4.hidden = YES;
+    if (data.apply_note.length) {
+        lines++;
+        [self showLabel:self.bodyLabel4 conten:[NSString stringWithFormat:@"申请备注：%@", data.apply_note]];
+    }
     self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
