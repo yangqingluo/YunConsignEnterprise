@@ -79,21 +79,28 @@
                         }
                     }
                     QKWEAKSELF;
-                    PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:1 back:^(NSObject *object){
-                        if ([object isKindOfClass:[NSArray class]]) {
-                            NSMutableArray *m_array = [NSMutableArray new];
-                            for (NSNumber *number in (NSArray *)object) {
-                                NSInteger index = [number integerValue];
-                                if (index < dataArray.count && index >= 0) {
-                                    [m_array addObject:dataArray[index]];
-                                }
-                            }
-                            [weakself.condition setValue:[NSArray arrayWithArray:m_array] forKey:key];
+//                    PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
+//                        if ([object isKindOfClass:[NSArray class]]) {
+//                            NSMutableArray *m_array = [NSMutableArray new];
+//                            for (NSNumber *number in (NSArray *)object) {
+//                                NSInteger index = [number integerValue];
+//                                if (index < dataArray.count && index >= 0) {
+//                                    [m_array addObject:dataArray[index]];
+//                                }
+//                            }
+//                            [weakself.condition setValue:[NSArray arrayWithArray:m_array] forKey:key];
+//                            [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//                        }
+//                    }];
+//                    vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
+//                    [self doPushViewController:vc animated:YES];
+                    BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                        if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                            [weakself.condition setValue:@[dataArray[buttonIndex - 1]] forKey:key];
                             [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                         }
-                    }];
-                    vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
-                    [self doPushViewController:vc animated:YES];
+                    } otherButtonTitlesArray:source_array];
+                    [sheet showInView:self.view];
                 }
                 else {
                     [self pullServiceArrayFunctionForCode:m_key selectionInIndexPath:indexPath];
