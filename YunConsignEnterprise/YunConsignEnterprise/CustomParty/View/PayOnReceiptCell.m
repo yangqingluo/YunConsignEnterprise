@@ -26,7 +26,7 @@
 
 - (void)refreshFooter {
     NSArray *m_array = @[@"付款"];
-    if ([self.data.receipt_state integerValue] == RECEIPT_STATE_TYPE_3) {
+    if ([self.data.receipt_state integerValue] == RECEIPT_STATE_TYPE_4) {
         m_array = @[@"取消付款"];
     }
     [self.footerView updateDataSourceWithArray:m_array];

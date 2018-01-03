@@ -29,6 +29,7 @@
         [self.viewArray addObject:@{@"title":@"已登记",@"VC":[[TransportTruckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"运输中",@"VC":[[TransportTruckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
         [self.viewArray addObject:@{@"title":@"已完成",@"VC":[[TransportTruckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
+        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
     }
     return self;
 }

@@ -39,8 +39,9 @@ typedef NS_ENUM(NSInteger, RESOURCE_TYPE) {
 //回单状态
 typedef enum : NSUInteger {
     RECEIPT_STATE_TYPE_1 = 1,//未到站
-    RECEIPT_STATE_TYPE_2 = 2,//未付款
-    RECEIPT_STATE_TYPE_3 = 3,//已付款
+    RECEIPT_STATE_TYPE_2 = 2,//未提货
+    RECEIPT_STATE_TYPE_3 = 3,//已提货
+    RECEIPT_STATE_TYPE_4 = 4,//已回单
 } RECEIPT_STATE_TYPE;
 
 typedef NS_ENUM(NSInteger, LOAN_APPLY_STATE) {
@@ -53,7 +54,7 @@ typedef NS_ENUM(NSInteger, LOAN_APPLY_STATE) {
 //运单状态
 typedef NS_ENUM(NSInteger, WAYBILL_STATE) {
     WAYBILL_STATE_1 = 1,//等待装车
-    WAYBILL_STATE_2,//
+    WAYBILL_STATE_2,//已装车
     WAYBILL_STATE_3,//运输中
     WAYBILL_STATE_4,//已到站
     WAYBILL_STATE_5,//已完成
