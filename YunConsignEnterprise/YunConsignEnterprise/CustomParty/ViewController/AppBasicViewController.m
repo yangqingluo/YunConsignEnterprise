@@ -223,15 +223,15 @@
 
 - (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
     NSString *functionCode = nil;
-    if ([dict_code isEqualToString:@"start_service"]) {
-        functionCode = @"hex_waybill_getCurrentService";
-    }
-    else if ([dict_code isEqualToString:@"end_service"]) {
-        functionCode = @"hex_waybill_getEndService";
-    }
-    else {
+//    if ([dict_code isEqualToString:@"start_service"]) {
+//        functionCode = @"hex_waybill_getCurrentService";
+//    }
+//    else if ([dict_code isEqualToString:@"end_service"]) {
+//        functionCode = @"hex_waybill_getEndService";
+//    }
+//    else {
         functionCode = @"hex_waybill_getAllService";
-    }
+//    }
     
     if (!functionCode) {
         return;

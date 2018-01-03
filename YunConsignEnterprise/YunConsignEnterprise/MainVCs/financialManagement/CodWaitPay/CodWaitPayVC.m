@@ -52,34 +52,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)pullServiceArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
-    NSString *functionCode = nil;
-    if ([dict_code isEqualToString:@"start_service"]) {
-        functionCode = @"hex_waybill_getAllService";
-    }
-    
-    if (!functionCode) {
-        return;
-    }
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:functionCode Parm:nil completion:^(id responseBody, NSError *error){
-        [weakself doHideHudFunction];
-        if (!error) {
-            NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
-            if (m_array.count) {
-                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                if (indexPath) {
-                    [weakself selectRowAtIndexPath:indexPath];
-                }
-            }
-        }
-        else {
-            [weakself doShowHintFunction:error.userInfo[@"message"]];
-        }
-    }];
-}
-
 - (void)checkDataMapExistedForCode:(NSString *)key {
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {

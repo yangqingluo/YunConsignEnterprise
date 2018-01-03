@@ -70,7 +70,7 @@
         case QueryConditionType_WaybillLoad:{
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
-                           @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
+                           @{@"title":@"终点网点",@"subTitle":@"请选择",@"key":@"end_service"},
                            @{@"title":@"车辆状态",@"subTitle":@"请选择",@"key":@"transport_truck_state"},
                            @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
         }
