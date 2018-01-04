@@ -171,8 +171,10 @@
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [PayOnReceiptCell tableView:tableView heightForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppNeedReceiptWayBillInfo *item = self.dataSource[indexPath.row];
+    NSInteger receipt_state = [item.receipt_state integerValue];
+    return [PayOnReceiptCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:3 showFooter:(receipt_state == RECEIPT_STATE_TYPE_3 || receipt_state == RECEIPT_STATE_TYPE_4)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -225,13 +227,16 @@
                     } otherButtonTitles:@"确定", nil];
                     [alert show];
                 }
-                else {
+                else if ([item.receipt_state integerValue] == RECEIPT_STATE_TYPE_3) {
                     BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:nil message:@"确定付款吗" cancelButtonTitle:@"取消" clickButton:^(NSInteger buttonIndex) {
                         if (buttonIndex == 1) {
                             [weakself doPayReceiptWaybillByIdFunction:item.waybill_id];
                         }
                     } otherButtonTitles:@"确定", nil];
                     [alert show];
+                }
+                else {
+                    
                 }
             }
                 break;

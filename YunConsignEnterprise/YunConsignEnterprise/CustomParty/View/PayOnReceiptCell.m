@@ -25,11 +25,24 @@
 }
 
 - (void)refreshFooter {
-    NSArray *m_array = @[@"付款"];
-    if ([self.data.receipt_state integerValue] == RECEIPT_STATE_TYPE_4) {
-        m_array = @[@"取消付款"];
+    NSInteger receipt_state = [self.data.receipt_state integerValue];
+    switch (receipt_state) {
+        case RECEIPT_STATE_TYPE_3:
+        case RECEIPT_STATE_TYPE_4:{
+            self.footerView.hidden = NO;
+            NSArray *m_array = @[@"付款"];
+            if (receipt_state == RECEIPT_STATE_TYPE_4) {
+                m_array = @[@"取消付款"];
+            }
+            [self.footerView updateDataSourceWithArray:m_array];
+        }
+            break;
+            
+        default:{
+            self.footerView.hidden = YES;
+        }
+            break;
     }
-    [self.footerView updateDataSourceWithArray:m_array];
 }
 
 #pragma mark - setter
@@ -54,6 +67,9 @@
     [AppPublic adjustLabelWidth:self.bodyLabel3];
     
     self.payLabel.text = [NSString stringWithFormat:@"回单付：%@", _data.pay_on_receipt_amount];
+    
+//    NSUInteger lines = 3;
+//    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
     [self refreshFooter];
 }
 
