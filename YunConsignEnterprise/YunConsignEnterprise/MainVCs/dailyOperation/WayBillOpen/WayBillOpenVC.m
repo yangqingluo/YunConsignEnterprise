@@ -131,6 +131,9 @@
         NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
         button.selected = !button.selected;
         [self.toSaveData setValue:boolString(button.selected) forKey:m_dic[@"subKey"]];
+        if (!button.selected) {
+            [self.toSaveData setValue:@"0" forKey:m_dic[@"key"]];
+        }
         [self.tableView reloadRowsAtIndexPaths:@[button.indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
