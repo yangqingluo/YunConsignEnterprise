@@ -192,13 +192,13 @@
 - (void)updateFooterSummary {
     int count = 0;
     int goods_total_count = 0;
-    int goods_total_weight = 0;
+    int total_amount = 0;
     for (AppCanLoadWayBillInfo *item in self.selectSet) {
         count++;
         goods_total_count += [item.goods_total_count intValue];
-        goods_total_weight += [item.goods_total_weight intValue];
+        total_amount += [item.total_amount intValue];
     }
-    self.footerView.summaryView.textLabel.text = [NSString stringWithFormat:@"合计：%d票/%d件/货量%d", count, goods_total_count, goods_total_weight];
+    self.footerView.summaryView.textLabel.text = [NSString stringWithFormat:@"合计：%d票/%d件/货量%d", count, goods_total_count, total_amount];
 }
 
 - (void)cancelLoadWaybill:(NSString *)waybill_ids {
