@@ -86,5 +86,13 @@
     "item_note" : "",
     "item_sort" : 11,
     "item_val" : "transfer_fee"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "备注",
+    "item_note" : "",
+    "item_sort" : 12,
+    "item_val" : "note"
 }
 ]

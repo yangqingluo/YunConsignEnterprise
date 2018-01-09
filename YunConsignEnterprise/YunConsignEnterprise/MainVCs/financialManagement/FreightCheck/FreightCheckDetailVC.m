@@ -156,7 +156,7 @@
         [m_array addObject:notNilString([self.totalData valueForKey:@"waybill_count"], @"0")];
         [m_array addObject:notNilString([self.totalData valueForKey:@"consignee_name"], @"")];
         for (AppDataDictionary *map_item in self.condition.show_column) {
-            [m_array addObject:notNilString([self.totalData valueForKey:map_item.item_val], @"0")];
+            [m_array addObject:notNilString([self.totalData valueForKey:map_item.item_val], [map_item.item_val isEqualToString:@"note"] ? @"" : @"0")];
         }
         [self.footerView updateDataSourceWithArray:m_array];
         [self.tableView reloadData];

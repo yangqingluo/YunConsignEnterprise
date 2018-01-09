@@ -279,6 +279,8 @@
 		E4AF3B101F78E28B009EB766 /* PublicSwitchedInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF3B0F1F78E28B009EB766 /* PublicSwitchedInputCellView.m */; };
 		E4AFFF591F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFFF581F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m */; };
 		E4B05EF81F9F7B9900895591 /* EndServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B05EF71F9F7B9900895591 /* EndServiceCell.m */; };
+		E4B282732004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4B282712004B2D30012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png */; };
+		E4B282742004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4B282722004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png */; };
 		E4BB91A21F99EE1A00337A52 /* WaybillTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BB91A11F99EE1A00337A52 /* WaybillTitleView.m */; };
 		E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
@@ -896,6 +898,8 @@
 		E4AFFF581F98BCBB00EF7683 /* PublicDailyOpenWaybillVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublicDailyOpenWaybillVC.m; path = YunConsignEnterprise/MainVCs/DailyOperation/PublicDailyOpenWaybillVC.m; sourceTree = SOURCE_ROOT; };
 		E4B05EF61F9F7B9900895591 /* EndServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndServiceCell.h; sourceTree = "<group>"; };
 		E4B05EF71F9F7B9900895591 /* EndServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndServiceCell.m; sourceTree = "<group>"; };
+		E4B282712004B2D30012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_CHANGE_APPLY@3x.png"; sourceTree = "<group>"; };
+		E4B282722004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_CHANGE_CHECK@3x.png"; sourceTree = "<group>"; };
 		E4BB91A01F99EE1A00337A52 /* WaybillTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillTitleView.h; sourceTree = "<group>"; };
 		E4BB91A11F99EE1A00337A52 /* WaybillTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillTitleView.m; sourceTree = "<group>"; };
 		E4BC30B21F97255E00CAADAE /* WaybillArrivalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillArrivalCell.h; sourceTree = "<group>"; };
@@ -1742,6 +1746,8 @@
 				E49D7EB41FD38F16009B59B7 /* daily_icon_WAYBILL_OPEN@3x.png */,
 				E49D7EB51FD38F16009B59B7 /* daily_icon_WAYBILL_QUERY@3x.png */,
 				E49D7EB61FD38F16009B59B7 /* daily_icon_WAYBILL_RECEIVE@3x.png */,
+				E4B282712004B2D30012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png */,
+				E4B282722004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png */,
 				E49D7EB71FD38F16009B59B7 /* download_image_default@2x.png */,
 				E49D7EB81FD38F16009B59B7 /* list_icon_add@2x.png */,
 				E49D7EB91FD38F16009B59B7 /* list_icon_add@3x.png */,
@@ -2772,6 +2778,7 @@
 				E49D7F161FD38F16009B59B7 /* download_image_default@2x.png in Resources */,
 				E49D7F051FD38F16009B59B7 /* content_icon_direction@2x.png in Resources */,
 				E4E2A3E81FB311AE00D8EC1C /* UIBarButtonItemGrid.png in Resources */,
+				E4B282732004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png in Resources */,
 				E49D7F501FD38F16009B59B7 /* setting_icon_SERVICE@3x.png in Resources */,
 				E49D7F081FD38F16009B59B7 /* content_icon_direction_w@3x.png in Resources */,
 				E49D7F321FD38F16009B59B7 /* list_icon_radio_selcted@3x.png in Resources */,
@@ -2790,6 +2797,7 @@
 				E4E2A3EB1FB311AE00D8EC1C /* VideoOverlay.png in Resources */,
 				E4E2A3DA1FB311AE00D8EC1C /* ImageSelectedSmallOn@2x.png in Resources */,
 				E4E2A3D31FB311AE00D8EC1C /* ImageSelectedOn.png in Resources */,
+				E4B282742004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png in Resources */,
 				E49D7F611FD38F16009B59B7 /* TYBANG@3x.png in Resources */,
 				E49D7F2C1FD38F16009B59B7 /* list_icon_imgdelete@3x.png in Resources */,
 				E49D7F561FD38F16009B59B7 /* tabbar_icon_daily_selected@2x.png in Resources */,

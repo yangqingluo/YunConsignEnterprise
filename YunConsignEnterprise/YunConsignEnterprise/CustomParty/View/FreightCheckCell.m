@@ -21,7 +21,7 @@
     [m_array addObject:notNilString(data.goods_number, nil)];
     [m_array addObject:notNilString(data.consignee_name, nil)];
     for (NSString *val in self.valArray) {
-        [m_array addObject:notNilString([data valueForKey:val], @"0")];
+        [m_array addObject:notNilString([data valueForKey:val], [val isEqualToString:@"note"] ? @"" : @"0")];
     }
     [self.baseView updateDataSourceWithArray:m_array];
 }
