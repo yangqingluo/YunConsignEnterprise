@@ -180,7 +180,7 @@
             if (item.items.count) {
                 weakself.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:item.items[0]];
             }
-            [weakself updateSubviews];
+            [weakself updateSubviews:YES];
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -192,7 +192,7 @@
     [self doHideHudFunction];
 }
 
-- (void)updateSubviews {
+- (void)updateSubviews:(BOOL)isReset {
     [self.goodsArray removeAllObjects];
     for (AppWaybillItemInfo *item in self.detailData.waybill_items) {
         AppGoodsInfo *goods = [AppGoodsInfo mj_objectWithKeyValues:[item mj_keyValues]];
@@ -201,6 +201,10 @@
     }
     [self.headerView updateDataForWaybillDetailInfo:self.detailData];
     self.toSaveData = [AppSaveWayBillInfo mj_objectWithKeyValues:[self.detailData mj_keyValues]];
+    if (isReset) {
+        //保证从服务器获取详情数据时的界面即时数据和服务器数据一致
+        self.toSaveData.total_amount = [self.detailData.total_amount copy];
+    }
     
     [self.tableView reloadData];
 }

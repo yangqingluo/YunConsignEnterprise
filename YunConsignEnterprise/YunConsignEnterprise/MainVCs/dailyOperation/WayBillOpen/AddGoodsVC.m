@@ -70,12 +70,9 @@
         if (!self.headerView.data.freight) {
             self.headerView.data.freight = @"0";
         }
-        if (!self.headerView.data.weight) {
-            self.headerView.data.weight = @"0";
-        }
-        if (!self.headerView.data.volume) {
-            self.headerView.data.volume = @"0";
-        }
+        
+        self.headerView.data.weight = notShowFooterZeroString(self.headerView.data.weight, @"0");
+        self.headerView.data.volume = notShowFooterZeroString(self.headerView.data.volume, @"0");
         
         if (self.doneBlock) {
             self.doneBlock(self.headerView.data);

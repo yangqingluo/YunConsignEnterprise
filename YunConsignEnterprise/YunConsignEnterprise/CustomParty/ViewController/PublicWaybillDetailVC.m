@@ -388,7 +388,7 @@
                 [cell addShowContents:@[@"运费：",
                                         [NSString stringWithFormat:@"%@", self.detailData.freight],
                                         @"总数：",
-                                        [NSString stringWithFormat:@"%@/%@/%@", self.detailData.goods_total_count, self.detailData.goods_total_weight, self.detailData.goods_total_volume]]];
+                                        [NSString stringWithFormat:@"%@/%@/%@", notShowFooterZeroString(self.detailData.goods_total_count, @"0"), notShowFooterZeroString(self.detailData.goods_total_weight, @"0"), notShowFooterZeroString(self.detailData.goods_total_volume, @"0")]]];
                 
                 return cell;
             }

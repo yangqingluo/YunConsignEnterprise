@@ -580,7 +580,7 @@
                 [cell addShowContents:@[@"运费：",
                                         self.toSaveData.freight,
                                         @"总数：",
-                                        [NSString stringWithFormat:@"%@/%@/%@", self.toSaveData.goods_total_count, notShowFooterZeroString(self.toSaveData.goods_total_weight, nil), notShowFooterZeroString(self.toSaveData.goods_total_volume, nil)]]];
+                                        [NSString stringWithFormat:@"%@/%@/%@", notShowFooterZeroString(self.toSaveData.goods_total_count, @"0"), notShowFooterZeroString(self.toSaveData.goods_total_weight, @"0"), notShowFooterZeroString(self.toSaveData.goods_total_volume, @"0")]]];
                 return cell;
             }
             else {
