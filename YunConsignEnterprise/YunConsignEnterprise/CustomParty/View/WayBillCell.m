@@ -25,16 +25,10 @@
 //    [self.headerView addSubview:_statusImageView];
 }
 
-//- (void)setupFooter {
-//    [super setupFooter];
-//    NSArray *m_array = @[@"作废", @"修改", @"打印", @"物流"];
-//    [self.footerView updateDataSourceWithArray:m_array];
-//}
-
 - (void)refreshFooter {
-    NSArray *m_array = @[@"作废", @"修改", @"打印", @"物流"];
+    NSArray *m_array = @[@"作废", @"修改", @"物流"];
     if ([self.data.waybill_state intValue] >= WAYBILL_STATE_5) {
-        m_array = @[@"打印", @"物流"];
+        m_array = @[@"物流"];
     }
     [self.footerView updateDataSourceWithArray:m_array];
 }

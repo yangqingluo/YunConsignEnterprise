@@ -62,13 +62,13 @@
             [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
-        else if (nIndex == 1){
-            if (self.type == WaybillDetailType_WayBillQuery && [self.data.waybill_state integerValue] < WAYBILL_STATE_5) {
-                UIButton *btn = NewRightButton([UIImage imageNamed:@"navbar_icon_edit"], nil);
-                [btn addTarget:self action:@selector(editBtnAction) forControlEvents:UIControlEventTouchUpInside];
-                return btn;
-            }
-        }
+//        else if (nIndex == 1){
+//            if (self.type == WaybillDetailType_WayBillQuery && [self.data.waybill_state integerValue] < WAYBILL_STATE_5) {
+//                UIButton *btn = NewRightButton([UIImage imageNamed:@"navbar_icon_edit"], nil);
+//                [btn addTarget:self action:@selector(editBtnAction) forControlEvents:UIControlEventTouchUpInside];
+//                return btn;
+//            }
+//        }
         return nil;
     }];
 }
@@ -191,22 +191,22 @@
     if (!_footerView) {
         _footerView = [[PublicMutableButtonView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
         switch (_type) {
-            case WaybillDetailType_WayBillQuery:{
-                _footerView.defaultWidthScale = 1.0 / 4;
-                [_footerView updateDataSourceWithArray:@[@"作废", @"打印", @"修改记录", @"物流跟踪"]];
-                for (UIButton *btn in _footerView.showViews) {
-                    btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
-                    if ([_footerView.showViews indexOfObject:btn] == 0) {
-                        btn.backgroundColor = EmphasizedColor;
-                        [btn setTitleColor:WarningColor forState:UIControlStateNormal];
-                    }
-                    else {
-                        btn.backgroundColor = MainColor;
-                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                    }
-                }
-            }
-                break;
+//            case WaybillDetailType_WayBillQuery:{
+//                _footerView.defaultWidthScale = 1.0 / 4;
+//                [_footerView updateDataSourceWithArray:@[@"作废", @"打印", @"修改记录", @"物流跟踪"]];
+//                for (UIButton *btn in _footerView.showViews) {
+//                    btn.titleLabel.font = [AppPublic appFontOfSize:appButtonTitleFontSize];
+//                    if ([_footerView.showViews indexOfObject:btn] == 0) {
+//                        btn.backgroundColor = EmphasizedColor;
+//                        [btn setTitleColor:WarningColor forState:UIControlStateNormal];
+//                    }
+//                    else {
+//                        btn.backgroundColor = MainColor;
+//                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//                    }
+//                }
+//            }
+//                break;
                 
             default: {
                 _footerView.defaultWidthScale = 1.0 / 2;
@@ -488,66 +488,65 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         int tag = [m_dic[@"tag"] intValue];
-        if (self.type == WaybillDetailType_WayBillQuery) {
-            switch (tag) {
-                case 0:{
-                    if ([self.data.waybill_state integerValue] >= WAYBILL_STATE_5) {
-                        [self doShowHintFunction:@"该运单不能进行作废操作"];
-                        return;
-                    }
-                    QKWEAKSELF;
-                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定作废运单吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
-                        if (buttonIndex == 1) {
-                            UITextField *textField = [view textFieldAtIndex:0];
-                            [weakself cancelWaybill:weakself.detailData.waybill_id cause:textField.text];
-                        }
-                    }otherButtonTitles:@"确定", nil];
-                    
-                    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-                    UITextField *alertTextField = [alert textFieldAtIndex:0];
-                    alertTextField.clearButtonMode = UITextFieldViewModeAlways;
-                    alertTextField.returnKeyType = UIReturnKeyDone;
-                    alertTextField.delegate = self;
-                    alertTextField.placeholder = @"作废原因";
-                    [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-                    [alert show];
-                }
-                    break;
-                    
-                case 1:{
-                    [self doShowHintFunction:defaultNoticeNotComplete];
-                }
-                    break;
-                    
-                case 2:{
-                    [self goToWaybillChangeListVC];
-                }
-                    break;
-                    
-                case 3:{
-                    [self goToWaybillLogVC];
-                }
-                    break;
-                    
-                default:
-                    break;
+//        if (self.type == WaybillDetailType_WayBillQuery) {
+//            switch (tag) {
+//                case 0:{
+//                    if ([self.data.waybill_state integerValue] >= WAYBILL_STATE_5) {
+//                        [self doShowHintFunction:@"该运单不能进行作废操作"];
+//                        return;
+//                    }
+//                    QKWEAKSELF;
+//                    BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定作废运单吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+//                        if (buttonIndex == 1) {
+//                            UITextField *textField = [view textFieldAtIndex:0];
+//                            [weakself cancelWaybill:weakself.detailData.waybill_id cause:textField.text];
+//                        }
+//                    }otherButtonTitles:@"确定", nil];
+//
+//                    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//                    UITextField *alertTextField = [alert textFieldAtIndex:0];
+//                    alertTextField.clearButtonMode = UITextFieldViewModeAlways;
+//                    alertTextField.returnKeyType = UIReturnKeyDone;
+//                    alertTextField.delegate = self;
+//                    alertTextField.placeholder = @"作废原因";
+//                    [alertTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//                    [alert show];
+//                }
+//                    break;
+//
+//                case 1:{
+//                    [self doShowHintFunction:defaultNoticeNotComplete];
+//                }
+//                    break;
+//
+//                case 2:{
+//                    [self goToWaybillChangeListVC];
+//                }
+//                    break;
+//
+//                case 3:{
+//                    [self goToWaybillLogVC];
+//                }
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//        }
+        
+        switch (tag) {
+            case 0:{
+                [self goToWaybillChangeListVC];
             }
-        }
-        else {
-            switch (tag) {
-                case 0:{
-                    [self goToWaybillChangeListVC];
-                }
-                    break;
-                    
-                case 1:{
-                    [self goToWaybillLogVC];
-                }
-                    break;
-                    
-                default:
-                    break;
+                break;
+                
+            case 1:{
+                [self goToWaybillLogVC];
             }
+                break;
+                
+            default:
+                break;
         }
     }
 }

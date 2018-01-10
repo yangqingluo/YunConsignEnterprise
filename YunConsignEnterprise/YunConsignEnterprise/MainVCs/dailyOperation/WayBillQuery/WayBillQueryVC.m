@@ -219,9 +219,9 @@
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
         AppWayBillInfo *item = self.dataSource[indexPath.row];
-        int tag = ([item.waybill_state integerValue] >= WAYBILL_STATE_5 ? 1 : 3) - [m_dic[@"tag"] intValue];
+        int tag = ([item.waybill_state integerValue] >= WAYBILL_STATE_5 ? 0 : 2) - [m_dic[@"tag"] intValue];
         switch (tag) {
-            case 3:{
+            case 2:{
                 QKWEAKSELF;
                 BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定作废运单吗" message:nil cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
@@ -241,7 +241,7 @@
             }
                 break;
                 
-            case 2:{
+            case 1:{
                 WaybillEditVC *vc = [WaybillEditVC new];
                 vc.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:[item mj_keyValues]];
 //                QKWEAKSELF;
@@ -251,11 +251,6 @@
 //                    }
 //                };
                 [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-                
-            case 1:{
-                [self doShowHintFunction:defaultNoticeNotComplete];
             }
                 break;
                 
