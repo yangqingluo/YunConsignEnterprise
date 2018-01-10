@@ -263,7 +263,7 @@
                        @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount"},
                          @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount"}],
                        @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
-        if ([self.billData.cash_on_delivery_type isEqualToString: @"3"]) {
+        if ([self.billData.cash_on_delivery_amount integerValue] == 0) {
             //没有代收款
             _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                            @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
@@ -399,7 +399,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat rowHeight = kCellHeightFilter;
     if (indexPath.section == 0) {
-        rowHeight = [WaybillCustReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath];
+        rowHeight = [WaybillCustReceiveCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:([self.billData.cash_on_delivery_amount integerValue] > 0 ? 4 : 3)];
     }
     else if (indexPath.section == 1) {
         if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {

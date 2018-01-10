@@ -12,7 +12,7 @@
 
 - (void)setupHeader {
     [super setupHeader];
-    self.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+//    self.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
     
     _urgentLabel = NewLabel(CGRectMake(self.titleLabel.right + kEdgeMiddle, self.titleLabel.top, 30, self.titleLabel.height), WarningColor, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentLeft);
     _urgentLabel.text = @"[送]";
@@ -49,7 +49,7 @@
 #pragma mark - setter
 - (void)setData:(AppPaymentWaybillInfo *)data {
     _data = data;
-    self.titleLabel.text = [NSString stringWithFormat:@"货号：%@/%@", notNilString(data.goods_number, nil), notNilString(data.waybill_number, nil)];
+    self.titleLabel.text = [NSString stringWithFormat:@"货号：%@", notNilString(data.goods_number, nil)];
     [AppPublic adjustLabelWidth:self.titleLabel];
     
     self.urgentLabel.hidden = !isTrue(data.is_deliver_goods);
@@ -65,11 +65,17 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@/%@/%@", notNilString(_data.goods_name, nil), notNilString(_data.goods_packge, nil), notNilString(_data.goods_total, nil)];
     self.bodyLabel2.text = [NSString stringWithFormat:@"已收：%d", [_data.pay_now_amount intValue]];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"回单付：%d", [_data.pay_on_receipt_amount intValue]];
-    self.bodyLabel4.text = [NSString stringWithFormat:@"代收款：%@", notNilString(_data.cash_on_delivery_type_text, nil)];
     self.bodyLabelRight2.text = [NSString stringWithFormat:@"提付：%d", [_data.pay_on_delivery_amount intValue]];
-    self.bodyLabelRight3.text = [NSString stringWithFormat:@"运费代扣：%@", isTrue(_data.is_deduction_freight) ? @"是" : @"否"];
-    self.bodyLabelRight4.text = [NSString stringWithFormat:@"金额：%d", [_data.cash_on_delivery_amount intValue]];
+    self.bodyLabel3.text = [NSString stringWithFormat:@"回单付：%d", [_data.pay_on_receipt_amount intValue]];
+    
+    self.bodyLabel4.hidden = YES;
+    self.bodyLabelRight3.hidden = YES;
+    self.bodyLabelRight4.hidden = YES;
+    if ([_data.cash_on_delivery_amount integerValue] > 0) {
+        [self showLabel:self.bodyLabel4 conten:[NSString stringWithFormat:@"代收款：%@", notNilString(_data.cash_on_delivery_type_text, nil)]];
+        [self showLabel:self.bodyLabelRight3 conten:[NSString stringWithFormat:@"运费代扣：%@", isTrue(_data.is_deduction_freight) ? @"是" : @"否"]];
+        [self showLabel:self.bodyLabelRight4 conten:[NSString stringWithFormat:@"金额：%d", [_data.cash_on_delivery_amount intValue]]];
+    }
     
     if (!_data) {
         self.titleLabel.text = @"货号：";
