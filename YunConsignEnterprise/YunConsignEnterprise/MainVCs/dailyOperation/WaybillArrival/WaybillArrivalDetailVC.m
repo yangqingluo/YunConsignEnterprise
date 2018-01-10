@@ -27,8 +27,11 @@
     [super viewDidLoad];
     [self setupNav];
     
+    self.title = [NSString stringWithFormat:@"%@/%@", self.truckData.truck_number_plate, self.truckData.route];
     self.condition.transport_truck_id = [self.truckData.transport_truck_id copy];
     
+//    //忽略已打印功能不对查询生效，只对打印有效，去掉显示
+//    self.footerView.ignoreBtn.hidden = YES;
     self.footerView.bottom = self.view.height;
     [self.view addSubview:self.footerView];
     self.tableView.height -= self.footerView.height;
@@ -169,9 +172,9 @@
     [self.dataSource removeAllObjects];
     [self.selectSet removeAllObjects];
     for (AppCanArrivalWayBillInfo *item in self.originalDataSource) {
-        if (self.footerView.ignoreBtn.selected && isTrue(item.print_state)) {
-            continue;
-        }
+//        if (self.footerView.ignoreBtn.selected && isTrue(item.print_state)) {
+//            continue;
+//        }
         [self.dataSource addObject:item];
     }
     
@@ -247,6 +250,11 @@
     if (!cell) {
         cell = [[WaybillArrivalDetailCell alloc] initWithHeaderStyle:PublicHeaderCellStyleSelection reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+//        cell.titleLabel.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+//        cell.bodyLabel1.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+//        cell.bodyLabel2.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
+//        cell.bodyLabel3.font = [AppPublic appFontOfSize:appLabelFontSizeSmall];
     }
     id item = self.dataSource[indexPath.row];
     cell.indexPath = [indexPath copy];

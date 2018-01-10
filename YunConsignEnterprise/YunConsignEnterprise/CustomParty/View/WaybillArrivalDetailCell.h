@@ -11,6 +11,7 @@
 @interface WaybillArrivalDetailCell : PublicHeaderBodyCell
 
 @property (strong, nonatomic) UILabel *urgentLabel;
+@property (strong, nonatomic) UILabel *bodyLabelRight2;
 
 @property (copy, nonatomic) AppCanArrivalWayBillInfo *data;
 

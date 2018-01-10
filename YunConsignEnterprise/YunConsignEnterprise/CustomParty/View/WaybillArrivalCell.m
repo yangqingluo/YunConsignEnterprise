@@ -43,8 +43,8 @@
     self.bodyLabel3.text = [NSString stringWithFormat:@"货量：%@",data.load_quantity];
     
     self.arriveTimeLabel.text = [NSString stringWithFormat:@"到车：%@", data.arrival_time ? data.arrival_time : @"未到车"];
-    NSDictionary *dic1 = @{NSFontAttributeName:[AppPublic appFontOfSize:appLabelFontSize], NSForegroundColorAttributeName:baseTextColor};
-    NSDictionary *dic2 = @{NSFontAttributeName:[AppPublic appFontOfSize:appLabelFontSize], NSForegroundColorAttributeName:MainColor};
+    NSDictionary *dic1 = @{NSFontAttributeName:self.noHandoverLabel.font, NSForegroundColorAttributeName:baseTextColor};
+    NSDictionary *dic2 = @{NSFontAttributeName:self.noHandoverLabel.font, NSForegroundColorAttributeName:MainColor};
     
     NSMutableAttributedString *m_string = [NSMutableAttributedString new];
     [m_string appendAttributedString:[[NSAttributedString alloc] initWithString:@"未交接：" attributes:dic1]];
