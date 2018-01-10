@@ -10,6 +10,8 @@
 
 #define Event_PublicHeaderCellSelectButtonClicked @"Event_PublicHeaderCellSelectButtonClicked"
 
+#define height_body_label 24.0
+
 typedef NS_ENUM(NSInteger, PublicHeaderCellStyle) {
     PublicHeaderCellStyleDefault,
     PublicHeaderCellStyleSelection

@@ -75,7 +75,7 @@
     _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, self.baseView.width, [[self class] tableView:nil heightForRowAtIndexPath:nil] - self.headerView.bottom)];
     [self.baseView addSubview:_bodyView];
     
-    _bodyLabel1 = NewLabel(CGRectMake(kEdge, kEdgeMiddle, _bodyView.width - 2 * kEdge, 24), nil, nil, NSTextAlignmentLeft);
+    _bodyLabel1 = NewLabel(CGRectMake(kEdge, kEdgeMiddle, _bodyView.width - 2 * kEdge, height_body_label), nil, nil, NSTextAlignmentLeft);
     //    _bodyLabel1.adjustsFontSizeToFitWidth = YES;
     [_bodyView addSubview:_bodyLabel1];
     
@@ -114,7 +114,7 @@
 
 + (CGFloat)heightForBodyWithLabelLines:(NSUInteger)lines {
     NSUInteger m_lines = MAX(1, lines);
-    return 2 * kEdgeMiddle + m_lines * 24.0 + (m_lines - 1) * kEdge;
+    return 2 * kEdgeMiddle + m_lines * height_body_label + (m_lines - 1) * kEdge;
 }
 
 - (void)selectBtnAction:(UIButton *)button {

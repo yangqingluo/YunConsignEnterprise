@@ -112,7 +112,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [WaybillChangeApplyCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:3];
+    return [WaybillChangeApplyCell tableView:tableView heightForRowAtIndexPath:indexPath data:self.dataSource[indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

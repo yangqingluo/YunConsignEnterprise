@@ -15,4 +15,6 @@
 
 @property (copy, nonatomic) AppWaybillChangeApplyInfo *data;
 
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath data:(AppWaybillChangeApplyInfo *)data;
+
 @end
