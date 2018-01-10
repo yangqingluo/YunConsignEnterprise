@@ -231,7 +231,7 @@
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
-        _condition.start_time = [_condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+        _condition.start_time = [_condition.end_time dateByAddingTimeInterval:-3 * defaultDayTimeInterval];
     }
     return _condition;
 }
@@ -256,7 +256,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillLoadSelectCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    AppCanLoadWayBillInfo *item = self.dataSource[indexPath.row];
+    return [WaybillLoadSelectCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[item.cash_on_delivery_amount integerValue] > 0 ? 3 : 2];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

@@ -60,7 +60,7 @@
 
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
-    vc.type = QueryConditionType_WaybillLoadTT;
+    vc.type = QueryConditionType_WaybillLoaded;
     vc.condition = [self.condition copy];
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
@@ -259,8 +259,9 @@
     return self.dataSource.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [WaybillLoadedSelectCell tableView:tableView heightForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppCanLoadWayBillInfo *item = self.dataSource[indexPath.row];
+    return [WaybillLoadedSelectCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:[item.cash_on_delivery_amount integerValue] > 0 ? 3 : 2];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

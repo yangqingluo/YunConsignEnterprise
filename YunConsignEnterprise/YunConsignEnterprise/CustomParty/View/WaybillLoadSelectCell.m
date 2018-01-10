@@ -40,12 +40,19 @@
     
     self.bodyLabel1.text = [NSString stringWithFormat:@"货物：%@", _data.goods_info];
     self.bodyLabel2.text = [NSString stringWithFormat:@"客户：%@", _data.cust_info];
-    self.bodyLabel3.text = [NSString stringWithFormat:@"代收款：%@", _data.cash_on_delivery_amount];
-    [AppPublic adjustLabelWidth:self.bodyLabel3];
-    
-    self.payStyleLabel.text = [data payStyleStringForState];
-    [AppPublic adjustLabelWidth:self.payStyleLabel];
-    self.payStyleLabel.left = self.bodyLabel3.right;
+    NSInteger lines = 2;
+    self.bodyLabel3.hidden = YES;
+    self.payStyleLabel.hidden = YES;
+    if ([data.cash_on_delivery_amount integerValue] > 0) {
+        lines++;
+        [self showLabel:self.bodyLabel3 conten:[NSString stringWithFormat:@"代收款：%@", _data.cash_on_delivery_amount]];
+        [AppPublic adjustLabelWidth:self.bodyLabel3];
+        
+        [self showLabel:self.payStyleLabel conten:[data payStyleStringForState]];
+        [AppPublic adjustLabelWidth:self.payStyleLabel];
+        self.payStyleLabel.left = self.bodyLabel3.right;
+    }
+    self.bodyView.height = [[self class] heightForBodyWithLabelLines:lines];
 }
 
 @end
