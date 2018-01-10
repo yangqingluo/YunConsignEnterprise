@@ -416,6 +416,13 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+
+@implementation AppWaybillChangeApplyInfo
+
+
+
+@end
+
 @implementation WaybillToCustReceiveInfo
 
 

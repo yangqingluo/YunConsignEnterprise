@@ -101,16 +101,16 @@
     NSDictionary *toSaveDic = [self.toSaveData mj_keyValues];
     NSDictionary *detailDic = [self.detailData mj_keyValues];
     NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    [m_dic setObject:boolString(is_update_waybill_item) forKey:@"is_update_waybill_item"];
     
     BOOL hasChanged = NO;
     for (NSString *key in toSaveDic.allKeys) {
         if ([key isEqualToString:@"waybill_items"]) {
             if (is_update_waybill_item) {
                 hasChanged = YES;
-                [m_dic setObject:boolString(is_update_waybill_item) forKey:@"is_update_waybill_item"];
             }
             else {
-                continue;
+//                continue;
             }
         }
         else if (![toSaveDic[key] isEqual:detailDic[key]]) {
@@ -119,7 +119,7 @@
         [m_dic setObject:toSaveDic[key] forKey:key];
     }
     if (hasChanged) {
-//        NSLog(@"%@", [AppPublic logDic:m_dic]);
+        NSLog(@"%@", [AppPublic logDic:m_dic]);
         [m_dic setObject:self.detailData.waybill_id forKey:@"waybill_id"];
         [self pushUpdateWaybillFunction:m_dic];
     }

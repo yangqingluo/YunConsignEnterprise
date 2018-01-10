@@ -50,7 +50,7 @@
     [self setupNav];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self updateTableViewHeader];
-    [self.tableView.mj_header beginRefreshing];
+    [self beginRefreshing];
 }
 
 - (void)setupNav {
@@ -77,7 +77,7 @@
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
             weakself.condition = (AppQueryConditionInfo *)object;
-            [weakself.tableView.mj_header beginRefreshing];
+            [weakself beginRefreshing];
         }
     };
     [vc showFromVC:self];

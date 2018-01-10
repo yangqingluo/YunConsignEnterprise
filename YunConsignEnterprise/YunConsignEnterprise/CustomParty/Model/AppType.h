@@ -51,6 +51,12 @@ typedef NS_ENUM(NSInteger, LOAN_APPLY_STATE) {
     LOAN_APPLY_STATE_4,//已放款
 };
 
+typedef NS_ENUM(NSInteger, WAYBILL_CHANGE_APPLY_STATE) {
+    WAYBILL_CHANGE_APPLY_STATE_1 = 1,//等待审核
+    WAYBILL_CHANGE_APPLY_STATE_2,//审核通过
+    WAYBILL_CHANGE_APPLY_STATE_3,//驳回
+};
+
 //运单状态
 typedef NS_ENUM(NSInteger, WAYBILL_STATE) {
     WAYBILL_STATE_1 = 1,//等待装车
@@ -580,6 +586,18 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *is_reject;//是否驳回 YES_NO 1是2否
 @property (strong, nonatomic) NSString *reject_note;//驳回原因
 @property (strong, nonatomic) NSString *city_info;//城市
+
+@end
+
+//运单修改申请数据
+@interface AppWaybillChangeApplyInfo : AppWayBillInfo
+
+@property (strong, nonatomic) NSString *change_state;//申请状态
+@property (strong, nonatomic) NSString *change_state_text;
+@property (strong, nonatomic) NSString *apply;//申请信息
+@property (strong, nonatomic) NSString *check;//审核信息
+@property (strong, nonatomic) NSString *change_note;//修改内容
+@property (strong, nonatomic) NSString *check_note;//驳回原因
 
 @end
 

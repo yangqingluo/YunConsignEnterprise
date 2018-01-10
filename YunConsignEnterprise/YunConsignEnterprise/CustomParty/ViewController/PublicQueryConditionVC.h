@@ -21,6 +21,8 @@ typedef enum : NSUInteger {
     QueryConditionType_WaybillReceive,//客户自提
     QueryConditionType_PayOnReceipt,//回单付款
     QueryConditionType_CustomerManage,//客户管理
+    QueryConditionType_WaybillChangeApply,//运单修改申请
+    QueryConditionType_WaybillChangeCheck,//运单修改审核
     QueryConditionType_FreightCheck,//运输款对账
     QueryConditionType_FreightNotPay,//未收运输款
     QueryConditionType_CodQuery,//代收款查询

@@ -137,6 +137,17 @@
         }
             break;
             
+        case QueryConditionType_WaybillChangeApply:
+        case QueryConditionType_WaybillChangeCheck:{
+            self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
+                               @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
+                               @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                               @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
+            //            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+            [self additionalDataDictionaryForCode:@"query_column"];
+        }
+            break;
+            
         case QueryConditionType_CodLoanApply:{
             self.title = @"放款申请查询";
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},

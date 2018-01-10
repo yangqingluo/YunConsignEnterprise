@@ -16,6 +16,7 @@
 #import "WaybillReceiveVC.h"
 #import "PayOnReceiptVC.h"
 #import "CustomerConditionVC.h"
+#import "WaybillChangeApplyVC.h"
 
 @interface DailyOperationVC ()
 
@@ -95,6 +96,16 @@
             }
             else if ([item.menu_code isEqualToString:@"PAY_ON_RECEIPT"]) {
                 PayOnReceiptVC *vc = [PayOnReceiptVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if ([item.menu_code isEqualToString:@"CUST_MANAGE"]) {
+                CustomerConditionVC *vc = [CustomerConditionVC new];
+                vc.accessInfo = item;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if ([item.menu_code isEqualToString:@"WAYBILL_CHANGE_APPLY"]) {
+                WaybillChangeApplyVC *vc = [WaybillChangeApplyVC new];
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
