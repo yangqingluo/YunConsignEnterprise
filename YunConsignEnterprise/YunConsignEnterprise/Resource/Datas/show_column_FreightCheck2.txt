@@ -74,18 +74,18 @@
 {
     "dict_id" : 0,
     "item_id" : 0,
-    "item_name" : "垫付费",
+    "item_name" : "中转费",
     "item_note" : "",
     "item_sort" : 10,
-    "item_val" : "pay_for_sb_fee"
+    "item_val" : "transfer_fee"
 },
 {
     "dict_id" : 0,
     "item_id" : 0,
-    "item_name" : "中转费",
+    "item_name" : "垫付费",
     "item_note" : "",
     "item_sort" : 11,
-    "item_val" : "transfer_fee"
+    "item_val" : "pay_for_sb_fee"
 },
 {
     "dict_id" : 0,
