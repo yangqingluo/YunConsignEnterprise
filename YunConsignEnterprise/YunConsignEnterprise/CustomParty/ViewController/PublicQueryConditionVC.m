@@ -103,7 +103,7 @@
             break;
             
         case QueryConditionType_WaybillArrivalDetail:{
-            self.showArray = @[@{@"title":@"装车网点",@"subTitle":@"必填，请选择",@"key":@"load_service"},
+            self.showArray = @[@{@"title":@"装车网点",@"subTitle":@"请选择",@"key":@"load_service"},
                            @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
             [self additionalDataDictionaryForCode:@"query_column"];

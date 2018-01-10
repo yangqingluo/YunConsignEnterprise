@@ -191,7 +191,7 @@
         else {
             m_string = notNilString(self.totalData[m_key], nil);
         }
-        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%@元", m_string];
+        ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"放款总金额：%@", m_string];
     }
 }
 
