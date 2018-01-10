@@ -63,6 +63,8 @@
 		E45995361F95E61E009F35A6 /* SearchQuantityResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995351F95E61E009F35A6 /* SearchQuantityResultCell.m */; };
 		E45B3CAC1F7B4E9B001D9FDB /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */; };
 		E45B3CB21F7B5233001D9FDB /* TransportTruckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E45B3CB11F7B5233001D9FDB /* TransportTruckCell.m */; };
+		E45DE7A42005ECA00038A297 /* CustomerConditionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E45DE7A32005ECA00038A297 /* CustomerConditionVC.m */; };
+		E45DE7A72005FA8E0038A297 /* PublicSelectorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45DE7A62005FA8E0038A297 /* PublicSelectorFooterView.m */; };
 		E4602E8D1FB0448E00C26029 /* DailyReimbursementCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */; };
 		E460C5DC1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E460C5DB1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m */; };
 		E460C5DF1FB2FC5500B6014F /* PublicShowTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E460C5DE1FB2FC5500B6014F /* PublicShowTableVC.m */; };
@@ -564,6 +566,10 @@
 		E45B3CAB1F7B4E9B001D9FDB /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSlideSwitchView.m; sourceTree = "<group>"; };
 		E45B3CB01F7B5233001D9FDB /* TransportTruckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportTruckCell.h; sourceTree = "<group>"; };
 		E45B3CB11F7B5233001D9FDB /* TransportTruckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportTruckCell.m; sourceTree = "<group>"; };
+		E45DE7A22005ECA00038A297 /* CustomerConditionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerConditionVC.h; sourceTree = "<group>"; };
+		E45DE7A32005ECA00038A297 /* CustomerConditionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerConditionVC.m; sourceTree = "<group>"; };
+		E45DE7A52005FA8E0038A297 /* PublicSelectorFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicSelectorFooterView.h; sourceTree = "<group>"; };
+		E45DE7A62005FA8E0038A297 /* PublicSelectorFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicSelectorFooterView.m; sourceTree = "<group>"; };
 		E4602E8B1FB0448E00C26029 /* DailyReimbursementCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementCheckCell.h; sourceTree = "<group>"; };
 		E4602E8C1FB0448E00C26029 /* DailyReimbursementCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementCheckCell.m; sourceTree = "<group>"; };
 		E460C5DA1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublicDailyReimbursementDetailVC.h; path = YunConsignEnterprise/MainVCs/FinancialManagement/PublicDailyReimbursementDetailVC.h; sourceTree = SOURCE_ROOT; };
@@ -1458,10 +1464,12 @@
 		E49D7DEA1FD38CAA009B59B7 /* CustomerManage */ = {
 			isa = PBXGroup;
 			children = (
-				E49D7DEB1FD38CAA009B59B7 /* CustomerEditVC.h */,
-				E49D7DEC1FD38CAA009B59B7 /* CustomerEditVC.m */,
+				E45DE7A22005ECA00038A297 /* CustomerConditionVC.h */,
+				E45DE7A32005ECA00038A297 /* CustomerConditionVC.m */,
 				E49D7DED1FD38CAA009B59B7 /* CustomerManageVC.h */,
 				E49D7DEE1FD38CAA009B59B7 /* CustomerManageVC.m */,
+				E49D7DEB1FD38CAA009B59B7 /* CustomerEditVC.h */,
+				E49D7DEC1FD38CAA009B59B7 /* CustomerEditVC.m */,
 			);
 			name = CustomerManage;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/CustomerManage;
@@ -1947,6 +1955,8 @@
 				E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */,
 				E4BB91A01F99EE1A00337A52 /* WaybillTitleView.h */,
 				E4BB91A11F99EE1A00337A52 /* WaybillTitleView.m */,
+				E45DE7A52005FA8E0038A297 /* PublicSelectorFooterView.h */,
+				E45DE7A62005FA8E0038A297 /* PublicSelectorFooterView.m */,
 				E4E5ED821F9EDD3B00ACDD3D /* PublicFooterSummaryView.h */,
 				E4E5ED831F9EDD3B00ACDD3D /* PublicFooterSummaryView.m */,
 				E4CE60281FA037B3007F427C /* PublicTTLoadFooterView.h */,
@@ -2945,6 +2955,7 @@
 				E49D7E441FD38CAA009B59B7 /* WaybillLogTableVC.m in Sources */,
 				E4069B6A1FD1A0B0009F84DD /* CodPayCell.m in Sources */,
 				E4FB63351FC5651E005C482E /* QKGeocoder.m in Sources */,
+				E45DE7A42005ECA00038A297 /* CustomerConditionVC.m in Sources */,
 				E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */,
 				E4E2A3901FB311AE00D8EC1C /* DACircularProgressView.m in Sources */,
 				E4AEA0561F5EA6CF002EBE41 /* AppPublic.m in Sources */,
@@ -3093,6 +3104,7 @@
 				E4E2A3F91FB311AE00D8EC1C /* SDWebImageCompat.m in Sources */,
 				E49D7E971FD38D4E009B59B7 /* CodRemitTableVC.m in Sources */,
 				E4E2A3BA1FB311AE00D8EC1C /* MJRefreshAutoFooter.m in Sources */,
+				E45DE7A72005FA8E0038A297 /* PublicSelectorFooterView.m in Sources */,
 				E4AEA0DB1F5EA8CE002EBE41 /* UIImage+Color.m in Sources */,
 				E42D18C41FB42DDF00649825 /* SaveCodLoanApplySecondCell.m in Sources */,
 				E4E2A3BB1FB311AE00D8EC1C /* MJRefreshBackFooter.m in Sources */,

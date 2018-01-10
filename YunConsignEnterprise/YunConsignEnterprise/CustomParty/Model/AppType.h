@@ -167,6 +167,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *phone;//电话
 @property (strong, nonatomic) NSString *last_deliver_time;//最后发货时间
 @property (strong, nonatomic) NSString *last_deliver_goods;//最后发货内容
+@property (strong, nonatomic) NSString *bank_name;//银行名称
+@property (strong, nonatomic) NSString *bank_card_account;//银行卡号
 @property (strong, nonatomic) NSString *belong_city_id;//所属城市编号
 @property (strong, nonatomic) NSString *belong_city_name;//所属城市名称
 @property (strong, nonatomic) NSString *note;//备注

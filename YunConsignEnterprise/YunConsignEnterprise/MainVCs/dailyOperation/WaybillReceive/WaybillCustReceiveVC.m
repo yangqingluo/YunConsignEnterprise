@@ -20,7 +20,7 @@
 @property (strong, nonatomic) WaybillToCustReceiveInfo *toSaveData;
 
 @property (strong, nonatomic) NSArray *showArray;
-@property (strong, nonatomic) NSSet *defaultKeyBoardTypeSet;
+//@property (strong, nonatomic) NSSet *defaultKeyBoardTypeSet;
 @property (strong, nonatomic) NSSet *selectorSet;
 
 @end
@@ -153,12 +153,13 @@
         id object = self.showArray[indexPath.row];
         if ([object isKindOfClass:[NSDictionary class]]) {
             NSDictionary *m_dic = object;
+            BOOL isPrice = [m_dic[@"isPrice"] boolValue];
             NSString *key = m_dic[@"key"];
-            if ([self.defaultKeyBoardTypeSet containsObject:key]) {
-                [self.toSaveData setValue:content forKey:key];
+            if (isPrice) {
+                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
             }
             else {
-                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:key];
+                [self.toSaveData setValue:content forKey:key];
             }
         }
         else if ([object isKindOfClass:[NSArray class]]) {
@@ -255,34 +256,34 @@
         _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                        @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
                        @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
-                       @{@"title":@"实收代收款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_real_amount"},
+                       @{@"title":@"实收代收款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_real_amount", @"isPrice" : @YES},
                        @{@"title":@"代收款少款",@"subTitle":@"请选择",@"key":@"cash_on_delivery_causes_type"},
-                       @{@"title":@"代收款少款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
+                       @{@"title":@"代收款少款金额",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount", @"isPrice" : @YES},
                        @{@"title":@"少款原因",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_note"},
-                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"less_indemnity_amount"},
-                       @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount"},
-                         @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount"}],
+                       @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"less_indemnity_amount", @"isPrice" : @YES},
+                       @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount", @"isPrice" : @YES},
+                         @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount", @"isPrice" : @YES}],
                        @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
         if ([self.billData.cash_on_delivery_amount integerValue] == 0) {
             //没有代收款
             _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                            @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
                            @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
-                           @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount"},
-                           @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount"},
-                             @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount"}],
+                           @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount", @"isPrice" : @YES},
+                           @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount", @"isPrice" : @YES},
+                             @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount", @"isPrice" : @YES}],
                            @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
         }
     }
     return _showArray;
 }
 
-- (NSSet *)defaultKeyBoardTypeSet {
-    if (!_defaultKeyBoardTypeSet) {
-        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"waybill_receive_note", @"cash_on_delivery_causes_note", @"consignee_name", nil];
-    }
-    return _defaultKeyBoardTypeSet;
-}
+//- (NSSet *)defaultKeyBoardTypeSet {
+//    if (!_defaultKeyBoardTypeSet) {
+//        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"waybill_receive_note", @"cash_on_delivery_causes_note", @"consignee_name", nil];
+//    }
+//    return _defaultKeyBoardTypeSet;
+//}
 
 - (NSSet *)selectorSet {
     if (!_selectorSet) {
@@ -311,7 +312,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     NSString *key = showObject[@"key"];
-    BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
+    BOOL isKeybordDefault = ![showObject[@"isPrice"] boolValue];
     cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     cell.baseView.textField.adjustZeroShow = !isKeybordDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
@@ -480,19 +481,16 @@
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
         id item = self.showArray[indexPath.row];
-        NSString *key = @"";
+        BOOL isPrice = NO;
         if ([item isKindOfClass:[NSDictionary class]]) {
-            key = item[@"key"];
+            isPrice = [item[@"isPrice"] boolValue];
         }
         else if ([item isKindOfClass:[NSArray class]]) {
             NSDictionary *m_dic = item[textField.tag];
-            key = m_dic[@"key"];
+            isPrice = [m_dic[@"isPrice"] boolValue];
         }
-        
-        if (key.length) {
-            if (![self.defaultKeyBoardTypeSet containsObject:key]) {
-                length = kPriceLengthMax;
-            }
+        if (isPrice) {
+            length = kPriceLengthMax;
         }
     }
     

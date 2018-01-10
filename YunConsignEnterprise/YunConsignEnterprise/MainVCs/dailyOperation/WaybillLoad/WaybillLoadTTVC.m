@@ -138,7 +138,7 @@
     }];
 }
 
-- (void)loadWaybillToTransportTruckFunction{
+- (void)loadWaybillToTransportTruckFunction {
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"transport_truck_id" : self.truckData.transport_truck_id}];
     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.selectSet.count];
     for (AppCanLoadWayBillInfo *item in self.selectSet) {
@@ -303,7 +303,7 @@
         if (self.selectSet.count == self.dataSource.count) {
             self.footerView.selectBtn.selected = YES;
         }
-        if (self.selectSet.count == 0) {
+        else {
             self.footerView.selectBtn.selected = NO;
         }
         [self updateFooterSummary];

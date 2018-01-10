@@ -86,6 +86,13 @@
     if (self.toSaveData.note) {
         [m_dic setObject:self.toSaveData.note forKey:@"note"];
     }
+    if (self.toSaveData.bank_name) {
+        [m_dic setObject:self.toSaveData.bank_name forKey:@"bank_name"];
+    }
+    if (self.toSaveData.bank_card_account) {
+        [m_dic setObject:self.toSaveData.bank_card_account forKey:@"bank_card_account"];
+    }
+    
     [self doShowHudFunction];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_cust_updateCustById" Parm:m_dic completion:^(id responseBody, NSError *error){
@@ -121,12 +128,7 @@
         if ([object isKindOfClass:[NSDictionary class]]) {
             NSDictionary *m_dic = object;
             NSString *key = m_dic[@"key"];
-            if ([self.defaultKeyBoardTypeSet containsObject:key]) {
-                [self.toSaveData setValue:content forKey:m_dic[@"key"]];
-            }
-            else {
-                [self.toSaveData setValue:[NSString stringWithFormat:@"%d", [content intValue]] forKey:m_dic[@"key"]];
-            }
+            [self.toSaveData setValue:content forKey:key];
         }
     }
 }
@@ -159,6 +161,8 @@
         _showArray = @[
                        @{@"title":@"客户姓名",@"subTitle":@"请输入",@"key":@"freight_cust_name"},
                        @{@"title":@"客户电话",@"subTitle":@"请输入",@"key":@"phone"},
+                       @{@"title":@"开户行",@"subTitle":@"请输入",@"key":@"bank_name"},
+                       @{@"title":@"银行账户",@"subTitle":@"请输入",@"key":@"bank_card_account"},
                        @{@"title":@"所属城市",@"subTitle":@"请选择",@"key":@"belong_city_name"},
                        @{@"title":@"客户备注",@"subTitle":@"请输入",@"key":@"note"}];
     }
@@ -167,7 +171,7 @@
 
 - (NSSet *)defaultKeyBoardTypeSet {
     if (!_defaultKeyBoardTypeSet) {
-        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"freight_cust_name", @"note", nil];
+        _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"freight_cust_name", @"note", @"bank_name", nil];
     }
     return _defaultKeyBoardTypeSet;
 }
@@ -265,34 +269,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self selectRowAtIndexPath:indexPath];
-}
-
-#pragma  mark - TextField
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""]) {
-        return YES;
-    }
-    NSInteger length = kInputLengthMax;
-    if ([textField isKindOfClass:[IndexPathTextField class]]) {
-        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
-        id item = self.showArray[indexPath.row];
-        NSString *key = @"";
-        if ([item isKindOfClass:[NSDictionary class]]) {
-            key = item[@"key"];
-        }
-        else if ([item isKindOfClass:[NSArray class]]) {
-            NSDictionary *m_dic = item[textField.tag];
-            key = m_dic[@"key"];
-        }
-        
-        if (key.length) {
-            if (![self.defaultKeyBoardTypeSet containsObject:key]) {
-                length = kPriceLengthMax;
-            }
-        }
-    }
-    
-    return (range.location < length);
 }
 
 @end

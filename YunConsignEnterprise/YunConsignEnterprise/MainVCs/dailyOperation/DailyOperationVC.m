@@ -15,7 +15,7 @@
 #import "WaybillArrivalVC.h"
 #import "WaybillReceiveVC.h"
 #import "PayOnReceiptVC.h"
-#import "CustomerManageVC.h"
+#import "CustomerConditionVC.h"
 
 @interface DailyOperationVC ()
 
@@ -99,7 +99,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if ([item.menu_code isEqualToString:@"CUST_MANAGE"]) {
-                CustomerManageVC *vc = [CustomerManageVC new];
+                CustomerConditionVC *vc = [CustomerConditionVC new];
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }

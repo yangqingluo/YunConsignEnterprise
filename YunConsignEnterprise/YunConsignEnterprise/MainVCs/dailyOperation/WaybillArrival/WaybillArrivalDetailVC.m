@@ -283,7 +283,7 @@
         if (self.selectSet.count == self.dataSource.count) {
             self.footerView.selectBtn.selected = YES;
         }
-        if (self.selectSet.count == 0) {
+        else {
             self.footerView.selectBtn.selected = NO;
         }
         [self updateFooterSummary];
