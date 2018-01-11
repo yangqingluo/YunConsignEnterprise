@@ -95,7 +95,7 @@
     
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_cust_updateCustById" Parm:m_dic completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_cust_updateCustByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             ResponseItem *item = responseBody;
