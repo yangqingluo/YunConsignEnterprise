@@ -7,6 +7,7 @@
 //
 
 #import "UserPublic.h"
+#import "JPUSHService.h"
 
 #import <ifaddrs.h>
 #import <arpa/inet.h>
@@ -47,6 +48,8 @@ __strong static UserPublic *_singleManger = nil;
     if (_userData) {
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         [ud setObject:[_userData mj_keyValues] forKey:kUserData];
+        
+        [self bindJPushTag];
     }
 }
 
@@ -54,7 +57,15 @@ __strong static UserPublic *_singleManger = nil;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:kUserData];
     
+    [JPUSHService cleanTags:nil seq:0];
+    
     _singleManger = nil;
+}
+
+- (void)bindJPushTag {
+    if (_userData) {
+        [JPUSHService setTags:[NSSet setWithObject:_userData.user_id] completion:nil seq:0];
+    }
 }
 
 + (NSString *)stringForType:(NSInteger)type key:(NSString *)key {
@@ -113,7 +124,12 @@ __strong static UserPublic *_singleManger = nil;
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         NSDictionary *data = [ud objectForKey:kUserData];
         if (data) {
-            _userData = [AppUserInfo mj_objectWithKeyValues:data];
+            _userData = [AppUserInfo mj_objectWithKeyValues:data];            
+//            [JPUSHService validTag:_userData.user_id completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind){
+//                if (!isBind) {
+//                    [[UserPublic getInstance] bindJPushTag];
+//                }
+//            } seq:0];
             [self generateRootAccesses];
         }
     }
