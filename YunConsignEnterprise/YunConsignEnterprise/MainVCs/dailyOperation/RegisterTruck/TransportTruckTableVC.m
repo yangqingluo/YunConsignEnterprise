@@ -140,7 +140,7 @@
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
                 [weakself showHint:@"发车成功"];
-                [weakself.tableView.mj_header beginRefreshing];
+                [weakself beginRefreshing];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];

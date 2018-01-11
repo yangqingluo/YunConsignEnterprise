@@ -1,35 +1,30 @@
 //
-//  TransportTruckVC.m
+//  WaybillChangeCheckVC.m
 //  YunConsignEnterprise
 //
-//  Created by 7kers on 2017/9/27.
-//  Copyright © 2017年 yangqingluo. All rights reserved.
+//  Created by 7kers on 2018/1/11.
+//  Copyright © 2018年 yangqingluo. All rights reserved.
 //
 
-#import "TransportTruckVC.h"
-#import "TransportTruckTableVC.h"
+#import "WaybillChangeCheckVC.h"
+#import "WaybillChangeCheckTableVC.h"
 #import "PublicQueryConditionVC.h"
 
-
-@interface TransportTruckVC ()
+@interface WaybillChangeCheckVC ()
 
 @end
 
-@implementation TransportTruckVC
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+@implementation WaybillChangeCheckVC
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportTruckSaveNotification:) name:kNotification_TransportTruckSaveRefresh object:nil];
         self.viewArray = [NSMutableArray new];
-        [self.viewArray addObject:@{@"title":@"已登记",@"VC":[[TransportTruckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
-        [self.viewArray addObject:@{@"title":@"运输中",@"VC":[[TransportTruckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
-        [self.viewArray addObject:@{@"title":@"已完成",@"VC":[[TransportTruckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
-        self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
+        [self.viewArray addObject:@{@"title":@"等待审核",@"VC":[[WaybillChangeCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
+        [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[WaybillChangeCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];
+        [self.viewArray addObject:@{@"title":@"驳回",@"VC":[[WaybillChangeCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:2]}];
+        self.condition.start_time = nil;
+        self.condition.end_time = nil;
     }
     return self;
 }
@@ -62,7 +57,7 @@
 
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
-    vc.type = QueryConditionType_TransportTruck;
+    vc.type = QueryConditionType_WaybillChangeCheck;
     vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){

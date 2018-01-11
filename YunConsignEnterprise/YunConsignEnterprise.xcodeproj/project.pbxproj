@@ -255,6 +255,9 @@
 		E49D7F631FD38F16009B59B7 /* TYBANG_s@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E49D7F041FD38F16009B59B7 /* TYBANG_s@3x.png */; };
 		E4A2CD371FCE6D3D0047A9BC /* TruckManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A2CD361FCE6D3D0047A9BC /* TruckManageVC.m */; };
 		E4A2CD3A1FCE6D760047A9BC /* SaveTruckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A2CD391FCE6D760047A9BC /* SaveTruckVC.m */; };
+		E4A59D412006ECCE006A877A /* WaybillChangeCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A59D402006ECCE006A877A /* WaybillChangeCheckVC.m */; };
+		E4A59D472006ED01006A877A /* WaybillChangeCheckTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A59D462006ED01006A877A /* WaybillChangeCheckTableVC.m */; };
+		E4A59D4A2006EF99006A877A /* WaybillChangeCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A59D492006EF99006A877A /* WaybillChangeCheckCell.m */; };
 		E4A633201FB037E300873BF5 /* DailyReimbursementApplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */; };
 		E4A65B6E1FB1A51900942525 /* CodLoanCheckDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A65B6D1FB1A51900942525 /* CodLoanCheckDetailCell.m */; };
 		E4AC27191FE98D770026504C /* TransportTruckDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AC27181FE98D770026504C /* TransportTruckDetailVC.m */; };
@@ -855,6 +858,12 @@
 		E4A2CD361FCE6D3D0047A9BC /* TruckManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TruckManageVC.m; sourceTree = "<group>"; };
 		E4A2CD381FCE6D760047A9BC /* SaveTruckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveTruckVC.h; sourceTree = "<group>"; };
 		E4A2CD391FCE6D760047A9BC /* SaveTruckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveTruckVC.m; sourceTree = "<group>"; };
+		E4A59D3F2006ECCE006A877A /* WaybillChangeCheckVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillChangeCheckVC.h; sourceTree = "<group>"; };
+		E4A59D402006ECCE006A877A /* WaybillChangeCheckVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeCheckVC.m; sourceTree = "<group>"; };
+		E4A59D452006ED01006A877A /* WaybillChangeCheckTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillChangeCheckTableVC.h; sourceTree = "<group>"; };
+		E4A59D462006ED01006A877A /* WaybillChangeCheckTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeCheckTableVC.m; sourceTree = "<group>"; };
+		E4A59D482006EF99006A877A /* WaybillChangeCheckCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillChangeCheckCell.h; sourceTree = "<group>"; };
+		E4A59D492006EF99006A877A /* WaybillChangeCheckCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaybillChangeCheckCell.m; sourceTree = "<group>"; };
 		E4A6331E1FB037E300873BF5 /* DailyReimbursementApplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyReimbursementApplyCell.h; sourceTree = "<group>"; };
 		E4A6331F1FB037E300873BF5 /* DailyReimbursementApplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyReimbursementApplyCell.m; sourceTree = "<group>"; };
 		E4A65B6C1FB1A51900942525 /* CodLoanCheckDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodLoanCheckDetailCell.h; sourceTree = "<group>"; };
@@ -1402,6 +1411,10 @@
 		E48B513B20060535004D6C51 /* WaybillChangeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				E4A59D3F2006ECCE006A877A /* WaybillChangeCheckVC.h */,
+				E4A59D402006ECCE006A877A /* WaybillChangeCheckVC.m */,
+				E4A59D452006ED01006A877A /* WaybillChangeCheckTableVC.h */,
+				E4A59D462006ED01006A877A /* WaybillChangeCheckTableVC.m */,
 			);
 			name = WaybillChangeCheck;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/WaybillChangeCheck;
@@ -2033,6 +2046,8 @@
 				E456501C1F978D2200F7694B /* CustomerManageCell.m */,
 				E48B514020060861004D6C51 /* WaybillChangeApplyCell.h */,
 				E48B514120060861004D6C51 /* WaybillChangeApplyCell.m */,
+				E4A59D482006EF99006A877A /* WaybillChangeCheckCell.h */,
+				E4A59D492006EF99006A877A /* WaybillChangeCheckCell.m */,
 				E4763CF51FA0DCBC00EC36F9 /* WaybillCustReceiveCell.h */,
 				E4763CF61FA0DCBC00EC36F9 /* WaybillCustReceiveCell.m */,
 				E46826001FA06EF8009C4918 /* PublicHeaderBodyCell.h */,
@@ -2985,6 +3000,7 @@
 				E4FB63351FC5651E005C482E /* QKGeocoder.m in Sources */,
 				E45DE7A42005ECA00038A297 /* CustomerConditionVC.m in Sources */,
 				E4E050DE1F9F6E5D0068FD04 /* PublicEndStationSelectVC.m in Sources */,
+				E4A59D412006ECCE006A877A /* WaybillChangeCheckVC.m in Sources */,
 				E4E2A3901FB311AE00D8EC1C /* DACircularProgressView.m in Sources */,
 				E4AEA0561F5EA6CF002EBE41 /* AppPublic.m in Sources */,
 				E4CE602D1FA03EDF007F427C /* UDImageLabelButton.m in Sources */,
@@ -3035,6 +3051,7 @@
 				E49D7E411FD38CAA009B59B7 /* WaybillChangeListVC.m in Sources */,
 				E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */,
 				E49D7E3A1FD38CAA009B59B7 /* WaybillLoadedVC.m in Sources */,
+				E4A59D472006ED01006A877A /* WaybillChangeCheckTableVC.m in Sources */,
 				E4AF3B0A1F78CD87009EB766 /* SwitchorCell.m in Sources */,
 				E49D7E2F1FD38CAA009B59B7 /* PayOnReceiptVC.m in Sources */,
 				E4AF3B041F78CBBD009EB766 /* PublicCellView.m in Sources */,
@@ -3204,6 +3221,7 @@
 				E475B0281FA0B6B00076D918 /* WaybillLoadedSelectCell.m in Sources */,
 				E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */,
 				E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */,
+				E4A59D4A2006EF99006A877A /* WaybillChangeCheckCell.m in Sources */,
 				E4E2A3871FB311AE00D8EC1C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E44764961F611AC70084F4EB /* MainTabNavController.m in Sources */,
 				E49C4F651F73AF03007E7D70 /* FourItemsDoubleListCell.m in Sources */,

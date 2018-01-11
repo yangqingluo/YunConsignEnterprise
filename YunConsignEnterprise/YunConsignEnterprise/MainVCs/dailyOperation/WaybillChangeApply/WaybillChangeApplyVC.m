@@ -89,7 +89,7 @@
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppWaybillChangeApplyInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
-            if (item.total < 10) {
+            if (item.total <= weakself.dataSource.count) {
                 [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             else {
@@ -156,18 +156,6 @@
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//
-//    SaveServiceVC *vc = [SaveServiceVC new];
-//    vc.baseData = self.dataSource[indexPath.row];
-//    [self goToSaveVC:vc];
-//}
-//
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
-
 #pragma mark - UIResponder+Router
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
@@ -179,7 +167,7 @@
             case 0:{
                 PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
                 vc.data = item;
-                [self.navigationController pushViewController:vc animated:YES];
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 

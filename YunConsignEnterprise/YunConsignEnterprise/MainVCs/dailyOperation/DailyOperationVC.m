@@ -17,6 +17,7 @@
 #import "PayOnReceiptVC.h"
 #import "CustomerConditionVC.h"
 #import "WaybillChangeApplyVC.h"
+#import "WaybillChangeCheckVC.h"
 
 @interface DailyOperationVC ()
 
@@ -109,8 +110,8 @@
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-            else if ([item.menu_code isEqualToString:@"CUST_MANAGE"]) {
-                CustomerConditionVC *vc = [CustomerConditionVC new];
+            else if ([item.menu_code isEqualToString:@"WAYBILL_CHANGE_CHECK"]) {
+                WaybillChangeCheckVC *vc = [WaybillChangeCheckVC new];
                 vc.accessInfo = item;
                 [self.navigationController pushViewController:vc animated:YES];
             }
