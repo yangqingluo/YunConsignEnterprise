@@ -125,11 +125,11 @@ __strong static UserPublic *_singleManger = nil;
         NSDictionary *data = [ud objectForKey:kUserData];
         if (data) {
             _userData = [AppUserInfo mj_objectWithKeyValues:data];            
-//            [JPUSHService validTag:_userData.user_id completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind){
-//                if (!isBind) {
-//                    [[UserPublic getInstance] bindJPushTag];
-//                }
-//            } seq:0];
+            [JPUSHService validTag:_userData.user_id completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind){
+                if (!isBind) {
+                    [[UserPublic getInstance] bindJPushTag];
+                }
+            } seq:0];
             [self generateRootAccesses];
         }
     }

@@ -71,7 +71,7 @@ static void uncaughtExceptionHandler(NSException *exception) {
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
     [JPUSHService setupWithOption:launchOptions appKey:@"0975e6955b9d06697c321ffd"
                           channel:@"Publish channel"
-                 apsForProduction:NO
+                 apsForProduction:YES
             advertisingIdentifier:nil];
     
     return YES;
