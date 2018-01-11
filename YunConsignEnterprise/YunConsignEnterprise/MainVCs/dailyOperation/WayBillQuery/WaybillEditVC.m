@@ -119,13 +119,12 @@
         [m_dic setObject:toSaveDic[key] forKey:key];
     }
     if (hasChanged) {
-        NSLog(@"%@", [AppPublic logDic:m_dic]);
+//        NSLog(@"%@", [AppPublic logDic:m_dic]);
         [m_dic setObject:self.detailData.waybill_id forKey:@"waybill_id"];
         [self pushUpdateWaybillFunction:m_dic];
     }
     else {
         [self doShowHintFunction:@"未做修改"];
-//        [self updateWayBillSuccessWithChange:nil];
     }
 }
 
@@ -137,7 +136,7 @@
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
-                [weakself updateWayBillSuccessWithChange:parm];
+                [weakself updateWayBillSuccessWithChange:parm showMessage:item.message];
             }
             else {
                 [weakself showHint:item.message.length ? item.message : @"数据出错"];
@@ -149,7 +148,7 @@
     }];
 }
 
-- (void)updateWayBillSuccessWithChange:(NSDictionary *)changedDic {
+- (void)updateWayBillSuccessWithChange:(NSDictionary *)changedDic showMessage:(NSString *)message {
     if (changedDic) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_WaybillListRefresh object:nil];
         for (NSString *key in changedDic.allKeys) {
@@ -158,11 +157,13 @@
             }
             [self.detailData setValue:changedDic[key] forKey:key];
         }
-        QKWEAKSELF;
-        BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已更新" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
-            [weakself goBackWithDone:YES];
-        } otherButtonTitles:nil];
-        [alert show];
+//        QKWEAKSELF;
+//        BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"运单已更新" message:nil cancelButtonTitle:@"确定" clickButton:^(NSInteger buttonIndex) {
+//            [weakself goBackWithDone:YES];
+//        } otherButtonTitles:nil];
+//        [alert show];
+        [self doShowHintFunction:message.length ? message : @"运单已更新"];
+        [self goBackWithDone:YES];
     }
     else {
         [self goBackWithDone:NO];
