@@ -8,6 +8,7 @@
 
 #import "WaybillChangeApplyVC.h"
 #import "PublicQueryConditionVC.h"
+#import "PublicWaybillDetailVC.h"
 
 #import "WaybillChangeApplyCell.h"
 
@@ -102,6 +103,32 @@
     }];
 }
 
+- (void)doCancelWaybillChangeByIdFunctionAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > self.dataSource.count - 1) {
+        return;
+    }
+    AppWaybillChangeApplyInfo *item = self.dataSource[indexPath.row];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"change_id" : item.change_id}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_cancelWaybillChangeByIdFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                [weakself doShowHintFunction:@"取消成功"];
+                [weakself beginRefreshing];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
@@ -146,15 +173,25 @@
     if ([eventName isEqualToString:Event_PublicMutableButtonClicked]) {
         NSDictionary *m_dic = (NSDictionary *)userInfo;
         NSIndexPath *indexPath = m_dic[@"indexPath"];
-        int tag = [m_dic[@"tag"] intValue];
+        AppWaybillChangeApplyInfo *item = self.dataSource[indexPath.row];
+        int tag = ([item.change_state integerValue] == WAYBILL_CHANGE_APPLY_STATE_1 ? 1 : 0) - [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                
+                PublicWaybillDetailVC *vc = [PublicWaybillDetailVC new];
+                vc.data = item;
+                [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
                 
             case 1:{
-                
+                //取消申请
+                QKWEAKSELF;
+                BlockAlertView *alert = [[BlockAlertView alloc] initWithTitle:@"确定取消该修改申请吗" message:[NSString stringWithFormat:@"货号：%@\n运单号：%@", item.goods_number, item.waybill_number] cancelButtonTitle:@"取消" callBlock:^(UIAlertView *view, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [weakself doCancelWaybillChangeByIdFunctionAtIndexPath:indexPath];
+                    }
+                } otherButtonTitles:@"确定", nil];
+                [alert show];
             }
                 break;
                 

@@ -32,13 +32,10 @@
 
 - (void)refreshFooter {
     NSArray *m_array = @[@"运单详情"];
-//    if ([self.data.loan_apply_state integerValue] == LOAN_APPLY_STATE_1) {
-//        m_array = @[@"驳回"];
+    if ([self.data.change_state integerValue] == WAYBILL_CHANGE_APPLY_STATE_1) {
+        m_array = @[@"取消", @"运单详情"];
 //        self.footerView.hidden = NO;
-//    }
-//    else {
-//        self.footerView.hidden = YES;
-//    }
+    }
     [self.footerView updateDataSourceWithArray:m_array];
 }
 

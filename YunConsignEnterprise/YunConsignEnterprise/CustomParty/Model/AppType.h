@@ -592,6 +592,7 @@ BOOL isTrue(NSString *string);
 //运单修改申请数据
 @interface AppWaybillChangeApplyInfo : AppWayBillInfo
 
+@property (strong, nonatomic) NSString *change_id;//申请编号
 @property (strong, nonatomic) NSString *change_state;//申请状态
 @property (strong, nonatomic) NSString *change_state_text;
 @property (strong, nonatomic) NSString *apply;//申请信息
