@@ -19,7 +19,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportTruckSaveNotification:) name:kNotification_TransportTruckSaveRefresh object:nil];
         self.condition.start_time = nil;
         self.condition.end_time = nil;
         

@@ -19,7 +19,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transportTruckSaveNotification:) name:kNotification_TransportTruckSaveRefresh object:nil];
         self.viewArray = [NSMutableArray new];
         [self.viewArray addObject:@{@"title":@"等待审核",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:0]}];
         [self.viewArray addObject:@{@"title":@"审核通过",@"VC":[[CodLoanCheckTableVC alloc] initWithStyle:UITableViewStyleGrouped parentVC:self andIndexTag:1]}];

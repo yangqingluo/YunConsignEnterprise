@@ -25,12 +25,12 @@
     self = [super initWithStyle:style parentVC:pVC andIndexTag:index];
     if (self) {
         switch (index) {
-            case 2: {
+            case 1: {
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_WaybillChangeCheckedRefresh object:nil];
             }
                 break;
                 
-            case 3: {
+            case 2: {
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needRefreshNotification:) name:kNotification_WaybillChangeCheckRejectRefresh object:nil];
             }
                 break;

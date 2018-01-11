@@ -139,6 +139,7 @@
         if (!error) {
             ResponseItem *item = responseBody;
             if (item.flag == 1) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_TransportTruckSaveRefresh object:nil];
                 [weakself showHint:@"发车成功"];
                 [weakself beginRefreshing];
             }
