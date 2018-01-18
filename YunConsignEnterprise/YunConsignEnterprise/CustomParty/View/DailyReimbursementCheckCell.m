@@ -12,17 +12,10 @@
 
 - (void)setupBody {
     [super setupBody];
-    self.bodyLabel2.top = self.bodyLabel1.bottom;
-    self.bodyLabel2.height = self.bodyLabel3.top - self.bodyLabel2.top;
     
-    _bodyLabelRight2 = NewLabel(self.bodyLabel2.frame, self.bodyLabel2.textColor, self.bodyLabel2.font, NSTextAlignmentLeft);
-    _bodyLabelRight2.numberOfLines = 0;
-    [self.bodyView addSubview:_bodyLabelRight2];
-    
-    self.bodyLabel2.text = @"关联运单：";
-    [AppPublic adjustLabelWidth:self.bodyLabel2];
-    self.bodyLabelRight2.left = self.bodyLabel2.right;
-    self.bodyLabelRight2.width = self.bodyView.width - kEdgeMiddle - self.bodyLabelRight2.left;
+    _bodyLabel4 = NewLabel(self.bodyLabel1.frame, nil, nil, NSTextAlignmentLeft);
+    _bodyLabel4.top = self.bodyLabel3.bottom + kEdge;
+    [self.bodyView addSubview:_bodyLabel4];
 }
 
 - (void)refreshFooter {
@@ -43,22 +36,32 @@
     [AppPublic adjustLabelWidth:self.titleLabel];
     self.statusLabel.text = data.daily_fee;
     
-    self.bodyLabel1.text = [NSString stringWithFormat:@"申请时间：%@", data.apply_time];
-    self.bodyLabelRight2.text = [NSString stringWithFormat:@"%@", [data showWaybillInfoString]];
+    self.bodyLabel1.text = [NSString stringWithFormat:@"申请人：　%@", data.apply_name];
     
     NSUInteger lines = 2;
     self.bodyLabel3.hidden = YES;
-    if (self.indextag == 2) {
-        lines++;
-        self.bodyLabel3.hidden = NO;
-        self.bodyLabel3.text = [NSString stringWithFormat:@"驳回原因：%@", data.check_note];
-    }
-    else {
-        BOOL isNote = data.note.length;
+    self.bodyLabel4.hidden = YES;
+    BOOL isNote = data.note.length;
+    if (self.indextag == 0) {
+        self.bodyLabel2.text = [NSString stringWithFormat:@"关联运单：%@", [data showWaybillInfoString]];
         if (isNote) {
             lines++;
-            self.bodyLabel3.hidden = NO;
-            self.bodyLabel3.text = [NSString stringWithFormat:@"报销备注：%@", data.note];
+            [self showLabel:self.bodyLabel3 conten:[NSString stringWithFormat:@"报销备注：%@", data.note]];
+        }
+    }
+    else {
+        lines = 3;
+        self.bodyLabel2.text = [NSString stringWithFormat:@"审核人：　%@", data.check_name];
+        [self showLabel:self.bodyLabel3 conten:[NSString stringWithFormat:@"关联运单：%@", [data showWaybillInfoString]]];
+        if (self.indextag == 2) {
+            lines++;
+            [self showLabel:self.bodyLabel4 conten:[NSString stringWithFormat:@"驳回原因：%@", data.check_note]];
+        }
+        else {
+            if (isNote) {
+                lines++;
+                [self showLabel:self.bodyLabel4 conten:[NSString stringWithFormat:@"报销备注：%@", data.note]];
+            }
         }
     }
     [self refreshFooter];
@@ -72,7 +75,7 @@
     }
     else {
         if (indextag == 2) {
-            self.bodyLabel3.textColor = WarningColor;
+            self.bodyLabel4.textColor = WarningColor;
         }
     }
 }

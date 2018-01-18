@@ -274,7 +274,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     AppDailyReimbursementCheckInfo *item = self.dataSource[indexPath.row];
-    return [DailyReimbursementCheckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:(self.indextag == 2) ? 3 : (2 + (item.note.length > 0))];
+    NSUInteger lines = 2;
+    if (self.indextag == 2) {
+        lines = 4;
+    }
+    else {
+        if (self.indextag == 1) {
+            lines  = 3;
+        }
+        if (item.note.length > 0) {
+            lines++;
+        }
+    }
+    return [DailyReimbursementCheckCell tableView:tableView heightForRowAtIndexPath:indexPath bodyLabelLines:lines];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

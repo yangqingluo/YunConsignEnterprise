@@ -7,7 +7,6 @@
 
 #import "AppPublic.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "UIImage+Color.h"
 
 #import "LoginViewController.h"
 #import "MainTabBarController.h"

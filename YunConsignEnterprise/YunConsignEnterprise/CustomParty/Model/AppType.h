@@ -880,6 +880,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *daily_name;//科目名称
 @property (strong, nonatomic) NSString *daily_fee;//申请费用
 @property (strong, nonatomic) NSString *apply_time;//申请时间
+@property (strong, nonatomic) NSString *apply_name;//申请人
 @property (strong, nonatomic) NSString *voucher;//凭证
 @property (strong, nonatomic) NSString *waybill_info;//关联运单
 @property (strong, nonatomic) NSString *note;//申请备注
