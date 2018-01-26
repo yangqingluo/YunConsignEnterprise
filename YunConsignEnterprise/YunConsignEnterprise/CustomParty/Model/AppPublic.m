@@ -77,6 +77,22 @@ __strong static AppPublic  *_singleManger = nil;
     return _selectedURLZone;
 }
 
+- (NSString *)serverFilePath {
+    if (!_serverFilePath) {
+        NSString *fileName = @"server.json";
+        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString * rootFolder = [rootPath stringByAppendingPathComponent:@"AppDownload"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:rootFolder]) {
+            [fileManager createDirectoryAtPath:rootFolder withIntermediateDirectories:NO attributes:nil error:nil];
+        }
+        
+        NSString *fileFolder = [rootFolder stringByAppendingPathComponent:fileName];
+        _serverFilePath = fileFolder;
+    }
+    return _serverFilePath;
+}
+
 #pragma mark - public
 //检查该版本是否第一次使用
 BOOL isFirstUsing() {

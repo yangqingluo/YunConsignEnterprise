@@ -64,6 +64,7 @@
     _zoneButton.backgroundColor =[UIColor clearColor];
     [_zoneButton setTitleColor:baseTextColor forState:UIControlStateNormal];
     [_zoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [_zoneButton setTitle:@"请选择服务器" forState:UIControlStateNormal];
     [AppPublic roundCornerRadius:_zoneButton cornerRadius:kButtonCornerRadius];
     _zoneButton.layer.borderColor = baseSeparatorColor.CGColor;
     _zoneButton.layer.borderWidth = 1.0;
@@ -112,6 +113,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     self.usernameTextField.text = [ud objectForKey:kUserName];
     
+    [self downloadServerFile];
     [self updateZoneButtonTitle];
 }
 
@@ -172,7 +174,22 @@
 }
 
 - (void)updateZoneButtonTitle {
-    [self.zoneButton setTitle:[AppPublic getInstance].selectedURLZone.item_name forState:UIControlStateNormal];
+//    [self.zoneButton setTitle:[AppPublic getInstance].selectedURLZone.item_name forState:UIControlStateNormal];
+}
+
+- (void)downloadServerFile {
+    [self doShowHudFunction];
+    
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] downLoadFileWithOperations:nil withSavaPath:[AppPublic getInstance].serverFilePath withUrlString:@"http://d.yunlaila.com.cn/server.json" completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            [weakself doShowHintFunction:@"获取服务器地址完成"];
+        }
+        
+    } withDownLoadProgress:^(float progress) {
+        
+    }];
 }
 
 @end

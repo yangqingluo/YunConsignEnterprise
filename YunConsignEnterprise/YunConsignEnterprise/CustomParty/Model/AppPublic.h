@@ -139,6 +139,10 @@ typedef void(^DoneBlock)(id object);
 @property (strong, nonatomic) NSArray *urlZoneArray;
 @property (strong, nonatomic) AppDataDictionary *selectedURLZone;
 
+@property (strong, nonatomic) NSString *serverFilePath;
+@property (strong, nonatomic) NSArray *serverArray;
+@property (strong, nonatomic) NSDictionary *selectedServer;
+
 + (AppPublic *)getInstance;
 
 /*!
