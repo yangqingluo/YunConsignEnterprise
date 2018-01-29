@@ -36,7 +36,6 @@ static void uncaughtExceptionHandler(NSException *exception) {
 //    }
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[AppPublic getInstance].serverFilePath]) {
-        [[AppPublic getInstance] clearURLZone];
         [[UserPublic getInstance] clear];
     }
     

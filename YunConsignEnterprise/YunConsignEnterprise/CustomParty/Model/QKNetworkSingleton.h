@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#define appUrlAddress      ([AppPublic getInstance].selectedURLZone.item_val)
+#define appUrlAddress      ([AppPublic getInstance].selectedServer[@"server_addr"])
 #define APP_HTTP_SUCCESS	             	1	//成功
 
 typedef void(^QKNetworkBlock)(id responseBody, NSError *error);

@@ -52,30 +52,30 @@ __strong static AppPublic  *_singleManger = nil;
     return _appName;
 }
 
-- (NSArray *)urlZoneArray {
-    if (!_urlZoneArray) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"url_zone" ofType:@"txt"];
-        if (path) {
-            NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
-            _urlZoneArray = [AppDataDictionary mj_objectArrayWithKeyValuesArray:keyValuesArray];
-        }
-    }
-    return _urlZoneArray;
-}
-
-- (AppDataDictionary *)selectedURLZone {
-    if (!_selectedURLZone) {
-        NSDictionary *m_dic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserZone];
-        if (m_dic) {
-            _selectedURLZone = [AppDataDictionary mj_objectWithKeyValues:m_dic];
-        }
-        else {
-            _selectedURLZone = self.urlZoneArray[0];
-        }
-    }
-//    NSLog(@"%@", _selectedURLZone.item_val);
-    return _selectedURLZone;
-}
+//- (NSArray *)urlZoneArray {
+//    if (!_urlZoneArray) {
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"url_zone" ofType:@"txt"];
+//        if (path) {
+//            NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
+//            _urlZoneArray = [AppDataDictionary mj_objectArrayWithKeyValuesArray:keyValuesArray];
+//        }
+//    }
+//    return _urlZoneArray;
+//}
+//
+//- (AppDataDictionary *)selectedURLZone {
+//    if (!_selectedURLZone) {
+//        NSDictionary *m_dic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserZone];
+//        if (m_dic) {
+//            _selectedURLZone = [AppDataDictionary mj_objectWithKeyValues:m_dic];
+//        }
+//        else {
+//            _selectedURLZone = self.urlZoneArray[0];
+//        }
+//    }
+////    NSLog(@"%@", _selectedURLZone.item_val);
+//    return _selectedURLZone;
+//}
 
 - (NSString *)serverFilePath {
     if (!_serverFilePath) {
@@ -91,6 +91,44 @@ __strong static AppPublic  *_singleManger = nil;
         _serverFilePath = fileFolder;
     }
     return _serverFilePath;
+}
+
+- (NSString *)serverCachePath {
+    if (!_serverCachePath) {
+        NSString *fileName = @"server.json";
+        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString * rootFolder = [rootPath stringByAppendingPathComponent:@"AppCache"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:rootFolder]) {
+            [fileManager createDirectoryAtPath:rootFolder withIntermediateDirectories:NO attributes:nil error:nil];
+        }
+        
+        NSString *fileFolder = [rootFolder stringByAppendingPathComponent:fileName];
+        _serverCachePath = fileFolder;
+    }
+    return _serverCachePath;
+}
+
+- (NSArray *)serverArray {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:self.serverFilePath]) {
+        NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:self.serverFilePath] options:kNilOptions error:nil];
+        return keyValuesArray;
+    }
+    return nil;
+}
+
+- (NSDictionary *)selectedServer {
+    if (!_selectedServer) {
+        NSDictionary *m_dic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserServer];
+        if (m_dic) {
+            _selectedServer = m_dic;
+        }
+        else if (self.serverArray) {
+            _selectedServer = self.serverArray[0];
+        }
+    }
+    return _selectedServer;
 }
 
 #pragma mark - public
@@ -524,17 +562,30 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month) {
     }
 }
 
-- (void)saveURLZoneWithData:(AppDataDictionary *)data {
-    if (!data) {
+//- (void)saveURLZoneWithData:(AppDataDictionary *)data {
+//    if (!data) {
+//        return;
+//    }
+//    _selectedURLZone = [data copy];
+//    [[NSUserDefaults standardUserDefaults] setObject:[_selectedURLZone mj_keyValues] forKey:kUserZone];
+//}
+//
+//- (void)clearURLZone {
+//    _selectedURLZone = nil;
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserZone];
+//}
+
+- (void)saveSeverWithData:(NSDictionary *)dic {
+    if (!dic) {
         return;
     }
-    _selectedURLZone = [data copy];
-    [[NSUserDefaults standardUserDefaults] setObject:[_selectedURLZone mj_keyValues] forKey:kUserZone];
+    _selectedServer = dic;
+    [[NSUserDefaults standardUserDefaults] setObject:_selectedServer forKey:kUserServer];
 }
 
-- (void)clearURLZone {
-    _selectedURLZone = nil;
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserZone];
+- (void)clearServerData {
+    _selectedServer = nil;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserServer];
 }
 
 @end

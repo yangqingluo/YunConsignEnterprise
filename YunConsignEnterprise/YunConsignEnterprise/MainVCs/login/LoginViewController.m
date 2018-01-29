@@ -107,13 +107,13 @@
     loginButton.layer.borderColor = baseSeparatorColor.CGColor;
     loginButton.layer.borderWidth = 1.0;
     
-    [loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    [loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginButton];
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     self.usernameTextField.text = [ud objectForKey:kUserName];
     
-    [self downloadServerFile];
+    [self downloadServerFileFunction];
     [self updateZoneButtonTitle];
 }
 
@@ -135,7 +135,7 @@
     textField.leftViewMode = UITextFieldViewModeAlways;
 }
 
-- (void)loginAction {
+- (void)loginButtonAction {
     [self.view endEditing:YES];
     
     if (self.usernameTextField.text.length == 0) {
@@ -146,7 +146,6 @@
     }
     else {
         [self doShowHudFunction];
-        
         QKWEAKSELF;
         [[QKNetworkSingleton sharedManager] loginWithID:self.usernameTextField.text Password:self.passwordTextField.text completion:^(id responseBody, NSError *error){
             [weakself doHideHudFunction];
@@ -158,15 +157,15 @@
 }
 
 - (void)zoneButtonAction {
-    NSArray *dataArray = [AppPublic getInstance].urlZoneArray;
+    NSArray *dataArray = [AppPublic getInstance].serverArray;
     NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
-    for (AppDataDictionary *m_data in dataArray) {
-        [m_array addObject:m_data.item_name];
+    for (NSDictionary *m_data in dataArray) {
+        [m_array addObject:m_data[@"server_name"]];
     }
     QKWEAKSELF;
     BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
         if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
-            [[AppPublic getInstance] saveURLZoneWithData:dataArray[buttonIndex - 1]];
+            [[AppPublic getInstance] saveSeverWithData:dataArray[buttonIndex - 1]];
             [weakself updateZoneButtonTitle];
         }
     } otherButtonTitlesArray:m_array];
@@ -174,17 +173,29 @@
 }
 
 - (void)updateZoneButtonTitle {
-//    [self.zoneButton setTitle:[AppPublic getInstance].selectedURLZone.item_name forState:UIControlStateNormal];
+    if ([AppPublic getInstance].selectedServer) {
+        [self.zoneButton setTitle:[AppPublic getInstance].selectedServer[@"server_name"] forState:UIControlStateNormal];
+    }
+    else {
+        [self.zoneButton setTitle:@"请选择服务器" forState:UIControlStateNormal];
+    }
 }
 
-- (void)downloadServerFile {
+- (void)downloadServerFileFunction {
     [self doShowHudFunction];
     
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] downLoadFileWithOperations:nil withSavaPath:[AppPublic getInstance].serverFilePath withUrlString:@"http://d.yunlaila.com.cn/server.json" completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] downLoadFileWithOperations:nil withSavaPath:[AppPublic getInstance].serverCachePath withUrlString:@"http://d.yunlaila.com.cn/server.json" completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
-            [weakself doShowHintFunction:@"获取服务器地址完成"];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if ([fileManager fileExistsAtPath:[AppPublic getInstance].serverFilePath]) {
+                [fileManager removeItemAtPath:[AppPublic getInstance].serverFilePath error:nil];
+            }
+            [fileManager moveItemAtPath:[AppPublic getInstance].serverCachePath toPath:[AppPublic getInstance].serverFilePath error:nil];
+        }
+        else {
+//            [self doShowHintFunction:@"服务器地址错误"];
         }
         
     } withDownLoadProgress:^(float progress) {

@@ -98,7 +98,8 @@
 
 #define kUserName                    @"username_YunConsignEnterprise"
 #define kUserData                    @"userdata_YunConsignEnterprise"
-#define kUserZone                    @"userzone_YunConsignEnterprise"
+//#define kUserZone                    @"userzone_YunConsignEnterprise"
+#define kUserServer                  @"userserver_YunConsignEnterprise"
 
 #define defaultDateFormat            @"yyyy-MM-dd"
 #define defaultHeadImageName         @"默认头像"
@@ -136,10 +137,11 @@ typedef void(^DoneBlock)(id object);
 @property (strong, nonatomic) NSString *appName;
 
 //分区选择
-@property (strong, nonatomic) NSArray *urlZoneArray;
-@property (strong, nonatomic) AppDataDictionary *selectedURLZone;
+//@property (strong, nonatomic) NSArray *urlZoneArray;//已弃用
+//@property (strong, nonatomic) AppDataDictionary *selectedURLZone;//已弃用
 
 @property (strong, nonatomic) NSString *serverFilePath;
+@property (strong, nonatomic) NSString *serverCachePath;
 @property (strong, nonatomic) NSArray *serverArray;
 @property (strong, nonatomic) NSDictionary *selectedServer;
 
@@ -238,7 +240,9 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month);
 - (void)goToMainVC;
 - (void)goToLoginCompletion:(void (^)(void))completion;
 
-- (void)saveURLZoneWithData:(AppDataDictionary *)data;
-- (void)clearURLZone;
+//- (void)saveURLZoneWithData:(AppDataDictionary *)data;//已弃用
+//- (void)clearURLZone;//已弃用
+- (void)saveSeverWithData:(NSDictionary *)dic;
+- (void)clearServerData;
 
 @end
