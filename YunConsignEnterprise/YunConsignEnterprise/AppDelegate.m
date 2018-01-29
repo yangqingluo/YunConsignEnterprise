@@ -35,7 +35,7 @@ static void uncaughtExceptionHandler(NSException *exception) {
 //        }
 //    }
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[AppPublic getInstance].serverFilePath]) {
+    if (![AppPublic getInstance].selectedServer) {
         [[UserPublic getInstance] clear];
     }
     

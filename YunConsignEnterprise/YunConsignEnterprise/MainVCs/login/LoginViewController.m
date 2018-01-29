@@ -137,12 +137,14 @@
 
 - (void)loginButtonAction {
     [self.view endEditing:YES];
-    
     if (self.usernameTextField.text.length == 0) {
-        [self showHint:@"请输入用户名"];
+        [self doShowHintFunction:@"请输入用户名"];
     }
     else if (self.passwordTextField.text.length < kPasswordLengthMin) {
-        [self showHint:@"请输入正确的密码"];
+        [self doShowHintFunction:@"请输入正确的密码"];
+    }
+    else if (![AppPublic getInstance].selectedServer) {
+        [self doShowHintFunction:@"服务器地址错误"];
     }
     else {
         [self doShowHudFunction];
@@ -158,18 +160,23 @@
 
 - (void)zoneButtonAction {
     NSArray *dataArray = [AppPublic getInstance].serverArray;
-    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
-    for (NSDictionary *m_data in dataArray) {
-        [m_array addObject:m_data[@"server_name"]];
-    }
-    QKWEAKSELF;
-    BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
-        if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
-            [[AppPublic getInstance] saveSeverWithData:dataArray[buttonIndex - 1]];
-            [weakself updateZoneButtonTitle];
+    if (dataArray.count) {
+        NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+        for (NSDictionary *m_data in dataArray) {
+            [m_array addObject:m_data[@"server_name"]];
         }
-    } otherButtonTitlesArray:m_array];
-    [sheet showInView:self.view];
+        QKWEAKSELF;
+        BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+            if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                [[AppPublic getInstance] saveSeverWithData:dataArray[buttonIndex - 1]];
+                [weakself updateZoneButtonTitle];
+            }
+        } otherButtonTitlesArray:m_array];
+        [sheet showInView:self.view];
+    }
+    else {
+        [self downloadServerFileFunction];
+    }
 }
 
 - (void)updateZoneButtonTitle {
@@ -188,11 +195,8 @@
     [[QKNetworkSingleton sharedManager] downLoadFileWithOperations:nil withSavaPath:[AppPublic getInstance].serverCachePath withUrlString:@"http://d.yunlaila.com.cn/server.json" completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            if ([fileManager fileExistsAtPath:[AppPublic getInstance].serverFilePath]) {
-                [fileManager removeItemAtPath:[AppPublic getInstance].serverFilePath error:nil];
-            }
-            [fileManager moveItemAtPath:[AppPublic getInstance].serverCachePath toPath:[AppPublic getInstance].serverFilePath error:nil];
+            [[AppPublic getInstance] updateServeData];
+            [self updateZoneButtonTitle];
         }
         else {
 //            [self doShowHintFunction:@"服务器地址错误"];

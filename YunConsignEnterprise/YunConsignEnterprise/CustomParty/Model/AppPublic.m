@@ -52,31 +52,6 @@ __strong static AppPublic  *_singleManger = nil;
     return _appName;
 }
 
-//- (NSArray *)urlZoneArray {
-//    if (!_urlZoneArray) {
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"url_zone" ofType:@"txt"];
-//        if (path) {
-//            NSArray *keyValuesArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
-//            _urlZoneArray = [AppDataDictionary mj_objectArrayWithKeyValuesArray:keyValuesArray];
-//        }
-//    }
-//    return _urlZoneArray;
-//}
-//
-//- (AppDataDictionary *)selectedURLZone {
-//    if (!_selectedURLZone) {
-//        NSDictionary *m_dic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserZone];
-//        if (m_dic) {
-//            _selectedURLZone = [AppDataDictionary mj_objectWithKeyValues:m_dic];
-//        }
-//        else {
-//            _selectedURLZone = self.urlZoneArray[0];
-//        }
-//    }
-////    NSLog(@"%@", _selectedURLZone.item_val);
-//    return _selectedURLZone;
-//}
-
 - (NSString *)serverFilePath {
     if (!_serverFilePath) {
         NSString *fileName = @"server.json";
@@ -562,23 +537,10 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month) {
     }
 }
 
-//- (void)saveURLZoneWithData:(AppDataDictionary *)data {
-//    if (!data) {
+- (void)saveSeverWithData:(NSDictionary *)dic {
+//    if (!dic) {
 //        return;
 //    }
-//    _selectedURLZone = [data copy];
-//    [[NSUserDefaults standardUserDefaults] setObject:[_selectedURLZone mj_keyValues] forKey:kUserZone];
-//}
-//
-//- (void)clearURLZone {
-//    _selectedURLZone = nil;
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserZone];
-//}
-
-- (void)saveSeverWithData:(NSDictionary *)dic {
-    if (!dic) {
-        return;
-    }
     _selectedServer = dic;
     [[NSUserDefaults standardUserDefaults] setObject:_selectedServer forKey:kUserServer];
 }
@@ -586,6 +548,21 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month) {
 - (void)clearServerData {
     _selectedServer = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserServer];
+}
+
+- (void)updateServeData {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:self.serverFilePath]) {
+        [fileManager removeItemAtPath:self.serverFilePath error:nil];
+    }
+    NSError *error = nil;
+    [fileManager moveItemAtPath:self.serverCachePath toPath:self.serverFilePath error:&error];
+    if (error) {
+        NSLog(@"fileManager updateServeData error:%@", error);
+    }
+    if (![self.serverArray containsObject:self.selectedServer]) {
+        [self clearServerData];
+    }
 }
 
 @end

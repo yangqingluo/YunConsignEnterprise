@@ -137,9 +137,6 @@ typedef void(^DoneBlock)(id object);
 @property (strong, nonatomic) NSString *appName;
 
 //分区选择
-//@property (strong, nonatomic) NSArray *urlZoneArray;//已弃用
-//@property (strong, nonatomic) AppDataDictionary *selectedURLZone;//已弃用
-
 @property (strong, nonatomic) NSString *serverFilePath;
 @property (strong, nonatomic) NSString *serverCachePath;
 @property (strong, nonatomic) NSArray *serverArray;
@@ -240,9 +237,8 @@ NSDate *dateWithPriousorLaterDate(NSDate *date, int month);
 - (void)goToMainVC;
 - (void)goToLoginCompletion:(void (^)(void))completion;
 
-//- (void)saveURLZoneWithData:(AppDataDictionary *)data;//已弃用
-//- (void)clearURLZone;//已弃用
 - (void)saveSeverWithData:(NSDictionary *)dic;
 - (void)clearServerData;
+- (void)updateServeData;
 
 @end
