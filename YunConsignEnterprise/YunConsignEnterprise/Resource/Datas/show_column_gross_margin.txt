@@ -1,0 +1,42 @@
+[
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "日期",
+    "item_note" : "",
+    "item_sort" : 1,
+    "item_val" : "count_date"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "货量",
+    "item_note" : "",
+    "item_sort" : 2,
+    "item_val" : "total_amount"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "车费",
+    "item_note" : "",
+    "item_sort" : 3,
+    "item_val" : "cost_register"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "装车费",
+    "item_note" : "",
+    "item_sort" : 4,
+    "item_val" : "cost_load"
+},
+{
+    "dict_id" : 0,
+    "item_id" : 0,
+    "item_name" : "毛利",
+    "item_note" : "",
+    "item_sort" : 5,
+    "item_val" : "gross_margin"
+}
+]
