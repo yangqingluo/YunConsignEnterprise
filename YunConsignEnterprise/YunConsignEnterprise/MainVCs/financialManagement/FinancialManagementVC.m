@@ -17,6 +17,7 @@
 #import "CodRemitVC.h"
 #import "DailyReimbursementApplyVC.h"
 #import "DailyReimbursementCheckVC.h"
+#import "GrossMarginCountVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -80,6 +81,9 @@
             }
             else if ([item.menu_code isEqualToString:@"DAILY_REIMBURSEMENT_CHECK"]) {
                 vc = [DailyReimbursementCheckVC new];
+            }
+            else if ([item.menu_code isEqualToString:@"GROSS_MARGIN_COUNT"]) {
+                vc = [GrossMarginCountVC new];
             }
             
             if (vc) {

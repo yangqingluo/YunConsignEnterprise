@@ -160,7 +160,7 @@ __strong static UserPublic *_singleManger = nil;
 - (NSMutableDictionary *)dataMapDic {
     if (!_dataMapDic) {
         _dataMapDic = [NSMutableDictionary new];
-        NSArray *m_array = @[@"daily_name", @"show_column", @"show_column_cod_check", @"show_column_FreightCheck1", @"show_column_FreightCheck2", @"query_column_waybill", @"waybill_type"];
+        NSArray *m_array = @[@"daily_name", @"show_column", @"show_column_cod_check", @"show_column_FreightCheck1", @"show_column_FreightCheck2", @"show_column_gross_margin", @"query_column_waybill", @"waybill_type"];
         for (NSString *key in m_array) {
             NSString *path = [[NSBundle mainBundle] pathForResource:key ofType:@"txt"];
             if (path) {
@@ -224,8 +224,7 @@ NSString *serviceDataMapKeyForTruck(NSString *transport_truck_id) {
     }
     return NO;
 }
-+ (NSDictionary *)getIPAddresses
-{
++ (NSDictionary *)getIPAddresses {
     NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
     
     // retrieve the current interfaces - returns 0 on success

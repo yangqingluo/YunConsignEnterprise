@@ -93,6 +93,11 @@
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
 		E48002D81FDFC57B00E7D943 /* url_zone.txt in Resources */ = {isa = PBXBuildFile; fileRef = E48002D71FDFC57B00E7D943 /* url_zone.txt */; };
+		E48A99EB202C76BD0098ABF4 /* GrossMarginCountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A99EA202C76BD0098ABF4 /* GrossMarginCountVC.m */; };
+		E48A99ED202C77D70098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E48A99EC202C77D60098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png */; };
+		E48A99F0202C78A20098ABF4 /* GrossMarginCountDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A99EF202C78A20098ABF4 /* GrossMarginCountDetailVC.m */; };
+		E48A99F2202C79540098ABF4 /* show_column_gross_margin.txt in Resources */ = {isa = PBXBuildFile; fileRef = E48A99F1202C79540098ABF4 /* show_column_gross_margin.txt */; };
+		E48A99F5202C7E4E0098ABF4 /* GrossMarginCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A99F4202C7E4E0098ABF4 /* GrossMarginCountCell.m */; };
 		E48B3C561FB182A500B6C57E /* PublicFMWaybillQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */; };
 		E48B513F2006054B004D6C51 /* WaybillChangeApplyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48B513E2006054B004D6C51 /* WaybillChangeApplyVC.m */; };
 		E48B514220060861004D6C51 /* WaybillChangeApplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E48B514120060861004D6C51 /* WaybillChangeApplyCell.m */; };
@@ -632,6 +637,14 @@
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
 		E48002D71FDFC57B00E7D943 /* url_zone.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = url_zone.txt; sourceTree = "<group>"; };
+		E48A99E9202C76BD0098ABF4 /* GrossMarginCountVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrossMarginCountVC.h; sourceTree = "<group>"; };
+		E48A99EA202C76BD0098ABF4 /* GrossMarginCountVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrossMarginCountVC.m; sourceTree = "<group>"; };
+		E48A99EC202C77D60098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "money_icon_GROSS_MARGIN_COUNT@3x.png"; sourceTree = "<group>"; };
+		E48A99EE202C78A20098ABF4 /* GrossMarginCountDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrossMarginCountDetailVC.h; sourceTree = "<group>"; };
+		E48A99EF202C78A20098ABF4 /* GrossMarginCountDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrossMarginCountDetailVC.m; sourceTree = "<group>"; };
+		E48A99F1202C79540098ABF4 /* show_column_gross_margin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column_gross_margin.txt; sourceTree = "<group>"; };
+		E48A99F3202C7E4E0098ABF4 /* GrossMarginCountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrossMarginCountCell.h; sourceTree = "<group>"; };
+		E48A99F4202C7E4E0098ABF4 /* GrossMarginCountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrossMarginCountCell.m; sourceTree = "<group>"; };
 		E48B3C541FB182A500B6C57E /* PublicFMWaybillQueryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicFMWaybillQueryCell.h; sourceTree = "<group>"; };
 		E48B3C551FB182A500B6C57E /* PublicFMWaybillQueryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicFMWaybillQueryCell.m; sourceTree = "<group>"; };
 		E48B513D2006054B004D6C51 /* WaybillChangeApplyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillChangeApplyVC.h; sourceTree = "<group>"; };
@@ -1372,6 +1385,7 @@
 				E490AC921FB2DC9E00905826 /* PublicWaybillDetailListVC.m */,
 				E460C5DA1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.h */,
 				E460C5DB1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m */,
+				E48A99E8202C76A30098ABF4 /* GrossMarginCount */,
 				E49D7E4A1FD38D4E009B59B7 /* CodCheck */,
 				E49D7E4F1FD38D4E009B59B7 /* CodLoanApply */,
 				E49D7E5A1FD38D4E009B59B7 /* CodLoanCheck */,
@@ -1441,11 +1455,24 @@
 				E430C0821FD157E400A94A23 /* show_column_cod_check.txt */,
 				E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */,
 				E44455D51FE904A300441A90 /* show_column_FreightCheck2.txt */,
+				E48A99F1202C79540098ABF4 /* show_column_gross_margin.txt */,
 				E48002D71FDFC57B00E7D943 /* url_zone.txt */,
 				E449C78D1FEA070B001B1077 /* waybill_type.txt */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
+		};
+		E48A99E8202C76A30098ABF4 /* GrossMarginCount */ = {
+			isa = PBXGroup;
+			children = (
+				E48A99E9202C76BD0098ABF4 /* GrossMarginCountVC.h */,
+				E48A99EA202C76BD0098ABF4 /* GrossMarginCountVC.m */,
+				E48A99EE202C78A20098ABF4 /* GrossMarginCountDetailVC.h */,
+				E48A99EF202C78A20098ABF4 /* GrossMarginCountDetailVC.m */,
+			);
+			name = GrossMarginCount;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/GrossMarginCount;
+			sourceTree = SOURCE_ROOT;
 		};
 		E48B513B20060535004D6C51 /* WaybillChangeCheck */ = {
 			isa = PBXGroup;
@@ -1893,6 +1920,7 @@
 				E49D7EE31FD38F16009B59B7 /* money_icon_DAILY_REIMBURSEMENT_CHECK@3x.png */,
 				E49D7EE41FD38F16009B59B7 /* money_icon_FREIGHT_CHECK@3x.png */,
 				E49D7EE51FD38F16009B59B7 /* money_icon_FREIGHT_NOT_PAY@3x.png */,
+				E48A99EC202C77D60098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png */,
 				E49D7EE61FD38F16009B59B7 /* navbar_icon_back@2x.png */,
 				E49D7EE71FD38F16009B59B7 /* navbar_icon_back@3x.png */,
 				E49D7EE81FD38F16009B59B7 /* navbar_icon_edit@2x.png */,
@@ -2140,6 +2168,8 @@
 				E4069B691FD1A0B0009F84DD /* CodPayCell.m */,
 				E48C72C01FA9BD52007F7FC8 /* CodCheckCell.h */,
 				E48C72C11FA9BD52007F7FC8 /* CodCheckCell.m */,
+				E48A99F3202C7E4E0098ABF4 /* GrossMarginCountCell.h */,
+				E48A99F4202C7E4E0098ABF4 /* GrossMarginCountCell.m */,
 				E4D2BB221FAAC239006A2AAC /* CodLoanApplyCell.h */,
 				E4D2BB231FAAC239006A2AAC /* CodLoanApplyCell.m */,
 				E4F78C341FB199DD0003549A /* CodLoanCheckCell.h */,
@@ -2873,6 +2903,7 @@
 				E42DACD21FCB0B81004FCDD1 /* show_column.txt in Resources */,
 				E49D7F0D1FD38F16009B59B7 /* daily_icon_CUST_MANAGE@3x.png in Resources */,
 				E4E2A3C81FB311AE00D8EC1C /* MJRefresh.bundle in Resources */,
+				E48A99ED202C77D70098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png in Resources */,
 				E49D7F551FD38F16009B59B7 /* tabbar_icon_daily_normal@3x.png in Resources */,
 				E429AEB91FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png in Resources */,
 				E49D7F4C1FD38F16009B59B7 /* navbar_icon_search@3x.png in Resources */,
@@ -2976,6 +3007,7 @@
 				E49D7F311FD38F16009B59B7 /* list_icon_radio_selcted@2x.png in Resources */,
 				E49D7F3E1FD38F16009B59B7 /* money_icon_COD_QUERY@3x.png in Resources */,
 				E49D7F3B1FD38F16009B59B7 /* money_icon_COD_CHECK@3x.png in Resources */,
+				E48A99F2202C79540098ABF4 /* show_column_gross_margin.txt in Resources */,
 				E49D7F5F1FD38F16009B59B7 /* tabbar_icon_setting_selected@3x.png in Resources */,
 				E49D7F121FD38F16009B59B7 /* daily_icon_WAYBILL_LOAD@3x.png in Resources */,
 				E49D7F3C1FD38F16009B59B7 /* money_icon_COD_LOAN_APPLY@3x.png in Resources */,
@@ -3038,6 +3070,7 @@
 				E4FB63381FC57013005C482E /* ServiceLocationVC.m in Sources */,
 				E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */,
 				E4E2A3F71FB311AE00D8EC1C /* NSData+ImageContentType.m in Sources */,
+				E48A99F0202C78A20098ABF4 /* GrossMarginCountDetailVC.m in Sources */,
 				E4E29E1B1F9899FE00A24504 /* WayBillDetailHeaderView.m in Sources */,
 				E43B9DA41FC5552F00D1C57B /* SaveServiceVC.m in Sources */,
 				E49D7E371FD38CAA009B59B7 /* ServiceGoodsDetailVC.m in Sources */,
@@ -3118,6 +3151,7 @@
 				E49D7E411FD38CAA009B59B7 /* WaybillChangeListVC.m in Sources */,
 				E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */,
 				E49D7E3A1FD38CAA009B59B7 /* WaybillLoadedVC.m in Sources */,
+				E48A99EB202C76BD0098ABF4 /* GrossMarginCountVC.m in Sources */,
 				E4A59D472006ED01006A877A /* WaybillChangeCheckTableVC.m in Sources */,
 				E4AF3B0A1F78CD87009EB766 /* SwitchorCell.m in Sources */,
 				E49D7E2F1FD38CAA009B59B7 /* PayOnReceiptVC.m in Sources */,
@@ -3179,6 +3213,7 @@
 				E49D7EA41FD38D4E009B59B7 /* FreightCheckVC.m in Sources */,
 				E49D7E471FD38CAA009B59B7 /* WaybillCustReceiveVC.m in Sources */,
 				E4E2A40C1FB311AE00D8EC1C /* TZImagePickerController.m in Sources */,
+				E48A99F5202C7E4E0098ABF4 /* GrossMarginCountCell.m in Sources */,
 				E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */,
 				E4E2A3F41FB311AE00D8EC1C /* MWTapDetectingView.m in Sources */,
 				E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */,

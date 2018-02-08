@@ -909,6 +909,16 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppDailyGrossMarginInfo : AppType
+
+@property (strong, nonatomic) NSString *count_date;//日期
+@property (strong, nonatomic) NSString *total_amount;//货量
+@property (strong, nonatomic) NSString *cost_register;//车费
+@property (strong, nonatomic) NSString *cost_load;//装车费
+@property (strong, nonatomic) NSString *gross_margin;//毛利
+
+@end
+
 
 
 

@@ -609,7 +609,11 @@ BOOL isTrue(NSString *string) {
 @end
 
 
+@implementation AppDailyGrossMarginInfo
 
+
+
+@end
 
 
 

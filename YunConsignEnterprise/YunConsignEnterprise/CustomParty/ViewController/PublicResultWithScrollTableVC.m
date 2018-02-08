@@ -19,7 +19,10 @@
     
     [self.view insertSubview:self.scrollView atIndex:0];
     CGFloat scale = 5.0f + 2.0 * self.condition.show_column.count;
-    if (self.type != PublicResultWithScrollTableType_DEFAULT) {
+    if (self.type == PublicResultWithScrollTableType_GrossMarginCount) {
+        scale = 1.0f + 0.5 + 2.0 * self.condition.show_column.count;
+    }
+    else if (self.type != PublicResultWithScrollTableType_DEFAULT) {
         scale = 7.0f + 2.0 * self.condition.show_column.count;
     }
     
@@ -38,14 +41,25 @@
     
     [self.edgeArray addObject:@(1.0 / scale)];
     [self.edgeArray addObject:@(4.0 / scale)];
-    if (self.type != PublicResultWithScrollTableType_DEFAULT) {
+    if (self.type == PublicResultWithScrollTableType_GrossMarginCount) {
+        [self.edgeArray removeLastObject];
+    }
+    else if (self.type != PublicResultWithScrollTableType_DEFAULT) {
         [self.edgeArray addObject:@(2.0 / scale)];
     }
     
     for (AppDataDictionary *item in self.condition.show_column) {
         [self.valArray addObject:item.item_val];
         [self.nameArray addObject:item.item_name];
-        [self.edgeArray addObject:@(([item.item_val isEqualToString:@"note"] ? noteEdge : 2.0) / scale)];
+        if ([item.item_val isEqualToString:@"note"]) {
+            [self.edgeArray addObject:@(noteEdge / scale)];
+        }
+        else if ([item.item_val isEqualToString:@"count_date"]) {
+            [self.edgeArray addObject:@(2.5 / scale)];
+        }
+        else {
+            [self.edgeArray addObject:@(2.0 / scale)];
+        }
     }
     
     CGFloat contentWidth = MAX(screen_width, 38 * scale);
