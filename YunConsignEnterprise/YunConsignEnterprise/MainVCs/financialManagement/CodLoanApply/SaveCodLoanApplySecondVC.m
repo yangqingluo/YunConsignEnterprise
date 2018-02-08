@@ -12,6 +12,8 @@
 
 @interface SaveCodLoanApplySecondVC ()<UITextFieldDelegate>
 
+@property (strong, nonatomic) NSArray *remitBankInfoList;
+
 @end
 
 @implementation SaveCodLoanApplySecondVC
@@ -22,6 +24,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self initializeData];
+    [self doSetRemitBankInfoFunction];
 }
 
 - (void)setupNav {
@@ -83,6 +86,36 @@
     }
 }
 
+- (void)doSetRemitBankInfoFunction {
+    if (!self.dataSource.count) {
+        [self showHint:@"运单数据出错"];
+        return;
+    }
+    NSMutableArray *idArray = [NSMutableArray arrayWithCapacity:self.dataSource.count];
+    for (AppWayBillDetailInfo *item in self.dataSource) {
+        [idArray addObject:item.waybill_id];
+    }
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_ids" : [idArray componentsJoinedByString:@","]}];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_setRemitBankInfoFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1) {
+                weakself.remitBankInfoList = item.items;
+                [weakself updateBankInfoView];
+            }
+            else {
+                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)doSaveLoanApplyFunction:(NSDictionary *)dic {
     if (!self.dataSource.count) {
         [self showHint:@"运单数据出错"];
@@ -124,6 +157,14 @@
 //        [weakself doPopToLastViewControllerSkip:2 animated:YES];
 //    } otherButtonTitles:nil];
 //    [alert show];
+}
+
+- (void)updateBankInfoView {
+    if (self.remitBankInfoList.count) {
+        NSDictionary *item = self.remitBankInfoList[0];
+        self.showData = [AppCodLoanApplyInfo mj_objectWithKeyValues:item];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 #pragma mark - UITableView
