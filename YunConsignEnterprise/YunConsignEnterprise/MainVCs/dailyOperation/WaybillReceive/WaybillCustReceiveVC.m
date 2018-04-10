@@ -269,7 +269,7 @@
             _showArray = @[@{@"title":@"提货人",@"subTitle":@"请输入",@"key":@"consignee_name"},
                            @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"consignee_phone"},
                            @{@"title":@"提货人身份证",@"subTitle":@"请输入",@"key":@"consignee_id_card"},
-                           @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"cash_on_delivery_causes_amount", @"isPrice" : @YES},
+                           @{@"title":@"少款",@"subTitle":@"请输入",@"key":@"less_indemnity_amount", @"isPrice" : @YES},
                            @[@{@"title":@"赔款",@"subTitle":@"请输入",@"key":@"payment_indemnity_amount", @"isPrice" : @YES},
                              @{@"title":@"包送",@"subTitle":@"请输入",@"key":@"deliver_indemnity_amount", @"isPrice" : @YES}],
                            @{@"title":@"自提备注",@"subTitle":@"无",@"key":@"waybill_receive_note"},];
