@@ -746,6 +746,7 @@ BOOL isTrue(NSString *string);
 @interface AppGoodsQuantityInfo : AppType
 
 @property (strong, nonatomic) NSString *quantity;//货量
+@property (strong, nonatomic) NSString *remain;//剩余
 
 @end
 

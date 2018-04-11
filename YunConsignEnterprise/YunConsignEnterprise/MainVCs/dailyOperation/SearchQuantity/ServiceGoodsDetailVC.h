@@ -6,9 +6,9 @@
 //  Copyright © 2017年 yangqingluo. All rights reserved.
 //
 
-#import "AppBasicTableViewController.h"
+#import "PublicResultTableVC.h"
 
-@interface ServiceGoodsDetailVC : AppBasicTableViewController
+@interface ServiceGoodsDetailVC : PublicResultTableVC
 
 @property (copy, nonatomic) AppQueryConditionInfo *condition;
 @property (copy, nonatomic) AppServiceGoodsQuantityInfo *serviceQuantityData;

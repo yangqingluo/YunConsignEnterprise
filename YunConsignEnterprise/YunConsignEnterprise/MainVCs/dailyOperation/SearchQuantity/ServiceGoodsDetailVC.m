@@ -14,8 +14,6 @@
 
 @interface ServiceGoodsDetailVC ()
 
-@property (strong, nonatomic) NSMutableArray *dataSource;
-
 @property (strong, nonatomic) UIView *headerView;
 
 @end
@@ -28,7 +26,6 @@
     
     self.tableView.tableHeaderView = self.headerView;
     [self updateTableViewHeader];
-    
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -36,26 +33,14 @@
     [self createNavWithTitle:[NSString stringWithFormat:@"%@-货量明细", self.serviceQuantityData.service_name] createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
-            [btn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
             return btn;
         }
         return nil;
     }];
 }
 
-- (void)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)loadFirstPageData{
-    [self pullDataFunction:YES];
-}
-
-- (void)loadMoreData{
-    [self pullDataFunction:NO];
-}
-
-- (void)pullDataFunction:(BOOL)isReset {
+- (void)pullBaseListData:(BOOL)isReset {
     //20171222取消分页，接口采用新接口
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : self.serviceQuantityData.service_id}];
     if (self.condition) {
@@ -96,35 +81,7 @@
     }];
 }
 
-- (void)updateTableViewHeader {
-    QKWEAKSELF;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadFirstPageData];
-    }];
-}
-
-- (void)updateTableViewFooter {
-    QKWEAKSELF;
-    if (!self.tableView.mj_footer) {
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [weakself loadMoreData];
-        }];
-    }
-}
-
-- (void)endRefreshing{
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-}
-
 #pragma mark - getter
-- (NSMutableArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-    }
-    return _dataSource;
-}
-
 - (UIView *)headerView {
     if (!_headerView) {
         CGFloat m_edge = kEdge;

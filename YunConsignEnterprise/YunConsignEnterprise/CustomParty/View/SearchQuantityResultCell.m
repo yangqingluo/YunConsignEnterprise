@@ -21,16 +21,19 @@
         _firstLabel = NewLabel(CGRectMake(0, 0, width, kCellHeightMiddle), nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
         [self.contentView addSubview:_firstLabel];
         
-        _secondLabel = NewLabel(CGRectMake(width, 0, width, _firstLabel.height), nil, [AppPublic appFontOfSize:appLabelFontSizeSmall], NSTextAlignmentCenter);
+        _secondLabel = NewLabel(CGRectMake(width, 0, width, _firstLabel.height), nil,_firstLabel.font, NSTextAlignmentCenter);
         [self.contentView addSubview:_secondLabel];
         
-        _actionBtn = NewTextButton(@"  ", MainColor);
-        _actionBtn.frame = CGRectMake(0, 0, 60, 30);
-        _actionBtn.center = CGPointMake(2.5 * width, _firstLabel.centerY);
-        [AppPublic roundCornerRadius:_actionBtn cornerRadius:kButtonCornerRadius];
-        _actionBtn.layer.borderColor = MainColor.CGColor;
-        _actionBtn.layer.borderWidth = 1.0;
-        [self.contentView addSubview:_actionBtn];
+        _thirdLabel = NewLabel(CGRectMake(2 * width, 0, width, _firstLabel.height), nil, _firstLabel.font, NSTextAlignmentCenter);
+        [self.contentView addSubview:_thirdLabel];
+        
+//        _actionBtn = NewTextButton(@"  ", MainColor);
+//        _actionBtn.frame = CGRectMake(0, 0, 60, 30);
+//        _actionBtn.center = CGPointMake(2.5 * width, _firstLabel.centerY);
+//        [AppPublic roundCornerRadius:_actionBtn cornerRadius:kButtonCornerRadius];
+//        _actionBtn.layer.borderColor = MainColor.CGColor;
+//        _actionBtn.layer.borderWidth = 1.0;
+//        [self.contentView addSubview:_actionBtn];
     }
     
     return self;
@@ -58,13 +61,15 @@
         AppRouteGoodsQuantityInfo *m_data = (AppRouteGoodsQuantityInfo *)data;
         self.firstLabel.text = m_data.route;
         self.secondLabel.text = m_data.quantity;
-        [self.actionBtn setTitle:@"派车" forState:UIControlStateNormal];
+        self.thirdLabel.text = m_data.remain;
+//        [self.actionBtn setTitle:@"派车" forState:UIControlStateNormal];
     }
     else if ([data isKindOfClass:[AppServiceGoodsQuantityInfo class]]) {
         AppServiceGoodsQuantityInfo *m_data = (AppServiceGoodsQuantityInfo *)data;
         self.firstLabel.text = m_data.service_name;
         self.secondLabel.text = m_data.quantity;
-        [self.actionBtn setTitle:@"详情" forState:UIControlStateNormal];
+        self.thirdLabel.text = m_data.remain;
+//        [self.actionBtn setTitle:@"详情" forState:UIControlStateNormal];
     }
 }
 @end

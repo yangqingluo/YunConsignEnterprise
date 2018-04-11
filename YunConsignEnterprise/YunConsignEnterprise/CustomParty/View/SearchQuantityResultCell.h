@@ -12,7 +12,8 @@
 
 @property (strong, nonatomic) UILabel *firstLabel;
 @property (strong, nonatomic) UILabel *secondLabel;
-@property (strong, nonatomic) UIButton *actionBtn;
+@property (strong, nonatomic) UILabel *thirdLabel;
+//@property (strong, nonatomic) UIButton *actionBtn;
 
 @property (copy, nonatomic) AppGoodsQuantityInfo *data;
 

@@ -8,6 +8,7 @@
 
 #import "SearchQuantityResultTableVC.h"
 #import "ServiceGoodsDetailVC.h"
+#import "ServiceRemainDetailVC.h"
 #import "PublicSaveTransportTruckVC.h"
 
 #import "PublicMutableLabelView.h"
@@ -99,12 +100,34 @@
     }
 }
 
+- (void)cellSecondLabelAction:(UIGestureRecognizer *)gesture {
+    UILabel *label = (UILabel *)gesture.view;
+    if (self.indextag == 1) {
+        ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];
+        vc.condition = [self.condition copy];
+        vc.serviceQuantityData = self.dataSource[label.tag];
+        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+    }
+}
+
+- (void)cellThirdLabelAction:(UIGestureRecognizer *)gesture {
+    UILabel *label = (UILabel *)gesture.view;
+    if (self.indextag == 1) {
+        ServiceRemainDetailVC *vc = [ServiceRemainDetailVC new];
+        vc.condition = [self.condition copy];
+        vc.serviceQuantityData = self.dataSource[label.tag];
+        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+    }
+}
+
 - (void)updateSubviews {
     int quantity = 0;
+    int remain = 0;
     for (AppGoodsQuantityInfo *item in self.dataSource) {
         quantity += [item.quantity intValue];
+        remain += [item.remain intValue];
     }
-    ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总计：%d", quantity];
+    ((PublicFooterSummaryView *)self.footerView).textLabel.text = [NSString stringWithFormat:@"总货量：%d，总剩货：%d", quantity, remain];
     self.tableView.tableHeaderView = self.dataSource.count ? self.headerView : nil;
     [self.tableView reloadData];
 }
@@ -172,7 +195,7 @@
             cell.backgroundColor = [UIColor whiteColor];
             
             PublicMutableLabelView *m_view = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, 0, screen_width, [self tableView:tableView heightForRowAtIndexPath:indexPath])];
-            [m_view updateDataSourceWithArray:@[self.indextag == 0 ? @"线路" : @"门店", @"货量", @"操作"]];
+            [m_view updateDataSourceWithArray:@[self.indextag == 0 ? @"线路" : @"门店", @"货量", @"剩货"]];
             [cell.contentView addSubview:m_view];
         }
         return cell;
@@ -185,10 +208,24 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
             
-            [cell.actionBtn addTarget:self action:@selector(cellActionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            if (self.indextag == 1) {
+                cell.secondLabel.textColor = MainColor;
+                cell.thirdLabel.textColor = MainColor;
+                
+                UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSecondLabelAction:)];
+                [cell.secondLabel addGestureRecognizer:tap2];
+                cell.secondLabel.userInteractionEnabled = YES;
+                
+                UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellThirdLabelAction:)];
+                [cell.thirdLabel addGestureRecognizer:tap3];
+                cell.thirdLabel.userInteractionEnabled = YES;
+            }
+//            [cell.actionBtn addTarget:self action:@selector(cellActionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         cell.data = self.dataSource[indexPath.row - 1];
-        cell.actionBtn.tag = indexPath.row - 1;
+        cell.secondLabel.tag = indexPath.row - 1;
+        cell.thirdLabel.tag = indexPath.row - 1;
+//        cell.actionBtn.tag = indexPath.row - 1;
         return cell;
     }
     return [UITableViewCell new];
