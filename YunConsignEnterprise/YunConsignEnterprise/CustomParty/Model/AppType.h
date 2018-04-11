@@ -690,6 +690,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *start_car_time;
 @property (strong, nonatomic) NSString *transport_truck_state;
 @property (strong, nonatomic) NSString *cost_load;//装车费
+@property (strong, nonatomic) NSString *cost_before;//预付费
 
 @end
 

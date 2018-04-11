@@ -49,6 +49,7 @@
                      @{@"title":@"登记时间",@"subTitle":@"",@"key":@"register_time"},
                      @{@"title":@"登记运费",@"subTitle":@"",@"key":@"cost_register"},
                      @{@"title":@"装车费",@"subTitle":@"",@"key":@"cost_load"},
+                     @{@"title":@"预付费",@"subTitle":@"",@"key":@"cost_before"},
                      @{@"title":@"登记人",@"subTitle":@"",@"key":@"operator_name"},],
                    @[@{@"title":@"装车货量",@"subTitle":@"",@"key":@"load_quantity"}],
                    @[@{@"title":@"结算运费",@"subTitle":@"",@"key":@"cost_check"},
@@ -164,7 +165,7 @@
         case 2:
         case 3:{
             NSString *key = m_dic[@"key"];
-            if ([key isEqualToString:@"cost_load"] || [key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_check"]) {
+            if ([key isEqualToString:@"cost_load"] || [key isEqualToString:@"cost_before"] || [key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_check"]) {
                 cell.baseView.textField.text = notShowFooterZeroString([self.detailData valueForKey:key], @"0");
             }
             else {
