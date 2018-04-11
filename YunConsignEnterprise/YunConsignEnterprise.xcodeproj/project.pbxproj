@@ -93,6 +93,7 @@
 		E47AABCE1F66796D00D7C450 /* UIButton+ImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AABCD1F66796D00D7C450 /* UIButton+ImageAndText.m */; };
 		E47AAC421F66899E00D7C450 /* PublicUserHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */; };
 		E48002D81FDFC57B00E7D943 /* url_zone.txt in Resources */ = {isa = PBXBuildFile; fileRef = E48002D71FDFC57B00E7D943 /* url_zone.txt */; };
+		E488696C207E0DAD00606115 /* SingleShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E488696B207E0DAD00606115 /* SingleShowCell.m */; };
 		E48A99EB202C76BD0098ABF4 /* GrossMarginCountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A99EA202C76BD0098ABF4 /* GrossMarginCountVC.m */; };
 		E48A99ED202C77D70098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E48A99EC202C77D60098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png */; };
 		E48A99F0202C78A20098ABF4 /* GrossMarginCountDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E48A99EF202C78A20098ABF4 /* GrossMarginCountDetailVC.m */; };
@@ -637,6 +638,8 @@
 		E47AAC401F66899E00D7C450 /* PublicUserHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicUserHeaderView.h; sourceTree = "<group>"; };
 		E47AAC411F66899E00D7C450 /* PublicUserHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicUserHeaderView.m; sourceTree = "<group>"; };
 		E48002D71FDFC57B00E7D943 /* url_zone.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = url_zone.txt; sourceTree = "<group>"; };
+		E488696A207E0DAD00606115 /* SingleShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleShowCell.h; sourceTree = "<group>"; };
+		E488696B207E0DAD00606115 /* SingleShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleShowCell.m; sourceTree = "<group>"; };
 		E48A99E9202C76BD0098ABF4 /* GrossMarginCountVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrossMarginCountVC.h; sourceTree = "<group>"; };
 		E48A99EA202C76BD0098ABF4 /* GrossMarginCountVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrossMarginCountVC.m; sourceTree = "<group>"; };
 		E48A99EC202C77D60098ABF4 /* money_icon_GROSS_MARGIN_COUNT@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "money_icon_GROSS_MARGIN_COUNT@3x.png"; sourceTree = "<group>"; };
@@ -2092,6 +2095,8 @@
 				E4AF3B0F1F78E28B009EB766 /* PublicSwitchedInputCellView.m */,
 				E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */,
 				E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */,
+				E488696A207E0DAD00606115 /* SingleShowCell.h */,
+				E488696B207E0DAD00606115 /* SingleShowCell.m */,
 				E49C4F601F73A181007E7D70 /* DoubleInputCell.h */,
 				E49C4F611F73A181007E7D70 /* DoubleInputCell.m */,
 				E4DE917F1FD5B04C00249730 /* NormalTableViewCell.h */,
@@ -3322,6 +3327,7 @@
 				E48B513F2006054B004D6C51 /* WaybillChangeApplyVC.m in Sources */,
 				E475B0281FA0B6B00076D918 /* WaybillLoadedSelectCell.m in Sources */,
 				E49C4F5C1F738FC3007E7D70 /* AddGoodsListHeaderView.m in Sources */,
+				E488696C207E0DAD00606115 /* SingleShowCell.m in Sources */,
 				E4F686FF1F70F11200D80704 /* WayBillSRHeaderView.m in Sources */,
 				E4A59D4A2006EF99006A877A /* WaybillChangeCheckCell.m in Sources */,
 				E4E2A3871FB311AE00D8EC1C /* UIActivityIndicatorView+AFNetworking.m in Sources */,

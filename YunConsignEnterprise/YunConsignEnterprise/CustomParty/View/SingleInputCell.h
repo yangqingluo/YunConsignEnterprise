@@ -15,6 +15,4 @@
 //备用，使用时实现
 @property (strong, nonatomic) IndexPathButton *actionButton;
 
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath rightString:(NSString *)rightString;
-
 @end

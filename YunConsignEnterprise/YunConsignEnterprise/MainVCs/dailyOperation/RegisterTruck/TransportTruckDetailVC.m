@@ -9,7 +9,7 @@
 #import "TransportTruckDetailVC.h"
 #import "TTLoadListVC.h"
 
-#import "SingleInputCell.h"
+#import "SingleShowCell.h"
 
 @interface TransportTruckDetailVC ()
 
@@ -115,20 +115,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat rowHeight = kCellHeightFilter;
-    return rowHeight;
-//    return [SingleInputCell tableView:tableView heightForRowAtIndexPath:indexPath rightString:indexPath.section == self.showArray.count - 2 ? self.detailData.note : @""];
+    return [SingleShowCell tableView:tableView heightForRowAtIndexPath:indexPath rightString:indexPath.section == self.showArray.count - 2 ? self.detailData.note : @"" type:(indexPath.section == 2) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"TTPayCost_cell";
-    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SingleShowCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[SingleShowCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        cell.baseView.textField.enabled = NO;
         cell.baseView.lineView.hidden = YES;
     }
     NSArray *m_array = self.showArray[indexPath.section];
@@ -136,9 +132,7 @@
     if (indexPath.row < m_array.count) {
         m_dic = m_array[indexPath.row];
         cell.baseView.textLabel.text = m_dic[@"title"];
-        cell.baseView.textField.placeholder = m_dic[@"subTitle"];
-        cell.baseView.textField.text = @"";
-        cell.baseView.textField.indexPath = [indexPath copy];
+        cell.baseView.subTextLabel.text = m_dic[@"subTitle"];
     }
     else {
         cell.baseView.textLabel.text = @"";
@@ -148,16 +142,16 @@
     switch (indexPath.section) {
         case 0:{
             if (indexPath.row == 0) {
-                cell.baseView.textField.text = self.detailData.start_station_city_name;
+                cell.baseView.subTextLabel.text = self.detailData.start_station_city_name;
             }
             else {
                 NSUInteger index = indexPath.row - 1;
                 if (index < self.detailData.end_station.count) {
                     AppEndStationInfo *station = self.detailData.end_station[index];
-                    cell.baseView.textField.text = [NSString stringWithFormat:@"%@-%@", station.end_station_city_name, station.end_station_service_name];
+                    cell.baseView.subTextLabel.text = [NSString stringWithFormat:@"%@-%@", station.end_station_city_name, station.end_station_service_name];
                 }
                 else {
-                    cell.baseView.textField.text = @"";
+                    cell.baseView.subTextLabel.text = @"";
                 }
             }
         }
@@ -169,10 +163,10 @@
         case 4:{
             NSString *key = m_dic[@"key"];
             if ([key isEqualToString:@"cost_load"] || [key isEqualToString:@"cost_before"] || [key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_check"]) {
-                cell.baseView.textField.text = notShowFooterZeroString([self.detailData valueForKey:key], @"0");
+                cell.baseView.subTextLabel.text = notShowFooterZeroString([self.detailData valueForKey:key], @"0");
             }
             else {
-                cell.baseView.textField.text = [self.detailData valueForKey:key];
+                cell.baseView.subTextLabel.text = [self.detailData valueForKey:key];
             }
             
             if (indexPath.section == 2) {

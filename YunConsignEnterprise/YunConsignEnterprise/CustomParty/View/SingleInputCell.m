@@ -40,16 +40,6 @@
     // Configure the view for the selected state
 }
 
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath rightString:(NSString *)rightString {
-    PublicInputCellView *m_view = [[PublicInputCellView alloc] initWithFrame:CGRectMake(kEdgeMiddle, 0, screen_width - 2 * kEdgeMiddle, 0)];
-    return [self tableView:tableView heightForRowAtIndexPath:indexPath withRightTitle:rightString rightTitleFont:m_view.textField.font rightWidth:m_view.textField.width];
-}
-
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath withRightTitle:(NSString *)rTitle rightTitleFont:(UIFont *)rTitleFont rightWidth:(CGFloat)rWidth {
-    CGFloat height = kEdge + [AppPublic textSizeWithString:rTitle font:rTitleFont constantWidth:rWidth].height + kEdge;
-    return MAX(kCellHeightFilter, height);
-}
-
 #pragma mark - setter
 - (void)setIsShowBottomEdge:(BOOL)isShowBottomEdge {
     _isShowBottomEdge = isShowBottomEdge;
