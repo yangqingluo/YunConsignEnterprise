@@ -30,7 +30,7 @@
 }
 
 - (void)setupNav {
-    [self createNavWithTitle:[NSString stringWithFormat:@"%@-货量明细", self.serviceQuantityData.service_name] createMenuItem:^UIView *(int nIndex){
+    [self createNavWithTitle:self.title createMenuItem:^UIView *(int nIndex){
         if (nIndex == 0){
             UIButton *btn = NewBackButton(nil);
             [btn addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -43,6 +43,10 @@
 - (void)pullBaseListData:(BOOL)isReset {
     //20171222取消分页，接口采用新接口
     NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"service_id" : self.serviceQuantityData.service_id}];
+    if (self.searchType) {
+        [m_dic setObject:self.searchType forKey:@"search_type"];
+    }
+    
     if (self.condition) {
         if (self.condition.start_time) {
             [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
@@ -103,6 +107,13 @@
         [baseView addSubview:NewSeparatorLine(CGRectMake(0, baseView.height - appSeparaterLineSize, baseView.width, appSeparaterLineSize))];
     }
     return _headerView;
+}
+
+- (NSString *)searchType {
+    if (!_searchType) {
+        _searchType = @"1";
+    }
+    return _searchType;
 }
 
 #pragma mark - UITableView

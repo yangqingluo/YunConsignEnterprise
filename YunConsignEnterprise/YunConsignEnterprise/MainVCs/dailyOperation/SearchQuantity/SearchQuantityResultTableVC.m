@@ -8,7 +8,6 @@
 
 #import "SearchQuantityResultTableVC.h"
 #import "ServiceGoodsDetailVC.h"
-#import "ServiceRemainDetailVC.h"
 #import "PublicSaveTransportTruckVC.h"
 
 #import "PublicMutableLabelView.h"
@@ -106,6 +105,7 @@
         ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];
         vc.condition = [self.condition copy];
         vc.serviceQuantityData = self.dataSource[label.tag];
+        vc.title = [NSString stringWithFormat:@"%@-货量明细", vc.serviceQuantityData.service_name];
         [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
     }
 }
@@ -113,9 +113,11 @@
 - (void)cellThirdLabelAction:(UIGestureRecognizer *)gesture {
     UILabel *label = (UILabel *)gesture.view;
     if (self.indextag == 1) {
-        ServiceRemainDetailVC *vc = [ServiceRemainDetailVC new];
+        ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];
         vc.condition = [self.condition copy];
         vc.serviceQuantityData = self.dataSource[label.tag];
+        vc.title = [NSString stringWithFormat:@"%@-剩货明细", vc.serviceQuantityData.service_name];
+        vc.searchType = @"2";
         [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
     }
 }

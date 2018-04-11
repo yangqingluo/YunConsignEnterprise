@@ -61,7 +61,7 @@
 - (void)searchBtnAction {
     PublicQueryConditionVC *vc = [PublicQueryConditionVC new];
     vc.type = QueryConditionType_WaybillLoadTT;
-    vc.condition = [self.condition copy];
+    vc.condition = self.condition;
     QKWEAKSELF;
     vc.doneBlock = ^(NSObject *object){
         if ([object isKindOfClass:[AppQueryConditionInfo class]]) {
@@ -231,7 +231,8 @@
 - (AppQueryConditionInfo *)condition {
     if (!_condition) {
         _condition = [AppQueryConditionInfo new];
-        _condition.start_time = [_condition.end_time dateByAddingTimeInterval:-3 * defaultDayTimeInterval];
+        _condition.start_time = nil;
+        _condition.end_time = nil;
     }
     return _condition;
 }

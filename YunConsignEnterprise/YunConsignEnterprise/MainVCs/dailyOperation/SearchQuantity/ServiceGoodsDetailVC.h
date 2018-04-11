@@ -10,7 +10,7 @@
 
 @interface ServiceGoodsDetailVC : PublicResultTableVC
 
-@property (copy, nonatomic) AppQueryConditionInfo *condition;
 @property (copy, nonatomic) AppServiceGoodsQuantityInfo *serviceQuantityData;
+@property (strong, nonatomic) NSString *searchType;
 
 @end

@@ -467,7 +467,6 @@
 		E4E2A4121FB311AE00D8EC1C /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E2A37D1FB311AE00D8EC1C /* UIView+Layout.m */; };
 		E4E5ED841F9EDD3B00ACDD3D /* PublicFooterSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E5ED831F9EDD3B00ACDD3D /* PublicFooterSummaryView.m */; };
 		E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E744371F96066400CEC8FA /* WaybillLoadCell.m */; };
-		E4E8627C207DF10500BA326C /* ServiceRemainDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E8627B207DF10500BA326C /* ServiceRemainDetailVC.m */; };
 		E4ECF7DE1F726653003F69C0 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */; };
 		E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ED6EFA1F6291AA00AE5752 /* PublicBannerView.m */; };
 		E4EDBFCA1FB1EECB009D2FA4 /* CodWaitPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EDBFC91FB1EECB009D2FA4 /* CodWaitPayCell.m */; };
@@ -1260,8 +1259,6 @@
 		E4E5ED831F9EDD3B00ACDD3D /* PublicFooterSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicFooterSummaryView.m; sourceTree = "<group>"; };
 		E4E744361F96066400CEC8FA /* WaybillLoadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillLoadCell.h; sourceTree = "<group>"; };
 		E4E744371F96066400CEC8FA /* WaybillLoadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillLoadCell.m; sourceTree = "<group>"; };
-		E4E8627A207DF10500BA326C /* ServiceRemainDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceRemainDetailVC.h; sourceTree = "<group>"; };
-		E4E8627B207DF10500BA326C /* ServiceRemainDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceRemainDetailVC.m; sourceTree = "<group>"; };
 		E4ECF7DC1F726653003F69C0 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		E4ECF7DD1F726653003F69C0 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		E4ED6EF91F6291AA00AE5752 /* PublicBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicBannerView.h; sourceTree = "<group>"; };
@@ -1636,8 +1633,6 @@
 				E49D7E011FD38CAA009B59B7 /* SearchQuantityVC.m */,
 				E49D7E021FD38CAA009B59B7 /* ServiceGoodsDetailVC.h */,
 				E49D7E031FD38CAA009B59B7 /* ServiceGoodsDetailVC.m */,
-				E4E8627A207DF10500BA326C /* ServiceRemainDetailVC.h */,
-				E4E8627B207DF10500BA326C /* ServiceRemainDetailVC.m */,
 			);
 			name = SearchQuantity;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/SearchQuantity;
@@ -3183,7 +3178,6 @@
 				E4E2A3CA1FB311AE00D8EC1C /* UIScrollView+MJExtension.m in Sources */,
 				E4E2A4111FB311AE00D8EC1C /* TZVideoPlayerController.m in Sources */,
 				E4E2A4121FB311AE00D8EC1C /* UIView+Layout.m in Sources */,
-				E4E8627C207DF10500BA326C /* ServiceRemainDetailVC.m in Sources */,
 				E4E2A3C01FB311AE00D8EC1C /* MJRefreshAutoNormalFooter.m in Sources */,
 				E4E050DB1F9F62510068FD04 /* PublicSaveTransportTruckVC.m in Sources */,
 				E46900951FE9F2E800EFB294 /* TransportTruckEditVC.m in Sources */,
