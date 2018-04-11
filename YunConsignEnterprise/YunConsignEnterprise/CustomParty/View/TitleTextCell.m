@@ -34,10 +34,10 @@
     // Configure the view for the selected state
 }
 
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath withTitle:(NSString *)title{
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath withTitle:(NSString *)title {
     return [TitleTextCell tableView:tableView heightForRowAtIndexPath:indexPath withTitle:title titleFont:[UIFont systemFontOfSize:appLabelFontSize]];
 }
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath withTitle:(NSString *)title titleFont:(UIFont *)titleFont{
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath withTitle:(NSString *)title titleFont:(UIFont *)titleFont {
     CGFloat width = screen_width - 3 * kEdgeMiddle;
     CGFloat height = kEdge + [AppPublic textSizeWithString:title font:titleFont constantWidth:width].height + kEdge;
     

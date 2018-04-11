@@ -52,6 +52,7 @@
                      @{@"title":@"预付费",@"subTitle":@"",@"key":@"cost_before"},
                      @{@"title":@"登记人",@"subTitle":@"",@"key":@"operator_name"},],
                    @[@{@"title":@"装车货量",@"subTitle":@"",@"key":@"load_quantity"}],
+                   @[@{@"title":@"备注",@"subTitle":@"",@"key":@"note"}],
                    @[@{@"title":@"结算运费",@"subTitle":@"",@"key":@"cost_check"},
                      @{@"title":@"结算日期",@"subTitle":@"",@"key":@"check_time"},
                      @{@"title":@"打款账户",@"subTitle":@"无",@"key":@"driver_account"},
@@ -113,9 +114,10 @@
     return kEdge;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat rowHeight = kCellHeightFilter;
     return rowHeight;
+//    return [SingleInputCell tableView:tableView heightForRowAtIndexPath:indexPath rightString:indexPath.section == self.showArray.count - 2 ? self.detailData.note : @""];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -163,7 +165,8 @@
             
         case 1:
         case 2:
-        case 3:{
+        case 3:
+        case 4:{
             NSString *key = m_dic[@"key"];
             if ([key isEqualToString:@"cost_load"] || [key isEqualToString:@"cost_before"] || [key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_check"]) {
                 cell.baseView.textField.text = notShowFooterZeroString([self.detailData valueForKey:key], @"0");
