@@ -28,6 +28,10 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     self = [super init];
     if (self) {
         self.type = QueryConditionType_FreightCheck;
+        NSArray *dicArray = [[UserPublic getInstance].dataMapDic objectForKey:@"waybill_type"];
+        if (dicArray.count) {
+            self.condition.waybill_type = dicArray[0];
+        }
         [self.condition addObserver:self forKeyPath:searchTimeTypeKey options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
@@ -41,13 +45,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
 
 //初始化数据
 - (void)initializeData {
-    self.showArray = @[@{@"title":@"时间类型",@"subTitle":@"请选择",@"key":@"search_time_type"},
-                       @{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
-                       @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
-                       @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
-                       @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
-                       @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
-                       @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
+    self.showArray = [self showArrayForSearchTimeType:1];
     AppServiceInfo *serviceInfo = [AppServiceInfo mj_objectWithKeyValues:[[UserPublic getInstance].userData mj_keyValues]];
     self.condition.power_service_array = @[serviceInfo];
     [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column"]];
@@ -57,6 +55,10 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     if (!self.condition.search_time_type) {
         [self showHint:@"请选择时间类型"];
         return;
+    }
+    
+    if ([self.condition.search_time_type.item_val integerValue] == 1) {
+        self.condition.waybill_type = nil;
     }
     
     FreightCheckDetailVC *vc = [[FreightCheckDetailVC alloc] initWithStyle:UITableViewStylePlain];
@@ -163,6 +165,26 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     [super selectRowAtIndexPath:indexPath];
 }
 
+- (NSArray *)showArrayForSearchTimeType:(NSInteger)type {
+    return type == 1 ? @[@{@"title":@"时间类型",@"subTitle":@"请选择",@"key":@"search_time_type"},
+                         @{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+                         @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+                         @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
+                         @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                         @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
+                         @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}]
+    :
+    
+    @[@{@"title":@"时间类型",@"subTitle":@"请选择",@"key":@"search_time_type"},
+      @{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
+      @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
+      @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
+      @{@"title":@"运单类型",@"subTitle":@"请选择",@"key":@"waybill_type"},
+      @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+      @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
+      @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
+}
+
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:searchTimeTypeKey]) {
@@ -174,6 +196,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
         else {
             canSelectShowColumns = YES;
         }
+        self.showArray = [self showArrayForSearchTimeType:[self.condition.search_time_type.item_val integerValue]];
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:m_key];
         self.condition.show_column = dataArray;
         [self.tableView reloadData];
