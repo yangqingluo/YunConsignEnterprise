@@ -34,8 +34,7 @@ static NSString *userRoleKey = @"role_id";
         self.title = @"添加员工";
         self.toSaveData = [AppUserDetailInfo new];
     }
-    
-    [self additionalDataDictionaryForCode:@"gender"];
+    [self initialDataDictionaryForCodeArray:@[@"gender"]];
 }
 
 //初始化数据
@@ -47,8 +46,9 @@ static NSString *userRoleKey = @"role_id";
                        @{@"title":@"所属网点",@"subTitle":@"请选择",@"key":@"service", @"showKey":@"service_name", @"need" : self.baseData ? @NO : @YES},
                        @{@"title":@"所属岗位",@"subTitle":@"请选择",@"key":@"user_role", @"showKey":@"role_name", @"need" : self.baseData ? @NO : @YES},
                        @{@"title":@"账目查看",@"subTitle":@"请选择",@"key":@"power_service", @"showKey":@"power_service_name", @"need" : @NO},
+                       @{@"title":@"调度城市",@"subTitle":@"请选择",@"key":@"power_city_id", @"showKey":@"power_city_name", @"need" : @NO},
                        @{@"title":@"性别",@"subTitle":@"请选择",@"key":@"gender", @"showKey":@"gender_text", @"need" : self.baseData ? @NO : @YES},];
-    [self.selectorSet addObjectsFromArray:@[@"service", @"user_role", @"power_service", @"gender"]];
+    [self.selectorSet addObjectsFromArray:@[@"service", @"user_role", @"power_service", @"power_city_id", @"gender"]];
 //    [self.numberKeyBoardTypeSet addObjectsFromArray:@[@"telphone"]];
 }
 
@@ -69,6 +69,10 @@ static NSString *userRoleKey = @"role_id";
                 weakself.toSaveData = [detailData copy];
                 [weakself.toSaveData setValue:nil forKey:@"login_pass"];
                 [self judgeUserRoleFunction];
+                [weakself checkCityMapExistedForCode:@"power_city_id"];
+                if (canSelectPowerServices) {
+                    [weakself checkServiceMapExistedForCode:@"power_service"];
+                }
             }
             [weakself updateSubviews];
         }
@@ -278,6 +282,43 @@ static NSString *userRoleKey = @"role_id";
             [self pullServiceArrayFunctionForCode:key selectionInIndexPath:indexPath];
         }
     }
+    else if ([key isEqualToString:@"power_city_id"]) {
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        if (dataArray.count) {
+            NSMutableArray *source_array = [NSMutableArray new];
+            NSMutableArray *selected_array = [NSMutableArray new];
+            for (NSUInteger i = 0; i < dataArray.count; i++) {
+                AppCityInfo *item = dataArray[i];
+                [source_array addObject:item.open_city_name];
+                if ([[[self.toSaveData valueForKey:@"power_city_id"] componentsSeparatedByString:@","] containsObject:item.open_city_id]) {
+                    [selected_array addObject:@(i)];
+                }
+            }
+            QKWEAKSELF;
+            PublicSelectionVC *vc = [[PublicSelectionVC alloc] initWithDataSource:source_array selectedArray:selected_array maxSelectCount:dataArray.count back:^(NSObject *object){
+                if ([object isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *name_array = [NSMutableArray new];
+                    NSMutableArray *id_array = [NSMutableArray new];
+                    for (NSNumber *number in (NSArray *)object) {
+                        NSInteger index = [number integerValue];
+                        if (index < dataArray.count && index >= 0) {
+                            AppCityInfo *item = dataArray[index];
+                            [name_array addObject:item.open_city_name];
+                            [id_array addObject:item.open_city_id];
+                        }
+                    }
+                    [weakself.toSaveData setValue:[name_array componentsJoinedByString:@","] forKey:@"power_city_name"];
+                    [weakself.toSaveData setValue:[id_array componentsJoinedByString:@","] forKey:@"power_city_id"];
+                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            }];
+            vc.title = [NSString stringWithFormat:@"选择%@", m_dic[@"title"]];
+            [self doPushViewController:vc animated:YES];
+        }
+        else {
+            [self pullCityArrayFunctionForCode:key exceptCity:nil selectionInIndexPath:indexPath];
+        }
+    }
 }
 
 - (void)judgeUserRoleFunction {
@@ -312,16 +353,68 @@ static NSString *userRoleKey = @"role_id";
     NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
     if (dataArray.count) {
         if ([self.toCheckDataMapSet containsObject:key] && ![self.toSaveData valueForKey:key]) {
-//            if () {
-                AppDataDictionary *dataDic = dataArray[dataArray.count - 1] ;
-                [self.toSaveData setValue:dataDic.item_val forKey:key];
-                [self.toSaveData setValue:dataDic.item_name forKey:[NSString stringWithFormat:@"%@_text", key]];
-                [self.tableView reloadData];
-//            }
+            AppDataDictionary *dataDic = dataArray[dataArray.count - 1] ;
+            [self.toSaveData setValue:dataDic.item_val forKey:key];
+            [self.toSaveData setValue:dataDic.item_name forKey:[NSString stringWithFormat:@"%@_text", key]];
+            [self.tableView reloadData];
         }
     }
     else {
         [self pullDataDictionaryFunctionForCode:key selectionInIndexPath:nil];
+    }
+}
+
+- (void)checkCityMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if ([key isEqualToString:@"power_city_id"]) {
+            if (![self.toSaveData valueForKey:@"power_city_name"]) {
+                NSArray *keyArray = [[self.toSaveData valueForKey:key] componentsSeparatedByString:@","];
+                NSMutableArray *nameArray = [NSMutableArray arrayWithCapacity:keyArray.count];
+                for (NSString *keyBuffer in keyArray) {
+                    for (AppCityInfo *m_data in dataArray) {
+                        if ([m_data.open_city_id isEqualToString:keyBuffer]) {
+                            [nameArray addObject:m_data.open_city_name];
+                            break;
+                        }
+                    }
+                }
+                [self.toSaveData setValue:[nameArray componentsJoinedByString:@","] forKey:@"power_city_name"];
+                [self.tableView reloadData];
+            }
+        }
+    }
+    else {
+        if ([key isEqualToString:@"power_city_id"]) {
+            [self pullCityArrayFunctionForCode:key exceptCity:nil selectionInIndexPath:nil];
+        }
+    }
+}
+
+- (void)checkServiceMapExistedForCode:(NSString *)key {
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    if (dataArray.count) {
+        if ([key isEqualToString:@"power_service"]) {
+            if (![self.toSaveData valueForKey:@"power_service_name"]) {
+                NSArray *keyArray = [[self.toSaveData valueForKey:@"power_service_id"] componentsSeparatedByString:@","];
+                NSMutableArray *nameArray = [NSMutableArray arrayWithCapacity:keyArray.count];
+                for (NSString *keyBuffer in keyArray) {
+                    for (AppServiceInfo *m_data in dataArray) {
+                        if ([m_data.service_id isEqualToString:keyBuffer]) {
+                            [nameArray addObject:m_data.service_name];
+                            break;
+                        }
+                    }
+                }
+                [self.toSaveData setValue:[nameArray componentsJoinedByString:@","] forKey:@"power_service_name"];
+                [self.tableView reloadData];
+            }
+        }
+    }
+    else {
+        if ([key isEqualToString:@"power_service"]) {
+            [self pullServiceArrayFunctionForCode:key selectionInIndexPath:nil];
+        }
     }
 }
 

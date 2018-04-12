@@ -43,6 +43,8 @@
 - (void)textFieldDidChange:(UITextField *)textField;
 
 - (void)checkDataMapExistedForCode:(NSString *)key;
+- (void)checkCityMapExistedForCode:(NSString *)key;
+- (void)checkServiceMapExistedForCode:(NSString *)key;
 - (void)additionalDataDictionaryForCode:(NSString *)dict_code;
 - (void)initialDataDictionaryForCodeArray:(NSArray *)array;
 - (void)pullDataDictionaryFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;

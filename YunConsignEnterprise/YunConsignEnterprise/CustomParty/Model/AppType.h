@@ -134,7 +134,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *login_token;
 @property (strong, nonatomic) NSString *login_type;//登录设备类型，LOGIN_TYPE，1安卓手机、2安卓平板、3苹果手机、4苹果平板、5电脑
 @property (strong, nonatomic) NSString *login_type_text;
-@property (strong, nonatomic) NSString *open_city_id;// 	所属城市
+@property (strong, nonatomic) NSString *open_city_id;//所属城市
 @property (strong, nonatomic) NSString *open_city_name;
 @property (strong, nonatomic) NSString *role_id;//岗位编号，多个用逗号隔开
 @property (strong, nonatomic) NSString *role_name;//岗位名称，多个采用逗号隔开
@@ -154,6 +154,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *login_pass;//密码
 @property (strong, nonatomic) NSString *power_service_id;//财务权限门店，不是财务只能看自己门店，财务可看全部
 @property (strong, nonatomic) NSString *power_service_name;//财务权限门店，不是财务只能看自己门店，财务可看全部
+@property (strong, nonatomic) NSString *power_city_id;//调度城市
+@property (strong, nonatomic) NSString *power_city_name;
 
 @end
 

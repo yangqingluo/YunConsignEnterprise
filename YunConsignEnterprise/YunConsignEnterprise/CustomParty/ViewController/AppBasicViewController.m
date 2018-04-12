@@ -185,6 +185,14 @@
     
 }
 
+- (void)checkCityMapExistedForCode:(NSString *)key {
+    
+}
+
+- (void)checkServiceMapExistedForCode:(NSString *)key {
+    
+}
+
 - (void)additionalDataDictionaryForCode:(NSString *)dict_code {
     [self.toCheckDataMapSet addObject:dict_code];
     [self checkDataMapExistedForCode:dict_code];
@@ -244,6 +252,7 @@
             NSArray *m_array = [AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                [weakself checkServiceMapExistedForCode:dict_code];
                 if (indexPath) {
                     [weakself selectRowAtIndexPath:indexPath];
                 }
@@ -289,7 +298,10 @@
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
-                [weakself selectRowAtIndexPath:indexPath];
+                [weakself checkCityMapExistedForCode:dict_code];
+                if (indexPath) {
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
             }
         }
         else {
@@ -311,7 +323,10 @@
             NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dicMapCodeMixed(dict_code, openCityId)];
-                [weakself selectRowAtIndexPath:indexPath];
+                [weakself checkCityMapExistedForCode:dict_code];
+                if (indexPath) {
+                    [weakself selectRowAtIndexPath:indexPath];
+                }
             }
         }
         else {
@@ -413,7 +428,9 @@
                 ResponseItem *item = (ResponseItem *)responseBody;
                 if (item.items.count) {
                     [UserPublic getInstance].financeData = [AppCheckUserFinanceInfo mj_objectWithKeyValues:item.items[0]];
-                    [weakself selectRowAtIndexPath:indexPath];
+                    if (indexPath) {
+                        [weakself selectRowAtIndexPath:indexPath];
+                    }
                 }
             }
         }
