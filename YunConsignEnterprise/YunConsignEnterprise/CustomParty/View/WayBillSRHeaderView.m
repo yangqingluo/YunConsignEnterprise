@@ -167,6 +167,10 @@
 }
 
 AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open_city_name, NSString *service_id, NSString *service_name, NSString *freight_cust_name, NSString *phone) {
+    return NewAppSendReceiveInfoWithBankInfo(open_city_id, open_city_name, service_id, service_name, freight_cust_name, phone, nil, nil);
+}
+
+AppSendReceiveInfo *NewAppSendReceiveInfoWithBankInfo(NSString *open_city_id, NSString *open_city_name, NSString *service_id, NSString *service_name, NSString *freight_cust_name, NSString *phone, NSString *bank_name, NSString *bank_card_account) {
     AppSendReceiveInfo *info = [AppSendReceiveInfo new];
     info.service = [AppServiceInfo new];
     info.service.open_city_id = [open_city_id copy];
@@ -176,6 +180,8 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open
     info.customer = [AppCustomerInfo new];
     info.customer.freight_cust_name = [freight_cust_name copy];
     info.customer.phone = [phone copy];
+    info.customer.bank_name = [bank_name copy];
+    info.customer.bank_card_account = [bank_card_account copy];
     return info;
 }
 
@@ -187,11 +193,11 @@ AppSendReceiveInfo *NewAppSendReceiveInfo(NSString *open_city_id, NSString *open
     self.titleView.textLabel.text = [NSString stringWithFormat:@"运单号/货号： %@/%@", detailData.waybill_number, detailData.goods_number];
     self.date = dateFromString(detailData.consignment_time, defaultDateFormat);
     if (isReturn) {
-        self.receiverInfo = NewAppSendReceiveInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone);
+        self.receiverInfo = NewAppSendReceiveInfoWithBankInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone, detailData.shipper_bank_name, detailData.shipper_bank_card_account);
         self.senderInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
     }
     else {
-        self.senderInfo = NewAppSendReceiveInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone);
+        self.senderInfo = NewAppSendReceiveInfoWithBankInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone, detailData.shipper_bank_name, detailData.shipper_bank_card_account);
         self.receiverInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
     }
 }

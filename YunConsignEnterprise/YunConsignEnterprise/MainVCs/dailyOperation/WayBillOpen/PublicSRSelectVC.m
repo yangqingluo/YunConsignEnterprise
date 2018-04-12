@@ -39,20 +39,24 @@
             self.title = @"发货人";
             _showArray = _isEditOnly ?
             @[@{@"title":@"始发站",@"subTitle":@"请选择"},
-              @{@"title":@"客户电话",@"subTitle":@"请输入"},
-              @{@"title":@"客户姓名",@"subTitle":@"请输入"}]
+              @{@"title":@"客户电话",@"key":@"phone",@"subTitle":@"请输入"},
+              @{@"title":@"客户姓名",@"key":@"freight_cust_name",@"subTitle":@"请输入"},
+              @{@"title":@"银行名称",@"key":@"bank_name",@"subTitle":@"请输入"},
+              @{@"title":@"银行账户",@"key":@"bank_card_account",@"subTitle":@"请输入"}]
             :
             @[@{@"title":@"始发站",@"subTitle":@"请选择"},
-              @{@"title":@"客户电话",@"subTitle":@"请输入"},
-              @{@"title":@"客户姓名",@"subTitle":@"请输入"},
-              @{@"title":@"身份证号",@"subTitle":@"请输入"}];
+              @{@"title":@"客户电话",@"key":@"phone",@"subTitle":@"请输入"},
+              @{@"title":@"客户姓名",@"key":@"freight_cust_name",@"subTitle":@"请输入"},
+              @{@"title":@"身份证号",@"key":@"id_card",@"subTitle":@"请输入"},
+              @{@"title":@"银行名称",@"key":@"bank_name",@"subTitle":@"请输入"},
+              @{@"title":@"银行账户",@"key":@"bank_card_account",@"subTitle":@"请输入"}];
         }
             break;
         case SRSelectType_Receiver:{
             self.title = @"收货人";
             _showArray = @[@{@"title":@"终点站",@"subTitle":@"请选择"},
-                           @{@"title":@"客户电话",@"subTitle":@"请输入"},
-                           @{@"title":@"客户姓名",@"subTitle":@"请输入"}];
+                           @{@"title":@"客户电话",@"key":@"phone",@"subTitle":@"请输入"},
+                           @{@"title":@"客户姓名",@"key":@"freight_cust_name",@"subTitle":@"请输入"}];
             
         }
             break;
@@ -135,18 +139,13 @@
 }
 
 - (void)editAtIndexPath:(NSIndexPath *)indexPath tag:(NSInteger)tag andContent:(NSString *)content {
-    if (indexPath.row == 1) {
-        self.data.customer.phone = content;
-    }
-    else if (indexPath.row == 2) {
-        self.data.customer.freight_cust_name = content;
-    }
-    else if (indexPath.row == 3) {
-        self.data.customer.id_card = content;
+    if (indexPath.row == 0) {
+        
     }
     else {
-//        NSDictionary *dic = self.showArray[indexPath.row];
-//        [self.data setValue:content forKey:dic[@"key"]];
+        NSDictionary *dic = self.showArray[indexPath.row];
+        NSString *key = dic[@"key"];
+        [self.data.customer setValue:content forKey:key];
     }
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
@@ -213,29 +212,18 @@
         }
             break;
             
-        case 1:{
-            cell.baseView.textField.text = self.data.customer.phone;
+        default:{
+            NSDictionary *dic = self.showArray[indexPath.row];
+            NSString *key = dic[@"key"];
+            cell.baseView.textField.text = [self.data.customer valueForKey:key];
         }
-            break;
-            
-        case 2:{
-            cell.baseView.textField.text = self.data.customer.freight_cust_name;
-        }
-            break;
-            
-        case 3:{
-            cell.baseView.textField.text = self.data.customer.id_card;
-        }
-            break;
-            
-        default:
             break;
     }
     if (_isEditOnly) {
         cell.baseView.textField.enabled = (indexPath.row != 0);
     }
     else {
-        cell.baseView.textField.enabled = (indexPath.row == 2 || indexPath.row == 3);
+        cell.baseView.textField.enabled = (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5);
     }
     cell.baseView.textField.keyboardType = (indexPath.row == 1) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;

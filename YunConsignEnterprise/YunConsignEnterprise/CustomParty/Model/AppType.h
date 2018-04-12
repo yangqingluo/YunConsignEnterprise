@@ -445,6 +445,8 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *end_station_service_name;//到站网点名称
 @property (strong, nonatomic) NSString *shipper_name;//发货人名称
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
+@property (strong, nonatomic) NSString *shipper_bank_name;//发货人银行名称
+@property (strong, nonatomic) NSString *shipper_bank_card_account;//发货人银行卡号
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称
 @property (strong, nonatomic) NSString *consignee_phone;//收货人电话
 @property (strong, nonatomic) NSString *goods;//货物信息
