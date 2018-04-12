@@ -703,6 +703,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *truck_driver_phone;//电话
 @property (strong, nonatomic) NSString *cost_register;//登记运费
 @property (strong, nonatomic) NSString *cost_load;//装车费
+@property (strong, nonatomic) NSString *cost_before;//预付费
 @property (strong, nonatomic) NSString *truck_id;//常用车辆编号，如果存在，保存时，会自动获取司机银行账号信息
 @property (strong, nonatomic) NSString *end_station_service_id;//终点门店，多个用逗号隔开
 @property (strong, nonatomic) NSString *note;//备注

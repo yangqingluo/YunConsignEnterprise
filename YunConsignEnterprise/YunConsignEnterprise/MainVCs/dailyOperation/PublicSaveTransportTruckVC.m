@@ -208,6 +208,7 @@
         _toSaveData = [AppSaveTransportTruckInfo new];
         _toSaveData.cost_register = @"0";
         _toSaveData.cost_load = @"0";
+        _toSaveData.cost_before = @"0";
     }
     return _toSaveData;
 }
@@ -220,7 +221,9 @@
                          @{@"title":@"司机",@"subTitle":@"请输入",@"key":@"truck_driver_name"},
                          @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone"}],
                        @[@{@"title":@"运费",@"subTitle":@"请输入",@"key":@"cost_register"},
-                         @{@"title":@"装车费",@"subTitle":@"请输入",@"key":@"cost_load"}]
+                         @{@"title":@"装车费",@"subTitle":@"请输入",@"key":@"cost_load"},
+                         @{@"title":@"预付费",@"subTitle":@"请输入",@"key":@"cost_before"},
+                         @{@"title":@"备注",@"subTitle":@"请输入",@"key":@"note"}]
                        ];
     }
     return _showArray;
@@ -230,7 +233,6 @@
     if (!_defaultKeyBoardTypeSet) {
         _defaultKeyBoardTypeSet = [NSSet setWithObjects:@"note", @"truck_driver_name", @"truck_number_plate", nil];
     }
-    
     return _defaultKeyBoardTypeSet;
 }
 

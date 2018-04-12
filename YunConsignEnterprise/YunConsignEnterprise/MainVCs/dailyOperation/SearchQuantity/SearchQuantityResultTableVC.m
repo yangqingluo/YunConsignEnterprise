@@ -86,18 +86,18 @@
     }];
 }
 
-- (void)cellActionBtnAction:(UIButton *)button {
-    if (self.indextag == 0) {
-        PublicSaveTransportTruckVC *vc = [PublicSaveTransportTruckVC new];
-        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
-    }
-    else if (self.indextag == 1) {
-        ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];
-        vc.condition = [self.condition copy];
-        vc.serviceQuantityData = self.dataSource[button.tag];
-        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
-    }
-}
+//- (void)cellActionBtnAction:(UIButton *)button {
+//    if (self.indextag == 0) {
+//        PublicSaveTransportTruckVC *vc = [PublicSaveTransportTruckVC new];
+//        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+//    }
+//    else if (self.indextag == 1) {
+//        ServiceGoodsDetailVC *vc = [ServiceGoodsDetailVC new];
+//        vc.condition = [self.condition copy];
+//        vc.serviceQuantityData = self.dataSource[button.tag];
+//        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+//    }
+//}
 
 - (void)cellSecondLabelAction:(UIGestureRecognizer *)gesture {
     UILabel *label = (UILabel *)gesture.view;
