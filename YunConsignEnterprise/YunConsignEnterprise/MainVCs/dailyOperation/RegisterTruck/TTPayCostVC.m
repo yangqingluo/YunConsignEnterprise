@@ -138,7 +138,8 @@
                        @[@{@"title":@"车辆",@"subTitle":@"",@"key":@"truck_number_plate"},
                          @{@"title":@"司机",@"subTitle":@"",@"key":@"truck_driver_name"},
                          @{@"title":@"电话",@"subTitle":@"",@"key":@"truck_driver_phone"},
-                         @{@"title":@"登记运费",@"subTitle":@"",@"key":@"cost_register"},],
+                         @{@"title":@"登记运费",@"subTitle":@"",@"key":@"cost_register"},
+                         @{@"title":@"预付费",@"subTitle":@"",@"key":@"cost_before"}],
                        @[@{@"title":@"装车货量",@"subTitle":@"",@"key":@"load_quantity"}],
                        @[@{@"title":@"结算运费",@"subTitle":@"请输入",@"key":@"cost_check"},
                          @{@"title":@"结算日期",@"subTitle":@"请选择",@"key":@"check_time"},
@@ -236,7 +237,12 @@
         case 2:
         case 3:{
             NSString *key = m_dic[@"key"];
-            cell.baseView.textField.text = [self.detailData valueForKey:key];
+            if ([key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_before"]) {
+                cell.baseView.textField.text = notShowFooterZeroString([self.detailData valueForKey:key], @"");
+            }
+            else {
+                cell.baseView.textField.text = [self.detailData valueForKey:key];
+            }
             BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
             cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
             if (indexPath.section == 2) {
