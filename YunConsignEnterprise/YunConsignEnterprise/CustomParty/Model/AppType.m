@@ -139,6 +139,12 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+@implementation AppTownInfo
+
+
+
+@end
+
 
 @implementation AppGoodInfo
 
@@ -243,12 +249,15 @@ BOOL isTrue(NSString *string) {
     self.shipper_name = [info.customer.freight_cust_name copy];
     self.shipper_phone = [info.customer.phone copy];
     self.shipper_id_card = [info.customer.id_card copy];
+    self.shipper_bank_name = [info.customer.bank_name copy];
+    self.shipper_bank_card_account = [info.customer.bank_card_account copy];
 }
 
 - (void)appendReceiverInfo:(AppSendReceiveInfo *)info {
     self.consignee_name = [info.customer.freight_cust_name copy];
     self.consignee_phone = [info.customer.phone copy];
-    self.end_station_service_id = info.service.service_id;
+    self.end_station_service_id = [info.service.service_id copy];
+    self.real_station_city_name = [info.town.town_name copy];
 }
 
 - (NSDictionary *)app_keyValues {

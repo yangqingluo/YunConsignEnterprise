@@ -185,6 +185,13 @@ AppSendReceiveInfo *NewAppSendReceiveInfoWithBankInfo(NSString *open_city_id, NS
     return info;
 }
 
+AppSendReceiveInfo *NewAppSendReceiveInfoWithTownName(NSString *open_city_id, NSString *open_city_name, NSString *service_id, NSString *service_name, NSString *freight_cust_name, NSString *phone, NSString *real_station_city_name) {
+    AppSendReceiveInfo *info = NewAppSendReceiveInfo(open_city_id, open_city_name, service_id, service_name, freight_cust_name, phone);
+    info.town = [AppTownInfo new];
+    info.town.town_name = [real_station_city_name copy];
+    return info;
+}
+
 - (void)updateDataForWaybillDetailInfo:(AppWayBillDetailInfo *)detailData {
     [self updateDataForWaybillDetailInfo:detailData isReturn:NO];
 }
@@ -194,11 +201,11 @@ AppSendReceiveInfo *NewAppSendReceiveInfoWithBankInfo(NSString *open_city_id, NS
     self.date = dateFromString(detailData.consignment_time, defaultDateFormat);
     if (isReturn) {
         self.receiverInfo = NewAppSendReceiveInfoWithBankInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone, detailData.shipper_bank_name, detailData.shipper_bank_card_account);
-        self.senderInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
+        self.senderInfo = NewAppSendReceiveInfoWithTownName(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone, detailData.real_station_city_name);
     }
     else {
         self.senderInfo = NewAppSendReceiveInfoWithBankInfo(detailData.start_station_city_id, detailData.start_station_city_name, detailData.start_station_service_id, detailData.start_station_service_name, detailData.shipper_name, detailData.shipper_phone, detailData.shipper_bank_name, detailData.shipper_bank_card_account);
-        self.receiverInfo = NewAppSendReceiveInfo(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone);
+        self.receiverInfo = NewAppSendReceiveInfoWithTownName(detailData.end_station_city_id, detailData.end_station_city_name, detailData.end_station_service_id, detailData.end_station_service_name, detailData.consignee_name, detailData.consignee_phone, detailData.real_station_city_name);
     }
 }
 

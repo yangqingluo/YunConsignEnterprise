@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSMutableArray *serviceArray;
+@property (strong, nonatomic) NSMutableDictionary *townDic;
 
 @end
 
@@ -56,7 +57,8 @@
             self.title = @"收货人";
             _showArray = @[@{@"title":@"终点站",@"subTitle":@"请选择"},
                            @{@"title":@"客户电话",@"key":@"phone",@"subTitle":@"请输入"},
-                           @{@"title":@"客户姓名",@"key":@"freight_cust_name",@"subTitle":@"请输入"}];
+                           @{@"title":@"客户姓名",@"key":@"freight_cust_name",@"subTitle":@"请输入"},
+                           @{@"title":@"中转站",@"key":@"real_station_city_name",@"subTitle":@""}];
             
         }
             break;
@@ -128,9 +130,37 @@
             [weakself.serviceArray removeAllObjects];
             [weakself.serviceArray addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
              if (weakself.serviceArray.count) {
-                 weakself.data.service = weakself.serviceArray[0];
+                 [weakself changeService:weakself.serviceArray[0]];
              }
              [weakself.tableView reloadData];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)pullServiceTownArrayFunction:(NSString *)service_id atIndexPath:(NSIndexPath *)indexPath {
+    if (!service_id) {
+        return;
+    }
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryTownListById" Parm:@{@"service_id" : service_id} completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppTownInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (!m_array) {
+                m_array = [NSArray new];
+            }
+            [weakself.townDic setObject:m_array forKey:service_id];
+            if (m_array.count && !weakself.data.town.town_name) {
+                weakself.data.town = m_array[0];
+            }
+            [weakself.tableView reloadData];
+            if (indexPath) {
+                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
@@ -145,10 +175,35 @@
     else {
         NSDictionary *dic = self.showArray[indexPath.row];
         NSString *key = dic[@"key"];
-        [self.data.customer setValue:content forKey:key];
+        if ([key isEqualToString:@"real_station_city_name"]) {
+            self.data.town = [AppTownInfo new];
+            self.data.town.town_name = content;
+        }
+        else {
+            [self.data.customer setValue:content forKey:key];
+        }
     }
-    
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)changeService:(AppServiceInfo *)info {
+    if ([info isEqual:self.data.service]) {
+        return;
+    }
+    self.data.service = info;
+    
+    if (self.type == SRSelectType_Receiver) {
+        NSArray *townArray = self.townDic[info.service_id];
+        if (townArray) {
+            if (townArray.count) {
+                self.data.town = [AppTownInfo new];
+            }
+            [self.tableView reloadData];
+        }
+        else {
+            [self pullServiceTownArrayFunction:info.service_id atIndexPath:nil];
+        }
+    }
 }
 
 #pragma mark - getter
@@ -159,10 +214,18 @@
     return _serviceArray;
 }
 
+- (NSMutableDictionary *)townDic {
+    if (!_townDic) {
+        _townDic = [NSMutableDictionary new];
+    }
+    return _townDic;
+}
+
 - (AppSendReceiveInfo *)data {
     if (!_data) {
         _data = [AppSendReceiveInfo new];
         _data.customer = [AppCustomerInfo new];
+        _data.town = [AppTownInfo new];
     }
     return _data;
 }
@@ -206,25 +269,37 @@
     cell.baseView.textField.indexPath = [indexPath copy];
     cell.accessoryType = indexPath.row == 0 ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
-    switch (indexPath.row) {
-        case 0:{
-            cell.baseView.textField.text = [self.data.service showCityAndServiceName];
-        }
-            break;
-            
-        default:{
-            NSDictionary *dic = self.showArray[indexPath.row];
-            NSString *key = dic[@"key"];
-            cell.baseView.textField.text = [self.data.customer valueForKey:key];
-        }
-            break;
-    }
+    NSString *key = dic[@"key"];
     if (_isEditOnly) {
         cell.baseView.textField.enabled = (indexPath.row != 0);
     }
     else {
-        cell.baseView.textField.enabled = (indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5);
+        cell.baseView.textField.enabled = !(indexPath.row == 0 || indexPath.row == 1);
     }
+    
+    if (indexPath.row == 0) {
+        cell.baseView.textField.text = [self.data.service showCityAndServiceName];
+    }
+    else {
+        if ([key isEqualToString:@"real_station_city_name"]) {
+            cell.baseView.textField.text = self.data.town.town_name;
+            if (self.data.service) {
+                NSArray *townArray = self.townDic[self.data.service.service_id];
+                if (townArray.count) {
+                    cell.baseView.textField.enabled = NO;
+                    cell.baseView.textField.placeholder = @"请选择";
+                }
+                else {
+                    cell.baseView.textField.enabled = YES;
+                    cell.baseView.textField.placeholder = @"请输入";
+                }
+            }
+        }
+        else {
+           cell.baseView.textField.text = [self.data.customer valueForKey:key];
+        }
+    }
+    
     cell.baseView.textField.keyboardType = (indexPath.row == 1) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
@@ -233,6 +308,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self dismissKeyboard];
     switch (indexPath.row) {
         case 0:{
             if (_isEditOnly && self.type == SRSelectType_Sender) {
@@ -243,7 +319,6 @@
                     //始发站默认为当前所属站点
                     return;
                 }
-                
                 NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:self.serviceArray.count];
                 for (AppServiceInfo *item in self.serviceArray) {
                     [m_array addObject:item.showCityAndServiceName];
@@ -252,7 +327,7 @@
                 QKWEAKSELF;
                 BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:@"选择站点" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                     if (buttonIndex > 0 && (buttonIndex - 1) < weakself.serviceArray.count) {
-                        weakself.data.service = weakself.serviceArray[buttonIndex - 1];
+                        [weakself changeService:weakself.serviceArray[buttonIndex - 1]];
                         [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                     }
                 } otherButtonTitlesArray:m_array];
@@ -281,7 +356,34 @@
         }
             break;
             
-        default:
+        default:{
+            NSDictionary *dic = self.showArray[indexPath.row];
+            NSString *key = dic[@"key"];
+            if ([key isEqualToString:@"real_station_city_name"] && self.data.service) {
+                NSArray *townArray = self.townDic[self.data.service.service_id];
+                if (townArray) {
+                    if (!townArray.count) {
+                        return;
+                    }
+                    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:townArray.count];
+                    for (AppTownInfo *item in townArray) {
+                        [m_array addObject:item.town_name];
+                    }
+                    
+                    QKWEAKSELF;
+                    BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:@"选择中转站" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                        if (buttonIndex > 0 && (buttonIndex - 1) < townArray.count) {
+                            weakself.data.town = townArray[buttonIndex - 1];
+                            [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                        }
+                    } otherButtonTitlesArray:m_array];
+                    [sheet showInView:self.view];
+                }
+                else {
+                    [self pullServiceTownArrayFunction:self.data.service.service_id atIndexPath:indexPath];
+                }
+            }
+        }
             break;
     }
 }

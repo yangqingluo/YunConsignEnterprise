@@ -219,6 +219,14 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppTownInfo : AppType
+
+@property (strong, nonatomic) NSString *town_id;//中转站编号
+@property (strong, nonatomic) NSString *town_name;//中转站名称
+@property (strong, nonatomic) NSString *sort;//排序
+
+@end
+
 @interface AppGoodInfo : AppType
 
 @property (strong, nonatomic) NSString *good_id;//常用品名编号
@@ -295,6 +303,7 @@ BOOL isTrue(NSString *string);
 
 @property (strong, nonatomic) AppCustomerInfo *customer;
 @property (strong, nonatomic) AppServiceInfo *service;
+@property (strong, nonatomic) AppTownInfo *town;
 
 @end
 
@@ -339,9 +348,12 @@ BOOL isTrue(NSString *string);
 @interface AppSaveWayBillInfo : AppType
 
 @property (strong, nonatomic) NSString *end_station_service_id;//到站门店编号
+@property (strong, nonatomic) NSString *real_station_city_name;//真实到站名称（中转站）
 @property (strong, nonatomic) NSString *shipper_name;//发货人名称
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
 @property (strong, nonatomic) NSString *shipper_id_card;//发货人身份证号
+@property (strong, nonatomic) NSString *shipper_bank_name;//代收款打款银行名称
+@property (strong, nonatomic) NSString *shipper_bank_card_account;//代收款打款银行卡号
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称
 @property (strong, nonatomic) NSString *consignee_phone;//收货人电话
 @property (strong, nonatomic) NSString *insurance_amount;//保价金额
@@ -443,10 +455,11 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *end_station_city_name;//到站城市名称
 @property (strong, nonatomic) NSString *end_station_service_id;//到站网点编号
 @property (strong, nonatomic) NSString *end_station_service_name;//到站网点名称
+@property (strong, nonatomic) NSString *real_station_city_name;//真实到站名称（中转站）
 @property (strong, nonatomic) NSString *shipper_name;//发货人名称
 @property (strong, nonatomic) NSString *shipper_phone;//发货人电话
-@property (strong, nonatomic) NSString *shipper_bank_name;//发货人银行名称
-@property (strong, nonatomic) NSString *shipper_bank_card_account;//发货人银行卡号
+@property (strong, nonatomic) NSString *shipper_bank_name;//代收款打款银行名称
+@property (strong, nonatomic) NSString *shipper_bank_card_account;//代收款打款银行卡号
 @property (strong, nonatomic) NSString *consignee_name;//收货人名称
 @property (strong, nonatomic) NSString *consignee_phone;//收货人电话
 @property (strong, nonatomic) NSString *goods;//货物信息
