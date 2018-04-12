@@ -27,7 +27,7 @@
     [self setupNav];
     
     [self initializeData];
-    if (!_isEditOnly) {
+    if (!_isEditOnly || self.type == SRSelectType_Receiver) {
         [self pullServiceArrayFunction];
     }
 }
@@ -235,7 +235,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.row) {
         case 0:{
-            if (_isEditOnly) {
+            if (_isEditOnly && self.type == SRSelectType_Sender) {
                 return;
             }
             if (self.serviceArray.count) {
@@ -257,18 +257,6 @@
                     }
                 } otherButtonTitlesArray:m_array];
                 [sheet showInView:self.view];
-                
-                //                [self jxt_showActionSheetWithTitle:@"选择站点" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
-                //                    alertMaker.
-                //                    addActionCancelTitle(@"cancel").
-                //                    addActionDefaultTitles(m_array);
-                //                } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
-                //                    if (buttonIndex > 0 && (buttonIndex - 1) < weakself.serviceArray.count) {
-                //                        weakself.data.service = weakself.serviceArray[buttonIndex - 1];
-                //                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                //                    }
-                //
-                //                }];
             }
             else {
                 [self pullServiceArrayFunction];
