@@ -145,6 +145,7 @@
     }
     else if ([key isEqualToString:@"end_station"]) {
         PublicEndStationSelectVC *vc = [PublicEndStationSelectVC new];
+        vc.startCityId = self.toSaveData.start_station_city_id;
         QKWEAKSELF;
         vc.doneBlock = ^(NSObject *object){
             if ([object isKindOfClass:[NSArray class]]) {

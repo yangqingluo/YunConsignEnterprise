@@ -298,6 +298,28 @@
     }];
 }
 
+- (void)pullCityArrayFunctionForCode:(NSString *)dict_code exceptCity:(NSString *)openCityId selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    if (openCityId.length) {
+        [m_dic setObject:openCityId forKey:@"open_city_id"];
+    }
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryOpenCityListFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppCityInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dicMapCodeMixed(dict_code, openCityId)];
+                [weakself selectRowAtIndexPath:indexPath];
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *m_dic = @{@"transport_truck_id" : transport_truck_id};
     [self doShowHudFunction];

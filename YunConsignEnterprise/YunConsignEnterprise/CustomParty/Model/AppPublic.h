@@ -174,6 +174,11 @@ NSString *notNilString(NSString *string, NSString *placeString);
 NSString *notShowFooterZeroString(NSString *string, NSString *placeString);
 
 /*!
+ @brief 数据字典key混合
+ */
+NSString *dicMapCodeMixed(NSString *first_code, NSString *second_code);
+
+/*!
  @brief 字典转中文字符串
  */
 + (NSString *)logDic:(NSDictionary *)dic;

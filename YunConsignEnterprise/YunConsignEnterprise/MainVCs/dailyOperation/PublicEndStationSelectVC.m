@@ -104,14 +104,14 @@
 
 - (void)showCityAction {
     NSString *key = @"end_station_city";
-    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+    NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:dicMapCodeMixed(key, self.startCityId)];
     if (dataArray.count) {
         [self.cityArray removeAllObjects];
         [self.cityArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];
     }
     else {
-        [self pullCityArrayFunctionForCode:key selectionInIndexPath:nil];
+        [self pullCityArrayFunctionForCode:key exceptCity:self.startCityId selectionInIndexPath:nil];
     }
 }
 

@@ -10,4 +10,6 @@
 
 @interface PublicEndStationSelectVC : AppBasicTableViewController
 
+@property (strong, nonatomic) NSString *startCityId;
+
 @end

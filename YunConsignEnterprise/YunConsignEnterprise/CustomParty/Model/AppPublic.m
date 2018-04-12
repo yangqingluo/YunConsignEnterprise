@@ -191,6 +191,14 @@ NSString *notShowFooterZeroString(NSString *string, NSString *placeString) {
     return string.length ? string : (placeString ? placeString : @"");
 }
 
+/*!
+ @brief 数据字典key混合
+ */
+NSString *dicMapCodeMixed(NSString *first_code, NSString *second_code) {
+    return second_code.length ? [NSString stringWithFormat:@"%@&%@", first_code, second_code] : first_code;
+}
+
+
 // log NSSet with UTF8
 // if not ,log will be \Uxxx
 + (NSString *)logDic:(NSDictionary *)dic {

@@ -62,7 +62,7 @@
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"起点城市",@"subTitle":@"请选择",@"key":@"start_station_city"},
-                           @{@"title":@"终点网点",@"subTitle":@"请选择",@"key":@"end_service"},
+                           @{@"title":@"终点城市",@"subTitle":@"请选择",@"key":@"end_station_city"},
                            @{@"title":@"车辆牌照",@"subTitle":@"请输入",@"key":@"truck_number_plate"}];
         }
             break;
@@ -364,7 +364,11 @@
         }
     }
     else if ([varClass isSubclassOfClass:[AppCityInfo class]]) {
-        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+        BOOL queryException = NO;//查询时是否去除起点城市标记
+        if ([key isEqualToString:@"end_station_city"] && (self.type == QueryConditionType_SearchQuantity || self.type == QueryConditionType_TransportTruck)) {
+            queryException = YES;
+        }
+        NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:queryException ? dicMapCodeMixed(key, self.condition.start_station_city.open_city_id) : key];
         if (dataArray.count) {
             NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
             for (AppCityInfo *m_data in dataArray) {
@@ -380,7 +384,12 @@
             [sheet showInView:self.view];
         }
         else {
-            [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            if (queryException) {
+                [self pullCityArrayFunctionForCode:key exceptCity:self.condition.start_station_city.open_city_id selectionInIndexPath:indexPath];
+            }
+            else {
+               [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            }
         }
     }
     else if ([self.boolValidSet containsObject:key]) {
