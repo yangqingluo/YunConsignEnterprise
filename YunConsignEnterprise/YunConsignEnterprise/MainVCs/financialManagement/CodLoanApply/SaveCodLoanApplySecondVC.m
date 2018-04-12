@@ -71,10 +71,10 @@
 //初始化数据
 - (void)initializeData {
     self.showData = [AppCodLoanApplyInfo new];
-    self.showArray = @[@{@"title":@"银行账户",@"subTitle":@"请输入银行账户",@"key":@"bank_card_account"},
-                       @{@"title":@"银行名称",@"subTitle":@"请输入银行名称",@"key":@"bank_name"},
-                       @{@"title":@"户主",@"subTitle":@"请输入户主姓名",@"key":@"bank_card_owner"},
-                       @{@"title":@"联系电话",@"subTitle":@"请输入户主电话",@"key":@"contact_phone"},
+    self.showArray = @[@{@"title":@"银行账户",@"subTitle":@"请输入银行账户",@"key":@"bank_card_account", @"matchKey":@"shipper_bank_card_account"},
+                       @{@"title":@"银行名称",@"subTitle":@"请输入银行名称",@"key":@"bank_name", @"matchKey":@"shipper_bank_name"},
+                       @{@"title":@"户主",@"subTitle":@"请输入户主姓名",@"key":@"bank_card_owner", @"matchKey":@"shipper_name"},
+                       @{@"title":@"联系电话",@"subTitle":@"请输入户主电话",@"key":@"contact_phone", @"matchKey":@"shipper_phone"},
                        @{@"title":@"申请备注",@"subTitle":@"请输入申请备注",@"key":@"apply_note"}];
 }
 
@@ -91,29 +91,52 @@
         [self showHint:@"运单数据出错"];
         return;
     }
-    NSMutableArray *idArray = [NSMutableArray arrayWithCapacity:self.dataSource.count];
-    for (AppWayBillDetailInfo *item in self.dataSource) {
-        [idArray addObject:item.waybill_id];
+    
+    AppWayBillDetailInfo *item0 = self.dataSource[0];
+    BOOL oneUser = YES;
+    for (NSInteger i = 1; i < self.dataSource.count; i++) {
+        AppWayBillDetailInfo *item = self.dataSource[i];
+        if (![item.shipper_bank_card_account isEqualToString:item0.shipper_bank_card_account] || ![item.shipper_name isEqualToString:item0.shipper_name]) {
+            oneUser = NO;
+            break;
+        }
     }
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_ids" : [idArray componentsJoinedByString:@","]}];
-    [self doShowHudFunction];
-    QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_setRemitBankInfoFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
-        [weakself endRefreshing];
-        if (!error) {
-            ResponseItem *item = responseBody;
-            if (item.flag == 1) {
-                weakself.remitBankInfoList = item.items;
-                [weakself updateBankInfoView];
-            }
-            else {
-                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+    
+    NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    for (NSDictionary *dic in self.showArray) {
+        NSString *matchKey = dic[@"matchKey"];
+        if (matchKey) {
+            NSString *m_value = [item0 valueForKey:matchKey];
+            if (m_value.length) {
+                [m_dic setObject:m_value forKey:dic[@"key"]];
             }
         }
-        else {
-            [weakself doShowHintFunction:error.userInfo[@"message"]];
-        }
-    }];
+    }
+    self.remitBankInfoList = @[m_dic];
+    [self updateBankInfoView];
+//    NSMutableArray *idArray = [NSMutableArray arrayWithCapacity:self.dataSource.count];
+//    for (AppWayBillDetailInfo *item in self.dataSource) {
+//        [idArray addObject:item.waybill_id];
+//    }
+//    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"waybill_ids" : [idArray componentsJoinedByString:@","]}];
+//    [self doShowHudFunction];
+//    QKWEAKSELF;
+//    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_loan_setRemitBankInfoFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+//        [weakself endRefreshing];
+//        if (!error) {
+//            ResponseItem *item = responseBody;
+//            if (item.flag == 1) {
+//                weakself.remitBankInfoList = item.items;
+//                [weakself updateBankInfoView];
+//            }
+//            else {
+//                [weakself doShowHintFunction:item.message.length ? item.message : @"数据出错"];
+//            }
+//        }
+//        else {
+//            [weakself doShowHintFunction:error.userInfo[@"message"]];
+//        }
+//    }];
 }
 
 - (void)doSaveLoanApplyFunction:(NSDictionary *)dic {
