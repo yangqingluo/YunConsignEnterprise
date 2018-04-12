@@ -12,7 +12,7 @@
 
 - (void)setupFooter {
     [super setupFooter];
-    [self.footerView updateDataSourceWithArray:@[@"地图", @"修改", @"删除"]];
+    [self.footerView updateDataSourceWithArray:@[@"中转站", @"地图", @"修改", @"删除"]];
 }
 
 #pragma mark - setter

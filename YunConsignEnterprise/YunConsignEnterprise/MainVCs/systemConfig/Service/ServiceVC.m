@@ -10,6 +10,7 @@
 #import "PublicQueryConditionVC.h"
 #import "SaveServiceVC.h"
 #import "ServiceLocationVC.h"
+#import "TownVC.h"
 
 #import "ServiceCell.h"
 
@@ -244,18 +245,25 @@
         int tag = [m_dic[@"tag"] intValue];
         switch (tag) {
             case 0:{
-                [self pullDetailDataAtIndexPath:indexPath];
+                TownVC *vc = [TownVC new];
+                vc.service = self.dataSource[indexPath.row];
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 
             case 1:{
+                [self pullDetailDataAtIndexPath:indexPath];
+            }
+                break;
+                
+            case 2:{
                 SaveServiceVC *vc = [SaveServiceVC new];
                 vc.baseData = self.dataSource[indexPath.row];
                 [self goToSaveVC:vc];
             }
                 break;
                 
-            case 2:{
+            case 3:{
                 [self confirmRemovingDataAtIndexPath:indexPath];
             }
                 break;

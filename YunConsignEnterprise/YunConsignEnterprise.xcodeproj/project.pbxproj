@@ -57,6 +57,8 @@
 		E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E447649E1F611C460084F4EB /* DailyOperationVC.m */; };
 		E44765051F6129040084F4EB /* UserPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = E44765041F6129040084F4EB /* UserPublic.m */; };
 		E449C78E1FEA070B001B1077 /* waybill_type.txt in Resources */ = {isa = PBXBuildFile; fileRef = E449C78D1FEA070B001B1077 /* waybill_type.txt */; };
+		E44A3594207F21240023322A /* TownVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E44A3593207F21240023322A /* TownVC.m */; };
+		E44A3597207F21450023322A /* SaveTownVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E44A3596207F21450023322A /* SaveTownVC.m */; };
 		E44AD0E71F73C22A004B9867 /* GoodsSummaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */; };
 		E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E456501C1F978D2200F7694B /* CustomerManageCell.m */; };
 		E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45995321F95E012009F35A6 /* PublicMutableLabelView.m */; };
@@ -577,6 +579,10 @@
 		E44765031F6129040084F4EB /* UserPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPublic.h; sourceTree = "<group>"; };
 		E44765041F6129040084F4EB /* UserPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPublic.m; sourceTree = "<group>"; };
 		E449C78D1FEA070B001B1077 /* waybill_type.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waybill_type.txt; sourceTree = "<group>"; };
+		E44A3592207F21240023322A /* TownVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TownVC.h; sourceTree = "<group>"; };
+		E44A3593207F21240023322A /* TownVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TownVC.m; sourceTree = "<group>"; };
+		E44A3595207F21450023322A /* SaveTownVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveTownVC.h; sourceTree = "<group>"; };
+		E44A3596207F21450023322A /* SaveTownVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveTownVC.m; sourceTree = "<group>"; };
 		E44AD0E51F73C22A004B9867 /* GoodsSummaryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSummaryCell.h; sourceTree = "<group>"; };
 		E44AD0E61F73C22A004B9867 /* GoodsSummaryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSummaryCell.m; sourceTree = "<group>"; };
 		E456501B1F978D2200F7694B /* CustomerManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerManageCell.h; sourceTree = "<group>"; };
@@ -1552,6 +1558,10 @@
 				E43B9DA31FC5552F00D1C57B /* SaveServiceVC.m */,
 				E4FB63361FC57012005C482E /* ServiceLocationVC.h */,
 				E4FB63371FC57012005C482E /* ServiceLocationVC.m */,
+				E44A3592207F21240023322A /* TownVC.h */,
+				E44A3593207F21240023322A /* TownVC.m */,
+				E44A3595207F21450023322A /* SaveTownVC.h */,
+				E44A3596207F21450023322A /* SaveTownVC.m */,
 			);
 			name = Service;
 			path = YunConsignEnterprise/MainVCs/SystemConfig/Service;
@@ -3030,6 +3040,7 @@
 			files = (
 				E447649C1F611C370084F4EB /* FinancialManagementVC.m in Sources */,
 				E42109021FD5C9B600F89075 /* FreightNotPayVC.m in Sources */,
+				E44A3594207F21240023322A /* TownVC.m in Sources */,
 				E4789A6A1FCD5AF400F1BD88 /* JsonUserCell.m in Sources */,
 				E45995331F95E012009F35A6 /* PublicMutableLabelView.m in Sources */,
 				E49D7E8E1FD38D4E009B59B7 /* CodLoanApplyWaybillQueryVC.m in Sources */,
@@ -3288,6 +3299,7 @@
 				E49C02321FD9758A00235D3B /* CodLoanApplyDetailCell.m in Sources */,
 				E48B514220060861004D6C51 /* WaybillChangeApplyCell.m in Sources */,
 				E4E744381F96066400CEC8FA /* WaybillLoadCell.m in Sources */,
+				E44A3597207F21450023322A /* SaveTownVC.m in Sources */,
 				E4DE91811FD5B04C00249730 /* NormalTableViewCell.m in Sources */,
 				E456501D1F978D2200F7694B /* CustomerManageCell.m in Sources */,
 				E4E2A3B91FB311AE00D8EC1C /* NSString+MJExtension.m in Sources */,
