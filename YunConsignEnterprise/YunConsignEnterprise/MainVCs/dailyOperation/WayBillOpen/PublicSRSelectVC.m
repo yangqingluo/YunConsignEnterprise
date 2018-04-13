@@ -154,9 +154,9 @@
                 m_array = [NSArray new];
             }
             [weakself.townDic setObject:m_array forKey:service_id];
-            if (m_array.count && !weakself.data.town.town_name) {
-                weakself.data.town = m_array[0];
-            }
+//            if (m_array.count && !weakself.data.town.town_name) {
+//                weakself.data.town = m_array[0];
+//            }
             [weakself.tableView reloadData];
             if (indexPath) {
                 [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
