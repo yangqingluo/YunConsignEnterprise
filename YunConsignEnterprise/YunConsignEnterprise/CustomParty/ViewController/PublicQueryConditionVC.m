@@ -365,7 +365,7 @@
     }
     else if ([varClass isSubclassOfClass:[AppCityInfo class]]) {
         BOOL queryException = NO;//查询时是否去除起点城市标记
-        if ([key isEqualToString:@"end_station_city"] && (self.type == QueryConditionType_SearchQuantity || self.type == QueryConditionType_TransportTruck)) {
+        if (([key isEqualToString:@"start_station_city"] || [key isEqualToString:@"end_station_city"]) && (self.type == QueryConditionType_SearchQuantity || self.type == QueryConditionType_TransportTruck)) {
             queryException = YES;
         }
         NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:queryException ? dicMapCodeMixed(key, self.condition.start_station_city.open_city_id) : key];

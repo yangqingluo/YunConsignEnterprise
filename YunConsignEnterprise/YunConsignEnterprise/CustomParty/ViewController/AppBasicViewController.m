@@ -324,9 +324,7 @@
             if (m_array.count) {
                 [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dicMapCodeMixed(dict_code, openCityId)];
                 [weakself checkCityMapExistedForCode:dict_code];
-                if (indexPath) {
-                    [weakself selectRowAtIndexPath:indexPath];
-                }
+                [weakself selectRowAtIndexPath:indexPath];
             }
         }
         else {

@@ -140,7 +140,7 @@
             [sheet showInView:self.view];
         }
         else {
-            [self pullCityArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            [self pullCityArrayFunctionForCode:key exceptCity:nil selectionInIndexPath:indexPath];
         }
     }
     else if ([key isEqualToString:@"end_station"]) {
