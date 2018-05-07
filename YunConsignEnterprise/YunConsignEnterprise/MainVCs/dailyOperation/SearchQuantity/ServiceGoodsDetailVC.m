@@ -8,7 +8,6 @@
 
 #import "ServiceGoodsDetailVC.h"
 
-#import "MJRefresh.h"
 #import "PublicMutableLabelView.h"
 #import "ServiceGoodsDetailCell.h"
 

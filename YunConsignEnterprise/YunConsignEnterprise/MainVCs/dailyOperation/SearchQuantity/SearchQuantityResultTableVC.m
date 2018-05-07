@@ -9,6 +9,7 @@
 #import "SearchQuantityResultTableVC.h"
 #import "ServiceGoodsDetailVC.h"
 #import "PublicSaveTransportTruckVC.h"
+#import "ServiceTownGoodsQuantityVC.h"
 
 #import "PublicMutableLabelView.h"
 #import "SearchQuantityResultCell.h"
@@ -106,7 +107,7 @@
         vc.condition = [self.condition copy];
         vc.serviceQuantityData = self.dataSource[label.tag];
         vc.title = [NSString stringWithFormat:@"%@-货量明细", vc.serviceQuantityData.service_name];
-        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+        [self doPushViewController:vc animated:YES];
     }
 }
 
@@ -118,7 +119,7 @@
         vc.serviceQuantityData = self.dataSource[label.tag];
         vc.title = [NSString stringWithFormat:@"%@-剩货明细", vc.serviceQuantityData.service_name];
         vc.searchType = @"2";
-        [[UserPublic getInstance].mainTabNav pushViewController:vc animated:YES];
+        [self doPushViewController:vc animated:YES];
     }
 }
 
@@ -207,7 +208,7 @@
         SearchQuantityResultCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[SearchQuantityResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor whiteColor];
             
             if (self.indextag == 1) {
@@ -231,6 +232,18 @@
         return cell;
     }
     return [UITableViewCell new];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (self.indextag == 0) {
+        if (indexPath.row > 0) {
+            ServiceTownGoodsQuantityVC *vc = [ServiceTownGoodsQuantityVC new];
+            vc.routeGoodsData = self.dataSource[indexPath.row - 1];
+            vc.condition = self.condition;
+            [self doPushViewController:vc animated:YES];
+        }
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -308,6 +308,7 @@
 		E4B05EF81F9F7B9900895591 /* EndServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B05EF71F9F7B9900895591 /* EndServiceCell.m */; };
 		E4B282732004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4B282712004B2D30012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png */; };
 		E4B282742004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4B282722004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png */; };
+		E4B3B199209FF816002C57A1 /* ServiceTownGoodsQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B3B198209FF816002C57A1 /* ServiceTownGoodsQuantityVC.m */; };
 		E4BB91A21F99EE1A00337A52 /* WaybillTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BB91A11F99EE1A00337A52 /* WaybillTitleView.m */; };
 		E4BC30B41F97255E00CAADAE /* WaybillArrivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BC30B31F97255E00CAADAE /* WaybillArrivalCell.m */; };
 		E4CC901B1F73655C0024FEC6 /* WayBillTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CC901A1F73655C0024FEC6 /* WayBillTitleCell.m */; };
@@ -970,6 +971,8 @@
 		E4B05EF71F9F7B9900895591 /* EndServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndServiceCell.m; sourceTree = "<group>"; };
 		E4B282712004B2D30012D938 /* daily_icon_WAYBILL_CHANGE_APPLY@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_CHANGE_APPLY@3x.png"; sourceTree = "<group>"; };
 		E4B282722004B2D40012D938 /* daily_icon_WAYBILL_CHANGE_CHECK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily_icon_WAYBILL_CHANGE_CHECK@3x.png"; sourceTree = "<group>"; };
+		E4B3B197209FF816002C57A1 /* ServiceTownGoodsQuantityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceTownGoodsQuantityVC.h; sourceTree = "<group>"; };
+		E4B3B198209FF816002C57A1 /* ServiceTownGoodsQuantityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceTownGoodsQuantityVC.m; sourceTree = "<group>"; };
 		E4BB91A01F99EE1A00337A52 /* WaybillTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillTitleView.h; sourceTree = "<group>"; };
 		E4BB91A11F99EE1A00337A52 /* WaybillTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaybillTitleView.m; sourceTree = "<group>"; };
 		E4BC30B21F97255E00CAADAE /* WaybillArrivalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaybillArrivalCell.h; sourceTree = "<group>"; };
@@ -1646,6 +1649,8 @@
 				E49D7E011FD38CAA009B59B7 /* SearchQuantityVC.m */,
 				E49D7E021FD38CAA009B59B7 /* ServiceGoodsDetailVC.h */,
 				E49D7E031FD38CAA009B59B7 /* ServiceGoodsDetailVC.m */,
+				E4B3B197209FF816002C57A1 /* ServiceTownGoodsQuantityVC.h */,
+				E4B3B198209FF816002C57A1 /* ServiceTownGoodsQuantityVC.m */,
 			);
 			name = SearchQuantity;
 			path = YunConsignEnterprise/MainVCs/DailyOperation/SearchQuantity;
@@ -3262,6 +3267,7 @@
 				E4E2A3921FB311AE00D8EC1C /* IQNSArray+Sort.m in Sources */,
 				E49D7E451FD38CAA009B59B7 /* WaybillLogVC.m in Sources */,
 				E4E2A38D1FB311AE00D8EC1C /* JXTAlertController.m in Sources */,
+				E4B3B199209FF816002C57A1 /* ServiceTownGoodsQuantityVC.m in Sources */,
 				E44764991F611BF70084F4EB /* SystemConfigVC.m in Sources */,
 				E42109081FD5CC0A00F89075 /* FreightNotPayCell.m in Sources */,
 				E4E2A3F91FB311AE00D8EC1C /* SDWebImageCompat.m in Sources */,
