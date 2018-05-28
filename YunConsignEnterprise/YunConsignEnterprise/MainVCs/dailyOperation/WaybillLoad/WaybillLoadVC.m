@@ -94,7 +94,10 @@
 }
 
 - (void)queryWaybillListByConditionFunction:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+//    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
+    
+    //2018.05.28取消此处接口分页
+    NSMutableDictionary *m_dic = [NSMutableDictionary new];
     if (self.condition) {
         if (self.condition.start_time) {
             [m_dic setObject:stringFromDate(self.condition.start_time, nil) forKey:@"start_time"];
@@ -122,12 +125,13 @@
             ResponseItem *item = responseBody;
             [weakself.dataSource addObjectsFromArray:[AppCanLoadTransportTruckInfo mj_objectArrayWithKeyValuesArray:item.items]];
             
-            if (item.total <= weakself.dataSource.count) {
-                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else {
-                [weakself updateTableViewFooter];
-            }
+            //2018.05.28取消此处接口分页后自然就取消了footer
+//            if (item.total <= weakself.dataSource.count) {
+//                [weakself.tableView.mj_footer endRefreshingWithNoMoreData];
+//            }
+//            else {
+//                [weakself updateTableViewFooter];
+//            }
             [weakself.tableView reloadData];
         }
         else {
