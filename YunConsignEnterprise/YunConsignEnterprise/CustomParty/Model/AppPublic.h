@@ -98,6 +98,7 @@
 
 #define kUserName                    @"username_YunConsignEnterprise"
 #define kUserData                    @"userdata_YunConsignEnterprise"
+#define kUserInsuranceFeeRate                    @"userinsurancefeerate_YunConsignEnterprise"
 //#define kUserZone                    @"userzone_YunConsignEnterprise"
 #define kUserServer                  @"userserver_YunConsignEnterprise"
 

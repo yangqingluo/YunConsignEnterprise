@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
-    
     [self clearData];
+    [[QKNetworkSingleton sharedManager] getInsuranceFeeRateByJoinIdCompletion:nil];
 }
 
 - (void)setupNav {
@@ -209,7 +209,7 @@
                         [self.toSaveData setValue:[NSString stringWithFormat:@"%d", value] forKey:m_dic[@"key"]];
                         NSString *key = m_dic[@"key"];
                         if ([key isEqualToString:@"insurance_amount"]) {
-                            self.toSaveData.insurance_fee = [NSString stringWithFormat:@"%.0f", floor(value * 0.03)];
+                            self.toSaveData.insurance_fee = [NSString stringWithFormat:@"%.0f", ceil(value * [UserPublic getInstance].insuranceFeeRate)];
                             DoubleInputCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
                             cell.anotherBaseView.textField.text = self.toSaveData.insurance_fee;
                         }

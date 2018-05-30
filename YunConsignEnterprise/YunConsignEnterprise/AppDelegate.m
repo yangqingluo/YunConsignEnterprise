@@ -41,6 +41,9 @@ static void uncaughtExceptionHandler(NSException *exception) {
     
     if ([UserPublic getInstance].userData) {
         [[AppPublic getInstance] goToMainVC];
+        
+        //获取当前用户信息并没有accessList，暂时无用
+        [[QKNetworkSingleton sharedManager] getCurrentUserInfoCompletion:nil];
     }
     else {
         [[AppPublic getInstance] goToLoginCompletion:nil];

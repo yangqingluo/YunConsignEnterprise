@@ -53,9 +53,17 @@ __strong static UserPublic *_singleManger = nil;
     }
 }
 
+- (void)saveUserInsuranceFeeRate:(NSString *)data {
+    if (data) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud setObject:data forKey:kUserInsuranceFeeRate];
+    }
+}
+
 - (void)clear{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:kUserData];
+    [ud removeObjectForKey:kUserInsuranceFeeRate];
     
     [JPUSHService cleanTags:nil seq:0];
     
@@ -155,6 +163,15 @@ __strong static UserPublic *_singleManger = nil;
         _systemConfigAccesses = [NSMutableArray new];
     }
     return _systemConfigAccesses;
+}
+
+- (double)insuranceFeeRate {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *data = [ud objectForKey:kUserInsuranceFeeRate];
+    if (data) {
+        return [data doubleValue];
+    }
+    return 0.03;
 }
 
 - (NSMutableDictionary *)dataMapDic {

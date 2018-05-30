@@ -52,5 +52,9 @@ NSURL *imageURLWithPath(NSString *path);
 
 //login
 - (void)loginWithID:(NSString *)username Password:(NSString *)password  completion:(QKNetworkBlock)completion;
+//获取当前用户信息
+- (void)getCurrentUserInfoCompletion:(QKNetworkBlock)completion;
+//获取保价费率
+- (void)getInsuranceFeeRateByJoinIdCompletion:(QKNetworkBlock)completion;
 
 @end

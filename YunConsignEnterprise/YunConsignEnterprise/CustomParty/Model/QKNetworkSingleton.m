@@ -276,10 +276,33 @@ NSString *httpRespString(NSError *error, NSObject *object){
                     object = item.items[0];
                 }
             }
-            
             [[AppPublic getInstance] loginDoneWithUserData:object username:username password:password];
         }
-        completion(responseBody, error);
+        if (completion) {
+            completion(responseBody, error);
+        }
+    }];
+}
+
+- (void)getCurrentUserInfoCompletion:(QKNetworkBlock)completion {
+    [self commonSoapPost:@"hex_login_getCurrentUserInfoFunction" Parm:nil completion:^(id responseBody, NSError *error){
+        if (completion) {
+            completion(responseBody, error);
+        }
+    }];
+}
+
+- (void)getInsuranceFeeRateByJoinIdCompletion:(QKNetworkBlock)completion {
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_getInsuranceFeeRateByJoinIdFunction" Parm:nil completion:^(id responseBody, NSError *error){
+        if (!error) {
+            ResponseItem *item = responseBody;
+            if (item.flag == 1 && item.items.count) {
+                [[UserPublic getInstance] saveUserInsuranceFeeRate:[item.items[0] objectForKey:@"insurance_fee_rate"]];
+            }
+        }
+        if (completion) {
+            completion(responseBody, error);
+        }
     }];
 }
 

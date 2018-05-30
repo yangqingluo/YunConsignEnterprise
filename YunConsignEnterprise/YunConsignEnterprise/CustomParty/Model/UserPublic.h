@@ -25,6 +25,8 @@
 @property (strong, nonatomic) NSMutableArray *financialManagementAccesses;
 //系统设置权限
 @property (strong, nonatomic) NSMutableArray *systemConfigAccesses;
+//保价费率
+@property (assign, nonatomic) double insuranceFeeRate;
 
 //数据字典数据
 @property (strong, nonatomic) NSMutableDictionary *dataMapDic;
@@ -36,6 +38,8 @@ NSString *serviceDataMapKeyForTruck(NSString *transport_truck_id);
 
 //保存用户数据
 - (void)saveUserData:(AppUserInfo *)data;
+//保存用户报价费率
+- (void)saveUserInsuranceFeeRate:(NSString *)data;
 //清除
 - (void)clear;
 
