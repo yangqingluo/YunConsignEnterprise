@@ -40,6 +40,7 @@
 - (void)senderButtonAction {
     PublicSRSelectVC *vc = [PublicSRSelectVC new];
     vc.type = SRSelectType_Sender;
+    vc.data = [self.headerView.senderInfo copy];
     vc.doneBlock = ^(id object){
         if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
             self.headerView.senderInfo = [object copy];
@@ -51,6 +52,7 @@
 - (void)receiverButtonAction {
     PublicSRSelectVC *vc = [PublicSRSelectVC new];
     vc.type = SRSelectType_Receiver;
+    vc.data = [self.headerView.receiverInfo copy];
     vc.doneBlock = ^(id object){
         if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
             self.headerView.receiverInfo = [object copy];

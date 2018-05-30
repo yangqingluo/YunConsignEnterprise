@@ -31,6 +31,9 @@
     if (!_isEditOnly || self.type == SRSelectType_Receiver) {
         [self pullServiceArrayFunction];
     }
+    if (self.type == SRSelectType_Receiver && self.data) {
+        [self pullServiceTownArrayFunction:self.data.service.service_id atIndexPath:nil];
+    }
 }
 
 //初始化数据
@@ -129,7 +132,7 @@
         if (!error) {
             [weakself.serviceArray removeAllObjects];
             [weakself.serviceArray addObjectsFromArray:[AppServiceInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
-             if (weakself.serviceArray.count) {
+             if (!weakself.data.service && weakself.serviceArray.count) {
                  [weakself changeService:weakself.serviceArray[0]];
              }
              [weakself.tableView reloadData];
@@ -176,7 +179,9 @@
         NSDictionary *dic = self.showArray[indexPath.row];
         NSString *key = dic[@"key"];
         if ([key isEqualToString:@"real_station_city_name"]) {
-            self.data.town = [AppTownInfo new];
+            if (!self.data.town) {
+                self.data.town = [AppTownInfo new];
+            }
             self.data.town.town_name = content;
         }
         else {
@@ -193,11 +198,9 @@
     self.data.service = info;
     
     if (self.type == SRSelectType_Receiver) {
+        self.data.town = [AppTownInfo new];
         NSArray *townArray = self.townDic[info.service_id];
         if (townArray) {
-            if (townArray.count) {
-                self.data.town = [AppTownInfo new];
-            }
             [self.tableView reloadData];
         }
         else {
