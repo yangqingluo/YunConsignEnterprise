@@ -104,6 +104,10 @@
         [self showHint:@"请补全发货人信息"];
         return;
     }
+    else if (!self.headerView.receiverInfo) {
+        [self showHint:@"请补全收货人信息"];
+        return;
+    }
     AddGoodsVC *vc = [AddGoodsVC new];
     vc.senderInfo = [self.headerView.senderInfo copy];
     QKWEAKSELF;
