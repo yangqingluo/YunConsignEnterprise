@@ -203,7 +203,7 @@
                           @[@{@"title":@"叉车费",@"subTitle":@"请输入",@"key":@"forklift_fee"},
                             @{@"title":@"回扣费",@"subTitle":@"请输入",@"key":@"rebate_fee"}],
                           @[@{@"title":@"保价",@"subTitle":@"请输入",@"key":@"insurance_amount"},
-                            @{@"title":@"保价费",@"subTitle":@"根据报价数目生成",@"key":@"insurance_fee"}],
+                            @{@"title":@"保价费",@"subTitle":@"请输入",@"key":@"insurance_fee"}],
                           @[@{@"title":@"接货费",@"subTitle":@"请输入",@"key":@"take_goods_fee"},
                             @{@"title":@"送货费",@"subTitle":@"请输入",@"key":@"deliver_goods_fee"}],
                           @[@{@"title":@"中转费",@"subTitle":@"请输入",@"key":@"transfer_fee"},
@@ -248,7 +248,7 @@
 
 - (NSSet *)inputInvalidSet {
     if (!_inputInvalidSet) {
-        _inputInvalidSet = [NSSet setWithObjects:@"insurance_fee", nil];
+        _inputInvalidSet = [NSSet setWithObjects:@"", nil];
     }
     
     return _inputInvalidSet;
