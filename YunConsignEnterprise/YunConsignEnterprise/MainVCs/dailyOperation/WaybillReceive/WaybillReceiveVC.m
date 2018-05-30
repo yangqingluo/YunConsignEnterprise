@@ -415,7 +415,7 @@
                 //自提
                 WaybillCustReceiveVC *vc = [WaybillCustReceiveVC new];
                 vc.billData = self.dataSource[indexPath.row];
-                [self.navigationController pushViewController:vc animated:YES];
+                [self doPushViewController:vc animated:YES];
             }
                 break;
                 

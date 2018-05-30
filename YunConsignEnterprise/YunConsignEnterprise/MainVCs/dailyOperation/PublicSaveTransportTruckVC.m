@@ -71,11 +71,13 @@
             for (NSDictionary *dic in m_array) {
                 NSString *key = dic[@"key"];
                 NSString *value = [self.toSaveData valueForKey:key];
-                if (!value.length) {
+                if ([dic[@"need"] boolValue] && !value) {
                     [self showHint:[NSString stringWithFormat:@"请补全%@", dic[@"title"]]];
                     return;
                 }
-                [m_dic setObject:value forKey:key];
+                if (value) {
+                    [m_dic setObject:value forKey:key];
+                }
             }
         }
         [self doShowHudFunction];
@@ -218,12 +220,12 @@
     if (!_showArray) {
         _showArray = @[@[@{@"title":@"始发站",@"subTitle":@"请选择始发站",@"key":@"start_station_city"},
                          @{@"title":@"终点站",@"subTitle":@"请选择终点站",@"key":@"end_station"}],
-                       @[@{@"title":@"车辆",@"subTitle":@"请输入",@"key":@"truck_number_plate"},
-                         @{@"title":@"司机",@"subTitle":@"请输入",@"key":@"truck_driver_name"},
-                         @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone"}],
-                       @[@{@"title":@"运费",@"subTitle":@"请输入",@"key":@"cost_register"},
-                         @{@"title":@"装车费",@"subTitle":@"请输入",@"key":@"cost_load"},
-                         @{@"title":@"预付费",@"subTitle":@"请输入",@"key":@"cost_before"},
+                       @[@{@"title":@"车辆",@"subTitle":@"请输入",@"key":@"truck_number_plate",@"need":@YES},
+                         @{@"title":@"司机",@"subTitle":@"请输入",@"key":@"truck_driver_name",@"need":@YES},
+                         @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone",@"need":@YES}],
+                       @[@{@"title":@"运费",@"subTitle":@"请输入",@"key":@"cost_register",@"need":@YES},
+                         @{@"title":@"装车费",@"subTitle":@"请输入",@"key":@"cost_load",@"need":@YES},
+                         @{@"title":@"预付费",@"subTitle":@"请输入",@"key":@"cost_before",@"need":@YES},
                          @{@"title":@"备注",@"subTitle":@"请输入",@"key":@"note"}]
                        ];
     }
