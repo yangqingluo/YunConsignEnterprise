@@ -807,6 +807,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *goods_name;//货物
 @property (strong, nonatomic) NSString *total_amount;//运费
 @property (strong, nonatomic) NSString *is_load;//装车次数，0表示没有装车，一般为1，如果存在拆分多次装车，则为大于1的数字
+@property (strong, nonatomic) NSString *consignee_name;//收货人姓名
 
 @end
 

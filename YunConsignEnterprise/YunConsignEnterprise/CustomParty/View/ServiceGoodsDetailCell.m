@@ -41,18 +41,20 @@
 }
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath data:(AppServiceGoodsDetailInfo *)data {
-    return MAX(kCellHeight, [AppPublic textSizeWithString:data.goods_name font:[PublicMutableLabelView new].mutableLabelFont constantWidth:0.2 * screen_width].height + kEdgeMiddle);
+    CGFloat goods_name_height = [AppPublic textSizeWithString:data.goods_name font:[PublicMutableLabelView new].mutableLabelFont constantWidth:0.2 * screen_width].height + kEdgeMiddle;
+    CGFloat consignee_name_height = [AppPublic textSizeWithString:data.consignee_name font:[PublicMutableLabelView new].mutableLabelFont constantWidth:0.2 * screen_width].height + kEdgeMiddle;
+    return MAX(kCellHeight, MAX(goods_name_height, consignee_name_height));
 }
 
 #pragma mark - setter
 - (void)setData:(AppServiceGoodsDetailInfo *)data {
     _data = data;
     self.baseView.height = [[self class] tableView:nil heightForRowAtIndexPath:nil data:data];
-    [self.baseView updateDataSourceWithArray:@[data.goods_number, data.goods_name, notShowFooterZeroString(data.total_amount, @"0"), [data.is_load intValue] > 0 ? @"√" : @""]];
-    if (self.baseView.showViews.count == 4) {
-        UILabel *label = self.baseView.showViews[3];
-        label.textColor = MainColor;
-    }
+    [self.baseView updateDataSourceWithArray:@[data.goods_number, data.goods_name, notShowFooterZeroString(data.total_amount, @"0"), data.consignee_name]];
+//    if (self.baseView.showViews.count == 4) {
+//        UILabel *label = self.baseView.showViews[3];
+//        label.textColor = MainColor;
+//    }
 }
 
 @end

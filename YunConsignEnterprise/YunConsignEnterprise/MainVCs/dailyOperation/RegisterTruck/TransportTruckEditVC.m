@@ -35,6 +35,7 @@
                          @{@"title":@"电话",@"subTitle":@"请输入",@"key":@"truck_driver_phone",@"need":@YES}],
                        @[@{@"title":@"登记运费",@"subTitle":@"请输入",@"key":@"cost_register",@"need":@YES},
                          @{@"title":@"装车费",@"subTitle":@"请输入",@"key":@"cost_load"},
+                         @{@"title":@"预付费",@"subTitle":@"请输入",@"key":@"cost_before"},
                          @{@"title":@"打款账户",@"subTitle":@"请输入",@"key":@"driver_account"},
                          @{@"title":@"户主",@"subTitle":@"请输入",@"key":@"driver_account_name"},
                          @{@"title":@"开户行",@"subTitle":@"请输入",@"key":@"driver_account_bank"}],
@@ -267,7 +268,7 @@
     
     NSString *key = m_dic[@"key"];
     BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
-    if ([key isEqualToString:@"cost_load"] || [key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_check"]) {
+    if ([key isEqualToString:@"cost_load"] || [key isEqualToString:@"cost_before"] || [key isEqualToString:@"cost_register"] || [key isEqualToString:@"cost_check"]) {
         cell.baseView.textField.adjustZeroShow = YES;
         cell.baseView.textField.text = notShowFooterZeroString([self.detailData valueForKey:key], @"0");
     }
