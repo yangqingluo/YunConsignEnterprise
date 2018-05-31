@@ -501,9 +501,6 @@
 }
 
 - (void)textFieldDidChange:(UITextField *)textField {
-//    if (textField.text.length > kInputLengthMax) {
-//        textField.text = [textField.text substringToIndex:kInputLengthMax];
-//    }
     if ([textField isKindOfClass:[IndexPathTextField class]]) {
         NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
         [self editAtIndexPath:indexPath tag:textField.tag andContent:textField.text];

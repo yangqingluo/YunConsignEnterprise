@@ -11,9 +11,14 @@
 
 #import "SingleInputCell.h"
 #import "BlockActionSheet.h"
+#import "BlockCustomSheet.h"
 #import "JXTAlertController.h"
 
-@interface PublicSRSelectVC ()<UITextFieldDelegate>
+@interface PublicSRSelectVC ()<UITextFieldDelegate> {
+    CGRect phoneTextFiledFrame;
+}
+
+@property (strong, nonatomic) BlockCustomSheet *customerSheet;
 
 @property (strong, nonatomic) NSArray *showArray;
 @property (strong, nonatomic) NSMutableArray *serviceArray;
@@ -184,6 +189,9 @@
             }
             self.data.town.town_name = content;
         }
+        else if ([key isEqualToString:@"phone"]) {
+            
+        }
         else {
             [self.data.customer setValue:content forKey:key];
         }
@@ -209,7 +217,50 @@
     }
 }
 
+- (void)pullCustListByPhoneAndCity:(NSString *)prefix {
+    self.data.customer.phone = prefix;
+    [self.customerSheet dismiss];
+    if (prefix.length < 4) {
+        return;
+    }
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_waybill_queryCustListByPhoneAndCityFunction" Parm:@{@"phone" : prefix, @"city" : self.data.service.open_city_id}  completion:^(id responseBody, NSError *error){
+        [weakself hideHud];
+        if (!error) {
+            [weakself showCustomerSheet:[AppCustomerInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]]];
+        }
+    }];
+}
+
+- (void)showCustomerSheet:(NSArray *)array {
+    if (!array.count) {
+        return;
+    }
+    NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:array.count];
+    for (AppCustomerInfo *item in array) {
+        [m_array addObject:[NSString stringWithFormat:@"%@ %@", item.freight_cust_name, item.phone]];
+    }
+    self.customerSheet.top = phoneTextFiledFrame.origin.y + phoneTextFiledFrame.size.height;
+    QKWEAKSELF;
+    self.customerSheet.block = ^(NSInteger buttonIndex){
+        if (buttonIndex < array.count) {
+            weakself.data.customer = array[buttonIndex];
+            [weakself.tableView reloadData];
+        }
+    };
+    [self.customerSheet showWithStringArray:m_array];
+}
+
 #pragma mark - getter
+- (BlockCustomSheet *)customerSheet {
+    if (!_customerSheet) {
+        CGFloat scale = 0.2;
+        _customerSheet = [[BlockCustomSheet alloc] initWithFrame:CGRectMake(scale * screen_width, 0, (1- scale) * screen_width - kEdgeMiddle, 0) style:UITableViewStyleGrouped];
+        [self.view addSubview:_customerSheet];
+    }
+    return _customerSheet;
+}
+
 - (NSMutableArray *)serviceArray {
     if (!_serviceArray) {
         _serviceArray = [NSMutableArray new];
@@ -264,6 +315,7 @@
         cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.baseView.textField.delegate = self;
+        [cell.baseView.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
     }
     cell.baseView.textLabel.text = dic[@"title"];
@@ -273,12 +325,13 @@
     cell.accessoryType = indexPath.row == 0 ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     NSString *key = dic[@"key"];
-    if (_isEditOnly) {
-        cell.baseView.textField.enabled = (indexPath.row != 0);
-    }
-    else {
-        cell.baseView.textField.enabled = !(indexPath.row == 0 || indexPath.row == 1);
-    }
+    cell.baseView.textField.enabled = (indexPath.row != 0);
+//    if (_isEditOnly) {
+//        cell.baseView.textField.enabled = (indexPath.row != 0);
+//    }
+//    else {
+//        cell.baseView.textField.enabled = !(indexPath.row == 0 || indexPath.row == 1);
+//    }
     
     if (indexPath.row == 0) {
         cell.baseView.textField.text = [self.data.service showCityAndServiceName];
@@ -343,19 +396,19 @@
             break;
             
         case 1:{
-            if (!_isEditOnly) {
-                PublicCustomerPhoneVC *vc = [PublicCustomerPhoneVC new];
-                vc.data = [self.data copy];
-                vc.title = self.title;
-                QKWEAKSELF;
-                vc.doneBlock = ^(id object){
-                    if ([object isKindOfClass:self.data.class]) {
-                        self.data.customer = [[object valueForKey:@"customer"] copy];
-                    }
-                    [weakself.tableView reloadData];
-                };
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+//            if (!_isEditOnly) {
+//                PublicCustomerPhoneVC *vc = [PublicCustomerPhoneVC new];
+//                vc.data = [self.data copy];
+//                vc.title = self.title;
+//                QKWEAKSELF;
+//                vc.doneBlock = ^(id object){
+//                    if ([object isKindOfClass:self.data.class]) {
+//                        self.data.customer = [[object valueForKey:@"customer"] copy];
+//                    }
+//                    [weakself.tableView reloadData];
+//                };
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
         }
             break;
             
@@ -388,6 +441,19 @@
             }
         }
             break;
+    }
+}
+
+#pragma  mark - TextField
+- (void)textFieldDidChange:(UITextField *)textField {
+    if ([textField isKindOfClass:[IndexPathTextField class]]) {
+        NSIndexPath *indexPath = [(IndexPathTextField *)textField indexPath];
+        //在当前页面自动匹配补全联系人供选择
+        if (indexPath.row == 1) {
+            NSString *content = textField.text;
+            phoneTextFiledFrame = [textField.superview convertRect:textField.frame toView:self.view];
+            [self pullCustListByPhoneAndCity:content];
+        }
     }
 }
 

@@ -16,6 +16,7 @@
 		E40F7CAF1F95B36700946C18 /* PublicDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E40F7CAE1F95B36700946C18 /* PublicDatePickerView.m */; };
 		E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E5D1FAACD420094F30E /* PublicSlideVC.m */; };
 		E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E601FAAE6810094F30E /* PublicResultTableVC.m */; };
+		E41155DF20BF9B0E0054568D /* BlockCustomSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155DE20BF9B0E0054568D /* BlockCustomSheet.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
 		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
@@ -505,6 +506,8 @@
 		E4110E5D1FAACD420094F30E /* PublicSlideVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicSlideVC.m; sourceTree = "<group>"; };
 		E4110E5F1FAAE6810094F30E /* PublicResultTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultTableVC.h; sourceTree = "<group>"; };
 		E4110E601FAAE6810094F30E /* PublicResultTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicResultTableVC.m; sourceTree = "<group>"; };
+		E41155DD20BF9B0E0054568D /* BlockCustomSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockCustomSheet.h; sourceTree = "<group>"; };
+		E41155DE20BF9B0E0054568D /* BlockCustomSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockCustomSheet.m; sourceTree = "<group>"; };
 		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
 		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
 		E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultWithScrollTableVC.h; sourceTree = "<group>"; };
@@ -2226,6 +2229,8 @@
 				E4789A691FCD5AF400F1BD88 /* JsonUserCell.m */,
 				E42DACD61FCB0CC2004FCDD1 /* TitleTextCell.h */,
 				E42DACD71FCB0CC2004FCDD1 /* TitleTextCell.m */,
+				E41155DD20BF9B0E0054568D /* BlockCustomSheet.h */,
+				E41155DE20BF9B0E0054568D /* BlockCustomSheet.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3104,6 +3109,7 @@
 				E4E2A3AA1FB311AE00D8EC1C /* LLImagePickerView.m in Sources */,
 				E43FCB591FA85FC300AFEE6D /* FreightCheckCell.m in Sources */,
 				E430F3AE1FB45CB600AB74E1 /* PublicMessageReadManager.m in Sources */,
+				E41155DF20BF9B0E0054568D /* BlockCustomSheet.m in Sources */,
 				E4E2A3931FB311AE00D8EC1C /* IQUIScrollView+Additions.m in Sources */,
 				E4E2A3B51FB311AE00D8EC1C /* NSObject+MJClass.m in Sources */,
 				E45995361F95E61E009F35A6 /* SearchQuantityResultCell.m in Sources */,
