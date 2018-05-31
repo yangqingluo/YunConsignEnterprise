@@ -23,6 +23,10 @@
 		E41155EC20BFD9260054568D /* SaveServiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155EB20BFD9260054568D /* SaveServiceNoteVC.m */; };
 		E41155EF20BFE1A70054568D /* PublicCommonInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155EE20BFE1A70054568D /* PublicCommonInputCellView.m */; };
 		E41155F220BFE24B0054568D /* CommonInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155F120BFE24B0054568D /* CommonInputCell.m */; };
+		E41155F520BFEFAB0054568D /* show_column_waybill_count.txt in Resources */ = {isa = PBXBuildFile; fileRef = E41155F420BFEFAB0054568D /* show_column_waybill_count.txt */; };
+		E41155F820BFEFF80054568D /* WaybillCountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155F720BFEFF80054568D /* WaybillCountVC.m */; };
+		E41155FB20BFF0130054568D /* WaybillCountDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155FA20BFF0130054568D /* WaybillCountDetailVC.m */; };
+		E41155FD20BFF3240054568D /* waybill_type_count.txt in Resources */ = {isa = PBXBuildFile; fileRef = E41155FC20BFF3240054568D /* waybill_type_count.txt */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
 		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
@@ -524,6 +528,12 @@
 		E41155EE20BFE1A70054568D /* PublicCommonInputCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicCommonInputCellView.m; sourceTree = "<group>"; };
 		E41155F020BFE24B0054568D /* CommonInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonInputCell.h; sourceTree = "<group>"; };
 		E41155F120BFE24B0054568D /* CommonInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonInputCell.m; sourceTree = "<group>"; };
+		E41155F420BFEFAB0054568D /* show_column_waybill_count.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = show_column_waybill_count.txt; sourceTree = "<group>"; };
+		E41155F620BFEFF80054568D /* WaybillCountVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillCountVC.h; sourceTree = "<group>"; };
+		E41155F720BFEFF80054568D /* WaybillCountVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaybillCountVC.m; sourceTree = "<group>"; };
+		E41155F920BFF0130054568D /* WaybillCountDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillCountDetailVC.h; sourceTree = "<group>"; };
+		E41155FA20BFF0130054568D /* WaybillCountDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaybillCountDetailVC.m; sourceTree = "<group>"; };
+		E41155FC20BFF3240054568D /* waybill_type_count.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waybill_type_count.txt; sourceTree = "<group>"; };
 		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
 		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
 		E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultWithScrollTableVC.h; sourceTree = "<group>"; };
@@ -1365,6 +1375,18 @@
 			path = YunConsignEnterprise/MainVCs/SystemConfig/ServiceNote;
 			sourceTree = SOURCE_ROOT;
 		};
+		E41155F320BFEE390054568D /* WaybillCount */ = {
+			isa = PBXGroup;
+			children = (
+				E41155F620BFEFF80054568D /* WaybillCountVC.h */,
+				E41155F720BFEFF80054568D /* WaybillCountVC.m */,
+				E41155F920BFF0130054568D /* WaybillCountDetailVC.h */,
+				E41155FA20BFF0130054568D /* WaybillCountDetailVC.m */,
+			);
+			name = WaybillCount;
+			path = YunConsignEnterprise/MainVCs/FinancialManagement/WaybillCount;
+			sourceTree = SOURCE_ROOT;
+		};
 		E429AEBA1FE7FC2B004D4D98 /* PasswordChange */ = {
 			isa = PBXGroup;
 			children = (
@@ -1428,6 +1450,7 @@
 				E490AC921FB2DC9E00905826 /* PublicWaybillDetailListVC.m */,
 				E460C5DA1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.h */,
 				E460C5DB1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m */,
+				E41155F320BFEE390054568D /* WaybillCount */,
 				E48A99E8202C76A30098ABF4 /* GrossMarginCount */,
 				E49D7E4A1FD38D4E009B59B7 /* CodCheck */,
 				E49D7E4F1FD38D4E009B59B7 /* CodLoanApply */,
@@ -1495,13 +1518,15 @@
 			children = (
 				E46CA9A21FB06A33008F26F4 /* daily_name.txt */,
 				E438C1121FE9204C00A438E4 /* query_column_waybill.txt */,
+				E41155F420BFEFAB0054568D /* show_column_waybill_count.txt */,
 				E42DACD11FCB0B81004FCDD1 /* show_column.txt */,
 				E430C0821FD157E400A94A23 /* show_column_cod_check.txt */,
 				E44455D61FE904A300441A90 /* show_column_FreightCheck1.txt */,
 				E44455D51FE904A300441A90 /* show_column_FreightCheck2.txt */,
 				E48A99F1202C79540098ABF4 /* show_column_gross_margin.txt */,
-				E48002D71FDFC57B00E7D943 /* url_zone.txt */,
 				E449C78D1FEA070B001B1077 /* waybill_type.txt */,
+				E41155FC20BFF3240054568D /* waybill_type_count.txt */,
+				E48002D71FDFC57B00E7D943 /* url_zone.txt */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -2998,6 +3023,7 @@
 				E49D7F3F1FD38F16009B59B7 /* money_icon_COD_REMIT@3x.png in Resources */,
 				E4E2A3D41FB311AE00D8EC1C /* ImageSelectedOn@2x.png in Resources */,
 				E49D7F431FD38F16009B59B7 /* money_icon_FREIGHT_CHECK@3x.png in Resources */,
+				E41155FD20BFF3240054568D /* waybill_type_count.txt in Resources */,
 				E4E2A3A01FB311AE00D8EC1C /* IQKeyboardManager.bundle in Resources */,
 				E49D7F591FD38F16009B59B7 /* tabbar_icon_money_normal@3x.png in Resources */,
 				E49D7F2A1FD38F16009B59B7 /* list_icon_details_open@3x.png in Resources */,
@@ -3064,6 +3090,7 @@
 				E4E2A3E21FB311AE00D8EC1C /* UIBarButtonItemArrowLeft.png in Resources */,
 				E49D7F231FD38F16009B59B7 /* list_icon_delete@2x.png in Resources */,
 				E49D7F2D1FD38F16009B59B7 /* list_icon_photo@2x.png in Resources */,
+				E41155F520BFEFAB0054568D /* show_column_waybill_count.txt in Resources */,
 				E49D7F101FD38F16009B59B7 /* daily_icon_SEARCH_QUANTITY@3x.png in Resources */,
 				E49D7F181FD38F16009B59B7 /* list_icon_add@3x.png in Resources */,
 				E49D7F311FD38F16009B59B7 /* list_icon_radio_selcted@2x.png in Resources */,
@@ -3284,6 +3311,7 @@
 				E48C72C51FA9BD83007F7FC8 /* PublicMutableLabelCell.m in Sources */,
 				E4E2A3F41FB311AE00D8EC1C /* MWTapDetectingView.m in Sources */,
 				E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */,
+				E41155F820BFEFF80054568D /* WaybillCountVC.m in Sources */,
 				E4E2A3FC1FB311AE00D8EC1C /* SDWebImageDownloaderOperation.m in Sources */,
 				E4AF3B101F78E28B009EB766 /* PublicSwitchedInputCellView.m in Sources */,
 				E4E2A3A91FB311AE00D8EC1C /* LLImagePickerModel.m in Sources */,
@@ -3327,6 +3355,7 @@
 				E4E2A3801FB311AE00D8EC1C /* AFSecurityPolicy.m in Sources */,
 				E4E2A3BF1FB311AE00D8EC1C /* MJRefreshAutoGifFooter.m in Sources */,
 				E43C68AF1FA99EA000464885 /* CodQueryCell.m in Sources */,
+				E41155FB20BFF0130054568D /* WaybillCountDetailVC.m in Sources */,
 				E4E2A39B1FB311AE00D8EC1C /* IQBarButtonItem.m in Sources */,
 				E44764941F611AC70084F4EB /* LoginViewController.m in Sources */,
 				E49D7E391FD38CAA009B59B7 /* WaybillArrivalVC.m in Sources */,

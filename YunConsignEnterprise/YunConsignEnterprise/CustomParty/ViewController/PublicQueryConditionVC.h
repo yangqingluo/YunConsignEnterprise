@@ -35,6 +35,7 @@ typedef enum : NSUInteger {
     QueryConditionType_DailyReimbursementSave,//日常报销提交
     QueryConditionType_DailyReimbursementCheck,//日常报销审核
     QueryConditionType_GrossMarginCount,//毛利统计
+    QueryConditionType_WaybillCount,//运单统计
     QueryConditionType_Service,//门店设置
     QueryConditionType_JsonUser,//员工设置
     QueryConditionType_TruckManage,//常用车辆

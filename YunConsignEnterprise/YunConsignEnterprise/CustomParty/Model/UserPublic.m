@@ -177,7 +177,7 @@ __strong static UserPublic *_singleManger = nil;
 - (NSMutableDictionary *)dataMapDic {
     if (!_dataMapDic) {
         _dataMapDic = [NSMutableDictionary new];
-        NSArray *m_array = @[@"daily_name", @"show_column", @"show_column_cod_check", @"show_column_FreightCheck1", @"show_column_FreightCheck2", @"show_column_gross_margin", @"query_column_waybill", @"waybill_type"];
+        NSArray *m_array = @[@"daily_name", @"show_column", @"show_column_cod_check", @"show_column_FreightCheck1", @"show_column_FreightCheck2", @"show_column_gross_margin", @"show_column_waybill_count", @"query_column_waybill", @"waybill_type", @"waybill_type_count"];
         for (NSString *key in m_array) {
             NSString *path = [[NSBundle mainBundle] pathForResource:key ofType:@"txt"];
             if (path) {

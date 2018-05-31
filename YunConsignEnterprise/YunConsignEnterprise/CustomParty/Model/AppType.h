@@ -1012,6 +1012,7 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *voucher;//报销凭证，最多三张
 @property (strong, nonatomic) AppServiceInfo *reimbursement_service;//报销网点
 @property (strong, nonatomic) NSString *is_match_waybill;//是否关联运单
+@property (strong, nonatomic) NSString *real_station_city_name;//真实到站名称（中转站）
 
 /*系统设置相关*/
 @property (strong, nonatomic) AppCityInfo *open_city;//所属城市

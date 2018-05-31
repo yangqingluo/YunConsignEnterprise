@@ -18,6 +18,7 @@
 #import "DailyReimbursementApplyVC.h"
 #import "DailyReimbursementCheckVC.h"
 #import "GrossMarginCountVC.h"
+#import "WaybillCountVC.h"
 
 @interface FinancialManagementVC ()
 
@@ -86,7 +87,7 @@
                 vc = [GrossMarginCountVC new];
             }
             else if ([item.menu_code isEqualToString:@"WAYBILL_COUNT"]) {
-//                vc = [GrossMarginCountVC new];
+                vc = [WaybillCountVC new];
             }
             
             if (vc) {
