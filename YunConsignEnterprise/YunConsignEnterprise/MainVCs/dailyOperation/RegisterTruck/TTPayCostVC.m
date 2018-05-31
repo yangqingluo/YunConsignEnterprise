@@ -55,11 +55,16 @@
     for (NSDictionary *dic in m_array) {
         NSString *key = dic[@"key"];
         NSString *value = [self.detailData valueForKey:key];
-        if (!value.length) {
+        if ([dic[@"need"] boolValue] && !value.length) {
             [self showHint:[NSString stringWithFormat:@"请补全%@", dic[@"title"]]];
             return;
         }
-        [m_dic setObject:value forKey:key];
+        if (value.length) {
+            [m_dic setObject:value forKey:key];
+        }
+        else {
+            [m_dic setObject:@"无" forKey:key];
+        }
     }
     [self doShowHudFunction];
     QKWEAKSELF;
@@ -141,8 +146,8 @@
                          @{@"title":@"登记运费",@"subTitle":@"",@"key":@"cost_register"},
                          @{@"title":@"预付费",@"subTitle":@"",@"key":@"cost_before"}],
                        @[@{@"title":@"装车货量",@"subTitle":@"",@"key":@"load_quantity"}],
-                       @[@{@"title":@"结算运费",@"subTitle":@"请输入",@"key":@"cost_check"},
-                         @{@"title":@"结算日期",@"subTitle":@"请选择",@"key":@"check_time"},
+                       @[@{@"title":@"结算运费",@"subTitle":@"请输入",@"key":@"cost_check",@"need":@YES},
+                         @{@"title":@"结算日期",@"subTitle":@"请选择",@"key":@"check_time",@"need":@YES},
                          @{@"title":@"打款账户",@"subTitle":@"请输入",@"key":@"driver_account"},
                          @{@"title":@"户主",@"subTitle":@"请输入",@"key":@"driver_account_name"},
                          @{@"title":@"开户行",@"subTitle":@"请输入",@"key":@"driver_account_bank"}]];
