@@ -65,8 +65,8 @@
             NSArray *power_array = self.condition.IDArrayForPowerServiceArray;
             [m_dic setObject:[power_array componentsJoinedByString:@","] forKey:@"power_service_id"];
         }
-        if (self.condition.query_column && self.condition.query_val) {
-            [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
+        if (self.condition.query_column_s && self.condition.query_val) {
+            [m_dic setObject:self.condition.query_column_s.item_val forKey:@"query_column"];
             [m_dic setObject:self.condition.query_val forKey:@"query_val"];
         }
         if (self.condition.show_column.count) {

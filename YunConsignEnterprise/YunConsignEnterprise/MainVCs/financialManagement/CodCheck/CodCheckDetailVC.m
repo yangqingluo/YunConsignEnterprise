@@ -69,8 +69,8 @@
         if (self.condition.search_time_type) {
             [m_dic setObject:self.condition.search_time_type.item_val forKey:@"time_type"];
         }
-        if (self.condition.query_column && self.condition.query_val) {
-            [m_dic setObject:self.condition.query_column.item_val forKey:@"query_column"];
+        if (self.condition.query_column_s && self.condition.query_val) {
+            [m_dic setObject:self.condition.query_column_s.item_val forKey:@"query_column"];
             [m_dic setObject:self.condition.query_val forKey:@"query_val"];
         }
         if (self.condition.power_service_array.count) {

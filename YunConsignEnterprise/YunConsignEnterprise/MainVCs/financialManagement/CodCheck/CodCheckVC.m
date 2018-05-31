@@ -37,11 +37,11 @@
                        @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                        @{@"title":@"代收方式",@"subTitle":@"请选择",@"key":@"cash_on_delivery_type"},
                        @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
-                       @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                       @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column_s"},
                        @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"}];
     AppServiceInfo *serviceInfo = [AppServiceInfo mj_objectWithKeyValues:[[UserPublic getInstance].userData mj_keyValues]];
     self.condition.power_service_array = @[serviceInfo];
-    [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column"]];
+    [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column_s"]];
 }
 
 - (void)searchButtonAction {

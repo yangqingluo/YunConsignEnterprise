@@ -48,7 +48,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
     self.showArray = [self showArrayForSearchTimeType:1];
     AppServiceInfo *serviceInfo = [AppServiceInfo mj_objectWithKeyValues:[[UserPublic getInstance].userData mj_keyValues]];
     self.condition.power_service_array = @[serviceInfo];
-    [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column"]];
+    [self initialDataDictionaryForCodeArray:@[@"search_time_type", @"query_column_s"]];
 }
 
 - (void)searchButtonAction {
@@ -170,7 +170,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
                          @{@"title":@"开始时间",@"subTitle":@"必填，请选择",@"key":@"start_time"},
                          @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
                          @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
-                         @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                         @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column_s"},
                          @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                          @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}]
     :
@@ -180,7 +180,7 @@ static NSString *searchTimeTypeKey = @"search_time_type";
       @{@"title":@"结束时间",@"subTitle":@"必填，请选择",@"key":@"end_time"},
       @{@"title":@"收款网点",@"subTitle":@"请选择",@"key":@"power_service_array"},
       @{@"title":@"运单类型",@"subTitle":@"请选择",@"key":@"waybill_type"},
-      @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+      @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column_s"},
       @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
       @{@"title":@"显示字段",@"subTitle":@"请选择",@"key":@"show_column"}];
 }

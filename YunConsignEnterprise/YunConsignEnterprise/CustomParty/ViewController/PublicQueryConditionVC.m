@@ -50,11 +50,11 @@
             self.showArray = @[@{@"title":@"开始时间",@"subTitle":@"请选择时间",@"key":@"start_time"},
                            @{@"title":@"结束时间",@"subTitle":@"请选择时间",@"key":@"end_time"},
                            @{@"title":@"运单类型",@"subTitle":@"请选择",@"key":@"waybill_type"},
-                           @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column"},
+                           @{@"title":@"查询项目",@"subTitle":@"请选择",@"key":@"query_column_s"},
                            @{@"title":@"查询内容",@"subTitle":@"请输入",@"key":@"query_val"},
                            @{@"title":@"显示作废",@"subTitle":@"请选择",@"key":@"is_cancel"}];
 //            self.condition.start_time = [self.condition.end_time dateByAddingTimeInterval:-2 * defaultDayTimeInterval];
-            [self additionalDataDictionaryForCode:@"query_column"];
+            [self additionalDataDictionaryForCode:@"query_column_s"];
         }
             break;
             
