@@ -154,10 +154,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-//    SaveTownVC *vc = [SaveTownVC new];
-//    vc.baseData = self.dataSource[indexPath.row];
-//    vc.service = self.service;
-//    [self goToSaveVC:vc];
+    SaveTownVC *vc = [SaveTownVC new];
+    vc.baseData = self.dataSource[indexPath.row];
+    vc.service = self.service;
+    [self goToSaveVC:vc];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

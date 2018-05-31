@@ -30,10 +30,12 @@
 //初始化数据
 - (void)initializeData {
     self.showArray = @[@{@"title":@"中转站",@"subTitle":@"请输入",@"key":@"town_name", @"need" : @YES},
+                       @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"town_phone"},
                        @{@"title":@"排序",@"subTitle":@"请输入",@"key":@"sort", @"need" : @YES}];
 }
 
 - (void)pullDetailData {
+    self.detailData = [self.baseData copy];
 //    [self doShowHudFunction];
 //    NSDictionary *m_dic = @{@"town_id" : [self.baseData valueForKey:@"town_id"]};
 //    QKWEAKSELF;

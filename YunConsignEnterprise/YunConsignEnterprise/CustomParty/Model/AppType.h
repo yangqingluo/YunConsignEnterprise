@@ -223,8 +223,10 @@ BOOL isTrue(NSString *string);
 
 @interface AppTownInfo : AppType
 
+@property (strong, nonatomic) NSString *service_id;//门店ID
 @property (strong, nonatomic) NSString *town_id;//中转站编号
 @property (strong, nonatomic) NSString *town_name;//中转站名称
+@property (strong, nonatomic) NSString *town_phone;//中转站电话
 @property (strong, nonatomic) NSString *sort;//排序
 
 @end
