@@ -10,8 +10,12 @@
 
 #import "PublicMutableLabelView.h"
 #import "SearchQuantityResultCell.h"
+#import "PublicFooterSummaryView.h"
 
 @interface ServiceTownGoodsQuantityVC ()
+
+@property (strong, nonatomic) PublicFooterSummaryView *footerView;
+@property (strong, nonatomic) NSMutableArray *totalDataSource;
 
 @end
 
@@ -20,6 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNav];
+    
+    self.footerView.bottom = self.view.height;
+    [self.view addSubview:self.footerView];
+    
+    self.tableView.height -= self.footerView.height;
     
     [self updateTableViewHeader];
     [self.tableView.mj_header beginRefreshing];
@@ -37,7 +46,7 @@
 }
 
 - (void)pullBaseListData:(BOOL)isReset {
-    NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:@{@"start" : [NSString stringWithFormat:@"%d", isReset ? 0 : (int)self.dataSource.count], @"limit" : [NSString stringWithFormat:@"%d", appPageSize]}];
     [m_dic setObject:self.routeGoodsData.start_station_city_id forKey:@"start_station_city_id"];
     [m_dic setObject:self.routeGoodsData.end_station_city_id forKey:@"end_station_city_id"];
     if (self.condition) {
@@ -48,7 +57,7 @@
             [m_dic setObject:stringFromDate(self.condition.end_time, nil) forKey:@"end_time"];
         }
     }
-    
+    [self pullBaseTotalData:isReset parm:m_dic];
     QKWEAKSELF;
     [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryTownGoodsQuantityByRouteFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself endRefreshing];
@@ -71,6 +80,60 @@
             [weakself showHint:error.userInfo[@"message"]];
         }
     }];
+}
+
+- (void)pullBaseTotalData:(BOOL)isReset parm:(NSDictionary *)parm {
+    if (!isReset) {
+        return;
+    }
+    NSMutableDictionary *m_dic = [NSMutableDictionary dictionaryWithDictionary:parm];
+    [m_dic setObject:@"0" forKey:@"start"];
+    [m_dic setObject:@"1000" forKey:@"limit"];
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_dispatch_queryTownGoodsQuantityByRouteFunction" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself endRefreshing];
+        if (!error) {
+            [weakself.totalDataSource removeAllObjects];
+            ResponseItem *item = responseBody;
+            [weakself.totalDataSource addObjectsFromArray:[AppRouteGoodsQuantityInfo mj_objectArrayWithKeyValuesArray:item.items]];
+            [weakself updateSubviews];
+        }
+        else {
+            [weakself showHint:error.userInfo[@"message"]];
+        }
+    }];
+}
+
+- (void)updateFooterSummary {
+    int quantity = 0;
+    int remain = 0;
+    for (AppGoodsQuantityInfo *item in self.totalDataSource) {
+        quantity += [item.quantity intValue];
+        remain += [item.remain intValue];
+    }
+    self.footerView.textLabel.text = [NSString stringWithFormat:@"总货量：%d，总剩货：%d", quantity, remain];
+}
+
+- (void)updateSubviews {
+    [self updateFooterSummary];
+    [self.tableView reloadData];
+}
+
+#pragma mark - getter
+- (PublicFooterSummaryView *)footerView {
+    if (!_footerView) {
+        _footerView = [[PublicFooterSummaryView alloc] initWithFrame:CGRectMake(0, 0, screen_width, DEFAULT_BAR_HEIGHT)];
+        _footerView.backgroundColor = [UIColor clearColor];
+    }
+    return _footerView;
+}
+
+- (NSMutableArray *)totalDataSource {
+    if (!_totalDataSource) {
+        _totalDataSource = [NSMutableArray new];
+    }
+    return _totalDataSource;
 }
 
 #pragma mark - UITableView
