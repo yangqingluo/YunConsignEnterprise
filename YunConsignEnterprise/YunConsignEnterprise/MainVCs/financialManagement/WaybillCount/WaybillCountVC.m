@@ -114,8 +114,10 @@ static NSString *endServiceKey = @"end_service";
             QKWEAKSELF;
             BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
                 if (buttonIndex > 0 && (buttonIndex - 1) < dicArray.count) {
-                    [weakself.condition setValue:dicArray[buttonIndex - 1] forKey:key];
-                    [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    if (![[weakself.condition valueForKey:key] isEqual:dicArray[buttonIndex - 1]]) {
+                        [weakself.condition setValue:dicArray[buttonIndex - 1] forKey:key];
+                        [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    }
                 }
             } otherButtonTitlesArray:m_array];
             [sheet showInView:self.view];
@@ -161,9 +163,9 @@ static NSString *endServiceKey = @"end_service";
         return;
     }
     else if ([key isEqualToString:@"real_station_city_name"]) {
-        AppServiceInfo *info = [self currentServiceInfo];
-        if (info) {
-            NSArray *townArray = self.townDic[info.service_id];
+        NSString *serviceID = [self currentServiceInfoID];
+        if (serviceID) {
+            NSArray *townArray = self.townDic[serviceID];
             if (townArray) {
                 if (!townArray.count) {
                     return;
@@ -182,7 +184,7 @@ static NSString *endServiceKey = @"end_service";
                 [sheet showInView:self.view];
             }
             else {
-                [self pullServiceTownArrayFunction:info.service_id atIndexPath:nil];
+                [self pullServiceTownArrayFunction:serviceID atIndexPath:nil];
             }
         }
         return;
@@ -217,23 +219,23 @@ static NSString *endServiceKey = @"end_service";
 }
 
 - (BOOL)judgeRealStationCityNameSelectOrInput {
-    AppServiceInfo *info = [self currentServiceInfo];
-    if (info) {
-        NSArray *townArray = self.townDic[info.service_id];
+    NSString *serviceID = [self currentServiceInfoID];
+    if (serviceID) {
+        NSArray *townArray = self.townDic[serviceID];
         return townArray.count > 0;
     }
     return NO;
 }
 
-- (AppServiceInfo *)currentServiceInfo {
-    AppServiceInfo *info = nil;
+- (NSString *)currentServiceInfoID {
+    NSString *serviceID = nil;
     if ([self.condition.waybill_type.item_val isEqualToString:@"1"]) {
-        info = self.condition.end_service;
+        serviceID = self.condition.end_service.service_id;
     }
     else {
-        info = self.condition.start_service;
+        serviceID = [UserPublic getInstance].userData.service_id;
     }
-    return info;
+    return serviceID;
 }
 
 #pragma mark - getter
@@ -247,18 +249,25 @@ static NSString *endServiceKey = @"end_service";
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:waybillTypeKey]) {
-        [self updateShowArray];
-        [self.tableView reloadData];
+        self.condition.real_station_city_name = nil;
+        if ([self.condition.waybill_type.item_val isEqualToString:@"1"]) {
+            self.condition.start_service = nil;
+        }
+        else {
+            self.condition.end_service = nil;
+        }
     }
-    else if ([keyPath isEqualToString:startServiceKey] || [keyPath isEqualToString:endServiceKey]) {
+    else if ([keyPath isEqualToString:endServiceKey] || [keyPath isEqualToString:startServiceKey]) {
         [self updateShowArray];
         [self.tableView reloadData];
-        AppServiceInfo *info = [self currentServiceInfo];
-        if (info) {
+        NSString *serviceID = [self currentServiceInfoID];
+        if ([keyPath isEqualToString:endServiceKey]) {
             self.condition.real_station_city_name = nil;
-            NSArray *townArray = self.townDic[info.service_id];
+        }
+        if (serviceID) {
+            NSArray *townArray = self.townDic[serviceID];
             if (!townArray) {
-                [self pullServiceTownArrayFunction:info.service_id atIndexPath:nil];
+                [self pullServiceTownArrayFunction:serviceID atIndexPath:nil];
             }
         }
     }
