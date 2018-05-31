@@ -27,6 +27,7 @@
 		E41155F820BFEFF80054568D /* WaybillCountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155F720BFEFF80054568D /* WaybillCountVC.m */; };
 		E41155FB20BFF0130054568D /* WaybillCountDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155FA20BFF0130054568D /* WaybillCountDetailVC.m */; };
 		E41155FD20BFF3240054568D /* waybill_type_count.txt in Resources */ = {isa = PBXBuildFile; fileRef = E41155FC20BFF3240054568D /* waybill_type_count.txt */; };
+		E411560020C04FBD0054568D /* ServiceLoadedDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155FF20C04FBD0054568D /* ServiceLoadedDetailVC.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
 		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
@@ -534,6 +535,8 @@
 		E41155F920BFF0130054568D /* WaybillCountDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaybillCountDetailVC.h; sourceTree = "<group>"; };
 		E41155FA20BFF0130054568D /* WaybillCountDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaybillCountDetailVC.m; sourceTree = "<group>"; };
 		E41155FC20BFF3240054568D /* waybill_type_count.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waybill_type_count.txt; sourceTree = "<group>"; };
+		E41155FE20C04FBD0054568D /* ServiceLoadedDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceLoadedDetailVC.h; sourceTree = "<group>"; };
+		E41155FF20C04FBD0054568D /* ServiceLoadedDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceLoadedDetailVC.m; sourceTree = "<group>"; };
 		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
 		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
 		E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultWithScrollTableVC.h; sourceTree = "<group>"; };
@@ -1684,6 +1687,8 @@
 				E49D7DF41FD38CAA009B59B7 /* TransportTruckTableVC.m */,
 				E49D7DF71FD38CAA009B59B7 /* TTLoadListVC.h */,
 				E49D7DF81FD38CAA009B59B7 /* TTLoadListVC.m */,
+				E41155FE20C04FBD0054568D /* ServiceLoadedDetailVC.h */,
+				E41155FF20C04FBD0054568D /* ServiceLoadedDetailVC.m */,
 				E49D7DF91FD38CAA009B59B7 /* TTPayCostVC.h */,
 				E49D7DFA1FD38CAA009B59B7 /* TTPayCostVC.m */,
 				E4AC27171FE98D770026504C /* TransportTruckDetailVC.h */,
@@ -3300,6 +3305,7 @@
 				E49D7E9A1FD38D4E009B59B7 /* CodPayVC.m in Sources */,
 				E49D7E3D1FD38CAA009B59B7 /* AddGoodsVC.m in Sources */,
 				E47118321F676ACC004D4337 /* PublicTabViewController.m in Sources */,
+				E411560020C04FBD0054568D /* ServiceLoadedDetailVC.m in Sources */,
 				E4941E771FC4193500707A0D /* PublicSaveVC.m in Sources */,
 				E4E2A3B81FB311AE00D8EC1C /* NSObject+MJProperty.m in Sources */,
 				E49C4F591F738EA3007E7D70 /* PublicListHeaderView.m in Sources */,

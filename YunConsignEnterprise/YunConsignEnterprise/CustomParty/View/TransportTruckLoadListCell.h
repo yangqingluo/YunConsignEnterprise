@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define Event_TransportTruckLoadListCellClicked @"Event_TransportTruckLoadListCellClicked"
+
 @interface TransportTruckLoadListCell : UITableViewCell
 
 @property (copy, nonatomic) NSArray *dataArray;

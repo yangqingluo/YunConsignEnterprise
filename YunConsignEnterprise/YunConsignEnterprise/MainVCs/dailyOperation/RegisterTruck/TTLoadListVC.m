@@ -7,6 +7,7 @@
 //
 
 #import "TTLoadListVC.h"
+#import "ServiceLoadedDetailVC.h"
 
 #import "TransportTruckLoadListCell.h"
 #import "PublicFooterSummaryView.h"
@@ -144,4 +145,18 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
 }
+
+#pragma mark - UIResponder+Router
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSObject *)userInfo {
+    if ([eventName isEqualToString:Event_TransportTruckLoadListCellClicked]) {
+        NSInteger index = [(NSNumber *)userInfo integerValue];
+        if (index >= 0 && index < self.dataSource.count) {
+            ServiceLoadedDetailVC *vc = [ServiceLoadedDetailVC new];
+            vc.truckLoadData = self.dataSource[index];
+            vc.title = [NSString stringWithFormat:@"%@-货量明细", vc.truckLoadData.load_service_name];
+            [self doPushViewController:vc animated:YES];
+        }
+    }
+}
+
 @end

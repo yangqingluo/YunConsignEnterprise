@@ -9,6 +9,8 @@
 #import "TransportTruckLoadListCell.h"
 #import "PublicMutableLabelView.h"
 
+#import "UIResponder+Router.h"
+
 @interface TransportTruckLoadListCell ()
 
 @property (strong, nonatomic) UIView *baseView;
@@ -49,6 +51,10 @@
     return kCellHeight * (m_array.count + 1);
 }
 
+- (void)selectCellMutableLabelViewAction:(UIGestureRecognizer *)gesture {
+    [self routerEventWithName:Event_TransportTruckLoadListCellClicked userInfo:@(gesture.view.tag)];
+}
+
 #pragma mark - setter
 - (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
@@ -64,8 +70,12 @@
         AppTransportTruckLoadInfo *item = dataArray[i];
         PublicMutableLabelView *labelView = [[PublicMutableLabelView alloc] initWithFrame:CGRectMake(0, titleView.bottom + i * kCellHeight, self.baseView.width, kCellHeight)];
         [labelView updateDataSourceWithArray:[item showStringListForDetail]];
+        labelView.tag = i;
         [self.baseView addSubview:labelView];
         [self.baseView addSubview:NewSeparatorLine(CGRectMake(0, labelView.top, self.baseView.width, appSeparaterLineSize))];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCellMutableLabelViewAction:)];
+        [labelView addGestureRecognizer:gesture];
     }
 }
 
