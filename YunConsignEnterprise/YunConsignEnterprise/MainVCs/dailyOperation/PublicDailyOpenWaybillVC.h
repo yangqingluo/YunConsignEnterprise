@@ -14,6 +14,7 @@
 #import "DoubleInputCell.h"
 #import "SwitchorCell.h"
 #import "SwitchedInputCell.h"
+#import "CommonInputCell.h"
 
 @interface PublicDailyOpenWaybillVC : AppBasicTableViewController<UITextFieldDelegate>
 
@@ -34,4 +35,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView singleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier;
 - (UITableViewCell *)tableView:(UITableView *)tableView switchedInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier;
 - (UITableViewCell *)tableView:(UITableView *)tableView doubleInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier;
+- (UITableViewCell *)tableView:(UITableView *)tableView commonInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier;
+
 @end

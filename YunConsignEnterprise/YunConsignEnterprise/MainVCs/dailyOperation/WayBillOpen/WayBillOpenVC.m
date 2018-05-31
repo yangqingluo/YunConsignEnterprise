@@ -132,6 +132,10 @@
     }
 }
 
+- (void)commonButtonAction:(IndexPathButton *)button {
+    [self touchRowButtonAtIndexPath:button.indexPath];
+}
+
 - (void)checkButtonAction:(IndexPathButton *)button {
     if (button.indexPath.section == 2) {
         NSDictionary *m_dic = self.payStyleShowArray[button.indexPath.row - 1];
@@ -272,6 +276,34 @@
             
         default:
             break;
+    }
+}
+
+- (void)touchRowButtonAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        NSDictionary *m_dic = self.payStyleShowArray[indexPath.row - 1];
+        NSString *key = m_dic[@"key"];
+        if ([key isEqualToString:@"note"]) {
+            NSArray *dataArray = [[UserPublic getInstance].dataMapDic objectForKey:key];
+            if (dataArray.count) {
+                NSMutableArray *m_array = [NSMutableArray arrayWithCapacity:dataArray.count];
+                for (AppNoteInfo *m_data in dataArray) {
+                    [m_array addObject:m_data.note_info];
+                }
+                QKWEAKSELF;
+                BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+                    if (buttonIndex > 0 && (buttonIndex - 1) < dataArray.count) {
+                        AppNoteInfo *item = dataArray[buttonIndex - 1];
+                        [weakself.toSaveData setValue:item.note_info forKey:key];
+                        [weakself.tableView reloadData];
+                    }
+                } otherButtonTitlesArray:m_array];
+                [sheet showInView:self.view];
+            }
+            else {
+                [self pullServiceNoteArrayFunctionForCode:key selectionInIndexPath:indexPath];
+            }
+        }
     }
 }
 
@@ -451,6 +483,16 @@
         cell.anotherBaseView.textField.text = [NSString stringWithFormat:@"%d", [value2 intValue]];
     }
     
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView commonInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    SingleInputCell *cell = (SingleInputCell *)[super tableView:tableView commonInputCellForRowAtIndexPath:indexPath showObject:showObject reuseIdentifier:reuseIdentifier];
+    NSString *key = showObject[@"key"];
+    NSString *value = [self.toSaveData valueForKey:key];
+    if (value) {
+        cell.baseView.textField.text = value;
+    }
     return cell;
 }
 
@@ -658,6 +700,10 @@
                     if ([self.inputForSelectorSet containsObject:key]) {
                         static NSString *CellIdentifier = @"pay_style_switchedInput_cell";
                         return [self tableView:tableView switchedInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
+                    }
+                    else if ([key isEqualToString:@"note"]) {
+                        static NSString *CellIdentifier = @"note_cell";
+                        return [self tableView:tableView commonInputCellForRowAtIndexPath:indexPath showObject:m_dic reuseIdentifier:CellIdentifier];
                     }
                     else {
                         static NSString *CellIdentifier = @"pay_style_edit_cell";

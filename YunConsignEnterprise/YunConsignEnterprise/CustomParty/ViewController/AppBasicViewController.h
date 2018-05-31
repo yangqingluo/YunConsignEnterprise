@@ -55,6 +55,7 @@
 - (void)pullLoadServiceArrayFunctionForTransportTruckID:(NSString *)transport_truck_id selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullTruckArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullServicePackageArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
+- (void)pullServiceNoteArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)pullServiceGoodArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath;
 - (void)doCheckUserIsOrNotFinanceFunction:(NSIndexPath *)indexPath;
 

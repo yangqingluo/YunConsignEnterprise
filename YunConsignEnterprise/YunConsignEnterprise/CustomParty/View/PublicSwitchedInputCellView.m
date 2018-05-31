@@ -13,9 +13,10 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _checkBtn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        _checkBtn = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
         [_checkBtn setImage:[UIImage imageNamed:@"list_icon_checkbox_normal"] forState:UIControlStateNormal];
         [_checkBtn setImage:[UIImage imageNamed:@"list_icon_checkbox_selcted"] forState:UIControlStateSelected];
+        _checkBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [self addRightView:_checkBtn];
     }
     return self;

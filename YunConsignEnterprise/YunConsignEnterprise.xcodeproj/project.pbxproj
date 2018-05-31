@@ -21,6 +21,8 @@
 		E41155E320BFD87E0054568D /* setting_icon_SERVICE_NOTE@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E41155E120BFD87D0054568D /* setting_icon_SERVICE_NOTE@3x.png */; };
 		E41155E920BFD9110054568D /* ServiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155E820BFD9110054568D /* ServiceNoteVC.m */; };
 		E41155EC20BFD9260054568D /* SaveServiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155EB20BFD9260054568D /* SaveServiceNoteVC.m */; };
+		E41155EF20BFE1A70054568D /* PublicCommonInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155EE20BFE1A70054568D /* PublicCommonInputCellView.m */; };
+		E41155F220BFE24B0054568D /* CommonInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155F120BFE24B0054568D /* CommonInputCell.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
 		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
@@ -518,6 +520,10 @@
 		E41155E820BFD9110054568D /* ServiceNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceNoteVC.m; sourceTree = "<group>"; };
 		E41155EA20BFD9260054568D /* SaveServiceNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveServiceNoteVC.h; sourceTree = "<group>"; };
 		E41155EB20BFD9260054568D /* SaveServiceNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveServiceNoteVC.m; sourceTree = "<group>"; };
+		E41155ED20BFE1A70054568D /* PublicCommonInputCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicCommonInputCellView.h; sourceTree = "<group>"; };
+		E41155EE20BFE1A70054568D /* PublicCommonInputCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicCommonInputCellView.m; sourceTree = "<group>"; };
+		E41155F020BFE24B0054568D /* CommonInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonInputCell.h; sourceTree = "<group>"; };
+		E41155F120BFE24B0054568D /* CommonInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonInputCell.m; sourceTree = "<group>"; };
 		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
 		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
 		E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultWithScrollTableVC.h; sourceTree = "<group>"; };
@@ -2136,6 +2142,8 @@
 				E4AF3B061F78CC8B009EB766 /* PublicSwitchorCellView.m */,
 				E4AF3B0E1F78E28B009EB766 /* PublicSwitchedInputCellView.h */,
 				E4AF3B0F1F78E28B009EB766 /* PublicSwitchedInputCellView.m */,
+				E41155ED20BFE1A70054568D /* PublicCommonInputCellView.h */,
+				E41155EE20BFE1A70054568D /* PublicCommonInputCellView.m */,
 				E49C4F5D1F7395AB007E7D70 /* SingleInputCell.h */,
 				E49C4F5E1F7395AB007E7D70 /* SingleInputCell.m */,
 				E488696A207E0DAD00606115 /* SingleShowCell.h */,
@@ -2146,6 +2154,8 @@
 				E4DE91801FD5B04C00249730 /* NormalTableViewCell.m */,
 				E4AF3B081F78CD87009EB766 /* SwitchorCell.h */,
 				E4AF3B091F78CD87009EB766 /* SwitchorCell.m */,
+				E41155F020BFE24B0054568D /* CommonInputCell.h */,
+				E41155F120BFE24B0054568D /* CommonInputCell.m */,
 				E4AF3B0B1F78DFD2009EB766 /* SwitchedInputCell.h */,
 				E4AF3B0C1F78DFD2009EB766 /* SwitchedInputCell.m */,
 				E49C4F571F738EA3007E7D70 /* PublicListHeaderView.h */,
@@ -3148,6 +3158,7 @@
 				E4AF3B011F78CB4E009EB766 /* AppResponder.m in Sources */,
 				E4941E6E1FC414EC00707A0D /* OpenCityVC.m in Sources */,
 				E49D7E2E1FD38CAA009B59B7 /* CustomerManageVC.m in Sources */,
+				E41155F220BFE24B0054568D /* CommonInputCell.m in Sources */,
 				E447649F1F611C460084F4EB /* DailyOperationVC.m in Sources */,
 				E49D6C151FB15C62004F82D4 /* PublicFMWaybillQueryVC.m in Sources */,
 				E49D7E441FD38CAA009B59B7 /* WaybillLogTableVC.m in Sources */,
@@ -3180,6 +3191,7 @@
 				E4E2A3FB1FB311AE00D8EC1C /* SDWebImageDownloader.m in Sources */,
 				E432295A1F97536A000400B8 /* WaybillReceiveCell.m in Sources */,
 				E4E2A3961FB311AE00D8EC1C /* IQUIViewController+Additions.m in Sources */,
+				E41155EF20BFE1A70054568D /* PublicCommonInputCellView.m in Sources */,
 				E4E2A3CC1FB311AE00D8EC1C /* UIView+MJExtension.m in Sources */,
 				E4A2CD3A1FCE6D760047A9BC /* SaveTruckVC.m in Sources */,
 				E4E2A3FE1FB311AE00D8EC1C /* SDWebImagePrefetcher.m in Sources */,

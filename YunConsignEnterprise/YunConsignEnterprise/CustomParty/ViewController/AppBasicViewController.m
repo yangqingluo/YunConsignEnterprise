@@ -395,6 +395,28 @@
         }
     }];
 }
+
+- (void)pullServiceNoteArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *m_dic = @{};
+    [self doShowHudFunction];
+    QKWEAKSELF;
+    [[QKNetworkSingleton sharedManager] commonSoapPost:@"hex_base_queryServiceNoteList" Parm:m_dic completion:^(id responseBody, NSError *error){
+        [weakself doHideHudFunction];
+        if (!error) {
+            NSArray *m_array = [AppNoteInfo mj_objectArrayWithKeyValuesArray:[responseBody valueForKey:@"items"]];
+            if (m_array.count) {
+                [[UserPublic getInstance].dataMapDic setObject:m_array forKey:dict_code];
+                if (indexPath) {
+                    [weakself touchRowButtonAtIndexPath:indexPath];
+                }
+            }
+        }
+        else {
+            [weakself doShowHintFunction:error.userInfo[@"message"]];
+        }
+    }];
+}
+
 - (void)pullServiceGoodArrayFunctionForCode:(NSString *)dict_code selectionInIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *m_dic = @{};
     [self doShowHudFunction];

@@ -32,6 +32,10 @@
     
 }
 
+- (void)commonButtonAction:(UIButton *)button {
+    
+}
+
 - (void)checkButtonAction:(UIButton *)button {
     
 }
@@ -187,6 +191,39 @@
 //    NSString *key1 = m_dic1[@"key"];
     NSString *key2 = m_dic2[@"key"];
     cell.anotherBaseView.textField.enabled = ![self.inputInvalidSet containsObject:key2];
+    cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView commonInputCellForRowAtIndexPath:(NSIndexPath *)indexPath showObject:(id)showObject reuseIdentifier:(NSString *)reuseIdentifier {
+    SingleInputCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[SingleInputCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.separatorInset = UIEdgeInsetsMake(0, screen_width, 0, 0);
+        cell.baseView.textField.delegate = self;
+        cell.baseView.textField.keyboardType = UIKeyboardTypeNumberPad;
+        
+        cell.actionButton = [[IndexPathButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
+        [cell.actionButton setImage:[UIImage imageNamed:@"list_icon_common"] forState:UIControlStateNormal];
+        [cell.actionButton addTarget:self action:@selector(commonButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        cell.actionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [cell.baseView addRightView:cell.actionButton];
+    }
+    cell.baseView.textLabel.text = showObject[@"title"];
+    cell.baseView.textField.placeholder = showObject[@"subTitle"];
+    cell.baseView.textField.text = @"";
+    cell.baseView.textField.indexPath = [indexPath copy];
+    cell.baseView.textField.enabled = YES;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    cell.actionButton.indexPath = [indexPath copy];
+    
+    NSString *key = showObject[@"key"];
+    BOOL isKeybordDefault = [self.defaultKeyBoardTypeSet containsObject:key];
+    cell.baseView.textField.keyboardType = isKeybordDefault ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
+    cell.baseView.textField.adjustZeroShow = !isKeybordDefault;
     cell.isShowBottomEdge = indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1;
     
     return cell;
