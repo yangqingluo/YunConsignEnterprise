@@ -170,6 +170,20 @@ BOOL isTrue(NSString *string) {
 
 @end
 
+
+@implementation AppNoteInfo
+
+
+
+@end
+
+@implementation AppNoteDetailInfo
+
+
+
+@end
+
+
 @implementation AppCityInfo
 
 

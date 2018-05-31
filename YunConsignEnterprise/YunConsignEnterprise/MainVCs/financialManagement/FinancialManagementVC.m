@@ -85,6 +85,9 @@
             else if ([item.menu_code isEqualToString:@"GROSS_MARGIN_COUNT"]) {
                 vc = [GrossMarginCountVC new];
             }
+            else if ([item.menu_code isEqualToString:@"WAYBILL_COUNT"]) {
+//                vc = [GrossMarginCountVC new];
+            }
             
             if (vc) {
                 vc.accessInfo = item;

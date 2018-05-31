@@ -17,6 +17,10 @@
 		E4110E5E1FAACD420094F30E /* PublicSlideVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E5D1FAACD420094F30E /* PublicSlideVC.m */; };
 		E4110E611FAAE6810094F30E /* PublicResultTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4110E601FAAE6810094F30E /* PublicResultTableVC.m */; };
 		E41155DF20BF9B0E0054568D /* BlockCustomSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155DE20BF9B0E0054568D /* BlockCustomSheet.m */; };
+		E41155E220BFD87E0054568D /* money_icon_WAYBILL_COUNT@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E41155E020BFD87D0054568D /* money_icon_WAYBILL_COUNT@3x.png */; };
+		E41155E320BFD87E0054568D /* setting_icon_SERVICE_NOTE@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E41155E120BFD87D0054568D /* setting_icon_SERVICE_NOTE@3x.png */; };
+		E41155E920BFD9110054568D /* ServiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155E820BFD9110054568D /* ServiceNoteVC.m */; };
+		E41155EC20BFD9260054568D /* SaveServiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41155EB20BFD9260054568D /* SaveServiceNoteVC.m */; };
 		E41BF7E91F9785AA00C23CEA /* PayOnReceiptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */; };
 		E41E9F4B1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E9F4A1FCAC3A600E18252 /* PublicResultWithScrollTableVC.m */; };
 		E420B8061F737B34009794A2 /* PublicInputCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E420B8051F737B34009794A2 /* PublicInputCellView.m */; };
@@ -508,6 +512,12 @@
 		E4110E601FAAE6810094F30E /* PublicResultTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicResultTableVC.m; sourceTree = "<group>"; };
 		E41155DD20BF9B0E0054568D /* BlockCustomSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockCustomSheet.h; sourceTree = "<group>"; };
 		E41155DE20BF9B0E0054568D /* BlockCustomSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockCustomSheet.m; sourceTree = "<group>"; };
+		E41155E020BFD87D0054568D /* money_icon_WAYBILL_COUNT@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "money_icon_WAYBILL_COUNT@3x.png"; sourceTree = "<group>"; };
+		E41155E120BFD87D0054568D /* setting_icon_SERVICE_NOTE@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_icon_SERVICE_NOTE@3x.png"; sourceTree = "<group>"; };
+		E41155E720BFD9110054568D /* ServiceNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceNoteVC.h; sourceTree = "<group>"; };
+		E41155E820BFD9110054568D /* ServiceNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceNoteVC.m; sourceTree = "<group>"; };
+		E41155EA20BFD9260054568D /* SaveServiceNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveServiceNoteVC.h; sourceTree = "<group>"; };
+		E41155EB20BFD9260054568D /* SaveServiceNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveServiceNoteVC.m; sourceTree = "<group>"; };
 		E41BF7E71F9785AA00C23CEA /* PayOnReceiptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOnReceiptCell.h; sourceTree = "<group>"; };
 		E41BF7E81F9785AA00C23CEA /* PayOnReceiptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOnReceiptCell.m; sourceTree = "<group>"; };
 		E41E9F491FCAC3A600E18252 /* PublicResultWithScrollTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicResultWithScrollTableVC.h; sourceTree = "<group>"; };
@@ -1337,6 +1347,18 @@
 			path = YunConsignEnterprise/MainVCs/SystemConfig/ServicePackage;
 			sourceTree = SOURCE_ROOT;
 		};
+		E41155E620BFD8F30054568D /* ServiceNote */ = {
+			isa = PBXGroup;
+			children = (
+				E41155E720BFD9110054568D /* ServiceNoteVC.h */,
+				E41155E820BFD9110054568D /* ServiceNoteVC.m */,
+				E41155EA20BFD9260054568D /* SaveServiceNoteVC.h */,
+				E41155EB20BFD9260054568D /* SaveServiceNoteVC.m */,
+			);
+			name = ServiceNote;
+			path = YunConsignEnterprise/MainVCs/SystemConfig/ServiceNote;
+			sourceTree = SOURCE_ROOT;
+		};
 		E429AEBA1FE7FC2B004D4D98 /* PasswordChange */ = {
 			isa = PBXGroup;
 			children = (
@@ -1431,6 +1453,7 @@
 			children = (
 				E44764971F611BF70084F4EB /* SystemConfigVC.h */,
 				E44764981F611BF70084F4EB /* SystemConfigVC.m */,
+				E41155E620BFD8F30054568D /* ServiceNote */,
 				E429AEBA1FE7FC2B004D4D98 /* PasswordChange */,
 				E4941E651FC413EC00707A0D /* JsonUser */,
 				E4941E661FC413EC00707A0D /* OpenCity */,
@@ -1874,6 +1897,8 @@
 		E49D7EA51FD38F16009B59B7 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				E41155E020BFD87D0054568D /* money_icon_WAYBILL_COUNT@3x.png */,
+				E41155E120BFD87D0054568D /* setting_icon_SERVICE_NOTE@3x.png */,
 				E429AEB81FE7F69A004D4D98 /* setting_icon_PASSWORD_CHANGE@3x.png */,
 				E49D7EA61FD38F16009B59B7 /* content_icon_direction@2x.png */,
 				E49D7EA71FD38F16009B59B7 /* content_icon_direction@3x.png */,
@@ -2891,6 +2916,7 @@
 			files = (
 				E49D7F331FD38F16009B59B7 /* list_icon_search@2x.png in Resources */,
 				E49D7F1A1FD38F16009B59B7 /* list_icon_checkbox_normal@3x.png in Resources */,
+				E41155E220BFD87E0054568D /* money_icon_WAYBILL_COUNT@3x.png in Resources */,
 				E49D7F221FD38F16009B59B7 /* list_icon_common@3x.png in Resources */,
 				E49D7F141FD38F16009B59B7 /* daily_icon_WAYBILL_QUERY@3x.png in Resources */,
 				E49D7F201FD38F16009B59B7 /* list_icon_checkbox_w_selected@3x.png in Resources */,
@@ -3011,6 +3037,7 @@
 				E48002D81FDFC57B00E7D943 /* url_zone.txt in Resources */,
 				E49D7F2F1FD38F16009B59B7 /* list_icon_radio_normal@2x.png in Resources */,
 				E49D7F3A1FD38F16009B59B7 /* login_icon_phone@3x.png in Resources */,
+				E41155E320BFD87E0054568D /* setting_icon_SERVICE_NOTE@3x.png in Resources */,
 				E49D7F571FD38F16009B59B7 /* tabbar_icon_daily_selected@3x.png in Resources */,
 				E4E2A3D21FB311AE00D8EC1C /* ImageSelectedOff@3x.png in Resources */,
 				E4E2A3DF1FB311AE00D8EC1C /* PlayButtonOverlayLargeTap.png in Resources */,
@@ -3071,6 +3098,7 @@
 				E4E2A3C61FB311AE00D8EC1C /* MJRefreshNormalHeader.m in Sources */,
 				E44764951F611AC70084F4EB /* MainTabBarController.m in Sources */,
 				E460C5DC1FB2F85300B6014F /* PublicDailyReimbursementDetailVC.m in Sources */,
+				E41155EC20BFD9260054568D /* SaveServiceNoteVC.m in Sources */,
 				E40E49D61F96083D000C8B0B /* PublicMutableButtonView.m in Sources */,
 				E4E2A3FA1FB311AE00D8EC1C /* SDWebImageDecoder.m in Sources */,
 				E4AE9F311F5EA605002EBE41 /* ViewController.m in Sources */,
@@ -3364,6 +3392,7 @@
 				E4E2A4031FB311AE00D8EC1C /* UIImageView+WebCache.m in Sources */,
 				E4ED6EFB1F6291AA00AE5752 /* PublicBannerView.m in Sources */,
 				E49D7E8C1FD38D4E009B59B7 /* CodLoanApplyVC.m in Sources */,
+				E41155E920BFD9110054568D /* ServiceNoteVC.m in Sources */,
 				E44765051F6129040084F4EB /* UserPublic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -259,6 +259,19 @@ BOOL isTrue(NSString *string);
 
 @end
 
+@interface AppNoteInfo : AppType
+
+@property (strong, nonatomic) NSString *note_id;//常用备注编号
+@property (strong, nonatomic) NSString *note_info;//常用备注信息
+
+@end
+
+@interface AppNoteDetailInfo : AppNoteInfo
+
+@property (strong, nonatomic) NSString *sort;//常用备注排序
+
+@end
+
 @interface AppCityInfo : AppType
 
 @property (strong, nonatomic) NSString *open_city_id;//所在城市编号

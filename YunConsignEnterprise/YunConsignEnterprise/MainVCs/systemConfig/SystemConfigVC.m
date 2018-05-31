@@ -14,6 +14,7 @@
 #import "ServicePackageVC.h"
 #import "TruckManageVC.h"
 #import "PasswordChangeVC.h"
+#import "ServiceNoteVC.h"
 
 #import "BlockAlertView.h"
 
@@ -97,6 +98,9 @@
                 }
                 else if ([item.menu_code isEqualToString:@"PRINT_SET"]) {
                     
+                }
+                else if ([item.menu_code isEqualToString:@"SERVICE_NOTE"]) {
+                    vc = [ServiceNoteVC new];
                 }
                 
                 if (vc) {
