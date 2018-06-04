@@ -36,8 +36,8 @@
     if (!_isEditOnly || self.type == SRSelectType_Receiver) {
         [self pullServiceArrayFunction];
     }
-    if (self.type == SRSelectType_Receiver && self.data) {
-        [self pullServiceTownArrayFunction:self.data.service.service_id atIndexPath:nil];
+    if (self.type == SRSelectType_Receiver && _data) {
+        [self pullServiceTownArrayFunction:_data.service.service_id atIndexPath:nil];
     }
 }
 
@@ -130,9 +130,27 @@
 }
 
 - (void)pullServiceArrayFunction {
+    NSMutableDictionary *m_dic = [NSMutableDictionary new];
+    NSString *funcId = @"";
+    if (self.type == SRSelectType_Sender) {
+        funcId = @"hex_waybill_getCurrentService";
+    }
+    else if (self.type == SRSelectType_Receiver) {
+        if (self.open_city_id) {
+            funcId = @"hex_base_updateWaybillGetEndService";
+            [m_dic setObject:self.open_city_id forKey:@"open_city_id"];
+        }
+        else {
+            funcId = @"hex_base_getEndService";
+        }
+    }
+    
+    if (!funcId.length) {
+        return;
+    }
     [self doShowHudFunction];
     QKWEAKSELF;
-    [[QKNetworkSingleton sharedManager] commonSoapPost:self.type == SRSelectType_Sender ? @"hex_waybill_getCurrentService" : @"hex_waybill_getEndService" Parm:nil completion:^(id responseBody, NSError *error){
+    [[QKNetworkSingleton sharedManager] commonSoapPost:funcId Parm:m_dic completion:^(id responseBody, NSError *error){
         [weakself doHideHudFunction];
         if (!error) {
             [weakself.serviceArray removeAllObjects];

@@ -43,7 +43,7 @@
     
     self.tableView.tableHeaderView = self.headerView;
     self.title = @"原货返回";
-    [self pullWaybillDetailData];
+    [self pullWaybillDetailData:NO];
 }
 
 - (void)goBackWithDone:(BOOL)done{
@@ -56,6 +56,24 @@
 - (void)doDoneAction {
     if (self.doneBlock) {
         self.doneBlock(self.detailData);
+    }
+}
+
+- (void)receiverButtonAction {
+    if (self.detailData.end_station_city_id) {
+        PublicSRSelectVC *vc = [PublicSRSelectVC new];
+        vc.type = SRSelectType_Receiver;
+        vc.data = self.headerView.receiverInfo;
+        vc.open_city_id = self.detailData.end_station_city_id;
+        vc.doneBlock = ^(id object){
+            if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
+                self.headerView.receiverInfo = [object copy];
+            }
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        [self pullWaybillDetailData:YES];
     }
 }
 
@@ -91,7 +109,7 @@
     [self goBackWithDone:YES];
 }
 
-- (void)pullWaybillDetailData {
+- (void)pullWaybillDetailData:(BOOL)goSelectReceiver {
     [self doShowHudFunction];
     NSDictionary *m_dic = @{@"waybill_id" : self.baseData.waybill_id};
     QKWEAKSELF;
@@ -106,6 +124,9 @@
                 weakself.detailData.return_waybill_number = [weakself.baseData.waybill_number copy];
             }
             [weakself updateSubviews];
+            if (goSelectReceiver) {
+                [self receiverButtonAction];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];

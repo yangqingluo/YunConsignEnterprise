@@ -19,5 +19,6 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) SRSelectType type;
 @property (assign, nonatomic) BOOL isEditOnly;//运单编辑时只做编辑
 @property (strong, nonatomic) AppSendReceiveInfo *data;
+@property (strong, nonatomic) NSString *open_city_id;
 
 @end

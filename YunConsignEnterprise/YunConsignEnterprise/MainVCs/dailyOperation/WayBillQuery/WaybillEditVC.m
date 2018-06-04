@@ -28,7 +28,7 @@
     [self.headerView setupTitle];
     self.tableView.tableHeaderView = self.headerView;
     self.title = @"运单修改";
-    [self pullWaybillDetailData];
+    [self pullWaybillDetailData:NO];
 }
 
 - (void)goBackWithDone:(BOOL)done{
@@ -58,16 +58,22 @@
 }
 
 - (void)receiverButtonAction {
-    PublicSRSelectVC *vc = [PublicSRSelectVC new];
-    vc.type = SRSelectType_Receiver;
-    vc.data = self.headerView.receiverInfo;
-    vc.isEditOnly = YES;
-    vc.doneBlock = ^(id object){
-        if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
-            self.headerView.receiverInfo = [object copy];
-        }
-    };
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.detailData.start_station_city_id) {
+        PublicSRSelectVC *vc = [PublicSRSelectVC new];
+        vc.type = SRSelectType_Receiver;
+        vc.data = self.headerView.receiverInfo;
+        vc.open_city_id = self.detailData.start_station_city_id;
+        vc.isEditOnly = YES;
+        vc.doneBlock = ^(id object){
+            if ([object isKindOfClass:[AppSendReceiveInfo class]]) {
+                self.headerView.receiverInfo = [object copy];
+            }
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        [self pullWaybillDetailData:YES];
+    }
 }
 
 - (void)saveButtonAction {
@@ -170,7 +176,7 @@
     }
 }
 
-- (void)pullWaybillDetailData {
+- (void)pullWaybillDetailData:(BOOL)goSelectReceiver {
     [self doShowHudFunction];
     NSDictionary *m_dic = @{@"waybill_id" : self.detailData.waybill_id};
     QKWEAKSELF;
@@ -182,6 +188,9 @@
                 weakself.detailData = [AppWayBillDetailInfo mj_objectWithKeyValues:item.items[0]];
             }
             [weakself updateSubviews:YES];
+            if (goSelectReceiver) {
+                [self receiverButtonAction];
+            }
         }
         else {
             [weakself showHint:error.userInfo[@"message"]];
