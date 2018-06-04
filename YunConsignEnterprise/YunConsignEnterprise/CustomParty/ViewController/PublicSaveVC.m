@@ -80,16 +80,18 @@
 
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self dismissKeyboard];
-    switch (indexPath.section) {
-        case 1:{
-            if (indexPath.row == 2) {
-                
+    NSDictionary *m_dic = self.showArray[indexPath.row];
+    NSString *key = m_dic[@"key"];
+    if ([self.boolValidSet containsObject:key]) {
+        NSArray *m_array = @[@"是", @"否"];
+        QKWEAKSELF;
+        BlockActionSheet *sheet = [[BlockActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"选择%@", m_dic[@"title"]] delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil clickButton:^(NSInteger buttonIndex){
+            if (buttonIndex > 0) {
+                [weakself.toSaveData setValue:boolString(buttonIndex == 1) forKey:key];
+                [weakself.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
-        }
-            break;
-            
-        default:
-            break;
+        } otherButtonTitlesArray:m_array];
+        [sheet showInView:self.view];
     }
 }
 
@@ -106,6 +108,13 @@
         _selectorSet = [NSMutableSet new];
     }
     return _selectorSet;
+}
+
+- (NSMutableSet *)boolValidSet {
+    if (!_boolValidSet) {
+        _boolValidSet = [NSMutableSet new];
+    }
+    return _boolValidSet;
 }
 
 #pragma mark - UITableView
@@ -183,6 +192,14 @@
                     }
                 }
             }
+        }
+    }
+    else if ([self.boolValidSet containsObject:key]) {
+        cell.baseView.textField.enabled = NO;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSString *value = [self.toSaveData valueForKey:key];
+        if (value) {
+            cell.baseView.textField.text = isTrue(value) ? @"是" : @"否";
         }
     }
     else {

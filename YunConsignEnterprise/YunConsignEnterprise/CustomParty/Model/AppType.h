@@ -215,6 +215,9 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *longitude;//经度
 @property (strong, nonatomic) NSString *latitude;//纬度
 @property (strong, nonatomic) NSString *print_count;//标签可打印数量
+@property (strong, nonatomic) NSString *can_set_destination;//是否可设置为终点站 YES_NO 是、否
+@property (strong, nonatomic) NSString *can_open_cod;//是否可开代收款 YES_NO 是、否
+@property (strong, nonatomic) NSString *is_cod_limit;//是否开启代收限制 YES_NO 是、否
 
 //编辑保存时自定义使用
 @property (strong, nonatomic) NSString *location;
@@ -383,15 +386,15 @@ BOOL isTrue(NSString *string);
 @property (strong, nonatomic) NSString *return_fee;//原货返回费
 @property (strong, nonatomic) NSString *pay_for_sb_fee;//垫付费
 @property (strong, nonatomic) NSString *cash_on_delivery_amount;//代收款金额
-@property (assign, nonatomic) NSString *is_deduction_freight;//是否运费代扣
+@property (strong, nonatomic) NSString *is_deduction_freight;//是否运费代扣
 //@property (assign, nonatomic) NSString *is_urgent;//是否急货
 @property (strong, nonatomic) NSString *is_deliver_goods;//是否送货
 @property (strong, nonatomic) NSString *total_amount;//总费用
-@property (assign, nonatomic) NSString *is_pay_now;//是否现付
+@property (strong, nonatomic) NSString *is_pay_now;//是否现付
 @property (strong, nonatomic) NSString *pay_now_amount;//现付金额
-@property (assign, nonatomic) NSString *is_pay_on_delivery;//是否提付
+@property (strong, nonatomic) NSString *is_pay_on_delivery;//是否提付
 @property (strong, nonatomic) NSString *pay_on_delivery_amount;//提付金额
-@property (assign, nonatomic) NSString *is_pay_on_receipt;//是否回单付
+@property (strong, nonatomic) NSString *is_pay_on_receipt;//是否回单付
 @property (strong, nonatomic) NSString *pay_on_receipt_amount;//回单付金额
 @property (strong, nonatomic) NSString *note;//运单内部
 @property (strong, nonatomic) NSString *inner_note;//运单内部备注

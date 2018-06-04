@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSMutableSet *numberKeyBoardTypeSet;
 @property (strong, nonatomic) NSMutableSet *selectorSet;
+@property (strong, nonatomic) NSMutableSet *boolValidSet;
 
 - (void)setupNav;
 - (void)saveButtonAction;

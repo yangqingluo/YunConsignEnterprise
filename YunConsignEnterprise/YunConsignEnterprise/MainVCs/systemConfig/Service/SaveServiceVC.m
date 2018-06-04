@@ -24,7 +24,11 @@
     }
     else {
         self.title = @"添加门店";
-        self.toSaveData = [AppServiceDetailInfo new];
+        AppServiceDetailInfo *detailInfo = [AppServiceDetailInfo new];
+        detailInfo.can_set_destination = @"1";
+        detailInfo.can_open_cod = @"1";
+        detailInfo.is_cod_limit = @"2";
+        self.toSaveData = detailInfo;
     }
 }
 
@@ -38,10 +42,14 @@
                        @{@"title":@"拼音简称",@"subTitle":@"请输入",@"key":@"service_pinyin", @"need" : @YES},
                        @{@"title":@"门店状态",@"subTitle":@"请选择",@"key":@"service_state", @"need" : @YES},
                        @{@"title":@"打印标签",@"subTitle":@"请输入",@"key":@"print_count", @"need" : @YES},
+                       @{@"title":@"可为到站",@"subTitle":@"请选择",@"key":@"can_set_destination", @"need" : @YES},
+                       @{@"title":@"可开代收",@"subTitle":@"请选择",@"key":@"can_open_cod", @"need" : @YES},
+                       @{@"title":@"代收限制",@"subTitle":@"请选择",@"key":@"is_cod_limit", @"need" : @YES},
                        @{@"title":@"负责人",@"subTitle":@"请输入",@"key":@"responsible_name", @"need" : @YES},
                        @{@"title":@"联系电话",@"subTitle":@"请输入",@"key":@"responsible_phone", @"need" : @YES},
                        @{@"title":@"定位",@"subTitle":@"请定位",@"key":@"location", @"need" : @YES},];
     [self.selectorSet addObjectsFromArray:@[@"open_city", @"service_state", @"location"]];
+    [self.boolValidSet addObjectsFromArray:@[@"can_set_destination", @"can_open_cod", @"is_cod_limit"]];
     [self.numberKeyBoardTypeSet addObjectsFromArray:@[@"print_count"]];
 }
 
@@ -211,6 +219,9 @@
             }
         };
         [vc showFromVC:self];
+    }
+    else {
+        [super selectRowAtIndexPath:indexPath];
     }
 }
 
